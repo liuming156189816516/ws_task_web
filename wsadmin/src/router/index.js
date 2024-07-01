@@ -190,6 +190,14 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_m064'),
         }
+      },
+      {
+        path: '/user_statistics',
+        component: () => import('@/views/registerManage/user_statistics'),
+        name: 'user_statistics',
+        meta: {
+          title:i18n.t('sys_p002'),
+        }
       }
     ]
   },

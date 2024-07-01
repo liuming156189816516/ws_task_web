@@ -2,9 +2,9 @@
     <div style="width:100%;height: 100%; float: left; position: relative;">
         <!-- 筛选条件 -->
         <el-form size="small" :inline="true" style="margin-top: 10px;">
-            <el-form-item>
+            <!-- <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m065')})" v-model="account" />
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item>
                 <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
             </el-form-item>
@@ -24,19 +24,22 @@
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
-                    <u-table-column type="index" :label="$t('sys_g020')" width="60" />
-                    <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130" />
-                    <u-table-column prop="type" :label="$t('sys_m066')" minWidth="100">
+                    <u-table-column prop="statis_time_str" :label="$t('sys_c134')" width="180" />
+                    <u-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
+                    <u-table-column prop="account_num" :label="$t('sys_m087')" minWidth="100" />
+                    <u-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
+                    <u-table-column prop="today_active_account_num" :label="$t('sys_m089')" minWidth="100" />
+                    <u-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
+                    <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
+                    <u-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
+                    <u-table-column prop="bounty_amount" :label="$t('sys_m093')" minWidth="100" />
+                    <u-table-column prop="commission_amount" :label="$t('sys_m094')" minWidth="100" />
+                    <u-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
+                    <u-table-column prop="user_income_amount" :label="$t('sys_m096')" minWidth="100" />
+                    <u-table-column prop="user_balance_amount" :label="$t('sys_m097')" minWidth="100" />
+                    <u-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
-                            {{taskOption[scope.row.type]||"-" }}
-                        </template>
-                    </u-table-column>
-                    <u-table-column prop="num" :label="$t('sys_m067')" minWidth="130" />
-                    <u-table-column prop="l_account" :label="$t('sys_m068')" minWidth="100" />
-                    <u-table-column prop="f_account" :label="$t('sys_q134')" minWidth="100" />
-                    <u-table-column prop="sys_c008" :label="$t('sys_c008')" width="180">
-                        <template slot-scope="scope">
-                            {{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}
+                            {{ scope.row.statis_time > 0 ? $baseFun.resetTime(scope.row.statis_time * 1000) : "-" }}
                         </template>
                     </u-table-column>
                     <!-- <u-table-column prop="offline_time" :label="$t('sys_g013')" minWidth="160">
@@ -50,8 +53,8 @@
     </div>
 </template>
 <script>
-import { successTips, resetPage } from '@/utils/index'
-import { gettaskrecordlist } from '@/api/user'
+import { resetPage } from '@/utils/index'
+import { getstatislist } from '@/api/user'
 export default {
     data() {
         return {
@@ -107,7 +110,7 @@ export default {
                 start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.resetTime(sTime[1], 1) : -1
             }
-            gettaskrecordlist(params).then(res => {
+            getstatislist(params).then(res => {
                 this.loading = false;
                 this.total = res.data.total;
                 this.accountDataList = res.data.list || [];

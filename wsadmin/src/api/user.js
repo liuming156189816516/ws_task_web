@@ -10,3 +10,6 @@ export const gettaskrecordlist = (params)=> {
 export const getbillrecordlist = (params)=> {
   return request({url:'/record/getbillrecordlist',method:'post',data:params})
 }
+export const getstatislist = (params)=> {
+  return request({url:'/statis/getstatislist',method:'post',data:params})
+}

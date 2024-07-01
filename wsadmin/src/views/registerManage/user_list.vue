@@ -13,10 +13,10 @@
         <!-- 分组管理 -->
         <div class="continer_main">
             <div class="group_continer">
-                <div class="tab_check_warp">
+                <!-- <div class="tab_check_warp">
                     <i slot="reference" class="el-icon-info"></i>
                     <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
-                </div>
+                </div> -->
                 <u-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"

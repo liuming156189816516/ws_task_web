@@ -33,7 +33,11 @@
                     </u-table-column>
                     <u-table-column prop="amount" :label="$t('sys_m076')" minWidth="130" />
                     <u-table-column prop="l_account" :label="$t('sys_m068')" minWidth="100" />
-                    <u-table-column prop="f_account" :label="$t('sys_q134')" minWidth="100" />
+                    <u-table-column prop="f_account" :label="$t('sys_q134')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{scope.row.f_account||"-" }}
+                        </template>
+                    </u-table-column>
                     <u-table-column prop="sys_c008" :label="$t('sys_c008')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}

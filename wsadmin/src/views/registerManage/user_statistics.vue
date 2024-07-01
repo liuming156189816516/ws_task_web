@@ -1,6 +1,15 @@
 <template>
     <div style="width:100%;height: 100%; float: left; position: relative;">
         <!-- 筛选条件 -->
+        <div class="detail_card">
+            <el-button v-if="isLoading" class="loading_icon" style="margin-top: 10px;" type="primary" :loading="true"></el-button>
+            <template v-else>
+            <div class="card_item" v-for="(item,idx) in cardOption" :style="{background:`${item.b_g}`}" @click="getStatistics">
+                <span>{{ item.label }}</span>
+                <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num"></span>
+            </div>
+            </template>
+        </div>
         <el-form size="small" :inline="true" style="margin-top: 10px;">
             <!-- <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m065')})" v-model="account" />
@@ -54,7 +63,7 @@
 </template>
 <script>
 import { resetPage } from '@/utils/index'
-import { getstatislist } from '@/api/user'
+import { getstatislist,gettodaystatisinfo } from '@/api/user'
 export default {
     data() {
         return {
@@ -64,6 +73,7 @@ export default {
             account: "",
             task_time: "",
             loading:false,
+            isLoading:false,
             checkIdArry:[],
             checkAccount:[],
             accountDataList:[],
@@ -73,13 +83,92 @@ export default {
     computed: {
         taskOption(){
             return ["",this.$t('sys_m069'),this.$t('sys_m070')]
+        },
+        cardOption(){
+            return [
+                {
+                    label:this.$t('sys_m086'),
+                    num:0,
+                    b_g:"#fef4e9",
+                    t_c:"#ff8400"
+                },
+                {
+                    label:this.$t('sys_m087'),
+                    num:0,
+                    b_g:"#eef6fe",
+                    t_c:"#369aff"
+                },
+                {
+                    label:this.$t('sys_m088'),
+                    num:0,
+                    b_g:"#dbfff1",
+                    t_c:"#02c97a"
+                },
+                {
+                    label:this.$t('sys_m089'),
+                    num:0,
+                    b_g:"#f9edff",
+                    t_c:"#b357ff"
+                },
+                {
+                    label:this.$t('sys_m090'),
+                    num:0,
+                    b_g:"#ffebeb",
+                    t_c:"#ff0f0"
+                },
+                {
+                    label:this.$t('sys_m091'),
+                    num:0,
+                    b_g:"#fffee6",
+                    t_c:"#f2bb16"
+                },
+                {
+                    label: this.$t('sys_m092'),
+                    num:0,
+                    b_g:"#dbfeff",
+                    t_c:"#1dcfdb"
+                },
+                {
+                    label: this.$t('sys_m096'),
+                    num:0,
+                    b_g:"#eef6fe",
+                    t_c:"#369aff"
+                }
+            ]
         }
     },
     created() {
-        // this.initNumberGroup();
+        this.getStatistics();
         this.initTaskList();
     },
     methods: {
+        getStatistics(){
+            this.isLoading=true;
+            gettodaystatisinfo({id:this.task_id}).then(res=>{
+                let vita = res.data;
+                for (let k = 0; k < this.cardOption.length; k++) {
+                    let item = this.cardOption[k];
+                    if (k == 0) {
+                        item.num = vita.register_num||0;
+                    }else if(k == 1){
+                        item.num = vita.account_num||0;
+                    }else if(k == 2){
+                        item.num = vita.today_active_user_num||0;
+                    }else if(k == 3){
+                        item.num = vita.today_active_account_num||0;
+                    }else if(k == 4){
+                        item.num = vita.data_num||0;
+                    }else if(k == 5){
+                        item.num = vita.withdraw_user_num||0;
+                    }else if(k == 6){
+                        item.num = vita.withdraw_amount||0;
+                    }else if(k == 7){
+                        item.num = vita.user_income_amount||0;
+                    }
+                }
+                this.isLoading=false;
+            })
+        },
         handleSelectionChange(row) {
             this.checkIdArry = row.map(item => { return item.id })
             this.checkAccount = row.map(item => { return item.account })
@@ -158,6 +247,38 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.detail_card{
+    // width: 100%;
+    width: 100%;
+    min-height: 160px;
+    display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+    .card_item{
+      height: 60px;
+      width: calc((100% - (4 - 1) * 60px) / 4);
+      display: flex;
+      font-size: 14px;
+      cursor: pointer;
+      align-items: center;
+      border-radius: 10px;
+      padding: 0 40px;
+      margin: 10px 0;
+      margin-left: 60px;
+			border-radius: 10px;
+      justify-content: space-between;
+      .card_num{
+        font-weight: 600;
+        font-size: 20px;
+        em{
+          font-style: normal;
+        }
+      }
+    }
+    .card_item:nth-of-type(4n + 1) {
+			margin-left: 0;
+		}
+  }
 ::v-deep .el-card__body {
     width: 100%;
     height: 118px;

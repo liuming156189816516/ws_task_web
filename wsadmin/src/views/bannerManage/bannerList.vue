@@ -15,7 +15,7 @@
 				</el-form-item>
                 <el-form-item style="float:right;">
                     <!-- <el-button size="small" type="danger" :disabled="factorModel.regestId==0" @click="delCardBtn(1,1)">批量删除</el-button> -->
-                    <el-button size="small" type="primary" @click="addGroupBtn(0,1)">创建任务</el-button>
+                    <el-button size="small" type="primary" @click="addGroupBtn(0,1)">新增轮播</el-button>
 				</el-form-item>
 			</el-form>
 		</div>
@@ -76,7 +76,7 @@
                     </div>
                 </el-form-item>
                 <el-form-item label="跳转链接：">
-                    <el-input placeholder="请输入跳转链接" v-model="sendForm.link"  oninput ="value=value.replace(/[^\d]/g,'')" ></el-input>
+                    <el-input placeholder="请输入跳转链接" v-model="sendForm.link"  oninput="value=value.replace(/[^\x00-\xff]/g, '')" ></el-input>
                 </el-form-item>
                 <el-form-item label="状态：" prop="status">
                     <el-radio-group v-model="sendForm.status">

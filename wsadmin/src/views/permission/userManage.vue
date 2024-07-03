@@ -266,9 +266,9 @@ export default {
           this.userForm.type==0?delete params.uid:"";
           this.isLoading=true;
           doadminuser(params).then(res =>{
-            successTips(this)
             this.isLoading=false;
             if (!res||res.code==100005) return;
+            successTips(this)
             this.userModel=false;
             this.initAccount()
           })

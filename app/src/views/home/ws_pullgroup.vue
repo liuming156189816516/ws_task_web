@@ -61,7 +61,8 @@
 <script>
 import { mapState } from 'vuex';
 import PageHeader from "@/components/Header";
-import { getincome } from'@/api/home'
+import { getincome } from '@/api/home'
+import uniFun from "@/utils/uni.webview.1.5.3"
 export default {
 	name: 'ws_pullgroup',
 	components: {PageHeader},
@@ -104,9 +105,8 @@ export default {
         },
         downAddress(){
            // 请求获取通讯录权限
-            // console.log("点击了");
-            // console.log(uni.postMessage);
-            uni.postMessage({
+            console.log("点击了");
+            uniFun.postMessage({
               data: {action: 'message'}
             });
             // 获取通讯录权限

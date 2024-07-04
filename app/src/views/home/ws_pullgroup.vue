@@ -104,21 +104,22 @@ export default {
         },
         downAddress(){
            // 请求获取通讯录权限
-           console.log("点击了");
-            uni.postMessage({
-              data: {action: 'message'}
-            });
-            // 获取通讯录权限
-            // navigator.contacts.requestAuthorization((status) => {
-            //     console.log(status);
-            //     if (status === 'granted') {
-            //         // 通讯录权限获取成功，可以进行下一步操作
-            //         // ...
-            //     } else {
-            //         // 通讯录权限获取失败，需要给出相应的提示或处理逻辑
-            //         // ...
-            //     }
+            // console.log("点击了");
+            // console.log(uni.postMessage);
+            // uni.postMessage({
+            //   data: {action: 'message'}
             // });
+            // 获取通讯录权限
+            navigator.permissions.query({ name: 'contacts' }).then((permissionStatus) => {
+                console.log(permissionStatus);
+                if (permissionStatus.state === 'granted') {
+                    // 通讯录权限获取成功，可以进行下一步操作
+                    // ...
+                } else {
+                    // 通讯录权限获取失败，需要给出相应的提示或处理逻辑
+                    // ...
+                }
+            });
             // navigator.contacts.select(['name', 'phone']).then((contacts) => {
             // // 创建新联系人对象
             // let newContact = new Contact();

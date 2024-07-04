@@ -104,8 +104,9 @@ export default {
         },
         downAddress(){
            // 请求获取通讯录权限
-           console.log("oooo");
-            window.postMessage("hello word", '*');
+            uni.postMessage({
+                data: {action: '我是消息'}
+            })
             // 获取通讯录权限
             // navigator.contacts.requestAuthorization((status) => {
             //     console.log(status);

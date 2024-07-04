@@ -104,35 +104,7 @@ export default {
         },
         downAddress(){
            // 请求获取通讯录权限
-            navigator.permissions.query({ name: 'contacts' }).then((permissionStatus) => {
-                if (permissionStatus.state === 'granted') {
-                    uni.addPhoneContact({
-                        nickName: '卢律师',
-                        firstName: '卢力华',
-                        remark: '卢律师',
-                        mobilePhoneNumber: '18092230666',
-                        email:'lulihua@zlwd.com',
-                        workAddressCountry:'中国大陆',
-                        workAddressStreet:'陕西省西安市高新区绿地中心B座36层',
-                        success: function() {
-                            console.log('success');
-                            uni.showToast({
-                                title: '添加成功',
-                                icon: 'success',
-                                duration: 2000
-                            })
-                        },
-                        fail: function() {
-                            console.log('fail');
-                            uni.showToast({
-                                title: '添加失败',
-                                icon: 'success',
-                                duration: 2000
-                            })
-                        }
-                    });
-                }
-            });
+            window.parent.postMessage({ action: 'buttonClicked' }, '*')
             // 获取通讯录权限
             // navigator.contacts.requestAuthorization((status) => {
             //     console.log(status);

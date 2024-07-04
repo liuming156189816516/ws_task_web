@@ -65,11 +65,10 @@
 import { mapState } from 'vuex';
 import { getaccountincome,getbrokeragestatis } from '@/api/home'
 export default {
-    name: 'home',
+    name: 'Mine',
     components: {},
     data() {
         return {
-            code: "456666",
             user_money:0,
             allIncome:"",
             taskOption: [

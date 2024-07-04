@@ -5,7 +5,7 @@
             <div class="cover_model">
                 <div class="task_warp">
                     <div class="left_img">
-                        <img src="../assets/images/mine/Recharge.png" alt="" srcset="">
+                        <img src="../assets/images/consult_icon.png" alt="" srcset="">
                     </div>
                     <div class="task_num">
                         <div class="task_top">

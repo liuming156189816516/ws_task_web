@@ -94,7 +94,7 @@
                             </template>
                             <template v-else>
                                 <div class="item_mess">
-                                    <img class="empty_data" src="@/assets/images/home/empty_icon.png" alt="" srcset="">
+                                    <img class="empty_data" src="@/assets/images/home/ws_icon.png" alt="" srcset="">
                                     <div class="empty_text">尚未添加whatsApp，无法开始赚钱 赶快去添加吧~</div>
                                 </div>
                             </template>

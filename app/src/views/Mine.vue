@@ -19,7 +19,7 @@
                     <div class="task_num">
                         <div class="text_1">账户余额</div>
                         <div class="text_2">
-                            <img src="../assets/images/mine/Recharge.png" alt="" srcset="">
+                            <img src="../assets/images/gold_icon.png" alt="" srcset="">
                             <span>{{user_money||0.00}}</span>
                         </div>
                     </div>

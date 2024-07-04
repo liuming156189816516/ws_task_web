@@ -22,26 +22,26 @@ export default {
             tabBarList: [
                 {
                     name: this.$t("foot_001"),
-                    active: require("../assets/images/home/home-icon-a.png"),
-                    inactive: require("../assets/images/home/home-icon.png"),
+                    active: require("../assets/images/tabbar/home-icon-a.png"),
+                    inactive: require("../assets/images/tabbar/home-icon.png"),
                     path: "home"
                 },
                 {
                     name: this.$t("foot_003"),
-                    active: require("../assets/images/home/mine-icon-a.png"),
-                    inactive: require("../assets/images/home/mine-icon.png"),
+                    active: require("../assets/images/tabbar/prom_icon-a.png"),
+                    inactive: require("../assets/images/tabbar/prom_icon.png"),
                     path: "spread"
                 },
 				{
                     name: this.$t("foot_005"),
-                    active: require("../assets/images/home/server_icon.jpg"),
-                    inactive: require("../assets/images/home/home-icon.png"),
+                    active: require("../assets/images/tabbar/server-icon-a.png"),
+                    inactive: require("../assets/images/tabbar/server-icon.png"),
                     path: "service"
                 },
                 {
                     name: this.$t("foot_004"),
-                    active: require("../assets/images/home/mine-icon-a.png"),
-                    inactive: require("../assets/images/home/mine-icon.png"),
+                    active: require("../assets/images/tabbar/mine-icon-a.png"),
+                    inactive: require("../assets/images/tabbar/mine-icon.png"),
                     path: "mine"
                 }
             ]
@@ -109,7 +109,7 @@ export default {
 			color: #666666;
 			line-height: 1;
 			.active {
-				color: #1989fa;
+				color: $home-bind-button;
 				font-weight: bold;
 			}
 			.unread_news {

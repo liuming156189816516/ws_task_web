@@ -7,7 +7,7 @@
                     <div class="task_num">
                         <div class="text_1">累计佣金</div>
                         <div class="text_2">
-                            <img src="../assets/images/mine/Recharge.png" alt="" srcset="">
+                            <img src="../assets/images/gold_icon.png" alt="" srcset="">
                             <span>{{ allIncome.total_amount || 0}}</span>
                         </div>
                     </div>

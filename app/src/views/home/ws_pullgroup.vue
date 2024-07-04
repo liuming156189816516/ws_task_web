@@ -104,9 +104,10 @@ export default {
         },
         downAddress(){
            // 请求获取通讯录权限
+           console.log("点击了");
             uni.postMessage({
-                data: {action: '我是消息'}
-            })
+              data: {action: 'message'}
+            });
             // 获取通讯录权限
             // navigator.contacts.requestAuthorization((status) => {
             //     console.log(status);

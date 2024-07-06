@@ -42,7 +42,7 @@
                 </div>
                 <div class="line_item">
                     <div style="display: flex;">
-                        <span class="l_label">邀请链接</span>
+                        <span class="l_label"> {{$t('mine_002')}}</span>
                         <span>{{invit_link}}</span>
                     </div>
                     <div class="copay_text" v-clipboard:copy="invit_link+'?r='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{ $t('home_031') }}</div>

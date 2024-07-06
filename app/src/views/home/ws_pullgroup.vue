@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer_btn">
+        <div class="footer_btn" v-if="isShow">
             <van-button type="danger" :loading="isLoading" loading-text="loading..." @click="submitTask">提交</van-button>
             <van-button plain type="warning" @click="downAddress">保存通讯录</van-button>
         </div>
@@ -71,6 +71,7 @@ export default {
 	data() {
 		return {
             task_id:"",
+            isShow:false,
             teamStemp:'',
             timestamp:0,
             group_link:'',
@@ -110,6 +111,8 @@ export default {
                 const [data1,data2] = res;
                 this.teamStemp = data1;
                 this.taskInfo = data2;
+                this.group_link = data2.invite_link;
+                this.isShow=data2.status==1||data2.status==2?true:false;
                 this.taskTime = (data2.invalid_time - this.timestamp)*1000 ||0;
                 this.taskList = data2.targets.filter(item=>{ return item})
             })
@@ -256,6 +259,7 @@ export default {
                         flex-wrap: wrap; 
                         max-height: 360px;
                         overflow-y: auto;
+                        // margin-bottom: 20px;
                         justify-content: space-between;
                         .account_list{
                             width: 48%;

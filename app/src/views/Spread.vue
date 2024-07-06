@@ -121,8 +121,9 @@ export default {
 <style lang="scss" scoped>
 .spread_warp {
     width: 100%;
+    height: 100%;
     overflow-y: auto;
-    padding-bottom: 160px;
+    padding-bottom: 200px;
     background-color: #f2f2f2;
     .top_model {
         width: 100%;

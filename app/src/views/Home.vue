@@ -88,7 +88,7 @@ export default {
             teamStemp:"",
             taskOption:[],
             langOptions: ['en-US','zh_CN'],
-            taskType:['','scanOnline','pullgroupTask','pullPownTask']
+            taskType:['','scanOnline','pullPownTask','pullgroupTask']
 		}
 	},
 	computed: {

@@ -137,7 +137,6 @@ export default {
                 this.user_money = income;
                 this.teamStemp = data2;
                 this.taskOption = [...data3.list,...data4.list];
-                console.log(this.taskOption);
             })
         },
         copySuccess(){

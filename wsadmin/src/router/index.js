@@ -198,6 +198,14 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_p002'),
         }
+      },
+      {
+        path: '/taskConfig',
+        component: () => import('@/views/registerManage/taskConfig'),
+        name: 'taskConfig',
+        meta: {
+          title:i18n.t('sys_p002'),
+        }
       }
     ]
   },

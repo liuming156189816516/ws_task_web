@@ -1086,6 +1086,7 @@ export default {
             successTips(this)
             for (let k = 0; k < this.numberGroupList.length; k++) {
                 if (this.numberGroupList[k].id == row.id) {
+                    this.numGroupTotal --;
                     this.numberGroupList.splice(k, 1)
                 }
             }
@@ -1320,7 +1321,7 @@ export default {
                 if (valid) {
                     let params = {}
                     // console.log(this.setIpType );
-                    this.ipForm.account?params.accounts=[this.this.ipForm.account]:params.accounts=this.checkAccount;
+                    this.ipForm.account?params.accounts=[this.ipForm.account]:params.accounts=this.checkAccount;
                     if (this.setIpType == 0) {
                         params.expire_time = Date.parse(this.$baseFun.resetTime(this.ipForm.expire_time)) / 1000;
                     } else if (this.setIpType == 1) {

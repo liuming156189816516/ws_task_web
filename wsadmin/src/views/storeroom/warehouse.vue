@@ -383,7 +383,7 @@ export default {
         limit:this.model1.limit,
         name:this.model1.file_name,
         start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
-        end_time: sTime ? this.$baseFun.resetTime(sTime[1], 1) : -1
+        end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
       }
       getaccountfilelist(params).then(res => {
         this.loading=false;

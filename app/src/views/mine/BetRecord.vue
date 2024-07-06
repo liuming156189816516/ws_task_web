@@ -1,7 +1,7 @@
 <template>
     <div class="earn">
         <div class="custom_head">
-            <page-header style="position: fixed;top: 0;left: 0; z-index: 9;" :title="$t('title_012')" :show-icon="true" :bgcolor="false"></page-header>
+            <page-header :title="$t('title_012')" :show-icon="true" :bgcolor="false"></page-header>
             <div class="dropdown_warp">
                 <div class="promote-header">
                     <div class="tab_nav" @click="pulldownState">
@@ -191,7 +191,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .van-overlay{
-    top: 92px;
+    top: 130px;
 }
 .earn {
     width: 100%;
@@ -199,9 +199,9 @@ export default {
     overflow: hidden;
     background-color: #f2f2f2;
     -webkit-overflow-scrolling: touch;
-    .dropdown_warp{
-        margin-top: 90px;
-    }
+    // .dropdown_warp{
+    //     margin-top: 90px;
+    // }
     .custom_head{
         width:100%;
         float: left;
@@ -293,7 +293,7 @@ export default {
     font-size: 0.28rem;
     box-sizing: border-box;
     position: relative;
-    height: calc(100vh - 355px);
+    height: calc(100vh - 425px);
     .buy-number{
         width: 100%;
         float: left;

@@ -1,6 +1,6 @@
 <template>
     <div class="home-content">
-        <page-header style="position: fixed;top: 0;left: 0; z-index: 9;" title="WhatsApp邀请任务" :show-icon="true" :bgcolor="false"></page-header>
+        <page-header title="WhatsApp邀请任务" :show-icon="true" :bgcolor="false"></page-header>
         <div class="home_content">
             <div class="task_step_detail">
                 <div class="task-pro">
@@ -116,7 +116,7 @@ export default {
             width: 100%;
             float: left;
             padding: 0 20px;
-            margin-top: 100px;
+            margin-top: 20px;
             box-sizing: border-box;
             .task_step_detail{
                 width: 100%;

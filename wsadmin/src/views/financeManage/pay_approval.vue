@@ -55,10 +55,15 @@
                             </el-dropdown>
                         </template>
                         <template slot-scope="scope">
-                            <el-tag size="small" :type="scope.row.status==2?'success':''"> {{ payOptions[scope.row.status] }}</el-tag>
+                            <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':''"> {{ payOptions[scope.row.status] }}</el-tag>
                         </template>
                     </el-table-column>
-					<el-table-column prop="itime" :label="$t('sys_c008')" width="160" align="center">
+                    <el-table-column prop="itime" :label="$t('sys_p015')" width="160" align="center">
+                        <template slot-scope="scope">
+                            {{scope.row.remark||"-" }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="itime" :label="$t('sys_c008')" width="160" align="center">
                         <template slot-scope="scope">
                             {{scope.row.itime>0?$baseFun.resetTime(scope.row.itime*1000):"~" }}
                         </template>
@@ -68,9 +73,10 @@
                             {{scope.row.ptime>0?$baseFun.resetTime(scope.row.ptime*1000):"~" }}
                         </template>
                     </el-table-column>
-                    <el-table-column width="120" label="操作" align="center" fixed="right">
+                    <el-table-column width="180" label="操作" align="center" fixed="right">
 						<template slot-scope="scope">
-							<el-button :type="scope.row.status==2?'info':'warning'" :disabled="scope.row.status==2||pay_id.length>0" size="mini" plain @click="delCardBtn(scope.row,2)">
+                            <el-button type="danger" :disabled="scope.row.status==2||scope.row.status==3" size="mini" plain @click="regectBtn(scope.row)">驳回</el-button>
+							<el-button :type="scope.row.status==2?'info':'warning'" :disabled="scope.row.status==2||scope.row.status==3||pay_id.length>0" size="mini" plain @click="delCardBtn(scope.row,2)">
                                 {{ scope.row.status==2?$t('sys_p008'):$t('sys_p010') }}
                             </el-button>
 							<!-- <el-button type="danger" size="mini" plain @click="delCardBtn(scope.row,2)">删除</el-button> -->
@@ -85,21 +91,10 @@
 			</div>
 		</div>
         <!-- 新增轮播 -->
-        <el-dialog :title="sendForm.type==0?'添加轮播':'编辑轮播'" :visible.sync="createModel" :close-on-click-modal="false" width="550px">
-			<el-form size="small" :model="sendForm" label-width="140px" :rules="sendRules" ref="sendForm">
-                <el-form-item label="轮播名称：" prop="task_name">
-                    <el-input placeholder="请输入任务名称" v-model="sendForm.task_name" style="width:100%;"></el-input>
-                </el-form-item>
-                <el-form-item label="跳转链接：">
-                    <el-input placeholder="请输入跳转链接" v-model="sendForm.link"  oninput ="value=value.replace(/[^\d]/g,'')" ></el-input>
-                </el-form-item>
-                <el-form-item label="状态：" prop="status">
-                    <el-radio-group v-model="sendForm.status">
-                        <el-radio :label="idx" v-for="(item,idx) in lopOption" :key="idx" v-show="idx!=0">{{ item }}</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="备注：">
-                    <el-input placeholder="请输入备注" v-model="sendForm.remark"></el-input>
+        <el-dialog title="驳回" :visible.sync="createModel" :close-on-click-modal="false" width="450px">
+			<el-form size="small" :model="sendForm" label-width="100px" :rules="sendRules" ref="sendForm">
+                <el-form-item label="备注：" prop="remark">
+                    <el-input type="textarea" :rows="4" :placeholder="$t('sys_mat061',{value:$t('sys_c071')})" v-model="sendForm.remark"></el-input>
                 </el-form-item>
                 <el-form-item style="text-align:center;margin-left: -110px;">
                     <el-button @click="createModel=false">取消</el-button>
@@ -138,22 +133,12 @@ export default {
             createModel:false,
             sendForm:{
 				id:"",
-                task_name:"",
-                file_url:"",
-                link:"",
                 remark:"",
-                status:1
             },
             pageOption: resetPage(),
             sendRules:{
-                task_name: [
-                    { required: true, message:this.$t('sys_mat061',{value:this.$t('sys_g070')}), trigger: 'blur' }
-                ],
-				file_url: [
-                    { required: true, message:this.$t('sys_c052'), trigger: 'change' }
-                ],
-				status: [
-                    { required: true, message:this.$t('sys_c052'), trigger: 'change' }
+                remark: [
+                    { required: true, message:this.$t('sys_mat061',{value:this.$t('sys_c071')}), trigger: 'blur' }
                 ]
             }
 		}
@@ -163,7 +148,7 @@ export default {
             return ["",this.$t('sys_c026'),this.$t('sys_c025')]
         },
         payOptions(){
-            return [this.$t('sys_l053'),this.$t('sys_p007'),this.$t('sys_p008')]
+            return [this.$t('sys_l053'),this.$t('sys_p007'),this.$t('sys_p008'),this.$t('sys_p015')]
         },
         drawOption(){
             return ["",this.$t('sys_p013'),this.$t('sys_p014')]
@@ -218,6 +203,13 @@ export default {
 			this.factorModel.offset = val;
 			this.getPayOrderList()
 		},
+        regectBtn(row){
+            this.sendForm.id=row.id;
+            this.createModel = true;
+            this.$nextTick(()=>{
+                this.$refs.sendForm.resetFields();
+            })
+        },
          //添加
         addGroupBtn(val,idx){
             this.type = idx;
@@ -236,16 +228,13 @@ export default {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
 					let data = {
-						ptype:this.type,
-                        name:this.sendForm.task_name,
-                        file_url:this.sendForm.file_url,
-                        link:this.sendForm.link,
-                        remark:this.sendForm.remark,
-                        status:this.sendForm.status
+						ptype:2,
+                        ids:[],
+                        id:this.sendForm.id,
+                        remark:this.sendForm.remark
 					}
-					this.type==2?data.id=this.sendForm.id:'',
                     this.isLoading = true;
-					docarousel(data).then(res =>{
+					dowithdrawapproval(data).then(res =>{
                         this.isLoading = false;
 						this.getPayOrderList()
 						this.createModel = false;

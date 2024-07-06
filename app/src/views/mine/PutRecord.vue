@@ -41,11 +41,11 @@
                 </div>
             </div>
             <div class="record_content">
-                <div class="buy-number" v-for="(item,index) in list" :key="index" @click="showReject(item)">
+                <div class="buy-number" v-for="(item,index) in list" :key="index">
                     <span>{{ formatTime(item.itime) }}</span>
                     <span :style="getStatusColor(item.status)">{{getStatusText(item.status)}}</span>
                     <span class="record_cash" v-if="item.status!=3">{{ item.amount }}</span>
-                    <span class="reject_tips record_cash" v-else>{{ item.amount }} <img src="../../assets/images/mine/reject_img.png" alt=""> </span>
+                    <span class="reject_tips record_cash" v-else @click="showReject(item)">{{ item.amount }} <img src="../../assets/images/mine/reject_img.png" alt=""> </span>
                 </div>
             </div>
         </div>
@@ -124,10 +124,8 @@ export default {
         },
         //查看驳回原因
         showReject(val){
-            if(val.status == 2){
-                this.dialogContent = val.desc
-                this.$refs.isDialog.showDialog()
-            }
+            this.dialogContent = val.remark
+            this.$refs.isDialog.showDialog()
         },
         //关闭驳回原因
         confirm_btn(){
@@ -329,7 +327,7 @@ export default {
         font-size: 0.28rem;
         box-sizing: border-box;
         position: relative;
-        height: calc(100vh - 360px);
+        height: calc(100vh - 430px);
         .buy-number{
             width: 100%;
             float: left;

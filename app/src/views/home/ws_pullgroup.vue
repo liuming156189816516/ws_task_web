@@ -1,6 +1,6 @@
 <template>
     <div class="home-content">
-        <page-header style="position: fixed;top: 0;left: 0; z-index: 9;" title="WhatsApp挂机任务" :show-icon="true" :bgcolor="false"></page-header>
+        <page-header title="WhatsApp挂机任务" :show-icon="true" :bgcolor="false"></page-header>
         <div class="home_content">
             <div class="task_step_detail">
                 <div class="task-pro">
@@ -36,14 +36,16 @@
                         </span>
                         <span class="task_video">任务教程</span>
                     </div>
-                    <div class="account_list" v-for="(item,idx) in dataList" :key="idx">
-                        <div class="account_item">
-                            <span>+5511971289354</span>
-                            <img src="../../assets/images/fuzhi.png" v-clipboard:copy="item" v-clipboard:success="copySuccess">
-                        </div>
-                        <div class="account_item">
-                            <span>+5511971289356</span>
-                            <img src="../../assets/images/fuzhi.png"  v-clipboard:copy="item" v-clipboard:success="copySuccess">
+                    <div class="account_warp">
+                        <div class="account_list" v-for="(item,idx) in dataList" :key="idx">
+                            <div class="account_item">
+                                <span>+551197128935{{  }}</span>
+                                <img src="../../assets/images/fuzhi.png" v-clipboard:copy="item" v-clipboard:success="copySuccess">
+                            </div>
+                            <!-- <div class="account_item">
+                                <span>+551197128935{{  }}</span>
+                                <img src="../../assets/images/fuzhi.png"  v-clipboard:copy="item" v-clipboard:success="copySuccess">
+                            </div> -->
                         </div>
                     </div>
                     <div>
@@ -62,7 +64,7 @@
 import { mapState } from 'vuex';
 import PageHeader from "@/components/Header";
 import { getincome } from '@/api/home'
-import uniFun from "@/utils/uni.webview.1.5.3"
+import uniFun from "../../utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
 	components: {PageHeader},
@@ -72,7 +74,7 @@ export default {
             group_link:'',
             isLoading:false,
             time: 30 * 60 * 60 * 1000,
-            dataList:[1,1,1,1,1,1]
+            dataList:[1,1,1,1,1,1,1,1,1,11,1,1,1,1]
 		}
 	},
 	computed: {
@@ -107,7 +109,7 @@ export default {
            // 请求获取通讯录权限
             console.log("点击了");
             uniFun.postMessage({
-              data: {action: 'message'}
+              data: this.dataList
             });
             // 获取通讯录权限
             // navigator.permissions.query({ name: 'contacts' }).then((permissionStatus) => {
@@ -156,7 +158,7 @@ export default {
             width: 100%;
             float: left;
             padding: 0 20px;
-            margin-top: 100px;
+            margin-top: 20px;
             margin-bottom: 160px;
             box-sizing: border-box;
             .task_step_detail{
@@ -257,20 +259,34 @@ export default {
                             color: #ff976a;
                         }
                     }
-                    .account_list{
+                    .account_warp{
+                        width: 100%; 
                         display: flex;
-                        font-size: 32px;
-                        margin-top: 20px;
-                        align-items: center;
+                        flex-wrap: wrap; 
+                        max-height: 360px;
+                        overflow-y: auto;
                         justify-content: space-between;
-                        .account_item{
+                        .account_list{
+                            width: 48%;
                             display: flex;
+                            font-size: 32px;
+                            margin-top: 20px;
                             align-items: center;
-                            img{
-                                height: 30px;
-                                margin-left: 10px;
+                            flex-wrap:nowrap;
+                            // justify-content: space-between;
+                            .account_item{
+                                display: flex;
+                                align-items: center;
+                                img{
+                                    height: 30px;
+                                    margin-left: 10px;
+                                }
                             }
                         }
+                    }
+                    .account_list:nth-child(even){
+                        display: flex;
+                        justify-content: right;
                     }
                     .van-cell{
                         padding: 8px 10px;

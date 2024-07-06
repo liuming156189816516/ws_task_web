@@ -40,6 +40,7 @@ export default {
 	},
 	beforeCreate() {},
 	created() {
+		console.log(this.isPc);
 		let preLoadTemp = new preLoad();
 		preLoadTemp.setup();
 		let _this = this;
@@ -56,7 +57,10 @@ body,
 #app {
 	height: 100%;
 	width: 100%;
+	padding-top: 24px;
 	overflow: hidden;
+	// background: $home-order-title;
+	background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);
 	.van-overlay, .van-popup{
 		z-index: 99 !important;
 	}

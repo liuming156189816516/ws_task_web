@@ -6,7 +6,7 @@
                     <el-col :span="18">
                         <el-form-item label="营销分组：" prop="market_group">
                             <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
-                                <el-option :label="item.name+'(数量：'+item.count+')，在线：('+item.online_num+')'" :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
+                                <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -22,7 +22,7 @@
                 </el-row>
                 <el-row :gutter="20">
                     <el-col :span="18">
-                        <el-form-item :label="$t('sys_q130')+'：'" prop="materialData" class="custom_say">
+                        <el-form-item :label="$t('sys_q131')+'：'" prop="materialData" class="custom_say">
                             <div class="mess_01">
                                 <el-button type="primary" size="mini" v-for="(item,idx) in btnOption" :key="idx" @click="showPropModel(idx)" v-show="item!=''">{{ item }}</el-button>
                                 <el-table :data="taskForm.materialData" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" style="width: 100%">

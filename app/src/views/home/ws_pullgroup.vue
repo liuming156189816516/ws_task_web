@@ -56,7 +56,7 @@
         </div>
         <div class="footer_btn">
             <van-button type="danger" :loading="isLoading" loading-text="loading..." @click="submitTask">提交</van-button>
-            <van-button plain type="danger" @click="downAddress">下载通讯录文件</van-button>
+            <van-button plain type="warning" @click="downAddress">保存通讯录</van-button>
         </div>
     </div>
 </template>

@@ -431,6 +431,8 @@
   justify-content: center;
   background-color: #fff;
 }
-.van-button{
-  border: none !important;
+.van-dialog__footer{
+  .van-button{
+    border: none !important;
+  } 
 }

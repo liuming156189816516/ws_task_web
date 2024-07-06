@@ -721,8 +721,9 @@ export default {
                                 }
                             }
                             .empty_data{
-                                width: 146px;
-                                height: 122px;
+                                display: flex;
+                                height: 100px;
+                                flex-shrink: 0;
                                 margin: 61px 0 41px 0;
                             }
                             .empty_text{

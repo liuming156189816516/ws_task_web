@@ -2,8 +2,8 @@
     <div class="home_warp">
         <div class="top_model">
             <div class="user_mess">
-                <div class="user_head">
-                    <img src="../assets/images/head/12.png" alt="" srcset="">
+                <div class="user_head" @click="updateHead">
+                    <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
@@ -86,8 +86,7 @@ export default {
     },
     computed: {
         ...mapState({
-            userInfo: state => state.User,
-            bannerList: state => state.User.bannerList
+            userInfo: state => state.User
         }),
         taskNameOption() {
             return ["", "WhatsApp挂机任务", "WhatsApp拉粉任务", "WhatsApp拉群任务"]
@@ -127,6 +126,7 @@ export default {
     },
     created() {
         this.syncInitApi();
+        this.$store.dispatch('User/getUserHead');
     },
     methods: {
         syncInitApi(){
@@ -160,6 +160,9 @@ export default {
         },
         handleJump(path){
             this.$router.push(path);
+        },
+        updateHead(){
+            this.$router.push("/myHead");
         },
         logoutHandle() {
             this.$dialog.confirm({
@@ -389,7 +392,7 @@ export default {
         width: 100%;
         display: flex;
         padding: 0 20px;
-        margin: 30px 0 60px 0;
+        margin: 60px 0 60px 0;
         box-sizing: border-box;
         .van-button{
             width: 100%;

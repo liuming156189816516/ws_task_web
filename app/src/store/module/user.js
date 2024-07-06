@@ -1,10 +1,11 @@
 import router from '../../router/';
 import { getincome } from'@/api/home'
-import { login,register,logout,getcarousellist } from '@/api/login';
+import { login,register,logout,getcarousellist,gethead } from '@/api/login';
 export default {
 	namespaced: true,
 	state: {
 		allIncome:"",
+		avatar:""||0,
 		httpManager: {},
 		bannerList:window.localStorage.getItem('carousel_list')||null,
 		inviteCode:window.localStorage.getItem('inviteCode')||null,
@@ -102,6 +103,9 @@ export default {
 		store_income(state, data) {
 			state.allIncome = data;
 		},
+		store_head(state, data) {
+			state.avatar = data;
+		},
 		store_carousel(state, data) {
 			state.bannerList = data.list;
 			window.localStorage.setItem('carousel_list',data);
@@ -129,6 +133,16 @@ export default {
 					if(res.token){
 						commit('store_info', res);
 					}
+					resolve(res);
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getUserHead({ commit },params) {
+			return new Promise((resolve, reject) => {
+				gethead(params).then(res => {
+					commit('store_head', res.head||0);
 					resolve(res);
 				}).catch(error => {
 					reject(error)

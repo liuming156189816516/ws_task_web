@@ -1,23 +1,20 @@
 <template>
 	<div id="app" :class="[hasTabBar ? 'set-padding-top' : '', isPc?'isPc': '']">
-		<div v-show="showNavBar" class="van_nav_pd"></div>
-		<!-- <keep-alive :include="list"> -->
-		<keep-alive :include="keepAliveNames">
-			<router-view ></router-view>
-		</keep-alive>
-		<!-- </keep-alive> -->
-		<router-view name="tabBar"></router-view>
-		<float-ball v-if="assistiveTouch"></float-ball>
-		<!-- <float-ball v-if="assistiveTouch"></float-ball> -->
+		<div v-if="!showNavBar" class="mobile_head_top"></div>
+		<div :class="!showNavBar?'app_top_continer':'app_continer'">
+			<keep-alive :include="keepAliveNames">
+				<router-view></router-view>
+			</keep-alive>
+			<router-view name="tabBar"></router-view>
+			<float-ball v-if="assistiveTouch"></float-ball>
+		</div>
 	</div>
 </template>
 <script>
 import FloatBall from './components/FloatBall';
 import preLoad from './core/PreLoadProxy';
 export default {
-	components: {
-		FloatBall,
-	},
+	components: {FloatBall},
 	provide: function(){
 		return {
 			isPc: !window.navigator.userAgent.match(
@@ -28,8 +25,8 @@ export default {
 	data() {
 		return {
 			title: '',
-			showNavBar: false,
 			hasTabBar: true,
+			showNavBar: false,
 			transitionName: '',
 			keepAliveNames: ['home'],
 			assistiveTouch: sessionStorage.getItem('plus_ready') && sessionStorage.getItem('plus_ready') === '1',
@@ -40,14 +37,14 @@ export default {
 	},
 	beforeCreate() {},
 	created() {
-		console.log(this.isPc);
 		let preLoadTemp = new preLoad();
 		preLoadTemp.setup();
-		let _this = this;
-		const { title, showNavBar, hasTabBar } = this.$route.meta;
+		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
-		this.showNavBar = !!showNavBar;
+		this.showNavBar = this.$Helper.isWeb();
+		// console.log(this.showNavBar);
+		console.log(this.$Helper.isAndroid());
 	},
 };
 </script>
@@ -55,14 +52,27 @@ export default {
 html,
 body,
 #app {
-	height: 100%;
 	width: 100%;
-	padding-top: 24px;
+	height: 100%;
 	overflow: hidden;
-	// background: $home-order-title;
-	background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);
 	.van-overlay, .van-popup{
 		z-index: 99 !important;
+	}
+	.mobile_head_top{
+		width: 100%;
+		height: 80px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);
+	}
+	.app_top_continer, .app_continer{
+		width: 100%;
+		height: 100%;
+		margin-top: 80px;
+	}
+	.app_continer{
+		margin-top: 0px;
 	}
 }
 

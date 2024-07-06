@@ -27,4 +27,12 @@ export const getcarousellist = (param) => {
 export const revisepwd = (param) => {
     return Post("adminmember/revisepwd", param)
 }
+// 修改头像
+export const revisehead = (param) => {
+    return Post("adminmember/revisehead", param)
+}
+// 用户头像
+export const gethead = (param) => {
+    return Post("adminmember/gethead", param)
+}
 

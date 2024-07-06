@@ -42,7 +42,6 @@ const  ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     let url, baseUrl,urls;
     data.httpRequestIndex = data.httpRequestIndex == undefined ? index : data.httpRequestIndex;
     data.httpRequestCount = data.httpRequestCount || 0;
-    
 
     if (process.env.NODE_ENV != 'development' && process.env.VUE_APP_FLAG == 'pro') {
         if (window.envInfo.releaseappInfo && window.envInfo.releaseappInfo.app_url && window.envInfo.releaseappInfo.app_url.length > 0) {
@@ -58,18 +57,9 @@ const  ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     // 是否带上token
     if (config.sendToken) {
         let token = localStorage.getItem('token');
-        if(networkUrl.indexOf('jz427') >-1){
-            baseUrl = `https://api.jz427.com/${func}?token=${token}`;
-        }else{
-            baseUrl =`${url}${func}?token=${token}`;
-        }
-
+        baseUrl =`${url}${func}?token=${token}`;
     } else {
-        if(networkUrl.indexOf('jz427') >-1){
-            baseUrl = `https://api.jz427.com/${func}`
-        }else{
-            baseUrl =`${url}${func}`
-        }
+        baseUrl =`${url}${func}`
     }
     axios.request({url: baseUrl,data: data,method: 'POST',timeout: 8000}).then(res => {
         let data = res.data;

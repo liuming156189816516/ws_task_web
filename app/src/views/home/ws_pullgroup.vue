@@ -20,8 +20,8 @@
             </div>
             <div class="task_desc">
                 <div class="task_top">
-                    <span>任务编号：182</span>
-                    <span>任务状态：进行中</span>
+                    <span>任务编号：{{ taskInfo.ser_no }}</span>
+                    <span>任务状态：{{statusOption[taskInfo.status]}}</span>
                 </div>
                 <div class="task_set_text">
                     请将下列的号码的用户邀请到你的群主中，并在邀请结束后，提交你的群组链接。我们会用AI验证你的群成员是否符合要求，并按照符合要求的成员数量为你结算佣金。
@@ -32,14 +32,14 @@
                     <div class="ws_account_top">
                         <span>任务倒计时</span>
                         <span class="task_time">
-                            <van-count-down :time="time" />
+                            <van-count-down :time="taskTime" />
                         </span>
                         <span class="task_video">任务教程</span>
                     </div>
                     <div class="account_warp">
-                        <div class="account_list" v-for="(item,idx) in dataList" :key="idx">
+                        <div class="account_list" v-for="(item,idx) in taskList" :key="idx">
                             <div class="account_item">
-                                <span>+551197128935{{  }}</span>
+                                <span>{{ item.target }}</span>
                                 <img src="../../assets/images/fuzhi.png" v-clipboard:copy="item" v-clipboard:success="copySuccess">
                             </div>
                             <!-- <div class="account_item">
@@ -63,84 +63,75 @@
 <script>
 import { mapState } from 'vuex';
 import PageHeader from "@/components/Header";
-import { getincome } from '@/api/home'
+import { getincome,getcreatetaskinfo,submitcreatetask } from '@/api/home'
 import uniFun from "../../utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
 	components: {PageHeader},
 	data() {
 		return {
+            task_id:"",
             teamStemp:'',
+            timestamp:0,
             group_link:'',
             isLoading:false,
-            time: 30 * 60 * 60 * 1000,
-            dataList:[1,1,1,1,1,1,1,1,1,11,1,1,1,1]
+            taskTime: 30 * 60 * 60 * 1000,
+            taskInfo:{},
+            taskList:[]
 		}
 	},
 	computed: {
 		...mapState({
 			userInfo: state => state.User.userInfo,
             bannerList: state => state.User.bannerList
-		})
+		}),
+        statusOption(){
+            return ["","开始任务","进行中","结算中","已结束"]
+        }
 	},
-    created(){},
-    activated(){
-        this.initSpread();
+    created(){
+        this.timestamp = Math.floor(new Date().getTime() / 1000);
+        this.task_id = this.$route.query.id||"";
+        this.syncInitApi();
     },
-    mounted() {
-	},
 	methods: {
-        async initSpread() {
-          this.teamStemp = await getincome({});
+        syncInitApi(){
+            let fun1 = new Promise((resolve,reject)=>{
+                getincome().then(res =>{
+                    resolve(res)
+                })
+            });
+            let fun2 = new Promise((resolve,reject)=>{
+                getcreatetaskinfo({task_info_id:this.task_id}).then(res =>{
+                    resolve(res)
+                })
+            });
+            Promise.all([fun1,fun2]).then( res => {
+                const [data1,data2] = res;
+                this.teamStemp = data1;
+                this.taskInfo = data2;
+                this.taskTime = (data2.invalid_time - this.timestamp)*1000 ||0;
+                this.taskList = data2.targets.filter(item=>{ return item})
+            })
         },
         copySuccess(){
             this.$toast(`${this.$t("home_031")}${this.$t("other_006")}`);
         },
         submitTask(){
             if(!this.group_link) return this.$toast("请输入群组链接"); 
-            this.$toast("任务已提交，及时关注佣金收益！");
             this.isLoading=true;
-            setTimeout(()=>{
+            submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
                 this.isLoading=false;
-                this.$router.go(-1)
-            },2000)
+                if(res.code) return;
+                this.$toast("任务已提交，及时关注佣金收益！");
+                setTimeout(()=>{
+                    this.$router.go(-1)
+                },1000)
+            })
         },
         downAddress(){
            // 请求获取通讯录权限
-            console.log("点击了");
-            uniFun.postMessage({
-              data: this.dataList
-            });
-            // 获取通讯录权限
-            // navigator.permissions.query({ name: 'contacts' }).then((permissionStatus) => {
-            //     console.log(permissionStatus);
-            //     if (permissionStatus.state === 'granted') {
-            //         // 通讯录权限获取成功，可以进行下一步操作
-            //         // ...
-            //     } else {
-            //         // 通讯录权限获取失败，需要给出相应的提示或处理逻辑
-            //         // ...
-            //     }
-            // });
-            // navigator.contacts.select(['name', 'phone']).then((contacts) => {
-            // // 创建新联系人对象
-            // let newContact = new Contact();
-            
-            // // 设置联系人姓名
-            // newContact.name = "John Doe";
-            
-            // // 添加手机号码
-            // newContact.phoneNumbers = [{ value: "123456789", type: "mobile" }];
-            
-            // // 保存联系人到通讯录
-            // newContact.save().then(() => {
-            //     console.log('Contact saved successfully.');
-            // }).catch((error) => {
-            //     console.error('Error saving contact:', error);
-            // });
-            // }).catch((error) => {
-            // console.error('Error selecting contacts:', error);
-            // });
+            uniFun.postMessage({data:this.taskList});
         }
 	}
 };

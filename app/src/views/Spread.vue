@@ -230,7 +230,7 @@ export default {
             display: flex;
             align-items: center;
             flex-direction: column;
-            padding: 0 30px 30px 30px;
+            padding: 0 30px 50px 30px;
             border-radius: 10px;
             box-sizing: border-box;
             background-color: $font-color-white;

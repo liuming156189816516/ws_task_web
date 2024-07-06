@@ -3,7 +3,7 @@
         <div class="top_model">
             <div class="user_mess">
                 <div class="user_head">
-                    <img src="../assets/images/head/12.png" alt="" srcset="">
+                    <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
@@ -65,7 +65,7 @@
                 <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
                     <div class="left_text">
                         <img class="ws_icon" src="../assets/images/home/ws_icon.png" alt="">
-                        <span>{{ taskNameOption[item.status] }}</span>
+                        <span>{{ taskNameOption[item.type]||item.task_name }}</span>
                     </div>
                     <van-button :type="item.status==1?'danger':item.status==2?'primary':'warning'">{{ taskStatusOption[item.status] }}</van-button>
                 </div>
@@ -75,7 +75,7 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import { getaccountincome,gettodayincome } from'@/api/home'
+import { getaccountincome,gettodayincome,gettaskliststatus,getalltasklist } from'@/api/home'
 export default {
 	name: 'home',
 	components: {},
@@ -86,18 +86,9 @@ export default {
             isIndex:false,
             user_money:0,
             teamStemp:"",
-            taskOption:[
-                {
-                    status:1,
-                },
-                {
-                    status:2,
-                },
-                {
-                    status:3,
-                }
-            ],
-            langOptions: ['en-US','zh_CN']
+            taskOption:[],
+            langOptions: ['en-US','zh_CN'],
+            taskType:['','scanOnline','pullgroupTask','pullPownTask']
 		}
 	},
 	computed: {
@@ -109,14 +100,16 @@ export default {
             return ["","WhatsApp挂机任务","WhatsApp拉粉任务","WhatsApp拉群任务"]
         },
         taskStatusOption(){
-            return ["","开始任务","进行中","已结束"]
+            return ["","开始任务","进行中","结算中","已结束"]
         }
 	},
     activated(){
         this.syncInitApi();
         this.isIndex=false;
+        this.$store.dispatch('User/getUserHead');
         this.$store.dispatch('User/plantCarousel');
     },
+
 	methods: {
         syncInitApi(){
             let fun1 = new Promise((resolve,reject)=>{
@@ -129,10 +122,22 @@ export default {
                     resolve(res)
                 })
             });
-            Promise.all([fun1,fun2]).then( res => {
-                const [{income},data2] = res;
+            let fun3 = new Promise((resolve,reject)=>{
+                gettaskliststatus().then(res =>{
+                    resolve(res)
+                })
+            });
+            let fun4 = new Promise((resolve,reject)=>{
+                getalltasklist().then(res =>{
+                    resolve(res)
+                })
+            });
+            Promise.all([fun1,fun2,fun3,fun4]).then( res => {
+                const [{income},data2,data3,data4] = res;
                 this.user_money = income;
                 this.teamStemp = data2;
+                this.taskOption = [...data3.list,...data4.list];
+                console.log(this.taskOption);
             })
         },
         copySuccess(){
@@ -148,13 +153,8 @@ export default {
 			// localStorage.setItem("language",lang);
 		},
         handleTask(row){
-            if(row.status == 1){
-                this.$router.push("/scanOnline")
-            }else if(row.status == 2){
-                this.$router.push("/pullgroupTask")
-            }else if(row.status == 3){
-                this.$router.push("/pullPownTask")
-            }
+            const path = this.taskType[row.type];
+            this.$router.push(`${path}?id=${row.task_info_id}`)
         }
 	}
 };
@@ -165,9 +165,9 @@ export default {
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
+        padding-bottom: 200px;
         background-color: #f2f2f2;
         -webkit-overflow-scrolling: touch; 
-        padding-bottom: 120px;
         .top_model{
             width: 100%;
             height: 340px;

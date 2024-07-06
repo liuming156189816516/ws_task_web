@@ -28,3 +28,18 @@ export const getbrokeragestatis = (param = {}) => {
 export const gethelp = (param = {}) => {
     return Post("account/gethelp", param);
 }
+export const gettaskliststatus = (param) => {
+    return Post("account/gettaskliststatus", param)
+}
+export const getcreatetaskinfo = (param) => {
+    return Post("account/getcreatetaskinfo", param)
+}
+export const getalltasklist = (param) => {
+    return Post("account/getalltasklist", param)
+}
+export const submitcreatetask = (param) => {
+    return Post("account/submitcreatetask", param)
+}
+
+
+

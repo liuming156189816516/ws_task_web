@@ -2,7 +2,7 @@
     <div class="my_head">
         <page-header :title="$t('home_039')"></page-header>
         <div class="image_list">
-            <div class="image_box" v-for="(item,index) in userHeadList" :key="index" @click="updateCheckImage(index)">
+            <div class="image_box" v-for="(item,idx) in userHeadList" :key="idx" @click="updateCheckImage(idx)">
                 <van-image fit="contain" :src="item" />
             </div>
         </div>
@@ -24,7 +24,8 @@
     </div>
 </template>
 <script>
-import PageHeader from "../../components/Header";
+import PageHeader from "@/components/Header";
+import { revisehead } from '@/api/login'
 export default {
     components: { PageHeader },
     data() {
@@ -43,8 +44,8 @@ export default {
     },
     created() {},
     methods: {
-        updateCheckImage(index) {
-            this.checkIndex = index;
+        updateCheckImage(idx) {
+            this.checkIndex = idx;
             this.show = true;
         },
         ok() {
@@ -52,7 +53,7 @@ export default {
             let Toast = setTimeout(() => {
                 toast = this.$toast.loading({ duration: 3000 });
             }, 1000);
-            updateinfo({type: 3,head: `${this.checkIndex}`}).then(res => {
+            revisehead({head:`${this.checkIndex+1}`}).then(res => {
                 if (Toast) {
                     clearTimeout(Toast);
                     Toast = null;
@@ -60,8 +61,7 @@ export default {
                 if (toast) {
                     toast.clear();
                 }
-                this.$store.dispatch("User/getUserInfo");
-                this.$router.back();
+                this.$router.go(-1);
             });
         },
         cancel() {
@@ -75,7 +75,6 @@ export default {
     height: 100%;
     background-color: #f2f2f2;
     .image_list {
-        margin-top: 20px;
         background-color: #fff;
         padding-bottom: 20px;
         .image_box {

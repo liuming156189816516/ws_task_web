@@ -35,7 +35,7 @@
             <div class="info_main">
                 <div class="line_item">
                     <div style="display: flex;">
-                        <span class="l_label">推荐吗</span>
+                        <span class="l_label">{{$t('home_030')}}</span>
                         <span>{{userInfo.inviteCode}}</span>
                     </div>
                     <div class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{ $t('home_031') }}</div>

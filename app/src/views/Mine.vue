@@ -7,7 +7,7 @@
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
-                    <div class="user_code">推荐吗：{{userInfo.inviteCode}} <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">复制</span></div>
+                    <div class="user_code">{{$t('home_030')}}：{{userInfo.inviteCode}} <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">复制</span></div>
                 </div>
             </div>
             <div class="lang_mess">

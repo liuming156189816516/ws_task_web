@@ -3,7 +3,7 @@
         <!-- 筛选条件 -->
         <el-form size="small" :inline="true" style="margin-top: 10px;">
             <el-form-item>
-                <el-input clearable :placeholder="$t('sys_g006')" v-model="account" />
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m065')})" v-model="account" />
             </el-form-item>
             <el-form-item>
                 <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
@@ -28,7 +28,7 @@
                     <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130" />
                     <u-table-column prop="type" :label="$t('sys_m075')" minWidth="100">
                         <template slot-scope="scope">
-                            {{taskOption[scope.row.type]||"-" }}
+                            {{formatType(scope.row.type)||"-" }}
                         </template>
                     </u-table-column>
                     <u-table-column prop="amount" :label="$t('sys_m076')" minWidth="130" />
@@ -73,7 +73,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return ["",this.$t('sys_m071'),this.$t('sys_m072'),this.$t('sys_m073'),this.$t('sys_m074')]
+            return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
         }
     },
     created() {
@@ -133,6 +133,10 @@ export default {
             }
             this.limit = size;
             this.initBillList();
+        },
+        formatType(type){
+          let result = this.taskOption.find(item=> item.value === type);
+          return result.lable||""
         }
     },
     watch:{

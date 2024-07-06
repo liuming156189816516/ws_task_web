@@ -2,7 +2,7 @@
   <div>
     <el-form :inline="true">
         <el-form-item >
-            <el-input clearable size="small" v-model="roleName" :placeholder="$t('sys_c022')" />
+            <el-input clearable size="small" v-model="roleName" :placeholder="$t('sys_mat061',{value:$t('sys_c032')})" />
         </el-form-item>
         <el-form-item >
             <el-button size="small" icon="el-icon-search" type="primary" @click="initRoleList(1)">{{ $t('sys_c002') }}</el-button>

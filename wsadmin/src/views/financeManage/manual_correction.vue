@@ -4,7 +4,7 @@
 		<div class="condition_warp select_warp">
 			<el-form inline>
                 <el-form-item>
-                    <el-input size="small" v-model="factorModel.card_no" clearable placeholder="请输入提现账号" style="width:180px;"></el-input>
+                    <el-input size="small" v-model="factorModel.card_no" clearable :placeholder="$t('sys_mat061',{value:$t('sys_c009')})" style="width:180px;"></el-input>
 				</el-form-item>
 				<!-- <el-form-item class="change_new_time">
 					<el-date-picker size="small" v-model="factorModel.dateArry" type="daterange" value-format="yyyy-MM-dd" range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期" style='width:240px'>
@@ -37,6 +37,11 @@
                     <el-table-column prop="front_balance" :label="$t('sys_m081')" minWidth="100" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.front_balance||0 }}
+						</template>
+                    </el-table-column>
+                    <el-table-column prop="amount" :label="$t('sys_p016')" minWidth="100" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.amount||0 }}
 						</template>
                     </el-table-column>
                     <el-table-column prop="before_balance" :label="$t('sys_m082')" minWidth="100" align="center">

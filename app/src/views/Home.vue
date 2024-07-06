@@ -67,7 +67,7 @@
                         <img class="ws_icon" src="../assets/images/home/ws_icon.png" alt="">
                         <span>{{ taskNameOption[item.type]||item.task_name }}</span>
                     </div>
-                    <van-button :type="item.status==1?'danger':item.status==2?'primary':'warning'">{{ taskStatusOption[item.status] }}</van-button>
+                    <van-button :type="item.status==1?'danger':item.status==2||item.status==3?'warning':'success'">{{ taskStatusOption[item.status] }}</van-button>
                 </div>
             </div>
         </div>

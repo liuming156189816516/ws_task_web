@@ -16,11 +16,11 @@
                     </div>
                     <div class="task-pro">
                         <div class="left-pro">
-                            <p>{{ allIncome.today_income || 0}}</p>
+                            <p>{{ allIncome.today_amount || 0}}</p>
                             <p>{{ $t("home_058") }}</p>
                         </div>
                         <div class="right-pro">
-                            <p>{{ allIncome.yesterday_income || 0 }}</p>
+                            <p>{{ allIncome.yesterday_amount || 0 }}</p>
                             <p>{{ $t("home_059") }}</p>
                         </div>
                         <div class="right-pro">

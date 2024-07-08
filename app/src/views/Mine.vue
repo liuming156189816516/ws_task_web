@@ -32,7 +32,7 @@
                             <p>{{ $t("home_058") }}</p>
                         </div>
                         <div class="right-pro">
-                            <p>{{allIncome.yesterday_amount ||0}}</p>
+                            <p>{{allIncome.total_amount ||0}}</p>
                             <p>{{ $t("home_059") }}</p>
                         </div>
                         <!-- <div class="right-pro">

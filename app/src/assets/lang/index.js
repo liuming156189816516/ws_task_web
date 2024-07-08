@@ -1,17 +1,16 @@
 
 import VueI18n from 'vue-i18n'
 import { Locale } from 'vant'
-import zhCN from './zh-CN'
-import enLocale from './zh.js'
+import zhCN from './zh.js'
+import enCN from './en.js'
 Vue.use(VueI18n)
 
 const messages = {
 	en: {
-		...enLocale
+		...enCN
 	},
 	zh: {
-		...zhCN,
-		...enLocale
+		...zhCN
 	}
 }
 const i18n = new VueI18n({

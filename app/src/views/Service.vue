@@ -23,7 +23,7 @@
             </div>
             <div class="info_main">
                 <video controls>
-                    <source :src="help_url||def_video" type="video/mp4">
+                    <source :src="help_url" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -36,7 +36,7 @@ export default {
     data() {
         return {
             help_url:"",
-            def_video:require("../assets/video/dbfcfa67.mp4")
+            // def_video:require("../assets/video/21bbddf98.mp4")
         }
     },
     created() {

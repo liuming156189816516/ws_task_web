@@ -20,6 +20,7 @@
         <el-table :data="groupTaskList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading"
           element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }"
           @selection-change="selectAllChange" @row-click="rowSelectChange">
+          <el-table-column prop="app_account" label="用户账号" minWidth="120" />
           <el-table-column prop="account" label="拉群账号" width="120" />
           <el-table-column prop="ad_account" label="营销账号" width="120" />
           <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">

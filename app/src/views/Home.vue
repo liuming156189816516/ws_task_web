@@ -27,14 +27,14 @@
                         <span></span>
                     </div>
                     <div class="right-pro">
-                        <p style="color:#e8555b;">{{ teamStemp.yesterday_income || 0.00 }}</p>
+                        <p style="color:#e8555b;">{{ teamStemp.promotion_income || 0.00 }}</p>
                         <p>{{ $t("home_057") }}</p>
                     </div>
                     <div class="custom_set_line">
                         <span></span>
                     </div>
                     <div class="right-pro">
-                        <p style="color:#677fdf;">{{ teamStemp.yesterday_income || 0.00 }}</p>
+                        <p style="color:#677fdf;">{{ teamStemp.task_income || 0.00 }}</p>
                         <p>{{ $t("home_061") }}</p>
                     </div>
                 </div>

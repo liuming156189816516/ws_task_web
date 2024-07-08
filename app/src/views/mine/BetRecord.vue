@@ -10,14 +10,14 @@
                         <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showState ? 180 : 0}deg)`}" />
                     </div>
                     <div class="tab_nav" @click="pulldownTime">
-                        <span v-if = "timeValue === ''">收益时间</span> 
-                        <span v-else-if = "timeValue == 0">今天</span> 
-                        <span v-else-if= "timeValue == 1">昨天</span> 
-                        <span v-else-if= "timeValue == 2">近七天</span>
+                        <span v-if = "!timeValue || timeValue === 0">收益时间</span> 
+                        <span v-else-if = "timeValue == 1">今天</span> 
+                        <span v-else-if= "timeValue == 2">昨天</span> 
+                        <span v-else-if= "timeValue == 3">近七天</span>
                         <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showTime ? 180 : 0}deg)`}" />
                     </div>
                     <div class="tab_nav cash_nav" @click="pulldownState">
-                        总收益：<span style="color:#F52C2C;">{{total_point||0}}元</span> 
+                        <!-- 总收益：<span style="color:#F52C2C;">{{total_point||0}}元</span>  -->
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@ export default {
         return {
             currentPage:1,
             total_point:0,
-            profitTime:['今天','昨天','近七天（包含今天）'],
+            profitTime:['重置','今天','昨天','近七天（包含今天）'],
             profitType:[{lable:"重置",value:-1},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }],
             stateValue:null,
             timeValue:"",
@@ -145,19 +145,19 @@ export default {
             let newDate = new Date();
             let sTime = "00"+":"+"00"+":"+"00";
             let eTime = "23"+":"+"59"+":"+"59";
-            if(idx == 0){
+            if(idx == 1){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = today;
                 this.sTime = today +" "+ sTime;
                 this.eTime = today +" "+ eTime;
-            }else if(idx == 1){
+            }else if(idx == 2){
                 newDate.setTime(newDate.getTime()-24*60*60*1000);
                 let yTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = yTady;
                 this.sTime = yTady +" "+ sTime;
                 this.eTime = yTady +" "+ eTime;
-            }else if(idx == 2){
+            }else if(idx == 3){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 newDate.setTime(newDate.getTime()-7*24*60*60*1000);
@@ -165,6 +165,9 @@ export default {
                 this.datetime = sevenTady;
                 this.sTime = sevenTady +" "+ sTime;
                 this.eTime = today +" "+ eTime;
+            }else{
+                this.sTime = "";
+                this.eTime = "";
             }
             this.billDetail();
             setTimeout(() =>{

@@ -33,8 +33,7 @@ import { gethelp } from '@/api/home';
 export default {
     data() {
         return {
-            help_url:"",
-            def_video:require("../assets/video/bbddf98.mp4")
+            help_url:""
         }
     },
     created() {

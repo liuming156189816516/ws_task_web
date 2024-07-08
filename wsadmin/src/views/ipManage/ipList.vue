@@ -1167,13 +1167,6 @@ export default {
     }
   }
 }
-.dropdown_selected{
-  color: #fff;
-  background-color: #209cdf;
-}
-.dropdown_title{
-  color: #409eff !important;
-}
 .remark_ext{
   width: 90px;
   white-space: nowrap;

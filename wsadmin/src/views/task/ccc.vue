@@ -1,617 +1,321 @@
+<!--  -->
 <template>
-    <div class="view_warp" ref="heightEle">
-      <el-button size="small" @click="$router.go(-1)">
-        <i class="el-icon-back"></i>
-        <span>{{$t('sys_q006')}}</span>
-      </el-button>
-        <div class="view_continer">
-            <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
-                <h3 class="mess_title">基础信息</h3>
-                <el-divider></el-divider>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="活动名称：" prop="task_name">
-                            <el-input v-model="taskForm.task_name" maxlength="20" show-word-limit></el-input>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="养号模式：" prop="rais_id">
-                            <el-radio-group v-model="taskForm.rais_id">
-                                <el-radio :label="idx" v-for="(item,idx) in raisOption" :key="idx" v-if="idx!=0">{{item.label}}</el-radio>
-                            </el-radio-group>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item>
-                            <el-alert :closable="false" :title="raisOption[taskForm.rais_id].title" :description="raisOption[taskForm.rais_id].desc" v-if="idx==rais_id" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="WS账号来源：" prop="source_num">
-                            <el-select v-model="taskForm.source_num" :placeholder="$t('sys_c052')">
-                                <el-option label="WS账号列表" :value="1"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="选择WS账号：" prop="group_id" class="custom_mess">
-                            <div class="mess_01">
-                                <div class="mess_t_01">
-                                    <span class="mess_t_02" style="cursor: pointer;" @click="clearWsBtn">{{ $t('sys_c049') }}</span>
-                                </div>
-                                <el-form-item label="选择分组：" prop="group_id" label-width="100px" style="margin-right: 20px;">
-                                    <el-select v-model="taskForm.group_id" multiple collapse-tags style="margin-left: 20px;" :placeholder="$t('sys_c052')" @change="changeAccountNum">
-                                        <el-option v-for="item in accountGroupList" :key="item.id" :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" />
-                                    </el-select>
-                                </el-form-item>
-                                <div class="mess_t_01">
-                                    预计群发账号数: <span class="mess_t_02">{{ totalNum }}</span>
-                                </div>
-                            </div>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item prop="data_pack_id">
-                            <el-select v-model="taskForm.data_pack_id" :placeholder="$t('sys_c052')">
-                                <el-option v-for="item in datapackList" :key="item.id" :label="item.name+'(入库数量：'+item.into_num+'，剩余数量：'+item.residue_num+')'"  :value="item.id" />
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="任务开始时间：">
-                            <el-date-picker v-model="taskForm.start_time" :picker-options="pickersOptions" value-format="yyyy-MM-dd HH:mm:ss" type="datetime" :placeholder="$t('sys_c052')" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="任务结束时间：" prop="end_time" class="hide_text">
-                            <el-date-picker v-model="taskForm.end_time" value-format="yyyy-MM-dd HH:mm:ss" :picker-options="pickerOptions" type="datetime" :placeholder="$t('sys_c052')" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <h3 class="mess_title">规则设置</h3>
-                <el-divider></el-divider>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="群发模式：" prop="group_type">
-                            <el-radio-group v-model="taskForm.group_type">
-                                <el-radio :label="1">系统默认模式</el-radio>
-                                <!-- <el-radio label="群发未回复粉丝数据"></el-radio> -->
-                            </el-radio-group>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item>
-                            <el-alert :closable="false" title="系统默认模式" description="群发账号同时执行群发，都是群发第一条话术，后续话术需要粉丝回复才触发发送" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item>
-                            <div class="number_01">
-                                <span class="number_02">账号每群发</span>
-                                <span class="number_03">
-                                    <el-input-number v-model ="taskForm.group1_num" type="number" :min="1" label="描述文字" style="width: 120px;" />
-                                </span>
-                                <span class="number_02">条数据则完成账号群发任务。</span>
-                            </div>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <!-- <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item>
-                            <div class="number_01">
-                                <span class="number_02">账号每群发</span>
-                                <span class="number_03">
-                                    <el-input-number v-model ="taskForm.group2_num" type="number" :min="1" label="描述文字" style="width: 120px;" />
-                                </span>
-                                <span class="number_02">条数据则休息</span>
-                                <span class="number_03">
-                                    <el-input-number v-model ="taskForm.sleep_num" type="number" :min="1" label="描述文字" style="width: 120px;" />
-                                </span>
-                                <span class="number_02">分钟。</span>
-                            </div>
-                        </el-form-item>
-                    </el-col>
-                </el-row> -->
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item>
-                            <div class="number_01">
-                                <span class="number_02">每个账号群发间隔为：</span>
-                                <span class="number_03">
-                                    <el-input-number v-model ="taskForm.sleep1_num" type="number" :min="1" label="描述文字" style="width: 120px;" />
-                                </span>
-                                <span class="number_02">~</span>
-                                <span class="number_03">
-                                    <el-input-number v-model ="taskForm.sleep2_num" type="number" :min="1" label="描述文字" style="width: 120px;" />
-                                </span>
-                                <span class="number_02">秒。</span>
-                            </div>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <h3 class="mess_title">话术设置</h3>
-                <el-divider></el-divider>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="群发话术：" prop="group_say">
-                            <el-radio-group v-model="taskForm.group_say">
-                                <el-radio :label="1">自主添加</el-radio>
-                                <!-- <el-radio label="群发未回复粉丝数据"></el-radio> -->
-                            </el-radio-group>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <!-- <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="主推话术语言：" prop="source_num">
-                            <el-select v-model="taskForm.source_num" :placeholder="$t('sys_c052')">
-                                <el-option label="区域一" value="shanghai"></el-option>
-                                <el-option label="区域二" value="beijing"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row> -->
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="话术内容：" prop="materialData" class="custom_say">
-                            <div class="mess_01">
-                                <el-button type="primary" size="mini" v-for="(item,idx) in btnOption" :key="idx" @click="showPropModel(idx)" v-show="item!=''">{{ item }}</el-button>
-                                <el-table :data="taskForm.materialData" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" style="width: 100%">
-                                    <el-table-column type="index" :label="$t('sys_g020')"></el-table-column>
-                                    <el-table-column prop="type" label="类型" minWidth="120">
-                                        <template slot-scope="scope">
-                                            <span>{{ sourceOption[scope.row.type]}}</span>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column prop="content" label="内容" minWidth="100">
-                                        <template slot-scope="scope">
-                                            <span class="content_01" v-if="scope.row.type==1||scope.row.type==5||scope.row.type==6||scope.row.type==7">{{ scope.row.content }}</span>
-                                            <img class="content_02" v-if="scope.row.type==2" :src="scope.row.content" alt="" srcset="">
-                                            <audio v-if="scope.row.type==3" controls class="audio_src">
-                                                <source :src="scope.row.content" type="audio/mpeg">
-                                            </audio>
-                                            <video v-if="scope.row.type==4" width="60" height="35" controls>
-                                                <source :src="scope.row.content" type="video/mp4">
-                                            </video>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column prop="address" :label="$t('sys_c010')" width="120">
-                                        <template slot-scope="scope">
-                                            <el-button class="custom_btn" size="mini" v-if="scope.row.type!=5" @click="editScript(scope.row,scope)">
-                                                <i class="el-icon-edit" />
-                                            </el-button>
-                                            <el-button class="custom_btn" size="mini" @click="delScript(scope)">
-                                                <i class="el-icon-delete-solid" />
-                                            </el-button>
-                                        </template>
-                                    </el-table-column>
-                                </el-table>
-                            </div>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="设置补发：" prop="set_add">
-                            <el-radio-group v-model="taskForm.set_add">
-                                <el-radio :label="1">不设置补发</el-radio>
-                                <!-- <el-radio label="群发未回复粉丝数据"></el-radio> -->
-                            </el-radio-group>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-form-item>
-                    <el-button type="primary" :loading="isLoading" @click="submitForm('taskForm')">开始群发</el-button>
-                    <el-button @click="$router.go(-1)">{{ $t('sys_c024') }}</el-button>
-                </el-form-item>
-            </el-form>
+    <div class='container_coat'>
+      <div class="condition_warp select_warp">
+        <el-form inline>
+          <el-form-item>
+            <el-input size="small" v-model="factorModel.card_no" clearable placeholder="请输入提现账号"
+              style="width:180px;"></el-input>
+          </el-form-item>
+          <!-- <el-form-item class="change_new_time">
+                      <el-date-picker size="small" v-model="factorModel.dateArry" type="daterange" value-format="yyyy-MM-dd" range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期" style='width:240px'>
+                      </el-date-picker>
+                  </el-form-item> -->
+          <el-form-item>
+            <el-button size="small" icon="el-icon-search" type="primary" @click="getPayOrderList(1)">{{ $t('sys_c002')
+              }}</el-button>
+            <el-button size="small" icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
+            <el-button size="small" :disabled="pay_id.length == 0" type="warning" @click="delCardBtn(0, 1)">{{
+              $t('sys_rai076', { value: $t('sys_p010') }) }}</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div class="switch_bar">
+        <div class="consun_list handel_area">
+          <el-table :data="bannerList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading"
+            element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }"
+            @selection-change="selectAllChange" @row-click="rowSelectChange">
+            <el-table-column prop="account" label="拉群账号" width="120" />
+            <el-table-column prop="ad_account" label="营销账号" width="120" />
+            <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
+              <template slot="header">
+                <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
+                  <span style="color:#909399" :class="[factorModel.status ? 'dropdown_title' : '']"> {{ $t('sys_c005') }}
+                    <i class="el-icon-arrow-down el-icon--right" />
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item :class="{ 'dropdown_selected': idx == factorModel.status }"
+                      v-for="(item, idx) in statusOptions" :key="idx" :command="idx">{{ item }}</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </template>
+              <template slot-scope="scope">
+                <el-tag size="small" :type="scope.row.status == 2 ? 'success' : scope.row.status == 3 ? 'danger' : ''"> {{
+              statusOptions[scope.row.status] }}</el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column prop="members" label="群成员" minWidth="120" />
+            <el-table-column prop="member_num" label="群成员数量" minWidth="120" />
+            <el-table-column prop="qid" label="群id" width="120" />
+            <el-table-column prop="invite_link" label="邀请链接" minWidth="100" />
+            <el-table-column prop="reason" label="原因" minWidth="100" />
+            <el-table-column prop="itime" :label="$t('sys_c008')" minWidth="160">
+              <template slot-scope="scope">
+                <div>{{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}</div>
+              </template>
+            </el-table-column>
+            <el-table-column width="180" label="操作" align="center" fixed="right">
+              <template slot-scope="scope">
+                <el-button type="danger" :disabled="scope.row.status == 2 || scope.row.status == 3" size="mini" plain
+                  @click="regectBtn(scope.row)">驳回</el-button>
+                <el-button :type="scope.row.status == 2 ? 'info' : 'warning'"
+                  :disabled="scope.row.status == 2 || scope.row.status == 3 || pay_id.length > 0" size="mini" plain
+                  @click="delCardBtn(scope.row, 2)">
+                  {{ scope.row.status == 2 ? $t('sys_p008') : $t('sys_p010') }}
+                </el-button>
+                <!-- <el-button type="danger" size="mini" plain @click="delCardBtn(scope.row,2)">删除</el-button> -->
+              </template>
+            </el-table-column>
+          </el-table>
+          <div class="layui_page">
+            <el-pagination background @size-change="limitChange" @current-change="offestChange" :page-sizes="pageOption"
+              :current-page.sync="factorModel.page" :page-size="factorModel.limit"
+              layout="total, sizes, prev, pager, next, jumper" :total="factorModel.total">
+            </el-pagination>
+          </div>
         </div>
-        <el-dialog title="选择素材" center :visible.sync="showSource" :close-on-click-modal="false" width="60%">
-            <material :key="source_type==1?Math.floor(new Date().getTime()):''" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
-        </el-dialog>
-        <el-dialog title="添加链接" center :visible.sync="showLink" :close-on-click-modal="false" width="560px">
-            <el-form size="small" :model="linkForm" :rules="linkRules" ref="linkForm" label-width="100px" class="demo-ruleForm">
-                <template v-if="source_type==2">
-                    <el-form-item :label="$t('sys_mat096')+':'" prop="link_title">
-                        <el-input v-model="linkForm.link_title" :placeholder="$t('sys_mat061',{value:$t('sys_mat019')})" />
-                    </el-form-item>
-                    <el-form-item :label="$t('sys_mat097')+':'" prop="link_address">
-                        <el-input v-model="linkForm.link_address" :placeholder="$t('sys_mat102',{value:$t('sys_mat019')})" />
-                    </el-form-item>
-                </template>
-                <template v-if="source_type==4">
-                    <el-form-item :label="$t('sys_mat098')+':'" prop="card_type">
-                        <el-radio-group v-model="linkForm.card_type">
-                            <el-radio :label="1">{{ $t('sys_mat101') }}</el-radio>
-                        </el-radio-group>
-                    </el-form-item>
-                    <el-form-item prop="card_text" style="margin-bottom: 10px;">
-                        <el-input v-model="linkForm.card_text" type="textarea" :rows="8" :placeholder="$t('sys_mat102')" />
-                    </el-form-item>
-                    <el-form-item>
-                        <el-checkbox v-model="linkForm.update_text">{{ $t('sys_mat099') }}</el-checkbox>
-                    </el-form-item>
-                </template>
-                <el-form-item>
-                    <el-button @click="showLink=false">{{ $t('sys_c024') }}</el-button>
-                    <el-button type="primary" @click="submitLink('linkForm')">确认</el-button>
-                </el-form-item>
-            </el-form>
-        </el-dialog>
+      </div>
+      <!-- 新增轮播 -->
+      <el-dialog title="驳回" :visible.sync="createModel" :close-on-click-modal="false" width="450px">
+        <el-form size="small" :model="sendForm" label-width="100px" :rules="sendRules" ref="sendForm">
+          <el-form-item label="备注：" prop="remark">
+            <el-input type="textarea" :rows="4" :placeholder="$t('sys_mat061', { value: $t('sys_c071') })"
+              v-model="sendForm.remark"></el-input>
+          </el-form-item>
+          <el-form-item style="text-align:center;margin-left: -110px;">
+            <el-button @click="createModel = false">取消</el-button>
+            <el-button type="primary" @click="submitSendBtn('sendForm')" :loading="isLoading">确定</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
+      <el-image-viewer v-if="imgModel" :on-close="closeViewer" style="z-index:9999" @click.native="cloneImgpreview"
+        :url-list="[viewImg]" />
     </div>
   </template>
   
   <script>
-  import { successTips } from '@/utils/index'
-  import material from '../content/material.vue';
-  import { getdatapacklist } from '@/api/datamanage'
-  import { getsendmsggroup,addsendmsgtask } from '@/api/task'
+  import { successTips, resetPage } from '@/utils/index'
+  import { getwithdrawapprovallist, dowithdrawapproval } from '@/api/pay'
   export default {
-    components:{material},
+    components: { 'el-image-viewer': () => import('element-ui/packages/image/src/image-viewer') },
     data() {
       return {
-        totalNum:0,
-        source_type:"",
-        is_index:"",
-        showLink:false,
-        isLoading:false,
-        showSource:false,
-        childMess:{
-            is_show:1,
-            type:0
+        statusList: ["待启动", "初始化", "进行中", "失败", "完成", "关闭"],
+        factorModel: {
+          status: 0,
+          card_no: "",
+          task_name: "",
+          total: 0,
+          offset: 1,
+          limit: 100
         },
-        timeOptionRange: '',
-        pickersOptions: {
-            disabledDate(time) {
-                let currentDate = new Date().getTime()
-                let lastDate = 3 * 24 * 60 * 60 * 1000
-                let lastChooseDate = currentDate+ lastDate
-                return time.getTime() < Date.now() || time.getTime() > lastChooseDate
-            }
+        type: 0,
+        pay_id: [],
+        viewImg: "",
+        loading: false,
+        bannerList: [],
+        isLoading: false,
+        isUpload: false,
+        imgModel: false,
+        createModel: false,
+        sendForm: {
+          id: "",
+          remark: "",
         },
-        pickerOptions: {
-            disabledDate(time) {
-                let currentDate = new Date().getTime()
-                let lastDate = 7 * 24 * 60 * 60 * 1000
-                let lastChooseDate = currentDate + lastDate
-                return time.getTime() < Date.now() || time.getTime() >= lastChooseDate
-                // return (time.getTime() + (3600 * 1000 * 24 * 1)) < Date.now() || (time.getTime() + (3600 * 1000 * 24 * 1)) > lastChooseDate
-            }
-        },
-        taskForm:{
-            groupNum:0,
-            task_name:"",
-            source_num:1,
-            group_id:[],
-            ws_data:1,
-            rais_id:1,
-            data_pack_id:"",
-            start_time:"",
-            end_time:"",
-            group_type:1,
-            group1_num:40,
-            group2_num:15,
-            sleep_num:20,
-            sleep1_num:1000,
-            sleep2_num:1200,
-            group_say:1,
-            set_add:1,
-            materialData:[],
-        },
-        linkForm:{
-            link_title:"",
-            link_address:"",
-            card_type:1, 
-            card_text:"",
-            update_text:true
-        },
-        datapackList:[],
-        accountOptions:[],
-        accountGroupList:[]
+        pageOption: resetPage(),
+        sendRules: {
+          remark: [
+            { required: true, message: this.$t('sys_mat061', { value: this.$t('sys_c071') }), trigger: 'blur' }
+          ]
+        }
       }
     },
     computed: {
-        taskRules() {
-            return {
-                task_name: [{ required: true, message: this.$t('sys_c052'), trigger: 'blur' }],
-                source_num: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                group_id: [{ type:'array', required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                ws_data: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                end_time: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                group_type: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                group_say: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                data_pack_id: [{ required: true, message: this.$t('sys_g091'), trigger: 'change' }],
-                materialData: [{ required: true, message: this.$t('sys_mat103'), trigger: 'change' }]
-            }
-        },
-        linkRules(){
-            return {
-                link_title: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }],
-                link_address: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }],
-                card_type: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                card_text: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }]
-            }
-        },
-        raisOption(){
-            return [
-                {},
-                {
-                    label:this.$t('sys_rai002'),
-                    title:"辅助模式",
-                    desc:"该模式按照发起聊天账号和被添加账号分组，随机匹配账号，主动发起会话账号会先将被动账号添加至通讯录后发起"
-                },
-                {
-                    label:this.$t('sys_rai003'),
-                    title:"好友互聊模式",
-                    desc:"该模式需要所选分组中存在互传通讯录的账号才能匹配发起互聊会话，无好友关系可先通过其他模式养号互传通讯录后在使用好友互聊模式"
-                },
-                {
-                    label:this.$t('sys_rai004'),
-                    title:"辅助模式",
-                    desc:"该模式按照所选账号随机分配添加账号和被添加账号，主动发起会话账号会先将被动账号添加至通讯录后发起"
-                }
-            ]
-        },
-        btnOption(){
-            return ["",this.$t('sys_mat093'),"",this.$t('sys_mat095'),this.$t('sys_mat092')]
-        },
-        sourceOption() {
-            return ["",this.$t('sys_mat008'),this.$t('sys_mat009'),this.$t('sys_mat010'),this.$t('sys_mat011'),this.$t('sys_mat091'),this.$t('sys_mat092')]
-        }
+      lopOption() {
+        return ["", this.$t('sys_c026'), this.$t('sys_c025')]
+      },
+      payOptions() {
+        return [this.$t('sys_l053'), this.$t('sys_p007'), this.$t('sys_p008'), this.$t('sys_p015')]
+      },
+      drawOption() {
+        return ["", this.$t('sys_p013'), this.$t('sys_p014')]
+      },
+      statusOptions(){
+        return ["","开始任务","进行中","结算中","已结束"]
+      }
     },
-    created(){
-        this.getGroupList();
-        this.getDatalist();
+    mounted() {
+      this.getPayOrderList();
     },
-    methods:{
-        async getGroupList(){
-            const { data } = await getsendmsggroup({page:1,limit:300});
-            this.accountGroupList = data.list || [];
-        },
-        getDatalist() {
-            getdatapacklist({page:1,limit:300}).then(res => {
-                this.datapackList = res.data.list || [];
-            })
-        },
-        getChildren(msg){
-            this.showSource=false;
-            if (this.source_id) {
-                for (let k = 0; k < this.taskForm.materialData.length; k++) {
-                    if (this.taskForm.materialData[k].id == this.source_id) {
-                        this.taskForm.materialData[k] = JSON.parse(msg)
-                    }
-                }
-            }else{
-                this.taskForm.materialData.push(JSON.parse(msg))
-            }
-        },
-        changeAccountNum(){
-            let numbers = this.accountGroupList.filter(item => {return item.group_id == this.taskForm.group_id});
-            this.totalNum = numbers.reduce((sum, item) => sum + Number(item.online_num || 0), 0);
-        },
-        showPropModel(type){
-            this.is_index = "";
-            this.source_id = "";
-            this.source_type = type;
-            if (type == 1) {
-                this.childMess.type="";
-                this.showSource=true;
-            }else if(type == 2||type == 4){
-                this.showLink=true;
-                this.$nextTick(()=>{
-                    this.$refs.linkForm.resetFields();
-                })
-            }else if(type == 3){
-                this.taskForm.materialData.push({type:5,content:this.$t('sys_mat091')})
-                this.$refs.taskForm.clearValidate('materialData');
-            }
-        },
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    let params = {
-                        config_str:JSON.stringify({
-                            data_type:this.taskForm.ws_data,
-                            send_type:this.taskForm.group_type,
-                            send_num:this.taskForm.group1_num,
-                            min_time:this.taskForm.sleep1_num,
-                            max_time:this.taskForm.sleep2_num,
-                            speech_skill_type:this.taskForm.group_say,
-                            material_num:this.taskForm.materialData.length,
-                            replenish:this.taskForm.set_add
-                        }),
-                        name:this.taskForm.task_name,
-                        group_ids:this.taskForm.group_id,
-                        data_type:this.taskForm.ws_data,
-                        data_pack_id:this.taskForm.data_pack_id,
-                        start_time:this.taskForm.start_time?this.$baseFun.resetTime(this.taskForm.start_time,3):-1,
-                        end_time:this.$baseFun.resetTime(this.taskForm.end_time,3),
-                        send_type:this.taskForm.group_type,
-                        send_num:this.taskForm.group1_num,
-                        // interval_send_num:this.taskForm.group2_num,
-                        // interval_send_time:this.taskForm.sleep_num,
-                        min_time:this.taskForm.sleep1_num,
-                        max_time:this.taskForm.sleep2_num,
-                        speech_skill_type:this.taskForm.group_say,
-                        material_list:this.taskForm.materialData,
-                        replenish:this.taskForm.set_add
-                    }
-                    this.isLoading=true;
-                    addsendmsgtask(params).then(res => {
-                        this.isLoading=false;
-                        if (res.code != 0) return;
-                        this.$router.go(-1);
-                        successTips(this)
-                    })
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-        submitLink(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    this.showLink=false;
-                    let index = this.taskForm.materialData[this.is_index];
-                    if (index) {
-                        for (let k = 0; k < this.taskForm.materialData.length; k++) {
-                            if (this.is_index === k) {
-                                let item = this.taskForm.materialData[k];
-                                item.content=this.linkForm.card_text;
-                                this.$set(this.taskForm.materialData,k,item)
-                            }
-                        }
-                    }else{
-                        let newObj = {id:"",type:this.source_type==2?5:6,}
-                        this.source_type==2?this.linkForm.title=this.linkForm.link_title:"";
-                        newObj.content=this.source_type==2?this.linkForm.link_address:this.linkForm.card_text
-                        this.taskForm.materialData.push(newObj);
-                    }
-                    this.$refs.taskForm.clearValidate('materialData');
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-        editScript(row,idx){
-            if (row.type == 6) {
-                this.showLink = true;
-                this.is_index = idx.$index;
-                this.$nextTick(()=>{
-                    this.linkForm.card_text = row.content;
-                    // this.linkForm.link_title = row.content;
-                    // this.linkForm.link_address = row.content; 
-                })
-            }else{
-                this.source_type = 1;
-                this.source_id = row.id;
-                this.childMess.type=String(row.type);
-                this.showSource=true;
-            }
-        },
-        delScript(row){
-            for (let k = 0; k < this.taskForm.materialData.length; k++) {
-                if (k === row.$index) {
-                    this.taskForm.materialData.splice(k,1)
-                }
-            }
-        },
-        restForm(){
-            this.$refs.taskForm.resetFields();
-        },
-        clearWsBtn(){
-            this.taskForm.group_id=[];
-            this.$nextTick(()=>{
-                this.$refs.taskForm.clearValidate('group_id');
-            })
+    methods: {
+      restQueryBtn() {
+        this.factorModel.card_no = "";
+        this.getPayOrderList(1)
+        this.$refs.serveTable.clearSelection();
+      },
+      //获取订单列表
+      getPayOrderList(num) {
+        this.loading = true;
+        this.factorModel.page = num ? num : this.factorModel.page;
+        let params = {
+          page: this.factorModel.page,
+          limit: this.factorModel.limit,
+          status: this.factorModel.status,
+          card_no: this.factorModel.card_no
         }
-    }
+        getwithdrawapprovallist(params).then(res => {
+          this.loading = false;
+          this.factorModel.total = res.data.total;
+          this.bannerList = res.data.list || [];
+        })
+      },
+      selectAllChange(row) {
+        this.pay_id = row.map(item => { return item.id })
+      },
+      rowSelectChange(row, column, event) {
+        let refsElTable = this.$refs.serveTable;
+        let findRow = this.pay_id.find(item => item == row.id);
+        if (findRow) {
+          refsElTable.toggleRowSelection(row, false);
+          return;
+        }
+        refsElTable.toggleRowSelection(row, true);
+      },
+      handleNewwork(val) {
+        this.factorModel.status = val;
+        this.getPayOrderList();
+      },
+      limitChange(val) {
+        this.factorModel.limit = val;
+        this.getPayOrderList()
+      },
+      offestChange(val) {
+        this.factorModel.offset = val;
+        this.getPayOrderList()
+      },
+      regectBtn(row) {
+        this.sendForm.id = row.id;
+        this.createModel = true;
+        this.$nextTick(() => {
+          this.$refs.sendForm.resetFields();
+        })
+      },
+      //添加
+      addGroupBtn(val, idx) {
+        this.type = idx;
+        if (idx == 2) {
+          this.sendForm.id = val.id;
+          this.sendForm.task_name = val.name;
+          this.sendForm.file_url = val.file_url;
+          this.sendForm.link = val.link;
+          this.sendForm.remark = val.remark;
+          this.sendForm.status = val.status;
+        }
+        this.createModel = true;
+      },
+      //提交
+      submitSendBtn(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            let data = {
+              ptype: 2,
+              ids: [],
+              id: this.sendForm.id,
+              remark: this.sendForm.remark
+            }
+            this.isLoading = true;
+            dowithdrawapproval(data).then(res => {
+              this.isLoading = false;
+              this.getPayOrderList()
+              this.createModel = false;
+            })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        })
+      },
+      //删除
+      delCardBtn(val, type) {
+        let that = this;
+        that.$confirm(this.$t('sys_c046', { value: this.$t('sys_p011') }), this.$t('sys_l013'), {
+          type: 'warning',
+          confirmButtonText: this.$t('sys_c024'),
+          cancelButtonText: this.$t('sys_c023'),
+          beforeClose: function (action, instance, done) {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true;
+              dowithdrawapproval({ status: 2, ids: type == 1 ? that.pay_id : [val.id] }).then(res => {
+                instance.confirmButtonLoading = false;
+                if (res.code != 0) return;
+                successTips(that)
+                that.getPayOrderList()
+                done();
+              })
+            } else {
+              done();
+            }
+          }
+        }).catch(() => {
+          that.$message({ type: 'info', message: '已取消' });
+        });
+      }
+    },
+    watch: {
+      createModel(val) {
+        if (val == false) {
+          this.$refs.sendForm.resetFields();
+          this.sendForm.id = "";
+          this.sendForm.task_name = "";
+          this.sendForm.file_url = "";
+          this.sendForm.link = "";
+          this.sendForm.remark = "";
+          this.sendForm.status = 1;
+        }
+      }
+    },
   }
   </script>
-  <style scoped lang="scss">
-  .view_continer{
-    width: 100%;
-    // max-height: 760px;
+  <style lang="scss" scoped>
+  .view_img {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    cursor: pointer;
     position: relative;
-    overflow-y: auto;
-    padding: 0 15%;
-    box-sizing: border-box;
-    .mess_title{
-        font-weight: 400;
-        color: #1f2f3d;
-        font-size: 22px;
+  
+    img {
+      width: 100%;
+      height: 100%;
     }
-    .content_01{
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-    .audio_src{
-        width: 140px;
-        height: 30px;
-    }
-    .content_02{
-        width: 44px;
-        height: 28px;
-    }
-    .custom_btn{
-        padding: 0;
+  
+    .cover_bg {
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      gap: 8px;
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .7);
+      transition: all .5s;
+  
+      i {
+        font-size: 16px;
+      }
+  
+      .el-icon-view {
         color: #409eff;
-        background: transparent;
-        border-color: transparent;
-        i{
-            font-size: 16px;
-        }
+      }
+  
+      .el-icon-delete {
+        color: #f56c6c;
+      }
     }
-    ::v-deep .el-alert{
-        background: #ecf5ff;
-        .el-alert__title{
-            color: #409eff;
-            font-size: 16px;
-        }
-    }
-    ::v-deep .el-alert__description{
-        font-size: 14px;
-        line-height: 24px;
-    }
-    .custom_mess, .custom_say{
-        .mess_01{
-            width: 100%;
-            padding: 10px 16px 10px 16px;
-            background-color: #ecf5ff;
-            border-radius: 4px;
-            position: relative;
-            box-sizing: border-box;
-            .mess_t_01{
-                font-size: 12px;
-                display: flex;
-                justify-content: flex-end;
-                .mess_t_02{
-                    color: #409eff;
-                    font-weight: bold;
-                }
-            }
-        }
-    }
-    .custom_say{
-        .mess_01{
-            border-radius: 4px;
-            background: transparent;
-            border: 1px solid #dcdfe6;
-        }
-    }
-    .number_01{
-        display: flex;
-        font-size: 12px;
-        line-height: 16px;
-        .number_02{
-            display: flex;
-            align-items: center;
-        }
-        .number_03{
-            margin: 0 5px;
-        }
-    }
+  }
+  
+  .view_img:hover .cover_bg {
+    opacity: 1;
   }
   </style>

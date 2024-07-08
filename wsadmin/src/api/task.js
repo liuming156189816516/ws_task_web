@@ -114,6 +114,11 @@ export const doupautoad = (params) =>{
 export const upautoad = (params) =>{
   return request({url:'/biggroup/upautoad',method:'post',data:params})
 }
+export const getcreategroupinfolist = (params) =>{
+  return request({url:'/group/getcreategroupinfolist',method:'post',data:params})
+}
+
+
 
 
 

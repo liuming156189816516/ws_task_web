@@ -36,7 +36,7 @@
                     <el-input :placeholder="$t('sys_mat061',{value:$t('sys_s003')})" v-model="configForm.task_name" style="width:100%;"></el-input>
                 </el-form-item>
                 <el-form-item :label="$t('sys_s004')" prop="task_num">
-                    <el-input :placeholder="$t('sys_mat061',{value:$t('sys_s004')})" v-model="configForm.task_num" oninput ="value=value.replace(/[^\d]/g,'')" ></el-input>
+                    <el-input :placeholder="$t('sys_mat061',{value:$t('sys_s004')})" v-model="configForm.task_num"></el-input>
                 </el-form-item>
                 <el-form-item :label="$t('sys_s005')" prop="task_desc">
                     <el-input type="textarea" :placeholder="$t('sys_mat061',{value:$t('sys_s005')})" rows="3" v-model="configForm.task_desc"></el-input>

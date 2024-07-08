@@ -112,6 +112,7 @@ export default {
                 this.teamStemp = data1;
                 this.taskInfo = data2;
                 this.group_link = data2.invite_link;
+                this.task_id==""?data2.task_info_id:this.task_id;
                 this.isShow=data2.status==1||data2.status==2?true:false;
                 this.taskTime = (data2.invalid_time - this.timestamp)*1000 ||0;
                 this.taskList = data2.targets.filter(item=>{ return item})

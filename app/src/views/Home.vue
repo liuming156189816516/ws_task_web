@@ -152,6 +152,7 @@ export default {
 			// localStorage.setItem("language",lang);
 		},
         handleTask(row){
+            // console.log(row);
             const path = this.taskType[row.type];
             this.$router.push(`${path}?id=${row.task_info_id}`)
         }

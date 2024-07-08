@@ -22,9 +22,7 @@
                 <span class="left_icon"></span>帮助文档
             </div>
             <div class="info_main">
-                <video controls>
-                    <source :src="help_url||def_video" type="video/mp4">
-                </video>
+                <video id="video" controls :src="help_url"></video>
             </div>
         </div>
     </div>

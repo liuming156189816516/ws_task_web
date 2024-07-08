@@ -67,7 +67,7 @@
                         <img class="ws_icon" src="../assets/images/home/ws_icon.png" alt="">
                         <span>{{ taskNameOption[item.type]||item.task_name }}</span>
                     </div>
-                    <van-button :type="item.status==1?'danger':item.status==2?'primary':item.status==3?'warning':'default'">{{ taskStatusOption[item.status] }}</van-button>
+                    <van-button :class="item.status==4?'close_task':''" :type="item.status==1?'danger':item.status==2?'primary':item.status==3?'warning':'default'">{{ taskStatusOption[item.status] }}</van-button>
                 </div>
             </div>
         </div>
@@ -408,6 +408,9 @@ export default {
                         border-radius: 35px;
                         box-sizing: border-box;
                     }
+                }
+                .close_task{
+                    background: #c8c9cc;
                 }
             }
         }

@@ -53,6 +53,8 @@ export default {
 		}
 	},
 	created() {
+		this.$i18n.locale=this.langIdx;
+                Cookies.set("language",this.langIdx)
 		this.userAccount();
     },
 	methods: {

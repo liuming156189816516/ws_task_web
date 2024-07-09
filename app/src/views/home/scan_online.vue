@@ -188,7 +188,7 @@ export default {
             return [this.$t('home_020'),this.$t('home_021'),this.$t('home_022')]
         },
         statusOption(){
-            return [this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
+            return ["",this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
         }
 	},
     created(){

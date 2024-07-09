@@ -24,7 +24,7 @@
                             <p>{{ $t("spre_004") }}</p>
                         </div>
                         <div class="right-pro">
-                            <p>{{allIncome.team_num||0}}</p>
+                            <p>{{allIncome.team_num || 0}}</p>
                             <p>{{ $t("spre_005") }}</p>
                         </div>
                     </div>

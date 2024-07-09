@@ -406,7 +406,7 @@ export default {
                         }
                     }
                     .van-button{
-                        width: 100px;
+                        min-width: 90px;
                         height: max-content;
                         line-height: 1;
                         padding: 10px 0;

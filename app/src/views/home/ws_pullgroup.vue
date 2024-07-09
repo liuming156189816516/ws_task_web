@@ -1,6 +1,6 @@
 <template>
     <div class="home-content">
-        <page-header :title="$t('home_009')" :show-icon="true" :bgcolor="false"></page-header>
+        <page-header :title="$t('home_011')" :show-icon="true" :bgcolor="false"></page-header>
         <div class="home_content">
             <div class="task_step_detail">
                 <div class="task-pro">

@@ -5,46 +5,39 @@
         </div>
         <div class="forget_continer">
             <div class="forget_title">
-                找回密码
+                {{ $t('login_007') }}
             </div>
             <div class="input_item">
                 <label class="left_icon">
                     <img src="../../assets/images/sign/zhanghao.png" />
                 </label>
-                <input v-model="username" :placeholder="$t('login_004')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+                <input v-model="username" :placeholder="$t('other_001',{value:$t('login_001')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
             </div>
             <div class="input_item verfy_item">
                 <div class="input_code">
                     <label class="left_icon">
                         <img src="../../assets/images/sign/secret.png" />
                     </label>
-                    <input v-model="safe_code" :placeholder="$t('login_012')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+                    <input v-model="safe_code" :placeholder="$t('other_001',{value:$t('login_008')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                 </div>
                 <div class="code_img" @click="getVerfyBtn" v-html="code" />
             </div>
-            <!-- <div class="uilist_div verfy_code">
-                <div class="input_code">
-                    <img src="../../assets/images/sign/secret.png" />
-                    <input style="flex-grow:1;" v-model="safe_code" autocomplete="off" :placeholder="$t('login_012')" oninput="value=value.replace(/[^\w_]/g,'')" />
-                </div>
-                <div class="code_img" @click="getVerfyBtn" v-html="code" />
-            </div> -->
             <div class="input_item">
                 <label class="left_icon">
                     <img src="../../assets/images/sign/lock.png" />
                 </label>
-                <input v-model="pwd" :placeholder="$t('login_008')" :type="regEye?'password':'text'" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+                <input v-model="pwd" :placeholder="$t('other_001',{value:$t('login_002')})" :type="regEye?'password':'text'" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                 <i :class="[regEye ? 'icon_biyan': 'icon_zhenyan']" @click="regEye = !regEye"></i>
             </div>
             <div class="input_item">
                 <label class="left_icon">
                     <img src="../../assets/images/sign/lock.png" />
                 </label>
-                <input v-model="sur_pwd" :placeholder="$t('login_010')" :type="regEye?'password':'text'" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+                <input v-model="sur_pwd" :placeholder="$t('other_001',{value:$t('login_009')})" :type="regEye?'password':'text'" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                 <i :class="[regEye ? 'icon_biyan': 'icon_zhenyan']" @click="regEye = !regEye"></i>
             </div>
             <div class="login_btn">
-				<van-button type="danger" :loading="isLoading" @click="handleRegister" loading-text="提交中...">{{$t('other_005') }}</van-button>
+				<van-button type="danger" :loading="isLoading" @click="handleRegister" :loading-text="$t('login_010')">{{ $t('other_003') }}</van-button>
 			</div>
         </div>
     </div>
@@ -79,18 +72,16 @@ export default {
 			const zh_reg = new RegExp(/^[^\u4e00-\u9fa5]+$/);
 			const regex = new RegExp(/^[0-9A-Za-z]{6,20}$/);
 			if (!this.username) {
-				return this.$toast(this.$t('login_004'));
-			} else if(!zh_reg.test(this.username)){
-				return this.$toast(this.$t('login_030'));
+                return this.$toast(this.$t('other_001',{value:this.$t('login_001')}));
 			}
             if (!this.safe_code) {
-				return this.$toast(this.$t('login_012'));
+				return this.$toast(this.$t('other_001',{value:this.$t('login_008')}));
 			}
 			if (!this.pwd || !regex.test(this.pwd)) {
-				return this.$toast(this.$t('login_009'));
+				this.$toast(this.$t('other_001',{value:this.$t('login_002')}));
 			}
 			if (this.sur_pwd !== this.pwd) {
-				return this.$toast(this.$t('login_020'));
+				this.$toast(this.$t('other_001',{value:this.$t('login_019')}));
 			}
 			let params = {
 				account: this.username,

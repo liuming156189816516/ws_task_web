@@ -1,32 +1,32 @@
 <template>
     <div class="earn">
         <div class="custom_head">
-            <page-header :title="$t('title_012')" :show-icon="true" :bgcolor="false"></page-header>
+            <page-header :title="$t('tail_001')" :show-icon="true" :bgcolor="false"></page-header>
             <div class="dropdown_warp">
                 <div class="promote-header">
                     <div class="tab_nav" @click="pulldownState">
-                        <span v-if = "dateState == ''">收益类型</span> 
+                        <span v-if = "dateState == ''">{{ $t('tail_002') }}</span> 
                         <span v-else>{{ dateState }}</span> 
                         <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showState ? 180 : 0}deg)`}" />
                     </div>
                     <div class="tab_nav" @click="pulldownTime">
-                        <span v-if = "!timeValue || timeValue === 0">收益时间</span> 
-                        <span v-else-if = "timeValue == 1">今天</span> 
-                        <span v-else-if= "timeValue == 2">昨天</span> 
-                        <span v-else-if= "timeValue == 3">近七天</span>
+                        <span v-if = "!timeValue || timeValue === 0">{{ $t('tail_003') }}</span> 
+                        <span v-else-if = "timeValue == 1">{{ $t('other_016') }}</span> 
+                        <span v-else-if= "timeValue == 2">{{ $t('other_017') }}</span> 
+                        <span v-else-if= "timeValue == 3">{{ $t('other_018') }}</span>
                         <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showTime ? 180 : 0}deg)`}" />
                     </div>
-                    <div class="tab_nav cash_nav" @click="pulldownState">
-                        <!-- 总收益：<span style="color:#F52C2C;">{{total_point||0}}元</span>  -->
-                    </div>
+                    <!-- <div class="tab_nav cash_nav" @click="pulldownState">
+                        总收益：<span style="color:#F52C2C;">{{total_point||0}}元</span> 
+                    </div> -->
                 </div>
             </div>
         </div>
         <div class="record_list" v-if="list&&list.length>0">
             <div class="record_warp record_title">
-                <span>{{$t("mine_007")}}</span>
-                <span>{{$t("mine_001")}}</span>
-                <span>{{$t("mine_006_1")}}</span>
+                <span>{{$t("tail_004")}}</span>
+                <span>{{$t("tail_005")}}</span>
+                <span>{{$t("tail_006")}}</span>
             </div>
             <div class="record_content">
                 <div class="buy-number" v-for="(item,index) in list" :key="index">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div v-else class="empty_tips">暂无数据...</div>
+        <div v-else class="empty_tips">{{$t("other_022")}}</div>
         <van-overlay :show = "showState" @click="showState = false">
             <div class="screen_down" @click.stop>
                 <ul>
@@ -68,8 +68,6 @@ export default {
         return {
             currentPage:1,
             total_point:0,
-            profitTime:['重置','今天','昨天','近七天（包含今天）'],
-            profitType:[{lable:"重置",value:-1},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }],
             stateValue:null,
             timeValue:"",
             showState:false,
@@ -86,12 +84,20 @@ export default {
             list: []
         };
     },
+    computed:{
+        profitTime(){
+            return [this.$t('other_024'),this.$t('other_016'),this.$t('other_017'),this.$t('other_023')];
+        },
+        profitType(){
+            return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('other_027'),value:8 },{lable:this.$t('other_028'),value:9 }];
+        }
+    },
     created() {
         this.billDetail();
     },
     methods: {
         billDetail() {
-            let isLoading = Toast.loading({message: '加载中...',forbidClick: true});
+            let isLoading = Toast.loading({message:this.$t('other_029'),forbidClick: true});
             getbillrecordlist({
                 page: this.page,
                 limit: this.limit,
@@ -193,9 +199,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.van-overlay{
-    top: 130px;
-}
 .earn {
     width: 100%;
     height: 100vh;
@@ -214,24 +217,22 @@ export default {
 }
 .promote-header {
     width: 100%;
-    float: left;
-    color: #7e7e7e;
-    font-size: 0.28rem;
     display: flex;
+    color: #7e7e7e;
     flex-direction: row;
     padding: 12px 30px 12px;
+    font-size: 28px;
     background-color: #fff;
+    justify-content:space-around;
     border-bottom: 1px solid  #f2f2f2;
-    // background-color: darkblue;
-    display: flex;justify-content:space-around;
+    gap: 20px;
     .tab_nav {
-        width: 196px;
-        // padding: 0 24px;
-        height: 68px;
+        width: max-content;
         display: flex;
-        flex-grow: 0 98px;
+        // flex: 1;
+        padding: 20px 30px;
         overflow: hidden;
-        margin-right: 10px;
+        border-radius: 0;
         background-color: #FFF2F2;
         .down_img {
             margin-left: 6px;
@@ -250,6 +251,7 @@ export default {
 .van-overlay{
   height: calc(100vh - 66px);
   position: absolute;
+  top: 135px;
 }
 .screen_down{
     width: 100%;

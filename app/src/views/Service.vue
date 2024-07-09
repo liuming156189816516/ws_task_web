@@ -1,7 +1,7 @@
 <template>
     <div class="spread_warp">
         <div class="top_model">
-            <div class="user_mess">客服</div>
+            <div class="user_mess">{{$t('serv_001')}}</div>
             <div class="cover_model">
                 <div class="task_warp">
                     <div class="left_img">
@@ -9,20 +9,22 @@
                     </div>
                     <div class="task_num">
                         <div class="task_top">
-                            <div class="text_1">在线客服</div>
-                            <div class="text_2">有问题找客服</div>
+                            <div class="text_1">{{$t('serv_002')}}</div>
+                            <div class="text_2">{{$t('serv_003')}}</div>
                         </div>
-                        <van-button type="danger" style="border-radius: 30px;height: inherit; padding: 10px 20px;">立即咨询</van-button>
+                        <van-button type="danger" style="border-radius: 30px;height: inherit; padding: 10px 20px;">{{$t('serv_005')}}</van-button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="spread_info">
             <div class="spread_l">
-                <span class="left_icon"></span>帮助文档
+                <span class="left_icon"></span>{{$t('serv_004')}}
             </div>
             <div class="info_main">
-                <video id="video" controls :src="help_url"></video>
+                <video controls>
+                    <source :src="help_url||def_video" type="video/mp4">
+                </video>
             </div>
         </div>
     </div>
@@ -33,7 +35,8 @@ import { gethelp } from '@/api/home';
 export default {
     data() {
         return {
-            help_url:""
+            help_url:"",
+            def_video:require("../assets/video/dbfcfa67.mp4")
         }
     },
     created() {
@@ -89,6 +92,7 @@ export default {
                 justify-content: space-between;
                 background-color: $font-color-white;
                 .left_img{
+                    flex-shrink: 0;
                     img{
                         height: 280px;
                     }
@@ -96,27 +100,29 @@ export default {
                 .task_num {
                     display: flex;
                     height: 260px;
+                    // flex-shrink: 0;
+                    margin-left: 20px;
                     align-items: center;
                     flex-direction: column;
                     justify-content: space-around;  
                     .task_top{
                         display: flex;
                         flex-direction: column;
-                        align-self: flex-start;
+                        margin-bottom: 20px;
                         .text_1 {
+                            display: flex;
                             font-size: 48px;
                             font-weight: bold;
                         }
                         .text_2 {
                             color: $home-earn-more;
-                            font-size: 34px;
+                            font-size: 28px;
                         }
                     }
                     .van-button{
                         height: 32px !important;
                         display: flex;
                         flex-shrink: 0;
-                        align-self: flex-end;
                     }
                 }
             }

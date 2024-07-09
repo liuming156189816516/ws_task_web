@@ -1,16 +1,16 @@
 <template>
     <div class="home-content">
-        <page-header style="position: fixed;top: 0;left: 0; z-index: 9;" title="WhatsApp挂机任务" :show-icon="true" :bgcolor="false"></page-header>
+        <page-header :title="$t('home_009')" :show-icon="true" :bgcolor="false"></page-header>
         <div class="home_content">
             <div class="mian_continer">
                 <div class="task-pro">
                     <div class="left-pro">
                         <p>{{ teamStemp.today_income || 0}}</p>
-                        <p>{{ $t("home_062") }}</p>
+                        <p>{{ $t("home_012") }}</p>
                     </div>
                     <div class="right-pro">
                         <p>{{ teamStemp.yesterday_income || 0 }}</p>
-                        <p>{{ $t("home_063") }}</p>
+                        <p>{{ $t("home_013") }}</p>
                     </div>
                 </div>
                 <div class="task_settl">
@@ -18,10 +18,10 @@
                 </div>
                 <div class="code-area">
                     <van-collapse v-model="activeName" :border = false accordion>
-                        <van-collapse-item name="1" color="#1989fa" :value="activeName==1?'点击收起':'点击添加'">
+                        <van-collapse-item name="1" color="#1989fa" :value="activeName==1?$t('home_014'):$t('home_015')">
                             <template #title>
                                 <div>
-                                    <van-icon :name="require('@/assets/images/home/erweima.png')" />扫码添加WS
+                                    <van-icon :name="require('@/assets/images/home/erweima.png')" />{{ $t('home_016') }}
                                 </div>
                             </template>
                             <div class="code-mian">
@@ -35,13 +35,13 @@
                                     </div> -->
                                     <div>
                                         <van-radio-group v-model="num_type" shape="square" direction="horizontal">
-                                            <van-radio name="1">个人</van-radio>
-                                            <van-radio name="2">商业</van-radio>
+                                            <van-radio name="1">{{ $t('home_017') }}</van-radio>
+                                            <van-radio name="2">{{ $t('home_018') }}</van-radio>
                                         </van-radio-group>
                                     </div>
                                 </div>
                                 <div class="code-tips">
-                                    <p>二维码处于灰色破损状态时，点击刷新二维码。</p>
+                                    <p>{{ $t('home_019') }}</p>
                                 </div>
                                 <div class="qr-code" v-show="errState">
                                     <div ref="qrcodeImg" class="view_qr @/assets/images/home/qr_err.png" id="qrcodeImg">
@@ -49,12 +49,12 @@
                                     </div>
                                 </div>
                                 <div class="err_code" v-show="!errState">
-                                    <van-loading v-if="isRqLoding" size="24px">加载中...</van-loading>
+                                    <van-loading v-if="isRqLoding" size="24px">{{ $t('other_029') }}</van-loading>
                                     <img v-else src="@/assets/images/home/qr_err.png" alt="" srcset="">
-                                    <van-button v-show="!isRqLoding" icon="replay" :disabled="countTime>0&&countTime<60" @click="refreQrBtn">{{countTime==60?'刷新二维码':countTime+'s后刷新'}}</van-button>
+                                    <van-button v-show="!isRqLoding" icon="replay" :disabled="countTime>0&&countTime<60" @click="refreQrBtn">{{countTime==60?$t('other_031'):countTime+$t('other_032')}}</van-button>
                                 </div>
-                                <p>手机端WhatsApp扫码点击确认后关闭此窗口！</p>
-                                <p>（等待3-5分钟，点击刷新列表查看WhatsApp状态）</p>
+                                <p>{{ $t('other_033') }}</p>
+                                <p>{{ $t('other_034') }}</p>
                             </div>
                             <template #right-icon >
                                 <van-icon name="" :color="color"/>
@@ -68,7 +68,7 @@
                             {{item}}
                             <span class="reash_btn" v-if="idx==2" @click="initWechatList(1,2)">
                                 <img class="loading_icon" :class="isLoading?'loading_active':''" src="@/assets/images/home/jiazai.png" alt="">
-                                <span>刷新</span>
+                                <span>{{ $t('other_035') }}</span>
                             </span>
                         </span>
                     </div>
@@ -76,7 +76,7 @@
                         <!-- <template> -->
                         <template v-if="loading">
                             <div class="item_mess" style="height: 204px;">
-                                <van-loading size="24px">加载中...</van-loading>
+                                <van-loading size="24px">{{ $t('other_029') }}</van-loading>
                             </div>
                         </template>
                         <template v-else>
@@ -88,39 +88,28 @@
                                         {{statusOption[item.status]}}
                                     </span>
                                     <span class="item_title">
-                                        <span class="del-btn" @click="showDelBtn(item)">删除</span>
+                                        <span class="del-btn" @click="showDelBtn(item)">{{ $t('other_036') }}</span>
                                     </span>
                                 </div>
                             </template>
                             <template v-else>
                                 <div class="item_mess">
                                     <img class="empty_data" src="@/assets/images/home/ws_icon.png" alt="" srcset="">
-                                    <div class="empty_text">尚未添加whatsApp，无法开始赚钱 赶快去添加吧~</div>
+                                    <div class="empty_text">{{ $t('other_037') }}</div>
                                 </div>
                             </template>
                             </template>
-                        <!-- <div class="page_footer">
-                            <div class="paging_left">
-                                <template v-if="total>6">
-                                    <PrevNext :len="wechaList.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext"></PrevNext>
-                                </template>
-                            </div>
-                            <div class="refash_right" @click="initWechatList(1,2)">
-                                <span>刷新列表</span>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
                 <div class="task_disc">
-                    <p>* 手机端微信扫码点击确认后，可点击收起。</p>
-                    <p>* 等待3-5分钟，点击刷新列表查看微信状态。</p>
-                    <p class="point_tips">* 随时查看,保持在线,上号之后系统在自行执行任务,切勿私自操作,影响收益。</p>
-                    <!-- <p class="point_tips">* 请大家挂机正常的vx！注册不满一月的新vx号，未实名的vx请勿挂机！</p> -->
+                    <p>{{ $t('other_038') }}</p>
+                    <p>{{ $t('other_039') }}</p>
+                    <p class="point_tips">{{ $t('other_040') }}</p>
                 </div>
             </div>
         </div>
         <van-popup v-model="showProvince" position="bottom" :style="{ height: '260px' }">
-            <van-picker title="选择省份" show-toolbar visible-item-count="4" value-key="name" :columns="provinceColumns" @confirm="onConfirm" @cancel="showProvince=false" />
+            <van-picker :title="$t('other_041')" show-toolbar visible-item-count="4" value-key="name" :columns="provinceColumns" @confirm="onConfirm" @cancel="showProvince=false" />
         </van-popup>
     </div>
 </template>
@@ -159,8 +148,6 @@ export default {
             refreState:false,
             showProvince:false,
             isRqLoding:false,
-			lableItem:['WS账号','状态','操作'],
-            statusOption:["","离线","在线","登录中","登录失败","离线中"],
             wechaList:[],
             list:[
                 "https://img0.baidu.com/it/u=132095580,3308868527&fm=253&fmt=auto&app=138&f=JPG?w=592&h=296",
@@ -196,7 +183,13 @@ export default {
 		...mapState({
 			userInfo: state => state.User.userInfo,
             bannerList: state => state.User.bannerList
-		})
+		}),
+        lableItem(){
+            return [this.$t('home_020'),this.$t('home_021'),this.$t('home_022')]
+        },
+        statusOption(){
+            return [this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
+        }
 	},
     created(){
         // this.$store.dispatch('User/getUserInfo');
@@ -401,7 +394,7 @@ export default {
         .home_content{
             width: 100%;
             float: left;
-            margin-top: 100px;
+            margin-top: 20px;
             .my_swipe{
                 width: 100%;
                 height: 320px;
@@ -482,8 +475,9 @@ export default {
                         margin-right: 4px;
                     }
                     div{
+                        width: max-content;
                         display: flex;
-                        font-weight: 500;
+                        font-weight: bold;
                         font-size: 16px;
                         align-items: center;
                     }
@@ -619,7 +613,7 @@ export default {
                             left: 50%;
                             margin: 0;
                             transform: translate(-50%,-50%);
-                            width: auto;
+                            // width: auto;
                             height: max-content;
                             padding: 0;
                             outline: none;
@@ -730,8 +724,9 @@ export default {
                                 width: 100%;
                                 color: #aaa;
                                 display: flex;
+                                line-height: 1;
+                                text-align: center;
                                 margin-bottom: 96px;
-                                justify-content: center;
                             }
                     }
                     .item_mess:last-child{

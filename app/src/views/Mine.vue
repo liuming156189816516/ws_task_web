@@ -7,7 +7,7 @@
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
-                    <div class="user_code">{{$t('home_030')}}：{{userInfo.inviteCode}} <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">复制</span></div>
+                    <div class="user_code">{{$t('other_005')}}：{{userInfo.inviteCode}} <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
                 </div>
             </div>
             <div class="lang_mess">
@@ -17,7 +17,7 @@
             <div class="cover_model">
                 <div class="task_warp">
                     <div class="task_num">
-                        <div class="text_1">账户余额</div>
+                        <div class="text_1">{{$t('mine_001')}}</div>
                         <div class="text_2">
                             <img src="../assets/images/gold_icon.png" alt="" srcset="">
                             <span>{{user_money||0.00}}</span>
@@ -29,11 +29,11 @@
                     <div class="task-pro">
                         <div class="left-pro">
                             <p>{{allIncome.today_amount ||0}}</p>
-                            <p>{{ $t("home_058") }}</p>
+                            <p>{{ $t("spre_003") }}</p>
                         </div>
                         <div class="right-pro">
                             <p>{{allIncome.yesterday_amount ||0}}</p>
-                            <p>{{ $t("home_059") }}</p>
+                            <p>{{ $t("spre_004") }}</p>
                         </div>
                         <!-- <div class="right-pro">
                             <p>999</p>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="login_out">
-            <van-button type="danger" @click="logoutHandle">退出登录</van-button>
+            <van-button type="danger" @click="logoutHandle">{{ $t("other_010") }}</van-button>
         </div>
     </div>
 </template>
@@ -88,26 +88,20 @@ export default {
         ...mapState({
             userInfo: state => state.User
         }),
-        taskNameOption() {
-            return ["", "WhatsApp挂机任务", "WhatsApp拉粉任务", "WhatsApp拉群任务"]
-        },
-        taskStatusOption() {
-            return ["", "开始任务", "进行中", "已结束"]
-        },
         menuOption() {
             return [
                 {
-                    name:this.$t("title_002"),
+                    name:this.$t("mine_002"),
                     path:"/withdraw",
                     icon:require("../assets/images/mine/mine-put-record.png")
                 },
                 {
-                    name:this.$t("title_012"),
+                    name:this.$t("mine_003"),
                     path:"/betrecord",
                     icon:require("../assets/images/mine/me_icon_txjl.png")
                 },
                 {
-                    name:this.$t("title_005"),
+                    name:this.$t("mine_004"),
                     path:"/putrecord",
                     icon:require("../assets/images/mine/mine-put-record2.png")
                 },
@@ -117,7 +111,7 @@ export default {
                 //     icon:require("../assets/images/mine/mine-message-center.png")
                 // },
                 {
-                    name:this.$t("login_003"),
+                    name:this.$t("mine_005"),
                     path:"/ResetPwd",
                     icon:require("../assets/images/mine/mine-update-pwd.png")
                 }
@@ -147,7 +141,7 @@ export default {
             })
         },
         copySuccess() {
-            this.$toast(`${this.$t("home_031")}${this.$t("other_006")}`);
+            this.$toast(`${this.$t("other_044")}`);
         },
         handleTask(row) {
             if (row.status == 1) {
@@ -167,10 +161,10 @@ export default {
         logoutHandle() {
             this.$dialog.confirm({
                 title: this.$t("other_008"),
-                message: this.$t("mine_055"),
+                message: this.$t("other_009"),
                 confirmButtonColor: "rgb(255,2,65)",
-                confirmButtonText: this.$t("other_005"),
-                cancelButtonText: this.$t("other_004")
+                confirmButtonText: this.$t("other_003"),
+                cancelButtonText: this.$t("other_007")
             }).then(() => {
                 this.$store.dispatch("User/logoutUser");
                 var storage = window.localStorage;
@@ -391,8 +385,8 @@ export default {
     .login_out{
         width: 100%;
         display: flex;
-        padding: 0 20px;
-        margin: 60px 0 60px 0;
+        padding: 60px 20px;
+        margin-bottom: 30px;
         box-sizing: border-box;
         .van-button{
             width: 100%;

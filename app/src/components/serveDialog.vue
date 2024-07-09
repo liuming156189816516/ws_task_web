@@ -56,7 +56,7 @@ export default {
             this.$emit("closeBtn",false)
         },
         copySuccess(e){
-            this.$toast("复制成功");
+            this.$toast(`${this.$t("other_044")}`);
         }
 	},
 }

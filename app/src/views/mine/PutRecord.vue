@@ -1,25 +1,25 @@
 <template>
     <div class="earn">
-        <page-header :title="$t('title_005')" :show-icon="true"></page-header>
+        <page-header :title="$t('mine_004')" :show-icon="true"></page-header>
         <div class="dropdown_warp">
                 <div class="promote-header">
                     <div class="tab_nav" @click="pulldownState">
-                        <span v-if = "dateState == ''">请选择收益类型</span> 
+                        <span v-if = "!stateValue||stateValue=='-1'">{{ $t('tail_002') }}</span> 
                         <span v-else>{{ dateState }}</span> 
                         <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showState ? 180 : 0}deg)`}" />
                     </div>
                     <div class="tab_nav" @click="pulldownTime">
-                        <span v-if = "timeValue === ''">请选择收益时间</span> 
-                        <span v-else-if = "timeValue == 0">今天</span> 
-                        <span v-else-if= "timeValue == 1">昨天</span> 
-                        <span v-else-if= "timeValue == 2">近七天</span>
+                        <span v-if = "!timeValue || timeValue === 0">{{ $t('tail_003') }}</span> 
+                        <span v-else-if = "timeValue == 1">{{ $t('other_016') }}</span> 
+                        <span v-else-if= "timeValue == 2">{{ $t('other_017') }}</span> 
+                        <span v-else-if= "timeValue == 3">{{ $t('other_018') }}</span>
                         <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showTime ? 180 : 0}deg)`}" />
                     </div>
                 </div>
                 <van-overlay :show = "showState" @click="showState = false">
                     <div class="screen_down" @click.stop>
                         <ul>
-                            <li v-for="item in profitType" :key="item.value" :class="item.value === stateValue  ? 'checkActive':''" @click="changeType(item.value,item)">{{item.text}}</li>
+                            <li v-for="item in profitType" :key="item.value" :class="item.value === stateValue  ? 'checkActive':''" @click="changeType(item)">{{item.lable}}</li>
                         </ul>
                     </div>
                 </van-overlay>
@@ -35,9 +35,9 @@
         <div class="service-body" v-if="list&&list.length>0">
             <div class="record_list">
                 <div class="record_warp">
-                    <span>时间</span>
-                    <span>状态</span>
-                    <span>提现金额</span>
+                    <span>{{ $t('tail_004') }}</span>
+                    <span>{{ $t('tail_008') }}</span>
+                    <span>{{ $t('pay_016') }}</span>
                 </div>
             </div>
             <div class="record_content">
@@ -49,9 +49,9 @@
                 </div>
             </div>
         </div>
-        <div v-else class="empty_tips">暂无数据...</div>
+        <div v-else class="empty_tips">{{ $t('other_022') }}</div>
         <PrevNext v-if="list&&list.length>0" :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext" />
-        <popDialog ref="isDialog" :title = "title" :titleContent = "dialogContent" :isCancel = false :isConfirm = true @confirm_btn = "confirm_btn"></popDialog>
+        <popDialog ref="isDialog" :title="$t('tail_009')" :titleContent = "dialogContent" :isCancel = false :isConfirm = true @confirm_btn = "confirm_btn"></popDialog>
     </div>
 </template>
 <script>
@@ -67,15 +67,7 @@ export default {
     components: { PageHeader, PrevNext,popDialog },
     data() {
         return {
-            profitType:[
-                {text:'全部状态',value:-1},
-                {text:'申请中',value:1},
-                {text:'已到账',value:2},
-                {text:'已驳回',value:3},
-            ],
-            title:"驳回原因",
             dialogContent:"",
-            profitTime:['今天','昨天','近七天（包含今天）'],
             stateValue:-1,
             timeValue:"",
             showState:false,
@@ -92,6 +84,14 @@ export default {
             total: 0
         };
     },
+    computed:{
+        profitTime(){
+            return [this.$t('other_024'),this.$t('other_016'),this.$t('other_017'),this.$t('other_023')];
+        },
+        profitType(){
+            return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('tail_005'),value:1 },{lable:this.$t('tail_006'),value:2 },{lable:this.$t('tail_007'),value:3 }];
+        }
+    },
     created() {
         this.getPointflow();
     },
@@ -104,7 +104,7 @@ export default {
                 start_time: !this.sTime ? -1: dateStamp(this.sTime),
                 end_time: !this.eTime ? -1: dateStamp(this.eTime),
             }
-            let isLoading = Toast.loading({message: '加载中...',forbidClick: true})
+            let isLoading = Toast.loading({message:this.$t('other_029'),forbidClick: true})
             getwithdrawapprovallist(params).then(res => {
                 isLoading.clear();
                 this.list = res.list || [];
@@ -141,9 +141,9 @@ export default {
             this.showTime = !this.showTime;
         },
         // 选择收益类型
-        changeType(idx,val){
-            this.stateValue = idx;
-            this.dateState = val.text;
+        changeType(val){
+            this.stateValue = val.value;
+            this.dateState = val.lable;
             this.getPointflow();
             setTimeout(() =>{
                 this.showState = false;
@@ -157,12 +157,6 @@ export default {
                     return { color: "rgb(3, 176, 27)" };
                 case 3:
                     return { color: "rgb(255, 0, 66)" };
-                case 4:
-                    return { color: "#07c160" };
-                case 5:
-                    return { color: "#ff976a" };
-                case 6:
-                    return { color: "#ff976a" };
                 default:
                     return {};
             }
@@ -170,17 +164,11 @@ export default {
         getStatusText(status) {
             switch (status) {
                 case 1:
-                    return this.$t("mine_065");
+                    return this.$t("tail_005");
                 case 2:
-                    return this.$t("mine_066");
+                    return this.$t("tail_006");
                 case 3:
-                    return this.$t("mine_067");
-                case 4:
-                    return "已到账";
-                case 5:
-                    return "申请中";
-                case 6:
-                    return "申请中";
+                    return this.$t("tail_007");
                 default:
                     return "";
             }
@@ -192,19 +180,19 @@ export default {
             let newDate = new Date();
             let sTime = "00"+":"+"00"+":"+"00";
             let eTime = "23"+":"+"59"+":"+"59";
-            if(idx == 0){
+            if(idx == 1){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = today;
                 this.sTime = today +" "+ sTime;
                 this.eTime = today +" "+ eTime;
-            }else if(idx == 1){
+            }else if(idx == 2){
                 newDate.setTime(newDate.getTime()-24*60*60*1000);
                 let yTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = yTady;
                 this.sTime = yTady +" "+ sTime;
                 this.eTime = yTady +" "+ eTime;
-            }else if(idx == 2){
+            }else if(idx == 3){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 newDate.setTime(newDate.getTime()-7*24*60*60*1000);
@@ -212,15 +200,14 @@ export default {
                 this.datetime = sevenTady;
                 this.sTime = sevenTady +" "+ sTime;
                 this.eTime = today +" "+ eTime;
+            }else{
+                this.sTime = "";
+                this.eTime = "";
             }
             this.getPointflow();
             setTimeout(() =>{
                 this.showTime = false;
             },200)
-        },
-        // 格式化金额
-        formatMoney(point) {
-            return fmoney(point,2);
         },
         formatTime(time) {
             return formatTime(time);
@@ -252,15 +239,17 @@ export default {
     display: flex;
     color: #7e7e7e;
     flex-direction: row;
-    padding: 12px 0;
+    padding: 12px 30px 12px;
     font-size: 28px;
     background-color: #fff;
     justify-content:space-around;
     border-bottom: 1px solid  #f2f2f2;
+    gap: 20px;
     .tab_nav {
-        width: 40%;
         display: flex;
-        padding: 20px 0;
+        // flex: 1;
+        width: max-content;
+        padding: 20px 30px;
         text-align: center;
         border-radius: 44px;
         align-items: center;
@@ -280,7 +269,7 @@ export default {
 .van-overlay{
   height: calc(100vh - 66px);
   position: absolute;
-  top: 100%;
+  top: 50px;
 }
 .screen_down{
     width: 100%;

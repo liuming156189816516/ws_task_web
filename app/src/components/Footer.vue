@@ -18,39 +18,39 @@ export default {
     data() {
         return {
             active: 0,
-            newStatus:0,
-            tabBarList: [
+            newStatus:0
+        };
+    },
+	computed: {
+		tabBarList(){
+			return [
                 {
-                    name: this.$t("foot_001"),
+                    name: this.$t("table_001"),
                     active: require("../assets/images/tabbar/home-icon-a.png"),
                     inactive: require("../assets/images/tabbar/home-icon.png"),
                     path: "home"
                 },
                 {
-                    name: this.$t("foot_003"),
+                    name: this.$t("table_002"),
                     active: require("../assets/images/tabbar/prom_icon-a.png"),
                     inactive: require("../assets/images/tabbar/prom_icon.png"),
                     path: "spread"
                 },
 				{
-                    name: this.$t("foot_005"),
+                    name: this.$t("table_003"),
                     active: require("../assets/images/tabbar/server-icon-a.png"),
                     inactive: require("../assets/images/tabbar/server-icon.png"),
                     path: "service"
                 },
                 {
-                    name: this.$t("foot_004"),
+                    name: this.$t("table_004"),
                     active: require("../assets/images/tabbar/mine-icon-a.png"),
                     inactive: require("../assets/images/tabbar/mine-icon.png"),
                     path: "mine"
                 }
             ]
-        };
-    },
-    computed: mapState({
-        token: state => state.User.token,
-        userInfo: state => state.User.userInfo
-    }),
+		}
+	},
     created() {
         this.moveNews.$on('moveState', (data)=> {
             this.newStatus = sessionStorage.getItem("newsStatus")

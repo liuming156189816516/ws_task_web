@@ -1,6 +1,6 @@
 <template>
     <div class="my_head">
-        <page-header :title="$t('home_039')"></page-header>
+        <page-header :title="$t('mine_006')"></page-header>
         <div class="image_list">
             <div class="image_box" v-for="(item,idx) in userHeadList" :key="idx" @click="updateCheckImage(idx)">
                 <van-image fit="contain" :src="item" />
@@ -13,13 +13,13 @@
             class="image_dialog"
             @confirm="ok"
             @cancel="cancel"
-            :cancel-button-text="$t('other_004')"
-            :confirm-button-text="$t('other_005')"
+            :cancel-button-text="$t('other_007')"
+            :confirm-button-text="$t('other_003')"
             close-on-click-overlay
             close-on-popstate
         >
             <img :src="userHeadList[checkIndex]" class="check_image" />
-            <div class="check_tip">{{$t("mine_068")}}</div>
+            <div class="check_tip">{{$t("other_042")}}</div>
         </van-dialog>
     </div>
 </template>

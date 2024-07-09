@@ -89,7 +89,7 @@ export default {
             this.$toast("获取链接成功！");
         },
         copySuccess(){
-            this.$toast(`${this.$t("home_031")}${this.$t("other_006")}`);
+            this.$toast(`${this.$t("other_044")}`);
         },
         submitTask(){
             if(!this.group_link) return this.$toast("请输入群组链接"); 

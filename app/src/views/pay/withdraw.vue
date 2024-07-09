@@ -1,7 +1,7 @@
 <template>
 	<div class="withdraw">
 		<div class="panel">
-			<page-header title="提现" :show-icon="true"></page-header>
+			<page-header :title="$t('pay_001')" :show-icon="true"></page-header>
 			<van-tabs title-active-color="red" :active="curIndex" @change="onChange">
                 <van-tab :title="item" v-for="(item,idx) in personList" :key="idx"></van-tab>
             </van-tabs>
@@ -9,74 +9,54 @@
 				<div class="card_box">
 					<div class="card">
 						<div class="title">
-							<span>{{ $t('buy_008') }}</span>
+							<span>{{ $t('pay_004') }}</span>
 						</div>
 						<div class="amount van-ellipsis">
 							{{ WithdMoney || 0 }}
 						</div>
 						<div class="btn-withdraw">
-							<van-button type="danger" @click="submitBtn">{{ $t('mine_015') }}</van-button>
+							<van-button type="danger" @click="submitBtn">{{ $t('pay_005') }}</van-button>
 						</div>
 					</div>
 				</div>
 				<div class="share_box">
 					<div class="share_link">
-						<span class="account_name" v-text="curIndex==0?'银行账号：':'USDT地址：'"></span>
-						<span class="account_text" v-text="curIndex==0?card_no||'请添加银行账号':card_no||'请添加USDT地址'"></span>
+						<span class="account_name" v-text="curIndex==0?$t('pay_013')+'：':$t('pay_014')+'：'"></span>
+						<span class="account_text" v-text="curIndex==0?card_no||$t('other_001',{value:$t('pay_013')}):card_no||$t('other_001',{value:$t('pay_014')})"></span>
 					</div>
 					<div class="share_btn" @click="bindCardBtn">
-						<van-button type="danger">{{curIndex==0&&card_no?'修改':curIndex==1&&card_no?'修改':'添加'}}</van-button>
+						<van-button type="danger">{{curIndex==0&&card_no?$t('pay_008'):curIndex==1&&card_no?$t('pay_008'):$t('pay_007')}}</van-button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="tip">
 			<div class="cash_adverice">
-				<div class="title-tip">{{ $t('mine_016') }}</div>
-				<div>
-					<van-tag type="warning" /> 最低体现金额100元
+				<div class="title-tip">{{ $t('pay_009') }}</div>
+				<div class="title_item">
+					<van-tag type="warning" /> {{$t('pay_010',{value:100})}}
 				</div>
-				<template v-if="curIndex == 0 && userInfo.fee_ali != 0">
-					<div v-if="userInfo.fee_type_ali == 0">
-						<van-tag type="warning" />
-						每次提现收取{{ userInfo.fee_ali }}元的手续费
-					</div>
-					<div v-else-if="userInfo.fee_type_ali == 1">
-						<van-tag type="warning" />
-						每次提现收取{{ userInfo.fee_ali }}%的手续费
-					</div>
-				</template>
-				<template v-if="curIndex == 1 && userInfo.fee != 0">
-					<div v-if="userInfo.fee_type == 0">
-						<van-tag type="warning" />
-						每次提现收取{{ userInfo.fee }}元的手续费
-					</div>
-					<div v-else-if="userInfo.fee_type == 1">
-						<van-tag type="warning" />
-						每次提现收取{{ userInfo.fee }}%的手续费
-					</div>
-				</template>
-				<div style="color:#F52C2C;">
+				<div class="title_item" style="color:#F52C2C;">
 					<van-tag type="warning" />
-					当日21点前提现,当日晚上24点之前到账。
+					{{ $t('pay_011') }}
 				</div>
-				<div>
+				<div class="title_item">
 					<van-tag type="warning" />
-					本平台是第三方合作安全出款，收到款项后请勿转回。
+					{{ $t('pay_012') }}
 				</div>
 			</div>
 		</div>
 		<van-popup :close-on-click-overlay="false" :overlay="true" v-model="showModel">
 			<div class="dialog_content">
-				<div class="header_title">提现</div>
-				<div class="header_tips">当前可提现金额为{{WithdMoney}}元</div>
+				<div class="header_title">{{ $t('pay_001') }}</div>
+				<div class="header_tips">{{ $t('pay_015',{value:WithdMoney}) }}</div>
 				<van-cell-group inset :border="false">
-					<van-field v-model="withdraw_num" type="number" clearable placeholder="请输入提现金额" />
+					<van-field v-model="withdraw_num" type="number" clearable :placeholder="$t('other_001',{value:$t('pay_016')})" />
 				</van-cell-group>
 				<div class="custom_dialog__footer">
-					<van-button class="custom_dialog_cancel" @click="showModel=false">{{ $t('other_004') }}</van-button>
+					<van-button class="custom_dialog_cancel" @click="showModel=false">{{ $t('other_007') }}</van-button>
 					<span class="model_line"></span>
-					<van-button class="custom_dialog_confirm" :loading="isLoading" loading-text="提交中..." @click="withdrawBtn">{{ $t('other_005') }}</van-button>
+					<van-button class="custom_dialog_confirm" :loading="isLoading" :loading-text="$t('other_012')" @click="withdrawBtn">{{ $t('other_011') }}</van-button>
 				</div>
 			</div>
 		</van-popup>
@@ -99,11 +79,15 @@ export default {
 			userInfo:"",
 			isLoading:false,
 			withdraw_num:null,
-			personList:["提现到银行卡","提现到USDT账户"],
 			showModel: false,
 			is_prevent: false
 		}
 	},
+	computed: {
+		personList(){
+			return [this.$t('pay_002'),this.$t('pay_003')];
+		}
+    },
 	created() {
 		this.getUserIncome();
 		this.getBankInfo();
@@ -140,20 +124,20 @@ export default {
 		submitBtn() {
 			let payIdx = Number(this.curIndex+1);
 			if(payIdx==1&&!this.card_no){
-				return this.$toast('请先添加银行卡');
+				return this.$toast(this.$t('other_001',{value:this.$t('pay_013')}));
 			} else if(payIdx==2&&!this.card_no){
-				return this.$toast('请先添加USDT账户');
+				return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}));
 			} else if(this.WithdMoney <= 0){
-				return this.$toast('当前不可提现');
+				return this.$toast(this.$t('pay_017'));
 			}
 			this.showModel=true;
 		},
 		async withdrawBtn(){
-			if(!this.card_no) return this.$toast('请添加收款信息！');
+			if(!this.card_no) return this.$toast(this.$t('other_001',{value:this.$t('pay_013')}));
 			if(this.withdraw_num > this.WithdMoney || this.withdraw_num<=0){
-				return this.$toast('请输入正确的提现金额！');
+				return this.$toast(this.$t('pay_018'));
 			}else if(this.withdraw_num % 1 != 0){
-				return this.$toast('只能以正整数倍提现,请输入正确的提现金额!');
+				return this.$toast(this.$t('pay_019'));
 			}
 			let params = {
 				type:Number(this.curIndex)+1,
@@ -166,7 +150,7 @@ export default {
 			let res = await savewithdrawapproval(params);
 			this.isLoading = false;
 			if(res.code) return;
-			this.$toast('操作完成');
+			this.$toast(this.$t('other_013'));
 			setTimeout(() => {this.$router.go(-1)},500);
 		},
 		getPutPoint() {
@@ -470,6 +454,10 @@ export default {
 				color: #ee0a24;
 				font-weight: 600;
 				font-size: 32px;
+			}
+			.title_item{
+				line-height: 1.3;
+				margin-bottom: 20px;
 			}
 		}
 		.title-tip {

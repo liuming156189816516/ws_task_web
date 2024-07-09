@@ -4,71 +4,41 @@
         <div class="content-block">
             <van-cell-group>
                 <van-field
-                    :label="$t('mine_021')"
+                    :label="$t('login_020')"
                     class="cell-block"
                     :border="false"
                     autocomplete="off"
                     :right-icon="regEye0 ? 'closed-eye': 'eye-o'"
                     :type="regEye0 ? 'password': 'text'"
                     @click-right-icon="regEye0 = !regEye0"
-                    :placeholder="$t('login_031',{value:$t('mine_021')})"
+                    :placeholder="$t('other_001',{value:$t('login_020')})"
                     v-model="oPwd"
                 ></van-field>
                 <van-field
-                    :label="$t('mine_023')"
+                    :label="$t('login_021')"
                     class="cell-block"
                     :border="false"
                     autocomplete="off"
                     :right-icon="regEye1 ? 'closed-eye': 'eye-o'"
                     :type="regEye1 ? 'password': 'text'"
                     @click-right-icon="regEye1 = !regEye1"
-                    :placeholder="$t('login_031',{value:$t('mine_023')})"
+                    :placeholder="$t('other_001',{value:$t('login_021')})"
                     v-model="nPwd"
                 ></van-field>
                 <van-field
-                    :label="$t('mine_026')"
+                    :label="$t('login_009')"
                     class="cell-block"
                     :border="false"
                     autocomplete="off"
                     :right-icon="regEye2 ? 'closed-eye': 'eye-o'"
                     :type="regEye2 ? 'password': 'text'"
                     @click-right-icon="regEye2 = !regEye2"
-                    :placeholder="$t('login_031',{value:$t('mine_026')})"
+                    :placeholder="$t('other_001',{value:$t('login_009')})"
                     v-model="cPwd"
                 ></van-field>
-                <!-- <van-field
-                    label="验证码"
-                    class="cell-block"
-                    :border="false"
-                    type="text"
-                    v-model="verify_code">
-                    <template #button>
-                        <van-button size="small" type="primary" id="TencentCaptcha" data-appid="2004381688" data-cbfn="callbackName" data-biz-state="data-biz-state" 
-                          @click="getVerfyBtn"  >{{countTime == 60?'发送验证码':`${countTime}秒后重新获取` }}</van-button>
-                    </template>
-                </van-field> -->
-                <!-- <van-field
-                    label="校验码"
-                    class="cell-block"
-                    :border="false"
-                    type="text"
-                    :placeholder="请输入正确的校验码"
-                    v-model="code_verify_v"
-                >
-                    <template #button>
-                        <div class="num_validate_ct">
-                            <span :class="'img_'+num1"></span>
-                            <span :class="'img_'+operate"></span>
-                            <span :class="'img_'+num2"></span>
-                            <span :class="'img_deng'"></span>
-                            <span :class="'img_wen'"></span>
-                        </div>
-                    </template>
-                </van-field> -->
             </van-cell-group>
-            <van-button type="danger" :loading="isLoading" @click="submitFun">{{ $t('buy_069') }}</van-button>
+            <van-button type="danger" :loading="isLoading" @click="submitFun">{{ $t('other_003') }}</van-button>
         </div>
-        <!-- <van-button type="success" :loading="isLoading" @click="submitFun">主要按钮</van-button> -->
     </div>
 </template>
 <script>
@@ -77,10 +47,8 @@ import { revisepwd } from "@/api/login";
 import PageHeader from "@/components/Header";
 
 export default {
-    components: {
-        PageHeader
-    },
     name: "reset-pwd",
+    components: {PageHeader},
     data() {
         return {
             oPwd:"",    
@@ -115,12 +83,12 @@ export default {
     methods: {
         submitFun() {
             if (!this.oPwd) {
-                return this.$t('login_031',{value:this.$t('mine_021')})
+                return this.$toast(this.$t('other_001',{value:this.$t('login_020')}));
             }
-            if (!this.cPwd) {
-                return this.$t('login_031',{value:this.$t('mine_023')});
-            }else if(this.nPwd !== this.cPwd){
-                return this.$toast(this.$t('login_020'))
+            if (!this.nPwd) {
+                return this.$toast(this.$t('other_001',{value:this.$t('login_021')}));
+            }else if(this.nPwd != this.cPwd){
+                return this.$toast(this.$t('login_019'));
             }
             this.isLoading=true;
             revisepwd({old_pwd:this.oPwd,new_pwd:this.nPwd}).then(res => {
@@ -128,8 +96,8 @@ export default {
                 if(res.code) return;
                 this.$dialog.confirm({
                     title: this.$t("other_008"),
-                    message: this.$t("login_018"),
-                    confirmButtonText: this.$t("buy_069"),
+                    message: this.$t("login_022"),
+                    confirmButtonText: this.$t("other_011"),
                     showCancelButton: false
                 }).then(() => {
                     this.$store.dispatch("User/logoutUser");

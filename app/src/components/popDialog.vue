@@ -19,8 +19,8 @@
 				<slot class="custom_dialog__message" name="content"></slot>
 				<div class="custom_dialog__message" v-show="titleContent != ''">{{ titleContent }}</div>
 				<div class="custom_dialog__footer">
-					<van-button v-if="isCancel == true" class="custom_dialog_cancel" plain type="primary" @click="hideModel">取消</van-button>
-					<van-button v-if="isConfirm == true" class="custom_dialog_confirm" plain type="primary" @click="confirmBtn">{{ confirmName }}</van-button>
+					<van-button v-if="isCancel == true" class="custom_dialog_cancel" plain type="primary" @click="hideModel">{{ $t('other_011') }}</van-button>
+					<van-button v-if="isConfirm == true" class="custom_dialog_confirm" plain type="primary" @click="confirmBtn">{{ $t('other_011') }}</van-button>
 				</div>
 			</div>
 		</van-popup>

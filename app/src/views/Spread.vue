@@ -1,11 +1,11 @@
 <template>
     <div class="spread_warp">
         <div class="top_model">
-            <div class="user_mess">推广</div>
+            <div class="user_mess">{{ $t("spre_001") }}</div>
             <div class="cover_model">
                 <div class="task_warp">
                     <div class="task_num">
-                        <div class="text_1">累计佣金</div>
+                        <div class="text_1">{{ $t("spre_002") }}</div>
                         <div class="text_2">
                             <img src="../assets/images/gold_icon.png" alt="" srcset="">
                             <span>{{ allIncome.total_amount || 0}}</span>
@@ -17,15 +17,15 @@
                     <div class="task-pro">
                         <div class="left-pro">
                             <p>{{ allIncome.today_amount || 0}}</p>
-                            <p>{{ $t("home_058") }}</p>
+                            <p>{{ $t("spre_003") }}</p>
                         </div>
                         <div class="right-pro">
                             <p>{{ allIncome.yesterday_amount || 0 }}</p>
-                            <p>{{ $t("home_059") }}</p>
+                            <p>{{ $t("spre_004") }}</p>
                         </div>
                         <div class="right-pro">
                             <p>{{allIncome.team_num||0}}</p>
-                            <p>{{ $t("home_060") }}</p>
+                            <p>{{ $t("spre_005") }}</p>
                         </div>
                     </div>
                 </div>
@@ -35,17 +35,17 @@
             <div class="info_main">
                 <div class="line_item">
                     <div style="display: flex;">
-                        <span class="l_label">{{$t('home_030')}}</span>
+                        <span class="l_label">{{$t('other_005')}}</span>
                         <span>{{userInfo.inviteCode}}</span>
                     </div>
-                    <div class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{ $t('home_031') }}</div>
+                    <div class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{ $t('other_006') }}</div>
                 </div>
                 <div class="line_item">
                     <div style="display: flex;">
-                        <span class="l_label"> {{$t('mine_002')}}</span>
+                        <span class="l_label"> {{$t('spre_006')}}</span>
                         <span>{{invit_link}}</span>
                     </div>
-                    <div class="copay_text" v-clipboard:copy="invit_link+'?r='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{ $t('home_031') }}</div>
+                    <div class="copay_text" v-clipboard:copy="invit_link+'?r='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{ $t('other_006') }}</div>
                 </div>
                 <div class="invit_code" ref="qrcodeImg">
                     <!-- <img src="../assets/images/home/qrCode.jpg" alt="" srcset=""> -->
@@ -112,7 +112,7 @@ export default {
             })
         },
         copySuccess(){
-            this.$toast(`${this.$t("home_031")}${this.$t("other_006")}`);
+            this.$toast(`${this.$t("other_044")}`);
         }
     }
 }

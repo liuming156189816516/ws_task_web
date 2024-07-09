@@ -15,35 +15,35 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<img src="../../assets/images/sign/zhanghao.png" />
-					<input v-model="username" :placeholder="$t('login_004')" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_001')})" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div pwd">
 					<img src="../../assets/images/sign/lock.png" />
-					<input v-model="pwd" :placeholder="$t('login_008')" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="pwd" :placeholder="$t('other_001',{value:$t('login_002')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
 					<img src="../../assets/images/sign/lock.png" />
-					<input v-model="sur_pwd" :placeholder="$t('login_010')" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="sur_pwd" :placeholder="$t('other_001',{value:$t('login_009')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
 					<img src="../../assets/images/sign/tuiguang.png" />
-					<input style="flex-grow:1;" v-model="user_code" :placeholder="$t('login_011')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input style="flex-grow:1;" v-model="user_code" :placeholder="$t('other_001',{value:$t('login_012')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div verfy_code">
 					<div class="input_code">
 						<img src="../../assets/images/sign/secret.png" />
-						<input style="flex-grow:1;" v-model="safe_code" autocomplete="off" :placeholder="$t('login_012')" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<input style="flex-grow:1;" v-model="safe_code" autocomplete="off" :placeholder="$t('other_001',{value:$t('login_008')})" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="code_img" @click="getVerfyBtn" v-html="code" />
 				</div>
 			</div>
 			<div class="login_btn">
-				<van-button type="danger" :loading="isLoading" @click="handleRegister()" loading-text="注册中...">{{$t('login_002') }}</van-button>
+				<van-button type="danger" :loading="isLoading" @click="handleRegister()" :loading-text="$t('login_010')">{{$t('login_014') }}</van-button>
 			</div>
 			<div class="register_btn">
-				已有账号？<span @click="goLogin">{{ $t('login_015') }}>></span>
+				{{ $t('login_015') }}<span @click="goLogin">{{ $t('login_016') }}>></span>
 			</div>
 		</div>
 	</div>
@@ -62,7 +62,6 @@ export default {
 			pwd: "",
 			sur_pwd: "",
 			timestamp:"",
-			verTitle: "获取验证码",
 			user_verify: "",
 			user_code:"",
 			countTime: 60,
@@ -105,21 +104,21 @@ export default {
 			const reg = new RegExp(/^1[3456789]\d{9}$/);
 			const regex = new RegExp(/^[0-9A-Za-z]{6,20}$/);
 			if (!this.username) {
-				return this.$toast(this.$t('login_004'));
+				return this.$toast(this.$t('other_001',{value:this.$t('login_001')}))
 			} else if(!zh_reg.test(this.username)){
-				return this.$toast(this.$t('login_030'));
+				return this.$toast(this.$t('other_001',{value:this.$t('login_018')}));
 			}
 			if (!this.pwd || !regex.test(this.pwd)) {
-				return this.$toast(this.$t('login_009'));
+				return this.$toast(this.$t('other_001',{value:this.$t('login_002')}));
 			}
 			if (this.sur_pwd !== this.pwd) {
-				return this.$toast(this.$t('login_020'));
+				return this.$toast(this.$t('login_019'));
 			}
 			if (!this.user_code) {
-				return this.$toast(this.$t('login_011'));
+				return this.$toast(this.$t('other_001',{value:this.$t('login_012')}));
 			}
 			if (!this.safe_code) {
-				return this.$toast(this.$t('login_012'));
+				return this.$toast(this.$t('other_001',{value:this.$t('login_008')}));
 			}
 			if (this.user_code.length > 10) {
 				if (this.user_code.indexOf('user_code') > -1) {

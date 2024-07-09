@@ -6,35 +6,35 @@
                 <div class="task-pro">
                     <div class="left-pro">
                         <p class="invit_num">{{ teamStemp.member_num || 0}}</p>
-                        <p class="invit_text">邀请进群人数(人)</p>
+                        <p class="invit_text">{{$t('home_028')}}</p>
                     </div>
                     <div class="right-pro">
                         <p class="invit_num">{{ teamStemp.amount || 0 }}</p>
-                        <p class="invit_text">获得金额(ENC)</p>
+                        <p class="invit_text">{{$t('home_029')}}</p>
                     </div>
                 </div>
                 <div class="custom_line">
                     <span class="botton_line"></span>
                 </div>
-                <div class="task_detail" @click="$router.push('/betrecord')">查看详情</div>
+                <div class="task_detail" @click="$router.push('/betrecord')">{{$t('home_030')}}</div>
             </div>
             <div class="task_desc">
                 <div class="task_top">
-                    <span>任务编号：{{ teamStemp.ser_no }}</span>
-                    <span>任务状态：{{statusOption[teamStemp.status]}}</span>
+                    <span>{{$t('home_031')}}：{{ teamStemp.ser_no }}</span>
+                    <span>{{$t('home_032')}}：{{statusOption[teamStemp.status]}}</span>
                 </div>
                 <div class="task_set_text">
-                    请将下列的号码的用户邀请到你的群主中，并在邀请结束后，提交你的群组链接。我们会用AI验证你的群成员是否符合要求，并按照符合要求的成员数量为你结算佣金。
+                    {{$t('home_033')}}
                 </div>
             </div>
             <div class="ws_account_warp">
                 <div class="ws_account_time">
                     <div class="ws_account_top">
-                        <span>任务倒计时</span>
+                        <span>{{$t('home_034')}}</span>
                         <span class="task_time">
                             <van-count-down :time="taskTime" />
                         </span>
-                        <span class="task_video" @click="showVideo">任务教程</span>
+                        <span class="task_video" @click="showVideo">{{$t('home_035')}}</span>
                     </div>
                     <div class="account_warp">
                         <div class="account_list" v-for="(item,idx) in taskList" :key="idx">
@@ -49,14 +49,14 @@
                         </div>
                     </div>
                     <div>
-                        <van-field v-model="group_link" placeholder="请输入群组链接" /> 
+                        <van-field v-model="group_link" :placeholder="$t('other_001',{value:$t('home_036')})" /> 
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer_btn" v-if="isShow">
-            <van-button type="danger" :loading="isLoading" loading-text="loading..." @click="submitTask">提交</van-button>
-            <van-button plain type="warning" @click="downAddress">保存通讯录</van-button>
+            <van-button type="danger" :loading="isLoading" :loading-text="$t('other_029')" @click="submitTask">{{$t('home_038')}}</van-button>
+            <van-button plain type="warning" @click="downAddress">{{$t('home_037')}}</van-button>
         </div>
     </div>
 </template>
@@ -86,7 +86,7 @@ export default {
             bannerList: state => state.User.bannerList
 		}),
         statusOption(){
-            return ["","开始任务","进行中","结算中","已结束"]
+            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
         }
 	},
     created(){
@@ -99,19 +99,21 @@ export default {
            let groupData =  await getcreatetaskinfo({task_info_id:this.task_id});
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
+           this.task_id = groupData.task_info_id;
+           this.group_link = groupData.invite_link;
            this.isShow=groupData.status==1||groupData.status==2?true:false;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         },
         copySuccess(){
-            this.$toast(`${this.$t("home_031")}${this.$t("other_006")}`);
+            this.$toast(`${this.$t("other_044")}`);
         },
         submitTask(){
-            if(!this.group_link) return this.$toast("请输入群组链接"); 
+            if(!this.group_link) return this.$toast($t('other_001',{value:$t('home_036')})); 
             this.isLoading=true;
             submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
                 this.isLoading=false;
                 if(res.code) return;
-                this.$toast("任务已提交，及时关注佣金收益！");
+                this.$toast(this.$t("home_039"));
                 setTimeout(()=>{
                     this.$router.go(-1)
                 },1000)

@@ -1,22 +1,22 @@
 <template>
     <div class="person_c">
-        <page-header title="绑定提现信息" :show-icon="true"></page-header>
+        <page-header :title="$t('pay_023')" :show-icon="true"></page-header>
         <div class="person_content">
             <template v-if="curIndex==1">
                 <div class="user_info">
-                    <span class="lable_text">收款卡号</span>
-                    <van-field v-model="collectCard" :maxlength="19" placeholder="请输入收款卡号" :border="false" />
+                    <span class="lable_text">{{ $t('pay_020') }}</span>
+                    <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_020')})" :border="false" />
                 </div>
                 <div class="user_info bank_account" @click="showBank">
-                    <span class="lable_text">开户银行</span>
+                    <span class="lable_text">{{ $t('pay_021') }}</span>
                     <div class="flex-between">
-                        <van-field v-model="bankName" :readonly = true placeholder="请输入开户银行" :border="false" />
+                        <van-field v-model="bankName" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
                         <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${selectBank == true ? 90 : 0}deg)`}" />
                     </div>
                 </div>
                 <div class="user_info">
-                    <span class="lable_text">收款姓名</span>
-                    <van-field v-model="collectName" placeholder="请输入收款姓名" :border="false" />
+                    <span class="lable_text">{{ $t('pay_022') }}</span>
+                    <van-field v-model="collectName" :placeholder="$t('other_001',{value:$t('pay_022')})" :border="false" />
                 </div>
                 <!-- <div class="user_info">
                     <span class="lable_text">收款姓名</span>
@@ -29,8 +29,8 @@
             </template>
             <template v-else-if="curIndex==2">
                 <div class="user_info alipay_info">
-                    <span class="lable_text">USDT地址</span>
-                    <van-field v-model="collectCard" placeholder="请输入USDT地址" :border="false" />
+                    <span class="lable_text">{{ $t('pay_014') }}</span>
+                    <van-field v-model="collectCard" :placeholder="$t('other_001',{value:$t('pay_014')})" :border="false" />
                 </div>
             </template>
             <!-- <div class="user_info">
@@ -42,9 +42,9 @@
                     </template>
                 </van-field>
             </div> -->
-            <van-action-sheet :round="false" v-model="selectBank" :actions="malayBank" @close="hideBankSelect" @select="changeSelect" cancel-text="取消" />
+            <van-action-sheet :round="false" v-model="selectBank" :actions="malayBank" @close="hideBankSelect" @select="changeSelect" :cancel-text="$t('other_007')" />
             <div class="button_area">
-                <van-button type="danger" @click="submitBtn" :loading="isLoading">保存</van-button>
+                <van-button type="danger" @click="submitBtn" :loading="isLoading">{{ $t('other_015') }}</van-button>
             </div>
         </div>
     </div>
@@ -134,19 +134,19 @@ export default {
             }
             this.bank_id?params.id=this.bank_id:"";
             if(this.curIndex==1&&!this.collectCard){
-                return this.$toast('请输入收款卡号')
+                return this.$toast(this.$t('other_001',{value:this.$t('pay_020')}))
             }else if(this.curIndex==2&&!this.collectCard){
-                return this.$toast('请输入USTD账户')
+                return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
             }else if(this.curIndex==1&&!this.bankName){
-                return this.$toast('请选择开户银行')
+                return this.$toast(this.$t('other_014',{value:this.$t('pay_021')}))
             }else if(this.curIndex==1&&!this.collectName){
-                return this.$toast('请输入收款人姓名')
+                return this.$toast(this.$t('other_001',{value:this.$t('pay_020')}))
             }
             this.isLoading = true;
             const res = await dowithdrawcard(params);
             this.isLoading = false;
             if(res.code) return;
-            this.$toast('操作完成');
+            this.$toast(this.$t('other_013'));
             setTimeout(() => {this.$router.go(-1)},500);
         }
     }
@@ -185,7 +185,7 @@ export default {
             justify-content: space-between;
             .van-cell{flex-grow: 1;}
             .lable_text{
-                width: 2rem;
+                width: 260px;
                 color: #969799;
                 line-height: 80px;
                 float: left;

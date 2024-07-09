@@ -89,7 +89,7 @@ module.exports = {
 	devServer: {
 		// 配置服务器
 		host: '0.0.0.0',
-		port: 8080,
+		port: 8079,
 		open: false,
 		https: false,
 		overlay: {

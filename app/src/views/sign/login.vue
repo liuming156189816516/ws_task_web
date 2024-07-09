@@ -1,42 +1,55 @@
 <template>
 	<div class="login_warp">
+		<div class="l_value" @click="showChangeBtn" @click.stop>
+			<span>{{ viewLang() }}</span>
+			<img class="down_icon" src="@/assets/images/home/xiala.png">
+			<van-transition name="fade-up">
+				<div class="down_list" :class="isIndex?'active_open':'active_close'">
+					<p v-for="item in langOptions" :key="item.lang" :style="langIdx==item.lang?'color:#07c160;':''" @click="onChangeType(item)">{{item.name}}</p>
+				</div>
+			</van-transition>
+		</div>
 		<div class="login_main">
 			<div class="sign_login">
-				<img class="login_img" src="../../assets/images/logo.png" alt="" srcset="">
-				<!-- <div class="head_title">{{ $t('login_029') }}</div> -->
+				<img class="login_img" src="@/assets/images/logo.png">
+				<div class="head_title">Cash Cow</div>
 				<div class="uilist">
 					<div class="uilist_div account">
-						<img src="../../assets/images/sign/zhanghao.png" alt />
-						<input v-model="username" :placeholder="$t('login_004')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<img src="@/assets/images/sign/zhanghao.png" alt />
+						<input v-model="username" :placeholder="$t('other_001',{value:$t('login_001')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="uilist_div pwd">
-						<img src="../../assets/images/sign/icon_suo.png" alt />
-						<input v-model="password" :placeholder="$t('login_008')" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<img src="@/assets/images/sign/icon_suo.png" alt />
+						<input v-model="password" :placeholder="$t('other_001',{value:$t('login_002')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 						<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="eyeBol"></i>
 					</div>
 					<div class="forget_pwd">
-						<van-checkbox v-model="autologin" shape="square" checked-color="#F52C2C">{{$t('login_023')}}</van-checkbox>
-						<span class="forget_text" @click="forgetFunc">{{ $t('login_021') }}</span>
+						<van-checkbox v-model="autologin" shape="square" checked-color="#F52C2C">{{$t('other_002')}}</van-checkbox>
+						<span class="forget_text" @click="forgetFunc">{{ $t('login_003') }}</span>
 					</div>
 				</div>
 				<div class="login_btn">
-					<van-button type="danger" :loading="isLoading" @click="handleLogin" loading-text="登录中...">登录</van-button>
-					<van-button @click="goRegister" >{{ $t('login_002') }}</van-button>
+					<van-button type="danger" :loading="isLoading" @click="handleLogin" :loading-text="$t('login_005')">{{$t('login_004')}}</van-button>
+					<van-button @click="goRegister" >{{ $t('login_006') }}</van-button>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-import WebsiteSetting from '../../mixin/websiteSetting.js';
 export default {
-	mixins: [WebsiteSetting],
 	data() {
 		return {
 			regEye:true,
 			autologin:true,
 			username:"",
 			password:"",
+			langIdx:Cookies.get("language")||'en',
+			isIndex:false,
+			langOptions: [
+				{lang:"en",name:"en-US"},
+				{lang:"zh",name:"zh_CN"}
+			]
 		}
 	},
 	created() {
@@ -107,6 +120,18 @@ export default {
 		},
 		forgetFunc(){
 			this.$router.push("/forget_pwd")
+		},
+		showChangeBtn(){
+			this.isIndex=!this.isIndex;
+		},
+		onChangeType(row){
+			this.langIdx=row.lang;
+			this.$i18n.locale=row.lang;
+            Cookies.set("language",row.lang)
+		},
+		viewLang(){
+			let lang = this.langOptions.find(item=>item.lang == this.langIdx);
+			return lang.name
 		}
 	}
 };
@@ -139,11 +164,9 @@ export default {
 			// align-items: center;
 			flex-direction: column;
 			.login_img{
-				width: 90px;
 				height: 120px;
 				margin: 0 auto;
 				margin-top: 20%;
-				margin-bottom: 20%;
 			}
 			.uilist {
 				overflow: hidden;
@@ -211,7 +234,7 @@ export default {
 	flex-shrink: 0;
 	align-items: center;
 	justify-content: center; 
-	margin: 20% 0 10% 0;
+	margin-bottom: 20%;
 }
 .forget_pwd{
 	display: flex;
@@ -222,5 +245,81 @@ export default {
 		color: #323aa2;
 		font-size: 28px;
 	}
+}
+.l_value{
+	display: flex;
+	position: relative;
+	align-items: center;
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	z-index: 1;
+	span{
+		width: 100%;
+		flex-grow: 1;
+		color: #000;
+		font-size: 32px;
+		border-radius: 8px;
+	}
+	.down_icon{
+		display: flex;
+		width: 30px;
+		margin-left: 20px;
+	}
+	.down_list{
+		width: 160px;
+		max-height: 230px;
+		position: absolute;
+		left: 0;
+		top: 60px;
+		z-index: 2;
+		font-size: 28px;
+		padding: 16px 20px;
+		border-radius: 8px;
+		box-sizing: border-box;
+		color: $font-color-black;
+		background-color: $home-eart-status-value;
+		// background-color: $color-Nobtnbg;
+		p{
+			padding: 10px 0;
+			border-bottom: 1px solid #ebedf0;
+		}
+		p:last-child{
+			border: none;
+		}
+	}
+	.down_list:before {
+		content: "";
+		display: block;
+		position: absolute;
+		width:0;
+		height: 0;
+		border: 16px solid transparent;
+		border-bottom-color: $home-eart-status-value;
+		left: 40px;
+		top: -30px;
+	}
+	.active_open{
+		display: block;
+		transition: all .2s;
+		// animation: slide-down .2s ease-in;
+		transition: .2s ease-in;
+		transform-origin: 50% 0;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	}
+	.active_close{
+		display: none;
+		transition: all .5s;
+		animation: select-close .5s ease-in;
+		transition: .3s ease-in;
+		transform-origin: 50% 0;
+	}
+	@keyframes slide-down{
+		0%{transform: scale(1,.5)}
+		100%{transform: scale(1,1)}
+	}
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 5s;
 }
 </style>

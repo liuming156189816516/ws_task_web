@@ -7,42 +7,46 @@
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
-                    <div class="user_code">{{$t('home_030')}}：{{userInfo.inviteCode}} <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">复制</span></div>
+                    <div class="user_code">{{$t('other_005')}}：{{userInfo.inviteCode}} 
+                        <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
+                    </div>
                 </div>
             </div>
             <div class="l_value" @click="showChangeBtn" @click.stop>
-                <span>{{ langOptions[langIdx] }}</span>
+                <span>{{ viewLang() }}</span>
                 <img class="down_icon" src="../assets/images/home/down_arrow_white.png" alt="" srcset="">
-                <div class="down_list" :class="isIndex?'active_open':'active_close'">
-                    <p v-for="(item,idx) in langOptions" :key="idx" :style="langIdx==idx?'color:#07c160;':''" @click="onChangeType(idx)">{{item}}</p>
-                </div>
+                <van-transition name="fade-up">
+                    <div class="down_list" :class="isIndex?'active_open':'active_close'">
+                        <p v-for="item in langOptions" :key="item.lang" :style="langIdx==item.lang?'color:#07c160;':''" @click="onChangeType(item)">{{item.name}}</p>
+                    </div>
+                </van-transition>
             </div>
             <div class="cover_model">
                 <div class="task-pro">
                     <div class="left-pro">
                         <p style="color:#f2943d;">{{user_money||0.00}}</p>
-                        <p>{{ $t("home_056") }}</p>
+                        <p>{{ $t("home_001") }}</p>
                     </div>
                     <div class="custom_set_line">
                         <span></span>
                     </div>
                     <div class="right-pro">
                         <p style="color:#e8555b;">{{ teamStemp.task_income || 0.00 }}</p>
-                        <p>{{ $t("home_057") }}</p>
+                        <p>{{ $t("home_002") }}</p>
                     </div>
                     <div class="custom_set_line">
                         <span></span>
                     </div>
                     <div class="right-pro">
                         <p style="color:#677fdf;">{{ teamStemp.promotion_income || 0.00 }}</p>
-                        <p>{{ $t("home_061") }}</p>
+                        <p>{{ $t("home_003") }}</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="home_content">
             <div class="notice_text">
-                <van-notice-bar speed='20' :left-icon="require('../assets/images/home/earn-icon-a.png')" scrollable text="中午12点到晚上6点执行任务，期间挂机享受收益，请保持在线！" />
+                <van-notice-bar speed='20' :left-icon="require('../assets/images/home/earn-icon-a.png')" scrollable :text="$t('other_043')" />
             </div>
             <van-swipe class="my_swipe" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(item,idx) in bannerList" :key="idx">
@@ -60,7 +64,7 @@
         <div class="task_continer">
             <div class="task_main">
                 <div class="model_line">
-                    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px', marginTop:'10px '}">请选择任务类型</van-divider>
+                    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px', marginTop:'10px '}">{{ $t("home_004") }}</van-divider>
                 </div>
                 <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)" v-show="idx!=1">
                     <div class="left_text">
@@ -82,13 +86,13 @@ export default {
 	data() {
 		return {
             code:"456666",
-            langIdx:0,
             isIndex:false,
             user_money:0,
             teamStemp:"",
             taskOption:[],
-            langOptions: ['en-US','zh_CN'],
-            taskType:['','scanOnline','pullPownTask','pullgroupTask']
+            langIdx:Cookies.get("language")||'en',
+            taskType:['','scanOnline','pullPownTask','pullgroupTask'],
+            langOptions: [{lang:"en",name:"en-US"},{lang:"zh",name:"zh_CN"}]
 		}
 	},
 	computed: {
@@ -97,10 +101,10 @@ export default {
             bannerList: state => state.User.bannerList,
 		}),
         taskNameOption(){
-            return ["","WhatsApp挂机任务","WhatsApp拉粉任务","WhatsApp拉群任务"]
+            return ["",this.$t('home_009'),this.$t('home_010'),this.$t('home_011')]
         },
         taskStatusOption(){
-            return ["","开始任务","进行中","结算中","已结束"]
+            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
         }
 	},
     activated(){
@@ -140,22 +144,24 @@ export default {
             })
         },
         copySuccess(){
-            this.$toast(`${this.$t("home_031")}${this.$t("other_006")}`);
+            this.$toast(`${this.$t("other_044")}`);
         },
         showChangeBtn(){
 			this.isIndex=!this.isIndex;
 		},
-        onChangeType(idx){
-			this.langIdx=idx;
-			let lang =idx==0?'en':'po';
-			// this.$i18n.locale=lang;
-			// localStorage.setItem("language",lang);
+        onChangeType(row){
+			this.langIdx=row.lang;
+			this.$i18n.locale=row.lang;
+            Cookies.set("language",row.lang)
 		},
         handleTask(row){
-            // console.log(row);
             const path = this.taskType[row.type];
             this.$router.push(`${path}?id=${row.task_info_id}`)
-        }
+        },
+		viewLang(){
+			let lang = this.langOptions.find(item=>item.lang == this.langIdx);
+			return lang.name
+		}
 	}
 };
 </script>
@@ -236,8 +242,7 @@ export default {
                 }
                 .down_icon{
                     display: flex;
-                    width: 20px;
-                    width: 36px;
+                    width: 30px;
                     margin-left: 20px;
                 }
                 .down_list{
@@ -270,12 +275,12 @@ export default {
                     border: 16px solid transparent;
                     border-bottom-color: #fff;
                     left: 40px;
-                    top: -32px;
+                    top: -30px;
                 }
                 .active_open{
                     display: block;
                     transition: all .2s;
-                    animation: slide-down .2s ease-in;
+                    // animation: slide-down .2s ease-in;
                     transition: .2s ease-in;
                     transform-origin: 50% 0;
                     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;

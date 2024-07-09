@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="task_settl">
-                    <van-notice-bar speed='20' :left-icon="require('@/assets/images/home/earn-icon-a.png')" scrollable text="中午12点到晚上6点执行任务，期间挂机享受收益，请保持在线！" />
+                    <van-notice-bar speed='20' :left-icon="require('@/assets/images/home/earn-icon-a.png')" scrollable :text="$t('other_043')" />
                 </div>
                 <div class="code-area">
                     <van-collapse v-model="activeName" :border = false accordion>

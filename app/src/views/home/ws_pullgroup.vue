@@ -5,11 +5,11 @@
             <div class="task_step_detail">
                 <div class="task-pro">
                     <div class="left-pro">
-                        <p class="invit_num">{{ teamStemp.today_income || 0}}</p>
+                        <p class="invit_num">{{ teamStemp.member_num || 0}}</p>
                         <p class="invit_text">邀请进群人数(人)</p>
                     </div>
                     <div class="right-pro">
-                        <p class="invit_num">{{ teamStemp.yesterday_income || 0 }}</p>
+                        <p class="invit_num">{{ teamStemp.amount || 0 }}</p>
                         <p class="invit_text">获得金额(ENC)</p>
                     </div>
                 </div>
@@ -20,8 +20,8 @@
             </div>
             <div class="task_desc">
                 <div class="task_top">
-                    <span>任务编号：{{ taskInfo.ser_no }}</span>
-                    <span>任务状态：{{statusOption[taskInfo.status]}}</span>
+                    <span>任务编号：{{ teamStemp.ser_no }}</span>
+                    <span>任务状态：{{statusOption[teamStemp.status]}}</span>
                 </div>
                 <div class="task_set_text">
                     请将下列的号码的用户邀请到你的群主中，并在邀请结束后，提交你的群组链接。我们会用AI验证你的群成员是否符合要求，并按照符合要求的成员数量为你结算佣金。
@@ -34,7 +34,7 @@
                         <span class="task_time">
                             <van-count-down :time="taskTime" />
                         </span>
-                        <span class="task_video">任务教程</span>
+                        <span class="task_video" @click="showVideo">任务教程</span>
                     </div>
                     <div class="account_warp">
                         <div class="account_list" v-for="(item,idx) in taskList" :key="idx">
@@ -63,7 +63,7 @@
 <script>
 import { mapState } from 'vuex';
 import PageHeader from "@/components/Header";
-import { getincome,getcreatetaskinfo,submitcreatetask } from '@/api/home'
+import { getcreatetaskinfo,submitcreatetask } from '@/api/home'
 import uniFun from "../../utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
@@ -77,7 +77,6 @@ export default {
             group_link:'',
             isLoading:false,
             taskTime: 30 * 60 * 60 * 1000,
-            taskInfo:{},
             taskList:[]
 		}
 	},
@@ -93,30 +92,15 @@ export default {
     created(){
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         this.task_id = this.$route.query.id||"";
-        this.syncInitApi();
+        this.getGroupMess();
     },
 	methods: {
-        syncInitApi(){
-            let fun1 = new Promise((resolve,reject)=>{
-                getincome().then(res =>{
-                    resolve(res)
-                })
-            });
-            let fun2 = new Promise((resolve,reject)=>{
-                getcreatetaskinfo({task_info_id:this.task_id}).then(res =>{
-                    resolve(res)
-                })
-            });
-            Promise.all([fun1,fun2]).then( res => {
-                const [data1,data2] = res;
-                this.teamStemp = data1;
-                this.taskInfo = data2;
-                this.task_id = data2.task_info_id;
-                this.group_link = data2.invite_link;
-                this.isShow=data2.status==1||data2.status==2?true:false;
-                this.taskTime = (data2.invalid_time - this.timestamp)*1000 ||0;
-                this.taskList = data2.targets.filter(item=>{ return item})
-            })
+        async getGroupMess(){
+           let groupData =  await getcreatetaskinfo({task_info_id:this.task_id});
+           this.teamStemp = groupData;
+           this.taskList = groupData.targets;
+           this.isShow=groupData.status==1||groupData.status==2?true:false;
+           this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         },
         copySuccess(){
             this.$toast(`${this.$t("home_031")}${this.$t("other_006")}`);
@@ -136,6 +120,9 @@ export default {
         downAddress(){
            // 请求获取通讯录权限
             uniFun.postMessage({data:this.taskList});
+        },
+        showVideo(){
+            this.$router.push("/service")
         }
 	}
 };

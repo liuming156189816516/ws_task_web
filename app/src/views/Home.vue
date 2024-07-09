@@ -62,7 +62,7 @@
                 <div class="model_line">
                     <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px', marginTop:'10px '}">请选择任务类型</van-divider>
                 </div>
-                <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
+                <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)" v-show="idx!=1">
                     <div class="left_text">
                         <img class="ws_icon" src="../assets/images/home/ws_icon.png" alt="">
                         <span>{{ taskNameOption[item.type]||item.task_name }}</span>

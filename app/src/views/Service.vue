@@ -22,9 +22,7 @@
                 <span class="left_icon"></span>{{$t('serv_004')}}
             </div>
             <div class="info_main">
-                <video controls>
-                    <source :src="help_url||def_video" type="video/mp4">
-                </video>
+                <video controls :src="help_url" type="video/mp4" />
             </div>
         </div>
     </div>
@@ -36,7 +34,6 @@ export default {
     data() {
         return {
             help_url:"",
-            def_video:require("../assets/video/dbfcfa67.mp4")
         }
     },
     created() {
@@ -46,7 +43,7 @@ export default {
         async getHelpVideo() {
             const { url } = await gethelp({});
             this.help_url = url;
-        },
+        }
     }
 }
 </script>

@@ -5,6 +5,7 @@
 				<div class="back_icon">
 					<img src="@/assets/images/sign/left.png" @click="$router.go(-1)" />
 				</div>
+				<div class="serve_area">{{ $t('login_014') }}</div>
 			</div>
 			<img class="login_img" src="@/assets/images/logo.png" alt="" srcset="">
 			<!-- <div class="head_title">{{ $t('login_029') }}</div> -->
@@ -192,24 +193,27 @@ export default {
 			display: flex;
 			align-items: center;
 			.back_icon {
-				flex: 1;
+				flex-grow: 0;
 				img {
 					width: 18px;
 				}
 			}
 			.serve_area {
 				display: flex;
+				flex-grow: 2;
+				font-size: 34px;
 				align-items: center;
-				img {
-					width: 32px;
-					height: 40px;
-					margin-right: 8px;
-				}
-				span {
-					color: #F52C2C;
-					font-size: 28px;
-					font-weight: 600;
-				}
+				justify-content: center;
+				// img {
+				// 	width: 32px;
+				// 	height: 40px;
+				// 	margin-right: 8px;
+				// }
+				// span {
+				// 	color: #F52C2C;
+				// 	font-size: 28px;
+				// 	font-weight: 600;
+				// }
 			}
 		}
 

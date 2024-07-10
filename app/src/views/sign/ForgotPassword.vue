@@ -1,12 +1,12 @@
 <template>
     <div class="forgot">
-        <div class="left_ct" @click="$router.go(-1)">
-			<img src="@/assets/images/sign/left.png" />
+        <div class="nav_top">
+            <div class="back_icon">
+                <img src="@/assets/images/sign/left.png" @click="$router.go(-1)" />
+            </div>
+            <div class="serve_area">{{ $t('login_007') }}</div>
         </div>
         <div class="forget_continer">
-            <div class="forget_title">
-                {{ $t('login_007') }}
-            </div>
             <div class="input_item">
                 <label class="left_icon">
                     <img src="@/assets/images/sign/zhanghao.png" />
@@ -109,19 +109,31 @@ export default {
 <style lang="scss" scoped>
 .forgot {
     height: 100vh;
-    .left_ct{
+    .nav_top {
+        width: 100%;
         height: 88px;
         display: flex;
-        align-items: center;
         padding: 0 30px;
         box-sizing: border-box;
-        img{
-            width: 18px;
+        align-items: center;
+        .back_icon {
+            flex-grow: 0;
+            img {
+                width: 18px;
+            }
+        }
+        .serve_area {
+            display: flex;
+            flex-grow: 2;
+            font-size: 34px;
+            align-items: center;
+            justify-content: center;
         }
     }
     .forget_continer {
         width: 100%;
         padding: 0 48px;
+        margin-top: 10%;
 	    box-sizing: border-box;
         input {
             background: transparent !important;
@@ -131,13 +143,6 @@ export default {
             color: #626262;
             padding-left: 25px;
             flex-grow: 1;
-        }
-        .forget_title{
-            width: 100%;
-            font-size: 38px;
-            line-height: 1.5;
-            margin-top: 10%;
-            margin-bottom: 10%;
         }
         .input_item{
             display: flex;

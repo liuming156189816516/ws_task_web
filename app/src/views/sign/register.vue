@@ -141,6 +141,7 @@ export default {
 			this.isLoading =true;
 			this.$store.dispatch('User/userRegister', params).then(res => {
 				this.isLoading = false;
+				this.getVerfyBtn();
 				if(!res.token) return;
 				this.$router.replace('/home');
 				// try {
@@ -152,8 +153,6 @@ export default {
 				// 	}
 				// } catch (e) { }
 			}).catch(() => {
-				console.log("9999");
-				// Toast.clear();
 				this.isLoading = false;
 			})
 		}

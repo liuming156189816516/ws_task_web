@@ -227,7 +227,7 @@ export default {
         initQrcode(row,tips){
             this.settime();
             this.isRqLoding = true;
-            getqrcode({account_type:Number(this.num_type),country_name:this.loginArea,country_code:String(this.loginCode)}).then(res => {
+            getqrcode({account_type:Number(this.num_type)}).then(res => {
                 setTimeout(()=>{this.isRqLoding = false},3000)
                 if(res.qr_code){
                     this.errState = true;

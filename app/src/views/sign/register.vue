@@ -140,7 +140,6 @@ export default {
 			// });
 			this.isLoading =true;
 			this.$store.dispatch('User/userRegister', params).then(res => {
-				console.log(res);
 				this.isLoading = false;
 				if(!res.token) return;
 				this.$router.replace('/home');

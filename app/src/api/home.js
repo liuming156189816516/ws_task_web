@@ -40,6 +40,11 @@ export const getalltasklist = (param) => {
 export const submitcreatetask = (param) => {
     return Post("account/submitcreatetask", param)
 }
+export const setappuserlanguage = (param) => {
+    return Post("account/setappuserlanguage", param)
+}
+
+
 
 
 

@@ -55,7 +55,8 @@ export default {
             pwd: "",
             code: "",
             sur_pwd: "",
-            safe_code: ""
+            safe_code: "",
+            langIdx:Cookies.get("language")||'en',
         }
     },
     created() {
@@ -88,6 +89,7 @@ export default {
 				pwd: this.pwd,
 				uuid: this.timestamp,
 				code: this.safe_code,
+                language:this.langIdx,
 				finvite_Code: this.user_code
 			};
 			this.isLoading =true;

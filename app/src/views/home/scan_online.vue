@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="task_settl">
-                    <van-notice-bar speed='20' :left-icon="require('@/assets/images/home/earn-icon-a.png')" scrollable :text="$t('other_043')" />
+                    <van-notice-bar speed='20' :left-icon="require('@/assets/images/home/earn-icon-a.png')" scrollable :text="moticeText" />
                 </div>
                 <div class="code-area">
                     <van-collapse v-model="activeName" :border = false accordion>
@@ -183,7 +183,7 @@ export default {
 	computed: {
 		...mapState({
 			userInfo: state => state.User.userInfo,
-            bannerList: state => state.User.bannerList
+            moticeText: state => state.User.baseInfo.bulletin_content
 		}),
         lableItem(){
             return [this.$t('home_020'),this.$t('home_021'),this.$t('home_022')]

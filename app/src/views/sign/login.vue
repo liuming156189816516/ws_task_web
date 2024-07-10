@@ -69,7 +69,8 @@ export default {
 			}
 			let params = {
 				account: this.username,
-				pwd:this.password
+				pwd:this.password,
+				language:this.langIdx
 			};
 			const Toast = this.$toast.loading({
 				duration: 3000,

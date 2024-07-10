@@ -186,7 +186,6 @@ export default {
 		position: relative;
 		flex-direction: column;
 		.login_img{
-			width: 90px;
 			height: 120px;
 			margin: 0 auto;
 			margin-top: 8%;

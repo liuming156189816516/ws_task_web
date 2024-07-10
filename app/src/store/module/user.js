@@ -7,7 +7,7 @@ export default {
 		allIncome:"",
 		avatar:""||0,
 		httpManager: {},
-		bannerList:window.localStorage.getItem('carousel_list')||null,
+		baseInfo:window.localStorage.getItem('baseInfo')||null,
 		inviteCode:window.localStorage.getItem('inviteCode')||null,
 		token: window.localStorage.getItem('token') || null,
 		account: window.localStorage.getItem('account') || null,
@@ -107,8 +107,8 @@ export default {
 			state.avatar = data;
 		},
 		store_carousel(state, data) {
-			state.bannerList = data.list;
-			window.localStorage.setItem('carousel_list',data);
+			state.baseInfo = data;
+			window.localStorage.setItem('baseInfo',data);
 		},
 	},
 	actions: {

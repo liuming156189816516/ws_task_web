@@ -46,7 +46,7 @@
         </div>
         <div class="home_content">
             <div class="notice_text">
-                <van-notice-bar speed='20' :left-icon="require('../assets/images/home/earn-icon-a.png')" scrollable :text="$t('other_043')" />
+                <van-notice-bar speed='20' :left-icon="require('../assets/images/home/earn-icon-a.png')" scrollable :text="moticeText" />
             </div>
             <van-swipe class="my_swipe" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(item,idx) in bannerList" :key="idx" @click="jumpLink(item.link)">
@@ -78,7 +78,7 @@
 <script>
 import { mapState } from 'vuex';
 import uniFun from "@/utils/uni-webview-js"
-import { getaccountincome,gettodayincome,gettaskliststatus,getalltasklist } from'@/api/home'
+import { getaccountincome,gettodayincome,gettaskliststatus,getalltasklist,setappuserlanguage } from'@/api/home'
 export default {
 	name: 'home',
 	components: {},
@@ -97,7 +97,8 @@ export default {
 	computed: {
 		...mapState({
 			userInfo: state => state.User,
-            bannerList: state => state.User.bannerList,
+            bannerList: state => state.User.baseInfo.list,
+            moticeText: state => state.User.baseInfo.bulletin_content,
 		}),
         taskNameOption(){
             return ["",this.$t('home_009'),this.$t('home_010'),this.$t('home_011')]
@@ -112,7 +113,6 @@ export default {
         this.$store.dispatch('User/getUserHead');
         this.$store.dispatch('User/plantCarousel');
     },
-
 	methods: {
         syncInitApi(){
             let fun1 = new Promise((resolve,reject)=>{
@@ -148,10 +148,11 @@ export default {
         showChangeBtn(){
 			this.isIndex=!this.isIndex;
 		},
-        onChangeType(row){
+        async onChangeType(row){
 			this.langIdx=row.lang;
 			this.$i18n.locale=row.lang;
-            Cookies.set("language",row.lang)
+            Cookies.set("language",row.lang);
+            await setappuserlanguage({language:row.lang});
 		},
         handleTask(row){
             const path = this.taskType[row.type];

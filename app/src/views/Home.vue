@@ -153,6 +153,7 @@ export default {
 			this.$i18n.locale=row.lang;
             Cookies.set("language",row.lang);
             await setappuserlanguage({language:row.lang});
+            await this.$store.dispatch('User/plantCarousel');
 		},
         handleTask(row){
             const path = this.taskType[row.type];

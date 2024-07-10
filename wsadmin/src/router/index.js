@@ -196,7 +196,7 @@ export const asyncRoutes = [
         component: () => import('@/views/registerManage/user_statistics'),
         name: 'user_statistics',
         meta: {
-          title:i18n.t('sys_p002'),
+          title:i18n.t('sys_s007'),
         }
       },
       {
@@ -204,7 +204,7 @@ export const asyncRoutes = [
         component: () => import('@/views/registerManage/taskConfig'),
         name: 'taskConfig',
         meta: {
-          title:i18n.t('sys_p002'),
+          title:i18n.t('sys_s002'),
         }
       }
     ]
@@ -498,7 +498,7 @@ export const asyncRoutes = [
         component: () => import('@/views/financeManage/manual_correction'),
         name: 'manual_correction',
         meta: {
-          title:i18n.t('sys_p002'),
+          title:i18n.t('sys_m077'),
         }
       }
     ]

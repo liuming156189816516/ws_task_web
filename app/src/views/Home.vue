@@ -110,8 +110,6 @@ export default {
     activated(){
         this.syncInitApi();
         this.isIndex=false;
-        this.$i18n.locale=this.langIdx;
-        Cookies.set("language",this.langIdx)
         this.$store.dispatch('User/getUserHead');
         this.$store.dispatch('User/plantCarousel');
     },

@@ -61,8 +61,8 @@ export default {
     home_037:"Save address book",
     home_038:"Submit",
     home_039: "The task has been submitted, please pay attention to the Bouns income in time!",
-    home_040:"View details",
-    home_041:"View details",
+    home_040:"Deleting your online WhatsApp account will result in no income. Are you sure you want to delete it??",
+    home_041:"Are you sure you want to delete this WhatsApp account??",
 
     spre_001:"Promotion",
     spre_002:"Accumulated Bouns",
@@ -164,6 +164,7 @@ export default {
     other_042:"Avatar selected",
     other_043:"The task is performed from 12 noon to 6 pm. During this period, you can enjoy the benefits by hanging up. Please stay online.",
     other_044:"Copied successfully",
+    other_045:"hint",
 
     table_001:"Home",
     table_002:"Promotion",

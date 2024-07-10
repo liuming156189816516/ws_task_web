@@ -53,8 +53,6 @@ export default {
 		}
 	},
 	created() {
-		this.$i18n.locale=this.langIdx;
-                Cookies.set("language",this.langIdx)
 		this.userAccount();
     },
 	methods: {
@@ -234,6 +232,8 @@ export default {
 	width: 100%;
 	display: flex;
 	flex-shrink: 0;
+	font-weight: bold;
+	font-size: 32px;
 	align-items: center;
 	justify-content: center; 
 	margin-bottom: 20%;

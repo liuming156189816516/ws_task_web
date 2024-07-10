@@ -189,6 +189,9 @@ export default {
         },
         statusOption(){
             return ["",this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
+        },
+        tipsOption(){
+            return ["",this.$t('home_023')]
         }
 	},
     created(){
@@ -271,47 +274,17 @@ export default {
             })
             this.isRqLoding = false;
         },
-        handelBtn(row){
-            let tipsText = row.wx_state===0?'上线':'下线'
-            Dialog.confirm({
-                title:"提示",
-                message:"你确定要"+tipsText+"吗？",
-                cancelButtonText:"取消",
-                confirmButtonText:"确定",
-                beforeClose: ((action, done) => {
-                    if (action === 'confirm') {
-                        this.initQrcode(row,tipsText);
-                        // apiAddfun(params).then(res => {
-                        //     if(res.errorCode == 0){
-                        //         this.userAllAdress();
-                        //         id==null?this.collectAdress():this.userAllAdress();
-                        //         done()
-                        //     }else{
-                        //         done(false)
-                        //     }
-                        // })
-                        done();
-                    }else{
-                        done();
-                    }
-                })
-            });
-        },
         showDelBtn(row){
-            // if(row.wx_state==1){
-            //     Toast('当前账号在线，无法删除');
-            //     return;
-            // }
-            let tipsText = row.status==2?'删除在线WhatsApp号会导致没有收益，确定要删除吗?':'你确定要删除该WhatsApp号吗？'
+            let tipsText = row.status==2?this.$t('home_040'):this.$t('home_041')
             Dialog.confirm({
-                title:"提示",
+                title:this.$t('other_045'),
                 message:tipsText,
-                cancelButtonText:"取消",
-                confirmButtonText:"确定",
+                cancelButtonText:this.$t('other_007'),
+                confirmButtonText:this.$t('other_011'),
                 beforeClose: ((action, done) => {
                     if (action === 'confirm') {
                         delaccount({account: row.account}).then(res => {
-                            Toast('删除完成')
+                            Toast(this.$t('other_013'))
                             this.initWechatList();
                         })
                         done();

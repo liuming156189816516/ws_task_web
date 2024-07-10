@@ -14,7 +14,7 @@ const messages = {
 	}
 }
 const i18n = new VueI18n({
-	locale: Cookies.get('language') || "zh", // 设置默认语言
+	locale: Cookies.get('language') || "en", // 设置默认语言
 	silentTranslationWarn: true,
 	messages: messages // 设置资源文件对象
 })

@@ -49,11 +49,9 @@
                 <van-notice-bar speed='20' :left-icon="require('../assets/images/home/earn-icon-a.png')" scrollable :text="$t('other_043')" />
             </div>
             <van-swipe class="my_swipe" :autoplay="3000" indicator-color="white">
-                <van-swipe-item v-for="(item,idx) in bannerList" :key="idx">
+                <van-swipe-item v-for="(item,idx) in bannerList" :key="idx" @click="jumpLink(item.link)">
                     <template v-if="item.link">
-                        <a style="display: flex;" :href="item.link" target="_blank">
-                            <img :src="item.file_url" alt="">
-                        </a>
+                        <img :src="item.file_url">
                     </template>
                     <template v-else>
                         <img :src="item.file_url" alt="">
@@ -161,7 +159,11 @@ export default {
 		viewLang(){
 			let lang = this.langOptions.find(item=>item.lang == this.langIdx);
 			return lang.name
-		}
+		},
+        jumpLink(path){
+            if(!path) return;
+            this.$Helper.toOutLink(path);
+        }
 	}
 };
 </script>

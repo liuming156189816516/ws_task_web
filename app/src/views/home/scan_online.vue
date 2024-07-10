@@ -21,7 +21,8 @@
                         <van-collapse-item name="1" color="#1989fa" :value="activeName==1?$t('home_014'):$t('home_015')">
                             <template #title>
                                 <div>
-                                    <van-icon :name="require('@/assets/images/home/erweima.png')" />{{ $t('home_016') }}
+                                    <van-icon :name="require('@/assets/images/home/erweima.png')" />
+                                    {{ $t('home_016') }}
                                 </div>
                             </template>
                             <div class="code-mian">
@@ -41,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="code-tips">
-                                    <p>{{ $t('home_019') }}</p>
+                                    <p>{{ $t('home_019') }} <span v-if="errState">{{ countTime}}s</span></p>
                                 </div>
                                 <div class="qr-code" v-show="errState">
                                     <div ref="qrcodeImg" class="view_qr @/assets/images/home/qr_err.png" id="qrcodeImg">

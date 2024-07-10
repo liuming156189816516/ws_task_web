@@ -108,7 +108,7 @@ export default {
             this.$toast(`${this.$t("other_044")}`);
         },
         submitTask(){
-            if(!this.group_link) return this.$toast($t('other_001',{value:$t('home_036')})); 
+            if(!this.group_link) return this.$toast(this.$t('other_001',{value:this.$t('home_036')})); 
             this.isLoading=true;
             submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
                 this.isLoading=false;

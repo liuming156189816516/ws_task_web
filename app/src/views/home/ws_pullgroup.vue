@@ -293,11 +293,12 @@ export default {
             box-sizing: border-box;
             flex-direction: column;
             justify-content: center;
+            background-color: #f2f2f2;
             .van-button{
                 border-radius: 35px;
             }
             .van-button:nth-child(1){
-                margin-bottom: 40px;
+                margin-bottom: 10px;
             }
         }
     }

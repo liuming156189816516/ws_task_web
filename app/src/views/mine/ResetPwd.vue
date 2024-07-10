@@ -192,9 +192,6 @@ export default {
     }
 }
 ::v-deep {
-    .van-field__label {
-        width: 60px;
-    }
     .van-cell__value{
         display: flex;
         align-items: center;
@@ -218,11 +215,8 @@ export default {
     width: 100%;
     border-radius: 5px;
 }
-</style>
-<style lang="scss">
-    .content-block {
-        .van-field__label{
-            width: 140px !important;
-        }
-    }
+::v-deep .van-field__label{
+    min-width: 130px;
+    margin-right: 0;
+}
 </style>

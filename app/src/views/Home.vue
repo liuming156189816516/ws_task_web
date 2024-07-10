@@ -163,9 +163,10 @@ export default {
 		},
         jumpLink(path){
             if(!path) return;
-            uniFun.navigateToWebview({
-                url:path
-            })
+            plus.runtime.openUrl(path);
+            // uniFun.navigateToWebview({
+            //     url:path
+            // })
             // this.$Helper.toOutLink(path);
         }
 	}

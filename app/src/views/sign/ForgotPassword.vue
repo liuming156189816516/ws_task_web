@@ -21,7 +21,7 @@
                     <input v-model="safe_code" :placeholder="$t('other_001',{value:$t('login_008')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                 </div>
                 <div class="code_img" @click="getVerfyBtn">
-                    <img :src="require(`@/assets/images/code/${item}.png`)" v-for="item in verfyList" :key="item">
+                    <img :src="require(`@/assets/images/code/${item}.png`)" v-for="(item,idx) in verfyList" :key="idx">
                 </div>
             </div>
             <div class="input_item">

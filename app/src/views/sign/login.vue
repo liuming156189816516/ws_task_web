@@ -73,7 +73,7 @@ export default {
 			};
 			const Toast = this.$toast.loading({
 				duration: 3000,
-				message: this.$t('login_013'),
+				message: this.$t('login_005'),
 				forbidClick: true,
 				loadingType: 'spinner',
 			});

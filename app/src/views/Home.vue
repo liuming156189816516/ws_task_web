@@ -163,7 +163,7 @@ export default {
 		},
         jumpLink(path){
             if(!path) return;
-            plus.runtime.openUrl(path);
+            uniFun.postMessage({data:path});
             // uniFun.navigateToWebview({
             //     url:path
             // })

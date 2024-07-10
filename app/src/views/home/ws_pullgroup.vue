@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div>
-                        <van-field v-model="group_link" :placeholder="$t('other_001',{value:$t('home_036')})" /> 
+                        <van-field :disabled="!isShow" v-model="group_link" :placeholder="$t('other_001',{value:$t('home_036')})" /> 
                     </div>
                 </div>
             </div>

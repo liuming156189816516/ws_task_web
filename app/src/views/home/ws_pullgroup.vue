@@ -286,7 +286,6 @@ export default {
             width: 100%;
             display: flex;
             padding: 0 20px;
-            gap: 20px;
             position: fixed;
             left: 0;
             flex-shrink: 0;
@@ -296,6 +295,9 @@ export default {
             justify-content: center;
             .van-button{
                 border-radius: 35px;
+            }
+            .van-button:nth-child(1){
+                margin-bottom: 40px;
             }
         }
     }

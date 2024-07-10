@@ -143,7 +143,7 @@ export default {
             float: left;
             padding: 0 20px;
             margin-top: 20px;
-            margin-bottom: 160px;
+            margin-bottom: 200px;
             box-sizing: border-box;
             .task_step_detail{
                 width: 100%;
@@ -289,6 +289,7 @@ export default {
             gap: 20px;
             position: fixed;
             left: 0;
+            flex-shrink: 0;
             bottom: 40px;
             box-sizing: border-box;
             flex-direction: column;

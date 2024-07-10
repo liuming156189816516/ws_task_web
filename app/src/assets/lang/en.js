@@ -28,7 +28,7 @@ export default {
     home_004:"Please choose task type",
     home_005:"Start task",
     home_006:"In Progress",
-    home_007:"Settlement in progress",
+    home_007:"Settling",
     home_008:"Ended",
     home_009:"WhatsApp Massage Task",
     home_010:"WhatsApp followers Task",

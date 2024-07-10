@@ -3,37 +3,33 @@
 		<div class="sign_login">
 			<div class="nav_top">
 				<div class="back_icon">
-					<img src="../../assets/images/sign/left.png" @click="$router.go(-1)" />
+					<img src="@/assets/images/sign/left.png" @click="$router.go(-1)" />
 				</div>
-				<!-- <div class="serve_area" @click="isDialong = true">
-					<img src="../../assets/images/ms_serve.png" alt="" srcset="">
-					<span>{{ $t('mine_040') }}</span>
-				</div> -->
 			</div>
-			<img class="login_img" src="../../assets/images/logo.png" alt="" srcset="">
+			<img class="login_img" src="@/assets/images/logo.png" alt="" srcset="">
 			<!-- <div class="head_title">{{ $t('login_029') }}</div> -->
 			<div class="uilist">
 				<div class="uilist_div">
-					<img src="../../assets/images/sign/zhanghao.png" />
+					<img src="@/assets/images/sign/zhanghao.png" />
 					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_001')})" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div pwd">
-					<img src="../../assets/images/sign/lock.png" />
+					<img src="@/assets/images/sign/lock.png" />
 					<input v-model="pwd" :placeholder="$t('other_001',{value:$t('login_002')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
-					<img src="../../assets/images/sign/lock.png" />
+					<img src="@/assets/images/sign/lock.png" />
 					<input v-model="sur_pwd" :placeholder="$t('other_001',{value:$t('login_009')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
-					<img src="../../assets/images/sign/tuiguang.png" />
+					<img src="@/assets/images/sign/tuiguang.png" />
 					<input style="flex-grow:1;" v-model="user_code" :placeholder="$t('other_001',{value:$t('login_012')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div verfy_code">
 					<div class="input_code">
-						<img src="../../assets/images/sign/secret.png" />
+						<img src="@/assets/images/sign/secret.png" />
 						<input style="flex-grow:1;" v-model="safe_code" autocomplete="off" :placeholder="$t('other_001',{value:$t('login_008')})" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="code_img" @click="getVerfyBtn">
@@ -98,9 +94,6 @@ export default {
 			// }
 			const { code } = await getcode({ uuid: this.timestamp });
 			this.verfyList = code.split("");
-			// for (let k = 0; k < list.length; k++) {
-			// 	list[k] = '@/assets/images/code/'+Number(list[k])+'.jpg'
-			// }
 		},
 		//注册
 		handleRegister() {

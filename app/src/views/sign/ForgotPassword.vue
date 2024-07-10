@@ -1,7 +1,7 @@
 <template>
     <div class="forgot">
         <div class="left_ct" @click="$router.go(-1)">
-			<img src="../../assets/images/sign/left.png" />
+			<img src="@/assets/images/sign/left.png" />
         </div>
         <div class="forget_continer">
             <div class="forget_title">
@@ -9,14 +9,14 @@
             </div>
             <div class="input_item">
                 <label class="left_icon">
-                    <img src="../../assets/images/sign/zhanghao.png" />
+                    <img src="@/assets/images/sign/zhanghao.png" />
                 </label>
                 <input v-model="username" :placeholder="$t('other_001',{value:$t('login_001')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
             </div>
             <div class="input_item verfy_item">
                 <div class="input_code">
                     <label class="left_icon">
-                        <img src="../../assets/images/sign/secret.png" />
+                        <img src="@/assets/images/sign/secret.png" />
                     </label>
                     <input v-model="safe_code" :placeholder="$t('other_001',{value:$t('login_008')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                 </div>
@@ -26,14 +26,14 @@
             </div>
             <div class="input_item">
                 <label class="left_icon">
-                    <img src="../../assets/images/sign/lock.png" />
+                    <img src="@/assets/images/sign/lock.png" />
                 </label>
                 <input v-model="pwd" :placeholder="$t('other_001',{value:$t('login_002')})" :type="regEye?'password':'text'" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                 <i :class="[regEye ? 'icon_biyan': 'icon_zhenyan']" @click="regEye = !regEye"></i>
             </div>
             <div class="input_item">
                 <label class="left_icon">
-                    <img src="../../assets/images/sign/lock.png" />
+                    <img src="@/assets/images/sign/lock.png" />
                 </label>
                 <input v-model="sur_pwd" :placeholder="$t('other_001',{value:$t('login_009')})" :type="regEye?'password':'text'" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                 <i :class="[regEye ? 'icon_biyan': 'icon_zhenyan']" @click="regEye = !regEye"></i>

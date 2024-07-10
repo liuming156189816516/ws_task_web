@@ -64,7 +64,7 @@
 import { mapState } from 'vuex';
 import PageHeader from "@/components/Header";
 import { getcreatetaskinfo,submitcreatetask } from '@/api/home'
-import uniFun from "../../utils/uni-webview-js"
+import uniFun from "@/utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
 	components: {PageHeader},

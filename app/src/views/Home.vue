@@ -77,6 +77,7 @@
 </template>
 <script>
 import { mapState } from 'vuex';
+import uniFun from "@/utils/uni-webview-js"
 import { getaccountincome,gettodayincome,gettaskliststatus,getalltasklist } from'@/api/home'
 export default {
 	name: 'home',
@@ -162,7 +163,10 @@ export default {
 		},
         jumpLink(path){
             if(!path) return;
-            this.$Helper.toOutLink(path);
+            uniFun.navigateToWebview({
+                url:path
+            })
+            // this.$Helper.toOutLink(path);
         }
 	}
 };

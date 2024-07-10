@@ -20,7 +20,9 @@
                     </label>
                     <input v-model="safe_code" :placeholder="$t('other_001',{value:$t('login_008')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                 </div>
-                <div class="code_img" @click="getVerfyBtn" v-html="code" />
+                <div class="code_img" @click="getVerfyBtn">
+                    <img :src="require(`@/assets/images/code/${item}.png`)" v-for="item in verfyList" :key="item">
+                </div>
             </div>
             <div class="input_item">
                 <label class="left_icon">
@@ -56,6 +58,7 @@ export default {
             code: "",
             sur_pwd: "",
             safe_code: "",
+            verfyList:[],
             langIdx:Cookies.get("language")||'en',
         }
     },
@@ -66,7 +69,7 @@ export default {
     methods: {
         async getVerfyBtn(){
             const { code } = await getcode({ uuid: this.timestamp });
-			this.code = code;
+			this.verfyList = code.split("");
         },
         //注册
 		handleRegister() {
@@ -196,6 +199,10 @@ export default {
                 box-sizing: border-box;
                 justify-content: center;
                 background-color: #F6F6F6;
+                gap: 6px;
+				img{
+					height: 50px;
+				}
             }
         }
         .login_btn {

@@ -36,7 +36,9 @@
 						<img src="../../assets/images/sign/secret.png" />
 						<input style="flex-grow:1;" v-model="safe_code" autocomplete="off" :placeholder="$t('other_001',{value:$t('login_008')})" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
-					<div class="code_img" @click="getVerfyBtn" v-html="code" />
+					<div class="code_img" @click="getVerfyBtn">
+						<img :src="require(`@/assets/images/code/${item}.png`)" v-for="item in verfyList" :key="item">
+					</div>
 				</div>
 			</div>
 			<div class="login_btn">
@@ -59,6 +61,7 @@ export default {
 			safe_code: "",
 			username: "",
 			password: "",
+			verfyList:[],
 			pwd: "",
 			sur_pwd: "",
 			timestamp:"",
@@ -66,7 +69,6 @@ export default {
 			user_code:"",
 			countTime: 60,
 			uuid: "",
-			code:""
 		}
 	},
 	created() {
@@ -95,8 +97,10 @@ export default {
 			// 	return this.$toast('请输入正确的手机号');
 			// }
 			const { code } = await getcode({ uuid: this.timestamp });
-			// this.safe_code = code;
-			this.code = code;
+			this.verfyList = code.split("");
+			// for (let k = 0; k < list.length; k++) {
+			// 	list[k] = '@/assets/images/code/'+Number(list[k])+'.jpg'
+			// }
 		},
 		//注册
 		handleRegister() {
@@ -306,6 +310,10 @@ export default {
 				box-sizing: border-box;
 				justify-content: center;
 				background-color: #F6F6F6;
+				gap: 6px;
+				img{
+					height: 50px;
+				}
 			}
 		}
 	}

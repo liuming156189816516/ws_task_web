@@ -6,11 +6,11 @@
                 <div class="task-pro">
                     <div class="left-pro">
                         <p>{{ teamStemp.today_income || 0}}</p>
-                        <p>{{ $t("home_012") }}</p>
+                        <p>{{ $t("mine_007") }}</p>
                     </div>
                     <div class="right-pro">
                         <p>{{ teamStemp.yesterday_income || 0 }}</p>
-                        <p>{{ $t("home_013") }}</p>
+                        <p>{{ $t("mine_008") }}</p>
                     </div>
                 </div>
                 <div class="task_settl">
@@ -35,7 +35,7 @@
                                         </div>
                                     </div> -->
                                     <div>
-                                        <van-radio-group v-model="num_type" shape="square" direction="horizontal">
+                                        <van-radio-group v-model="num_type" :disabled="countTime!=60" shape="square" direction="horizontal" @change="changeCard">
                                             <van-radio name="1">{{ $t('home_017') }}</van-radio>
                                             <van-radio name="2">{{ $t('home_018') }}</van-radio>
                                         </van-radio-group>
@@ -217,6 +217,10 @@ export default {
                 this.errState = true;
                 this.initQrcode();
             }
+        },
+        changeCard(){
+            if (this.countTime != 60) return;
+            this.refreQrBtn();
         },
         //刷新二维码
         refreQrBtn(){

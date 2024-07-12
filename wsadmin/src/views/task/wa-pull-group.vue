@@ -1,17 +1,32 @@
-<!--  -->
+<!--  -->this.checkArr
 <template>
   <div class='container_coat'>
     <div class="condition_warp select_warp">
-      <el-form inline>
+      <el-form size="small" inline>
         <el-form-item>
-          <el-input size="small" v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
+          <el-button type="primary" :disabled="checkArry.length==0" @click="scamperBtn(0,0)">{{ $t('sys_q111') }}</el-button>
         </el-form-item>
         <el-form-item>
-          <el-input size="small" v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
+          <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
         </el-form-item>
         <el-form-item>
-          <el-button size="small" icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002')}}</el-button>
-          <el-button size="small" icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
+          <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
+        </el-form-item>
+        <!-- <el-form-item>
+          <el-button type="warning" :disabled="checkIdArry.length==0" @click="handleGroupBtn(1)">{{ $t('sys_rai081') }}</el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="warning" :disabled="checkIdArry.length==0" @click="handleGroupBtn(3)">{{ $t('sys_rai097') }}</el-button>
+        </el-form-item> -->
+        <!-- <el-form-item>
+          <el-button type="danger" :disabled="checkIdArry.length==0" @click="handleGroupBtn(2)">{{ $t('sys_rai082') }}</el-button>
+        </el-form-item> -->
+        <el-form-item>
+          <el-button icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002')}}</el-button>
+          <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
+        </el-form-item>
+        <el-form-item class="fr">
+          自动炸群: <el-switch v-model="auto_scamper" active-text="开启" inactive-text="关闭" @change="handleScamper" />
         </el-form-item>
       </el-form>
     </div>
@@ -20,6 +35,7 @@
         <el-table :data="groupTaskList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading"
           element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }"
           @selection-change="selectAllChange" @row-click="rowSelectChange">
+          <el-table-column type="selection" width="55" />
           <el-table-column prop="app_account" label="用户账号" minWidth="120" />
           <el-table-column prop="account" label="拉群账号" width="120" />
           <el-table-column prop="ad_account" label="营销账号" width="120" />
@@ -50,15 +66,9 @@
               <div>{{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}</div>
             </template>
           </el-table-column>
-          <!-- <el-table-column width="180" label="操作" align="center" fixed="right">
+          <!-- <el-table-column width="100" label="操作" align="center" fixed="right">
             <template slot-scope="scope">
-              <el-button type="danger" :disabled="scope.row.status == 2 || scope.row.status == 3" size="mini" plain
-                @click="regectBtn(scope.row)">驳回</el-button>
-              <el-button :type="scope.row.status == 2 ? 'info' : 'warning'"
-                :disabled="scope.row.status == 2 || scope.row.status == 3 || pay_id.length > 0" size="mini" plain
-                @click="delCardBtn(scope.row, 2)">
-                {{ scope.row.status == 2 ? $t('sys_p008') : $t('sys_p010') }}
-              </el-button>
+              <el-button type="danger" :disabled="checkArry.length>0" size="mini" plain @click="scamperBtn(scope.row,1)">炸群</el-button>
             </template>
           </el-table-column> -->
         </el-table>
@@ -70,12 +80,25 @@
         </div>
       </div>
     </div>
+    <el-dialog :title="$t('sys_rai100')" :visible.sync="dialogVisible" width="560px" center>
+      <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item :label="$t('sys_rai104')+'：'" prop="relpy_text">
+          <el-input type="textarea" clearable v-model="taskForm.relpy_text" :placeholder="$t('sys_g129')" rows="8" />
+        </el-form-item>
+        <el-form-item>
+          <div class="el-item-right">
+            <el-button @click="dialogVisible=false">{{ $t('sys_c023') }}</el-button>
+            <el-button type="primary" :loading="isLoading" @click="submitForm('taskForm')">{{ $t('sys_c024') }}</el-button>
+          </div>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { successTips, resetPage } from '@/utils/index'
-import { getcreategroupinfolist } from '@/api/task'
+import { getcreategroupinfolist,getsysconfig,upsysconfig,groupsendmsg } from '@/api/task'
 export default {
   data() {
     return {
@@ -87,29 +110,43 @@ export default {
         account: "",
         ad_account: "",
       },
+      taskForm:{
+        relpy_type:"",
+        relpy_id:"",
+        relpy_text:"",
+      },
       type: 0,
+      checkArry:[],
       loading: false,
+      auto_scamper:null,
       groupTaskList: [],
       isLoading: false,
       isUpload: false,
       imgModel: false,
+      dialogVisible:false,
       pageOption: resetPage()
     }
   },
   computed: {
     statusOptions(){
       return ["","开始任务","进行中","结算中","已结束"]
+    },
+    taskRules() {
+      return {
+        relpy_text: [{ required: true, message: this.$t('sys_mat021'), trigger: 'blure' },{ max: 2000, message: '最多可输入2000个字符', trigger: 'blur' }],
+      }
     }
   },
   mounted() {
     this.getTaskList();
+    this.initGroupConfig();
   },
   methods: {
     restQueryBtn() {
       this.model1.status = "";
       this.model1.account = "";
       this.model1.ad_account = "";
-      this.getTaskList(1)
+      this.getTaskList(1);
       // this.$refs.serveTable.clearSelection();
     },
     //获取订单列表
@@ -137,11 +174,11 @@ export default {
       })
     },
     selectAllChange(row) {
-      this.pay_id = row.map(item => { return item.id })
+      this.checkArry = row.map(item => { return item.id })
     },
     rowSelectChange(row, column, event) {
       let refsElTable = this.$refs.serveTable;
-      let findRow = this.pay_id.find(item => item == row.id);
+      let findRow = this.checkArry.find(item => item == row.id);
       if (findRow) {
         refsElTable.toggleRowSelection(row, false);
         return;
@@ -168,18 +205,43 @@ export default {
       })
     },
     //添加
-    addGroupBtn(val, idx) {
-      this.type = idx;
-      if (idx == 2) {
-        this.sendForm.id = val.id;
-        this.sendForm.task_name = val.name;
-        this.sendForm.file_url = val.file_url;
-        this.sendForm.link = val.link;
-        this.sendForm.remark = val.remark;
-        this.sendForm.status = val.status;
+    scamperBtn(row,type){
+      this.taskForm.relpy_type=type;
+      this.taskForm.relpy_text=""; 
+      if (type == 1) {
+        this.taskForm.relpy_id=row.id;
+        this.taskForm.relpy_text=row.ad; 
       }
-      this.createModel = true;
+      this.dialogVisible=true;
     },
+    async initGroupConfig(){
+      const {data:{auto_pull_group}} = await getsysconfig();
+      this.auto_scamper = auto_pull_group==1?true:false;
+    },
+    async handleScamper(e){
+      const {code} = await upsysconfig({auto_big_group:-1,auto_pull_group:this.auto_scamper?1:0});
+      if (code !=0 ) return;
+      this.auto_scamper = e;
+      successTips(this)
+    },
+    submitForm(formName){
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              this.isLoading=true;
+              let ids = this.taskForm.relpy_type==1?this.checkIdArry:[this.taskForm.relpy_id];
+              groupsendmsg({ids:ids,ad:this.taskForm.relpy_text}).then(res=>{
+                this.isLoading=false;
+                if (res.code !=0 ) return;
+                successTips(this)
+                this.getTaskList(1);
+                this.dialogVisible=false;
+              })
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          })
+        },
     //提交
     submitSendBtn(formName) {
       this.$refs[formName].validate((valid) => {

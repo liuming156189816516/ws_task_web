@@ -43,6 +43,10 @@ export const submitcreatetask = (param) => {
 export const setappuserlanguage = (param) => {
     return Post("account/setappuserlanguage", param)
 }
+export const getbonus = (param) => {
+    return Post("account/getbonus", param)
+}
+
 
 
 

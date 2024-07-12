@@ -58,14 +58,14 @@ export const dobatchclosepullgrouptask = (params) =>{
   return request({url:'/pullgroup/dobatchclosepullgrouptask',method:'post',data:params})
 }
 export const groupsendmsg = (params) =>{
-  return request({url:'/pullgroup/groupsendmsg',method:'post',data:params})
+  return request({url:'/group/groupsendmsg',method:'post',data:params})
 }
 
 export const getsysconfig = (params) =>{
-  return request({url:'/adminmember/getsysconfig',method:'post',data:params})
+  return request({url:'/group/getsysconfig',method:'post',data:params})
 }
 export const upsysconfig = (params) =>{
-  return request({url:'/adminmember/upsysconfig',method:'post',data:params})
+  return request({url:'/group/upsysconfig',method:'post',data:params})
 }
 
 // 养号

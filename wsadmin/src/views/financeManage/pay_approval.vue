@@ -73,9 +73,9 @@
                             {{scope.row.ptime>0?$baseFun.resetTime(scope.row.ptime*1000):"~" }}
                         </template>
                     </el-table-column>
-                    <el-table-column width="180" label="操作" align="center" fixed="right">
+                    <el-table-column width="120" label="操作" align="center" fixed="right">
 						<template slot-scope="scope">
-                            <el-button type="danger" :disabled="scope.row.status==2||scope.row.status==3" size="mini" plain @click="regectBtn(scope.row)">驳回</el-button>
+                            <!-- <el-button type="danger" :disabled="scope.row.status==2||scope.row.status==3" size="mini" plain @click="regectBtn(scope.row)">驳回</el-button> -->
 							<el-button :type="scope.row.status==2?'info':'warning'" :disabled="scope.row.status==2||scope.row.status==3||pay_id.length>0" size="mini" plain @click="delCardBtn(scope.row,2)">
                                 {{ scope.row.status==2?$t('sys_p008'):$t('sys_p010') }}
                             </el-button>

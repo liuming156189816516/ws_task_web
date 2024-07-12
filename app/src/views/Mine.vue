@@ -28,12 +28,12 @@
                     </div>
                     <div class="task-pro">
                         <div class="left-pro">
-                            <p>{{allIncome.today_amount ||0}}</p>
-                            <p>{{ $t("spre_003") }}</p>
+                            <p>{{allIncome.today_bonus ||0}}</p>
+                            <p>{{ $t("mine_007") }}</p>
                         </div>
                         <div class="right-pro">
-                            <p>{{allIncome.yesterday_amount ||0}}</p>
-                            <p>{{ $t("spre_004") }}</p>
+                            <p>{{allIncome.yesterday_bonus ||0}}</p>
+                            <p>{{ $t("mine_008") }}</p>
                         </div>
                         <!-- <div class="right-pro">
                             <p>999</p>
@@ -63,7 +63,7 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import { getaccountincome,getbrokeragestatis } from '@/api/home'
+import { getaccountincome,getbonus } from '@/api/home'
 export default {
     name: 'Mine',
     components: {},
@@ -130,7 +130,7 @@ export default {
                 })
             });
             let fun2 = new Promise((resolve,reject)=>{
-                getbrokeragestatis().then(res =>{
+                getbonus().then(res =>{
                     resolve(res)
                 })
             });

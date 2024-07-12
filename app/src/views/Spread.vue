@@ -79,7 +79,6 @@ export default {
     },
     created() {
         this.syncInitApi();
-        this.$store.dispatch('User/userIncome');
     },
     methods:{
         syncInitApi(){

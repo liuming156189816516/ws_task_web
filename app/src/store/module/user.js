@@ -69,6 +69,7 @@ export default {
 			window.localStorage.setItem('token',token);
 			window.localStorage.setItem('account',account);
 			window.localStorage.setItem('inviteCode',invite_code);
+			// this.dispatch('User/plantCarousel');
 		},
 		clearUserInfo: (state, data) => {
 			localStorage.removeItem('token');
@@ -112,13 +113,15 @@ export default {
 		},
 	},
 	actions: {
-		userLogin({ commit }, params ,callback) {
+		userLogin({ commit,dispatch}, params ,callback) {
 			commit('clearUserInfo');
 			return new Promise((resolve, reject) => {
 				login(params).then (res => {
 					if(res.token){
 						commit('store_info', res);
 						resolve(res)
+						dispatch('getUserHead');
+						dispatch('plantCarousel');
 					}
 					resolve(res)
 				}).catch(error => {
@@ -126,12 +129,14 @@ export default {
 				});
 			});
 		},
-		userRegister({ commit }, params) {
+		userRegister({ commit,dispatch }, params) {
 			commit('clearUserInfo');
 			return new Promise((resolve, reject) => {
 				register(params).then(res => {
 					if(res.token){
 						commit('store_info', res);
+						dispatch('getUserHead');
+						dispatch('plantCarousel');
 					}
 					resolve(res);
 				}).catch(error => {

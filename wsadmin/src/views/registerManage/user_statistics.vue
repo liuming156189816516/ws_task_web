@@ -4,7 +4,7 @@
         <div class="detail_card">
             <el-button v-if="isLoading" class="loading_icon" style="margin-top: 10px;" type="primary" :loading="true"></el-button>
             <template v-else>
-            <div class="card_item" v-for="(item,idx) in cardOption" :style="{background:`${item.b_g}`}" @click="getStatistics">
+            <div class="card_item" v-for="(item,idx) in cardOption" :key="idx" :style="{background:`${item.b_g}`}" @click="getStatistics">
                 <span>{{ item.label }}</span>
                 <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num"></span>
             </div>
@@ -44,7 +44,7 @@
                     <u-table-column prop="bounty_amount" :label="$t('sys_m093')" minWidth="100" />
                     <u-table-column prop="commission_amount" :label="$t('sys_m094')" minWidth="100" />
                     <u-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
-                    <u-table-column prop="user_income_amount" :label="$t('sys_m096')" minWidth="100" />
+                    <u-table-column prop="personal_amount" :label="$t('sys_m096')" minWidth="100" />
                     <u-table-column prop="user_balance_amount" :label="$t('sys_m097')" minWidth="100" />
                     <u-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
@@ -110,11 +110,17 @@ export default {
                     b_g:"#f9edff",
                     t_c:"#b357ff"
                 },
-                {
-                    label:this.$t('sys_m090'),
+                 {
+                    label:this.$t('sys_m093'),
                     num:0,
                     b_g:"#ffebeb",
                     t_c:"#ff0f0"
+                },
+                {
+                    label:this.$t('sys_m089'),
+                    num:0,
+                    b_g:"#fffee6",
+                    t_c:"#f2bb16"
                 },
                 {
                     label:this.$t('sys_m091'),
@@ -133,7 +139,13 @@ export default {
                     num:0,
                     b_g:"#eef6fe",
                     t_c:"#369aff"
-                }
+                },
+                {
+                    label:this.$t('sys_m094'),
+                    num:0,
+                    b_g:"#f9edff",
+                    t_c:"#b357ff"
+                },
             ]
         }
     },
@@ -157,13 +169,17 @@ export default {
                     }else if(k == 3){
                         item.num = vita.today_active_account_num||0;
                     }else if(k == 4){
-                        item.num = vita.data_num||0;
+                        item.num = vita.bounty_amount||0;
                     }else if(k == 5){
-                        item.num = vita.withdraw_user_num||0;
+                        item.num = vita.data_num||0;
                     }else if(k == 6){
-                        item.num = vita.withdraw_amount||0;
+                        item.num = vita.withdraw_user_num||0;
                     }else if(k == 7){
-                        item.num = vita.user_income_amount||0;
+                        item.num = vita.withdraw_amount||0;
+                    }else if(k == 8){
+                        item.num = vita.personal_amount||0;
+                    }else if(k == 9){
+                        item.num = vita.commission_amount||0;
                     }
                 }
                 this.isLoading=false;
@@ -256,7 +272,7 @@ export default {
 		justify-content: flex-start;
     .card_item{
       height: 60px;
-      width: calc((100% - (4 - 1) * 60px) / 4);
+      width: calc((100% - (5 - 1) * 40px) / 5);
       display: flex;
       font-size: 14px;
       cursor: pointer;
@@ -264,8 +280,8 @@ export default {
       border-radius: 10px;
       padding: 0 40px;
       margin: 10px 0;
-      margin-left: 60px;
-			border-radius: 10px;
+      margin-left: 40px;
+	  border-radius: 10px;
       justify-content: space-between;
       .card_num{
         font-weight: 600;
@@ -275,7 +291,7 @@ export default {
         }
       }
     }
-    .card_item:nth-of-type(4n + 1) {
+    .card_item:nth-of-type(5n + 1) {
 			margin-left: 0;
 		}
   }

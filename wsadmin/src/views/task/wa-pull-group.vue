@@ -58,6 +58,7 @@
           </el-table-column>
           <el-table-column prop="members" label="群成员" minWidth="120" />
           <el-table-column prop="member_num" label="群成员数量" minWidth="120" />
+          <el-table-column prop="zq_num" label="炸群次数" minWidth="120" />
           <el-table-column prop="qid" label="群id" minWidth="140" />
           <el-table-column prop="invite_link" label="邀请链接" minWidth="100" />
           <el-table-column prop="reason" label="原因" minWidth="100" />
@@ -274,7 +275,7 @@ export default {
         beforeClose: function (action, instance, done) {
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
-            dowithdrawapproval({ status: 2, ids: type == 1 ? that.pay_id : [val.id] }).then(res => {
+            dowithdrawapproval({ status: 2, ids: type == 1 ? that.checkArry : [val.id] }).then(res => {
               instance.confirmButtonLoading = false;
               if (res.code != 0) return;
               successTips(that)

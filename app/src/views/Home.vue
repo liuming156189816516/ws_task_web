@@ -110,8 +110,8 @@ export default {
     activated(){
         this.syncInitApi();
         this.isIndex=false;
-        this.$store.dispatch('User/getUserHead');
-        this.$store.dispatch('User/plantCarousel');
+        // this.$store.dispatch('User/getUserHead');
+        // this.$store.dispatch('User/plantCarousel');
     },
 	methods: {
         syncInitApi(){

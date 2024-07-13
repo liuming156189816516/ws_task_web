@@ -89,7 +89,7 @@ export default {
             return [this.$t('other_024'),this.$t('other_016'),this.$t('other_017'),this.$t('other_023')];
         },
         profitType(){
-            return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('tail_005'),value:1 },{lable:this.$t('tail_006'),value:2 },{lable:this.$t('tail_007'),value:3 }];
+            return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('tail_005'),value:1 },{lable:this.$t('tail_006'),value:2 }];
         }
     },
     created() {

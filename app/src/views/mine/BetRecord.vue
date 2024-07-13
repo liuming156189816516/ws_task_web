@@ -1,7 +1,7 @@
 <template>
     <div class="earn">
         <div class="custom_head">
-            <page-header :title="$t('tail_001')" :show-icon="true" :bgcolor="false"></page-header>
+            <page-header :title="$t('mine_003')" :show-icon="true" :bgcolor="false"></page-header>
             <div class="dropdown_warp">
                 <div class="promote-header">
                     <div class="tab_nav" @click="pulldownState">
@@ -89,7 +89,7 @@ export default {
             return [this.$t('other_024'),this.$t('other_016'),this.$t('other_017'),this.$t('other_023')];
         },
         profitType(){
-            return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('other_027'),value:8 },{lable:this.$t('other_028'),value:9 }];
+            return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('other_027'),value:8 }];
         }
     },
     created() {

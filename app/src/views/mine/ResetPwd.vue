@@ -26,14 +26,14 @@
                     v-model="nPwd"
                 ></van-field>
                 <van-field
-                    :label="$t('login_009')"
+                    :label="$t('login_007')"
                     class="cell-block"
                     :border="false"
                     autocomplete="off"
                     :right-icon="regEye2 ? 'closed-eye': 'eye-o'"
                     :type="regEye2 ? 'password': 'text'"
                     @click-right-icon="regEye2 = !regEye2"
-                    :placeholder="$t('login_009')"
+                    :placeholder="$t('login_007')"
                     v-model="cPwd"
                 ></van-field>
             </van-cell-group>

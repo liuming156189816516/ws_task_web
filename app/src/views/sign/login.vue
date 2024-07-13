@@ -281,7 +281,7 @@ export default {
 		border-radius: 8px;
 		box-sizing: border-box;
 		color: $font-color-black;
-		background-color: $home-eart-status-value;
+		//background-color: $home-eart-status-value;
 		// background-color: $color-Nobtnbg;
 		p{
 			padding: 10px 0;
@@ -298,7 +298,7 @@ export default {
 		width:0;
 		height: 0;
 		border: 16px solid transparent;
-		border-bottom-color: $home-eart-status-value;
+		border-bottom-color: rgba(100, 100, 111, .1);
 		left: 40px;
 		top: -30px;
 	}

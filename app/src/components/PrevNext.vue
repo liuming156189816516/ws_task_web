@@ -71,7 +71,7 @@ export default {
         color: #fff;
         height: 46px;
         line-height: 46px;
-        width: 146px;
+        width: 160px;
         text-align: center;
         border-radius: 23px;
         background-color: $home-bind-button;

@@ -4,7 +4,7 @@
             <div class="back_icon">
                 <img src="@/assets/images/sign/left.png" @click="$router.go(-1)" />
             </div>
-            <div class="serve_area">{{ $t('login_007') }}</div>
+            <div class="serve_area">{{ $t('login_003') }}</div>
         </div>
         <div class="forget_continer">
             <div class="input_item">
@@ -125,6 +125,7 @@ export default {
         .serve_area {
             display: flex;
             flex-grow: 2;
+            height: 100%;
             font-size: 34px;
             align-items: center;
             justify-content: center;

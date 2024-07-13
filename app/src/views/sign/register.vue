@@ -201,6 +201,7 @@ export default {
 			.serve_area {
 				display: flex;
 				flex-grow: 2;
+				height: 100%;
 				font-size: 34px;
 				align-items: center;
 				justify-content: center;

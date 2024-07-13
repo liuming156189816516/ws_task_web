@@ -46,10 +46,10 @@
         </div>
         <div class="home_content">
             <div class="notice_text">
-                <van-notice-bar speed='20' :left-icon="require('../assets/images/home/earn-icon-a.png')" scrollable :text="moticeText" />
+                <van-notice-bar speed='20' :left-icon="require('../assets/images/home/earn-icon-a.png')" scrollable :text="userInfo.baseNotice" />
             </div>
             <van-swipe class="my_swipe" :autoplay="3000" indicator-color="white">
-                <van-swipe-item v-for="(item,idx) in bannerList" :key="idx" @click="jumpLink(item.link)">
+                <van-swipe-item v-for="(item,idx) in userInfo.baseBanner" :key="idx" @click="jumpLink(item.link)">
                     <template v-if="item.link">
                         <img :src="item.file_url">
                     </template>
@@ -97,8 +97,7 @@ export default {
 	computed: {
 		...mapState({
 			userInfo: state => state.User,
-            bannerList: state => state.User.baseInfo.list,
-            moticeText: state => state.User.baseInfo.bulletin_content,
+            // moticeText: state => state.User.baseInfo.bulletin_content,
 		}),
         taskNameOption(){
             return ["",this.$t('home_009'),this.$t('home_010'),this.$t('home_011')]

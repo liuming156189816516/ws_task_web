@@ -7,7 +7,8 @@ export default {
 		allIncome:"",
 		avatar:""||0,
 		httpManager: {},
-		baseInfo:window.localStorage.getItem('baseInfo')||null,
+		baseBanner:window.localStorage.getItem('baseBanner')||null,
+		baseNotice:window.localStorage.getItem('baseNotice')||null,
 		inviteCode:window.localStorage.getItem('inviteCode')||null,
 		token: window.localStorage.getItem('token') || null,
 		account: window.localStorage.getItem('account') || null,
@@ -108,9 +109,11 @@ export default {
 			state.avatar = data;
 		},
 		store_carousel(state, data) {
-			state.baseInfo = data;
-			window.localStorage.setItem('baseInfo',data);
-		},
+			state.baseBanner = data.list;
+			state.baseNotice = data.bulletin_content;
+			window.localStorage.setItem('baseBanner',data.list);
+			window.localStorage.setItem('baseNotice',data.bulletin_content);
+		}
 	},
 	actions: {
 		userLogin({ commit,dispatch}, params ,callback) {
@@ -120,8 +123,8 @@ export default {
 					if(res.token){
 						commit('store_info', res);
 						resolve(res)
-						dispatch('getUserHead');
-						dispatch('plantCarousel');
+						// dispatch('getUserHead');
+						// dispatch('plantCarousel');
 					}
 					resolve(res)
 				}).catch(error => {

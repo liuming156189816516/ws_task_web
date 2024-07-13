@@ -645,7 +645,7 @@ export default {
                             margin-right: 8px;
                         }
                         .reash_btn{
-                            color: #4e6ef2;
+                            color: $home-copay-title;
                             display: flex;
                             align-items: center;
                             .loading_icon{

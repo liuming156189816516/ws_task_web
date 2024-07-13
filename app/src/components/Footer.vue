@@ -109,7 +109,7 @@ export default {
 			color: #666666;
 			line-height: 1;
 			.active {
-				color: $home-bind-button;
+				color: $color-theme;
 				font-weight: bold;
 			}
 			.unread_news {

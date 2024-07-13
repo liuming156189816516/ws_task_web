@@ -4,12 +4,12 @@
         <div class="dropdown_warp">
                 <div class="promote-header">
                     <div class="tab_nav" @click="pulldownState">
-                        <span v-if = "!stateValue||stateValue=='-1'">{{ $t('tail_002') }}</span> 
+                        <span v-if = "!stateValue||stateValue=='-1'">{{ $t('tail_008') }}</span> 
                         <span v-else>{{ dateState }}</span> 
                         <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showState ? 180 : 0}deg)`}" />
                     </div>
                     <div class="tab_nav" @click="pulldownTime">
-                        <span v-if = "!timeValue || timeValue === 0">{{ $t('tail_003') }}</span> 
+                        <span v-if = "!timeValue || timeValue === 0">{{ $t('tail_004') }}</span> 
                         <span v-else-if = "timeValue == 1">{{ $t('other_016') }}</span> 
                         <span v-else-if= "timeValue == 2">{{ $t('other_017') }}</span> 
                         <span v-else-if= "timeValue == 3">{{ $t('other_018') }}</span>

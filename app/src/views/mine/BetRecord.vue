@@ -10,7 +10,7 @@
                         <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showState ? 180 : 0}deg)`}" />
                     </div>
                     <div class="tab_nav" @click="pulldownTime">
-                        <span v-if = "!timeValue || timeValue === 0">{{ $t('tail_003') }}</span> 
+                        <span v-if = "!timeValue || timeValue === 0">{{ $t('tail_004') }}</span> 
                         <span v-else-if = "timeValue == 1">{{ $t('other_016') }}</span> 
                         <span v-else-if= "timeValue == 2">{{ $t('other_017') }}</span> 
                         <span v-else-if= "timeValue == 3">{{ $t('other_018') }}</span>
@@ -25,8 +25,8 @@
         <div class="record_list" v-if="list&&list.length>0">
             <div class="record_warp record_title">
                 <span>{{$t("tail_004")}}</span>
-                <span>{{$t("tail_005")}}</span>
-                <span>{{$t("tail_006")}}</span>
+                <span>{{$t("tail_002")}}</span>
+                <span>{{$t("pay_016")}}</span>
             </div>
             <div class="record_content">
                 <div class="buy-number" v-for="(item,index) in list" :key="index">

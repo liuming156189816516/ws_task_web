@@ -35,14 +35,14 @@
             <div class="info_main">
                 <div class="line_item">
                     <div style="display: flex;">
-                        <span class="l_label">{{$t('other_005')}}</span>
+                        <span class="l_label">{{$t('other_005')}}：</span>
                         <span>{{userInfo.inviteCode}}</span>
                     </div>
                     <div class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{ $t('other_006') }}</div>
                 </div>
                 <div class="line_item">
                     <div style="display: flex;">
-                        <span class="l_label"> {{$t('spre_006')}}</span>
+                        <span class="l_label"> {{$t('spre_006')}}：</span>
                         <span>{{invit_link}}</span>
                     </div>
                     <div class="copay_text" v-clipboard:copy="invit_link+'?r='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{ $t('other_006') }}</div>
@@ -244,7 +244,9 @@ export default {
                 justify-content: space-between;
                 border-bottom: 1px solid #ececec;
                 .l_label{
-                    width: 160px;
+                    display: flex;
+                    width: 185px;
+                    flex-shrink: 0;
                 }
                 .copay_text{
                     display: flex;

@@ -11,7 +11,7 @@
                     :right-icon="regEye0 ? 'closed-eye': 'eye-o'"
                     :type="regEye0 ? 'password': 'text'"
                     @click-right-icon="regEye0 = !regEye0"
-                    :placeholder="$t('other_001',{value:$t('login_020')})"
+                    :placeholder="$t('login_020')"
                     v-model="oPwd"
                 ></van-field>
                 <van-field
@@ -22,7 +22,7 @@
                     :right-icon="regEye1 ? 'closed-eye': 'eye-o'"
                     :type="regEye1 ? 'password': 'text'"
                     @click-right-icon="regEye1 = !regEye1"
-                    :placeholder="$t('other_001',{value:$t('login_021')})"
+                    :placeholder="$t('login_021')"
                     v-model="nPwd"
                 ></van-field>
                 <van-field
@@ -33,7 +33,7 @@
                     :right-icon="regEye2 ? 'closed-eye': 'eye-o'"
                     :type="regEye2 ? 'password': 'text'"
                     @click-right-icon="regEye2 = !regEye2"
-                    :placeholder="$t('other_001',{value:$t('login_009')})"
+                    :placeholder="$t('login_009')"
                     v-model="cPwd"
                 ></van-field>
             </van-cell-group>

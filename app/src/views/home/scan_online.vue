@@ -35,7 +35,7 @@
                                         </div>
                                     </div> -->
                                     <div>
-                                        <van-radio-group v-model="num_type" :disabled="countTime!=60" shape="square" direction="horizontal" @change="changeCard">
+                                        <van-radio-group v-model="num_type" checked-color="#07c160" :disabled="countTime!=60" shape="square" direction="horizontal" @change="changeCard">
                                             <van-radio name="1">{{ $t('home_017') }}</van-radio>
                                             <van-radio name="2">{{ $t('home_018') }}</van-radio>
                                         </van-radio-group>
@@ -420,6 +420,7 @@ export default {
                 .van-notice-bar{
                     padding: 0 8px;
                     font-size: 15px;
+                    color: $home-notice-tip;
                     background-color: transparent;
                 }
                 img{

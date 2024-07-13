@@ -239,7 +239,7 @@ export default {
                         padding: 8px 26px;
                         font-size: 24px;
                         background-color: #fff;
-                        color: $home-order-title;
+                        color: $color-theme;
                         background: #fff;
                     }
                 }
@@ -302,7 +302,6 @@ export default {
                 .left-pro,
                 .right-pro {
                     flex: 1;
-
                     p {
                         width: 100%;
                         display: flex;
@@ -314,12 +313,12 @@ export default {
                 }
 
                 .left-pro p:nth-child(1), .right-pro p:nth-child(1) {
-                    color: $home-eart-rate-value;
+                    color: $font-color-black;
                     font-size: 42px;
                 }
-                .right-pro p:nth-child(1){
-                    color: $home-month-value;
-                }
+                // .right-pro p:nth-child(1){
+                //     color: $home-month-value;
+                // }
 
                 .left-pro p:nth-child(2),
                 .right-pro p:nth-child(2) {

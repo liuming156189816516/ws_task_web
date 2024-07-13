@@ -24,21 +24,21 @@
             <div class="cover_model">
                 <div class="task-pro">
                     <div class="left-pro">
-                        <p style="color:#f2943d;">{{user_money||0.00}}</p>
+                        <p>{{user_money||0.00}}</p>
                         <p>{{ $t("home_001") }}</p>
                     </div>
                     <div class="custom_set_line">
                         <span></span>
                     </div>
                     <div class="right-pro">
-                        <p style="color:#e8555b;">{{ teamStemp.task_income || 0.00 }}</p>
+                        <p>{{ teamStemp.task_income || 0.00 }}</p>
                         <p>{{ $t("home_002") }}</p>
                     </div>
                     <div class="custom_set_line">
                         <span></span>
                     </div>
                     <div class="right-pro">
-                        <p style="color:#677fdf;">{{ teamStemp.promotion_income || 0.00 }}</p>
+                        <p>{{ teamStemp.promotion_income || 0.00 }}</p>
                         <p>{{ $t("home_003") }}</p>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
         <div class="task_continer">
             <div class="task_main">
                 <div class="model_line">
-                    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px', marginTop:'10px '}">{{ $t("home_004") }}</van-divider>
+                    <van-divider :style="{ color: '#07c160', borderColor: '#07c160', padding: '0 16px', marginTop:'10px '}">{{ $t("home_004") }}</van-divider>
                 </div>
                 <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)" v-show="idx!=1">
                     <div class="left_text">
@@ -224,9 +224,8 @@ export default {
                             font-size: 24px;
                             margin-left:10px;
                             border-radius:30px;
-                            background-color: #fff;
-                            color: $home-order-title;
-                            background: #fff;
+                            color: $color-theme;
+                            background: $font-color-white;
                         }
                     }
                 }
@@ -325,13 +324,14 @@ export default {
                         p{
                             width: 100%;
                             display: flex;
-                            color: #999999;
+                            color: $home-notice-tip;
                             font-weight: bold;
                             justify-content: center;
                             align-items: center;
                         }
                     }
                     .left-pro p:nth-child(1), .right-pro p:nth-child(1){
+                        color: $font-color-black;
                         font-size: 46px;
                     }
                     .left-pro p:nth-child(2), .right-pro p:nth-child(2){
@@ -364,15 +364,13 @@ export default {
                 .van-notice-bar{
                     padding: 0 10px;
                     font-size: 15px;
+                    color: $home-notice-tip;
                     border-radius: 10px;
                     background-color: #fff;
                 }
                 img{
                     width: 30px;
                     height: 30px;
-                }
-                span{
-                    color: $home-bind-button;
                 }
             }
         }

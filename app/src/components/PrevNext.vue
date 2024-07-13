@@ -74,7 +74,7 @@ export default {
         width: 160px;
         text-align: center;
         border-radius: 23px;
-        background-color: $home-bind-button;
+        background-color: $color-theme;
     }
     & > span:nth-child(1){
         margin-right: 16px;

@@ -24,7 +24,7 @@
 						<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="eyeBol"></i>
 					</div>
 					<div class="forget_pwd">
-						<van-checkbox v-model="autologin" shape="square" checked-color="#F52C2C">{{$t('other_002')}}</van-checkbox>
+						<van-checkbox v-model="autologin" shape="square" checked-color="#07c160">{{$t('other_002')}}</van-checkbox>
 						<span class="forget_text" @click="forgetFunc">{{ $t('login_003') }}</span>
 					</div>
 				</div>
@@ -245,7 +245,7 @@ export default {
 	margin-bottom: 20px;
 	justify-content: space-between;
 	.forget_text{
-		color: #323aa2;
+		color: $font-color-black;
 		font-size: 28px;
 	}
 }

@@ -144,7 +144,7 @@ export default {
             height: 100%;
             width: 8px;
             margin-right: 10px;
-            background-color: $home-copay-title;
+            background-color: $color-theme;
             border-radius: 38px;
         }
         .info_main{

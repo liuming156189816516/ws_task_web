@@ -99,7 +99,7 @@ export default {
             changepwd(params).then(res=>{
                 this.isLoading = false;
                 if (res.code) return;
-                this.$toast(this.$t('login_018'));
+                this.$toast(this.$t('other_013'));
                 setTimeout(()=>{this.$router.replace('/login')},1000)
             })
 		}

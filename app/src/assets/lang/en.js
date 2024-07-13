@@ -85,7 +85,6 @@ export default {
     mine_006:"Modify avatar",
     mine_007:"Today's Bonus",
     mine_008:"Yesterday's Bouns",
-    
 
     pay_001:"Withdraw cash",
     pay_002:"Account Informadion",
@@ -122,7 +121,6 @@ export default {
     tail_009:"Reason for rejection",
     tail_010:"Income details",
 
-
     other_001:"Please enter {value}",
     other_002:"Remember Me",
     other_003:"Confirm",
@@ -132,7 +130,7 @@ export default {
     other_007:"Cancel",
     other_008:"Kind reminder",
     other_009: "Are you sure you want to log out?",
-    other_010:"Log out",
+    other_010:"Log Out",
     other_011:"OK",
     other_012:"Submitting...",
     other_013:"Operation completed",
@@ -166,7 +164,7 @@ export default {
     other_041:"Select province",
     other_042:"Avatar selected",
     other_043:"The task is performed from 12 noon to 6 pm. During this period, you can enjoy the benefits by hanging up. Please stay online.",
-    other_044:"Copied successfully",
+    other_044:"Copied Successfully",
     other_045:"hint",
 
     table_001:"Home",

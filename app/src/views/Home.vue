@@ -365,7 +365,7 @@ export default {
                     padding: 0 10px;
                     font-size: 15px;
                     color: $home-notice-tip;
-                    border-radius: 10px;
+                    border-radius: 6px;
                     background-color: #fff;
                 }
                 img{

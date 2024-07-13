@@ -229,8 +229,8 @@ export default {
           this.$refs[formName].validate((valid) => {
             if (valid) {
               this.isLoading=true;
-              let ids = this.taskForm.relpy_type==1?this.checkIdArry:[this.taskForm.relpy_id];
-              groupsendmsg({ids:ids,ad:this.taskForm.relpy_text}).then(res=>{
+              // let ids = this.taskForm.relpy_type==1?this.checkArry:[this.taskForm.relpy_id];
+              groupsendmsg({ids:this.checkArry,ad:this.taskForm.relpy_text}).then(res=>{
                 this.isLoading=false;
                 if (res.code !=0 ) return;
                 successTips(this)

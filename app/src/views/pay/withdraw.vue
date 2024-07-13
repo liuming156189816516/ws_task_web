@@ -2,7 +2,7 @@
 	<div class="withdraw">
 		<div class="panel">
 			<page-header :title="$t('mine_002')" :show-icon="true"></page-header>
-			<van-tabs title-active-color="red" :active="curIndex" @change="onChange">
+			<van-tabs title-active-color="#ff9600" :active="curIndex" @change="onChange">
                 <van-tab :title="item" v-for="(item,idx) in personList" :key="idx"></van-tab>
             </van-tabs>
 			<div class="draw_main">
@@ -15,7 +15,7 @@
 							{{ WithdMoney || 0 }}
 						</div>
 						<div class="btn-withdraw">
-							<van-button type="danger" @click="submitBtn">{{ $t('pay_005') }}</van-button>
+							<van-button type="primary" @click="submitBtn">{{ $t('pay_005') }}</van-button>
 						</div>
 					</div>
 				</div>
@@ -25,7 +25,7 @@
 						<span class="account_text" v-text="curIndex==0?card_no||$t('other_001',{value:$t('pay_013')}):card_no||$t('other_001',{value:$t('pay_014')})"></span>
 					</div>
 					<div class="share_btn" @click="bindCardBtn">
-						<van-button type="danger">{{curIndex==0&&card_no?$t('pay_008'):curIndex==1&&card_no?$t('pay_008'):$t('pay_007')}}</van-button>
+						<van-button type="primary">{{curIndex==0&&card_no?$t('pay_008'):curIndex==1&&card_no?$t('pay_008'):$t('pay_007')}}</van-button>
 					</div>
 				</div>
 			</div>
@@ -227,7 +227,7 @@ export default {
 				padding-top: 30px;
 				.card {
 					height: 447px;
-					background-color: $home-bind-button;
+					background-color: $color-theme;
 					border-radius: 10px;
 					text-align: center;
 					border-radius: 20px;
@@ -278,7 +278,7 @@ export default {
 							font-weight: bold;
 							border-color: #fff;
 							background-color: #fff;
-							color: $home-bind-button;
+							color: $home-copay-title;
 						}
 					}
 				}
@@ -532,5 +532,8 @@ export default {
 			}
 		}
 	}
+}
+::v-deep .van-tabs__line{
+	background-color: $home-copay-title;
 }
 </style>

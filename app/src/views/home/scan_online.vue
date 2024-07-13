@@ -553,11 +553,10 @@ export default {
                     .code-tips{
                         font-size: 24px;
                         font-weight: 400;
-                        color: #939393;
                         margin: 20px 0 10px 0;
                         p{
                             text-align: center;
-                            color: $home-bind-button;
+                            color: $home-copay-title;
                         }
                     }  
                     .qr-code, .err_code{

@@ -29,8 +29,8 @@
 					</div>
 				</div>
 				<div class="login_btn">
-					<van-button type="danger" :loading="isLoading" @click="handleLogin" :loading-text="$t('login_005')">{{$t('login_004')}}</van-button>
-					<van-button @click="goRegister" >{{ $t('login_006') }}</van-button>
+					<van-button type="primary" :loading="isLoading" @click="handleLogin" :loading-text="$t('login_005')">{{$t('login_004')}}</van-button>
+					<van-button plain type="primary" @click="goRegister" >{{ $t('login_006') }}</van-button>
 				</div>
 			</div>
 		</div>
@@ -196,14 +196,14 @@ export default {
 			flex-direction: column;
 			.van-button{
 				width: 100%;
-				border: none;
+				// border: none;
 				border-radius: 6px;
 				margin-bottom: 20px;
 			}
-			.van-button:nth-child(2){
-				color: #323aa2;
-				background: #e9edfe;
-			}
+			// .van-button:nth-child(2){
+			// 	color: #323aa2;
+			// 	background: #e9edfe;
+			// }
 		}
 	}
 }

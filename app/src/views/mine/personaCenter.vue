@@ -44,7 +44,7 @@
             </div> -->
             <van-action-sheet :round="false" v-model="selectBank" :actions="malayBank" @close="hideBankSelect" @select="changeSelect" :cancel-text="$t('other_007')" />
             <div class="button_area">
-                <van-button type="danger" @click="submitBtn" :loading="isLoading">{{ $t('other_015') }}</van-button>
+                <van-button type="primary" @click="submitBtn" :loading="isLoading">{{ $t('other_015') }}</van-button>
             </div>
         </div>
     </div>
@@ -226,7 +226,6 @@ export default {
                 border: none;
                 border-radius: 44px;
                 font-size: 0.32rem;
-                background-color:$home-bind-button;
             }
         }
         .first_title, .bank_account{

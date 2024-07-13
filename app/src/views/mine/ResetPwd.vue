@@ -37,7 +37,7 @@
                     v-model="cPwd"
                 ></van-field>
             </van-cell-group>
-            <van-button type="danger" :loading="isLoading" @click="submitFun">{{ $t('other_003') }}</van-button>
+            <van-button type="primary" :loading="isLoading" @click="submitFun">{{ $t('other_003') }}</van-button>
         </div>
     </div>
 </template>

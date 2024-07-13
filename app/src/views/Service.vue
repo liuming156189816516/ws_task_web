@@ -12,7 +12,7 @@
                             <div class="text_1">{{$t('serv_002')}}</div>
                             <div class="text_2">{{$t('serv_003')}}</div>
                         </div>
-                        <van-button type="danger" style="border-radius: 30px;height: inherit; padding: 10px 20px;">{{$t('serv_005')}}</van-button>
+                        <van-button type="primary" style="border-radius: 30px;height: inherit; padding: 10px 20px;">{{$t('serv_005')}}</van-button>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@ export default {
         border-bottom-right-radius: 80px;
         box-sizing: border-box;
         justify-content: space-between;
-        background: #f45250;
+        background: $color-theme;
         .user_mess {
             width: 100%;
             display: flex;

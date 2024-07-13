@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="login_out">
-            <van-button type="danger" @click="logoutHandle">{{ $t("other_010") }}</van-button>
+            <van-button type="primary" @click="logoutHandle">{{ $t("other_010") }}</van-button>
         </div>
     </div>
 </template>
@@ -162,7 +162,7 @@ export default {
             this.$dialog.confirm({
                 title: this.$t("other_008"),
                 message: this.$t("other_009"),
-                confirmButtonColor: "rgb(255,2,65)",
+                confirmButtonColor: "#ff9600",
                 confirmButtonText: this.$t("other_003"),
                 cancelButtonText: this.$t("other_007")
             }).then(() => {
@@ -201,7 +201,7 @@ export default {
         position: relative;
         box-sizing: border-box;
         justify-content: space-between;
-        background: #f45250;
+        background: $color-theme;
         border-bottom-left-radius: 80px;
         border-bottom-right-radius: 80px;
         .user_mess,

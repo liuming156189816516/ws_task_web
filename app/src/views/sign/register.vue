@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="login_btn">
-				<van-button type="danger" :loading="isLoading" @click="handleRegister()" :loading-text="$t('login_010')">{{$t('login_014') }}</van-button>
+				<van-button type="primary" :loading="isLoading" @click="handleRegister()" :loading-text="$t('login_010')">{{$t('login_014') }}</van-button>
 			</div>
 			<div class="register_btn">
 				{{ $t('login_015') }}<span @click="goLogin">{{ $t('login_016') }}>></span>
@@ -344,7 +344,7 @@ export default {
 		font-weight: bold;
 
 		span {
-			color: $home-bind-button;
+			color: $home-copay-title;
 		}
 	}
 }

@@ -135,7 +135,7 @@ export default {
         border-bottom-right-radius: 80px;
         box-sizing: border-box;
         justify-content: space-between;
-        background: #f45250;
+        background: $color-theme;
 
         .user_mess {
             width: 100%;

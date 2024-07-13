@@ -69,7 +69,7 @@
                         <img class="ws_icon" src="../assets/images/home/ws_icon.png" alt="">
                         <span>{{ taskNameOption[item.type]||item.task_name }}</span>
                     </div>
-                    <van-button :class="item.status==4?'close_task':''" :type="item.status==1?'danger':item.status==2?'primary':item.status==3?'warning':'default'">{{ taskStatusOption[item.status] }}</van-button>
+                    <van-button :class="item.status==4?'close_task':''" :type="item.status==1?'primary':item.status==2?'primary':item.status==3?'warning':'default'">{{ taskStatusOption[item.status] }}</van-button>
                 </div>
             </div>
         </div>
@@ -192,7 +192,7 @@ export default {
             position: relative;
             box-sizing: border-box;
             justify-content: space-between;
-            background: #f45250;
+            background: $color-theme;
             .user_mess, .l_value{
                 display: flex;
                 font-size: 28px;

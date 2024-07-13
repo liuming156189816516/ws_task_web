@@ -39,7 +39,7 @@
                 <i :class="[regEye ? 'icon_biyan': 'icon_zhenyan']" @click="regEye = !regEye"></i>
             </div>
             <div class="login_btn">
-				<van-button type="danger" :loading="isLoading" @click="handleRegister" :loading-text="$t('login_010')">{{ $t('other_003') }}</van-button>
+				<van-button type="primary" :loading="isLoading" @click="handleRegister" :loading-text="$t('login_010')">{{ $t('other_003') }}</van-button>
 			</div>
         </div>
     </div>

@@ -44,8 +44,8 @@
                     <u-table-column prop="bounty_amount" :label="$t('sys_m093')" minWidth="100" />
                     <u-table-column prop="commission_amount" :label="$t('sys_m094')" minWidth="100" />
                     <u-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
+                    <u-table-column prop="user_income_amount" :label="$t('sys_l108')" minWidth="100" />
                     <u-table-column prop="personal_amount" :label="$t('sys_m096')" minWidth="100" />
-                    <u-table-column prop="user_balance_amount" :label="$t('sys_m097')" minWidth="100" />
                     <u-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.statis_time > 0 ? $baseFun.resetTime(scope.row.statis_time * 1000) : "-" }}
@@ -213,7 +213,7 @@ export default {
                 limit: this.limit,
                 account:this.account,
                 start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
-                end_time: sTime ? this.$baseFun.resetTime(sTime[1], 1) : -1
+                end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
             }
             getstatislist(params).then(res => {
                 this.loading = false;

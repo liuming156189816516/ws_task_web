@@ -350,9 +350,6 @@
 .singular_down ul li:last-child{
   border-bottom: 0px solid transparent;
 }
-.van-tab--active{
-  color: #F52C2C !important;
-}
 .van-tabs__line{
   width: 84px;
   background-color: #F52C2C;

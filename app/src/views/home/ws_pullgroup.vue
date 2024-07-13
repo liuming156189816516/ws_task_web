@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="footer_btn" v-if="isShow">
-            <van-button type="danger" :loading="isLoading" :loading-text="$t('other_029')" @click="submitTask">{{$t('home_038')}}</van-button>
+            <van-button type="primary" :loading="isLoading" :loading-text="$t('other_029')" @click="submitTask">{{$t('home_038')}}</van-button>
             <van-button plain type="warning" @click="downAddress">{{$t('home_037')}}</van-button>
         </div>
     </div>

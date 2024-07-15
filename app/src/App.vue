@@ -69,6 +69,7 @@ body,
 	.app_top_continer, .app_continer{
 		width: 100%;
 		height: 100%;
+		// height: calc(100% - 180px);
 		overflow-y: auto;
 		margin-top: 80px;
 	}

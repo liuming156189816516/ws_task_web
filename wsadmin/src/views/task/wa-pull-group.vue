@@ -81,10 +81,18 @@
         </div>
       </div>
     </div>
-    <el-dialog :title="$t('sys_rai100')" :visible.sync="dialogVisible" width="560px" center>
+    <el-dialog :title="$t('sys_q111')" :visible.sync="dialogVisible" :width="taskForm.group_type==1?'450px':'560px'" center>
       <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item :label="$t('sys_rai104')+'：'" prop="relpy_text">
-          <el-input type="textarea" clearable v-model="taskForm.relpy_text" :placeholder="$t('sys_g129')" rows="8" />
+        <el-form label-width="100px">
+          <el-form-item :label="$t('sys_q132')+'：'" prop="group_type">
+            <el-radio-group v-model="taskForm.group_type">
+              <el-radio :label="1">默认</el-radio>
+              <el-radio :label="2">自定义</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-form>
+        <el-form-item v-if="taskForm.group_type==2" :label="$t('sys_rai104')+'：'" prop="relpy_text">
+          <el-input type="textarea" clearable v-model="taskForm.relpy_text" :placeholder="$t('sys_g129')" rows="6" />
         </el-form-item>
         <el-form-item>
           <div class="el-item-right">
@@ -114,6 +122,7 @@ export default {
       taskForm:{
         relpy_type:"",
         relpy_id:"",
+        group_type:1,
         relpy_text:"",
       },
       type: 0,
@@ -134,6 +143,7 @@ export default {
     },
     taskRules() {
       return {
+        group_type:[{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
         relpy_text: [{ required: true, message: this.$t('sys_mat021'), trigger: 'blure' },{ max: 2000, message: '最多可输入2000个字符', trigger: 'blur' }],
       }
     }
@@ -229,8 +239,12 @@ export default {
           this.$refs[formName].validate((valid) => {
             if (valid) {
               this.isLoading=true;
-              // let ids = this.taskForm.relpy_type==1?this.checkArry:[this.taskForm.relpy_id];
-              groupsendmsg({ids:this.checkArry,ad:this.taskForm.relpy_text}).then(res=>{
+              let params = {
+                ids:this.checkArry,
+                ad:this.taskForm.relpy_text
+              }
+              !params.ad? delete params.ad:"";
+              groupsendmsg(params).then(res=>{
                 this.isLoading=false;
                 if (res.code !=0 ) return;
                 successTips(this)

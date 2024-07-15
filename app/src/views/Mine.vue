@@ -286,10 +286,9 @@ export default {
                         font-weight: bold;
                         align-items: center;
                         margin-top: 30px;
-
                         img {
                             height: 64px;
-                            margin-right: 30px;
+                            margin-right: 10px;
                         }
                     }
                 }

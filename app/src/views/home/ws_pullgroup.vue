@@ -208,8 +208,8 @@ export default {
                 .task_set_text{
                     font-size: 24px;
                     margin-top: 20px;
-                    line-height: 1.5;
-                    letter-spacing: 2px;
+                    line-height: 1.4;
+                    text-align: justify;
                 }
             }
             .ws_account_warp{

@@ -164,7 +164,11 @@ export default {
 		},
         jumpLink(path){
             if(!path) return;
-            uniFun.postMessage({data:path});
+            if(this.$Helper.isWeb()){
+                window.open(path,"_blank");
+            }else{
+                uniFun.postMessage({data:path});
+            }
             // uniFun.navigateToWebview({
             //     url:path
             // })
@@ -348,7 +352,7 @@ export default {
             box-sizing: border-box;
             .my_swipe{
                 width: 100%;
-                height: 320px;
+                height: 300px;
                 border-radius: 10px;
                 img{
                     width: 100%;

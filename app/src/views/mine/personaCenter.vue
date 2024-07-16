@@ -50,7 +50,7 @@
     </div>
 </template>
 <script>
-import { getwithdrawcard,dowithdrawcard } from "@/api/pay";
+import { getwithdrawcard,dowithdrawcard,getlistbanks } from "@/api/pay";
 import PageHeader from "@/components/Header";
 export default {
     name: "mine",
@@ -67,23 +67,22 @@ export default {
             countTime:"",
             isLoading:false,
             selectBank:false,
-            bankArray:[],
             malayBank: [
-                { name: ('Bangkok Bank')},
-                { name: ('Maybank')},
-                { name: ('CIMB Bank')},
-                { name: ('Public Bank Berhad')},
-                { name: ('RHB Bank')},
-                { name: ('Hong Leong Bank')},
-                { name: ('AmBank')},
-                { name: ('Alliance Bank Malaysia Berhad')},
-                { name: ('Affin Bank')},
-                { name: ('HSBC')},
-                { name: ('Bank Islam Malaysia')},
-                { name: ('OCBC')},
-                { name: ('AGRO')},
-                { name: ('Bank Rakyat')},
-                { name: ('BSN')}
+                // { name: ('Bangkok Bank')},
+                // { name: ('Maybank')},
+                // { name: ('CIMB Bank')},
+                // { name: ('Public Bank Berhad')},
+                // { name: ('RHB Bank')},
+                // { name: ('Hong Leong Bank')},
+                // { name: ('AmBank')},
+                // { name: ('Alliance Bank Malaysia Berhad')},
+                // { name: ('Affin Bank')},
+                // { name: ('HSBC')},
+                // { name: ('Bank Islam Malaysia')},
+                // { name: ('OCBC')},
+                // { name: ('AGRO')},
+                // { name: ('Bank Rakyat')},
+                // { name: ('BSN')}
             ]
         }
     },
@@ -94,16 +93,28 @@ export default {
     },
     created() {
         this.curIndex = this.$route.query.type;
-        this.initBankInfo();
+        this.syncInitApi();
     },
-    mounted() { },
     methods: {
-        async initBankInfo(){
-        const {bank_name,card_no,payee_name,id} = await getwithdrawcard({type:Number(this.curIndex)});
-            this.bank_id = id||"";
-            this.bankName = bank_name||"";
-            this.collectCard = card_no||"";
-            this.collectName = payee_name||"";
+        syncInitApi(){
+            let fun1 = new Promise((resolve,reject)=>{
+                getlistbanks().then(res =>{
+                    resolve(res)
+                })
+            });
+            let fun2 = new Promise((resolve,reject)=>{
+                getwithdrawcard({type:1}).then(res =>{
+                    resolve(res)
+                })
+            });
+            Promise.all([fun1,fun2]).then( res => {
+                const [bankList,{id,bank_name,card_no,payee_name}] = res;
+                this.malayBank = bankList.banks||[];
+                this.bank_id = id||"";
+                this.bankName = bank_name||"";
+                this.collectCard = card_no||"";
+                this.collectName = payee_name||"";
+            })
         },
         showBank(){
             this.selectBank = true;

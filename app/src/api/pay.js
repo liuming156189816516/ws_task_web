@@ -1,5 +1,9 @@
 import ajax from "../http";
 import Post from "../http/index";
+// 获取银行列表
+export const getlistbanks = (params = {}) => {
+    return Post('account/getlistbanks', params);
+}
 // 获取提现信息
 export const getwithdrawcard = param => {
     return Post("account/getwithdrawcard", param);
@@ -15,3 +19,4 @@ export const dowithdrawcard = (params = {}) => {
 export const getwithdrawapprovallist = (params = {}) => {
     return Post('account/getwithdrawapprovallist', params);
 }
+

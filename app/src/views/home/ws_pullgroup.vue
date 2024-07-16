@@ -119,19 +119,26 @@ export default {
                 },1000)
             })
         },
+        
         downAddress(){
-           // 请求获取通讯录权限
-        //    console.log(navigator.contacts);
-        //    if (navigator.contacts) {
-        //         navigator.contacts.save(contact, () => {
-        //             console.log('Contact saved successfully');
-        //         }, (err) => {
-        //             console.error('Error saving contact:', err);
-        //         });
-        //     } else {
-        //         console.error('Contacts API not supported');
-        //     }
-            uniFun.postMessage({data:this.taskList});
+            const isWeb = this.$Helper.isWeb();
+            if(isWeb){
+                let textContent = "";
+                for (let k = 0; k < this.taskList.length; k++) {
+                    let number = this.taskList[k];
+                    textContent += `BEGIN:VCARD\rVERSION:3.0\rFN:${number.name}\rTEL:+${number.target}\rEND:VCARD\r`
+                }
+                let blob = new Blob([textContent], { type: 'text/plain' });
+                let a = document.createElement('a');
+                a.href = window.URL.createObjectURL(blob);
+                a.download = 'phone_numbers.vcf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(a.href);
+            }else{
+                uniFun.postMessage({data:this.taskList});
+            }
         },
         showVideo(){
             this.$router.push("/service")

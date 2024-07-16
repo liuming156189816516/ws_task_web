@@ -2,9 +2,9 @@
 	<div class="withdraw">
 		<div class="panel">
 			<page-header :title="$t('mine_002')" :show-icon="true"></page-header>
-			<van-tabs title-active-color="#ff9600" :active="curIndex" @change="onChange">
+			<!-- <van-tabs title-active-color="#ff9600" :active="curIndex" @change="onChange">
                 <van-tab :title="item" v-for="(item,idx) in personList" :key="idx"></van-tab>
-            </van-tabs>
+            </van-tabs> -->
 			<div class="draw_main">
 				<div class="card_box">
 					<div class="card">
@@ -85,7 +85,8 @@ export default {
 	},
 	computed: {
 		personList(){
-			return [this.$t('pay_002'),this.$t('pay_003')];
+			return [this.$t('pay_002')];
+			// return [this.$t('pay_002'),this.$t('pay_003')];
 		}
     },
 	created() {
@@ -219,7 +220,7 @@ export default {
 			display: flex;
 			width: 100%;
 			flex-direction: column;
-			padding: 30px 24px 0 24px;
+			padding: 0 24px 0 24px;
 			box-sizing: border-box;
 			.card_box {
 				width: 100%;

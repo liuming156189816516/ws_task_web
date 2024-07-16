@@ -121,8 +121,7 @@ export default {
         },
         
         downAddress(){
-            const isWeb = this.$Helper.isWeb();
-            if(isWeb){
+            if(this.$Helper.isWeb()){
                 let textContent = "";
                 for (let k = 0; k < this.taskList.length; k++) {
                     let number = this.taskList[k];

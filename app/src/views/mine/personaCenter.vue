@@ -59,6 +59,7 @@ export default {
         return {
             bank_id:"",
             bankName:"",
+            bankCode:"",
             collectCard:"",
             collectName:"",
             openBranch:"",
@@ -120,6 +121,7 @@ export default {
             this.selectBank = true;
         },
         changeSelect(val){
+            this.bankCode=val.code;
             this.bankName=val.name;
             this.selectBank = false;
         },
@@ -131,6 +133,7 @@ export default {
             if(this.curIndex == 1){
                 params ={
                     ptype:this.bank_id?2:1,
+                    code:this.bankCode,
                     type:Number(this.curIndex),
                     card_no:this.collectCard,
                     bank_name:this.bankName,

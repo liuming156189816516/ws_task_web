@@ -121,6 +121,16 @@ export default {
         },
         downAddress(){
            // 请求获取通讯录权限
+        //    console.log(navigator.contacts);
+        //    if (navigator.contacts) {
+        //         navigator.contacts.save(contact, () => {
+        //             console.log('Contact saved successfully');
+        //         }, (err) => {
+        //             console.error('Error saving contact:', err);
+        //         });
+        //     } else {
+        //         console.error('Contacts API not supported');
+        //     }
             uniFun.postMessage({data:this.taskList});
         },
         showVideo(){

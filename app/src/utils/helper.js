@@ -114,6 +114,11 @@ const Helper = {
 	isIos() {
 		return this.openInWebview() && this.judgeClient() == "ios"
 	},
+	
+	isSimulator() {
+		const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		return /iPhone|iPad|iPod|Android/i.test(userAgent);
+  	},
 	//是否是web端
 	isWeb() {
 		return !this.openInWebview()

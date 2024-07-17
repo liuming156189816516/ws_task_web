@@ -42,7 +42,7 @@ export default {
 		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
-		this.showNavBar = this.$Helper.isWeb();
+		// this.showNavBar = this.$Helper.isWeb();
 		// console.log(this.$Helper.isWeb());
 	},
 };

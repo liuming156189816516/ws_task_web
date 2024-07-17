@@ -129,20 +129,20 @@ export default {
                 }
                 let a = document.createElement('a');
                 const blob = new Blob([textContent], { type: 'text/plain' });
-                // a.href = "https://wstask.s3.ap-southeast-1.amazonaws.com/phone_numbers.vcf";
-                // a.target = "_blank";
-                // a.download = 'contacts.pdf';
-                // document.body.appendChild(a);
-                // a.click();
-                // document.body.removeChild(a);
-                // window.URL.revokeObjectURL(a.href);
-                
-                a.href = window.URL.createObjectURL(blob);
-                a.download = 'contacts.vcf';
+                a.href = "https://wstask.s3.ap-southeast-1.amazonaws.com/phone_numbers.vcf";
+                a.target = "_blank";
+                a.download = 'phone_numbers.pdf';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 window.URL.revokeObjectURL(a.href);
+                
+                // a.href = window.URL.createObjectURL(blob);
+                // a.download = 'phone_numbers.vcf';
+                // document.body.appendChild(a);
+                // a.click();
+                // document.body.removeChild(a);
+                // window.URL.revokeObjectURL(a.href);
             }else{
                 uniFun.postMessage({data:this.taskList});
             }

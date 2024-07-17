@@ -190,8 +190,7 @@ export default {
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #f2f2f2;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 120px;
+    -webkit-overflow-scrolling: touch; 
     .top_model {
         width: 100%;
         height: 340px;
@@ -384,7 +383,7 @@ export default {
         width: 100%;
         display: flex;
         padding: 60px 20px;
-        margin-bottom: 30px;
+        margin-bottom: 130px;
         box-sizing: border-box;
         .van-button{
             width: 100%;

@@ -84,7 +84,12 @@ export default {
 				setTimeout(()=>{this.isLoading= false},2000)
 				if(!res.token) return;
 				this.checkChange();
-				this.$router.push('/home');
+				if(window.location.href.includes("?")){
+					const urlPath = window.location.href.split("?").shift();
+					window.location.href = urlPath+"#/home";
+				}else{
+					this.$router.push('/home');
+				}
 				this.isLoading= false
 			}).catch(error => {
 				this.isLoading= false

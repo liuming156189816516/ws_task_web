@@ -42,6 +42,10 @@ export default {
 		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
+		if (navigator && navigator.userAgent) {
+			this.showNavBar = true;
+			console.log('在浏览器中打开的页面');
+		}
 		// this.showNavBar = this.$Helper.isWeb();
 		// console.log(this.$Helper.isWeb());
 	},

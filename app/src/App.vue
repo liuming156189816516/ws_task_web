@@ -43,8 +43,10 @@ export default {
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.isWeb();
-		alert(this.showNavBar);
-		console.log(this.showNavBar);
+		// console.log(this.$Helper.isMobileDevice());
+		const isApk = document.getElementById("#viewApk");
+		console.log(isApk);
+		alert(isApk)
 		// console.log(this.$Helper.isWeb());
 	},
 };

@@ -129,6 +129,11 @@ const Helper = {
 		const urlPath = window.location.href.split("?").shift();
 		return urlPath+"#/home";
 	},
+	isMobileDevice() {
+		console.log(navigator);
+		const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		return /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+	},
 	/*判断客户端*/
 	judgeClient() {
 		let client = '';

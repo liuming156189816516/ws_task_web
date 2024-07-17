@@ -1,6 +1,6 @@
 <template>
 	<div id="app" :class="[hasTabBar ? 'set-padding-top' : '', isPc?'isPc': '']">
-		<div v-if="!showNavBar" class="mobile_head_top">{{ showNavBar }}</div>
+		<div v-if="!showNavBar" class="mobile_head_top"></div>
 		<div :class="!showNavBar?'app_top_continer':'app_continer'">
 			<keep-alive :include="keepAliveNames">
 				<router-view></router-view>

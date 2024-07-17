@@ -43,7 +43,7 @@ export default {
 		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
-		this.device = navigator.userAgent.search("Html5Plus");
+		this.device = navigator.userAgent.search("Html5Plus")||"88888";
 		console.log(navigator.userAgent.search("Html5Plus"));
 		// if (navigator && navigator.userAgent) {
 		// 	this.showNavBar = true;

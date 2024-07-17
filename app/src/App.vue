@@ -1,6 +1,6 @@
 <template>
 	<div id="app" :class="[hasTabBar ? 'set-padding-top' : '', isPc?'isPc': '']">
-		<div v-if="!showNavBar" class="mobile_head_top"></div>
+		<div v-if="!showNavBar" class="mobile_head_top">{{ device }}</div>
 		<div :class="!showNavBar?'app_top_continer':'app_continer'">
 			<keep-alive :include="keepAliveNames">
 				<router-view></router-view>
@@ -25,6 +25,7 @@ export default {
 	data() {
 		return {
 			title: '',
+			device:"",
 			hasTabBar: false,
 			showNavBar: false,
 			transitionName: '',
@@ -42,6 +43,8 @@ export default {
 		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
+		this.device = navigator.userAgent.search("Html5Plus");
+		console.log(navigator.userAgent.search("Html5Plus"));
 		// if (navigator && navigator.userAgent) {
 		// 	this.showNavBar = true;
 		// 	console.log('在浏览器中打开的页面');

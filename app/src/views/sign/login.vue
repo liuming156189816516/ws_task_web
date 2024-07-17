@@ -85,8 +85,7 @@ export default {
 				if(!res.token) return;
 				this.checkChange();
 				if(window.location.href.includes("?")){
-					const urlPath = window.location.href.split("?").shift();
-					window.location.href = urlPath+"#/home";
+					window.location.replace(this.$Helper.restAddress())
 				}else{
 					this.$router.push('/home');
 				}

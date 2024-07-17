@@ -141,7 +141,11 @@ export default {
 				this.isLoading = false;
 				this.getVerfyBtn();
 				if(!res.token) return;
-				this.$router.replace('/home');
+				if(window.location.href.includes("?")){
+					window.location.replace(this.$Helper.restAddress())
+				}else{
+					this.$router.push('/home');
+				}
 				// try {
 				// 	if (this.$Helper.isAndroid()) {
 				// 		JSInterface.onLoginin();

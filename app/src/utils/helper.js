@@ -124,6 +124,11 @@ const Helper = {
 		return !this.openInWebview()
 		// return !isWebView.check(navigator.userAgent);
 	},
+	//重置地址栏
+	restAddress() {
+		const urlPath = window.location.href.split("?").shift();
+		return urlPath+"#/home";
+	},
 	/*判断客户端*/
 	judgeClient() {
 		let client = '';

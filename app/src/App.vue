@@ -1,6 +1,6 @@
 <template>
 	<div id="app" :class="[hasTabBar ? 'set-padding-top' : '', isPc?'isPc': '']">
-		<div v-if="!showNavBar" class="mobile_head_top"></div>
+		<div v-if="!showNavBar" class="mobile_head_top">{{ showNavBar }}</div>
 		<div :class="!showNavBar?'app_top_continer':'app_continer'">
 			<keep-alive :include="keepAliveNames">
 				<router-view></router-view>
@@ -43,7 +43,8 @@ export default {
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.isWeb();
-		// console.log(this.showNavBar);
+		alert(this.showNavBar);
+		console.log(this.showNavBar);
 		// console.log(this.$Helper.isWeb());
 	},
 };

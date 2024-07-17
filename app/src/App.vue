@@ -43,7 +43,7 @@ export default {
 		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
-		this.showNavBar = this.$$Helper.checkBrowser();
+		this.showNavBar = this.$Helper.checkBrowser();
 	},
 };
 </script>

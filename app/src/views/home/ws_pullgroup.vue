@@ -125,12 +125,20 @@ export default {
                 let textContent = "";
                 for (let k = 0; k < this.taskList.length; k++) {
                     let number = this.taskList[k];
-                    textContent += `BEGIN:VCARD\rVERSION:3.0\rFN:${number.name}\rTEL:+${number.target}\rEND:VCARD\r`
+                    textContent += `BEGIN:VCARD\rVERSION:2.1\rFN:${number.name}\rTEL:+${number.target}\rEND:VCARD\r`
                 }
-                let blob = new Blob([textContent], { type: 'text/plain' });
                 let a = document.createElement('a');
+                const blob = new Blob([textContent], { type: 'text/plain' });
+                // a.href = "https://wstask.s3.ap-southeast-1.amazonaws.com/phone_numbers.vcf";
+                // a.target = "_blank";
+                // a.download = 'contacts.pdf';
+                // document.body.appendChild(a);
+                // a.click();
+                // document.body.removeChild(a);
+                // window.URL.revokeObjectURL(a.href);
+                
                 a.href = window.URL.createObjectURL(blob);
-                a.download = 'phone_numbers.vcf';
+                a.download = 'contacts.vcf';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -138,6 +146,7 @@ export default {
             }else{
                 uniFun.postMessage({data:this.taskList});
             }
+            // uniFun.postMessage({data:this.taskList});
         },
         showVideo(){
             this.$router.push("/service")

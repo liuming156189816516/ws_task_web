@@ -383,7 +383,7 @@ export default {
         width: 100%;
         display: flex;
         padding: 60px 20px;
-        margin-bottom: 130px;
+        margin-bottom: 180px;
         box-sizing: border-box;
         .van-button{
             width: 100%;

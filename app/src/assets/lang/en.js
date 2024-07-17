@@ -94,7 +94,7 @@ export default {
     pay_006:"Bank account number",
     pay_007:"Add",
     pay_008:"Modify",
-    pay_009:"Withdrawal instructions",
+    pay_009:"Withdrawal Instructions",
     pay_010: "Minimum withdrawal amount {value} yuan",
     pay_011: "Withdraw money before 21:00 on the same day and receive it before 24:00 on the same day",
     pay_012: "This platform cooperates with a third party to safely withdraw money. Please do not transfer it back after receiving the money.",
@@ -108,7 +108,7 @@ export default {
     pay_020:"Bank Number",
     pay_021:"Account Bank",
     pay_022:"Username",
-    pay_023:"Bind withdrawal information",
+    pay_023:"Bind Withdrawal Information",
 
     tail_001:"Income details",
     tail_002:"Type",

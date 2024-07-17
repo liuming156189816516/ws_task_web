@@ -48,15 +48,15 @@
 		</div>
 		<van-popup :close-on-click-overlay="false" :overlay="true" v-model="showModel">
 			<div class="dialog_content">
-				<div class="header_title">{{ $t('pay_001') }}</div>
-				<div class="header_tips">{{ $t('pay_015',{value:WithdMoney}) }}</div>
+				<!-- <div class="header_title">{{ $t('pay_001') }}</div>
+				<div class="header_tips">{{ $t('pay_015',{value:WithdMoney}) }}</div> -->
 				<van-cell-group inset :border="false">
 					<van-field v-model="withdraw_num" type="number" clearable :placeholder="$t('other_001',{value:$t('pay_016')})" />
 				</van-cell-group>
 				<div class="custom_dialog__footer">
 					<van-button class="custom_dialog_cancel" @click="showModel=false">{{ $t('other_007') }}</van-button>
 					<span class="model_line"></span>
-					<van-button class="custom_dialog_confirm" :loading="isLoading" :loading-text="$t('other_012')" @click="withdrawBtn">{{ $t('other_011') }}</van-button>
+					<van-button class="custom_dialog_confirm" :loading="isLoading" :loading-text="$t('other_012')" @click="withdrawBtn">{{ $t('other_003') }}</van-button>
 				</div>
 			</div>
 		</van-popup>
@@ -279,7 +279,7 @@ export default {
 							font-weight: bold;
 							border-color: #fff;
 							background-color: #fff;
-							color: $home-copay-title;
+							color: $color-theme;
 						}
 					}
 				}
@@ -484,6 +484,7 @@ export default {
 	.dialog_content{
 		width: 100%;
 		display: flex;
+		padding-top: 30px;
 		flex-direction: column;
 		.header_title, .custom_dialog__footer{
 			display: flex;
@@ -529,7 +530,7 @@ export default {
 				border-left: 1px solid #f2f3f5;
 			}
 			.custom_dialog_confirm{
-				color: #1989fa;
+				color: $home-copay-title;
 			}
 		}
 	}

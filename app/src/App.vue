@@ -43,6 +43,16 @@ export default {
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.isWeb();
+		if (typeof window !== 'undefined') {
+			// 在浏览器中运行的代码
+			alert("浏览器");
+			console.log("浏览器");
+		} else {
+			alert("非浏览器");
+			console.log("非浏览器");
+			// 不在浏览器中运行的代码
+		}
+
 		// console.log(this.$Helper.isWeb());
 	},
 };

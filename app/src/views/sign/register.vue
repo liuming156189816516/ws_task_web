@@ -106,8 +106,10 @@ export default {
 			} else if(!zh_reg.test(this.username)){
 				return this.$toast(this.$t('other_001',{value:this.$t('login_018')}));
 			}
-			if (!this.pwd || !regex.test(this.pwd)) {
+			if (!this.pwd) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_002')}));
+			}else if(!regex.test(this.pwd)){
+				return this.$toast(this.$t('other_001',{value:this.$t('login_023')}));
 			}
 			if (this.sur_pwd !== this.pwd) {
 				return this.$toast(this.$t('login_019'));

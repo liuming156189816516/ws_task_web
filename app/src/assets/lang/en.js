@@ -21,6 +21,7 @@ export default {
     login_020:"Old Password",
     login_021:"New Password",
     login_022:"Modification successful, please log in",
+    login_023:"At least six digit password",
 
     home_001:"Balance",
     home_002:"Today's Task",

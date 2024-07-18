@@ -12,7 +12,8 @@
 							<span>{{ $t('pay_004') }}</span>
 						</div>
 						<div class="amount van-ellipsis">
-							{{ WithdMoney || 0 }}
+							<img src="@/assets/images/gold_icon.png">
+							{{ WithdMoney || 0 }}≈{{ income_naira || 0 }} <span>{{ $t('pay_024') }}</span>
 						</div>
 						<div class="btn-withdraw">
 							<van-button type="primary" @click="submitBtn">{{ $t('pay_005') }}</van-button>
@@ -34,16 +35,25 @@
 			<div class="cash_adverice">
 				<div class="title-tip">{{ $t('pay_009') }}</div>
 				<div class="title_item">
-					<van-tag type="warning" /> {{$t('pay_010',{value:100})}}
+					<van-tag type="warning" /> {{$t('pay_010',{value:800})}}
 				</div>
-				<div class="title_item" style="color:#F52C2C;">
+				<!-- <div class="title_item" style="color:#F52C2C;">
 					<van-tag type="warning" />
 					{{ $t('pay_011') }}
+				</div> -->
+				<div class="title_item">
+					<van-tag type="warning" />
+					{{ $t('pay_025',{value:5}) }}
 				</div>
 				<div class="title_item">
 					<van-tag type="warning" />
 					{{ $t('pay_012') }}
 				</div>
+				<div class="title_item">
+					<van-tag type="warning" />
+					{{ $t('pay_026') }}
+				</div>
+
 			</div>
 		</div>
 		<van-popup :close-on-click-overlay="false" :overlay="true" v-model="showModel">
@@ -76,6 +86,7 @@ export default {
 			payee_name:"",
 			curIndex:"0",
 			WithdMoney:0,
+			income_naira:0,
 			userInfo:"",
 			isLoading:false,
 			withdraw_num:null,
@@ -100,8 +111,9 @@ export default {
 	},
 	methods: {
 		async getUserIncome(){
-			let { income } = await getaccountincome();
+			let { income,income_naira } = await getaccountincome();
 			this.WithdMoney = income||0;
+			this.income_naira = income_naira||0;
 		},
 		async getBankInfo(){
 			let { card_no,bank_name,payee_name } = await getwithdrawcard({type:Number(this.curIndex)+1});
@@ -128,7 +140,7 @@ export default {
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_013')}));
 			} else if(payIdx==2&&!this.card_no){
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}));
-			} else if(this.WithdMoney <= 0){
+			} else if(this.income_naira < 800){
 				return this.$toast(this.$t('pay_017'));
 			}
 			this.showModel=true;
@@ -248,12 +260,25 @@ export default {
 						}
 					}
 					.amount {
-						font-family: 'Arial MT';
+						display: flex;
 						color: #fff;
-						font-weight: 500;
-						text-align: center;
 						margin-top: 40px;
 						font-size: 75px;
+						font-weight: 500;
+						align-items: center;
+						justify-content: center;
+						font-family: 'Arial MT';
+						img{
+							height: 56px;
+							margin-right: 10px;
+						}
+						span{
+							display: flex;
+							align-items: end;
+							font-size: 24px;
+							margin-left: 10px;
+							margin-top: 25px;
+						}
 					}
 					.desc {
 						display: flex;

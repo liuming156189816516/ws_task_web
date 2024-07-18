@@ -203,11 +203,12 @@ export default {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    position: relative;
     background-color: #f2f2f2;
     -webkit-overflow-scrolling: touch;
-    // .dropdown_warp{
-    //     margin-top: 90px;
-    // }
+    .dropdown_warp{
+        position: relative;
+    }
     .custom_head{
         width:100%;
         float: left;
@@ -251,7 +252,7 @@ export default {
 .van-overlay{
   height: calc(100vh - 66px);
   position: absolute;
-  top: 135px;
+  top: 90px;
 }
 .screen_down{
     width: 100%;

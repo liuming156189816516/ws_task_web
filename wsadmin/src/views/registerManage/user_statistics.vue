@@ -117,7 +117,7 @@ export default {
                     t_c:"#ff0f0"
                 },
                 {
-                    label:this.$t('sys_m089'),
+                    label:this.$t('sys_m090'),
                     num:0,
                     b_g:"#fffee6",
                     t_c:"#f2bb16"

@@ -23,9 +23,8 @@
                     <span>{{$t('home_031')}}：{{ teamStemp.ser_no }}</span>
                     <span>{{$t('home_032')}}：{{statusOption[teamStemp.status]}}</span>
                 </div>
-                <div class="task_set_text">
-                    {{$t('home_033')}}
-                </div>
+                <div v-if="this.$Helper.checkBrowser()" class="task_set_text" v-html="$t('home_033',{value:$t('home_042')})"></div>
+                <div v-else class="task_set_text" v-html="$t('home_033',{value:''})"></div>
             </div>
             <div class="ws_account_warp">
                 <div class="ws_account_time">

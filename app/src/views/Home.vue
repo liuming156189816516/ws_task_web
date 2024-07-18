@@ -1,5 +1,5 @@
 <template>
-    <div class="home_warp" @click="isIndex=false">
+    <div class="home_warp" @click="isIndex=false" ref="warpBox" @scroll="handleScrolStop">
         <div class="top_model">
             <div class="user_mess">
                 <div class="user_head">
@@ -73,6 +73,9 @@
                 </div>
             </div>
         </div>
+        <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
+            <img class="ws_icon" src="../assets/images/home/dingbu.png" alt="">
+        </div>
     </div>
 </template>
 <script>
@@ -84,14 +87,14 @@ export default {
 	components: {},
 	data() {
 		return {
-            code:"456666",
+            isScroll:false,
             isIndex:false,
             user_money:0,
             teamStemp:"",
             taskOption:[],
             langIdx:Cookies.get("language")||'en',
             taskType:['','scanOnline','pullPownTask','pullgroupTask'],
-            langOptions: [{lang:"en",name:"en-US"},{lang:"zh",name:"zh_CN"}]
+            langOptions:[{lang:"en",name:"en-US"},{lang:"zh",name:"zh_CN"}]
 		}
 	},
 	computed: {
@@ -108,7 +111,8 @@ export default {
 	},
     activated(){
         this.syncInitApi();
-        this.isIndex=false;
+        this.isIndex = false;
+        this.isScroll = false;
         this.$store.dispatch('User/getUserHead');
         this.$store.dispatch('User/plantCarousel');
     },
@@ -173,6 +177,19 @@ export default {
             //     url:path
             // })
             // this.$Helper.toOutLink(path);
+        },
+        handleScrolStop(){
+            let scrollTop = this.$refs.warpBox;
+            if(scrollTop.scrollTop >= 100){
+                this.isScroll = true;
+            }else{
+                this.isScroll = false;
+            }
+        },
+        scrollTopBtn(){
+            this.isScroll = false;
+            let scrollTop = this.$refs.warpBox;
+            scrollTop.scrollTo({top: 0,behavior:"smooth"});
         }
 	}
 };
@@ -183,9 +200,35 @@ export default {
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
+        position: relative;
         padding-bottom: 200px;
         background-color: #f2f2f2;
         -webkit-overflow-scrolling: touch; 
+        .top_icon{
+            width: 70px;
+            height: 70px;
+            position: fixed;
+            right:100px;
+            bottom: 160px;
+            display: flex;
+            z-index: 99999;
+            flex-shrink: 0;
+            opacity: 0;
+            align-items: center;
+            border-radius: 50%;
+            transition: all .5s;
+            justify-content: center;
+            background: $font-color-white;
+            img{
+                height: 40px;
+            }
+        }
+        .icon_active{
+            opacity: 1;
+        }
+        .icon_hide{
+            opacity: 0;
+        }
         .top_model{
             width: 100%;
             height: 340px;

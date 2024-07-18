@@ -1,5 +1,5 @@
 <template>
-    <div class="home_warp">
+    <div class="home_warp" ref="warpBox">
         <div class="top_model">
             <div class="user_mess">
                 <div class="user_head" @click="updateHead">
@@ -138,6 +138,10 @@ export default {
             }
             this.$set(this.menuOption,k,item)
         }
+    },
+    monted(){
+        let scrollTop = this.$refs.warpBox;
+        scrollTop.scrollTo({top: 0,behavior: "instant" });
     },
     methods: {
         syncInitApi(){

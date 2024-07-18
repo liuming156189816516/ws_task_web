@@ -46,6 +46,9 @@ export const setappuserlanguage = (param) => {
 export const getbonus = (param) => {
     return Post("account/getbonus", param)
 }
+export const getdownloadurl = (param) => {
+    return Post("account/getdownloadurl", param)
+}
 
 
 

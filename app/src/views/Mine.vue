@@ -45,7 +45,7 @@
         </div>
         <div class="task_continer">
             <div class="task_main">
-                <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click="handleJump(item.path)" v-show="item.isShow">
+                <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click="handleJump(item.path,idx)" v-show="item.isShow">
                     <div class="left_text">
                         <img class="ws_icon" :src="item.icon" alt="">
                         <span>{{ item.name }}</span>
@@ -63,12 +63,13 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import { getaccountincome,getbonus } from '@/api/home'
+import { getaccountincome,getbonus,getdownloadurl } from '@/api/home'
 export default {
     name: 'Mine',
     components: {},
     data() {
         return {
+            apk_url:"",
             user_money:0,
             allIncome:"",
             taskOption: [
@@ -124,22 +125,15 @@ export default {
                     name:this.$t("mine_009"),
                     path:"/down_apk",
                     icon:require("../assets/images/mine/anzhuo.png")
-                },
+                }
             ]
         }
     },
     created() {
         this.syncInitApi();
         this.$store.dispatch('User/getUserHead');
-        for (let k = 0; k < this.menuOption.length; k++) {
-            let item = this.menuOption[k];
-            if(item.path=='/down_apk'&&!this.$Helper.checkBrowser()){
-                item.isShow=false;
-            }
-            this.$set(this.menuOption,k,item)
-        }
     },
-    monted(){
+    mounted(){
         let scrollTop = this.$refs.warpBox;
         scrollTop.scrollTo({top: 0,behavior: "instant" });
     },
@@ -155,10 +149,23 @@ export default {
                     resolve(res)
                 })
             });
-            Promise.all([fun1,fun2]).then( res => {
-                const [{income},data2] = res;
+            let fun3 = new Promise((resolve,reject)=>{
+                getdownloadurl().then(res =>{
+                    resolve(res)
+                })
+            });
+            Promise.all([fun1,fun2,fun3]).then( res => {
+                const [{income},data2,data3] = res;
                 this.user_money = income;
                 this.allIncome = data2;
+                for (let k = 0; k < this.menuOption.length; k++) {
+                    let item = this.menuOption[k];
+                    if(k == 4 && this.$Helper.checkBrowser()){
+                        item.isShow=true;
+                        item.path= data3.url;
+                    }
+                    this.$set(this.menuOption,k,item)
+                }
             })
         },
         copySuccess() {
@@ -173,12 +180,12 @@ export default {
                 this.$router.push("/pullPownTask")
             }
         },
-        handleJump(path){
-            if (path != '/down_apk') {
+        handleJump(path,idx){
+            if (idx !== 4) {
                 this.$router.push(path);
             }else{
                 let link = document.createElement('a');
-                link.href = '@/assets/video/cashcow.apk';
+                link.href = path;
                 link.setAttribute('download', 'cashcow');
                 link.click();
             }

@@ -36,8 +36,8 @@
           element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }"
           @selection-change="selectAllChange" @row-click="rowSelectChange">
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="app_account" label="用户账号" minWidth="120" />
-          <el-table-column prop="account" label="拉群账号" width="120" />
+          <el-table-column prop="app_account" label="用户账号" minWidth="100" />
+          <el-table-column prop="account" label="拉群账号" width="140" />
           <el-table-column prop="ad_account" label="营销账号" width="120" />
           <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
             <template slot="header">
@@ -52,15 +52,39 @@
               </el-dropdown>
             </template>
             <template slot-scope="scope">
-              <el-tag size="small" :type="scope.row.status == 2 ? 'success' : scope.row.status == 3 ? 'danger' : ''"> {{
-            statusOptions[scope.row.status] }}</el-tag>
+              <el-tag size="small" :type="scope.row.status == 2 ? 'success' : scope.row.status == 3 ? 'danger' : ''"> {{ statusOptions[scope.row.status] }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="members" label="群成员" minWidth="120" />
+          <el-table-column prop="members" label="群成员" minWidth="120" show-overflow-tooltip>
+            <!-- <template slot-scope="scope">
+              <el-tooltip class="item" effect="dark" :content="scope.row.members" placement="top">
+                <div style="width: max-content;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.members||"-" }}</div>
+              </el-tooltip>
+            </template> -->
+          </el-table-column>
+          <!-- <el-table-column prop="members" label="群成员" minWidth="120">
+            <template slot-scope="scope">
+              <el-popover width="250" placement="top-start" trigger="hover" :content="scope.row.members">
+                <el-input v-model="scope.row.members"></el-input>
+              </el-popover>
+            </template>
+          </el-table-column> -->
           <el-table-column prop="member_num" label="群成员数量" minWidth="120" />
           <el-table-column prop="zq_num" label="炸群次数" minWidth="120" />
-          <el-table-column prop="qid" label="群id" minWidth="140" />
-          <el-table-column prop="invite_link" label="邀请链接" minWidth="100" />
+          <el-table-column prop="qid" label="群id" minWidth="140">
+            <template slot-scope="scope">
+              <el-tooltip class="item" effect="dark" :content="scope.row.qid" placement="top">
+                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.qid||"-" }}</div>
+              </el-tooltip>
+            </template>
+          </el-table-column>
+          <el-table-column prop="invite_link" label="邀请链接" minWidth="120">
+            <template slot-scope="scope">
+              <el-tooltip class="item" effect="dark" :content="scope.row.invite_link" placement="top">
+                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.invite_link||"-" }}</div>
+              </el-tooltip>
+            </template>
+          </el-table-column>
           <el-table-column prop="reason" label="原因" minWidth="100" />
           <el-table-column prop="itime" :label="$t('sys_c008')" minWidth="120">
             <template slot-scope="scope">

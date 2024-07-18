@@ -427,6 +427,9 @@ aside {
 .el-pagination{
   text-align: left;
 }
+.el-tooltip__popper {
+  max-width: 450px !important;
+} 
 // .el-button--text {
 //     display: none !important;
 // }

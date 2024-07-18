@@ -213,7 +213,7 @@ export default {
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
-    padding-bottom: 200px;
+    padding-bottom: 240px;
     background-color: #f2f2f2;
     -webkit-overflow-scrolling: touch; 
     .top_model {

@@ -160,9 +160,9 @@ export default {
                 this.allIncome = data2;
                 for (let k = 0; k < this.menuOption.length; k++) {
                     let item = this.menuOption[k];
-                    if(k == 4 && this.$Helper.checkBrowser()){
-                        item.isShow=true;
-                        item.path= data3.url;
+                    if(k == 4 && !this.$Helper.checkBrowser()){
+                        item.isShow = false;
+                        item.path = data3.url;
                     }
                     this.$set(this.menuOption,k,item)
                 }

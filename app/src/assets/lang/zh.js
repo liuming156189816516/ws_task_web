@@ -66,6 +66,7 @@ export default {
     home_040:"删除在线WhatsApp号会导致没有收益，确定要删除吗?",
     home_041:"你确定要删除该WhatsApp号吗?",
     home_042:"<span style='color:#ff013d;'>为了顺利完成任务，推荐使用chrome浏览器</span>。",
+    home_043:"下载chrome",
 
     spre_001:"推广",
     spre_002:"累计佣金",

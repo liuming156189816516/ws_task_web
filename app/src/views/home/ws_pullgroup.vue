@@ -25,7 +25,7 @@
                 </div>
                 <div v-if="this.$Helper.checkBrowser()" class="task_set_text">
                     <span v-html="$t('home_033',{value:$t('home_042')})"></span>
-                    <span class="down_text" @click="downChrome">下载chrome</span>
+                    <span class="down_text" @click="downChrome">{{$t('home_043')}}</span>
                     <!-- {{ $t('home_033',{value:$t('home_042')}) }} -->
                 </div>
                 <div v-else class="task_set_text" v-html="$t('home_033',{value:''})"></div>

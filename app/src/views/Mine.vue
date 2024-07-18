@@ -121,7 +121,7 @@ export default {
                     icon:require("../assets/images/mine/mine-update-pwd.png")
                 },
                 {
-                    isShow:true,
+                    isShow:false,
                     name:this.$t("mine_009"),
                     path:"/down_apk",
                     icon:require("../assets/images/mine/anzhuo.png")
@@ -162,6 +162,10 @@ export default {
                     let item = this.menuOption[k];
                     if(k == 4 && !this.$Helper.checkBrowser()){
                         item.isShow = false;
+                        item.path = data3.url;
+                    }
+                    if(k == 4 && this.$Helper.checkBrowser()){
+                        item.isShow = true;
                         item.path = data3.url;
                     }
                     this.$set(this.menuOption,k,item)

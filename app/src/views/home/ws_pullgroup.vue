@@ -127,25 +127,24 @@ export default {
                     let number = this.taskList[k];
                     textContent += `BEGIN:VCARD\rVERSION:2.1\rFN:${number.name}\rTEL:+${number.target}\rEND:VCARD\r`
                 }
-                // let a = document.createElement('a');
-                // const blob = new Blob([textContent], { type: 'text/plain' });
-                // a.href = window.URL.createObjectURL(blob);
-                // a.download = 'phone_numbers.vcf';
-                // document.body.appendChild(a);
-                // a.click();
-                // document.body.removeChild(a);
-                // window.URL.revokeObjectURL(a.href);
-
-                let tempLink = document.createElement("a");
-                tempLink.style.display = "none";
-                // tempLink.href = filePath;
+                let a = document.createElement('a');
                 const blob = new Blob([textContent], { type: 'text/plain' });
-                tempLink.href = window.URL.createObjectURL(blob);
-                tempLink.setAttribute("download",'phone_numbers.vcf');
-                tempLink.setAttribute("target", "_blank");
-                document.body.appendChild(tempLink);
-                tempLink.click();
-                document.body.removeChild(tempLink);
+                a.href = window.URL.createObjectURL(blob);
+                a.download = 'phone_numbers.vcf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(a.href);
+
+                // let tempLink = document.createElement("a");
+                // tempLink.style.display = "none";
+                // const blob = new Blob([textContent], { type: 'text/plain' });
+                // tempLink.href = window.URL.createObjectURL(blob);
+                // tempLink.setAttribute("download",'phone_numbers.vcf');
+                // tempLink.setAttribute("target", "_blank");
+                // document.body.appendChild(tempLink);
+                // tempLink.click();
+                // document.body.removeChild(tempLink);
 
             }else{
                 uniFun.postMessage({data:this.taskList});

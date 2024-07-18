@@ -112,9 +112,9 @@ export default {
 			if (this.sur_pwd !== this.pwd) {
 				return this.$toast(this.$t('login_019'));
 			}
-			if (!this.user_code) {
-				return this.$toast(this.$t('other_001',{value:this.$t('login_012')}));
-			}
+			// if (!this.user_code) {
+			// 	return this.$toast(this.$t('other_001',{value:this.$t('login_012')}));
+			// }
 			if (!this.safe_code) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_008')}));
 			}

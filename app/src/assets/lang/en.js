@@ -64,7 +64,7 @@ export default {
     home_040:"Deleting your online WhatsApp account will result in no income. Are you sure you want to delete it?",
     home_041:"Are you sure you want to delete this WhatsApp account??",
     home_042:"<span style='color:#ff013d;'>In order to successfully complete the task, it is recommended to use the Chrome browser</span>. ",
-    home_043:"download chrome",
+    home_043:"Download Chrome",
 
     spre_001:"Promotion",
     spre_002:"Accumulated Promo",

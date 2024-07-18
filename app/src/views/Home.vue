@@ -208,7 +208,7 @@ export default {
             width: 70px;
             height: 70px;
             position: fixed;
-            right:80px;
+            right:60px;
             bottom: 160px;
             display: flex;
             z-index: 99999;

@@ -78,6 +78,8 @@ export default {
             teamStemp:'',
             timestamp:0,
             group_link:'',
+            target_url:'',
+            chrome_url:'',
             isLoading:false,
             taskTime: 30 * 60 * 60 * 1000,
             taskList:[]
@@ -102,6 +104,8 @@ export default {
            let groupData =  await getcreatetaskinfo({task_info_id:this.task_id});
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
+           this.target_url = groupData.target_url;
+           this.chrome_url = groupData.chrome_url;
            this.task_id = groupData.task_info_id;
            this.group_link = groupData.invite_link;
            this.isShow=groupData.status==1||groupData.status==2?true:false;
@@ -125,19 +129,23 @@ export default {
         
         downAddress(){
             if(this.$Helper.checkBrowser()){
-                let textContent = "";
-                for (let k = 0; k < this.taskList.length; k++) {
-                    let number = this.taskList[k];
-                    textContent += `BEGIN:VCARD\rVERSION:2.1\rFN:${number.name}\rTEL:+${number.target}\rEND:VCARD\r`
-                }
-                let a = document.createElement('a');
-                const blob = new Blob([textContent], { type: 'text/plain' });
-                a.href = window.URL.createObjectURL(blob);
-                a.download = 'phone_numbers.vcf';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(a.href);
+                const link = document.createElement('a');
+                link.href = this.target_url;
+                link.setAttribute('download', 'phone_numbers');
+                link.click();
+                // let textContent = "";
+                // for (let k = 0; k < this.taskList.length; k++) {
+                //     let number = this.taskList[k];
+                //     textContent += `BEGIN:VCARD\rVERSION:2.1\rFN:${number.name}\rTEL:+${number.target}\rEND:VCARD\r`
+                // }
+                // let a = document.createElement('a');
+                // const blob = new Blob([textContent], { type: 'text/plain' });
+                // a.href = window.URL.createObjectURL(blob);
+                // a.download = 'phone_numbers.vcf';
+                // document.body.appendChild(a);
+                // a.click();
+                // document.body.removeChild(a);
+                // window.URL.revokeObjectURL(a.href);
 
                 // let tempLink = document.createElement("a");
                 // tempLink.style.display = "none";
@@ -148,7 +156,6 @@ export default {
                 // document.body.appendChild(tempLink);
                 // tempLink.click();
                 // document.body.removeChild(tempLink);
-
             }else{
                 uniFun.postMessage({data:this.taskList});
             }
@@ -158,12 +165,10 @@ export default {
             this.$router.push("/service")
         },
         downChrome(){
-            // const link = document.createElement('a');
-            // link.href = '@/assets/video/Chrome.apk';
-            // link.setAttribute('download', 'Chrome');
-            // link.click();
-            // document.body.removeChild(link);
-            // window.URL.revokeObjectURL(link.href);
+            const link = document.createElement('a');
+            link.href = this.chrome_url;
+            link.setAttribute('download', 'Chrome');
+            link.click();
         }
 	}
 };

@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "lint": "eslint --ext .js,.vue src",
-    "build:prod": "vue-cli-service build",
     "build:test": "vue-cli-service build --mode test",
     "build:test1": "vue-cli-service build --mode test1",
+    "build:prod": "vue-cli-service build --mode production",
     "preview": "node build/index.js --preview",
     "new": "plop",
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",

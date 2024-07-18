@@ -60,12 +60,13 @@ export default {
 		handleLogin() {
 			const regex = /^[0-9A-Za-z]{6,20}$/;
 			const reg = new RegExp(/^1[3456789]\d{9}$/);
-			if (!this.username /*|| !reg.test(this.username)*/) {
+			if (!this.username) {
+				/*|| !reg.test(this.username)*/
 				// return this.$toast(this.$t('login_007'));
-				return this.$toast('手机号不能为空！')
+				return this.$toast(this.$t('other_001',{value:this.$t('login_001')}))
 			}
 			if (!this.password) {
-				return this.$toast(this.$t('login_008'));
+				return this.$toast(this.$t('other_001',{value:this.$t('login_002')}));
 			}
 			let params = {
 				account: this.username,

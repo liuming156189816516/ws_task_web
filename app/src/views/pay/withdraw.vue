@@ -58,11 +58,13 @@
 		</div>
 		<van-popup :close-on-click-overlay="false" :overlay="true" v-model="showModel">
 			<div class="dialog_content">
+				<div class="header_title">{{ $t('pay_027') }}</div>
 				<!-- <div class="header_title">{{ $t('pay_001') }}</div>
 				<div class="header_tips">{{ $t('pay_015',{value:WithdMoney}) }}</div> -->
-				<van-cell-group inset :border="false">
-					<van-field v-model="withdraw_num" type="number" clearable :placeholder="$t('other_001',{value:$t('pay_016')})" />
+				<van-cell-group inset :border="false" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+					<van-field v-model="withdraw_num" type="number" clearable placeholder="0" />
 				</van-cell-group>
+				<div class="auto_computed">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num/10}}{{ $t('pay_024') }}</div>
 				<div class="custom_dialog__footer">
 					<van-button class="custom_dialog_cancel" @click="showModel=false">{{ $t('other_007') }}</van-button>
 					<span class="model_line"></span>
@@ -509,7 +511,7 @@ export default {
 	.dialog_content{
 		width: 100%;
 		display: flex;
-		padding-top: 30px;
+		padding-top: 20px;
 		flex-direction: column;
 		.header_title, .custom_dialog__footer{
 			display: flex;
@@ -517,7 +519,15 @@ export default {
 		}
 		.header_title{
 			font-size: 24px;
-			padding-top: 10px;
+			margin-bottom: 20px;
+		}
+		.auto_computed{
+			width: 100%; 
+			display: flex;
+			font-size: 16px; 
+			padding: 10px 0;
+			align-items: center;
+			justify-content: center;
 		}
 		.header_tips{
 			display: flex;
@@ -530,14 +540,17 @@ export default {
 		.van-cell-group{
 			display: flex;
 			width: 100%;
-			margin-bottom: 30px;
 			justify-content: center;
 			box-sizing: border-box;
 			.van-cell{
 				width: 180px;
 				border-radius: 4px;
 				padding: 6px 10px;
+				text-align: center;
 				background-color: #f2f3f5;
+				::v-deep .van-field__control{
+					text-align: center;
+				}
 			}
 		}
 		.custom_dialog__footer{

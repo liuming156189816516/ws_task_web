@@ -114,8 +114,9 @@ export default {
     pay_023:"Bind Withdrawal Information",
     pay_024:"naira",
     pay_025:"Maximum withdrawals per day: {value} times",
-    pay_026:"10 integral = 1 Naira",
+    pay_026:"10 Integral = 1 Naira",
     // pay_024:"naira",
+    pay_027:"Integral",
 
     tail_001:"Income details",
     tail_002:"Type",

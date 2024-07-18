@@ -89,6 +89,7 @@ export default {
     mine_006:"修改头像",
     mine_007:"今日收益",
     mine_008:"昨日收益",
+    mine_009:"下载App",
 
     pay_001:"提现",
     pay_002:"提现到银行卡",

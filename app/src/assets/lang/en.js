@@ -87,6 +87,7 @@ export default {
     mine_006:"Modify avatar",
     mine_007:"Today's Bonus",
     mine_008:"Yesterday's Bouns",
+    mine_009:"Download App",
 
     pay_001:"Withdraw cash",
     pay_002:"Account Informadion",

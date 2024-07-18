@@ -45,7 +45,7 @@
         </div>
         <div class="task_continer">
             <div class="task_main">
-                <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click="handleJump(item.path)">
+                <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click="handleJump(item.path)" v-show="item.isShow">
                     <div class="left_text">
                         <img class="ws_icon" :src="item.icon" alt="">
                         <span>{{ item.name }}</span>
@@ -91,16 +91,19 @@ export default {
         menuOption() {
             return [
                 {
+                    isShow:true,
                     name:this.$t("mine_002"),
                     path:"/withdraw",
                     icon:require("../assets/images/mine/mine-put-record.png")
                 },
                 {
+                    isShow:true,
                     name:this.$t("mine_003"),
                     path:"/betrecord",
                     icon:require("../assets/images/mine/me_icon_txjl.png")
                 },
                 {
+                    isShow:true,
                     name:this.$t("mine_004"),
                     path:"/putrecord",
                     icon:require("../assets/images/mine/mine-put-record2.png")
@@ -111,16 +114,30 @@ export default {
                 //     icon:require("../assets/images/mine/mine-message-center.png")
                 // },
                 {
+                    isShow:true,
                     name:this.$t("mine_005"),
                     path:"/ResetPwd",
                     icon:require("../assets/images/mine/mine-update-pwd.png")
-                }
+                },
+                {
+                    isShow:true,
+                    name:this.$t("mine_009"),
+                    path:"/down_apk",
+                    icon:require("../assets/images/mine/anzhuo.png")
+                },
             ]
         }
     },
     created() {
         this.syncInitApi();
         this.$store.dispatch('User/getUserHead');
+        for (let k = 0; k < this.menuOption.length; k++) {
+            let item = this.menuOption[k];
+            if(item.path=='/down_apk'&&!this.$Helper.checkBrowser()){
+                item.isShow=false;
+            }
+            this.$set(this.menuOption,k,item)
+        }
     },
     methods: {
         syncInitApi(){
@@ -153,7 +170,14 @@ export default {
             }
         },
         handleJump(path){
-            this.$router.push(path);
+            if (path != '/down_apk') {
+                this.$router.push(path);
+            }else{
+                let link = document.createElement('a');
+                link.href = '@/assets/video/cashcow.apk';
+                link.setAttribute('download', 'cashcow');
+                link.click();
+            }
         },
         updateHead(){
             this.$router.push("/myHead");

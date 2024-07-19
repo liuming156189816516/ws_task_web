@@ -88,6 +88,7 @@ export default {
 			payee_name:"",
 			curIndex:"0",
 			WithdMoney:0,
+			bank_code:"",
 			income_naira:0,
 			userInfo:"",
 			isLoading:false,
@@ -118,7 +119,8 @@ export default {
 			this.income_naira = income_naira||0;
 		},
 		async getBankInfo(){
-			let { card_no,bank_name,payee_name } = await getwithdrawcard({type:Number(this.curIndex)+1});
+			let { card_no,bank_name,payee_name,code } = await getwithdrawcard({type:Number(this.curIndex)+1});
+			this.bank_code = code||"";
 			this.card_no = card_no||"";
 			this.bank_name = bank_name||"";
 			this.payee_name = payee_name||"";
@@ -156,6 +158,7 @@ export default {
 			}
 			let params = {
 				type:Number(this.curIndex)+1,
+				code:this.bank_code,
 				card_no:this.card_no,
 				bank_name:this.bank_name,
 				payee_name:this.payee_name,

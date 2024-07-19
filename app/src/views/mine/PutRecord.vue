@@ -45,8 +45,7 @@
                     <span>{{ formatTime(item.itime) }}</span>
                     <span :style="getStatusColor(item.status)">{{getStatusText(item.status)}}</span>
                     <span class="record_cash" v-if="item.status!=3">{{ item.amount }}</span>
-                    <span class="reject_tips record_cash" v-else>{{ item.amount }} <img src="../../assets/images/mine/reject_img.png" alt=""> </span>
-                    <!-- @click="showReject(item)" -->
+                    <span class="reject_tips record_cash" v-else @click="showReject(item)">{{ item.amount }} <img src="../../assets/images/mine/reject_img.png" alt=""> </span>
                 </div>
             </div>
         </div>

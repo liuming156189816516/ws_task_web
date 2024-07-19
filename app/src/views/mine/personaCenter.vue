@@ -14,9 +14,9 @@
                         <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${selectBank == true ? 90 : 0}deg)`}" />
                     </div>
                 </div>
-                <div class="user_info">
+                <div class="user_info" v-if="collectName">
                     <span class="lable_text">{{ $t('pay_022') }}</span>
-                    <van-field v-model="collectName" :placeholder="$t('other_001',{value:$t('pay_022')})" :border="false" />
+                    <van-field v-model="collectName" disabled :placeholder="$t('other_001',{value:$t('pay_022')})" :border="false" />
                 </div>
                 <!-- <div class="user_info">
                     <span class="lable_text">收款姓名</span>

@@ -95,7 +95,7 @@ export default {
     pay_003:"USDT Account",
     pay_004: "Withdrawable Amount",
     pay_005:"Withdraw Now",
-    pay_006:"Bank Card",
+    pay_006:"Bank Account",
     pay_007:"Add",
     pay_008:"Modify",
     pay_009:"Withdrawal Instructions",

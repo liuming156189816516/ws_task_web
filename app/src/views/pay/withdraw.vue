@@ -22,7 +22,7 @@
 				</div>
 				<div class="share_box">
 					<div class="share_link">
-						<span class="account_name" v-text="curIndex==0?$t('pay_013')+'：':$t('pay_014')+'：'"></span>
+						<span class="account_name" v-text="curIndex==0?$t('pay_006')+'：':$t('pay_014')+'：'"></span>
 						<span class="account_text" v-text="curIndex==0?card_no||$t('other_001',{value:$t('pay_013')}):card_no||$t('other_001',{value:$t('pay_014')})"></span>
 					</div>
 					<div class="share_btn" @click="bindCardBtn">

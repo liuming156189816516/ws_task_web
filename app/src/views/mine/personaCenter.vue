@@ -109,9 +109,10 @@ export default {
                 })
             });
             Promise.all([fun1,fun2]).then( res => {
-                const [bankList,{id,bank_name,card_no,payee_name}] = res;
+                const [bankList,{id,bank_name,card_no,payee_name,code}] = res;
                 this.malayBank = bankList.banks||[];
                 this.bank_id = id||"";
+                this.bankCode = code||"";
                 this.bankName = bank_name||"";
                 this.collectCard = card_no||"";
                 this.collectName = payee_name||"";

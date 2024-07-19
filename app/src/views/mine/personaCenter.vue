@@ -5,7 +5,7 @@
             <template v-if="curIndex==1">
                 <div class="user_info">
                     <span class="lable_text">{{ $t('pay_006') }}</span>
-                    <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_013')})" :border="false" />
+                    <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_006')})" :border="false" />
                 </div>
                 <div class="user_info bank_account" @click="showBank">
                     <span class="lable_text">{{ $t('pay_021') }}</span>
@@ -149,7 +149,7 @@ export default {
             }
             this.bank_id?params.id=this.bank_id:"";
             if(this.curIndex==1&&!this.collectCard){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_020')}))
+                return this.$toast(this.$t('other_001',{value:this.$t('pay_006')}))
             }else if(this.curIndex==2&&!this.collectCard){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
             }else if(this.curIndex==1&&!this.bankName){

@@ -129,6 +129,7 @@ export default {
     tail_008:"Status",
     tail_009:"Reason for rejection",
     tail_010:"Income details",
+    tail_011:"Failed",
 
     other_001:"Please enter {value}",
     other_002:"Remember Me",

@@ -13,7 +13,7 @@
                 <el-form-item>
 					<el-button size="small" icon="el-icon-search" type="primary" @click="getPayOrderList(1)">{{ $t('sys_c002') }}</el-button>
                     <el-button size="small" icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
-                    <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="delCardBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_p010')}) }}</el-button>
+                    <!-- <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="delCardBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_p010')}) }}</el-button> -->
                 </el-form-item>
 			</el-form>
 		</div>
@@ -43,6 +43,11 @@
 						</template>
                     </el-table-column>
                     <el-table-column prop="amount" :label="$t('sys_p006')" minWidth="100" align="center" />
+                    <el-table-column prop="txid" :label="$t('sys_m080')" minWidth="100" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.txid||"-" }}
+						</template>
+                    </el-table-column>
                     <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
@@ -55,10 +60,10 @@
                             </el-dropdown>
                         </template>
                         <template slot-scope="scope">
-                            <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':''"> {{ payOptions[scope.row.status] }}</el-tag>
+                            <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':'warning'"> {{ payOptions[scope.row.status] }}</el-tag>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="itime" :label="$t('sys_p015')" width="160" align="center">
+                    <el-table-column prop="itime" :label="$t('sys_p017')+$t('sys_c071')" width="160" align="center">
                         <template slot-scope="scope">
                             {{scope.row.remark||"-" }}
                         </template>
@@ -73,15 +78,15 @@
                             {{scope.row.ptime>0?$baseFun.resetTime(scope.row.ptime*1000):"~" }}
                         </template>
                     </el-table-column>
-                    <el-table-column width="120" label="操作" align="center" fixed="right">
+                    <!-- <el-table-column width="120" label="操作" align="center" fixed="right">
 						<template slot-scope="scope">
-                            <!-- <el-button type="danger" :disabled="scope.row.status==2||scope.row.status==3" size="mini" plain @click="regectBtn(scope.row)">驳回</el-button> -->
+                            <el-button type="danger" :disabled="scope.row.status==2||scope.row.status==3" size="mini" plain @click="regectBtn(scope.row)">驳回</el-button>
 							<el-button :type="scope.row.status==2?'info':'warning'" :disabled="scope.row.status==2||scope.row.status==3||pay_id.length>0" size="mini" plain @click="delCardBtn(scope.row,2)">
                                 {{ scope.row.status==2?$t('sys_p008'):$t('sys_p010') }}
                             </el-button>
-							<!-- <el-button type="danger" size="mini" plain @click="delCardBtn(scope.row,2)">删除</el-button> -->
+							<el-button type="danger" size="mini" plain @click="delCardBtn(scope.row,2)">删除</el-button>
 						</template>
-					</el-table-column>
+					</el-table-column> -->
 				</el-table>
                 <div class="layui_page">
                     <el-pagination background @size-change="limitChange" @current-change="offestChange" :page-sizes="pageOption"
@@ -148,7 +153,7 @@ export default {
             return ["",this.$t('sys_c026'),this.$t('sys_c025')]
         },
         payOptions(){
-            return [this.$t('sys_l053'),this.$t('sys_p007'),this.$t('sys_p008'),this.$t('sys_p015')]
+            return [this.$t('sys_l053'),this.$t('sys_p007'),this.$t('sys_p008'),this.$t('sys_p017')]
         },
         drawOption(){
             return ["",this.$t('sys_p013'),this.$t('sys_p014')]

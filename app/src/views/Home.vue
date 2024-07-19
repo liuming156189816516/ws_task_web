@@ -109,12 +109,14 @@ export default {
             return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
         }
 	},
+    created(){
+        this.$store.dispatch('User/getUserHead');
+        this.$store.dispatch('User/plantCarousel');
+    },
     activated(){
         this.syncInitApi();
         this.isIndex = false;
         this.isScroll = false;
-        this.$store.dispatch('User/getUserHead');
-        this.$store.dispatch('User/plantCarousel');
     },
 	methods: {
         syncInitApi(){

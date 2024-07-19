@@ -131,6 +131,7 @@ export default {
     tail_008:"状态",
     tail_009:"驳回原因",
     tail_010:"收益明细",
+    tail_011:"失败",
 
     other_001:"请输入{value}",
     other_002:"下次自动登录",

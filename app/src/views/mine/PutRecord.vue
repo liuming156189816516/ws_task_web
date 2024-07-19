@@ -45,7 +45,8 @@
                     <span>{{ formatTime(item.itime) }}</span>
                     <span :style="getStatusColor(item.status)">{{getStatusText(item.status)}}</span>
                     <span class="record_cash" v-if="item.status!=3">{{ item.amount }}</span>
-                    <span class="reject_tips record_cash" v-else @click="showReject(item)">{{ item.amount }} <img src="../../assets/images/mine/reject_img.png" alt=""> </span>
+                    <span class="reject_tips record_cash" v-else>{{ item.amount }} <img src="../../assets/images/mine/reject_img.png" alt=""> </span>
+                    <!-- @click="showReject(item)" -->
                 </div>
             </div>
         </div>
@@ -168,7 +169,7 @@ export default {
                 case 2:
                     return this.$t("tail_006");
                 case 3:
-                    return this.$t("tail_007");
+                    return this.$t("tail_011");
                 default:
                     return "";
             }

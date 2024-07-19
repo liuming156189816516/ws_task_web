@@ -95,7 +95,7 @@ export default {
     pay_003:"USDT Account",
     pay_004: "Withdrawable Amount",
     pay_005:"Withdraw Now",
-    pay_006:"Bank account number",
+    pay_006:"Bank Card",
     pay_007:"Add",
     pay_008:"Modify",
     pay_009:"Withdrawal Instructions",
@@ -175,6 +175,8 @@ export default {
     other_043:"The task is performed from 12 noon to 6 pm. During this period, you can enjoy the benefits by hanging up. Please stay online.",
     other_044:"Copied Successfully",
     other_045:"hint",
+    other_046:"Login information expired",
+    other_047:"Network abnormality, please try again later.",
 
     table_001:"Home",
     table_002:"Promotion",

@@ -1,5 +1,5 @@
 import axios from "./axios";
-let networkUrl = window.location.href;
+import { i18n } from '@/assets/lang'
 export const cloudPath = () => {
     let seeeionToken = "";
     if(JSON.parse(sessionStorage.getItem("cloudStorage")) != undefined && JSON.parse(sessionStorage.getItem("cloudStorage")) != null){
@@ -34,7 +34,7 @@ const rupRequestUrl = () => {
 }
 rupRequestUrl()
 
-const  ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
+const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     let config = {
         sendToken: true,
         ...conf
@@ -61,12 +61,12 @@ const  ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     } else {
         baseUrl =`${url}${func}`
     }
-    axios.request({url: baseUrl,data: data,method: 'POST',timeout: 8000}).then(res => {
+    axios.request({url: baseUrl,data: data,method:'POST',timeout:func=="account/dowithdrawcard"?30000:8000}).then(res => {
         let data = res.data;
         if (data.code == 0) {
             resolve(data.data)
         } else if (data.code == 401) {
-            vant.Toast("登录信息过期");
+            vant.Toast(i18n.t('other_046'));
             sessionStorage.clear();
             localStorage.clear();
             setTimeout(() => {
@@ -83,7 +83,7 @@ const  ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
         if (!err.message) return;
         data.httpRequestCount++;
         if (data.httpRequestCount >= urls.length||data.httpRequestCount > 5) {
-            vant.Toast.fail("网络异常，请稍后重试。");
+            vant.Toast.fail(i18n.t('other_047'));
             // setTimeout(() => {
             //     vant.Toast.clear();
             // }, 1500);

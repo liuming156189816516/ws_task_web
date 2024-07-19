@@ -4,7 +4,7 @@
         <div class="person_content">
             <template v-if="curIndex==1">
                 <div class="user_info">
-                    <span class="lable_text">{{ $t('pay_013') }}</span>
+                    <span class="lable_text">{{ $t('pay_006') }}</span>
                     <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_013')})" :border="false" />
                 </div>
                 <div class="user_info bank_account" @click="showBank">

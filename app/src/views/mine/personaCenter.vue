@@ -154,9 +154,10 @@ export default {
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
             }else if(this.curIndex==1&&!this.bankName){
                 return this.$toast(this.$t('other_014',{value:this.$t('pay_021')}))
-            }else if(this.curIndex==1&&!this.collectName){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_020')}))
             }
+            // else if(this.curIndex==1&&!this.collectName){
+            //     return this.$toast(this.$t('other_001',{value:this.$t('pay_020')}))
+            // }
             this.isLoading = true;
             const res = await dowithdrawcard(params);
             this.isLoading = false;

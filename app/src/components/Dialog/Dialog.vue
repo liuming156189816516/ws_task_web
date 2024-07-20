@@ -4,42 +4,6 @@
         <div class="notic_content">{{content}}</div>
     </van-dialog>
 </template>
-<style lang="scss">
-    .notic_cover{
-        .van-dialog__header{
-            padding-top: 15px !important;
-        }
-        .van-dialog__footer{
-            width: 100%;
-        }
-    }
-</style>
-<style lang="scss" scoped>
-.notic_cover{
-    width: 100%;
-    float: left;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: row;
-    .close_btn{
-        font-size: 38px;
-        position: absolute;
-        top: 31px;
-        right: 31px;
-    }
-    .notic_content{
-        width: 100%;
-        float: left;
-        // max-height: 280px;
-        font-size: 28px;
-        padding: 0 30px 10px 30px;
-        text-align: justify;
-        box-sizing: border-box;
-        padding-bottom: 20px;
-    }
-}
-</style>
 <script>
 export default {
     props: {
@@ -88,3 +52,39 @@ export default {
     }
 };
 </script>
+<style lang="scss">
+    .notic_cover{
+        .van-dialog__header{
+            padding-top: 15px !important;
+        }
+        .van-dialog__footer{
+            width: 100%;
+        }
+    }
+</style>
+<style lang="scss" scoped>
+.notic_cover{
+    width: 100%;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    .close_btn{
+        font-size: 38px;
+        position: absolute;
+        top: 31px;
+        right: 31px;
+    }
+    .notic_content{
+        width: 100%;
+        float: left;
+        // max-height: 280px;
+        font-size: 28px;
+        padding: 0 30px 10px 30px;
+        text-align: justify;
+        box-sizing: border-box;
+        padding-bottom: 20px;
+    }
+}
+</style>

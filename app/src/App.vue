@@ -45,6 +45,9 @@ export default {
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.checkBrowser();
 	},
+	mounted(){
+		// this.$popDialog({content: "hhhhhhh",title:"广告",type:""})
+	}
 };
 </script>
 <style lang="scss">

@@ -176,7 +176,7 @@ export default {
 				return this.$toast(this.$t('pay_018'));
 			}else if(this.withdraw_num % 1 != 0){
 				return this.$toast(this.$t('pay_019'));
-			}else if(this.withdraw_num/100 < this.withdraw_cash){
+			}else if(this.withdraw_num/10 < this.withdraw_cash){
 				return this.$toast(this.$t('pay_028',{value:this.withdraw_cash}));
 			}
 			let params = {

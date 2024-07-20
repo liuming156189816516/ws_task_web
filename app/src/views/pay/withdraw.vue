@@ -154,9 +154,10 @@ export default {
 				return this.$toast(this.$t('pay_018'));
 			}else if(this.withdraw_num % 1 != 0){
 				return this.$toast(this.$t('pay_019'));
-			}else if(this.withdraw_num/100 < 800){
-				return this.$toast(this.$t('pay_028',{value:800}));
 			}
+			// else if(this.withdraw_num/100 < 800){
+			// 	return this.$toast(this.$t('pay_028',{value:800}));
+			// }
 			let params = {
 				type:Number(this.curIndex)+1,
 				code:this.bank_code,

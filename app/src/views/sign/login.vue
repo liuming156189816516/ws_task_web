@@ -80,6 +80,8 @@ export default {
 				loadingType: 'spinner',
 			});
 			this.isLoading= true;
+			// let pp = this.$Helper.aesEncrptMsg(JSON.stringify(params));
+			// console.log(this.$Helper.aesDecrptHost(pp));
 			this.$store.dispatch('User/userLogin', params).then(res => {
 				Toast.clear();
 				setTimeout(()=>{this.isLoading= false},2000)

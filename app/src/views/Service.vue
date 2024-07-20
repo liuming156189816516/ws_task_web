@@ -22,7 +22,7 @@
                 <span class="left_icon"></span>{{$t('serv_004')}}
             </div>
             <div class="info_main">
-                <video controls :src="help_url" type="video/mp4" width="100%" height="320px" />
+                <video controls :src="help_url" type="video/mp4"/>
             </div>
         </div>
     </div>
@@ -152,6 +152,7 @@ export default {
             display: flex;
             video {
                 width: 100%;
+                max-height: 100%;
             }
         }
     }

@@ -81,7 +81,7 @@
 <script>
 import { mapState } from 'vuex';
 import uniFun from "@/utils/uni-webview-js"
-import { getaccountincome,gettodayincome,gettaskliststatus,getalltasklist,setappuserlanguage } from'@/api/home'
+import { getaccountincome,gettodayincome,gettaskliststatus,getalltasklist,setappuserlanguage,gethelp } from'@/api/home'
 export default {
 	name: 'home',
 	components: {},
@@ -91,6 +91,7 @@ export default {
             isIndex:false,
             user_money:0,
             teamStemp:"",
+            help_url:"",
             taskOption:[],
             langIdx:Cookies.get("language")||'en',
             taskType:['','scanOnline','pullPownTask','pullgroupTask'],
@@ -117,6 +118,11 @@ export default {
         this.syncInitApi();
         this.isIndex = false;
         this.isScroll = false;
+        if(JSON.parse(window.localStorage.getItem('is_play'))){
+            setTimeout(() => {
+                this.$popDialog({content:this.help_url,title:"使用教程",type:""}) 
+            },500);
+        }
     },
 	methods: {
         syncInitApi(){
@@ -140,11 +146,17 @@ export default {
                     resolve(res)
                 })
             });
-            Promise.all([fun1,fun2,fun3,fun4]).then( res => {
-                const [{income},data2,data3,data4] = res;
+            let fun5 = new Promise((resolve,reject)=>{
+                gethelp().then(res =>{
+                    resolve(res)
+                })
+            });
+            Promise.all([fun1,fun2,fun3,fun4,fun5]).then( res => {
+                const [{income},data2,data3,data4,data5] = res;
                 this.user_money = income;
                 this.teamStemp = data2;
                 this.taskOption = [...data3.list,...data4.list];
+                this.help_url = data5.url;
             })
         },
         copySuccess(){

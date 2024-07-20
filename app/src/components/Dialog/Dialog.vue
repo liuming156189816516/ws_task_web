@@ -6,7 +6,11 @@
                 <van-icon class="close_btn" name="cross" @click="closeBtn" />
             </div>
             <div class="video_tips">
-                <video metadata controls src="https://wstask.s3.ap-southeast-1.amazonaws.com/help_url.mp4" type="video/mp4" />
+                <div class="vide-cover" v-if="!is_play">
+                    <img class="def_img" src= "../../assets/images/home/cover_img.jpg">
+                    <img class="play_btn" :src="require(`../../assets/images/home/${is_play?'zanting':'bofang'}.png`)" @click="palySource">
+                </div>
+                <video ref="myVideo" controls :src="content" type="video/mp4" />
             </div>
         </div>
     </van-overlay>
@@ -32,6 +36,7 @@ export default {
             qqCode:"",
             wechatCode:"",
             visible:false,
+            is_play:false,
             adverImg:[]
         };
     },
@@ -40,7 +45,17 @@ export default {
     methods: {
         closeBtn(){
             document.getElementById("app").removeChild(this.$el);
+            window.localStorage.setItem('is_play',false)
             this.visible=false;
+        },
+        palySource(){
+            if(this.is_play){
+                this.is_play=false;
+                this.$refs.myVideo.pause()
+            }else{
+                this.is_play=true;
+                this.$refs.myVideo.play();
+            }
         }
     }
 };
@@ -79,11 +94,33 @@ export default {
             width: 100%;
             padding: 0;
             overflow: hidden;
+            position: relative;
             padding-bottom: 20px;
             background: $font-color-white;
             video{
                 width: 100%;
+                min-height: 100%;
                 max-height: 100%;
+            }
+            .vide-cover{
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 9;
+                background: $font-color-black;
+                .def_img{
+                    width: 100%;
+                    height: 100%;
+                    margin-top: 5px;
+                }
+                .play_btn{
+                    height: 48px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                }
             }
         }
         // .continer{

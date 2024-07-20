@@ -44,9 +44,6 @@ export default {
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.checkBrowser();
-	},
-	mounted(){
-		// this.$popDialog({content: "../src/assets/video/dbfcfa67.mp4",title:"使用教程",type:""})
 	}
 };
 </script>

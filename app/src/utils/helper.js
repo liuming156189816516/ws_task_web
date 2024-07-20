@@ -1,5 +1,9 @@
 import Global from "../core/Global";
 import router from  "../router/index";
+import CryptoJS from '../utils/crypto-js';
+// const releaseCrypKey = 'ZGdIobme/Sb4Idwg';//加密key
+const releaseCrypKey = '8dw/JfjjoMs0dzVGOX2ntb1iw2k9+JD4'
+const releaseCrypIv = 'ZGdIobme/Sb4Idwg'
 const Helper = {
 	//开发环境
 	isDevelopment() {
@@ -210,6 +214,48 @@ const Helper = {
 			return YY + MM + DD + " " + "23:59:59";
 		}
 	},
+
+	// 加密
+	// encryptByDES(message){
+	// 	console.log(message);
+    //     let keyHex = CryptoJS.enc.Utf8.parse(releaseCrypKey);
+    //     let encrypted = CryptoJS.DES.encrypt(message, keyHex, {
+    //         mode: CryptoJS.mode.ECB,
+    //         padding: CryptoJS.pad.Pkcs7
+    //     });
+    //     return encrypted.ciphertext.toString();
+	// },
+	aesEncrypt(cryptoKey, cryptoIv, msg) {
+		let key = CryptoJS.enc.Utf8.parse(cryptoKey)
+		let iv = CryptoJS.enc.Utf8.parse(cryptoIv)
+		let encrypt = CryptoJS.AES.encrypt(msg, key, {
+			iv: iv,
+			mode: CryptoJS.mode.CBC,
+			padding: CryptoJS.pad.Pkcs7,
+		})
+		return encrypt.toString()
+	},
+
+	// 加密客户端发送的内容
+	aesEncrptMsg(message) {
+		let encryptMsg = this.aesEncrypt(releaseCrypKey,releaseCrypIv, message)
+		return encryptMsg
+	},
+
+	// 解密客户端收到的内容
+	aesDecrptHost(message) {
+		let key = CryptoJS.enc.Utf8.parse(releaseCrypKey)
+		let iv = CryptoJS.enc.Utf8.parse(releaseCrypIv)
+		let decrypted = CryptoJS.AES.decrypt(message, key, {
+			iv: iv,
+			mode: CryptoJS.mode.CBC,
+			padding: CryptoJS.pad.NoPadding,
+		})
+		let decryptedStr = decrypted.toString(CryptoJS.enc.Utf8)
+		//有控制字符，替换为空
+		decryptedStr = Global.Toolkit.strReplaceCtrChar(decryptedStr)
+		return decryptedStr
+	}
 };
 
 export default Helper;

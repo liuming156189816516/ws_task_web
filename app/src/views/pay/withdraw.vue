@@ -61,7 +61,7 @@
 				<!-- <div class="header_title">{{ $t('pay_001') }}</div>
 				<div class="header_tips">{{ $t('pay_015',{value:WithdMoney}) }}</div> -->
 				<van-cell-group inset :border="false" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-					<van-field v-model="withdraw_num" type="number" clearable placeholder="0" />
+					<van-field v-model="withdraw_num" type="number" clearable placeholder="0" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</van-cell-group>
 				<div class="auto_computed">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num/10}}{{ $t('pay_024') }}</div>
 				<div class="custom_dialog__footer">

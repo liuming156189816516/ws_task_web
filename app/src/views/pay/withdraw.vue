@@ -13,7 +13,7 @@
 						</div>
 						<div class="amount van-ellipsis">
 							<img src="@/assets/images/gold_icon.png">
-							{{ WithdMoney || 0 }}≈{{ income_naira || 0 }} <span>{{ $t('pay_024') }}</span>
+							{{ WithdMoney || 0 }}≈{{ income_naira || 0 }}<span>{{ $t('pay_024') }}</span>
 						</div>
 						<div class="btn-withdraw">
 							<van-button type="primary" @click="submitBtn">{{ $t('pay_005') }}</van-button>
@@ -138,6 +138,7 @@ export default {
 			}
 		},
 		submitBtn() {
+			this.withdraw_num = "";
 			let payIdx = Number(this.curIndex+1);
 			if(payIdx==1&&!this.card_no){
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_013')}));
@@ -154,10 +155,9 @@ export default {
 				return this.$toast(this.$t('pay_018'));
 			}else if(this.withdraw_num % 1 != 0){
 				return this.$toast(this.$t('pay_019'));
+			}else if(this.withdraw_num/100 < 800){
+				return this.$toast(this.$t('pay_028',{value:800}));
 			}
-			// else if(this.withdraw_num/100 < 800){
-			// 	return this.$toast(this.$t('pay_028',{value:800}));
-			// }
 			let params = {
 				type:Number(this.curIndex)+1,
 				code:this.bank_code,

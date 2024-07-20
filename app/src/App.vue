@@ -46,7 +46,7 @@ export default {
 		this.showNavBar = this.$Helper.checkBrowser();
 	},
 	mounted(){
-		// this.$popDialog({content: "hhhhhhh",title:"广告",type:""})
+		// this.$popDialog({content: "../src/assets/video/dbfcfa67.mp4",title:"使用教程",type:""})
 	}
 };
 </script>

@@ -79,6 +79,7 @@ export default {
 	box-sizing: content-box;
 	width: 100%;
 	height: 98px;
+	z-index: 99;
 	box-shadow: 10px 10px 10px 10px #f2f2f2;
 	-moz-box-shadow: 10px 10px 10px 10px #f2f2f2;
 	border-top: 1px solid #E6E6E6;

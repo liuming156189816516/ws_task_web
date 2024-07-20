@@ -22,7 +22,7 @@
                 <span class="left_icon"></span>{{$t('serv_004')}}
             </div>
             <div class="info_main">
-                <video controls :src="help_url" type="video/mp4" />
+                <video controls :src="help_url" type="video/mp4" width="100%" height="320px" />
             </div>
         </div>
     </div>

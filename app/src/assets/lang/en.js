@@ -118,6 +118,7 @@ export default {
     pay_026:"10 Integral = 1 Naira",
     pay_027:"Integral",
     pay_028:"Minimum withdrawal {value} naira",
+    pay_029:"The number of withdrawals today has been capped",
 
     tail_001:"Income details",
     tail_002:"Type",
@@ -130,6 +131,7 @@ export default {
     tail_009:"Reason for rejection",
     tail_010:"Income details",
     tail_011:"Failed",
+    tail_012:"Reason for failure",
 
     other_001:"Please enter {value}",
     other_002:"Remember Me",

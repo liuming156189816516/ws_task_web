@@ -120,6 +120,7 @@ export default {
     pay_026:"10积分 = 1奈拉",
     pay_027:"积分",
     pay_028:"最低提现{value}奈拉",
+    pay_029:"今日提现次数已上限",
 
     tail_001:"收益明细",
     tail_002:"类型",
@@ -132,6 +133,7 @@ export default {
     tail_009:"驳回原因",
     tail_010:"收益明细",
     tail_011:"失败",
+    tail_012:"失败原因",
 
     other_001:"请输入{value}",
     other_002:"下次自动登录",

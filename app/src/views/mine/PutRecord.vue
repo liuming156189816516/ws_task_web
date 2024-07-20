@@ -51,7 +51,7 @@
         </div>
         <div v-else class="empty_tips">{{ $t('other_022') }}</div>
         <PrevNext v-if="list&&list.length>0" :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext" />
-        <popDialog ref="isDialog" :title="$t('tail_009')" :titleContent = "dialogContent" :isCancel = false :isConfirm = true @confirm_btn = "confirm_btn"></popDialog>
+        <popDialog ref="isDialog" :title="$t('tail_012')" :titleContent = "dialogContent" :isCancel = false :isConfirm = true @confirm_btn = "confirm_btn"></popDialog>
     </div>
 </template>
 <script>

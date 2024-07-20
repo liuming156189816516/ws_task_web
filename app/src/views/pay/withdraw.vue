@@ -35,7 +35,7 @@
 			<div class="cash_adverice">
 				<div class="title-tip">{{ $t('pay_009') }}</div>
 				<div class="title_item">
-					<van-tag type="warning" /> {{$t('pay_010',{value:800})}}
+					<van-tag type="warning" /> {{$t('pay_010',{value:withdraw_cash})}}
 				</div>
 				<!-- <div class="title_item" style="color:#F52C2C;">
 					<van-tag type="warning" />
@@ -43,7 +43,7 @@
 				</div> -->
 				<div class="title_item">
 					<van-tag type="warning" />
-					{{ $t('pay_025',{value:5}) }}
+					{{ $t('pay_025',{value:withdraw_times}) }}
 				</div>
 				<div class="title_item">
 					<van-tag type="warning" />
@@ -75,7 +75,7 @@
 </template>
 <script>
 import { getaccountincome} from '@/api/home';
-import { getwithdrawcard,savewithdrawapproval } from '@/api/pay';
+import { getwithdrawcard,savewithdrawapproval,getwithdrawconfig } from '@/api/pay';
 import PageHeader from '@/components/Header';
 import { setTimeout } from 'timers';
 export default {
@@ -92,6 +92,9 @@ export default {
 			userInfo:"",
 			isLoading:false,
 			withdraw_num:null,
+			withdraw_times:null,
+			withdraw_cash:null,
+			is_withdraw: false,
 			showModel: false,
 			is_prevent: false
 		}
@@ -103,7 +106,7 @@ export default {
 		}
     },
 	created() {
-		this.getUserIncome();
+		this.syncInitApi();
 		this.getBankInfo();
 	},
 	mounted() {
@@ -112,11 +115,28 @@ export default {
 		}
 	},
 	methods: {
-		async getUserIncome(){
-			let { income,income_naira } = await getaccountincome();
-			this.WithdMoney = income||0;
-			this.income_naira = income_naira||0;
-		},
+		syncInitApi(){
+            let fun1 = new Promise((resolve,reject)=>{
+                getaccountincome().then(res =>{
+                    resolve(res)
+                })
+            });
+            let fun2 = new Promise((resolve,reject)=>{
+                getwithdrawconfig().then(res =>{
+                    resolve(res)
+                })
+            });
+            Promise.all([fun1,fun2]).then( res => {
+                const [{income,income_naira},{limit_amount,limit_count,limit_count_status}] = res;
+				this.WithdMoney = income||0;
+				this.income_naira = income_naira||0;
+				this.withdraw_times = limit_count||0;
+				this.withdraw_cash = limit_amount||0;
+				this.is_withdraw = limit_count_status||false;
+            })
+        },
+
+
 		async getBankInfo(){
 			let { card_no,bank_name,payee_name,code } = await getwithdrawcard({type:Number(this.curIndex)+1});
 			this.bank_code = code||"";
@@ -140,11 +160,12 @@ export default {
 		submitBtn() {
 			this.withdraw_num = "";
 			let payIdx = Number(this.curIndex+1);
+			if(!this.is_withdraw) return this.$toast(this.$t('pay_029'));
 			if(payIdx==1&&!this.card_no){
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_013')}));
 			} else if(payIdx==2&&!this.card_no){
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}));
-			} else if(this.income_naira < 800){
+			} else if(this.income_naira < this.withdraw_cash){
 				return this.$toast(this.$t('pay_017'));
 			}
 			this.showModel=true;
@@ -155,8 +176,8 @@ export default {
 				return this.$toast(this.$t('pay_018'));
 			}else if(this.withdraw_num % 1 != 0){
 				return this.$toast(this.$t('pay_019'));
-			}else if(this.withdraw_num/100 < 800){
-				return this.$toast(this.$t('pay_028',{value:800}));
+			}else if(this.withdraw_num/100 < this.withdraw_cash){
+				return this.$toast(this.$t('pay_028',{value:this.withdraw_cash}));
 			}
 			let params = {
 				type:Number(this.curIndex)+1,
@@ -170,8 +191,9 @@ export default {
 			let res = await savewithdrawapproval(params);
 			this.isLoading = false;
 			if(res.code) return;
+			this.withdraw_num = "";
 			this.$toast(this.$t('other_013'));
-			setTimeout(() => {this.$router.go(-1)},500);
+			setTimeout(() => {this.$router.go(-1)},1000);
 		},
 		getPutPoint() {
 			let init = (this.userInfo.point || 0) / 10000;

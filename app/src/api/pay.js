@@ -19,4 +19,8 @@ export const dowithdrawcard = (params = {}) => {
 export const getwithdrawapprovallist = (params = {}) => {
     return Post('account/getwithdrawapprovallist', params);
 }
+export const getwithdrawconfig = (params = {}) => {
+    return Post('account/getwithdrawconfig', params);
+}
+
 

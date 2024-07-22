@@ -8,7 +8,7 @@
             <div class="video_tips">
                 <div class="vide-cover" v-if="!is_play">
                     <img class="def_img" src= "../../assets/images/home/cover_img.jpg">
-                    <img class="play_btn" :src="require(`../../assets/images/home/${is_play?'zanting':'bofang'}.png`)" @click="palySource">
+                    <img class="play_btn" src="../../assets/images/home/bofang.png" @click="palySource">
                 </div>
                 <video ref="myVideo" controls :src="content" type="video/mp4" />
             </div>
@@ -33,14 +33,18 @@ export default {
     },
     data() {
         return {
-            qqCode:"",
-            wechatCode:"",
             visible:false,
-            is_play:false,
-            adverImg:[]
+            is_play:false
         };
     },
     mounted() {
+        let video = this.$refs.myVideo;
+        video.addEventListener('play', (e)=> {
+            this.is_play=true;
+        })
+        video.addEventListener('pause',(e)=> {
+            this.is_play=false;
+        })
     },
     methods: {
         closeBtn(){
@@ -49,14 +53,13 @@ export default {
             this.visible=false;
         },
         palySource(){
-            if(this.is_play){
-                this.is_play=false;
-                this.$refs.myVideo.pause()
-            }else{
-                this.is_play=true;
-                this.$refs.myVideo.play();
-            }
+            this.$refs.myVideo.play();
+            this.is_play=true;
         }
+    },
+    beforeDestroy(){
+        window.removeEventListener('play');
+        indow.removeEventListener('pause');
     }
 };
 </script>

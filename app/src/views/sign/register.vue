@@ -143,7 +143,9 @@ export default {
 				this.isLoading = false;
 				this.getVerfyBtn();
 				if(!res.token) return;
-				fbq('track', 'CompleteRegistration');
+				if(process.env.NODE_ENV == 'production'){
+					fbq('track', 'CompleteRegistration');
+				}
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())
 				}else{

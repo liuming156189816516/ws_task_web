@@ -1,5 +1,5 @@
 <template>
-	<div class="login_warp">
+	<div class="login_warp" @click="isIndex=false">
 		<div class="l_value" @click="showChangeBtn" @click.stop>
 			<span>{{ viewLang() }}</span>
 			<img class="down_icon" src="@/assets/images/home/xiala.png">

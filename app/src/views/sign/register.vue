@@ -26,7 +26,7 @@
 				</div>
 				<div class="uilist_div pwd">
 					<img src="@/assets/images/sign/tuiguang.png" />
-					<input style="flex-grow:1;" v-model="user_code" :placeholder="$t('other_001',{value:$t('login_012')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input style="flex-grow:1;" v-model="user_code" :placeholder="$t('other_001',{value:$t('login_013')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div verfy_code">
 					<div class="input_code">

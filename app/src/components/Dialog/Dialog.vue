@@ -5,12 +5,15 @@
                 {{ title }}
                 <van-icon class="close_btn" name="cross" @click="closeBtn" />
             </div>
-            <div class="video_tips">
+            <div class="video_tips" v-if="type==1">
                 <div class="vide-cover" v-if="!is_play">
                     <img class="def_img" src= "../../assets/images/home/cover_img.jpg">
                     <img class="play_btn" src="../../assets/images/home/bofang.png" @click="palySource">
                 </div>
                 <video ref="myVideo" controls :src="content" type="video/mp4" />
+            </div>
+            <div class="contnet_mian">
+                {{ content }}
             </div>
         </div>
     </van-overlay>
@@ -18,13 +21,13 @@
 <script>
 export default {
     props: {
+        type:{
+            type: Number,
+            default: null 
+        },
         title: {
             type: String,
             default: "" //默认高度
-        },
-        type:{
-            type: String,
-            default: "" 
         },
         content: {
             type: String,

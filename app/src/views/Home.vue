@@ -120,7 +120,7 @@ export default {
         this.isScroll = false;
         if(JSON.parse(window.localStorage.getItem('is_play'))){
             setTimeout(() => {
-                this.$popDialog({content:this.help_url,title:this.$t("serv_004"),type:""}) 
+                this.$popDialog({content:this.help_url,title:this.$t("serv_004"),type:1}) 
             },500);
         }
     },

@@ -12,7 +12,7 @@
                             <div class="text_1">{{$t('serv_002')}}</div>
                             <div class="text_2">{{$t('serv_003')}}</div>
                         </div>
-                        <van-button type="primary" style="border-radius: 30px;height: inherit; padding: 10px 20px;">{{$t('serv_005')}}</van-button>
+                        <van-button type="primary" @click="contactService">{{$t('serv_005')}}</van-button>
                     </div>
                 </div>
             </div>
@@ -43,6 +43,12 @@ export default {
         async getHelpVideo() {
             const { url } = await gethelp({});
             this.help_url = url;
+        },
+        contactService(){
+            const link = document.createElement('a');
+            link.href = "https://wa.me/447377675671";
+            link.target = "_blank";
+            link.click();
         }
     }
 }
@@ -120,6 +126,9 @@ export default {
                         height: 32px !important;
                         display: flex;
                         flex-shrink: 0;
+                        border-radius: 30px;
+                        height: inherit;
+                        padding: 10px 20px;
                     }
                 }
             }

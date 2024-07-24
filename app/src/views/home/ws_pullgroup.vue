@@ -99,6 +99,11 @@ export default {
         this.task_id = this.$route.query.id||"";
         this.getGroupMess();
     },
+    mounted(){
+        // setTimeout(() => {
+        //     this.$popDialog({content:"hhhhhhhhhhhhhhhh",title:this.$t("serv_004"),type:2}) 
+        // },500);
+    },
 	methods: {
         async getGroupMess(){
            let groupData =  await getcreatetaskinfo({task_info_id:this.task_id});

@@ -79,7 +79,7 @@ export default {
 
     serv_001:"Customer Service",
     serv_002:"Customer Service",
-    serv_003: "Got a problem? find customer service",
+    serv_003: "Got a problem? contact customer service",
     serv_004:"Help Document",
     serv_005:"Consult Now",
 
@@ -90,7 +90,7 @@ export default {
     mine_005:"Change Password",
     mine_006:"Modify avatar",
     mine_007:"Today's Bonus",
-    mine_008:"Yesterday's Bouns",
+    mine_008:"Yesterday's Bonus",
     mine_009:"Download App",
 
     pay_001:"Withdraw cash",

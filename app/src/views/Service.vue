@@ -204,7 +204,7 @@ export default {
                         }
                         .text_2 {
                             color: $home-earn-more;
-                            font-size: 28px;
+                            font-size: 26px;
                         }
                     }
                     .van-button{

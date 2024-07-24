@@ -12,7 +12,7 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<img src="@/assets/images/sign/zhanghao.png" />
-					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_001')})" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_024')})" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div pwd">
 					<img src="@/assets/images/sign/lock.png" />
@@ -70,8 +70,8 @@ export default {
 	},
 	created() {
 		let url = window.location.search;
-		if (url.indexOf("=") > -1) {
-			this.user_code = url.split("=").pop();
+		if (url.indexOf("r=") > -1) {
+			this.user_code = url.split("r=").pop();
 		}
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();
@@ -102,7 +102,7 @@ export default {
 			const reg = new RegExp(/^1[3456789]\d{9}$/);
 			const regex = new RegExp(/^[0-9A-Za-z]{6,20}$/);
 			if (!this.username) {
-				return this.$toast(this.$t('other_001',{value:this.$t('login_001')}))
+				return this.$toast(this.$t('other_001',{value:this.$t('login_024')}))
 			} else if(!zh_reg.test(this.username)){
 				return this.$toast(this.$t('other_001',{value:this.$t('login_018')}));
 			}

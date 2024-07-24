@@ -24,6 +24,7 @@ export default {
     login_021:"新密码",
     login_022:"修改成功，请登录",
     login_023:"至少六位密码",
+    login_024:"邮箱",
 
     home_001:"用户余额",
     home_002:"今日任务收益",

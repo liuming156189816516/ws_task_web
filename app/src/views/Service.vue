@@ -45,10 +45,11 @@ export default {
             this.help_url = url;
         },
         contactService(){
-            const link = document.createElement('a');
-            link.href = "https://wa.me/447377675671";
-            link.target = "_blank";
-            link.click();
+            // const link = document.createElement('a');
+            // link.href = "https://wa.me/447377675671";
+            // link.target = "_blank";
+            // link.click();
+            window.location.href = 'https://wa.me/447377675671';
         }
     }
 }

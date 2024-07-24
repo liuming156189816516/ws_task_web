@@ -10,7 +10,7 @@
                     <img class="def_img" src= "../../assets/images/home/cover_img.jpg">
                     <img class="play_btn" src="../../assets/images/home/bofang.png" @click="palySource">
                 </div>
-                <video ref="myVideo" controls :src="content" type="video/mp4" />
+                <video ref="myVideo" controls :src="content" type="video/mp4" webkit-playsinline='true'    playsinline='true' />
             </div>
             <div class="contnet_mian" v-if="type==2">
                 <div v-html="content"></div>

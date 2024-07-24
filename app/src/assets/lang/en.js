@@ -34,7 +34,7 @@ export default {
     home_006:"In Progress",
     home_007:"Settling",
     home_008:"Ended",
-    home_009:"WhatsApp Massage Task",
+    home_009:"WhatsApp Message Task",
     home_010:"WhatsApp followers Task",
     home_011:"WhatsApp Group Task",
     home_012:"Today's Points",

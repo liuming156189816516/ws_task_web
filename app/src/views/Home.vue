@@ -76,15 +76,21 @@
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="../assets/images/home/dingbu.png" alt="">
         </div>
+        <drag-icon ref="dragIconCom" :gapWidthPx="40" :coefficientHeight="0.66">
+            <div class="serve_icon" slot="icon" @click="contactService">
+                <img src="../assets/images/ms_serve.png" alt="" />
+            </div>
+        </drag-icon>
     </div>
 </template>
 <script>
 import { mapState } from 'vuex';
 import uniFun from "@/utils/uni-webview-js"
+import dragIcon from "../components/dragIcon.vue";
 import { getaccountincome,gettodayincome,gettaskliststatus,getalltasklist,setappuserlanguage,gethelp } from'@/api/home'
 export default {
 	name: 'home',
-	components: {},
+	components: {dragIcon},
 	data() {
 		return {
             isScroll:false,
@@ -200,6 +206,13 @@ export default {
             this.isScroll = false;
             let scrollTop = this.$refs.warpBox;
             scrollTop.scrollTo({top: 0,behavior:"smooth"});
+        },
+        contactService(){
+            if(this.$Helper.checkBrowser()){
+                window.open("https://wa.me/44737767567","_blank");
+            }else{
+                uniFun.postMessage({data:"https://wa.me/447377675671"});
+            }
         }
 	}
 };
@@ -491,6 +504,11 @@ export default {
         span{
             display: flex;
             border-left: 2px solid #ececec;
+        }
+    }
+    .serve_icon{
+        img{
+            height: 80px;
         }
     }
 

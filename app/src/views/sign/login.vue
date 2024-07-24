@@ -16,7 +16,7 @@
 				<div class="uilist">
 					<div class="uilist_div account">
 						<img src="@/assets/images/sign/zhanghao.png" alt />
-						<input v-model="username" :placeholder="$t('other_001',{value:$t('login_024')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<input v-model="username" :placeholder="$t('other_001',{value:$t('login_001')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="uilist_div pwd">
 						<img src="@/assets/images/sign/icon_suo.png" alt />
@@ -63,7 +63,7 @@ export default {
 			if (!this.username) {
 				/*|| !reg.test(this.username)*/
 				// return this.$toast(this.$t('login_007'));
-				return this.$toast(this.$t('other_001',{value:this.$t('login_024')}))
+				return this.$toast(this.$t('other_001',{value:this.$t('login_001')}))
 			}
 			if (!this.password) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_002')}));

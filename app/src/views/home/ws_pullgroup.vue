@@ -131,8 +131,12 @@ export default {
             if(this.$Helper.checkBrowser()){
                 const link = document.createElement('a');
                 link.href = this.target_url;
-                link.setAttribute('download', 'phone_numbers');
+                link.download = this.$Helper.randomString(2)+'_phone_numbers';
+                link.target = "_blank";
                 link.click();
+                // link.href = this.target_url;
+                // link.setAttribute('download', 'phone_numbers');
+                // link.click();
                 // let textContent = "";
                 // for (let k = 0; k < this.taskList.length; k++) {
                 //     let number = this.taskList[k];
@@ -143,6 +147,7 @@ export default {
                 // a.href = window.URL.createObjectURL(blob);
                 // a.download = 'phone_numbers.vcf';
                 // document.body.appendChild(a);
+                // link.target = "_blank"; 
                 // a.click();
                 // document.body.removeChild(a);
                 // window.URL.revokeObjectURL(a.href);

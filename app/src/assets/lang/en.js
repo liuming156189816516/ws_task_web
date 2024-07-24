@@ -24,6 +24,7 @@ export default {
     login_023:"At least six digit password",
     login_024:"your email",
     login_025:"E-mail format is incorrect",
+    login_026:"phone number",
 
     home_001:"Balance",
     home_002:"Today's Task",

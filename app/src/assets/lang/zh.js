@@ -26,6 +26,7 @@ export default {
     login_023:"至少六位密码",
     login_024:"邮箱",
     login_025:"邮箱格式不正确",
+    login_026:"手机号",
 
     home_001:"用户余额",
     home_002:"今日任务收益",

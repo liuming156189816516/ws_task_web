@@ -185,6 +185,9 @@ export default {
     other_045:"提示",
     other_046:"登录信息过期",
     other_047:"网络异常，请稍后重试。",
+    other_048:"<div class='task_tips'> 恭喜完成！是时候执行下一个任务了！</div><div class='import_title'>重要的！！</div><div class='import_task_title'>在继续之前，请删除本任务中使用和保存的通讯录，以免下一个任务失败，否则会影响您的收入。</div>",
+    other_049:"重要的！",
+    other_050:"在继续之前，请删除本任务中使用和保存的通讯录，以免下一个任务失败，否则会影响您的收入。",
 
     table_001:"首页",
     table_002:"推广",

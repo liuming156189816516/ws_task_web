@@ -1,5 +1,5 @@
 <template>
-    <div class="home-content">
+    <div class="home-content" ref="warpBox">
         <page-header :title="$t('home_011')" :show-icon="true" :bgcolor="false"></page-header>
         <div class="home_content">
             <div class="task_step_detail">
@@ -101,7 +101,7 @@ export default {
     },
     mounted(){
         // setTimeout(() => {
-        //     this.$popDialog({content:"hhhhhhhhhhhhhhhh",title:this.$t("serv_004"),type:2}) 
+        //     this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
         // },500);
     },
 	methods: {
@@ -125,10 +125,14 @@ export default {
             submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
                 this.isLoading=false;
                 if(res.code) return;
+                this.getGroupMess();
                 this.$toast(this.$t("home_039"));
-                setTimeout(()=>{
-                    this.$router.go(-1)
-                },1000)
+                this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
+                let scrollTop = this.$refs.warpBox;
+                scrollTop.scrollTo({top: 0,behavior: "instant" });
+                // setTimeout(()=>{
+                //     this.$router.go(-1)
+                // },1000)
             })
         },
         

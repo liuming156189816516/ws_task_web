@@ -143,7 +143,7 @@ export default {
     other_005:"Invite Code",
     other_006:"Copy",
     other_007:"Cancel",
-    other_008:"Kind reminder",
+    other_008:"Kind Reminder",
     other_009: "Are you sure you want to log out?",
     other_010:"Log Out",
     other_011:"OK",
@@ -183,6 +183,9 @@ export default {
     other_045:"hint",
     other_046:"Login information expired",
     other_047:"Network abnormality, please try again later.",
+    other_048:"<div class='task_tips'>Congratulations on completion! It’s time to move onto the next mission!</div><div class='import_title'>!IMPORTANT!</div><div class='import_task_title'>Before moving on, please delete the address book used and saved in this task to avoid failure of the next task, else this will affect your income.</div>",
+    other_049:"!IMPORTANT!",
+    other_050:"Before moving on, please delete the address book used and saved in this task to avoid failure of the next task, else this will affect your income.",
 
     table_001:"Home",
     table_002:"Promotion",

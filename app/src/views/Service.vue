@@ -30,6 +30,7 @@
 
 <script>
 import { gethelp } from '@/api/home';
+import uniFun from "@/utils/uni-webview-js"
 export default {
     data() {
         return {
@@ -45,11 +46,11 @@ export default {
             this.help_url = url;
         },
         contactService(){
-            // const link = document.createElement('a');
-            // link.href = "https://wa.me/447377675671";
-            // link.target = "_blank";
-            // link.click();
-            window.location.href = 'https://wa.me/447377675671';
+            if(this.$Helper.checkBrowser()){
+                window.open("https://wa.me/44737767567","_blank");
+            }else{
+                uniFun.postMessage({data:"https://wa.me/447377675671"});
+            }
         }
     }
 }

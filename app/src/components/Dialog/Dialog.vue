@@ -12,8 +12,11 @@
                 </div>
                 <video ref="myVideo" controls :src="content" type="video/mp4" />
             </div>
-            <div class="contnet_mian">
-                {{ content }}
+            <div class="contnet_mian" v-if="type==2">
+                <div v-html="content"></div>
+                <!-- <div class="bank_btn">
+                    <van-button type="primary" @click="$router.push('/home')">确定</van-button>
+                </div> -->
             </div>
         </div>
     </van-overlay>
@@ -82,7 +85,7 @@ export default {
         background-color: $font-color-white;
         .header_title{
             width: 100%;
-            height: 44px;
+            height: 66px;
             display: flex;
             position: relative;
             font-size: 20px;
@@ -126,6 +129,23 @@ export default {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%,-50%);
+                }
+            }
+        }
+        .contnet_mian{
+            width: 100%;
+            padding: 0 20px 30px 20px;
+            text-align: justify;
+            box-sizing: border-box;
+            .bank_btn{
+                display: flex;
+                width: 100%;
+                margin-top: 20px;
+                align-items: center;
+                justify-content: center;
+                .van-button{
+                    height: max-content;
+                    padding: 10px 20px;
                 }
             }
         }

@@ -433,3 +433,20 @@
     border: none !important;
   } 
 }
+.task_tips{
+  display: flex;
+  font-size: 28px;
+  line-height: 1.5;
+}
+.import_title{
+  display: flex;
+  color: #ee0a24;
+  margin: 10px 0;
+  font-size: 38px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+}
+.import_task_title{
+  font-size: 28px;
+}

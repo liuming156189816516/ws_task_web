@@ -182,15 +182,11 @@ export default {
 		},
         jumpLink(path){
             if(!path) return;
-            if(this.$Helper.isWeb()){
+            if(this.$Helper.checkBrowser()){
                 window.open(path,"_blank");
             }else{
                 uniFun.postMessage({data:path});
             }
-            // uniFun.navigateToWebview({
-            //     url:path
-            // })
-            // this.$Helper.toOutLink(path);
         },
         handleScrolStop(){
             let scrollTop = this.$refs.warpBox;

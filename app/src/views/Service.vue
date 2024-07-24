@@ -47,7 +47,7 @@ export default {
         },
         contactService(){
             if(this.$Helper.checkBrowser()){
-                window.open("https://wa.me/44737767567","_blank");
+                window.open("https://wa.me/447377675671","_blank");
             }else{
                 uniFun.postMessage({data:"https://wa.me/447377675671"});
             }

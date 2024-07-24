@@ -6,11 +6,7 @@
                 <van-icon class="close_btn" name="cross" @click="closeBtn" />
             </div>
             <div class="video_tips" v-if="type==1">
-                <div class="vide-cover" v-if="!is_play">
-                    <img class="def_img" src= "../../assets/images/home/cover_img.jpg">
-                    <img class="play_btn" src="../../assets/images/home/bofang.png" @click="palySource">
-                </div>
-                <video ref="myVideo" controls :src="content" type="video/mp4" webkit-playsinline='true'    playsinline='true' />
+                <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls :src="content"></video>
             </div>
             <div class="contnet_mian" v-if="type==2">
                 <div v-html="content"></div>
@@ -44,12 +40,14 @@ export default {
         };
     },
     mounted() {
-        let video = this.$refs.myVideo;
-        video.addEventListener('play', (e)=> {
-            this.is_play=true;
-        })
-        video.addEventListener('pause',(e)=> {
-            this.is_play=false;
+        setTimeout(()=>{
+            let video = this.$refs.myVideo;
+            video.addEventListener('play', (e)=> {
+                this.is_play=true;
+            })
+            video.addEventListener('pause',(e)=> {
+                this.is_play=false;
+            })
         })
     },
     methods: {
@@ -61,12 +59,14 @@ export default {
         palySource(){
             this.$refs.myVideo.play();
             this.is_play=true;
+            // this.$refs.myVideo.setAttribute('webkit-playsinline', true);
+            // this.$refs.myVideo.setAttribute('playsinline', true);
         }
-    },
-    beforeDestroy(){
-        window.removeEventListener('play');
-        indow.removeEventListener('pause');
     }
+    // beforeDestroy(){
+    //     window.removeEventListener('play');
+    //     indow.removeEventListener('pause');
+    // }
 };
 </script>
 <style lang="scss" scoped>
@@ -104,32 +104,12 @@ export default {
             padding: 0;
             overflow: hidden;
             position: relative;
-            padding-bottom: 20px;
+            // padding-bottom: 20px;
+            margin-bottom: 20px;
             background: $font-color-white;
             video{
                 width: 100%;
-                min-height: 100%;
-                max-height: 100%;
-            }
-            .vide-cover{
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 9;
-                background: $font-color-black;
-                .def_img{
-                    width: 100%;
-                    height: 100%;
-                    margin-top: 5px;
-                }
-                .play_btn{
-                    height: 48px;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%,-50%);
-                }
+                height: 190px;
             }
         }
         .contnet_mian{

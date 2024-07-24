@@ -22,7 +22,16 @@
                 <span class="left_icon"></span>{{$t('serv_004')}}
             </div>
             <div class="info_main">
-                <video controls :src="help_url" type="video/mp4" webkit-playsinline='true' playsinline='true' />
+                <!-- <div class="box_mian">
+                    <div class="top_mover">
+                        <div class="top_img"></div>
+                    </div>
+                    <div class="bot_mover">
+                        <div class="top_img"></div>
+                    </div>
+                </div> -->
+                <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls="controls" :src="help_url"></video>
+                <!-- <video ref="myVideo" controls :src="help_url" type="video/mp4" webkit-playsinline='true' playsinline='true' /> -->
             </div>
         </div>
     </div>
@@ -35,10 +44,22 @@ export default {
     data() {
         return {
             help_url:"",
+            is_play:false,
         }
     },
     created() {
         this.getHelpVideo();
+    },
+    mounted() {
+        setTimeout(()=>{
+            let video = this.$refs.myVideo;
+            video.addEventListener('play', (e)=> {
+                this.is_play=true;
+            })
+            video.addEventListener('pause',(e)=> {
+                this.is_play=false;
+            })
+        })
     },
     methods: {
         async getHelpVideo() {
@@ -57,6 +78,68 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.box_mian{
+    width: 30%;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // z-index: 9999;
+    transform: translate(-50%,-50%);
+    // background: seagreen;
+    .top_mover{
+        position: absolute;
+        top: 0;
+        left:0;
+        animation:5s ease-in-out 3s infinite normal none running bLTaPl;
+        .top_img{
+            width: 60px;
+            height: 60px;
+            transform: rotate(60deg);
+            background: url("../assets/images/stretch-arrow-left.png") no-repeat;
+            background-size: 100% 100%;
+        }
+    }
+    .bot_mover{
+        position: absolute;
+        right:0;
+        bottom: 0;
+        animation:5s ease-in-out 3s infinite normal none running bRTaPl;
+    .top_img{
+            width: 60px;
+            height: 60px;
+            transform: rotate(60deg);
+            background: url("../assets/images/lashenjiantou.png") no-repeat;
+            background-size: 100% 100%;
+        } 
+    }
+}
+
+@keyframes bLTaPl{
+    //动画规则
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(30px, 30px);
+    } 
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+    @keyframes bRTaPl{
+    //动画规则
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(-30px,-30px);
+    } 
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
 .spread_warp {
     width: 100%;
     height: 100vh;
@@ -161,9 +244,12 @@ export default {
         .info_main{
             width: 100%;
             display: flex;
+            position: relative;
+            margin-bottom: 120px;
             video {
                 width: 100%;
-                max-height: 100%;
+                height: 400px;
+                // min-height: 300px;
             }
         }
     }

@@ -35,14 +35,11 @@ const Post = (func, data = {}, conf = {}) => {
 // rupRequestUrl()
 
 const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
-    let config = {
-        sendToken: true,
-        ...conf
-    }
     let url,baseUrl;
+    let config = {sendToken: true,...conf}
     data.httpRequestIndex = data.httpRequestIndex == undefined ? index : data.httpRequestIndex;
     data.httpRequestCount = data.httpRequestCount || 0;
-    if(process.env.VUE_APP_FLAG == 'pro'){
+    if(process.env.NODE_ENV == 'production'){
         url = `${window.location.host}:8096/`;
     }else{
         url = process.env.VUE_APP_APIURL;

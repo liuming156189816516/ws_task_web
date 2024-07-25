@@ -50,6 +50,11 @@ service.interceptors.response.use(res => {
       }
     } else {
       vant.Toast.fail(res.data.msg);
+      localStorage.clear();
+      localStorage.removeItem('token');
+      setTimeout(() => {
+        window.likevm.$router.replace('/login');
+      }, 1000);
     }
   },error => {
     vant.Toast.fail(i18n.t('other_047'));

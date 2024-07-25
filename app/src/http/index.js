@@ -107,7 +107,7 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
             // } else {
             //     data.httpRequestIndex += 1;
             // }
-            ProMisePost(func, data,conf,resolve, reject)
+            // ProMisePost(func, data,conf,resolve, reject)
         }
     })
 }

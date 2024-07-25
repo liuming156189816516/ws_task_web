@@ -38,7 +38,7 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     let config = {sendToken: true,...conf}
     data.httpRequestIndex = data.httpRequestIndex == undefined ? index : data.httpRequestIndex;
     data.httpRequestCount = data.httpRequestCount || 0;
-    console.log(window.location.host);
+    // console.log(window.location.host);
     if(process.env.NODE_ENV == 'production'){
         url = `${window.location.host}`;
     }else{

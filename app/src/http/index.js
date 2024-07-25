@@ -100,14 +100,14 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
             // }, 1500);
             reject(err)
         } else {
-            // data.httpRequestIndex = 0
-            data.httpRequestIndex += 1;
+            data.httpRequestIndex = 0;
+            // data.httpRequestIndex += 1;
             // if (data.httpRequestIndex == urls.length - 1) {
             //     data.httpRequestIndex = 0
             // } else {
             //     data.httpRequestIndex += 1;
             // }
-            // ProMisePost(func, data,conf,resolve, reject)
+            ProMisePost(func, data,conf,resolve, reject)
         }
     })
 }

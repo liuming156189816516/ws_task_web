@@ -4,7 +4,8 @@ import { getToken } from '@/utils/tool';
 console.log(process.env);
 const devType = process.env.VUE_APP_ENV;
 const pro_url = `${location.protocol}//${location.host}`;
-const baseURL = devType=="dev"?"/api/":`${pro_url}:8096/`;
+console.log(pro_url);
+const baseURL = devType=="dev"?"/api/":devType=="test"?`${pro_url}`:`${pro_url}:8096/`;
 const service = axios.create({baseURL:baseURL,timeout: 8000})
 // request 请求拦截器
 service.interceptors.request.use(config => {

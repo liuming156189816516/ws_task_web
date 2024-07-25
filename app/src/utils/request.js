@@ -1,13 +1,12 @@
 import axios from 'axios'
 import { i18n } from '@/assets/lang'
 import { getToken } from '@/utils/tool';
-console.log(process.env);
+const port = process.env.VUE_APP_PORT;
 const devType = process.env.VUE_APP_ENV;
-const address = location.host.split(":").shift();
-const pro_url = `${location.protocol}//${location.host}`;
-const baseURL = devType=="dev"?"/api/":devType=="test"?`${location.protocol}//${address}:8096/`:`${pro_url}:8096/`;
+const address = location.host.split(":").shift()+port;
+const pro_url = `${location.protocol}//${location.host}${port}`;
+const baseURL = devType=="dev"?"/api/":devType=="test"?`${location.protocol}//${address}`:`${pro_url}`;
 const service = axios.create({baseURL:baseURL,timeout: 8000})
-// request 请求拦截器
 service.interceptors.request.use(config => {
     config.method = config.method || 'get'
     config.headers = {
@@ -24,7 +23,6 @@ service.interceptors.request.use(config => {
     Promise.reject(error)
   }
 )
-  // response 响应拦截器
 service.interceptors.response.use(res => {
   if (res.status == 200) {
       let data = res.data;

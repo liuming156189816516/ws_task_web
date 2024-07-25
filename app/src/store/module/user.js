@@ -61,7 +61,6 @@ export default {
 		},
 		store_info: (state, data) => {
 			const {token,user_info:{uid,account,invite_code}} = data;
-			console.log(token);
 			state.uid = uid;
 			state.token = token;
 			state.account = account;
@@ -110,7 +109,6 @@ export default {
 			state.avatar = data;
 		},
 		store_carousel(state, data) {
-			console.log(data);
 			state.baseBanner = data.list;
 			state.baseNotice = data.bulletin_content;
 			window.localStorage.setItem('baseBanner',data.list);

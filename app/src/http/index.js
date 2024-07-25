@@ -40,7 +40,7 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     data.httpRequestCount = data.httpRequestCount || 0;
     // console.log(window.location.host);
     if(process.env.NODE_ENV == 'production'){
-        url = `${window.location.host}`;
+        url = `http://${window.location.host}`;
     }else{
         url = process.env.VUE_APP_APIURL;
     }

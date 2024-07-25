@@ -39,11 +39,14 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     data.httpRequestIndex = data.httpRequestIndex == undefined ? index : data.httpRequestIndex;
     data.httpRequestCount = data.httpRequestCount || 0;
     console.log(location.protocol);
+    console.log(process.env.NODE_ENV);
     if(process.env.NODE_ENV == 'development'){
         url = process.env.VUE_APP_APIURL;
     }else{
         const pro_url = `${location.protocol}//${location.host}`
-        url = location.protocol=='https:'?`${pro_url}:8096/`:pro_url
+        console.log(pro_url);
+        url = location.protocol=='https:'?`${pro_url}:8096/`:pro_url;
+        console.log(url);
     }
     console.log(url);
     // if (process.env.NODE_ENV != 'development' && process.env.VUE_APP_FLAG == 'pro') {

@@ -87,7 +87,6 @@ module.exports = {
 	},
 	productionSourceMap: false,
 	devServer: {
-		// 配置服务器
 		host: '0.0.0.0',
 		port: 8079,
 		open: false,
@@ -96,6 +95,13 @@ module.exports = {
 			warnings: true,
 			errors: true,
 		},
+		proxy: {
+			'/api': {
+				target: 'http://13.229.25.219:8096/',
+				changeOrigin: true,
+				pathRewrite: {'^/api': ''}
+			}
+		}
 	},
 	css: {
 		loaderOptions: {

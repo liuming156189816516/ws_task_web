@@ -42,7 +42,6 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     console.log(process.env.NODE_ENV);
     if(process.env.NODE_ENV == 'production'){
         const pro_url = `${location.protocol}//${location.host}`
-        console.log(pro_url);
         url = location.protocol=='https:'?`${pro_url}:8096/`:pro_url;
         console.log(url);
     }else{

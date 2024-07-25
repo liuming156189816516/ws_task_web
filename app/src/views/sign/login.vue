@@ -87,6 +87,8 @@ export default {
 				setTimeout(()=>{this.isLoading= false},2000)
 				if(!res.token) return;
 				this.checkChange();
+				console.log("11111");
+				console.log(window.localStorage.getItem('token'));
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())
 				}else{

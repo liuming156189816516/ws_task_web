@@ -6,12 +6,14 @@ export default {
 	state: {
 		allIncome:"",
 		avatar:""||0,
+		interval: null,
+		market: false,
 		httpManager: {},
-		baseBanner:window.localStorage.getItem('baseBanner')||null,
-		baseNotice:window.localStorage.getItem('baseNotice')||null,
-		inviteCode:window.localStorage.getItem('inviteCode')||null,
 		token: window.localStorage.getItem('token') || null,
 		account: window.localStorage.getItem('account') || null,
+		baseBanner: window.localStorage.getItem('baseBanner')||null,
+		baseNotice: window.localStorage.getItem('baseNotice')||null,
+		inviteCode: window.localStorage.getItem('inviteCode')||null,
 		config: {
 			ex_rate: 3,
 			first_point: 0,
@@ -24,11 +26,11 @@ export default {
 		footerGet: [false, false, false],
 		appList: [],
 		userInfo: {
-			up_num: ' ',
 			vip: 0,
+			up_num:'',
 			lunbo: [],
 			income_rand_infos: [],
-			promote_rand_infos: [],
+			promote_rand_infos: []
 		},
 		userHeadList: [
 			require('../../assets/images/head/1.png'),
@@ -51,10 +53,7 @@ export default {
 			require('../../assets/images/head/18.png'),
 			require('../../assets/images/head/19.png'),
 			require('../../assets/images/head/20.png'),
-		],
-		interval: null,
-		market: false,
-		
+		]
 	},
 	mutations: {
 		updateAppList(state, value) {
@@ -62,6 +61,7 @@ export default {
 		},
 		store_info: (state, data) => {
 			const {token,user_info:{uid,account,invite_code}} = data;
+			console.log(token);
 			state.uid = uid;
 			state.token = token;
 			state.account = account;
@@ -110,6 +110,7 @@ export default {
 			state.avatar = data;
 		},
 		store_carousel(state, data) {
+			console.log(data);
 			state.baseBanner = data.list;
 			state.baseNotice = data.bulletin_content;
 			window.localStorage.setItem('baseBanner',data.list);
@@ -184,10 +185,12 @@ export default {
 					sessionStorage.clear();
 					state.userInfo = {};
 					state.token = null;
+					localStorage.removeItem('token');
 					router.replace({path: '/login' });
 					resolve();
 				}).catch(err => {
 					router.replace({path: '/login' });
+					localStorage.removeItem('token');
 					reject();
 				});
 			});

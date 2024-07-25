@@ -463,7 +463,9 @@ export const parseParam = () => {
     })
     return result
 }
-
+export function getToken() {
+    return localStorage.getItem("token");
+}
 export const currentDate = () => {
 	var arr_week;
 	var now = new Date();

@@ -40,15 +40,14 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     data.httpRequestCount = data.httpRequestCount || 0;
     console.log(location.protocol);
     console.log(process.env.NODE_ENV);
-    if(process.env.NODE_ENV == 'development'){
-        url = process.env.VUE_APP_APIURL;
-    }else{
+    if(process.env.NODE_ENV == 'production'){
         const pro_url = `${location.protocol}//${location.host}`
         console.log(pro_url);
         url = location.protocol=='https:'?`${pro_url}:8096/`:pro_url;
         console.log(url);
+    }else{
+        url = process.env.VUE_APP_APIURL;
     }
-    console.log(url);
     // if (process.env.NODE_ENV != 'development' && process.env.VUE_APP_FLAG == 'pro') {
     //     if (window.envInfo.releaseappInfo && window.envInfo.releaseappInfo.app_url && window.envInfo.releaseappInfo.app_url.length > 0) {
     //         urls = window.envInfo.releaseappInfo.app_url

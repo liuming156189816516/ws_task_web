@@ -38,8 +38,10 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
     let config = {sendToken: true,...conf}
     data.httpRequestIndex = data.httpRequestIndex == undefined ? index : data.httpRequestIndex;
     data.httpRequestCount = data.httpRequestCount || 0;
+    console.log(location.protocol);
     if(process.env.NODE_ENV == 'production'){
-        url = `${location.protocol}//${location.host}:8096/`
+        const pro_url = `${location.protocol}//${location.host}`
+        url = location.protocol=='https:'? `${pro_url}:8096/`:pro_url
     }else{
         url = process.env.VUE_APP_APIURL;
     }

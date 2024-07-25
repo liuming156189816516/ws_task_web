@@ -30,6 +30,17 @@ service.interceptors.response.use(res => {
       if(data.code == 0){
         return data.data;
       }else if(data.code == 401){
+      //   this.$dialog.confirm({
+      //     title: this.$t("other_008"),
+      //     message: this.$t("other_009"),
+      //     confirmButtonColor: "#ff9600",
+      //     confirmButtonText: this.$t("other_003"),
+      //     cancelButtonText: this.$t("other_007")
+      // }).then(() => {
+      //     this.$store.dispatch("User/logoutUser");
+      //     var storage = window.localStorage;
+      //     storage["isstorename"] =  "no";
+      // })
         vant.Toast(i18n.t('other_046'));
         localStorage.clear();
         localStorage.removeItem('token');

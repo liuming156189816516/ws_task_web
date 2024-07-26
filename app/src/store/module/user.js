@@ -22,7 +22,7 @@ export default {
 			list: [],
 			mini_point: 100,
 			put_fee: 0,
-			return_point: 0,
+			return_point: 0
 		},
 		footerGet: [false, false, false],
 		appList: [],
@@ -85,14 +85,14 @@ export default {
 			state.userInfo = {
 				...state.userInfo,
 				...data,
-			};
+			}
 		},
 		userBalance(state, data) {
 			state.userInfo = {
 				...state.userInfo,
 				balance: data.balance,
 				usdb: data.usdb,
-			};
+			}
 		},
 		updateConfig(state, data) {
 			state.config = data;
@@ -131,8 +131,8 @@ export default {
 					resolve(userData)
 				}).catch(error => {
 					reject(error);
-				});
-			});
+				})
+			})
 		},
 		userRegister({ commit,dispatch }, params) {
 			commit('clearUserInfo');
@@ -193,12 +193,12 @@ export default {
 					router.replace({path: '/login' });
 					localStorage.removeItem('token');
 					reject();
-				});
-			});
+				})
+			})
 		},
 		logoutClearAndJump({ commit }) {
 			commit('clearUserInfo');
 		}
 	},
-	modules: {},
+	modules: {}
 };

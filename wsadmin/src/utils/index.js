@@ -362,7 +362,23 @@ export function removeClass(ele, cls) {
 
 //将时间戳转成年月日时分秒
 export function resetTime(date, type) {
-  var myDate = date ? new Date(type == 4 ? date * 1000 : date) : new Date();
+  // const timeZones = ['Asia/Shanghai', 'Europe/London', 'America/New_York'];
+  // const times = timeZones.map((timeZone) =>
+  //   new Date(new Date().getTime() + -(new Date().getTimezoneOffset() * 60000)).toLocaleString('en-US', { timeZone })
+  // );
+  // const localTime = date; // 获取本地时间
+  // const offset = -(localTime.getTimezoneOffset() / 60); // 计算本地时间和 UTC 时间之间的差距
+  // const utcTime = new Date(localTime.getTime() + offset * 3600 * 1000); // 计算 UTC 时间
+  // const specifiedTimeZoneTime = utcTime.toLocaleString('en-US', { timeZone: 'Africa/Lagos' }); // 获取指定时区的时间
+  // console.log(specifiedTimeZoneTime); // 输出指定时区时间的字符串格式
+
+  // console.log(new Date(date.toLocaleString('en-US', { timeZone: "Africa/Lagos" })));
+  // console.log(new Date(date));
+  const newYork = new Date(date).toLocaleString('en-US', { timeZone: 'Africa/Lagos' });
+  console.log();
+
+  var myDate = new Date(newYork);
+  // var myDate = date ? new Date(type == 4 ? date * 1000 : date) : new Date();
   var Year = myDate.getFullYear(); //获取年
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
   var Dates = myDate.getDate(); //获取日

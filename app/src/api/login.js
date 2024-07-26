@@ -5,7 +5,7 @@ export const login = (param) => {
 }
 // 注册
 export const register = (param) => {
-    return request({url: '/adminmember/register',method: 'post',data:param})
+    return request({url: '/adminmember/register$',method: 'post',data:param})
 }
 // 修改密码
 export const changepwd = (param) => {

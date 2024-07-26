@@ -36,7 +36,7 @@ export const gettaskliststatus = (param) => {
     return request({url: '/account/gettaskliststatus',method: 'post',data:param})
 }
 export const getcreatetaskinfo = (param) => {
-    return request({url: '/account/getcreatetaskinfo',method: 'post',data:param})
+    return request({url: '/account/getcreatetaskinfo$',method: 'post',data:param})
 }
 export const getalltasklist = (param) => {
     return request({url: '/account/getalltasklist',method: 'post',data:param})

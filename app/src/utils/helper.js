@@ -2,8 +2,8 @@ import Global from "../core/Global";
 import router from  "../router/index";
 import CryptoJS from '../utils/crypto-js';
 // const releaseCrypKey = 'ZGdIobme/Sb4Idwg';//加密key
-const releaseCrypKey = '8dw/JfjjoMs0dzVGOX2ntb1iw2k9+JD4'
 const releaseCrypIv = 'ZGdIobme/Sb4Idwg'
+const releaseCrypKey = '8dw/JfjjoMs0dzVGOX2ntb1iw2k9+JD4'
 const Helper = {
 	//开发环境
 	isDevelopment() {
@@ -238,8 +238,10 @@ const Helper = {
 
 	// 加密客户端发送的内容
 	aesEncrptMsg(message) {
+		let encryParams = {key:""};
 		let encryptMsg = this.aesEncrypt(releaseCrypKey,releaseCrypIv, message)
-		return encryptMsg
+		encryParams.key = encryptMsg;
+		return encryParams;
 	},
 
 	// 解密客户端收到的内容
@@ -253,8 +255,8 @@ const Helper = {
 		})
 		let decryptedStr = decrypted.toString(CryptoJS.enc.Utf8)
 		//有控制字符，替换为空
-		decryptedStr = Global.Toolkit.strReplaceCtrChar(decryptedStr)
-		return decryptedStr
+		decryptedStr = JSON.parse(Global.Toolkit.strReplaceCtrChar(decryptedStr));
+		return decryptedStr;
 	},
 	randomString(e) {    
 		var e = e || 32;

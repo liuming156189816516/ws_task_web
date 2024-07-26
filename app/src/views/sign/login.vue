@@ -82,13 +82,11 @@ export default {
 			this.isLoading= true;
 			// let pp = this.$Helper.aesEncrptMsg(JSON.stringify(params));
 			// console.log(this.$Helper.aesDecrptHost(pp));
-			this.$store.dispatch('User/userLogin', params).then(res => {
+			this.$store.dispatch('User/userLogin',params).then(res => {
 				Toast.clear();
 				setTimeout(()=>{this.isLoading= false},2000)
 				if(!res.token) return;
 				this.checkChange();
-				console.log("11111");
-				console.log(window.localStorage.getItem('token'));
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())
 				}else{

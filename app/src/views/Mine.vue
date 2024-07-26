@@ -131,7 +131,7 @@ export default {
     },
     created() {
         this.syncInitApi();
-        this.$store.dispatch('User/getUserHead');
+        // this.$store.dispatch('User/getUserHead');
     },
     mounted(){
         let scrollTop = this.$refs.warpBox;

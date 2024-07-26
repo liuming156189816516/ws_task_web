@@ -64,7 +64,7 @@
                 <div class="model_line">
                     <van-divider :style="{ color: '#07c160', borderColor: '#07c160', padding: '0 16px', marginTop:'10px '}">{{ $t("home_004") }}</van-divider>
                 </div>
-                <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)" v-show="idx!=1">
+                <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)" v-show="idx!=0&&idx!=1">
                     <div class="left_text">
                         <img class="ws_icon" src="../assets/images/home/ws_icon.png" alt="">
                         <span>{{ taskNameOption[item.type]||item.task_name }}</span>
@@ -117,7 +117,8 @@ export default {
         }
 	},
     created(){
-        this.$store.dispatch('User/getUserHead');
+        // this.$store.dispatch('User/getUserHead');
+        this.getHelpServe();
         this.$store.dispatch('User/plantCarousel');
     },
     activated(){
@@ -126,8 +127,8 @@ export default {
         this.isScroll = false;
         if(JSON.parse(window.localStorage.getItem('is_play'))){
             setTimeout(() => {
-                this.$popDialog({content:this.help_url,title:this.$t("serv_004"),type:1}) 
-            },500);
+                this.$popDialog({content:this.help_url,title:this.$t("serv_004"),type:1})
+            },500)
         }
     },
 	methods: {
@@ -152,18 +153,16 @@ export default {
                     resolve(res)
                 })
             });
-            let fun5 = new Promise((resolve,reject)=>{
-                gethelp().then(res =>{
-                    resolve(res)
-                })
-            });
-            Promise.all([fun1,fun2,fun3,fun4,fun5]).then( res => {
+            Promise.all([fun1,fun2,fun3,fun4]).then( res => {
                 const [{income},data2,data3,data4,data5] = res;
                 this.user_money = income;
                 this.teamStemp = data2;
                 this.taskOption = [...data3.list,...data4.list];
-                this.help_url = data5.url;
             })
+        },
+        async getHelpServe(){
+           const { url } = await gethelp();
+           this.help_url = url ||"";
         },
         copySuccess(){
             this.$toast(`${this.$t("other_044")}`);

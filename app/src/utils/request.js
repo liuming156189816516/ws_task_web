@@ -5,9 +5,9 @@ import { getToken } from '@/utils/tool';
 import scehelper from '@/utils/helper';
 const port = process.env.VUE_APP_PORT;
 const devType = process.env.VUE_APP_ENV;
-const address = location.host.split(":").shift()+port;
+const address = `${location.protocol}//${location.host.split(":").shift()}${port}`;
 const pro_url = `${location.protocol}//${location.host}${port}`;
-const baseURL = devType=="dev"?"/api/":devType=="test"?`${location.protocol}//${address}`:`${pro_url}`;
+const baseURL = devType=="dev"?"/api/":devType=="test"?address:`${pro_url}`;
 
 const service = axios.create({baseURL:baseURL,timeout: 8000});
 service.interceptors.request.use(config => {

@@ -374,11 +374,11 @@ export function resetTime(date, type) {
 
   // console.log(new Date(date.toLocaleString('en-US', { timeZone: "Africa/Lagos" })));
   // console.log(new Date(date));
-  const newYork = new Date(date).toLocaleString('en-US', { timeZone: 'Africa/Lagos' });
-  console.log();
+  // const newYork = new Date(date).toLocaleString('en-US', { timeZone: 'Africa/Lagos' });
+  // console.log();
 
-  var myDate = new Date(newYork);
-  // var myDate = date ? new Date(type == 4 ? date * 1000 : date) : new Date();
+  // var myDate = new Date(newYork);
+  var myDate = date ? new Date(type == 4 ? date * 1000 : date) : new Date();
   var Year = myDate.getFullYear(); //获取年
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
   var Dates = myDate.getDate(); //获取日

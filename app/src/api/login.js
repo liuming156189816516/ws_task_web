@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 // 登录
 export const login = (param) => {
-    return request({url: '/adminmember/login',method: 'post',data:param})
+    return request({url: '/adminmember/login$',method: 'post',data:param})
 }
 // 注册
 export const register = (param) => {

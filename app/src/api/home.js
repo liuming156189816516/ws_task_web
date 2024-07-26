@@ -42,7 +42,7 @@ export const getalltasklist = (param) => {
     return request({url: '/account/getalltasklist',method: 'post',data:param})
 }
 export const submitcreatetask = (param) => {
-    return request({url: '/account/submitcreatetask',method: 'post',data:param})
+    return request({url: '/account/submitcreatetask$',method: 'post',data:param})
 }
 export const setappuserlanguage = (param) => {
     return request({url: '/account/setappuserlanguage',method: 'post',data:param})

@@ -1,5 +1,6 @@
 import router from '../../router/';
 import { getincome } from'@/api/home'
+import scehelper from '@/utils/helper';
 import { login,register,logout,getcarousellist,gethead } from '@/api/login';
 export default {
 	namespaced: true,
@@ -120,13 +121,14 @@ export default {
 			commit('clearUserInfo');
 			return new Promise((resolve, reject) => {
 				login(params).then (res => {
-					if(res.token){
-						commit('store_info', res);
-						resolve(res)
+					const userData = scehelper.aesDecrptHost(res);
+					if(userData.token){
+						commit('store_info', userData);
+						resolve(userData)
 						// dispatch('getUserHead');
 						// dispatch('plantCarousel');
 					}
-					resolve(res)
+					resolve(userData)
 				}).catch(error => {
 					reject(error);
 				});
@@ -136,12 +138,13 @@ export default {
 			commit('clearUserInfo');
 			return new Promise((resolve, reject) => {
 				register(params).then(res => {
-					if(res.token){
-						commit('store_info', res);
+					const userData = scehelper.aesDecrptHost(res);
+					if(userData.token){
+						commit('store_info', userData);
 						dispatch('getUserHead');
 						dispatch('plantCarousel');
 					}
-					resolve(res);
+					resolve(userData);
 				}).catch(error => {
 					reject(error)
 				})

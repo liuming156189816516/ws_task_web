@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Dialog } from 'vant';
 import { i18n } from '@/assets/lang'
 import { getToken } from '@/utils/tool';
 import scehelper from '@/utils/helper';
@@ -37,31 +38,30 @@ service.interceptors.response.use(res => {
       if(data.code == 0){
         return data.data;
       }else if(data.code == 401){
-      //   this.$dialog.confirm({
-      //     title: this.$t("other_008"),
-      //     message: this.$t("other_009"),
-      //     confirmButtonColor: "#ff9600",
-      //     confirmButtonText: this.$t("other_003"),
-      //     cancelButtonText: this.$t("other_007")
-      // }).then(() => {
-      //     this.$store.dispatch("User/logoutUser");
-      //     var storage = window.localStorage;
-      //     storage["isstorename"] =  "no";
-      // })
-        vant.Toast(i18n.t('other_046'));
-        localStorage.clear();
-        localStorage.removeItem('token');
-        setTimeout(() => {
+        Dialog.confirm({
+          title: i18n.t('other_008'),
+          message: i18n.t('other_046'),
+          closeOnClickOverlay: true,
+          showCancelButton:false,
+          confirmButtonColor: "#ff9600",
+          confirmButtonText: i18n.t('other_003'),
+        }).then(() => {
+          localStorage.clear();
+          localStorage.removeItem('token');
           window.likevm.$router.replace('/login');
-        }, 1000);
+        })
+      }else{
+        vant.Toast.fail(data.msg);
       }
     } else {
-      vant.Toast.fail(res.data.msg);
+      vant.Toast.fail(data.msg);
       localStorage.clear();
       localStorage.removeItem('token');
-      setTimeout(() => {
-        window.likevm.$router.replace('/login');
-      },1000);
+      if(!window.location.href.includes("/login")){
+        setTimeout(() => {
+          window.likevm.$router.replace('/login');
+        },1000);
+      }
     }
   },error => {
     vant.Toast.fail(i18n.t('other_047'));

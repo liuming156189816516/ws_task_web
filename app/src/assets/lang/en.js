@@ -181,7 +181,7 @@ export default {
     other_043:"The task is performed from 12 noon to 6 pm. During this period, you can enjoy the benefits by hanging up. Please stay online.",
     other_044:"Copied Successfully",
     other_045:"hint",
-    other_046:"Login information expired",
+    other_046:"Login information has expired, please log in again",
     other_047:"Network abnormality, please try again later.",
     other_048:"<div class='task_tips'>Congratulations on completion! It’s time to move onto the next mission!</div><div class='import_title'>!IMPORTANT!</div><div class='import_task_title'>Before moving on, please delete the address book used and saved in this task to avoid failure of the next task, else this will affect your income.</div>",
     other_049:"!IMPORTANT!",

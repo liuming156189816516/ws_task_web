@@ -64,7 +64,7 @@
                 <div class="model_line">
                     <van-divider :style="{ color: '#07c160', borderColor: '#07c160', padding: '0 16px', marginTop:'10px '}">{{ $t("home_004") }}</van-divider>
                 </div>
-                <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)" v-show="idx!=0&&idx!=1">
+                <div class="task_item" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)" v-show="idx!=1">
                     <div class="left_text">
                         <img class="ws_icon" src="../assets/images/home/ws_icon.png" alt="">
                         <span>{{ taskNameOption[item.type]||item.task_name }}</span>

@@ -218,8 +218,8 @@ export default {
 </script>
 <style lang="scss" scoped>
     .home_warp {
+        width: 100%;
         height: 100%;
-        height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;

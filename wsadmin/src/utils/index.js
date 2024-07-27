@@ -366,17 +366,10 @@ function convertTimeToZone(date, targetTimeZone) {
 
 //将时间戳转成年月日时分秒
 export function resetTime(date, type) {
-<<<<<<< HEAD
-  var targetTimeZone = 'Africa/Lagos';
-  var convertedDate = convertTimeToZone(date/1000, targetTimeZone);
-  console.log(convertedDate);
   var myDate = date ? new Date(type == 4 ? date * 1000 : date) : new Date();
-=======
   let Afr_time = new Date().toLocaleString('en-US', { timeZone: 'Africa/Lagos' });
   const newYork = date? new Date(type == 4 ? date * 1000 : date).toLocaleString('en-US', { timeZone: 'Africa/Lagos' }):Afr_time;
   var myDate = new Date(newYork);
-  // var myDate = date ? new Date(type == 4 ? date * 1000 : date) : new Date();
->>>>>>> 9bad2b9c6c51ebbb5d9cc78bfed09e6049293668
   var Year = myDate.getFullYear(); //获取年
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
   var Dates = myDate.getDate(); //获取日

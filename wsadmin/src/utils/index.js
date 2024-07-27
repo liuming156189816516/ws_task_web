@@ -360,8 +360,15 @@ export function removeClass(ele, cls) {
   }
 }
 
+function convertTimeToZone(date, targetTimeZone) {
+  return new Date(date.toLocaleString('en-US', { timeZone: targetTimeZone }));
+}
+
 //将时间戳转成年月日时分秒
 export function resetTime(date, type) {
+  var targetTimeZone = 'Africa/Lagos';
+  var convertedDate = convertTimeToZone(date/1000, targetTimeZone);
+  console.log(convertedDate);
   var myDate = date ? new Date(type == 4 ? date * 1000 : date) : new Date();
   var Year = myDate.getFullYear(); //获取年
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一

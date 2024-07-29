@@ -76,7 +76,7 @@
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="../assets/images/home/dingbu.png" alt="">
         </div>
-        <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.66">
+        <drag-icon ref="dragIconCom" :gapWidthPx="24" :coefficientHeight="0.68">
             <div class="serve_icon" slot="icon" @click="contactService">
                 <img src="../assets/images/ms_serve.png" alt="" />
             </div>

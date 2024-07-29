@@ -1,8 +1,4 @@
 /**
- * Created by PanJiaChen on 16/11/18.
- */
-
-/**
  * Parse the time to string
  * @param {(Object|string|number)} time
  * @param {string} cFormat
@@ -11,7 +7,7 @@
 import i18n from '@/locale'
 export function resetPage(page) {
   return [10, 20, 50, 100, 200, 500, 1000]
-}
+}       
 export function parseTime(time, cFormat) {
   if (arguments.length === 0 || !time) {
     return null

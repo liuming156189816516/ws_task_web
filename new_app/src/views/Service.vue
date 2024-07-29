@@ -34,6 +34,11 @@
                 <!-- <video ref="myVideo" controls :src="help_url" type="video/mp4" webkit-playsinline='true' playsinline='true' /> -->
             </div>
         </div>
+         <!-- <drag-icon ref="dragIconCom" :gapWidthPx="24" :coefficientHeight="0.68">
+            <div class="serve_icon" slot="icon" @click="contactService">
+                <img src="../assets/images/ms_serve.png" alt="" />
+            </div>
+        </drag-icon> -->
     </div>
 </template>
 

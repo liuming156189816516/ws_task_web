@@ -68,9 +68,9 @@ export default {
         },
         contactService(){
             if(this.$Helper.checkBrowser()){
-                window.open("https://wa.me/447377675671","_blank");
+                window.open(process.env.VUE_APP_SERVICE,"_blank");
             }else{
-                uniFun.postMessage({data:"https://wa.me/447377675671"});
+                uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
             }
         }
     }

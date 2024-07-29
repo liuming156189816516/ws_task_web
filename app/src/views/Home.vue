@@ -76,7 +76,7 @@
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="../assets/images/home/dingbu.png" alt="">
         </div>
-        <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.66">
+        <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
             <div class="serve_icon" slot="icon" @click="contactService">
                 <img src="../assets/images/ms_serve.png" alt="" />
             </div>
@@ -208,9 +208,9 @@ export default {
         },
         contactService(){
             if(this.$Helper.checkBrowser()){
-                window.open("https://wa.me/447377675671","_blank");
+                window.open(process.env.VUE_APP_SERVICE,"_blank");
             }else{
-                uniFun.postMessage({data:"https://wa.me/447377675671"});
+                uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
             }
         }
 	}

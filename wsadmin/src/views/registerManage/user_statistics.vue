@@ -36,8 +36,10 @@
                     <u-table-column prop="statis_time_str" :label="$t('sys_c134')" width="180" />
                     <u-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
                     <u-table-column prop="account_num" :label="$t('sys_m087')" minWidth="100" />
-                    <u-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
-                    <u-table-column prop="today_active_account_num" :label="$t('sys_m089')" minWidth="100" />
+                    <u-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
+                    <u-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
+                    <u-table-column prop="today_active_account_num" :label="$t('sys_m089')" minWidth="120" />
+                    <u-table-column prop="today_create_group_task_num" :label="$t('sys_rai122')" minWidth="100" />
                     <u-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
                     <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                     <u-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
@@ -99,6 +101,12 @@ export default {
                     t_c:"#369aff"
                 },
                 {
+                    label:this.$t('sys_m101'),
+                    num:0,
+                    b_g:"#dbfeff",
+                    t_c:"#1dcfdb"
+                },
+                {
                     label:this.$t('sys_m088'),
                     num:0,
                     b_g:"#dbfff1",
@@ -112,6 +120,12 @@ export default {
                 },
                  {
                     label:this.$t('sys_m093'),
+                    num:0,
+                    b_g:"#ffebeb",
+                    t_c:"#ff0f0"
+                },
+                {
+                    label:this.$t('sys_rai122'),
                     num:0,
                     b_g:"#ffebeb",
                     t_c:"#ff0f0"
@@ -165,20 +179,24 @@ export default {
                     }else if(k == 1){
                         item.num = vita.account_num||0;
                     }else if(k == 2){
-                        item.num = vita.today_active_user_num||0;
+                        item.num = vita.today_new_active_user_num||0;
                     }else if(k == 3){
-                        item.num = vita.today_active_account_num||0;
+                        item.num = vita.today_active_user_num||0;
                     }else if(k == 4){
-                        item.num = vita.bounty_amount||0;
+                        item.num = vita.today_active_account_num||0;
                     }else if(k == 5){
-                        item.num = vita.data_num||0;
+                        item.num = vita.today_create_group_task_num||0;
                     }else if(k == 6){
-                        item.num = vita.withdraw_user_num||0;
+                        item.num = vita.bounty_amount||0;
                     }else if(k == 7){
-                        item.num = vita.withdraw_amount||0;
+                        item.num = vita.data_num||0;
                     }else if(k == 8){
-                        item.num = vita.personal_amount||0;
+                        item.num = vita.withdraw_user_num||0;
                     }else if(k == 9){
+                        item.num = vita.withdraw_amount||0;
+                    }else if(k == 10){
+                        item.num = vita.personal_amount||0;
+                    }else if(k == 11){
                         item.num = vita.commission_amount||0;
                     }
                 }
@@ -272,28 +290,31 @@ export default {
 		justify-content: flex-start;
     .card_item{
       height: 60px;
-      width: calc((100% - (5 - 1) * 40px) / 5);
+      width: calc((100% - (6 - 1) * 30px) / 6);
       display: flex;
       font-size: 14px;
       cursor: pointer;
       align-items: center;
       border-radius: 10px;
-      padding: 0 40px;
+      padding: 0 20px;
       margin: 10px 0;
-      margin-left: 40px;
+      margin-left: 30px;
 	  border-radius: 10px;
-      justify-content: space-between;
+      justify-content: center;
+    //   justify-content: space-between;
       .card_num{
+        display: flex;
         font-weight: 600;
         font-size: 20px;
+        margin-left: 10px;
         em{
           font-style: normal;
         }
       }
     }
-    .card_item:nth-of-type(5n + 1) {
-			margin-left: 0;
-		}
+    .card_item:nth-of-type(6n + 1) {
+        margin-left: 0;
+    }
   }
 ::v-deep .el-card__body {
     width: 100%;

@@ -7,7 +7,7 @@
           <el-button type="primary" :disabled="checkArry.length==0" @click="scamperBtn(0,0)">{{ $t('sys_q111') }}</el-button>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
+          <el-input v-model="model1.invite_link" clearable placeholder="请输入邀请链接"  style="width:180px;" />
         </el-form-item>
         <el-form-item>
           <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
@@ -141,6 +141,7 @@ export default {
         offset: 1,
         limit: 100,
         account: "",
+        invite_link: "",
         ad_account: "",
       },
       taskForm:{
@@ -180,6 +181,7 @@ export default {
     restQueryBtn() {
       this.model1.status = "";
       this.model1.account = "";
+      this.model1.invite_link = "";
       this.model1.ad_account = "";
       this.getTaskList(1);
       // this.$refs.serveTable.clearSelection();
@@ -192,7 +194,8 @@ export default {
         page: this.model1.page,
         limit: this.model1.limit,
         status: this.model1.status||-1,
-        account: this.model1.account,
+        // account: this.model1.account,
+        invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account
       }
       getcreategroupinfolist(params).then(res => {

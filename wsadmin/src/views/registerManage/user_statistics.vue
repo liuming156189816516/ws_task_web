@@ -185,9 +185,9 @@ export default {
                     }else if(k == 4){
                         item.num = vita.today_active_account_num||0;
                     }else if(k == 5){
-                        item.num = vita.today_create_group_task_num||0;
+                       item.num = vita.bounty_amount||0;
                     }else if(k == 6){
-                        item.num = vita.bounty_amount||0;
+                        item.num = vita.today_create_group_task_num||0;
                     }else if(k == 7){
                         item.num = vita.data_num||0;
                     }else if(k == 8){

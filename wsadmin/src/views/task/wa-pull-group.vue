@@ -12,6 +12,9 @@
         <el-form-item>
           <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
         </el-form-item>
+        <el-form-item>
+          <el-date-picker v-model="model1.ipCtime" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+        </el-form-item>
         <!-- <el-form-item>
           <el-button type="warning" :disabled="checkIdArry.length==0" @click="handleGroupBtn(1)">{{ $t('sys_rai081') }}</el-button>
         </el-form-item>
@@ -24,6 +27,7 @@
         <el-form-item>
           <el-button icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002')}}</el-button>
           <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
+          <el-button type="warning" icon="el-icon-download" @click="exportBtn">导出</el-button>
         </el-form-item>
         <el-form-item class="fr">
           自动炸群: <el-switch v-model="auto_scamper" active-text="开启" inactive-text="关闭" @change="handleScamper" />
@@ -131,7 +135,7 @@
 
 <script>
 import { successTips, resetPage } from '@/utils/index'
-import { getcreategroupinfolist,getsysconfig,upsysconfig,groupsendmsg } from '@/api/task'
+import { getcreategroupinfolist,getsysconfig,upsysconfig,groupsendmsg,dooutexcel } from '@/api/task'
 export default {
   data() {
     return {
@@ -141,6 +145,7 @@ export default {
         offset: 1,
         limit: 100,
         account: "",
+        ipCtime: "",
         invite_link: "",
         ad_account: "",
       },
@@ -181,14 +186,28 @@ export default {
     restQueryBtn() {
       this.model1.status = "";
       this.model1.account = "";
+      this.model1.ipCtime = "";
       this.model1.invite_link = "";
       this.model1.ad_account = "";
       this.getTaskList(1);
       // this.$refs.serveTable.clearSelection();
     },
+    async exportBtn(){
+      const sTime = this.model1.ipCtime;
+      let params = {
+        status: this.model1.status||-1,
+        invite_link: this.model1.invite_link,
+        ad_account: this.model1.ad_account,
+        start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
+        end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
+      }
+      let { data:{url} } = await dooutexcel(params);
+      window.location.href = url;
+    },
     //获取订单列表
     getTaskList(num) {
       this.loading = true;
+      const sTime = this.model1.ipCtime;
       this.model1.page = num ? num : this.model1.page;
       let params = {
         page: this.model1.page,
@@ -196,7 +215,9 @@ export default {
         status: this.model1.status||-1,
         // account: this.model1.account,
         invite_link: this.model1.invite_link,
-        ad_account: this.model1.ad_account
+        ad_account: this.model1.ad_account,
+        start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
+        end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
       }
       getcreategroupinfolist(params).then(res => {
         this.loading = false;

@@ -118,6 +118,10 @@ export const getcreategroupinfolist = (params) =>{
   return request({url:'/group/getcreategroupinfolist',method:'post',data:params})
 }
 
+export const dooutexcel = (params) =>{
+  return request({url:'/group/dooutexcel',method:'post',data:params})
+}
+
 
 
 

@@ -1,6 +1,7 @@
 <template>
 	<div class="login_warp" @click="isIndex=false">
-		<div class="l_value" @click="showChangeBtn" @click.stop>
+		<page-header :title="$t('login_027')" :noBg="false"></page-header>
+		<!-- <div class="l_value" @click="showChangeBtn" @click.stop>
 			<span>{{ viewLang() }}</span>
 			<img class="down_icon" src="@/assets/images/home/xiala.png">
 			<van-transition name="fade-up">
@@ -8,11 +9,14 @@
 					<p v-for="item in langOptions" :key="item.lang" :style="langIdx==item.lang?'color:#07c160;':''" @click="onChangeType(item)">{{item.name}}</p>
 				</div>
 			</van-transition>
+		</div> -->
+		<div class="head_main w_f flex-item flex-dir-c">
+			<div class="head_title">Sign in to your Account</div>
+			<div class="small_text flex-item font_32">Sign in to your account</div>
 		</div>
-		<div class="login_main">
+		<div class="login_main flex-item flex-dir-c">
 			<div class="sign_login">
-				<img class="login_img" src="@/assets/images/logo.png">
-				<div class="head_title">Cash Cow</div>
+				<!-- <img class="login_img" src="@/assets/images/logo.png"> -->
 				<div class="uilist">
 					<div class="uilist_div account">
 						<img src="@/assets/images/sign/zhanghao.png" alt />
@@ -30,14 +34,22 @@
 				</div>
 				<div class="login_btn">
 					<van-button type="primary" :loading="isLoading" @click="handleLogin" :loading-text="$t('login_005')">{{$t('login_004')}}</van-button>
-					<van-button plain type="primary" @click="goRegister" >{{ $t('login_006') }}</van-button>
+					<!-- <van-button plain type="primary" @click="goRegister" >{{ $t('login_006') }}</van-button> -->
 				</div>
 			</div>
+			<div class="register_text w_f flex-item flex-center font_32" @click="goRegister">Dont't have an account？<span class="reg_text"> Register</span></div>
 		</div>
+		   <!-- <drag-icon ref="dragIconCom" :gapWidthPx="24" :coefficientHeight="0.68">
+            <div class="serve_icon" slot="icon" @click="contactService">
+                <img src="../assets/images/ms_serve.png" alt="" />
+            </div>
+        </drag-icon> -->
 	</div>
 </template>
 <script>
+import PageHeader from "@/components/Header";
 export default {
+	components: { PageHeader },
 	data() {
 		return {
 			regEye:true,
@@ -148,14 +160,33 @@ export default {
 .login_warp {
 	width: 100%;
 	height: 100%;
-	padding: 0 48px;
-	box-sizing: border-box;
-	box-sizing: border-box;
 	position: relative;
 	min-height: 100vh;
+	background: url('../../assets/images/home/bg_img.png') no-repeat;
+    background-size: cover;
+	.head_main{
+		padding: 48px 48px;
+		box-sizing: border-box;
+		.head_title{
+			width: 100%;
+			display: flex;
+			font-weight: bold;
+			font-size: 72px;
+			align-items: center;
+			justify-content: center; 
+			color: $font-color-white;
+		}
+		.small_text{
+			margin-top: 10px;
+			color: $home-title-04;
+		}
+	}
 	.login_main {
 		width: 100%;
 		position: relative;
+		height: calc(100% - 428px);
+		position: relative;
+		background: $font-color-white;
 		input {
 			background: transparent !important;
 			border: transparent;
@@ -178,6 +209,9 @@ export default {
 			}
 			.uilist {
 				overflow: hidden;
+				padding: 60px 48px 0 48px;
+				box-sizing: border-box;
+				// background: $font-color-white;
 				.uilist_div{
 					position: relative;
 					display: flex;
@@ -200,6 +234,8 @@ export default {
 			width: 100%;
 			display: flex;
 			margin-top: 20px;
+			padding: 0 48px;
+			box-sizing: border-box;
 			flex-direction: column;
 			.van-button{
 				width: 100%;
@@ -211,6 +247,15 @@ export default {
 			// 	color: #323aa2;
 			// 	background: #e9edfe;
 			// }
+		}
+		.register_text{
+			position: absolute;
+			left: 0;
+			bottom: 60px;
+			color: $home-title-03;
+		}
+		.reg_text{
+			color: $color-theme;
 		}
 	}
 }
@@ -235,16 +280,6 @@ export default {
 }
 :-ms-input-placeholder {
 	color: #a7a7a7;
-}
-.head_title{
-	width: 100%;
-	display: flex;
-	flex-shrink: 0;
-	font-weight: bold;
-	font-size: 32px;
-	align-items: center;
-	justify-content: center; 
-	margin-bottom: 20%;
 }
 .forget_pwd{
 	display: flex;

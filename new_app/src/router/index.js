@@ -1,7 +1,7 @@
 import store from "../store/";
 import Home from "../views/Home.vue";
 import Footer from "../components/Footer";
-const initPath = window.localStorage.getItem('token') && window.localStorage.getItem("prologin")? "/home" : "/login";
+// const initPath = window.localStorage.getItem('token') && window.localStorage.getItem("prologin")? "/home" : "/login";
 const Login = () => import('../views/sign/login');
 const Register = () => import('../views/sign/register');
 const ForgotPassword = () => import("../views/sign/ForgotPassword");
@@ -31,7 +31,7 @@ Vue.use(VueRouter);
 
 const routes = [{
         path: "/",
-        redirect: initPath
+        redirect: "/home"
     },
     {
         path: '/home',
@@ -290,9 +290,7 @@ router.beforeEach((to, from, next) => {
         if (token) {
             next();
         } else {
-            next({
-                path: "/login",
-            });
+            next({path: "/home",});
         }
     }
     next();

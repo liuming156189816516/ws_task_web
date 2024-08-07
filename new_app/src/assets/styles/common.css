@@ -40,6 +40,12 @@
 .flex-dir-r{
   flex-direction: row;
 }
+.font_10 {
+  font-size: 10px;
+}
+.font_12 {
+  font-size: 12px;
+}
 .font_14 {
   font-size: 14px;
 }
@@ -52,8 +58,14 @@
 .font_20 {
   font-size: 20px;
 }
+.font_22 {
+  font-size: 22px;
+}
 .font_24 {
   font-size: 24px;
+}
+.font_26 {
+  font-size: 26px;
 }
 .font_28 {
   font-size: 28px;

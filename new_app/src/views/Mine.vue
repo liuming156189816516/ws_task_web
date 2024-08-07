@@ -1,32 +1,35 @@
 <template>
     <div class="home_warp" ref="warpBox">
-        <div class="top_model">
-            <div class="user_mess">
-                <div class="user_head" @click="updateHead">
-                    <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
+        <div class="top_model w_f flex-item flex-dir-c">
+            <div class="user_mess w_f flex-item flex-dir-c">
+                <div class="page_title w_f flex-item font_32 flex-center">Account</div>
+                <div class="w_f flex-item">
+                    <div class="user_head" @click="updateHead">
+                        <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
+                    </div>
+                    <div class="user_info">
+                        <div class="user_name font_32">{{ userInfo.account }}</div>
+                        <div class="user_code font_24">{{$t('other_005')}}：{{userInfo.inviteCode}} <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
+                    </div>
                 </div>
-                <div class="user_info">
-                    <div class="user_name">{{ userInfo.account }}</div>
-                    <div class="user_code">{{$t('other_005')}}：{{userInfo.inviteCode}} <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
-                </div>
-            </div>
-            <div class="lang_mess">
-                <!-- <span>zh-CN</span>
-                <img src="../assets/images/home/down_arrow_white.png" alt="" srcset=""> -->
             </div>
             <div class="cover_model">
-                <div class="task_warp">
+                <div class="task_warp w_f flex-item flex-align">
                     <div class="task_num">
-                        <div class="text_1">{{$t('mine_001')}}</div>
-                        <div class="text_2">
+                        <div class="text_1 w_f flex-item flex-center">
+                            {{$t('mine_001')}}
+                            <img src="@/assets/images/symbol_icon.png" @click="showRule">
+                        </div>
+                        <div class="text_2 flex-item font_48">
                             <img src="../assets/images/gold_icon.png" alt="" srcset="">
                             <span>{{user_money||0.00}}</span>
                         </div>
                     </div>
-                    <div class="custom_line">
+                    <van-button class="font_30" type="primary" @click="goWithdraw">Withdraw</van-button>
+                    <!-- <div class="custom_line">
                         <span class="botton_line"></span>
-                    </div>
-                    <div class="task-pro">
+                    </div> -->
+                    <!-- <div class="task-pro">
                         <div class="left-pro">
                             <p>{{allIncome.today_bonus ||0}}</p>
                             <p>{{ $t("mine_007") }}</p>
@@ -35,20 +38,32 @@
                             <p>{{allIncome.yesterday_bonus ||0}}</p>
                             <p>{{ $t("mine_008") }}</p>
                         </div>
-                        <!-- <div class="right-pro">
-                            <p>999</p>
-                            <p>{{ $t("home_060") }}</p>
-                        </div> -->
+                    </div> -->
+                </div>
+            </div>
+            <div class="self_jinbi w_f flex-item">
+                <div class="self_item w_f flex-item flex-dir-c">
+                    <div class="flex-item flex-align flex-between">
+                        <span class="font_28">Task Earnings</span>
+                        <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
+                    <div class="self_dold flex-item">999.00</div>
+                </div>
+                <div class="self_item w_f flex-item flex-dir-c">
+                    <div class="flex-item flex-align flex-between">
+                        <span class="font_28">Millionaire Earnings</span>
+                        <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
+                    </div>
+                    <div class="self_dold flex-item">999.00</div>
                 </div>
             </div>
         </div>
-        <div class="task_continer">
+        <div class="task_continer w_f flex-item flex-dir-c">
             <div class="task_main">
                 <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click="handleJump(item.path,idx)" v-show="item.isShow">
                     <div class="left_text">
-                        <img class="ws_icon" :src="item.icon" alt="">
-                        <span>{{ item.name }}</span>
+                        <img class="ws_icon" :src="require(`@/assets/images/mine/${item.icon}.png`)" alt="">
+                        <span class="font_32">{{ item.name }}</span>
                     </div>
                     <div class="right_icon">
                         <img src="../assets/images/home/xiala_icon.png" alt="" srcset="">
@@ -56,9 +71,9 @@
                 </div>
             </div>
         </div>
-        <div class="login_out">
+        <!-- <div class="login_out">
             <van-button type="primary" @click="logoutHandle">{{ $t("other_010") }}</van-button>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
@@ -93,21 +108,21 @@ export default {
             return [
                 {
                     isShow:true,
-                    name:this.$t("mine_002"),
-                    path:"/withdraw",
-                    icon:require("../assets/images/mine/mine-put-record.png")
-                },
-                {
-                    isShow:true,
-                    name:this.$t("mine_003"),
+                    name:this.$t("mine_010"),
                     path:"/betrecord",
-                    icon:require("../assets/images/mine/me_icon_txjl.png")
+                    icon:"draw_icon"
                 },
+                // {
+                //     isShow:true,
+                //     name:this.$t("mine_002"),
+                //     path:"/withdraw",
+                //     icon:"task_icon"
+                // },
                 {
                     isShow:true,
-                    name:this.$t("mine_004"),
+                    name:this.$t("mine_011"),
                     path:"/putrecord",
-                    icon:require("../assets/images/mine/mine-put-record2.png")
+                    icon:"task_icon"
                 },
                 // {
                 //     name:"消息中心",
@@ -116,15 +131,21 @@ export default {
                 // },
                 {
                     isShow:true,
-                    name:this.$t("mine_005"),
+                    name:this.$t("mine_012"),
                     path:"/ResetPwd",
-                    icon:require("../assets/images/mine/mine-update-pwd.png")
+                    icon:"pwd_icon"
                 },
                 {
                     isShow:false,
                     name:this.$t("mine_009"),
                     path:"/down_apk",
-                    icon:require("../assets/images/mine/anzhuo.png")
+                    icon:"anzhuo"
+                },
+                {
+                    isShow:true,
+                    name:this.$t("mine_013"),
+                    path:"/log_out",
+                    icon:"quit_icon"
                 }
             ]
         }
@@ -185,17 +206,26 @@ export default {
             }
         },
         handleJump(path,idx){
-            if (idx !== 4) {
-                this.$router.push(path);
-            }else{
+            if(path == '/down_apk'){
                 let link = document.createElement('a');
                 link.href = path;
                 link.setAttribute('download', 'cashcow');
                 link.click();
             }
+            if(path == "/log_out"){
+                this.logoutHandle();
+            }else{
+                this.$router.push(path);
+            }
         },
         updateHead(){
             this.$router.push("/myHead");
+        },
+        showRule(){
+            this.$popDialog({ content: this.help_url, title:"Notes", type: 4 })
+        },
+        goWithdraw(){
+            this.$router.push("/withdraw");
         },
         logoutHandle() {
             this.$dialog.confirm({
@@ -230,28 +260,19 @@ export default {
     overflow-y: scroll;
     padding-bottom: 240px;
     background-color: #f2f2f2;
-    overflow-scrolling: touch;
     -webkit-overflow-scrolling: touch;
     .top_model {
-        width: 100%;
-        height: 340px;
-        display: flex;
-        padding: 0 30px;
-        margin-bottom: 280px;
-        position: relative;
-        box-sizing: border-box;
-        justify-content: space-between;
-        background: $color-theme;
-        border-bottom-left-radius: 80px;
-        border-bottom-right-radius: 80px;
-        .user_mess,
-        .lang_mess {
-            display: flex;
-            font-size: 28px;
-            height: 180px;
-            color: #fff;
+        .user_mess {
+            height: 280px;
+            padding: 0 30px;
+            box-sizing: border-box;
+            color: $font-color-black;
             align-items: center;
-
+            background: linear-gradient(180deg, #008751 1.61%, rgba(255, 255, 255, 0.5) 100%);
+            .page_title{
+                margin: 40px 0;
+                color: $font-color-white;
+            }
             .user_head {
                 width: 120px;
                 height: 120px;
@@ -266,135 +287,124 @@ export default {
 
             .user_info {
                 margin-left: 20px;
-
                 .user_name {
-                    font-weight: bold;
-                    font-size: 36px;
+                    font-weight: 500;
                 }
-
                 .user_code {
                     margin-top: 10px;
-
                     .copay_code {
                         padding: 8px 26px;
-                        font-size: 24px;
-                        background-color: #fff;
-                        color: $color-theme;
-                        background: #fff;
+                        color: $font-color-white;
+                        background: $color-theme;
                     }
                 }
-            }
-        }
-
-        .lang_mess {
-            display: flex;
-
-            img {
-                height: 20px;
-                margin-left: 10px;
             }
         }
 
         .cover_model {
             width: 100%;
-            position: absolute;
-            top: 190px;
-            left: 0;
             padding: 0 20px;
+            margin-top: 20px;
             box-sizing: border-box;
             .task_warp {
                 display: flex;
                 flex-direction: column;
                 padding: 30px 0 40px 0;
-                border-radius: 10px;
+                border-radius: 40px;
                 background-color: $font-color-white;
-
                 .task_num {
                     width: 100%;
                     display: flex;
-                    margin-bottom: 40px;
+                    margin-bottom: 34px;
                     align-items: center;
                     flex-direction: column;
-
                     .text_1 {
+                        position: relative;
                         font-size: 28px;
+                        img{
+                            height: 36px;
+                            position: absolute;
+                            top: 50%;
+                            right: 20px;
+                            transform: translateY(-50%);
+                        }
                     }
 
                     .text_2 {
-                        display: flex;
-                        font-size: 78px;
                         font-weight: bold;
-                        align-items: center;
-                        margin-top: 30px;
+                        margin-top: 14px;
+                        font-style: italic;
                         img {
                             height: 64px;
                             margin-right: 10px;
                         }
                     }
                 }
+                .van-button {
+                    width: 211px;
+                    height: max-content;
+                    line-height: 1;
+                    padding: 10px 0;
+                    border-radius: 35px;
+                    box-sizing: border-box;
+                    border-color: $color-theme;
+                    background-color: $color-theme;
+                }
             }
-            .task-pro {
-                width: 100%;
-                display: flex;
-                margin-top: 30px;
-                flex-direction: row;
-                .left-pro,
-                .right-pro {
-                    flex: 1;
-                    p {
-                        width: 100%;
-                        display: flex;
-                        color: #999999;
-                        font-weight: bold;
-                        justify-content: center;
-                        align-items: center;
-                    }
+        }
+        .self_jinbi{
+            padding: 0 26px;
+            margin-top: 20px;
+            gap: 28px;
+            box-sizing: border-box;
+            .self_item{
+                flex: 1;
+                padding: 20px 20px;
+                box-sizing: border-box;
+                color: $home-title-12;
+                padding-bottom: 20px;
+                border-radius: 20px;
+                background: $font-color-white;
+                span{
+                    color: $home-title-06;
                 }
-
-                .left-pro p:nth-child(1), .right-pro p:nth-child(1) {
-                    color: $font-color-black;
-                    font-size: 42px;
+                .self_dold{
+                    font-weight: bold;
+                    margin-top: 16px;
+                    color: $home-title-12;
                 }
-                // .right-pro p:nth-child(1){
-                //     color: $home-month-value;
-                // }
-
-                .left-pro p:nth-child(2),
-                .right-pro p:nth-child(2) {
-                    font-size: 24px;
-                    margin-top: 12px;
+                .more_icon{
+                    height: 24px;
+                    margin-left: 4px;
                 }
             }
         }
     }
 
     .task_continer {
-        width: 100%;
-        display: flex;
+        padding: 0 26px;
         margin-top: 20px;
-        flex-direction: column;
         box-sizing: border-box;
-        background-color: $font-color-white;
         .task_main {
             display: flex;
             padding: 0 20px;
-            border-radius: 10px;
+            border-radius: 40px;
             box-sizing: border-box;
             flex-direction: column;
+            background-color: $font-color-white;
             .task_item {
                 width: 100%;
                 display: flex;
-                font-size: 30px;
                 padding: 30px 20px;
                 align-items: center;
                 box-sizing: border-box;
                 justify-content: space-between;
-                border-bottom: 1px solid #ececec;
+                // border-bottom: 1px solid #ececec;
                 .left_text {
                     display: flex;
                     align-items: center;
                     .ws_icon {
-                        height: 60px;
+                        height: 40px;
                         margin-right: 10px;
                     }
                 }

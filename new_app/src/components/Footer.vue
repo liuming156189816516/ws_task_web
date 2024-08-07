@@ -62,6 +62,9 @@ export default {
     },
     methods: {
         goToPage(path) {
+			// if(path !== '/home'){
+			// 	return this.$router.push("/login");
+			// }
             if (this.$route.name === path) {
                 return;
             }

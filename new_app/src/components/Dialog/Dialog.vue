@@ -1,10 +1,12 @@
 <template>
     <van-overlay :show="visible">
         <div class="overlay-mian" @click.stop>
-            <div class="header_title">
-                {{ title }}
-                <van-icon class="close_btn" name="cross" @click="closeBtn" />
-            </div>
+            <template v-if="type==1||type==2">
+                <div class="header_title">
+                    {{ title }}
+                    <van-icon class="close_btn" name="cross" @click="closeBtn" />
+                </div>
+            </template>
             <div class="video_tips" v-if="type==1">
                 <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls :src="content"></video>
             </div>
@@ -14,10 +16,36 @@
                     <van-button type="primary" @click="$router.push('/home')">确定</van-button>
                 </div> -->
             </div>
+            <template v-if="type==3||type==4||type==5">
+                <div class="rule_model w_f flex-item flex-align flex-dir-c">
+                    <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
+                    <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div>
+                    <div class="rule_desc font_22" v-if="type==3">
+                        <p>{{restLanuage('home_059')}}</p>
+                        <p>{{restLanuage('home_060')}}</p>
+                        <p>{{restLanuage('home_061')}}</p>
+                        <p>{{restLanuage('home_062')}}</p>
+                        <p>{{restLanuage('home_063')}}</p>
+                    </div>
+                    <div class="rule_desc font_22" v-if="type==4">
+                        <p>{{restLanuage('home_064')}}</p>
+                        <p>{{restLanuage('home_065')}}</p>
+                        <p>{{restLanuage('home_066')}}</p>
+                        <p>{{restLanuage('home_067')}}</p>
+                    </div>
+                    <div class="rule_desc font_22" v-if="type==5">
+                        <p>{{restLanuage('home_068')}}</p>
+                        <p>{{restLanuage('home_069')}}</p>
+                        <p>{{restLanuage('home_070')}}</p>
+                        <p>{{restLanuage('home_071')}}</p>
+                    </div>
+                </div>
+            </template>
         </div>
     </van-overlay>
 </template>
 <script>
+import { i18n } from '@/assets/lang'
 export default {
     props: {
         type:{
@@ -42,12 +70,14 @@ export default {
     mounted() {
         setTimeout(()=>{
             let video = this.$refs.myVideo;
-            video.addEventListener('play', (e)=> {
-                this.is_play=true;
-            })
-            video.addEventListener('pause',(e)=> {
-                this.is_play=false;
-            })
+            if(video){
+                video.addEventListener('play', (e)=> {
+                    this.is_play=true;
+                })
+                video.addEventListener('pause',(e)=> {
+                    this.is_play=false;
+                })
+            }
         })
     },
     methods: {
@@ -61,6 +91,9 @@ export default {
             this.is_play=true;
             // this.$refs.myVideo.setAttribute('webkit-playsinline', true);
             // this.$refs.myVideo.setAttribute('playsinline', true);
+        },
+        restLanuage(val){
+            return i18n.t(val)
         }
     }
     // beforeDestroy(){
@@ -80,7 +113,7 @@ export default {
     .overlay-mian{
         width: 100%;
         border-radius: 8px;
-        overflow: hidden;
+        // overflow: hidden;
         box-sizing: border-box;
         background-color: $font-color-white;
         .header_title{
@@ -114,6 +147,7 @@ export default {
         }
         .contnet_mian{
             width: 100%;
+            // border-radius: 30px;
             padding: 0 20px 30px 20px;
             text-align: justify;
             box-sizing: border-box;
@@ -126,6 +160,37 @@ export default {
                 .van-button{
                     height: max-content;
                     padding: 10px 20px;
+                }
+            }
+        }
+        .rule_model{
+            width: 100%;
+            // height: 300px;
+            position: relative;
+            border-radius: 30px;
+            background-color: $font-color-white;
+            .close_icon{
+                height: 24px;
+                position: absolute;
+                top: -30px;
+                right: 0;
+            }
+            .top_header{
+                width: 233px;
+                height: 33px;
+                font-weight: 510;
+                margin-bottom: 10px;
+                color: $home-title-12;
+                background: url('../../assets/images/head_icon.png') no-repeat;
+                background-size: cover;
+            }
+            .rule_desc{
+                padding: 10px 12px;
+                box-sizing: border-box;
+                p{
+                    line-height: 14px;
+                    color: $font-color-black;
+                    margin-bottom: 12px;
                 }
             }
         }

@@ -1,13 +1,12 @@
 <template>
 	<div class="login_warp">
+		<page-header :title="$t('login_027')" :noBg="false"></page-header>
+		<div class="head_main w_f flex-item flex-dir-c">
+			<div class="head_title">Sign in to your Account</div>
+			<div class="small_text flex-item font_32">Create your account</div>
+		</div>
 		<div class="sign_login">
-			<div class="nav_top">
-				<div class="back_icon">
-					<img src="@/assets/images/sign/left.png" @click="$router.go(-1)" />
-				</div>
-				<div class="serve_area">{{ $t('login_014') }}</div>
-			</div>
-			<img class="login_img" src="@/assets/images/logo.png" alt="" srcset="">
+			<!-- <img class="login_img" src="@/assets/images/logo.png" alt="" srcset=""> -->
 			<!-- <div class="head_title">{{ $t('login_029') }}</div> -->
 			<div class="uilist">
 				<div class="uilist_div">
@@ -49,7 +48,9 @@
 </template>
 <script>
 import { getcode } from '@/api/login';
+import PageHeader from "@/components/Header";
 export default {
+	components: { PageHeader },
 	data() {
 		return {
 			regEye:true,
@@ -170,11 +171,11 @@ export default {
 .login_warp {
 	width: 100%;
 	height: 100%;
-	padding: 0 48px;
-	box-sizing: border-box;
 	position: relative;
 	overflow: hidden;
 	overflow-y: auto;
+	background: url('../../assets/images/home/bg_img.png') no-repeat;
+    background-size: cover;
 	input {
 		background: transparent !important;
 		border: transparent;
@@ -184,52 +185,41 @@ export default {
 		padding-left: 25px;
 		flex-grow: 1;
 	}
-
+	.head_main{
+		padding: 48px 48px;
+		box-sizing: border-box;
+		// background-color: $color-theme;
+		.head_title{
+			width: 100%;
+			display: flex;
+			font-weight: bold;
+			font-size: 72px;
+			align-items: center;
+			justify-content: center; 
+			color: $font-color-white;
+		}
+		.small_text{
+			margin-top: 10px;
+			color: $home-title-04;
+		}
+	}
 	.sign_login {
 		display: flex;
 		width: 100%;
+		height: calc(100% - 428px);
 		position: relative;
 		flex-direction: column;
+		background: $font-color-white;
 		.login_img{
 			height: 120px;
 			margin: 0 auto;
 			margin-top: 8%;
 			margin-bottom: 10%;
 		}
-		.nav_top {
-			width: 100%;
-			height: 88px;
-			display: flex;
-			align-items: center;
-			.back_icon {
-				flex-grow: 0;
-				img {
-					width: 18px;
-				}
-			}
-			.serve_area {
-				display: flex;
-				flex-grow: 2;
-				height: 100%;
-				font-size: 34px;
-				align-items: center;
-				justify-content: center;
-				// img {
-				// 	width: 32px;
-				// 	height: 40px;
-				// 	margin-right: 8px;
-				// }
-				// span {
-				// 	color: #F52C2C;
-				// 	font-size: 28px;
-				// 	font-weight: 600;
-				// }
-			}
-		}
-
 		.uilist {
 			overflow: hidden;
-
+			padding: 0 48px;
+			box-sizing: border-box;
 			.uilist_div,
 			.verfy_code {
 				position: relative;
@@ -330,14 +320,14 @@ export default {
 		display: flex;
 		margin-top: 20px;
 		flex-direction: column;
-
+		padding: 0 48px;
+		box-sizing: border-box;
 		.van-button {
 			width: 100%;
 			border: none;
 			border-radius: 6px;
 			margin-bottom: 20px;
 		}
-
 		.van-button:nth-child(2) {
 			color: #323aa2;
 			background: #e9edfe;
@@ -386,12 +376,4 @@ export default {
 	color: #a7a7a7;
 }
 
-.head_title {
-	width: 100%;
-	display: flex;
-	flex-shrink: 0;
-	align-items: center;
-	justify-content: center;
-	margin: 20% 0 10% 0;
-}
 </style>

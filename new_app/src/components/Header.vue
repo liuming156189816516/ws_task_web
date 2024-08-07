@@ -1,5 +1,5 @@
 <template>
-    <div class="header-box" :class="[bgcolor?'headerBg':'', isPcH?'isPcH': '']">
+    <div :class="['header-box',!brColor?'hide_br':'',bgColor?'headerBg':'', isPcH?'isPcH': '']">
         <div class="header">
             <div class="left" @click="onClickLeft" v-show="showBack">
                 <van-icon name="arrow-left" size="20"></van-icon>
@@ -40,7 +40,10 @@ export default {
         hide: {
             default: false
         },
-        bgcolor: {
+        bgColor: {
+            default: false
+        },
+        brColor: {
             default: false
         },
         prevent: Boolean
@@ -58,18 +61,19 @@ export default {
             if (this.$props.prevent) {
                 this.$emit("return");
             } else {
-                if (!window.localStorage.getItem("token")) {
-                    this.$toast(this.$t("login_022"));
-                    sessionStorage.clear();
-                    localStorage.removeItem("token");
-                    setTimeout(() => {
-                        this.$router.replace("/login");
-                    }, 1000);
-                } else if(this.$props.jumpType == "0") {
-                    this.$router.push({path:'/home'});
-                } else {
-                    this.$router.back();
-                }
+                this.$router.go(-1);
+                // if (!window.localStorage.getItem("token")) {
+                //     this.$toast(this.$t("login_022"));
+                //     sessionStorage.clear();
+                //     localStorage.removeItem("token");
+                //     setTimeout(() => {
+                //         this.$router.replace("/login");
+                //     }, 1000);
+                // } else if(this.$props.jumpType == "0") {
+                //     this.$router.push({path:'/home'});
+                // } else {
+                //     this.$router.back();
+                // }
             }
         },
         onClickRight() {
@@ -94,15 +98,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header-box {
-    position: relative;
-    width: 100%;
-    // padding: 20px 20px;
-    height: 88px;
-    background-color: #ffffff;
-    // background: linear-gradient(90deg, #F65251, #F35251);
-    border-bottom: 1px solid #D8D8D8;
     display:flex;
+    width: 100%;
+    height: 88px;
+    position: relative;
+    border-bottom: 1px solid #D8D8D8;
     align-items: center;
+    background: transparent;
     .header {
         width: 100%;
         // display: flex;
@@ -153,5 +155,11 @@ export default {
     max-width: 1000px;
     left: 50% !important;
     transform: translateX(-50%);
+}
+.hide_br{
+    border: none !important;
+    .title{
+        color: $font-color-white !important;
+    }
 }
 </style>

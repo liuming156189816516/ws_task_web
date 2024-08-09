@@ -264,6 +264,7 @@ export default {
                         height:66px;
                         color: $font-color-white;
                         font-weight: bold;
+                        text-shadow: 4px 4px 0px #00000040;
                     }
                     .spred_m{
                         padding: 13px 70px;

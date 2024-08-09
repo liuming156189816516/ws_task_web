@@ -2,7 +2,8 @@
     <div :class="['header-box',!brColor?'hide_br':'',bgColor?'headerBg':'', isPcH?'isPcH': '']">
         <div class="header">
             <div class="left" @click="onClickLeft" v-show="showBack">
-                <van-icon name="arrow-left" size="20"></van-icon>
+                <!-- <van-icon name="arrow-left" size="20"></van-icon> -->
+                <img src="@/assets/images/bank_icon.png" alt="" srcset="">
             </div>
             <div class="title">{{title}}</div>
             <div class="ke-fu-icon" v-if="hide" :class="showIcon && 'show'" @click="$Helper.toOutLink(userInfo.kefu+'&appid=30301&appname='+wk_name+'&userid='+userInfo.user_id+'&username='+userInfo.user_key+'&point='+userInfo.point+'&ip='+myip+'&prov='+mycityname)">
@@ -125,6 +126,9 @@ export default {
             position: absolute;
             top: 50%;left: 30px;
             transform: translateY(-50%);
+            img{
+                height: 27px;
+            }
         }
         .ke-fu-icon {
             position: absolute;

@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="qr-code" v-show="errState">
                                     <div ref="qrcodeImg" class="view_qr @/assets/images/home/qr_err.png" id="qrcodeImg">
-                                        <img class="qr_img" src="@/assets/images/home/ws_icon.png" alt="">
+                                        <!-- <img class="qr_img" src="@/assets/images/home/ws_icon.png" alt=""> -->
                                     </div>
                                 </div>
                                 <div class="err_code" v-show="!errState">
@@ -95,7 +95,7 @@
                             </template>
                             <template v-else>
                                 <div class="item_mess">
-                                    <img class="empty_data" src="@/assets/images/home/ws_icon.png" alt="" srcset="">
+                                    <!-- <img class="empty_data" src="@/assets/images/home/ws_icon.png" alt="" srcset=""> -->
                                     <div class="empty_text">{{ $t('other_037') }}</div>
                                 </div>
                             </template>

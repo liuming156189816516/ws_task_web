@@ -52,6 +52,9 @@
 .font_16 {
   font-size: 16px;
 }
+.font_17 {
+  font-size: 17px;
+}
 .font_18 {
   font-size: 18px;
 }
@@ -105,6 +108,9 @@
 }
 .font_56 {
   font-size: 56px;
+}
+.font_72 {
+  font-size: 72px;
 }
 .no-pxtorem-s{
   padding-bottom: 50px;

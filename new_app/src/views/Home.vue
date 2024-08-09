@@ -30,13 +30,13 @@
                 </div>
             </div>
             <div class="task_main w_f flex-item flex-dir-c">
-                <div class="task_item w_f flex-item flex-dir-c font_34" v-for="(item,idx) in taskNameOption" :key="idx" v-show="idx!=0">
-                    <div class="task_name">{{item.name}}</div>
+                <div class="task_item w_f flex-item flex-dir-c font_34" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
+                    <div class="task_name">{{taskNameOption[item.type].name}}</div>
                     <div class="task_award font_30">
-                        <div v-html="$t(item.award)"></div>
-                        <van-button type="primary">{{item.btn}}</van-button>
+                        <div v-html="$t(taskNameOption[item.type].award)"></div>
+                        <van-button type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>
-                    <div class="task_desc font_24">{{item.desc}}</div>
+                    <div class="task_desc font_24">{{taskNameOption[item.type].desc}}</div>
                 </div>
             </div>
             <div class="record_warp w_f flex-item">
@@ -99,9 +99,9 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_044'),award:this.$t('home_047',{value:50}),btn:this.$t('home_056'),desc:this.$t('home_049')},
-                {name:this.$t('home_045'),award:this.$t('home_047',{value:70}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_046'),award:this.$t('home_048',{value:90}),btn:this.$t('home_058'),desc:this.$t('home_051')}
+                {name:this.$t('home_044'),type:2,status:null,task_info_id:null,award:this.$t('home_047',{value:50}),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                {name:this.$t('home_045'),type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:70}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_046'),type:1,status:null,task_info_id:null,award:this.$t('home_048',{value:90}),btn:this.$t('home_058'),desc:this.$t('home_051')}
             ]
         },
         taskStatusOption() {
@@ -114,7 +114,7 @@ export default {
         // this.$store.dispatch('User/plantCarousel');
     },
     activated() {
-        // this.syncInitApi();
+        this.syncInitApi();
         this.isIndex = false;
         this.isScroll = false;
         if (JSON.parse(window.localStorage.getItem('is_play'))) {
@@ -252,7 +252,7 @@ export default {
                     height: 26px;
                     padding: 0 4px 0 20px;
                     color: $color-theme;
-                    background-color: #86c6af;
+                    background-color: $home-title-04;
                 }
                 ::v-deep .van-swipe__track{
                     height: 26px !important;

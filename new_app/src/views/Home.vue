@@ -73,7 +73,7 @@
 <script>
 import { mapState } from 'vuex';
 import uniFun from "@/utils/uni-webview-js"
-import dragIcon from "../components/dragIcon.vue";
+// import dragIcon from "../components/dragIcon.vue";
 import { getaccountincome, gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
 export default {
     name: 'home',
@@ -114,7 +114,7 @@ export default {
         // this.$store.dispatch('User/plantCarousel');
     },
     activated() {
-        this.syncInitApi();
+        // this.syncInitApi();
         this.isIndex = false;
         this.isScroll = false;
         if (JSON.parse(window.localStorage.getItem('is_play'))) {

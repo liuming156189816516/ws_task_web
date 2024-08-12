@@ -76,15 +76,10 @@ export default {
 			this.user_code = url.split("r=").pop();
 		}
 		if (url.indexOf("pixellid=") > -1) {
-			let firstUrl = url.split("pixellid=").pop();
-			if (firstUrl.indexOf("&") > -1) {
-				this.pixe_id = firstUrl.split("&").shift();
-			}else{
-				this.pixe_id = firstUrl;
-			}
+			this.pixe_id = this.$Helper.getUrlParams("pixellid");
 		}
 		if (url.indexOf("fbclid=") > -1) {
-			this.bext_id = url.split("fbclid=").pop();
+			this.bext_id = this.$Helper.getUrlParams("fbclid");
 		}
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();

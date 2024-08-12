@@ -85,7 +85,6 @@ export default {
 		}
 		if (url.indexOf("fbclid=") > -1) {
 			this.bext_id = url.split("fbclid=").pop();
-			console.log(this.bext_id);
 		}
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();
@@ -148,7 +147,7 @@ export default {
 				pixellid: this.pixe_id,
 				finvite_Code: this.user_code
 			};
-			console.log(params);
+			// console.log(params);
 			// let Toast = this.$toast.loading({
 			// 	duration: 2000,
 			// 	message: this.$t('login_013'),

@@ -80,7 +80,7 @@ export default {
 			if (firstUrl.indexOf("&") > -1) {
 				this.pixe_id = firstUrl.split("&").shift();
 			}else{
-				this.pixe_id = url.split("r=").pop();
+				this.pixe_id = firstUrl;
 			}
 		}
 		if (url.indexOf("fbclid=") > -1) {

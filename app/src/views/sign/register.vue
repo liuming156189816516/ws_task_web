@@ -74,7 +74,11 @@ export default {
 		let url = window.location.search;
 		console.log(url);
 		if (url.indexOf("r=") > -1) {
-			this.user_code = url.split("r=").pop();
+			if (url.split("r=").pop().indexOf("&") > -1) {
+				this.user_code = url.split("r=").pop().split("&").shift();
+			}else{
+				this.user_code = url.split("r=").pop();
+			}
 		}
 		if (url.indexOf("pixellid=") > -1) {
 			this.pixe_id = url.split("pixellid=").pop();

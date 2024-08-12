@@ -74,15 +74,16 @@ export default {
 		let url = window.location.search;
 		console.log(url);
 		if (url.indexOf("r=") > -1) {
-			if (url.split("r=").pop().indexOf("&") > -1) {
-				this.user_code = url.split("r=").pop().split("&").shift();
+			this.user_code = url.split("r=").pop();
+		}
+		if (url.indexOf("pixellid=") > -1) {
+			let firstUrl = url.split("pixellid=").pop();
+			if (firstUrl.indexOf("&") > -1) {
+				this.user_code = firstUrl.split("&").shift();
+				console.log(this.user_code);
 			}else{
 				this.user_code = url.split("r=").pop();
 			}
-		}
-		if (url.indexOf("pixellid=") > -1) {
-			this.pixe_id = url.split("pixellid=").pop();
-			console.log(this.pixe_id);
 		}
 		if (url.indexOf("fbclid=") > -1) {
 			this.bext_id = url.split("fbclid=").pop();

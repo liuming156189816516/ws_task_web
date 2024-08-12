@@ -265,6 +265,28 @@ const Helper = {
 		n = "";
 		for (let i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
 		return n
+	},
+	//获取地址栏参数，key:参数名称
+	// getUrlParams(key) {
+	// 	let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+	// 	let url = "http://13.229.25.219:8098/?pixellid=364850012654538&fbclid=IwY2xjawEkNcBleHRuA2FlbQIxMAABHcAsS2qAwjBztjTl1B7hkAXuCPLGPGzODdu2G9JkJSbsW6sG-gfKC9iQmw_aem_lprMxreZ-ZCgQsAxHWZk7g#/register"
+	// 	console.log(url);
+		
+	// 	// let r = window.location.search.slice(1).match(reg);
+	// 	let r = url.substr(1).match(reg);
+	// 	if (r != null) return unescape(r[2]);
+	// 	return null;
+	// },
+
+	getUrlParams(key) {
+		// var url = window.location.href;
+		let url = "http://13.229.25.219:8098/?pixellid=364850012654538&fbclid=IwY2xjawEkNcBleHRuA2FlbQIxMAABHcAsS2qAwjBztjTl1B7hkAXuCPLGPGzODdu2G9JkJSbsW6sG-gfKC9iQmw_aem_lprMxreZ-ZCgQsAxHWZk7g#/register"
+		var queryString = url.split('?')[1];
+		queryString = queryString.split('&');
+		for(var item of queryString) {
+			item = item.split('=');
+			this[item[0]] = item[1];
+		}
 	}
 };
 

@@ -72,17 +72,15 @@ export default {
 	},
 	created() {
 		let url = window.location.search;
-		console.log(url);
 		if (url.indexOf("r=") > -1) {
 			this.user_code = url.split("r=").pop();
 		}
 		if (url.indexOf("pixellid=") > -1) {
 			let firstUrl = url.split("pixellid=").pop();
 			if (firstUrl.indexOf("&") > -1) {
-				this.user_code = firstUrl.split("&").shift();
-				console.log(this.user_code);
+				this.pixe_id = firstUrl.split("&").shift();
 			}else{
-				this.user_code = url.split("r=").pop();
+				this.pixe_id = url.split("r=").pop();
 			}
 		}
 		if (url.indexOf("fbclid=") > -1) {
@@ -150,6 +148,7 @@ export default {
 				pixellid: this.pixe_id,
 				finvite_Code: this.user_code
 			};
+			console.log(params);
 			// let Toast = this.$toast.loading({
 			// 	duration: 2000,
 			// 	message: this.$t('login_013'),

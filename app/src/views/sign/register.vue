@@ -62,6 +62,7 @@ export default {
 			pwd: "",
 			sur_pwd: "",
 			bext_id: "",
+			pixe_id: "",
 			timestamp:"",
 			user_verify: "",
 			user_code:"",
@@ -76,6 +77,9 @@ export default {
 		}
 		if (url.indexOf("fbclid=") > -1) {
 			this.bext_id = url.split("fbclid=").pop();
+		}
+		if (url.indexOf("pixellid=") > -1) {
+			this.pixe_id = url.split("pixellid=").pop();
 		}
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();
@@ -135,6 +139,7 @@ export default {
 				uuid: this.timestamp,
 				code: this.safe_code,
 				fbclid: this.bext_id,
+				pixellid: this.pixe_id,
 				finvite_Code: this.user_code
 			};
 			// let Toast = this.$toast.loading({

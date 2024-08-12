@@ -10,10 +10,6 @@
                     <div class="user_code">{{$t('other_005')}}：{{userInfo.inviteCode}} <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
                 </div>
             </div>
-            <div class="lang_mess">
-                <!-- <span>zh-CN</span>
-                <img src="../assets/images/home/down_arrow_white.png" alt="" srcset=""> -->
-            </div>
             <div class="cover_model">
                 <div class="task_warp">
                     <div class="task_num">
@@ -35,10 +31,6 @@
                             <p>{{allIncome.yesterday_bonus ||0}}</p>
                             <p>{{ $t("mine_008") }}</p>
                         </div>
-                        <!-- <div class="right-pro">
-                            <p>999</p>
-                            <p>{{ $t("home_060") }}</p>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -244,8 +236,7 @@ export default {
         background: $color-theme;
         border-bottom-left-radius: 80px;
         border-bottom-right-radius: 80px;
-        .user_mess,
-        .lang_mess {
+        .user_mess {
             display: flex;
             font-size: 28px;
             height: 180px;
@@ -285,16 +276,6 @@ export default {
                 }
             }
         }
-
-        .lang_mess {
-            display: flex;
-
-            img {
-                height: 20px;
-                margin-left: 10px;
-            }
-        }
-
         .cover_model {
             width: 100%;
             position: absolute;

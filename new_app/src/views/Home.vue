@@ -72,11 +72,11 @@
                 </div>
             </div>
         </div>
-        <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
+        <!-- <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
             <div class="serve_icon" slot="icon" @click="$Helper.globalContact()">
                 <img src="../assets/images/ms_serve.png" alt="" />
             </div>
-        </drag-icon>
+        </drag-icon> -->
     </div>
 </template>
 <script>
@@ -87,7 +87,7 @@ import dragIcon from "../components/dragIcon.vue";
 import { getaccountincome, gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
 export default {
     name: 'home',
-    components: {dragIcon},
+    // components: {dragIcon},
     data() {
         return {
             isScroll: false,

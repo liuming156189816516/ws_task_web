@@ -43,8 +43,8 @@
 			<div class="login_btn">
 				<van-button type="primary" :loading="isLoading" @click="handleRegister()" :loading-text="$t('login_010')">{{$t('login_014') }}</van-button>
 			</div>
-			<div class="register_btn">
-				{{ $t('login_015') }}<span @click="goLogin">{{ $t('login_016') }}>></span>
+			<div class="register_btn w_f flex-item flex-center font_32">
+				{{ $t('login_015') }}<span @click="goLogin">{{ $t('login_016') }}</span>
 			</div>
 		</div>
 	</div>
@@ -353,15 +353,9 @@ export default {
 	}
 
 	.register_btn {
-		text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 24px;
-		font-weight: bold;
-
-		span {
-			color: $home-copay-title;
+		color: $home-title-03;
+		span{
+			color: $color-theme;
 		}
 	}
 }

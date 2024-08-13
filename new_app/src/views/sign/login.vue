@@ -40,7 +40,7 @@
 					<!-- <van-button plain type="primary" @click="goRegister" >{{ $t('login_006') }}</van-button> -->
 				</div>
 			</div>
-			<div class="register_text w_f flex-item flex-center font_32" @click="goRegister">Dont't have an account？<span class="reg_text"> Register</span></div>
+			<div class="register_text w_f flex-item flex-center font_32" @click="goRegister">{{$t('login_028')}}<span class="reg_text"> {{$t('login_029')}}</span></div>
 		</div>
 		   <!-- <drag-icon ref="dragIconCom" :gapWidthPx="24" :coefficientHeight="0.68">
             <div class="serve_icon" slot="icon" @click="contactService">
@@ -269,9 +269,9 @@ export default {
 			left: 0;
 			bottom: 60px;
 			color: $home-title-03;
-		}
-		.reg_text{
-			color: $color-theme;
+			.reg_text{
+				color: $color-theme;
+			}
 		}
 	}
 }

@@ -42,64 +42,66 @@
             </div>
             <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">Complete task to win bonus</div>
         </div>
-        <div class="task_warp w_f flex-item">
-            <div class="task_main w_f flex-item flex-dir-c">
-                <div class="task_item w_f flex-item flex-dir-c font_34">
-                    <div class="task_name w_f flex-item">
-                        <img src="@/assets/images/mill/s_01.png">
+        <div class="task_box_main">
+            <div class="task_warp w_f flex-item">
+                <div class="task_main w_f flex-item flex-dir-c">
+                    <div class="task_item w_f flex-item flex-dir-c font_34">
+                        <div class="task_name w_f flex-item">
+                            <img src="@/assets/images/home/num1_icon.png">
+                        </div>
+                        <div class="task_award w_f">
+                            <div class="task_book font_28">Import contacts to your phone's address book</div>
+                            <div class="task_desc font_20">Click the 'Import' button on the right to add the contact information provided by the system to the system's address book!</div>
+                        </div>
+                        <div class="w_f flex-item flex-between flex-align font_24">
+                            <span class="show_account" @click="viewTaskNum">View Contact Numbers</span>
+                            <van-button type="primary" :disabled="!isShow" @click="downAddress">Import</van-button>
+                        </div>
                     </div>
-                    <div class="task_award w_f">
-                        <div class="task_book font_28">Import contacts to your phone’s address book</div>
-                        <div class="task_desc font_20">Click the Import button on the right to add the contact information provided by the system to the system’s address book!</div>
-                    </div>
-                    <div class="w_f flex-item flex-between flex-align font_24">
-                        <span class="show_account" @click="viewTaskNum">View Contact Numbers</span>
-                        <van-button type="primary" :disabled="!isShow" @click="downAddress">Import</van-button>
-                    </div>
-                </div>
 
-                <div class="task_item w_f flex-item flex-dir-c font_34">
-                    <div class="task_name w_f flex-item">
-                        <img src="@/assets/images/mill/s_02.png">
-                    </div>
-                    <div class="task_award w_f">
-                        <div class="task_book font_28">Submit Group Link</div>
-                        <!-- <div class="task_desc font_20">Click the Import button on the right to add the contact information provided by the system to the system’s address book!</div> -->
-                    </div>
-                    <div class="group_link w_f flex-item flex-between flex-align font_24">
-                        <input type="text" v-model="group_link" :disabled="!isShow" placeholder="Enter Group Link">
-                        <van-button type="primary" :disabled="!group_link||!isShow" @click="submitTask">Submit</van-button>
+                    <div class="task_item w_f flex-item flex-dir-c font_34">
+                        <div class="task_name w_f flex-item">
+                            <img src="@/assets/images/home/num2_icon.png">
+                        </div>
+                        <div class="task_award w_f">
+                            <div class="task_book font_28">Submit Group Link</div>
+                            <!-- <div class="task_desc font_20">Click the Import button on the right to add the contact information provided by the system to the system’s address book!</div> -->
+                        </div>
+                        <div class="group_link w_f flex-item flex-between flex-align font_24">
+                            <input type="text" v-model="group_link" :disabled="!isShow" placeholder="Enter Group Link">
+                            <van-button :disabled="!group_link||!isShow" @click="submitTask" :class="[!group_link||!isShow?'progress_award':'']">Submit</van-button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="record_legend w_f flex-item flex-dir-c">
-            <h3 class="font_28">Records：</h3>
-            <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
-        </div>
-        <div class="record_list w_f flex-item flex-dir-c">
-            <div class="title_top w_f flex-item flex-align flex-between font_28">
-                <span class="flex-item flex-align">Time</span>
-                <span class="flex-item flex-center">Task Number</span>
-                <span class="flex-item flex-center">Status</span>
-                <span class="flex-item">Bonus</span>
+            <div class="record_legend w_f flex-item flex-dir-c">
+                <h3 class="font_28">Records：</h3>
+                <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
             </div>
-            <template v-if="recordList&&recordList.length>0">
-                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in recordList" :key="idx">
-                    <span class="flex-item">2024-07-31 05:57:02</span>
-                    <span class="flex-item flex-center">202408011134</span>
-                    <span class="flex-item flex-center">Processing</span>
-                    <span class="flex-item">456.00</span>
+            <div class="record_list w_f flex-item flex-dir-c">
+                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_28">
+                    <span class="flex-item flex-align">Time</span>
+                    <span class="flex-item flex-center">Task Number</span>
+                    <span class="flex-item flex-center">Status</span>
+                    <span class="flex-item">Bonus</span>
                 </div>
-            </template>
-            <template v-else>
-                <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
-                    <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                    <p class="font_28">Invite your friends quickly to earn cash!</p>
+                <template v-if="recordList&&recordList.length>0">
+                    <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in recordList" :key="idx">
+                        <span class="flex-item">2024-07-31 05:57:02</span>
+                        <span class="flex-item flex-center">202408011134</span>
+                        <span class="flex-item flex-center">Processing</span>
+                        <span class="flex-item" style="font-weight: bold;">456.00</span>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+                        <p class="font_28">Invite your friends quickly to earn cash!</p>
+                    </div>
+                </template>
+                <div class="title_top footer_tips w_f flex-item font_24">
+                    Task time is based on the start time of the task ,the system currently retains records for up to 3 months
                 </div>
-            </template>
-            <div class="title_top footer_tips w_f flex-item font_24">
-                Task time is based on the start time of the task ,the system currently retains records for up to 3 months
             </div>
         </div>
     </div>
@@ -151,7 +153,6 @@ export default {
         async getGroupMess(){
            let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
-           console.log(groupData);
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
@@ -219,7 +220,7 @@ export default {
         overflow-y: auto;
         background-color: #f2f2f2;
         -webkit-overflow-scrolling: touch; 
-        padding-bottom: 120px;
+        padding-bottom: 20px;
         .task_mian{
             height: 1048px;
             position: relative;
@@ -297,6 +298,7 @@ export default {
                     box-sizing: border-box;
                     background: $font-color-white;
                     .task_title{
+                        font-weight: bold;
                         margin-bottom: 20px;
                     }
                     // .task_sure_time{
@@ -312,7 +314,6 @@ export default {
                     font-weight: bold;
                     .van-count-down{
                         width: 60px;
-                        font-weight: initial;
                         color: $home-title-02;
                         margin-left: 10px;
                     }
@@ -325,6 +326,10 @@ export default {
                 bottom: 115px;
                 font-weight: bold;
             }
+        }
+        .task_box_main{
+            background: #E6F2EF;
+            // background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
         }
         .task_warp{
             position: relative;
@@ -400,6 +405,10 @@ export default {
                         border-color: $color-theme;
                         background-color: $color-theme;
                     }
+                    .progress_award{
+                        border-color: $home-title-06;
+                        background-color: $home-title-06;
+                    }
                 }
             }
         }
@@ -413,9 +422,11 @@ export default {
                 border-radius: 20px;
                 box-sizing: border-box;
                 line-height: 34px;
+                color: $home-title-19;
                 background: $font-color-white;
                 .focus_tips{
                     color: $home-title-02;
+                    text-decoration: underline;
                 }
             }
         }
@@ -425,6 +436,10 @@ export default {
             padding-bottom: 30px;
             box-sizing: border-box;
             color: $font-color-black;
+            .task_title_head{
+                font-weight: bold;
+                color: $home-title-12;
+            }
             .title_top{
                 height: 100px;
                 padding: 0 40px;

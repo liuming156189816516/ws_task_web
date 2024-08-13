@@ -16,46 +16,28 @@
                     <van-button type="primary" @click="$router.push('/home')">确定</van-button>
                 </div> -->
             </div>
-            <template v-if="type==3||type==4||type==5|type==6||type==7||type==8">
+            <template v-if="type==3||type==4||type==5|type==7||type==8">
                 <div class="rule_model w_f flex-item flex-align flex-dir-c">
                     <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
                     <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div>
                     <div class="rule_desc font_22" v-if="type==3">
-                        <p>{{restLanuage('home_059')}}</p>
-                        <p>{{restLanuage('home_060')}}</p>
-                        <p>{{restLanuage('home_061')}}</p>
+                        <p @click="jumpLogin" v-html="restLanuage('home_059')"></p>
+                        <p v-html="restLanuage('home_060')"></p>
+                        <p v-html="restLanuage('home_061')"></p>
                         <p>{{restLanuage('home_062')}}</p>
                         <p>{{restLanuage('home_063')}}</p>
                     </div>
-                    <div class="rule_desc font_22" v-if="type==4">
+                    <div class="rule_desc rule_desc_04 font_22" v-if="type==4">
                         <p>{{restLanuage('home_064')}}</p>
                         <p>{{restLanuage('home_065')}}</p>
                         <p>{{restLanuage('home_066')}}</p>
                         <p>{{restLanuage('home_067')}}</p>
                     </div>
-                    <div class="rule_desc font_22" v-if="type==5">
+                    <div class="rule_desc rule_desc_5 font_22" v-if="type==5">
                         <p>{{restLanuage('home_068')}}</p>
                         <p>{{restLanuage('home_069')}}</p>
                         <p>{{restLanuage('home_070')}}</p>
                         <p>{{restLanuage('home_071')}}</p>
-                    </div>
-                    <div class="rule_desc font_22" v-if="type==6">
-                        <div class="secound_tiitle">
-                            <p class="font_26">{{restLanuage('home_072')}}</p>
-                            <span class="font_22">{{restLanuage('home_073')}}</span>
-                        </div>
-                        <div class="secound_tiitle">
-                            <p class="font_26">{{restLanuage('home_074')}}</p>
-                            <span class="font_22">{{restLanuage('home_075')}}</span>
-                        </div>
-                        <div class="secound_tiitle">
-                            <p class="font_26">{{restLanuage('home_076')}}</p>
-                            <span class="font_22">{{restLanuage('home_077')}}</span>
-                        </div>
-                        <div class="secound_tiitle">
-                            <p class="font_26">{{restLanuage('home_078')}}</p>
-                            <span class="font_22">{{restLanuage('home_079')}}</span>
-                        </div>
                     </div>
                     <div class="rule_desc w_f flex-item flex-between font_22" style="flex-wrap: wrap;" v-if="type==7">
                         <div class="task_list flex-item flex-center" v-for="(item,idx) in content" :key="idx">
@@ -71,6 +53,46 @@
                     </div>
                 </div>
             </template>
+            <div class="rule_model rule_model_06 w_f flex-item flex-align flex-dir-c" v-if="type==6">
+                <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
+                <div class="rule_model_hide w_f flex-item flex-item">
+                    <div class="rule_model_box w_f flex-item flex-item flex-align flex-dir-c">
+                        <div class="rule_outside w_f flex-item flex-align flex-dir-c">
+                            <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div>
+                            <div class="rule_desc rule_desc_1 font_22">
+                                <div class="secound_tiitle">
+                                    <p class="font_26">{{restLanuage('home_072')}}</p>
+                                    <span class="font_22">{{restLanuage('home_073')}}</span>
+                                </div>
+                                <div class="secound_tiitle">
+                                    <p class="font_26">{{restLanuage('home_074')}}</p>
+                                    <span class="font_22">{{restLanuage('home_075')}}</span>
+                                </div>
+                                <div class="secound_tiitle">
+                                    <p class="font_26">{{restLanuage('home_076')}}</p>
+                                    <span class="font_22">{{restLanuage('home_077')}}</span>
+                                </div>
+                                <div class="secound_tiitle" style="margin-bottom: 10px;">
+                                    <p class="font_26">{{restLanuage('home_078')}}</p>
+                                    <span class="font_22">{{restLanuage('home_079')}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rule_outside w_f flex-item flex-align flex-dir-c" style="margin-top: 10px;">
+                            <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
+                            <div class="top_header w_f flex-item flex-center flex-align font_26">Invite Friends Bonus Task Rules</div>
+                            <div class="rule_desc rule_desc_1 font_22">
+                                <div class="secound_tiitle">
+                                    <p>{{restLanuage('home_084')}}</p>
+                                    <p>{{restLanuage('home_085')}}</p>
+                                    <p>{{restLanuage('home_086')}}</p>
+                                    <p>{{restLanuage('home_087')}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </van-overlay>
 </template>
@@ -119,12 +141,14 @@ export default {
         palySource(){
             this.$refs.myVideo.play();
             this.is_play=true;
-            // this.$refs.myVideo.setAttribute('webkit-playsinline', true);
-            // this.$refs.myVideo.setAttribute('playsinline', true);
         },
         restLanuage(val){
             return i18n.t(val)
-        }
+        },
+        jumpLogin(){
+            this.visible=false;
+            this.$Helper.RedirectLogin()
+        },
     }
     // beforeDestroy(){
     //     window.removeEventListener('play');
@@ -193,9 +217,8 @@ export default {
                 }
             }
         }
-        .rule_model{
+        .rule_model, .rule_model_06{
             width: 100%;
-            // height: 300px;
             position: relative;
             border-radius: 30px;
             background-color: $font-color-white;
@@ -208,7 +231,7 @@ export default {
             .top_header{
                 width: 233px;
                 height: 33px;
-                font-weight: 510;
+                font-weight: bold;
                 margin-bottom: 10px;
                 color: $home-title-12;
                 background: url('../../assets/images/head_icon.png') no-repeat;
@@ -231,6 +254,38 @@ export default {
                     margin-bottom: 24px;
                     p{
                         margin-bottom: 8px;
+                    }
+                }
+            }
+            .rule_desc_04{
+                p{
+                    color: $home-title-15;
+                }
+            }
+            .rule_desc_5{
+                color: $home-title-15;
+            }
+        }
+        .rule_model_06{
+            position: relative;
+            padding-bottom: 0;
+            background: $home-title-13;
+            .rule_model_hide{
+                overflow: hidden;
+                border-radius: 30px;
+                .rule_model_box{
+                    max-height: 500px;
+                    overflow-y: auto;
+                    .rule_outside{
+                        // overflow-y: auto;
+                        border-radius: 26px;
+                        background: $font-color-white;
+                        .rule_desc_1{
+                            padding: 10px 12px;
+                            box-sizing: border-box;
+                            border-bottom-left-radius: 27px;
+                            border-bottom-right-radius: 27px;
+                        }
                     }
                 }
             }

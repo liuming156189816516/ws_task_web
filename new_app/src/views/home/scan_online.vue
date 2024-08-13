@@ -33,7 +33,7 @@
                         <div class="task_book font_34">Scan QR code</div>
                     </div>
                     <div class="w_f flex-item flex-between flex-align font_24">
-                        <span class="show_account" @click="viewTaskNum">View Contact Numbers</span>
+                        <span class="show_account" @click="viewTaskNum">Add your WhatsApp account</span>
                         <van-button type="primary" @click="addQrcode">Add Now</van-button>
                     </div>
                 </div>
@@ -41,9 +41,12 @@
                 <div class="task_item w_f flex-item flex-dir-c font_34">
                     <div class="ws_head w_f flex-item flex-dir-c">
                         <div class="task_award w_f">
-                            <div class="task_book font_34">Account List</div>
+                            <div class="task_book flex-item flex-align font_34" @click="initWechatList(1)">
+                                <span>Account List </span>
+                                <img src="@/assets/images/home/refsh_icon.png" alt="" srcset="">
+                            </div>
                         </div>
-                        <div class="title_top w_f flex-item flex-align flex-between font_28">
+                        <div class="title_top title_head_top w_f flex-item flex-align flex-between font_28">
                             <span class="flex-item flex-align">Account</span>
                             <span class="flex-item flex-center">Status</span>
                             <span class="flex-item flex-center">Operation</span>
@@ -108,7 +111,7 @@
                         <van-tab title="WhatsApp Business" />
                     </van-tabs> -->
                     <div class="tabs_list w_f flex-align flex-item flex-between">
-                        <div class="tabs_item flex-item font_28" :style="'color:'+(tabsIdx==idx?'#171717':'')"  v-for="(item,idx) in whatsOption" :key="idx" @click="changeTabs(idx)" v-show="idx!=0">
+                        <div class="tabs_item flex-item font_28" :style="tabsIdx==idx?'coloe:#171717;font-weight: bold;':''"  v-for="(item,idx) in whatsOption" :key="idx" @click="changeTabs(idx)" v-show="idx!=0">
                             {{ item }}
                             <span class="tabs_active" v-if="idx == tabsIdx"></span>
                         </div>
@@ -137,13 +140,13 @@
         box-sizing: border-box;
         .tabs_item{
             position: relative;
-            color: $home-title-12;
             // background-color: chartreuse;
             .tabs_active{
                 width: 60%;
                 position: absolute;
                 left: 50%;
                 bottom: -10px;
+                color: $home-title-12;
                 transform: translateX(-50%);
                 border-bottom: 4px solid red;
             }
@@ -223,7 +226,6 @@ export default {
         //     this.refreQrBtn();
         // },
         changeTabs(idx){
-            console.log(idx);
             if (this.countTime != 60) return;
             this.tabsIdx = idx;
             this.refreQrBtn();
@@ -264,7 +266,7 @@ export default {
                 }
             }, 1000);
 		},
-        initWechatList(num,idx){
+        initWechatList(num){
             this.loading =true;
             this.page=num!=undefined?num:this.page;
             getaccountlist().then(res => {
@@ -392,14 +394,14 @@ export default {
                 .share_rule{
                     color: $font-color-white;
                     position: absolute;
-                    top: -60px;
                     right: 0;
+                    bottom: -70px;
                     z-index: 9;
                     font-weight: initial;
                     padding: 8px 12px;
-                    border-top-left-radius: 200px;
+                    border-top-left-radius: 200px; 
                     border-bottom-left-radius: 200px;
-                    background: rgba($color: #000000, $alpha: .7);
+                    background: rgba($color: #000000, $alpha: .5);
                     img{
                         height: 40px;
                         margin-right: 4px;
@@ -514,6 +516,10 @@ export default {
                         }
                         .task_book{ 
                             margin-left: 10px;
+                            img{
+                                height: 40px;
+                                margin-left: 10px;
+                            }
                         }
                         .title_top{
                             height: 88px;
@@ -522,6 +528,9 @@ export default {
                             border-top-left-radius: 20px;
                             border-top-right-radius: 20px;
                             background: $home-title-10;
+                        }
+                        .title_head_top{
+                            font-weight: bold;
                         }
                     }
                     .ws_list{

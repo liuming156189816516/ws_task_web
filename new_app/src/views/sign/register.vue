@@ -1,6 +1,6 @@
 <template>
 	<div class="login_warp">
-		<page-header :title="$t('login_027')" :noBg="false" :showBack="false"></page-header>
+		<page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header>
 		<div class="head_main w_f flex-item flex-dir-c">
 			<div class="head_title">
 				Sign up
@@ -13,27 +13,27 @@
 			<!-- <div class="head_title">{{ $t('login_029') }}</div> -->
 			<div class="uilist">
 				<div class="uilist_div">
-					<img src="@/assets/images/sign/zhanghao.png" />
-					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_026')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
+					<input v-model="username" :placeholder="$t('login_026')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div pwd">
-					<img src="@/assets/images/sign/lock.png" />
-					<input v-model="pwd" :placeholder="$t('other_001',{value:$t('login_002')})" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<!-- <img src="@/assets/images/sign/lock.png" /> -->
+					<input v-model="pwd" :placeholder="$t('login_002')" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
-					<img src="@/assets/images/sign/lock.png" />
-					<input v-model="sur_pwd" :placeholder="$t('other_001',{value:$t('login_009')})" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<!-- <img src="@/assets/images/sign/lock.png" /> -->
+					<input v-model="sur_pwd" :placeholder="$t('login_009')" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
-					<img src="@/assets/images/sign/tuiguang.png" />
-					<input style="flex-grow:1;" v-model="user_code" :placeholder="$t('other_001',{value:$t('login_013')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<!-- <img src="@/assets/images/sign/tuiguang.png" /> -->
+					<input style="flex-grow:1;" v-model="user_code" :placeholder="$t('login_013')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div verfy_code">
 					<div class="input_code">
-						<img src="@/assets/images/sign/secret.png" />
-						<input style="flex-grow:1;" v-model="safe_code" autocomplete="off" :placeholder="$t('other_001',{value:$t('login_008')})" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<!-- <img src="@/assets/images/sign/secret.png" /> -->
+						<input style="flex-grow:1;" v-model="safe_code" autocomplete="off" :placeholder="$t('login_008')" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="code_img" @click="getVerfyBtn">
 						<img :src="require(`@/assets/images/code/${item}.png`)" v-for="(item,idx) in verfyList" :key="idx">

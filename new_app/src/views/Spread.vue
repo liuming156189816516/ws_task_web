@@ -31,14 +31,14 @@
                         <div class="spred_l">
                            <div class="w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
-                                <span class="flex-item font_28">My invitation link</span>
+                                <span class="left_desc flex-item font_28">My invitation link</span>
                                 <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?r='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                             </div>
                             <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
                            </div>
                            <div class="invit_code w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
-                                <span class="flex-item font_28">My invite code</span>
+                                <span class="left_desc flex-item font_28">My invite code</span>
                                 <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                             </div>
                             <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
@@ -68,13 +68,13 @@
                 <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
-                <div class="title_top w_f flex-item flex-align flex-between font_28">
+                <div class="title_top top_title_1 w_f flex-item flex-align flex-between font_28">
                     <span>Time</span>
                     <span>Bonus</span>
                 </div>
                 <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in recordList" :key="idx">
                     <span>2024-07-31 05:57:02</span>
-                    <span>456.00</span>
+                    <span class="record_cash">456.00</span>
                 </div>
                 <div class="title_top footer_tips w_f flex-item font_24">
                     Task time is based on the start time of the task ,the system currently retains records for up to 3 months
@@ -273,11 +273,15 @@ export default {
                         p{
                             overflow: hidden;
                             white-space: nowrap;
+                            font-weight: bold;
                             text-overflow: ellipsis;
                         }
                         .copay_desc{
                             height: 44px;
                             margin-top: 18px;
+                            .left_desc{
+                                font-weight: bold;
+                            }
                             .van-button{
                                 height: 22px;
                                 padding: 0 8px;
@@ -307,6 +311,7 @@ export default {
                 p{
                     color: $color-theme;
                     font-style: italic;
+                    font-weight: bold;
                 }
                 .step_warp{
                     margin-top: 40px;
@@ -389,8 +394,10 @@ export default {
                     border-radius: 20px;
                     box-sizing: border-box;
                     line-height: 34px;
+                    font-style: italic;
                     background: $font-color-white;
                     .focus_tips{
+                        text-decoration: underline;
                         color: $home-title-02;
                     }
                 }
@@ -407,6 +414,9 @@ export default {
                     box-sizing: border-box;
                     background: $home-title-10;
                 }
+                .top_title_1{
+                    font-weight: bold;
+                }
                 .title_top:nth-child(1){
                     border-top-left-radius: 20px;
                     border-top-right-radius: 20px;
@@ -419,10 +429,14 @@ export default {
                 .record_item:last-child{
                     border-bottom: 1px solid transparent;
                 }
+                .record_cash{
+                    font-weight: bold;
+                }
                 .footer_tips{
                     padding: 16px 0 16px 20px;
                     box-sizing: border-box;
                     color: $home-title-06;
+                    font-style: italic;
                     border-bottom-left-radius: 20px;
                     border-bottom-right-radius: 20px;
                 }

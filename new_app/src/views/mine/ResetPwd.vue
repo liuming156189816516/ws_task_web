@@ -1,6 +1,6 @@
 <template>
     <div class="reset-password">
-        <page-header :title="$t('mine_005')" :bgColor="true"></page-header>
+        <page-header :title="$t('mine_012')" :bgColor="true"></page-header>
         <div class="content-block">
             <van-cell-group :border="false">
                 <van-field

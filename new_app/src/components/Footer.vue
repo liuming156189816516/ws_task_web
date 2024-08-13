@@ -5,7 +5,7 @@
 				<div class="item_bg">
 					<img class="icon-cl"  :class="{'animate__animated animate__rotateIn': $route.name.indexOf(item.path) > -1 && item.path != 'strategy', 'animate__animated animate__bounceIn': $route.name.indexOf(item.path) > -1 && item.path == 'strategy'}" :src="$route.name.indexOf(item.path) > -1 ? item.active : item.inactive" alt="icons" />
 				</div>
-				<div class="sizefont" >
+				<div class="tabbar_name font_24" >
 					<span :class="{ active: $route.name.indexOf(item.path) > -1 }">{{ item.name }}</span>
 				</div>
 			</div>
@@ -133,7 +133,6 @@ export default {
 	.un-login {
 		height: 88px;
 		background: rgba(0, 0, 0, 0.8);
-
 		overflow: hidden;
 		display: flex;
 		align-items: center;
@@ -158,50 +157,11 @@ export default {
 	}
 	.icon-cl {
 		height: 40px;
-		&.vip {
-			display: block;
-			width: 108px;
-			height: 91px;
-			// border-radius: 38px;
-			// -moz-box-shadow: 0 14px 22px rgba(245, 168, 35, 0.4);
-			// -webkit-box-shadow: 0 14px 22px rgba(245, 166, 35, 0.4);
-			// box-shadow: 0 14px 22px rgba(245, 166, 35, 0.4);
-		}
 	}
-	.isTuijian{
-		position: relative;
-		z-index: 1005;
-		.icon-cl {
-			width: 78px;
-			height: 78px;
-			// top: -88px;
-			z-index: 1;
-		}
-		.item_bg{
-			display: flex;
-			width: 78px;
-			height: 78px;
-			// position: absolute;
-			// top: 0px;
-			// border-radius: 50%;
-			// left:50%;
-			// transform: translateX(-50%);
-			// border: 1px solid #E6E6E6;background-color: #fff;
-			// align-items: center;
-			// justify-content: center;
-			// z-index: 1005;
-		}
-		.mask{
-			background: #fff;width: 128px;height: 54px;
-			position: absolute;bottom: 0;left: 50%;transform: translateX(-50%);
-		}
-		.sizefont{
-			position: relative;top: 20px;
-		}
-	}
-	.sizefont {
+	.tabbar_name {
+		font-weight: 500;
+		color: $home-title-12;
 		margin-top: 2px;
-		font-size: 28px;
 	}
 }
 .recommend{

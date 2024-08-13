@@ -2,6 +2,7 @@
     <div class="home_warp" ref="warpBox">
         <div class="top_model w_f flex-item flex-dir-c">
             <div class="user_mess w_f flex-item flex-dir-c">
+                <!-- <page-header :title="$t('login_027')" :showBack="false"/> -->
                 <div class="page_title w_f flex-item font_32 flex-center">Account</div>
                 <div class="w_f flex-item">
                     <div class="user_head" @click="updateHead">
@@ -9,7 +10,7 @@
                     </div>
                     <div class="user_info">
                         <div class="user_name font_32">{{ userInfo.account }}</div>
-                        <div class="user_code font_24">{{$t('other_005')}}：{{userInfo.inviteCode}} <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
+                        <div class="user_code font_24">{{$t('other_005')}} <span style="font-weight: bold;">{{userInfo.inviteCode}}</span>： <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
                     </div>
                 </div>
             </div>
@@ -21,7 +22,7 @@
                             <img src="@/assets/images/symbol_icon.png" @click="showRule">
                         </div>
                         <div class="text_2 flex-item font_48">
-                            <img src="../assets/images/gold_icon.png" alt="" srcset="">
+                            <!-- <img src="../assets/images/gold_icon.png" alt="" srcset=""> -->
                             <span>{{user_money||0.00}}</span>
                         </div>
                     </div>
@@ -72,7 +73,6 @@ import { getwithdrawconfig } from '@/api/pay';
 import { getaccountincome,getbonus,getdownloadurl } from '@/api/home'
 export default {
     name: 'Mine',
-    components: {},
     data() {
         return {
             apk_url:"",
@@ -242,7 +242,7 @@ export default {
         },
         logoutHandle() {
             this.$dialog.confirm({
-                title: this.$t("other_008"),
+                // title: this.$t("other_008"),
                 message: this.$t("other_009"),
                 confirmButtonColor: "#ff9600",
                 confirmButtonText: this.$t("other_003"),
@@ -284,6 +284,7 @@ export default {
             background: linear-gradient(180deg, #008751 1.61%, rgba(255, 255, 255, 0.5) 100%);
             .page_title{
                 margin: 40px 0;
+                font-style: italic;
                 color: $font-color-white;
             }
             .user_head {
@@ -301,7 +302,7 @@ export default {
             .user_info {
                 margin-left: 20px;
                 .user_name {
-                    font-weight: 500;
+                    font-weight: bold;
                 }
                 .user_code {
                     margin-top: 10px;

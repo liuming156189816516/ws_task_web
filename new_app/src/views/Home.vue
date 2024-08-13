@@ -1,11 +1,11 @@
 <template>
     <div class="home_warp w_f" @click="isIndex = false" ref="warpBox" @scroll="handleScrolStop">
+        <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true" />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
-            <div class="logo_title w_f flex-item flex-center font_36">
+            <!-- <div class="logo_title w_f flex-item flex-center font_36">
                 {{$t('login_027')}}
-                <!-- <img src="@/assets/images/home/h_login.png" alt="" srcset=""> -->
                 <span class="flex-item font_32" @click="showRule">{{$t('other_051')}}</span>
-            </div>
+            </div> -->
             <div class="ui_time flex-item flex-center font_50">Ultimate Wealth Challenge</div>
             <div class="notice_warp w_f">
                 <div class="notice_mian w_f">
@@ -37,7 +37,8 @@
                         <!-- <template v-if="item.type==3">
                             taskStatusOption
                         </template> -->
-                        <van-button v-if="item.type==3" type="primary">{{taskStatusOption[item.status]}}</van-button>
+                        <van-count-down v-if="item.invalid_time" :time="item.invalid_time/1000" />
+                        <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
                         <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>
                     <div class="task_desc font_24">{{taskNameOption[item.type].desc}}</div>
@@ -48,23 +49,23 @@
                     <div class="top_title w_f flex-item flex-align flex-center font_32">Today's performance</div>
                     <div class="self_code w_f flex-item flex-dir-c">
                         <p class="font_32">{{ userInfo.inviteCode }}</p>
-                        <div class="w_f flex-item flex-align flex-between">
-                            <span class="font_24">Your current invite code : {{ userInfo.inviteCode }}</span>
+                        <div class="self_code_mess w_f flex-item flex-align flex-between">
+                            <div class="flex-item font_24">Your current invite code ：<span class="flex-item">{{userInfo.inviteCode }}</span></div>
                             <van-button class="font_20" type="primary">{{$t('other_006')}}</van-button>
                         </div>
                     </div>
                     <div class="self_jinbi w_f flex-item">
                         <div class="self_item w_f flex-item flex-dir-c">
                             <div class="self_dold flex-item flex-center">{{ teamStemp.task_income || 0.00 }}</div>
-                            <div class="flex-item flex-center flex-align">
+                            <div class="task_type flex-item flex-center flex-align" @click="showTask(1)">
                                 <span class="font_28">Task Earnings</span>
                                 <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                             </div>
                         </div>
-                         <div class="self_item w_f flex-item flex-dir-c">
+                        <div class="self_item w_f flex-item flex-dir-c">
                             <div class="self_dold flex-item flex-center">{{ teamStemp.promotion_income || 0.00 }}</div>
-                            <div class="flex-item flex-center flex-align">
-                                <span class="font_28">Millionaire Earnings</span>
+                            <div class="flex-item flex-center flex-align" @click="showTask(2)">
+                                <span class="task_type font_28">Millionaire Earnings</span>
                                 <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                             </div>
                         </div>
@@ -83,11 +84,12 @@
 import { mapState } from 'vuex';
 import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
+import PageHeader from "@/components/Header";
 import dragIcon from "../components/dragIcon.vue";
 import { getaccountincome, gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
 export default {
     name: 'home',
-    // components: {dragIcon},
+    components: {PageHeader},
     data() {
         return {
             isScroll: false,
@@ -110,8 +112,8 @@ export default {
             return [
                 {},
                 {name:this.$t('home_046'),type:3,status:null,task_info_id:null,award:this.$t('home_048',{value:6500}),btn:this.$t('home_058'),desc:this.$t('home_051')},
-                {name:this.$t('home_045'),type:1,status:null,task_info_id:null,award:this.$t('home_047',{value:7200}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_044'),type:2,status:null,task_info_id:null,award:this.$t('home_047',{value:7000}),btn:this.$t('home_056'),desc:this.$t('home_049')}
+                {name:this.$t('home_045'),type:2,status:null,task_info_id:null,award:this.$t('home_047',{value:7200}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_044'),type:1,status:null,task_info_id:null,award:this.$t('home_047',{value:7000}),btn:this.$t('home_056'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {
@@ -134,7 +136,7 @@ export default {
             if (JSON.parse(window.localStorage.getItem('is_play'))) {
                 setTimeout(() => {
                     this.$popDialog({ content: this.help_url, title: this.$t("serv_004"), type: 1 })
-                }, 500)
+                },500)
             }
         }else{
             this.taskOption= this.$Helper.defaultOption();
@@ -163,11 +165,10 @@ export default {
                 })
             });
             Promise.all([fun1, fun2, fun3, fun4]).then(res => {
-                const [{ income }, data2, data3, data4, data5] = res;
+                const [{ income }, data2, data3] = res;
                 this.user_money = income;
                 this.teamStemp = data2;
                 this.taskOption = data3.list;
-                console.log(this.taskOption);
             })
         },
         showRule(){
@@ -223,6 +224,9 @@ export default {
             this.isScroll = false;
             let scrollTop = this.$refs.warpBox;
             scrollTop.scrollTo({ top: 0, behavior: "smooth" });
+        },
+        showTask(idx){
+            this.$router.push(`/betrecord?id=${idx}`);
         }
     }
 };
@@ -342,11 +346,20 @@ export default {
                         font-weight: bold;
                         color: $home-title-02;
                     }
+                    .van-count-down{
+                        position: absolute;
+                        top: -22px;
+                        right: 41px;
+                        z-index: 9;
+                        font-weight: 700;
+                        font-size: 12px !important;
+                        color: $home-title-02;
+                    }
                     .van-button{
                         width: 114px;
                         padding: 0;
                         position: absolute;
-                        top: -10px;
+                        top: -4px;
                         right: 10px;
                         height: 30px;
                         line-height: 30px;
@@ -354,6 +367,10 @@ export default {
                         color: $font-color-white;
                         border-color: $color-theme;
                         background-color: $color-theme;
+                    }
+                    .progress_award{
+                        border-color: $home-title-06;
+                        background-color: $home-title-06;
                     }
                 }
                 .task_desc{
@@ -379,6 +396,7 @@ export default {
                 .top_title{
                     width: 566px;
                     height: 82px;
+                    color: $font-color-black;
                     font-weight: 510;
                     margin-bottom: 26px;
                     background: url('../assets/images/home/today_icon.png') no-repeat;
@@ -390,9 +408,15 @@ export default {
                     box-sizing: border-box;
                     background: $home-title-11;
                     p{
-                        font-weight: 500;
+                        font-weight: bold;
                         margin-bottom: 14px;
                         color: $home-title-12;
+                    }
+                    .self_code_mess{
+                        color: $home-title-12;
+                        span{
+                            font-weight: bold;
+                        }
                     }
                     .van-button{
                         height: 22px;
@@ -410,6 +434,9 @@ export default {
                         .self_dold{
                             font-weight: 700;
                             margin: 46px 0 16px 0;
+                        }
+                        .task_type{
+                            color: $home-title-06;
                         }
                         .more_icon{
                             height: 24px;

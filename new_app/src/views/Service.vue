@@ -21,7 +21,7 @@
                     <div class="w_f flex-item flex-align">
                         <img src="@/assets/images/serveic/serve_icon.png" alt="">
                         <div>
-                            <p class="font_28">Live customer service</p>
+                            <p class="font_28" style="font-weight: bold;">Live customer service</p>
                             <p class="font_24">24/7 service</p>
                         </div>
                     </div>
@@ -105,6 +105,7 @@ export default {
                 border-radius: 24px;
                 margin-top: -58px;
                 p{
+                    font-weight: bold;
                     padding: 14px 14px;
                     box-sizing: border-box;
                 }

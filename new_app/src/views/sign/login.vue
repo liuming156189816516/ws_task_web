@@ -1,6 +1,6 @@
 <template>
 	<div class="login_warp" @click="isIndex=false">
-		<page-header :title="$t('login_027')" :showBack="false"></page-header>
+		<page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header>
 		<!-- <div class="l_value" @click="showChangeBtn" @click.stop>
 			<span>{{ viewLang() }}</span>
 			<img class="down_icon" src="@/assets/images/home/xiala.png">
@@ -22,12 +22,12 @@
 				<!-- <img class="login_img" src="@/assets/images/logo.png"> -->
 				<div class="uilist">
 					<div class="uilist_div account">
-						<img src="@/assets/images/sign/zhanghao.png" alt />
-						<input v-model="username" :placeholder="$t('other_001',{value:$t('login_026')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<!-- <img src="@/assets/images/sign/zhanghao.png" alt /> -->
+						<input v-model="username" :placeholder="$t('login_026')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="uilist_div pwd">
-						<img src="@/assets/images/sign/icon_suo.png" alt />
-						<input v-model="password" :placeholder="$t('other_001',{value:$t('login_002')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<!-- <img src="@/assets/images/sign/icon_suo.png" alt /> -->
+						<input v-model="password" :placeholder="$t('login_002')" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 						<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="eyeBol"></i>
 					</div>
 					<div class="forget_pwd">

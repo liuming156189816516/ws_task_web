@@ -1,14 +1,11 @@
 <template>
-    <div :class="['header-box',!brColor?'hide_br':'',bgColor?'headerBg':'', isPcH?'isPcH': '']">
-        <div class="header">
-            <div class="left" @click="onClickLeft" v-show="showBack">
-                <!-- <van-icon name="arrow-left" size="20"></van-icon> -->
-                <img src="@/assets/images/bank_icon.png" alt="" srcset="">
+    <div :class="['header-box w_f',!brColor?'hide_br':'',bgColor?'headerBg':'', isPcH?'isPcH': '']">
+        <div class="header w_f flex-item flex-align flex-center font_32">
+            <div class="lable_left" @click="onClickLeft">
+                <img v-show="showBack" src="@/assets/images/bank_icon.png" alt="" srcset="">
             </div>
-            <div class="title">{{title}}</div>
-            <div class="ke-fu-icon" v-if="hide" :class="showIcon && 'show'" @click="$Helper.toOutLink(userInfo.kefu+'&appid=30301&appname='+wk_name+'&userid='+userInfo.user_id+'&username='+userInfo.user_key+'&point='+userInfo.point+'&ip='+myip+'&prov='+mycityname)">
-                <!-- <img src="../assets/images/buy/kefu.png" alt="ke-fu" /> -->
-            </div>
+            <div class="lable_center flex-item flex-center font_36" v-show="showTitle">{{title}}</div>
+            <div class="lable_right flex-item" v-show="rightIcon" @click="showRule">{{ $t('other_051') }}</div>
         </div>
     </div>
 </template>
@@ -32,13 +29,16 @@ export default {
         showBarPlace: {
             default: true
         },
+        showTitle: {
+            default: true
+        },
         showIcon: {
             default: false
         },
         read: {
             default: false
         },
-        hide: {
+        rightIcon: {
             default: false
         },
         bgColor: {
@@ -63,81 +63,52 @@ export default {
                 this.$emit("return");
             } else {
                 this.$router.go(-1);
-                // if (!window.localStorage.getItem("token")) {
-                //     this.$toast(this.$t("login_022"));
-                //     sessionStorage.clear();
-                //     localStorage.removeItem("token");
-                //     setTimeout(() => {
-                //         this.$router.replace("/login");
-                //     }, 1000);
-                // } else if(this.$props.jumpType == "0") {
-                //     this.$router.push({path:'/home'});
-                // } else {
-                //     this.$router.back();
-                // }
             }
         },
         onClickRight() {
             this.$emit("read_all");
+        },
+        showRule(){
+            this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
         }
     },
     created() {
         this.wk_name=process.env.VUE_APP_NAME
-    },
-    computed: {
-        myip() {
-            return localStorage.getItem('myip');
-        },
-        mycityname() {
-            return localStorage.getItem('mycityname');
-        },
-        userInfo() {
-            return this.$store.state.User.userInfo;
-        }
     }
 };
 </script>
 <style lang="scss" scoped>
 .header-box {
     display:flex;
-    width: 100%;
     height: 88px;
     position: relative;
-    border-bottom: 1px solid #D8D8D8;
     align-items: center;
     background: transparent;
+    // border-bottom: 1px solid #D8D8D8;
     .header {
-        width: 100%;
-        // display: flex;
-        height: 50px;
-        font-size: 36px;
-        color: #fff;
-        position: relative;
-        // justify-content: space-between;
-        // align-items: center;
-        .title {
-            text-align: center;
-            font-size: 36px;
-            color: #141414;
+        height: 100%;
+        padding: 0 36px;
+        box-sizing: border-box;
+        color: $font-color-white;
+        .lable_left, .lable_right{
+            flex-grow: 1;
+            flex-shrink: 0;
             font-weight: bold;
-            // margin-right: -0.8rem;
         }
-        .left {
-            position: absolute;
-            top: 50%;left: 30px;
-            transform: translateY(-50%);
+        .lable_left {
             img{
                 height: 27px;
             }
         }
-        .ke-fu-icon {
-            position: absolute;
-            right: 0.1rem;
-            top: 0rem;
-            img {
-                width: 60px;
-                height: 48px;
-            }
+        .lable_center {
+            flex-grow: 4;
+            flex-shrink: 0;
+            font-style: italic;
+            font-weight: bold;
+        }
+        .lable_right {
+            font-style: italic;
+            justify-content: right;
         }
     }
     ::v-deep{

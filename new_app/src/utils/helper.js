@@ -2,6 +2,7 @@ import Global from "../core/Global";
 import router from  "../router/index";
 import CryptoJS from '../utils/crypto-js';
 import uniFun from "@/utils/uni-webview-js"
+import { getToken } from '@/utils/tool';
 // const releaseCrypKey = 'ZGdIobme/Sb4Idwg';//加密key
 const releaseCrypIv = 'ZGdIobme/Sb4Idwg'
 const releaseCrypKey = '8dw/JfjjoMs0dzVGOX2ntb1iw2k9+JD4'
@@ -269,17 +270,19 @@ const Helper = {
 	},
 	randomStrings(count) {
 		const result = [];
+		let seedArry = [3,4,5,6,7,8,9];
 		const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		const randomString = length => Array.from({ length }, () => charset[Math.floor(Math.random() * charset.length)]).join('');
 		for (let i = 0; i < count; i++) {
+			let index = Math.floor(Math.random() * seedArry.length);
 			let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,4);
-			let newObj = `${randomString(6)} Complet tasks to earn ${randomNum}`
+			let newObj = `${randomString(6)} Complet ${index} tasks to earn ${randomNum}`
 			result.push(newObj)
 		}
 		return result;
 	},
 	defaultOption() {
-		return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:3}];
+		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:1}];
 	},
 	globalContact(){
 		if (this.checkBrowser()) {
@@ -287,6 +290,10 @@ const Helper = {
 		} else {
 			uniFun.postMessage({ data:process.env.VUE_APP_SERVEIC });
 		}
+	},
+	RedirectLogin(){
+		if(getToken()) return;
+		window.likevm.$router.replace('/login');
 	}
 };
 export default Helper;

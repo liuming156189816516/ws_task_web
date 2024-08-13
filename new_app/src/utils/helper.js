@@ -1,6 +1,7 @@
 import Global from "../core/Global";
 import router from  "../router/index";
 import CryptoJS from '../utils/crypto-js';
+import uniFun from "@/utils/uni-webview-js"
 // const releaseCrypKey = 'ZGdIobme/Sb4Idwg';//加密key
 const releaseCrypIv = 'ZGdIobme/Sb4Idwg'
 const releaseCrypKey = '8dw/JfjjoMs0dzVGOX2ntb1iw2k9+JD4'
@@ -265,7 +266,27 @@ const Helper = {
 		n = "";
 		for (let i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
 		return n
+	},
+	randomStrings(count) {
+		const result = [];
+		const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		const randomString = length => Array.from({ length }, () => charset[Math.floor(Math.random() * charset.length)]).join('');
+		for (let i = 0; i < count; i++) {
+			let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,4);
+			let newObj = `${randomString(6)} Complet tasks to earn ${randomNum}`
+			result.push(newObj)
+		}
+		return result;
+	},
+	defaultOption() {
+		return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:3}];
+	},
+	globalContact(){
+		if (this.checkBrowser()) {
+			window.open(process.env.VUE_APP_SERVEIC, "_blank");
+		} else {
+			uniFun.postMessage({ data:process.env.VUE_APP_SERVEIC });
+		}
 	}
 };
-
 export default Helper;

@@ -1,148 +1,185 @@
 <template>
-    <div class="home-content">
-        <page-header :title="$t('home_009')" :show-icon="true" :bgcolor="false"></page-header>
-        <div class="home_content">
-            <div class="mian_continer">
-                <div class="task-pro">
-                    <div class="left-pro">
-                        <p>{{ teamStemp.today_income || 0}}</p>
-                        <p>{{ $t("mine_007") }}</p>
+    <div class="home-content" ref="warpBox">
+        <div class="task_mian w_f">
+            <page-header :title="$t('home_009')" :show-icon="true" :bgcolor="false" />
+            <div class="notice_warp w_f">
+                <div class="notice_mian w_f">
+                    <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
+                    <van-notice-bar :scrollable="false">
+                        <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
+                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
+                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
+                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
+                        </van-swipe>
+                    </van-notice-bar>
+                </div>
+            </div>
+            <div class="share_bonus w_f flex-item flex-dir-c">
+                <p class="Win_l font_52 flex-item">Add Your Social Account</p>
+                <p class="Win_r font_64 flex-item">Win Extra Cash</p>
+                <div class="share_rule flex-item flex-center" @click="showRule">
+                    <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
+                    <span class="flex-item font_26">Rules</span>
+                </div>
+            </div>
+            <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">
+                <img src="@/assets/images/home/cash_icon.png" alt="" srcset="">
+            </div>
+        </div>
+        <div class="task_warp w_f flex-item">
+            <div class="task_main w_f flex-item flex-dir-c">
+                <div class="task_item w_f flex-item flex-dir-c font_34">
+                    <div class="task_award w_f">
+                        <div class="task_book font_34">Scan QR code</div>
                     </div>
-                    <div class="right-pro">
-                        <p>{{ teamStemp.yesterday_income || 0 }}</p>
-                        <p>{{ $t("mine_008") }}</p>
+                    <div class="w_f flex-item flex-between flex-align font_24">
+                        <span class="show_account" @click="viewTaskNum">View Contact Numbers</span>
+                        <van-button type="primary" @click="addQrcode">Add Now</van-button>
                     </div>
                 </div>
-                <div class="task_settl">
-                    <van-notice-bar speed='20' :left-icon="require('@/assets/images/home/earn-icon-a.png')" scrollable :text="userInfo.baseNotice" />
-                </div>
-                <div class="code-area">
-                    <van-collapse v-model="activeName" :border = false accordion>
-                        <van-collapse-item name="1" color="#1989fa" :value="activeName==1?$t('home_014'):$t('home_015')">
-                            <template #title>
-                                <div>
-                                    <van-icon :name="require('@/assets/images/home/erweima.png')" />
-                                    {{ $t('home_016') }}
-                                </div>
-                            </template>
-                            <div class="code-mian">
-                                <div class="code_area">
-                                    <!-- <div>
-                                        <div class="area_icon" @click="showProvince=true">
-                                            <img class="weizhi_icon" src="@/assets/images/home/weizhi.png" alt="" srcset="">
-                                            <span class="area_name">{{loginArea||'~'}}</span>
-                                            <img class="down_icon" src="@/assets/images/home/xiala_icon.png">
-                                        </div>
-                                    </div> -->
-                                    <div>
-                                        <van-radio-group v-model="num_type" checked-color="#07c160" :disabled="countTime!=60" shape="square" direction="horizontal" @change="changeCard">
-                                            <van-radio name="1">{{ $t('home_017') }}</van-radio>
-                                            <van-radio name="2">{{ $t('home_018') }}</van-radio>
-                                        </van-radio-group>
-                                    </div>
-                                </div>
-                                <div class="code-tips">
-                                    <p>{{ $t('home_019') }} <span v-if="errState">{{ countTime}}s</span></p>
-                                </div>
-                                <div class="qr-code" v-show="errState">
-                                    <div ref="qrcodeImg" class="view_qr @/assets/images/home/qr_err.png" id="qrcodeImg">
-                                        <!-- <img class="qr_img" src="@/assets/images/home/ws_icon.png" alt=""> -->
-                                    </div>
-                                </div>
-                                <div class="err_code" v-show="!errState">
-                                    <van-loading v-if="isRqLoding" size="24px">{{ $t('other_029') }}</van-loading>
-                                    <img v-else src="@/assets/images/home/qr_err.png" alt="" srcset="">
-                                    <van-button v-show="!isRqLoding" icon="replay" :disabled="countTime>0&&countTime<60" @click="refreQrBtn">{{countTime==60?$t('other_031'):countTime+$t('other_032')}}</van-button>
-                                </div>
-                                <p>{{ $t('other_033') }}</p>
-                                <p>{{ $t('other_034') }}</p>
-                            </div>
-                            <template #right-icon >
-                                <van-icon name="" :color="color"/>
-                            </template>
-                        </van-collapse-item>
-                    </van-collapse>
-                </div>
-                <div class="wecht-list">
-                    <div class="wecht-lable">
-                        <span class="item_title" v-for="(item,idx) in lableItem" :key="idx">
-                            {{item}}
-                            <span class="reash_btn" v-if="idx==2" @click="initWechatList(1,2)">
-                                <img class="loading_icon" :class="isLoading?'loading_active':''" src="@/assets/images/home/jiazai.png" alt="">
-                                <span>{{ $t('other_035') }}</span>
-                            </span>
-                        </span>
+
+                <div class="task_item w_f flex-item flex-dir-c font_34">
+                    <div class="ws_head w_f flex-item flex-dir-c">
+                        <div class="task_award w_f">
+                            <div class="task_book font_34">Account List</div>
+                        </div>
+                        <div class="title_top w_f flex-item flex-align flex-between font_28">
+                            <span class="flex-item flex-align">Account</span>
+                            <span class="flex-item flex-center">Status</span>
+                            <span class="flex-item flex-center">Operation</span>
+                        </div>
                     </div>
-                    <div class="wecht-mess">
-                        <!-- <template> -->
-                        <template v-if="loading">
-                            <div class="item_mess" style="height: 204px;">
-                                <van-loading size="24px">{{ $t('other_029') }}</van-loading>
-                            </div>
-                        </template>
-                        <template v-else>
+                    <div class="ws_list w_f flex-item flex-dir-c">
+                        <div class="ws_account">
                             <template v-if="wechaList&&wechaList.length>0">
-                                <div class="item_title item_mess" v-for="item in wechaList" :key="item.id">
-                                    <span class="item_title">{{item.account}}</span>
+                                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in 2" :key="idx">
+                                    <span class="flex-item">{{item.account}}</span>
                                     <span class="item_title item_status" :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">
                                         <a class="line_status" :class="item.status!=2?'down_status':''" href=""></a>
                                         {{statusOption[item.status]}}
                                     </span>
-                                    <span class="item_title">
-                                        <span class="del-btn" @click="showDelBtn(item)">{{ $t('other_036') }}</span>
-                                    </span>
+                                    <!-- <span class="flex-item flex-center">On Line</span> -->
+                                    <span class="log_out flex-item flex-align flex-center font_26" @click="showDelBtn(item)">Log Out</span>
                                 </div>
                             </template>
                             <template v-else>
-                                <div class="item_mess">
-                                    <!-- <img class="empty_data" src="@/assets/images/home/ws_icon.png" alt="" srcset=""> -->
-                                    <div class="empty_text">{{ $t('other_037') }}</div>
+                                <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+                                    <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+                                    <p class="font_28">Invite your friends quickly to earn cash!</p>
                                 </div>
                             </template>
-                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="task_disc">
-                    <p>{{ $t('other_038') }}</p>
-                    <p>{{ $t('other_039') }}</p>
-                    <p class="point_tips">{{ $t('other_040') }}</p>
                 </div>
             </div>
         </div>
-        <van-popup v-model="showProvince" position="bottom" :style="{ height: '260px' }">
-            <van-picker :title="$t('other_041')" show-toolbar visible-item-count="4" value-key="name" :columns="provinceColumns" @confirm="onConfirm" @cancel="showProvince=false" />
-        </van-popup>
+        <div class="record_legend w_f flex-item flex-dir-c">
+            <h3 class="font_28">Records：</h3>
+            <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
+        </div>
+        <div class="record_list w_f flex-item flex-dir-c">
+            <div class="title_top w_f flex-item flex-align flex-between font_28">
+                <span class="flex-item flex-align">Time</span>
+                <span class="flex-item">Bonus</span>
+            </div>
+            <template v-if="recordList&&recordList.length>0">
+                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in recordList" :key="idx">
+                    <span class="flex-item">2024-07-31 05:57:02</span>
+                    <span class="flex-item">456.00</span>
+                </div>
+            </template>
+            <template v-else>
+                <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+                    <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+                    <p class="font_28">Invite your friends quickly to earn cash!</p>
+                </div>
+            </template>
+            <div class="title_top footer_tips w_f flex-item font_24">
+                Task time is based on the start time of the task ,the system currently retains records for up to 3 months
+            </div>
+        </div>
+        <van-overlay :show="visible" class="w_f flex-item flex-align">
+            <div class="qr_warp">
+                <img class="close_icon" src="@/assets/images/close_icon.png" @click="visible=false">
+                <div class="qr_rule font_24">Scan the QR code on your mobile WhatsApp, click confirm, then close this page ! (Wait 3-5 minutes, then click the 'Refresh' button to update and check WhatsApp status) <span v-if="errState">{{ countTime}}s</span></div>
+                <div class="qr_continer w_f">
+                    <!-- <van-tabs v-model="active" @change="changeCard">
+                        <van-tab title="WhatsApp" />
+                        <van-tab title="WhatsApp Business" />
+                    </van-tabs> -->
+                    <div class="tabs_list w_f flex-align flex-item flex-between">
+                        <div class="tabs_item flex-item font_28" :style="'color:'+(tabsIdx==idx?'#171717':'')"  v-for="(item,idx) in whatsOption" :key="idx" @click="changeTabs(idx)" v-show="idx!=0">
+                            {{ item }}
+                            <span class="tabs_active" v-if="idx == tabsIdx"></span>
+                        </div>
+                    </div>
+
+                    <div class="qr-code w_f" v-show="errState">
+                        <div ref="qrcodeImg" class="view_qr @/assets/images/home/qr_err.png" id="qrcodeImg">
+                            <img class="qr_img" src="@/assets/images/home/ws_icon.png" alt="">
+                        </div>
+                    </div>
+                    <div class="err_code w_f" v-show="!errState">
+                        <van-loading v-if="isRqLoding" size="24px">{{ $t('other_029') }}</van-loading>
+                        <img v-else src="@/assets/images/home/qr_err.png" alt="" srcset="">
+                        <van-button v-show="!isRqLoding" icon="replay" :disabled="countTime>0&&countTime<60" @click="refreQrBtn">{{countTime==60?$t('other_031'):countTime+$t('other_032')}}</van-button>
+                    </div>
+                </div>
+            </div>
+        </van-overlay>
     </div>
 </template>
+<style lang="scss" scoped>
+    .tabs_list{
+        width: 100%;
+        height: 88px;
+        padding: 0 30px;
+        box-sizing: border-box;
+        .tabs_item{
+            position: relative;
+            color: $home-title-12;
+            // background-color: chartreuse;
+            .tabs_active{
+                width: 60%;
+                position: absolute;
+                left: 50%;
+                bottom: -10px;
+                transform: translateX(-50%);
+                border-bottom: 4px solid red;
+            }
+        }
+        .tabs_item:nth-child(2){
+            width: max-content;
+            justify-content: right;
+        }
+    }
+</style>
 <script>
 import QRCode from 'qrcodejs2'
 import { mapState } from 'vuex';
-import { setTimeout } from 'timers';
-import { fmoney } from '@/utils/tool';
 import { Toast,Dialog} from 'vant';
 import PageHeader from "@/components/Header";
 import { getincome,getaccountlist,delaccount,getqrcode } from'@/api/home'
 export default {
-	name: 'home',
+	name: 'scan_online',
 	components: {PageHeader},
 	data() {
 		return {
-            page:1,
-            total:0,
-            limit:6,
-            timer:null,
-			iphoneX: '',
-            IpObj:"",
-            num_type:"1",
+            task_id:"",
+            tabsIdx:1,
+            isShow:false,
+            visible:false,
+            timestamp:0,
+            group_link:'',
+            target_url:'',
+            chrome_url:'',
             loading:false,
             isLoading:false,
-            visible:true,
             userProvince:"",
             errState:false,
             qrCodeImg:"",
             activeName:1,
             teamStemp:'',
-            loginArea:'印度尼西亚',
             loginCode:62,
             qrCodeType:0,
             countTime:60,
@@ -150,75 +187,45 @@ export default {
             showProvince:false,
             isRqLoding:false,
             wechaList:[],
-            list:[
-                "https://img0.baidu.com/it/u=132095580,3308868527&fm=253&fmt=auto&app=138&f=JPG?w=592&h=296",
-                "https://img0.baidu.com/it/u=1709064170,207840351&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=278",
-                "https://img.tuguaishou.com/ips_templ_preview/53/2e/fa/lg_4426904_1634807148_61712d6ccc0a7.jpg!w1024_w?auth_key=2286544142-0-0-0408fba029f3f735dad77672222c8957",
-            ],
-            provinceColumns:[
-                {   code:62,
-                    name:"印度尼西亚"
-                },
-                {   code:91,
-                    name:"印度"
-                },
-                {   code:55,
-                    name:"巴西"
-                },
-                {   code:971,
-                    name:"阿拉伯联合酋长国"
-                },
-                {   code:92,
-                    name:"巴基斯坦 "
-                },
-                {   code:95,
-                    name:"缅甸 "
-                },
-                {   code:856,
-                    name:"老挝"
-                }
-            ]
-		};
+            taskList:[],
+            taskTime: 30 * 60 * 60 * 1000,
+            recordList:[0,0,0,0,0],
+            whatsOption:["","WhatsApp","WhatsApp Business"]
+		}
 	},
 	computed: {
 		...mapState({
-			userInfo: state => state.User
+			userInfo: state => state.User.userInfo,
+            bannerList: state => state.User.bannerList
 		}),
-        lableItem(){
-            return [this.$t('home_020'),this.$t('home_021'),this.$t('home_022')]
-        },
         statusOption(){
-            return ["",this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
-        },
-        tipsOption(){
-            return ["",this.$t('home_023')]
+            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
         }
 	},
-    created(){
-        // this.$store.dispatch('User/getUserInfo');
-        // setTimeout(()=>{
-        //     this.IpObj=JSON.parse(sessionStorage.getItem('storageIP'))
-        //     this.userProvince = this.IpObj.province !=undefined?this.IpObj.province:'' 
-        // },500)
+    // created(){
+    //     this.timestamp = Math.floor(new Date().getTime() / 1000);
+    //     this.task_id = this.$route.query.id||"";
+    // },
+    mounted(){
+        // setTimeout(() => {
+        //     this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
+        // },500);
     },
-    activated(){
-        this.activeName="1";
-        this.initSpread();
-        this.initWechatList();
-        this.$store.dispatch('User/plantCarousel');
-    },
-    mounted() {
-        //this.initSpread();
-	},
 	methods: {
-        onChange(idx){
-            if(idx==1&&this.qrCodeType!=1){
-                this.errState = true;
-                this.initQrcode();
-            }
+        addQrcode(){
+            clearInterval(this.timer);
+            this.countTime = 60;
+            this.initQrcode();
+            this.visible = true;
         },
-        changeCard(){
+        // changeCard(){
+        //     if (this.countTime != 60) return this.active = this.active;
+        //     this.refreQrBtn();
+        // },
+        changeTabs(idx){
+            console.log(idx);
             if (this.countTime != 60) return;
+            this.tabsIdx = idx;
             this.refreQrBtn();
         },
         //刷新二维码
@@ -230,7 +237,7 @@ export default {
         initQrcode(row,tips){
             this.settime();
             this.isRqLoding = true;
-            getqrcode({account_type:Number(this.num_type)}).then(res => {
+            getqrcode({account_type:this.tabsIdx}).then(res => {
                 setTimeout(()=>{this.isRqLoding = false},3000)
                 if(res.qr_code){
                     this.errState = true;
@@ -242,7 +249,6 @@ export default {
                     Toast(res.msg)
                     this.isRqLoding = false;
                     this.errState = false;
-                    this.loginArea=this.userProvince;
                 }
             })
         },
@@ -304,7 +310,6 @@ export default {
         onConfirm(val){
             clearInterval(this.timer);
             this.countTime = 60;
-            this.loginArea = val.name;
             this.loginCode = val.code;
             this.qrCodeType = 1;
             this.qrCodeImg="";
@@ -314,51 +319,17 @@ export default {
             this.$refs.qrcodeImg.textContent="";
             this.showProvince=false;
         },
-        // 格式化金额
-		formatMoney(point) {
-			return fmoney(point, 2);
-		},
-        onPrev() {
-            this.page--;
-            this.initWechatList();
+        viewTaskNum(){
+            this.$popDialog({ content: this.taskList, title:"Contact Numbers", type: 7 })
         },
-        onNext() {
-            this.page++;
-            this.initWechatList();
+        downAddress(){
+        },
+        showRule(){
+            this.$popDialog({ content: this.help_url, title:"Social Media Bonus", type: 8 })
         }
 	}
 };
 </script>
-<style lang="scss">
-    .van-notice-bar__left-icon, .van-notice-bar__right-icon{
-        min-width: 0;
-        padding-right: 5px;
-    }
-    .home-content{
-        .van-cell{
-            display: flex;
-            padding: 10px 0;
-        }
-        .van-collapse-item__content{
-            padding: 12px 0;
-        }
-        .van-cell--clickable:active{
-            background-color: transparent !important;
-        }
-        .van-cell__value{
-            span{
-                display: inline-block;
-                width: 76px;
-                height: 26px;
-                color: #fff;
-                font-size: 12px;
-                text-align: center;
-                border-radius: 18px;
-                background-color: $color-theme !important;
-            }
-        }
-    }
-</style>
 <style lang="scss" scoped>
     .home-content {
         height: 100%;
@@ -368,408 +339,370 @@ export default {
         background-color: #f2f2f2;
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 120px;
-        .home_content{
-            width: 100%;
-            float: left;
-            margin-top: 20px;
-            .my_swipe{
-                width: 100%;
-                height: 320px;
-                // margin-bottom: 30px;
-                img{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            .task-pro{
-                width: 100%;
-                display: flex;
-                padding: 20px 0;
-                border-radius: 10px;
-                flex-direction: row;
-                background-color: $color-theme;
-                .left-pro, .right-pro{
-                    flex: 1;
-                    p{
-                        width: 100%;
-                        display: flex;
-                        color: #fff;
-                        justify-content: center;
-                        align-items: center;
+        .task_mian{
+            height: 1048px;
+            position: relative;
+            background: url('../../assets/images/home/task_002.png') no-repeat;
+            background-size: 100% 100%;
+            .notice_warp {
+                position: relative;
+                padding: 0 70px;
+                margin-top: 50px;
+                box-sizing: border-box;
+                .notice_mian{
+                    overflow: hidden;
+                    border-radius: 60px;
+                    .van-notice-bar{
+                        height: 26px;
+                        padding: 0 4px 0 20px;
+                        color: $color-theme;
+                        background-color: $font-color-white;
+                    }
+                    ::v-deep .van-swipe__track{
+                        height: 26px !important;
+                        line-height: 26px;
+                        text-align: center;
                     }
                 }
-                .left-pro p:nth-child(1), .right-pro p:nth-child(1){
-                    font-size: 48px;
-                }
-                .left-pro p:nth-child(2), .right-pro p:nth-child(2){
-                    font-size: 24px;
-                    font-weight: 400;
-                    margin-top: 12px;
-                }
-                .left-pro{
-                    border-right: 1px solid #fff;
-                }
-            }
-            .task_settl{
-                font-size: 24px;
-                font-weight: 500;
-                margin-top: 10px;
-                align-items: center;
-                background-color: #fff;
-                .van-notice-bar{
-                    padding: 0 8px;
-                    font-size: 15px;
-                    color: $home-notice-tip;
-                    background-color: transparent;
-                }
-                img{
-                    width: 30px;
-                    height: 30px;
-                    // margin-right: 10px;
-                }
-                span{
-                    color: $home-bind-button;
-                }
-            }
-            .mian_continer{
-                width: 100%;
-                padding: 0 20px;
-                box-sizing: border-box;
-            }
-            .code-area, .wecht-list{
-                width: 100%;
-                margin-top: 32px;
-                border-radius: 20px;
-                background-color:$font-color-white;
-                .van-collapse{
-                    padding: 4px 13px;
-                    box-sizing: border-box;
-                }
-                .van-cell__title{
-                    position: relative;
+                .left_icon{
+                    position: absolute;
+                    height: 58px;
+                    top: 50%;
+                    left: 50px;
                     z-index: 1;
-                    .van-icon{
-                        font-size: 22px;
+                    transform: translateY(-50%);
+                }
+            }
+            .share_bonus{
+                font-weight: bold;
+                font-style: italic;
+                margin-top:105px;
+                position: relative;
+                color: $font-color-white;
+                p{
+                    text-shadow: 0 5px 3px #FF4F2B,0 -2px 0 #FF4F2B;
+                }
+                .Win_l{
+                  padding-left: 56px;
+                }
+                .Win_r{
+                    align-self: flex-end;
+                    padding-right: 46px;
+                }
+                .share_rule{
+                    color: $font-color-white;
+                    position: absolute;
+                    top: -60px;
+                    right: 0;
+                    z-index: 9;
+                    font-weight: initial;
+                    padding: 8px 12px;
+                    border-top-left-radius: 200px;
+                    border-bottom-left-radius: 200px;
+                    background: rgba($color: #000000, $alpha: .7);
+                    img{
+                        height: 40px;
                         margin-right: 4px;
                     }
-                    div{
-                        width: max-content;
-                        display: flex;
-                        font-weight: bold;
-                        font-size: 16px;
-                        align-items: center;
-                    }
                 }
-                .code-title, .code-mian{
-                    width: 100%;
-                    display: flex;
-                    // padding-bottom: 21px;
-                    border-bottom: 1px solid #e5e5e5;
-                    // .wechat-icon, .task-logo{
-                    // }
-                    .wechat-icon{
-                        flex-grow: 1;
-                        color: #141414;
-                        font-size: 32px;
-                        display: flex;
-                        font-weight: 500;
-                        align-items: center;
-                        img{
-                            width: 44px;
-                            height: 38px;
-                            margin-right: 9px;
-                        }
-                        span{
-                            font-weight: 600;
-                        }
-                    }
-                    .task-logo{
-                        flex-grow: 0;
-                        img{
-                            width: 158px;
-                            height: auto;
-                            float: right;
-                        }
-                    }
+            }
+            .task_win_bonus{
+                height: 130px;
+                position: absolute;
+                left: 0;
+                bottom: 115px;
+                img{
+                    height: 67px;
                 }
-                .code-mian{
-                    width: 100%;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    align-items: center;
-                    border-bottom: none;
-                    .code_area{
-                        width: 100%;
-                        height: 74px;
-                        display: flex;
-                        padding-left:20px;
-                        border-radius: 8px;
-                        align-items: center;
-                        box-sizing: border-box;
-                        justify-content:space-between;
-                        background-color: #F6F6F6;
-                        .area_icon{
-                            // flex-grow: 1;
-                            display: flex;
-                            margin-bottom: 10px;
-                            align-items: center;
-                            .weizhi_icon{
-                                width:36px;
-                                height: 34px;
-                            }
-                            .down_icon{
-                                width:28px;
-                                margin-left: 12px;
-                            }
-                            .text_left{
-                                color: #939393;
-                                font-size: 26px;
-                            }
-                            .area_name{
-                                color: #141414;
-                                font-size: 28px;
-                                margin-left: 3px;
-                                font-weight: 400;
-                            }
-                        }
-                        .update_btn {
-                            font-size: 24px;
-                            display: flex;
-                            align-items: center;
-                            .van-button{
-                                width: auto;
-                                height: max-content;
-                                padding: 0;
-                                outline: none;
-                                border: none;
-                                color: #ff976a; 
-                                background: transparent;
-                            }
-                            .van-button::before{
-                                background-color:transparent!important;
-                            }
-                        }
-                    }
-                    .code-tips{
-                        font-size: 24px;
-                        font-weight: 400;
-                        margin: 20px 0 10px 0;
-                        p{
-                            text-align: center;
-                            color: $home-copay-title;
-                        }
-                    }  
-                    .qr-code, .err_code{
-                        width: 364px;
-                        height: 364px;
-                        display: flex;
-                        flex-wrap: wrap;
-                        align-items: center;
-                        justify-content: center;
+                // background: rgba($color: #000000, $alpha: .5);
+            }
+        }
+        .task_warp{
+            position: relative;
+            z-index: 9;
+            margin-top: -50px;
+             .task_main{
+                padding: 0 24px 0 36px;
+                gap: 30px;
+                box-sizing: border-box;
+                // background: url('../../assets/images/home/jinbi.png') no-repeat;
+                // background-size: cover;
+                // background-position: 0 40px;
+                .task_item{
+                    height: 205px;
+                    padding: 16px 0 0 28px;
+                    box-sizing: border-box;
+                    background: url('../../assets/images/home/task_icon.png') no-repeat;
+                    background-size: 100% 100%;
+                    .task_name{
+                        margin-top: 8px;
                         img{
-                            width: 100%;
-                        }
-                        .view_qr{
-                            position: relative;
-                            .qr_img{
-                                width: 80px;
-                                height: 80px;
-                                position: absolute;
-                                top: 50%;
-                                left: 50%;
-                                z-index: 999;
-                                transform: translate(-50%,-50%);
-                            }
+                            height: 40px;
                         }
                     }
-                    .err_code{
+                    .task_award{
                         position: relative;
-                        .van-button{
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            margin: 0;
-                            transform: translate(-50%,-50%);
-                            // width: auto;
-                            height: max-content;
-                            padding: 0;
+                        color: $font-color-black;
+                        margin-top: 5px;
+                        margin-bottom: 42px;
+                        .task_book{
+                            font-weight: bold;
+                            color: $color-theme;
+                            text-shadow: 0px 4px 3px rgba(0,0,0,0.2);
+                            // text-shadow: 0px 3px 3px #000;
+
+                        }
+                        .task_desc{
+                            line-height: 32px;
+                            // letter-spacing: -2px;
+                            color: $home-title-03;
+                            margin-right: -20px;
+                        }
+                    }
+                    .show_account{
+                        color: $home-title-03;
+                    }
+                    .group_link{
+                        margin-top: 30px;
+                        input {
+                            width: 408px;
+                            height: 72px;
+                            background: $home-title-13 !important;
+                            border: $home-title-13;
+                            border-radius: 200px;
                             outline: none;
-                            border: none;
-                            color: #ff976a; 
-                            background: transparent;
+                            font-size: 28px;
+                            color: #626262;
+                            padding-left: 25px;
+                            flex-grow: 1;
                         }
-                        .van-button::before{
-                            background-color:transparent!important;
-                        }
-                        .refresh_btn{
-                            width: max-content;
-                            display: flex;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%,-50%);
+                        .van-button{
+                            margin-left: 20px;
                         }
                     }
                     .van-button{
-                        width: 235px;
-                        height: 34px;
-                        background: $home-bind-button;
-                        border-radius: 34px;
-                        margin: 24px 0 21px 0;
+                        width: max-content;
+                        height: 30px;
+                        line-height: 30px;
+                        margin-right: 10px;
+                        border-radius: 200px;
+                        color: $font-color-white;
+                        border-color: $color-theme;
+                        background-color: $color-theme;
                     }
-                    p{
-                        font-size: 24px;
-                        font-weight: 400;
-                        line-height: 36px;
-                        color: #ADADAD;
-                    } 
                 }
-            }
-            .wecht-list{
-                padding: 0 30px 5px 30px;
-                .wecht-lable, .wecht-mess{
+                .task_item:nth-child(2){
                     width: 100%;
-                    display: flex;
-                    font-size: 24px;
-                    font-weight: 500;
-                    color: #000000;
-                    line-height: 88px;
-                    border-bottom: 1px solid #f2f2f2;
-                    .item_title{
-                        flex: 1;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        .line_up{
-                            margin-right: 8px;
+                    height: initial;
+                    padding-left: 0;
+                    padding-right: 0;
+                    overflow: hidden;
+                    padding-bottom: 20px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background: none;
+                    .ws_head{
+                        // height: 181px;
+                        padding: 0 20px;
+                        box-sizing: border-box;
+                        background: url('../../assets/images/home/ws_head.png') no-repeat;
+                        background-size: 100% 100%;
+                        .task_award{
+                            margin-top: 24px;
+                            margin-bottom: 14px;
                         }
-                        .reash_btn{
-                            color: $home-copay-title;
-                            display: flex;
-                            align-items: center;
-                            .loading_icon{
-                                width: 32px;
-                                height: 32px;
-                                margin: 0 3px 0 10px;
-                            }
-                            .loading_active{
-                                width: 32px;
-                                height: 32px;
-                                -webkit-animation: rotation 15s linear infinite;
-                                animation: rotation .8s linear infinite;
-                            }
-                            @keyframes rotation {
-                                0% {
-                                    -webkit-transform: rotate(0deg);
-                                }
-                        
-                                100% {
-                                    -webkit-transform: rotate(360deg);
-                                }
-                            }
+                        .task_book{ 
+                            margin-left: 10px;
+                        }
+                        .title_top{
+                            height: 88px;
+                            padding: 0 20px;
+                            box-sizing: border-box;
+                            border-top-left-radius: 20px;
+                            border-top-right-radius: 20px;
+                            background: $home-title-10;
                         }
                     }
-                    .item_mess, .empty_mess{
-                        width: 100%;
-                        display: flex;
-                        flex-wrap: wrap;
-                        align-items: center;
-                        justify-content: center;
-                        border-bottom: 1px solid #f2f2f2;
-                            .item_status{
-                                display: flex;
-                                align-items: center;
+                    .ws_list{
+                        padding: 0 20px;
+                        padding-bottom: 20px;
+                        box-sizing: border-box;
+                        border-bottom-left-radius: 20px;
+                        border-bottom-right-radius: 20px;
+                        background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
+                        .ws_account{
+                            padding: 20px 20px 30px 20px;
+                            background: $font-color-white;
+                            .log_out{
+                                width: 140px;
+                                // height: 50px;
+                                padding: 10px 0;
                                 box-sizing: border-box;
-                                .line_status, .down_status{
-                                    width: 14px;
-                                    height: 14px;
-                                    margin-right: 8px;
-                                    border-radius: 50%;
-                                    background: #28C445;
-                                }
-                                .down_status{
-                                    background: #D32C2C;
-                                }
-                            }
-                            .empty_data{
-                                display: flex;
-                                height: 100px;
-                                flex-shrink: 0;
-                                margin: 61px 0 41px 0;
-                            }
-                            .empty_text{
-                                width: 100%;
-                                color: #aaa;
-                                display: flex;
-                                line-height: 1;
-                                text-align: center;
-                                margin-bottom: 96px;
-                            }
-                    }
-                    .item_mess:last-child{
-                        border-bottom: none !important;
-                    }
-                    .page_footer{
-                        width: 100%;
-                        display: flex;
-                        margin: 18px 0;
-                        .paging_left{
-                            flex-grow: 1;
-                        }
-                        .refash_right{
-                            display: flex;
-                            flex-grow: 0;
-                            align-items: center;
-                            justify-content: center;
-                            span{
-                                display: flex;
-                                width: 152px;
-                                height: 44px;
-                                color: $home-bind-button;
-                                align-items: center;
-                                font-size: 24px;
-                                border-radius: 26px;
-                                justify-content: center;
-                                border: 1px solid $home-bind-button;
+                                background: $home-title-18;
+                                border-radius: 200px;
+                                color: $color-theme;
                             }
                         }
+                        .title_top{
+                            padding: 20px 0;
+                        }
                     }
-                }
-                .wecht-mess{
-                    display: block;
-                    color: #141414;
-                    border-bottom: none;
-                    .on-line{
-                        color: #28C445;
-                        margin-right: 24px;
+                    .task_book{ 
+                        margin-left: 24px;
                     }
-                    .down-line{
-                        color: #F52C2C;
-                    }
-                    .del-btn{
-                        color: #A8A8A8;
+                    .record_list{
+                        padding: 0 20px;
                     }
                 }
             }
-            .task_disc{
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
+        }
+        .record_legend{
+            padding: 0 30px;
+            h3{
+                margin: 20px 0;
+            }
+            .record_derc{
+                padding: 12.2px 0 12.2px 18.82px;
+                border-radius: 20px;
+                box-sizing: border-box;
+                line-height: 34px;
+                background: $font-color-white;
+                .focus_tips{
+                    color: $home-title-02;
+                }
+            }
+        }
+        .record_list{
+            padding: 0 30px;
+            margin-top: 20px;
+            padding-bottom: 30px;
+            box-sizing: border-box;
+            color: $font-color-black;
+            .title_top{
+                height: 100px;
+                padding: 0 40px;
+                box-sizing: border-box;
+                background: $home-title-10;
+            }
+            .title_top:nth-child(1){
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+            }
+            .record_item{
+                height: 108px;
+                background: $font-color-white;
+                border-bottom: 1px solid $home-title-10;
+            }
+            .record_item:last-child{
+                border-bottom: 1px solid transparent;
+            }
+            // .record_item{
+            //     height: 66px;
+            // }
+            .empty_box{
+                height: 364px;
+                color: $home-title-14;
+                background-color: $font-color-white;
+                img{
+                    height: 202px;
+                }
+            }
+            .footer_tips{
+                padding: 10px 0 10px 16px;
+                box-sizing: border-box;
+                color: $home-title-06;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+        }
+    }
+
+    .van-overlay{
+        padding: 0 30px;
+        box-sizing: border-box;
+        height: 100% !important;
+        .qr_warp{
+            width: 100%;
+            padding: 32px 23px 20px 23px;
+            border-radius: 10px;
+            position: relative;
+            box-sizing: border-box;
+            background-color: #fff;
+            .qr_rule{
+                color: $color-theme;
+            }
+            .close_icon{
+                height: 24px;
+                position: absolute;
+                top: -30px;
+                right: 0;
+            }
+            ::v-deep .van-tabs__nav{
+                background: transparent;
+            }
+            ::v-deep .van-tab{
+                padding: 0;
+            }
+
+            .code-tips{
+                font-size: 24px;
+                font-weight: 400;
+                margin: 20px 0 10px 0;
                 p{
+                    text-align: center;
+                    color: $home-copay-title;
+                }
+            }
+            .qr-code, .err_code{
+                height: 200px;
+                display: flex;
+                // margin-top: 20px;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                img{
+                    width: 180px;
+                }
+                .view_qr{
+                    position: relative;
+                    .qr_img{
+                        width: 40px;
+                        height: 40px;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        z-index: 999;
+                        transform: translate(-50%,-50%);
+                    }
+                }
+            }
+            .err_code{
+                position: relative;
+                .van-button{
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin: 0;
+                    transform: translate(-50%,-50%);
+                    // width: auto;
+                    height: max-content;
+                    padding: 0;
+                    outline: none;
+                    border: none;
+                    color: #ff976a; 
+                    background: transparent;
+                }
+                .van-button::before{
+                    background-color:transparent!important;
+                }
+                .refresh_btn{
+                    width: max-content;
                     display: flex;
-                    width: 100%;
-                    font-size: 24px;
-                    font-weight: 400;
-                    color: #ADADAD;
-                    align-items: center;
-                    letter-spacing: 1px;
-                    margin-bottom: 20px;
-                }
-                p:nth-child(1){
-                    margin-top: 40px;
-                }
-                .point_tips{
-                    color: #F52C2C;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
                 }
             }
         }

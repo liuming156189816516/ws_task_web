@@ -12,9 +12,9 @@
                     <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
                     <van-notice-bar :scrollable="false">
                         <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
-                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
-                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
-                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
+                            <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
+                            <!-- <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
+                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item> -->
                         </van-swipe>
                     </van-notice-bar>
                 </div>
@@ -34,31 +34,35 @@
                     <div class="task_name">{{taskNameOption[item.type].name}}</div>
                     <div class="task_award font_30">
                         <div v-html="$t(taskNameOption[item.type].award)"></div>
-                        <van-button type="primary">{{taskNameOption[item.type].btn}}</van-button>
+                        <!-- <template v-if="item.type==3">
+                            taskStatusOption
+                        </template> -->
+                        <van-button v-if="item.type==3" type="primary">{{taskStatusOption[item.status]}}</van-button>
+                        <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>
                     <div class="task_desc font_24">{{taskNameOption[item.type].desc}}</div>
                 </div>
             </div>
-            <div class="record_warp w_f flex-item">
+            <div class="record_warp w_f flex-item" v-if="userInfo.token">
                 <div class="today_record w_f flex-item flex-align flex-dir-c">
                     <div class="top_title w_f flex-item flex-align flex-center font_32">Today's performance</div>
                     <div class="self_code w_f flex-item flex-dir-c">
-                        <p class="font_32">Alexander</p>
+                        <p class="font_32">{{ userInfo.inviteCode }}</p>
                         <div class="w_f flex-item flex-align flex-between">
-                            <span class="font_24">Your current invite code : Alexander</span>
+                            <span class="font_24">Your current invite code : {{ userInfo.inviteCode }}</span>
                             <van-button class="font_20" type="primary">{{$t('other_006')}}</van-button>
                         </div>
                     </div>
                     <div class="self_jinbi w_f flex-item">
                         <div class="self_item w_f flex-item flex-dir-c">
-                            <div class="self_dold flex-item flex-center">999.00</div>
+                            <div class="self_dold flex-item flex-center">{{ teamStemp.task_income || 0.00 }}</div>
                             <div class="flex-item flex-center flex-align">
                                 <span class="font_28">Task Earnings</span>
                                 <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                             </div>
                         </div>
                          <div class="self_item w_f flex-item flex-dir-c">
-                            <div class="self_dold flex-item flex-center">999.00</div>
+                            <div class="self_dold flex-item flex-center">{{ teamStemp.promotion_income || 0.00 }}</div>
                             <div class="flex-item flex-center flex-align">
                                 <span class="font_28">Millionaire Earnings</span>
                                 <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
@@ -68,16 +72,22 @@
                 </div>
             </div>
         </div>
+        <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
+            <div class="serve_icon" slot="icon" @click="$Helper.globalContact()">
+                <img src="../assets/images/ms_serve.png" alt="" />
+            </div>
+        </drag-icon>
     </div>
 </template>
 <script>
 import { mapState } from 'vuex';
+import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
-// import dragIcon from "../components/dragIcon.vue";
+import dragIcon from "../components/dragIcon.vue";
 import { getaccountincome, gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
 export default {
     name: 'home',
-    // components: {dragIcon},
+    components: {dragIcon},
     data() {
         return {
             isScroll: false,
@@ -87,7 +97,7 @@ export default {
             help_url: "",
             taskOption: [],
             langIdx: Cookies.get("language") || 'en',
-            taskType: ['', 'scanOnline', 'pullPownTask', 'pullgroupTask'],
+            taskType: ['', 'scanOnline', 'spread', 'pullgroupTask'],
             langOptions: [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" }]
         }
     },
@@ -99,13 +109,16 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_044'),type:2,status:null,task_info_id:null,award:this.$t('home_047',{value:50}),btn:this.$t('home_056'),desc:this.$t('home_049')},
-                {name:this.$t('home_045'),type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:70}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_046'),type:1,status:null,task_info_id:null,award:this.$t('home_048',{value:90}),btn:this.$t('home_058'),desc:this.$t('home_051')}
+                {name:this.$t('home_046'),type:3,status:null,task_info_id:null,award:this.$t('home_048',{value:6500}),btn:this.$t('home_058'),desc:this.$t('home_051')},
+                {name:this.$t('home_045'),type:1,status:null,task_info_id:null,award:this.$t('home_047',{value:7200}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_044'),type:2,status:null,task_info_id:null,award:this.$t('home_047',{value:7000}),btn:this.$t('home_056'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {
             return ["", this.$t('home_005'), this.$t('home_006'), this.$t('home_007'), this.$t('home_008')]
+        },
+        winNotis(){
+            return this.$Helper.randomStrings(100)
         }
     },
     created() {
@@ -114,13 +127,17 @@ export default {
         // this.$store.dispatch('User/plantCarousel');
     },
     activated() {
-        // this.syncInitApi();
-        this.isIndex = false;
-        this.isScroll = false;
-        if (JSON.parse(window.localStorage.getItem('is_play'))) {
-            setTimeout(() => {
-                this.$popDialog({ content: this.help_url, title: this.$t("serv_004"), type: 1 })
-            }, 500)
+        if(getToken()){
+            this.syncInitApi();
+            this.isIndex = false;
+            this.isScroll = false;
+            if (JSON.parse(window.localStorage.getItem('is_play'))) {
+                setTimeout(() => {
+                    this.$popDialog({ content: this.help_url, title: this.$t("serv_004"), type: 1 })
+                }, 500)
+            }
+        }else{
+            this.taskOption= this.$Helper.defaultOption();
         }
     },
     methods: {
@@ -149,7 +166,8 @@ export default {
                 const [{ income }, data2, data3, data4, data5] = res;
                 this.user_money = income;
                 this.teamStemp = data2;
-                this.taskOption = [...data3.list, ...data4.list];
+                this.taskOption = data3.list;
+                console.log(this.taskOption);
             })
         },
         showRule(){
@@ -173,8 +191,13 @@ export default {
             await this.$store.dispatch('User/plantCarousel');
         },
         handleTask(row) {
+            if (!this.userInfo.token) return this.$router.push("/login");
             const path = this.taskType[row.type];
-            this.$router.push(`${path}?id=${row.task_info_id}`)
+            if (row.type == 2) {
+                this.$router.push(path);
+            }else{
+                this.$router.push(`${path}?id=${row.task_info_id}`);
+            }
         },
         viewLang() {
             let lang = this.langOptions.find(item => item.lang == this.langIdx);
@@ -200,13 +223,6 @@ export default {
             this.isScroll = false;
             let scrollTop = this.$refs.warpBox;
             scrollTop.scrollTo({ top: 0, behavior: "smooth" });
-        },
-        contactService() {
-            if (this.$Helper.checkBrowser()) {
-                window.open("https://wa.me/447377675671", "_blank");
-            } else {
-                uniFun.postMessage({ data: "https://wa.me/447377675671" });
-            }
         }
     }
 };
@@ -402,6 +418,11 @@ export default {
                     }
                 }
             }
+        }
+    }
+    .serve_icon{
+        img{
+            height: 80px;
         }
     }
 }

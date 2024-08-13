@@ -1,51 +1,59 @@
 <template>
     <div class="earn">
-        <page-header :title="$t('mine_004')" :show-icon="true"></page-header>
+        <page-header :title="$t('mine_004')" :show-icon="true" :bgColor="true"></page-header>
         <div class="dropdown_warp">
-                <div class="promote-header">
-                    <div class="tab_nav" @click="pulldownState">
-                        <span v-if = "!stateValue||stateValue=='-1'">{{ $t('tail_008') }}</span> 
-                        <span v-else>{{ dateState }}</span> 
-                        <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showState ? 180 : 0}deg)`}" />
+            <div class="promote_header flex-item flex-align flex-between">
+                <div class="fiter_icon flex-item flex-align" @click="pulldownState">
+                    <span class="font_28">filter</span>
+                    <img src="@/assets/images/mine/down_icon.png">
+                </div>
+                <div class="change_value flex-item">
+                    <span class="flex-item">{{ dateState }}</span>
+                    <span class="flex-item"> {{ timeText }}</span>
+                </div>
+            </div>
+            <van-overlay :show = "showState" @click="showState = false">
+                <div class="screen_down" @click.stop>
+                    <div class="w_f flex-item flex-dir-c">
+                        <p class="font_24">Types of</p>
+                        <ul>
+                            <li v-for="item in profitType" :key="item.value" :class="stateValue===item.value?'checkActive':''" @click="changeType(item)">
+                                {{item.lable}}
+                            </li>
+                        </ul>
+                        <p class="font_24">Date</p>
+                        <ul>
+                            <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
+                        </ul>
                     </div>
-                    <div class="tab_nav" @click="pulldownTime">
-                        <span v-if = "!timeValue || timeValue === 0">{{ $t('tail_004') }}</span> 
-                        <span v-else-if = "timeValue == 1">{{ $t('other_016') }}</span> 
-                        <span v-else-if= "timeValue == 2">{{ $t('other_017') }}</span> 
-                        <span v-else-if= "timeValue == 3">{{ $t('other_018') }}</span>
-                        <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showTime ? 180 : 0}deg)`}" />
+                    <div class="footer_btn w_f flex-item flex-between">
+                        <van-button type="primary" :loading="isLoading" @click="submitFun(1)">{{ $t('other_053') }}</van-button>
+                        <van-button type="primary" :loading="isLoading" @click="submitFun(2)">{{ $t('home_038') }}</van-button>
                     </div>
                 </div>
-                <van-overlay :show = "showState" @click="showState = false">
-                    <div class="screen_down" @click.stop>
-                        <ul>
-                            <li v-for="item in profitType" :key="item.value" :class="item.value === stateValue  ? 'checkActive':''" @click="changeType(item)">{{item.lable}}</li>
-                        </ul>
-                    </div>
-                </van-overlay>
-                <van-overlay :show = "showTime" @click="showTime = false">
-                    <div class="screen_down" @click.stop>
-                        <ul>
-                            <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(index)">{{item}}</li>
-                        </ul>
-                    </div>
-                </van-overlay>
-            </div>
-
+            </van-overlay>
+        </div>
         <div class="service-body" v-if="list&&list.length>0">
-            <div class="record_list">
-                <div class="record_warp">
-                    <span>{{ $t('tail_004') }}</span>
-                    <span>{{ $t('tail_008') }}</span>
-                    <span>{{ $t('pay_016') }}</span>
-                </div>
-            </div>
-            <div class="record_content">
-                <div class="buy-number" v-for="(item,index) in list" :key="index">
-                    <span>{{ formatTime(item.itime) }}</span>
-                    <span :style="getStatusColor(item.status)">{{getStatusText(item.status)}}</span>
-                    <span class="record_cash" v-if="item.status!=3">{{ item.amount }}</span>
-                    <span class="reject_tips record_cash" v-else @click="showReject(item)">{{ item.amount }} <img src="../../assets/images/mine/reject_img.png" alt=""> </span>
+            <div class="record_list w_f flex-item flex-dir-c">
+                <div class="record_item flex-item flex-align" v-for="(item,index) in list" :key="index">
+                    <img class="l_icon" src="@/assets/images/mine/order_icon.png" alt="">
+                    <div class="w_f flex-item flex-align flex-dir-c">
+                        <div class="w_f flex-item flex-align flex-between">
+                            <div class="flex-item flex-dir-c">
+                                <p class="task_bonus font_30">Task bonus</p>
+                                <p class="task_type font_24" v-if="item.status==3" :style="{color:`${orderOption[item.status].color}`}" @click="showReject(item)">{{ orderOption[item.status].name }}</p>
+                                <p class="task_type font_24" v-else :style="{color:`${orderOption[item.status].color}`}">{{ orderOption[item.status].name }}</p>
+                            </div>
+                            <div class="task_money flex-item flex-align flex-dir-c">
+                                <p class="font_30">-{{ item.amount }}</p>
+                                <p class="font_24">Balance: 2,999.00</p>
+                            </div>
+                        </div>
+                        <div class="order_time w_f flex-item flex-align flex-between font_26">
+                            <span>ID:20240801546824</span>
+                            <span>{{ formatTime(item.itime) }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,13 +78,14 @@ export default {
             dialogContent:"",
             stateValue:-1,
             timeValue:"",
+            timeText:"",
             showState:false,
             showTime:false,
+            currentDate: "",
             datetime: "",
             dateState: "",
             sTime:"",
             eTime:"",
-            currentDate: "", //初始化当前时间
             list: [],
             page: 1,
             limit: 20,
@@ -90,6 +99,13 @@ export default {
         },
         profitType(){
             return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('tail_005'),value:1 },{lable:this.$t('tail_006'),value:2 },{lable:this.$t('tail_011'),value:3 }];
+        },
+        orderOption(){
+            return ["",
+                {name:this.$t('pay_030'),color:"#FFA800"},
+                {name:this.$t('pay_031'),color:"#008751"},
+                {name:this.$t('pay_032'),color:"#FF4E28"}
+            ]
         }
     },
     created() {
@@ -144,10 +160,10 @@ export default {
         changeType(val){
             this.stateValue = val.value;
             this.dateState = val.lable;
-            this.getPointflow();
-            setTimeout(() =>{
-                this.showState = false;
-            },200)
+            // this.getPointflow();
+            // setTimeout(() =>{
+            //     this.showState = false;
+            // },200)
         },
         getStatusColor(status) {
             switch (status) {
@@ -174,9 +190,10 @@ export default {
             }
         },
         // 选择收益时间
-        changeTime(idx){
+        changeTime(row,idx){
             this.page = 1;
             this.timeValue = idx;
+            this.timeText =idx!=0?row:"";
             let newDate = new Date();
             let sTime = "00"+":"+"00"+":"+"00";
             let eTime = "23"+":"+"59"+":"+"59";
@@ -204,13 +221,27 @@ export default {
                 this.sTime = "";
                 this.eTime = "";
             }
+            // this.getPointflow();
+            // setTimeout(() =>{
+            //     this.showTime = false;
+            // },200)
+        },
+        submitFun(type){
+            if(type == 1){
+                this.timeText="";
+                this.dateState="";
+                this.sTime = "";
+                this.eTime = "";
+                this.stateValue=null;
+                this.timeValue=null;
+            }
             this.getPointflow();
             setTimeout(() =>{
-                this.showTime = false;
+                this.showState = false;
             },200)
         },
         formatTime(time) {
-            return formatTime(time);
+            return formatTime(time,1);
         }
     }
 };
@@ -226,6 +257,26 @@ export default {
         .dropdown_warp{
             // margin-top: 10px;
             position: relative;
+            .promote_header {
+                width: 100%;
+                height: 88px;
+                font-size: 28px;
+                padding: 0 26px;
+                box-sizing: border-box;
+                background-color: #fff;
+                .fiter_icon{
+                    img{
+                        height: 12px;
+                        margin: 6px 0 0 5px;
+                    }
+                }
+                .change_value{
+                    color: $color-theme;
+                    span:nth-child(2){
+                        margin-left: 20px;
+                    }
+                }
+            }
         }
         .custom_head{
             width:100%;
@@ -234,58 +285,80 @@ export default {
             position: relative;
         }
 }
-.promote-header {
-    width: 100%;
-    display: flex;
-    color: #7e7e7e;
-    flex-direction: row;
-    padding: 12px 30px 12px;
-    font-size: 28px;
-    background-color: #fff;
-    justify-content:space-around;
-    border-bottom: 1px solid  #f2f2f2;
-    gap: 20px;
-    .tab_nav {
-        display: flex;
-        // flex: 1;
-        width: max-content;
-        padding: 20px 30px;
-        text-align: center;
-        border-radius: 44px;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        background-color: #F2F7FF;
-        .down_img {
-            width: 30px;
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-    }
-    .tab_nav:nth-child(1){
-        border-right: 1px solid #f2f2f2;
-    }
-}
+
 .van-overlay{
   height: calc(100vh - 66px);
   position: absolute;
-  top: 50px;
+  top: 44px;
+  background: transparent;
 }
 .screen_down{
     width: 100%;
     float: left;
-    padding: 30px 35px;
+    padding: 0 45px 40px 45px;
     background-color: #fff;
+    p{
+        margin-bottom: 32px;
+        color: $home-title-06;
+    }
+    .footer_btn{
+        gap: 34px;
+        margin-top: 36px;
+        padding-top: 20px;
+        border-top: 1px solid $home-title-17;
+        .van-button{
+            flex: 1;
+            border-radius: 8px;
+        }
+        .van-button:nth-child(1){
+            color: $color-theme;
+            border-color: $home-title-16;
+            background-color: $home-title-16;
+        }
+        .van-button:nth-child(2){
+            border-color: $color-theme;
+            background-color: $color-theme;
+        }
+    }
 }
 .service-body{
     width: 100%;
     float: left;
-    background-color: #fff;
+    // background-color: #fff;
     font-size: 28px;
     box-sizing: border-box;
     .record_list{
-        width: 100%;
-        float: left;
+        gap: 20px;
+        padding: 20px 26px;
+        box-sizing: border-box;
+        .record_item{
+            padding: 10px 10px;
+            border-radius: 20px;
+            box-sizing: border-box;
+            background: $font-color-white;
+            .l_icon{
+                height: 52px;
+                margin-right: 14px;
+            }
+            .task_bonus{
+                font-weight: bold;
+                color: $home-title-12;
+            }
+            .task_type{
+                color: $home-title-06;
+            }
+            .task_money{
+                color: $home-title-06;
+                p:nth-child(1){
+                    color: $home-title-12;
+                    font-weight: bold;
+                }
+            }
+            .order_time{
+                margin-top: 14px;
+                color: $home-title-06;
+            }
+        }
     }
     .record_warp{
         padding: 10px 0;
@@ -356,5 +429,6 @@ export default {
     font-size: 28px;
     align-items: center;
     justify-content: center;
+    background: transparent;
 }
 </style>

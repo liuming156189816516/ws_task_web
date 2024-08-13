@@ -173,7 +173,7 @@ export function timetamp(time) {
 	return s;
 }
 //将时间戳转成年月日时分秒
-export function formatTime(date) {
+export function formatTime(date,type) {
 	var myDate = new Date(date * 1000);
 	var Year = myDate.getFullYear(); //获取年
 	var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
@@ -197,7 +197,11 @@ export function formatTime(date) {
 	if (Seconds < 10) {
 		Seconds = '0' + Seconds;
 	}
-	return Year + '-' + Month + '-' + Dates + ' ' + Hour + ':' + Minute + ':' + Seconds;
+	if(type == 1){
+		return Year + '/' + Month + '/' + Dates + ' ' + Hour + ':' + Minute + ':' + Seconds;
+	}else{
+		return Year + '-' + Month + '-' + Dates + ' ' + Hour + ':' + Minute + ':' + Seconds;
+	}
 }
 export const appSource = () => {
 	const u = navigator.userAgent;

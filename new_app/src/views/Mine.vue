@@ -25,36 +25,26 @@
                             <span>{{user_money||0.00}}</span>
                         </div>
                     </div>
-                    <van-button class="font_30" type="primary" @click="goWithdraw">Withdraw</van-button>
-                    <!-- <div class="custom_line">
-                        <span class="botton_line"></span>
-                    </div> -->
-                    <!-- <div class="task-pro">
-                        <div class="left-pro">
-                            <p>{{allIncome.today_bonus ||0}}</p>
-                            <p>{{ $t("mine_007") }}</p>
-                        </div>
-                        <div class="right-pro">
-                            <p>{{allIncome.yesterday_bonus ||0}}</p>
-                            <p>{{ $t("mine_008") }}</p>
-                        </div>
-                    </div> -->
+                    <van-button class="font_30" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">Withdraw</van-button>
+                    <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
+                    <div class="draw_tips font_22" v-else-if="withdrawalNum>=0" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
+                    <!-- <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
                 </div>
             </div>
             <div class="self_jinbi w_f flex-item">
-                <div class="self_item w_f flex-item flex-dir-c">
+                <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(1)">
                     <div class="flex-item flex-align flex-between">
-                        <span class="font_28">Task Earnings</span>
+                        <span class="font_28">Today's Earnings</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
-                    <div class="self_dold flex-item">999.00</div>
+                    <div class="self_dold flex-item">{{ allIncome.today_bonus ||0 }}</div>
                 </div>
-                <div class="self_item w_f flex-item flex-dir-c">
+                <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(2)">
                     <div class="flex-item flex-align flex-between">
-                        <span class="font_28">Millionaire Earnings</span>
+                        <span class="font_28">Yesterday's Earnings</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
-                    <div class="self_dold flex-item">999.00</div>
+                    <div class="self_dold flex-item">{{ allIncome.yesterday_bonus ||0 }}</div>
                 </div>
             </div>
         </div>
@@ -78,6 +68,7 @@
 </template>
 <script>
 import { mapState } from 'vuex';
+import { getwithdrawconfig } from '@/api/pay';
 import { getaccountincome,getbonus,getdownloadurl } from '@/api/home'
 export default {
     name: 'Mine',
@@ -87,6 +78,10 @@ export default {
             apk_url:"",
             user_money:0,
             allIncome:"",
+            minWithdrawal:null,
+            withdrawalNum:null,
+            isWithdrawal:false,
+            withdrawConfig:"",
             taskOption: [
                 {
                     status: 1,
@@ -151,6 +146,13 @@ export default {
         }
     },
     created() {
+        for (let k = 0; k < this.menuOption.length; k++) {
+            let item = this.menuOption[k];
+            if (item.path == "/down_apk" && this.$Helper.checkBrowser() && this.$Helper.isAndroid()) {
+                item.isShow = true;
+            }
+            this.$set(this.menuOption,k,item)
+        }
         this.syncInitApi();
         this.$store.dispatch('User/getUserHead');
     },
@@ -175,10 +177,18 @@ export default {
                     resolve(res)
                 })
             });
-            Promise.all([fun1,fun2,fun3]).then( res => {
-                const [{income},data2,data3] = res;
+            let fun4 = new Promise((resolve,reject)=>{
+                getwithdrawconfig().then(res =>{
+                    resolve(res)
+                })
+            });
+            Promise.all([fun1,fun2,fun3,fun4]).then( res => {
+                const [{income},data2,data3,data4] = res;
                 this.user_money = income;
                 this.allIncome = data2;
+                this.minWithdrawal = Number(data4.limit_count);
+                this.withdrawalNum = data4.limit_amount;
+                this.isWithdrawal = data4.limit_count_status;
                 for (let k = 0; k < this.menuOption.length; k++) {
                     let item = this.menuOption[k];
                     if(k == 4 && !this.$Helper.checkBrowser()&&!this.$Helper.isAndroid()){
@@ -226,6 +236,9 @@ export default {
         },
         goWithdraw(){
             this.$router.push("/withdraw");
+        },
+        showIncome(type){
+            this.$router.push(`betrecord?type=${type}`);
         },
         logoutHandle() {
             this.$dialog.confirm({
@@ -350,12 +363,17 @@ export default {
                     border-color: $color-theme;
                     background-color: $color-theme;
                 }
+                .draw_tips{
+                    padding-left: 30px;
+                    margin-top: 20px;
+                    box-sizing: border-box;
+                }
             }
         }
         .self_jinbi{
             padding: 0 26px;
             margin-top: 20px;
-            gap: 28px;
+            gap: 24px;
             box-sizing: border-box;
             .self_item{
                 flex: 1;
@@ -367,6 +385,7 @@ export default {
                 background: $font-color-white;
                 span{
                     color: $home-title-06;
+                    margin-right: -10px;
                 }
                 .self_dold{
                     font-weight: bold;
@@ -395,7 +414,7 @@ export default {
             .task_item {
                 width: 100%;
                 display: flex;
-                padding: 30px 20px;
+                padding: 20px 20px;
                 align-items: center;
                 box-sizing: border-box;
                 justify-content: space-between;
@@ -440,15 +459,5 @@ export default {
             border-radius: 30px;
         }
     }
-}
-.custom_line{
-  width: 100%;
-  padding: 0 30px;
-  box-sizing: border-box;
-  .botton_line{
-    width: 100%;
-    display: flex;
-    border-bottom: 2px dashed #ececec;
-  }
 }
 </style>

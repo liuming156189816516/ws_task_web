@@ -1,6 +1,6 @@
 <template>
     <div class="user-info">
-        <page-header :title="$t('title_008')" :noBg="false"></page-header>
+        <page-header :title="$t('title_008')" :noBg="false" :bgColor="true"></page-header>
         <div class="content-block">
             <div class="group-box">
                 <van-cell-group>

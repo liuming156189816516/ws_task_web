@@ -16,7 +16,7 @@
                     <van-button type="primary" @click="$router.push('/home')">确定</van-button>
                 </div> -->
             </div>
-            <template v-if="type==3||type==4||type==5">
+            <template v-if="type==3||type==4||type==5|type==6||type==7||type==8">
                 <div class="rule_model w_f flex-item flex-align flex-dir-c">
                     <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
                     <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div>
@@ -38,6 +38,36 @@
                         <p>{{restLanuage('home_069')}}</p>
                         <p>{{restLanuage('home_070')}}</p>
                         <p>{{restLanuage('home_071')}}</p>
+                    </div>
+                    <div class="rule_desc font_22" v-if="type==6">
+                        <div class="secound_tiitle">
+                            <p class="font_26">{{restLanuage('home_072')}}</p>
+                            <span class="font_22">{{restLanuage('home_073')}}</span>
+                        </div>
+                        <div class="secound_tiitle">
+                            <p class="font_26">{{restLanuage('home_074')}}</p>
+                            <span class="font_22">{{restLanuage('home_075')}}</span>
+                        </div>
+                        <div class="secound_tiitle">
+                            <p class="font_26">{{restLanuage('home_076')}}</p>
+                            <span class="font_22">{{restLanuage('home_077')}}</span>
+                        </div>
+                        <div class="secound_tiitle">
+                            <p class="font_26">{{restLanuage('home_078')}}</p>
+                            <span class="font_22">{{restLanuage('home_079')}}</span>
+                        </div>
+                    </div>
+                    <div class="rule_desc w_f flex-item flex-between font_22" style="flex-wrap: wrap;" v-if="type==7">
+                        <div class="task_list flex-item flex-center" v-for="(item,idx) in content" :key="idx">
+                            {{ item.target }}
+                            <!-- <span v-for="(item,idx) in content" :key="idx">{{ item.target }}</span> -->
+                        </div>
+                    </div>
+                    <div class="rule_desc font_22" v-if="type==8">
+                        <p>{{restLanuage('home_080')}}</p>
+                        <p>{{restLanuage('home_081')}}</p>
+                        <p>{{restLanuage('home_082')}}</p>
+                        <p>{{restLanuage('home_083')}}</p>
                     </div>
                 </div>
             </template>
@@ -191,6 +221,17 @@ export default {
                     line-height: 14px;
                     color: $font-color-black;
                     margin-bottom: 12px;
+                }
+                .task_list{
+                    width: 33.33%;
+                    line-height: 1.8;
+                }
+                .secound_tiitle{
+                    color: $home-title-15;
+                    margin-bottom: 24px;
+                    p{
+                        margin-bottom: 8px;
+                    }
                 }
             }
         }

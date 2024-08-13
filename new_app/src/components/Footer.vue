@@ -22,6 +22,9 @@ export default {
         };
     },
 	computed: {
+		...mapState({
+            userInfo: state => state.User,
+        }),
 		tabBarList(){
 			return [
                 {
@@ -62,13 +65,12 @@ export default {
     },
     methods: {
         goToPage(path) {
-			// if(path !== '/home'){
-			// 	return this.$router.push("/login");
-			// }
-            if (this.$route.name === path) {
-                return;
-            }
-            this.$router.push(`/${path}`);
+			if (this.$route.name === path)return;
+			if(path !== '/home'&&!this.userInfo.token){
+				return this.$router.push("/login");
+			}else{
+				this.$router.push(`/${path}`);
+			}
         }
     }
 };

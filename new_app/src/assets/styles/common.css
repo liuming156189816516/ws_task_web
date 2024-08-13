@@ -103,11 +103,17 @@
 .font_50 {
   font-size: 50px;
 }
+.font_52 {
+  font-size: 52px;
+}
 .font_54 {
   font-size: 54px;
 }
 .font_56 {
   font-size: 56px;
+}
+.font_64 {
+  font-size: 64px;
 }
 .font_72 {
   font-size: 72px;
@@ -383,8 +389,8 @@
   background-color: #f2f2f2;
 }
 .screen_down .checkActive, .singular_down .checkActive{
-  color: #ff5414;
-  background-color: #fedbbf;
+  color: #fff;
+  background-color: #008751;
 }
 .singular_down .checkActive{
   background-color: transparent;

@@ -1,6 +1,6 @@
 <template>
     <div class="person_c">
-        <page-header :title="$t('pay_023')" :show-icon="true"></page-header>
+        <page-header :title="$t('pay_023')" :show-icon="true" :bgColor="true"></page-header>
         <div class="person_content">
             <template v-if="curIndex==1">
                 <div class="user_info">

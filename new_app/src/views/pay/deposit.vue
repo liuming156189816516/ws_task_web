@@ -1,6 +1,6 @@
 <template>
     <div class="deposit">
-        <page-header :title="$t('buy_013')" :hide="true" :show-icon="true"></page-header>
+        <page-header :title="$t('buy_013')" :hide="true" :show-icon="true" :bgColor="true"></page-header>
         <div class="skeleton">
             <div class="member-integral">
                 <div>

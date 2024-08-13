@@ -1,12 +1,11 @@
 <template>
     <div class="reset-password">
-        <page-header :title="$t('mine_005')"></page-header>
+        <page-header :title="$t('mine_005')" :bgColor="true"></page-header>
         <div class="content-block">
-            <van-cell-group>
+            <van-cell-group :border="false">
                 <van-field
                     :label="$t('login_020')"
                     class="cell-block"
-                    :border="false"
                     autocomplete="off"
                     :right-icon="regEye0 ? 'closed-eye': 'eye-o'"
                     :type="regEye0 ? 'password': 'text'"
@@ -17,7 +16,6 @@
                 <van-field
                     :label="$t('login_021')"
                     class="cell-block"
-                    :border="false"
                     autocomplete="off"
                     :right-icon="regEye1 ? 'closed-eye': 'eye-o'"
                     :type="regEye1 ? 'password': 'text'"
@@ -28,7 +26,6 @@
                 <van-field
                     :label="$t('login_007')"
                     class="cell-block"
-                    :border="false"
                     autocomplete="off"
                     :right-icon="regEye2 ? 'closed-eye': 'eye-o'"
                     :type="regEye2 ? 'password': 'text'"
@@ -37,7 +34,7 @@
                     v-model="cPwd"
                 ></van-field>
             </van-cell-group>
-            <van-button type="primary" :loading="isLoading" @click="submitFun">{{ $t('other_003') }}</van-button>
+            <van-button type="primary" :loading="isLoading" @click="submitFun">{{ $t('home_038') }}</van-button>
         </div>
     </div>
 </template>
@@ -111,7 +108,7 @@ export default {
 <style lang="scss" scoped>
 .reset-password {
     height: 100vh;
-    background-color: #f2f2f2;
+    background-color: $font-color-white;
 }
 .header {
     height: 102px;
@@ -142,6 +139,11 @@ export default {
     padding: 0 35px;
     .van-cell{
         border-radius: 5px;
+    }
+    .van-button{
+        margin-top: 50px;
+        border-color: $color-theme;
+        background-color: $color-theme;
     }
 }
 .submit-button {

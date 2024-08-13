@@ -1,6 +1,6 @@
 <template>
     <div class="spread_warp">
-        <page-header :title="$t('table_002')" :noBg="false" :showBack="false" />
+        <page-header :title="$t('table_002')" :noBg="false" :bgColor="false" :showBack="false" />
         <div class="w_f spread_title flex-item font_50 flex-dir-c">
             <p class="flex-item flex-center">Profit from sharing</p>
             <p class="flex-item flex-center">Earn continuously by inviting</p>
@@ -32,16 +32,16 @@
                            <div class="w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
                                 <span class="flex-item font_28">My invitation link</span>
-                                <van-button class="font_20" type="primary">{{$t('other_006')}}</van-button>
+                                <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?r='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                             </div>
-                            <div class="copay_text flex-item font_28">www.wscashcow.com?r=wvlivi#/register</div>
+                            <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
                            </div>
                            <div class="invit_code w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
                                 <span class="flex-item font_28">My invite code</span>
-                                <van-button class="font_20" type="primary">{{$t('other_006')}}</van-button>
+                                <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                             </div>
-                            <div class="copay_text flex-item font_28">wvlivi</div>
+                            <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
                            </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">Records：</h3>
-                <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips">online customer service</span></div>
+                <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top w_f flex-item flex-align flex-between font_28">
@@ -112,28 +112,28 @@ export default {
                 {
                     text:"Share your link",
                     img:"s_01",
-                    icon:"link_icon"
+                    icon:"img_001"
                 },
                 {
                     text:"Invitee register and log in",
                     img:"s_02",
-                    icon:"link_icon"
+                    icon:"img_002"
                 },
                 {
                     text:"Invitee completes the task",
                     img:"s_03",
-                    icon:"link_icon"
+                    icon:"img_003"
                 },
                 {
                     text:"Distribute bonus",
                     img:"s_04",
-                    icon:"link_icon"
+                    icon:"img_004"
                 }
             ]
         }
     },
     created() {
-        // this.syncInitApi();
+        this.syncInitApi();
     },
     methods:{
         syncInitApi(){
@@ -151,8 +151,8 @@ export default {
                 const [income,{invite_link}] = res;
                 this.allIncome = income;
                 this.invit_link = invite_link;
-                this.$refs.qrcodeImg.textContent="";
-                this.createQrcode(this.invit_link);
+                // this.$refs.qrcodeImg.textContent="";
+                // this.createQrcode(this.invit_link);
             })
         },
         createQrcode(url){
@@ -196,7 +196,7 @@ export default {
         .notice_warp {
             position: relative;
             padding: 0 70px;
-            margin-top: 28px;
+            // margin-top: 24px;
             box-sizing: border-box;
             .notice_mian{
                 overflow: hidden;
@@ -224,13 +224,14 @@ export default {
         }
         .share_main{
             height: 613px;
+            margin-top: 20px;
             position: relative;
             background: url('../assets/images/mill/bg_01.png') no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             .share_rule{
                 color: $font-color-white;
                 position: absolute;
-                top: 0;
+                top: -10px;
                 right: 0;
                 z-index: 9;
                 padding: 8px 12px;
@@ -249,8 +250,6 @@ export default {
                 box-sizing: border-box;
                 .mask_img{
                     margin-top: 168px;
-                    background: url('../assets/images/mill/bg_01.png') no-repeat;
-                    background-size: cover;
                 }
                 .spred_mess{
                     // height: 200px;
@@ -346,7 +345,7 @@ export default {
                             height: 18px;
                             position: absolute;
                             left: 0;
-                            bottom: 22px;
+                            bottom: 21px;
                             z-index: 1;
                         }
                         .triang_1{
@@ -421,7 +420,7 @@ export default {
                     border-bottom: 1px solid transparent;
                 }
                 .footer_tips{
-                    padding: 16px 20px;
+                    padding: 16px 0 16px 20px;
                     box-sizing: border-box;
                     color: $home-title-06;
                     border-bottom-left-radius: 20px;

@@ -1,7 +1,7 @@
 <template>
 	<div class="withdraw">
 		<div class="panel">
-			<page-header :title="$t('mine_002')" :show-icon="true"></page-header>
+			<page-header :title="$t('mine_002')" :show-icon="true" :bgColor="true"></page-header>
 			<!-- <van-tabs title-active-color="#ff9600" :active="curIndex" @change="onChange">
                 <van-tab :title="item" v-for="(item,idx) in personList" :key="idx"></van-tab>
             </van-tabs> -->

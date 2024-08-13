@@ -1,8 +1,11 @@
 <template>
 	<div class="login_warp">
-		<page-header :title="$t('login_027')" :noBg="false"></page-header>
+		<page-header :title="$t('login_027')" :noBg="false" :showBack="false"></page-header>
 		<div class="head_main w_f flex-item flex-dir-c">
-			<div class="head_title">Sign in to your Account</div>
+			<div class="head_title">
+				Sign up
+				<img src="@/assets/images/sign/close_icon.png" @click="bankIcon">
+			</div>
 			<div class="small_text flex-item font_32">Create your account</div>
 		</div>
 		<div class="sign_login">
@@ -11,16 +14,16 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<img src="@/assets/images/sign/zhanghao.png" />
-					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_026')})" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_026')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div pwd">
 					<img src="@/assets/images/sign/lock.png" />
-					<input v-model="pwd" :placeholder="$t('other_001',{value:$t('login_002')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="pwd" :placeholder="$t('other_001',{value:$t('login_002')})" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
 					<img src="@/assets/images/sign/lock.png" />
-					<input v-model="sur_pwd" :placeholder="$t('other_001',{value:$t('login_009')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="sur_pwd" :placeholder="$t('other_001',{value:$t('login_009')})" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
@@ -83,6 +86,9 @@ export default {
 		},
 		showEye(){
 			this.regEye = !this.regEye;
+		},
+		bankIcon(){
+			this.$router.go("-1")
 		},
 		// handleBlur(){
 		// 	if (!this.username) return;
@@ -191,12 +197,21 @@ export default {
 		// background-color: $color-theme;
 		.head_title{
 			width: 100%;
+			height: 188px;
 			display: flex;
 			font-weight: bold;
 			font-size: 72px;
-			align-items: center;
-			justify-content: center; 
+			position: relative;
+			// align-items: center;
+			// justify-content: center; 
 			color: $font-color-white;
+			img{
+				width: 48px;
+				height: 48px;
+				position: absolute;
+				top: 32px;
+				right: 0;
+			}
 		}
 		.small_text{
 			margin-top: 10px;
@@ -207,6 +222,7 @@ export default {
 		display: flex;
 		width: 100%;
 		height: calc(100% - 428px);
+		padding-top: 60px;
 		position: relative;
 		flex-direction: column;
 		background: $font-color-white;
@@ -327,6 +343,8 @@ export default {
 			border: none;
 			border-radius: 6px;
 			margin-bottom: 20px;
+			border-color: $color-theme;
+			background-color: $color-theme;
 		}
 		.van-button:nth-child(2) {
 			color: #323aa2;

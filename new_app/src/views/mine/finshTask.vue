@@ -1,7 +1,7 @@
 <template>
     <div class="earn">
         <div class="custom_head">
-            <page-header style="position: fixed;top: 0;left: 0; z-index: 9;" title="完成任务详情" :show-icon="true" :bgcolor="false"></page-header>
+            <page-header style="position: fixed;top: 0;left: 0; z-index: 9;" title="完成任务详情" :show-icon="true" :bgColor="true"></page-header>
             <div class="dropdown_warp">
                 <div class="promote-header">
                     <div class="tab_nav" @click="dateShow=!dateShow">

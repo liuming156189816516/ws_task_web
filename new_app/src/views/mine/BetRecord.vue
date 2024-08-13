@@ -1,29 +1,38 @@
 <template>
     <div class="earn">
         <div class="custom_head">
-            <page-header :title="$t('mine_003')" :show-icon="true" :bgcolor="false"></page-header>
+            <page-header :title="$t('mine_003')" :show-icon="true" :bgColor="true"></page-header>
             <div class="dropdown_warp">
-                <div class="promote-header">
-                    <div class="tab_nav" @click="pulldownState">
-                        <span v-if = "dateState == ''">{{ $t('tail_002') }}</span> 
-                        <span v-else>{{ dateState }}</span> 
-                        <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showState ? 180 : 0}deg)`}" />
+                <div class="promote_header flex-item flex-align flex-between">
+                    <div class="fiter_icon flex-item flex-align" @click="pulldownState">
+                        <span class="font_28">filter</span>
+                        <img src="@/assets/images/mine/down_icon.png">
                     </div>
-                    <div class="tab_nav" @click="pulldownTime">
-                        <span v-if = "!timeValue || timeValue === 0">{{ $t('tail_004') }}</span> 
-                        <span v-else-if = "timeValue == 1">{{ $t('other_016') }}</span> 
-                        <span v-else-if= "timeValue == 2">{{ $t('other_017') }}</span> 
-                        <span v-else-if= "timeValue == 3">{{ $t('other_018') }}</span>
-                        <van-icon class="down_img" name="arrow-down" style="transition: all 200ms linear" :style="{ transform: `rotate(${showTime ? 180 : 0}deg)`}" />
+                    <div class="change_value flex-item">
+                        <span class="flex-item">{{ dateState }}</span>
+                        <span class="flex-item"> {{ timeText }}</span>
                     </div>
-                    <!-- <div class="tab_nav cash_nav" @click="pulldownState">
-                        总收益：<span style="color:#F52C2C;">{{total_point||0}}元</span> 
-                    </div> -->
                 </div>
             </div>
         </div>
-        <div class="record_list" v-if="list&&list.length>0">
-            <div class="record_warp record_title">
+        <div class="record_list w_f flex-item flex-dir-c" v-if="list&&list.length>0">
+            <div class="record_item flex-item flex-align" v-for="(item,index) in list" :key="index">
+                <img class="l_icon" src="@/assets/images/mine/order_icon.png" alt="">
+                <div class="w_f flex-item flex-align flex-dir-c">
+                    <div class="w_f flex-item flex-align flex-between">
+                        <div class="flex-item flex-dir-c">
+                            <p class="task_bonus font_30">Task bonus</p>
+                            <p class="task_type font_24">Invite friends bonus</p>
+                        </div>
+                        <div class="task_money font_30">{{ item.amount }}</div>
+                    </div>
+                    <div class="order_time w_f flex-item flex-align flex-between font_26">
+                        <span>Balance: 2,999.00</span>
+                        <span>{{ formatTime(item.itime) }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="record_warp record_title">
                 <span>{{$t("tail_004")}}</span>
                 <span>{{$t("tail_002")}}</span>
                 <span>{{$t("pay_016")}}</span>
@@ -34,25 +43,36 @@
                     <span class="head_title">{{filterPay(item.type)}}</span>
                     <span class="record_cash">{{item.amount}}</span>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div v-else class="empty_tips">{{$t("other_022")}}</div>
         <van-overlay :show = "showState" @click="showState = false">
             <div class="screen_down" @click.stop>
-                <ul>
-                    <li v-for="item in profitType" :key="item.value" :class="stateValue===item.value?'checkActive':''" @click="changeType(item)">
-                        {{item.lable}}
-                    </li>
-                </ul>
+                <div class="w_f flex-item flex-dir-c">
+                    <p class="font_24">Types of</p>
+                    <ul>
+                        <li v-for="item in profitType" :key="item.value" :class="stateValue===item.value?'checkActive':''" @click="changeType(item)">
+                            {{item.lable}}
+                        </li>
+                    </ul>
+                    <p class="font_24">Date</p>
+                    <ul>
+                        <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
+                    </ul>
+                </div>
+                <div class="footer_btn w_f flex-item flex-between">
+                    <van-button type="primary" :loading="isLoading" @click="submitFun(1)">{{ $t('other_053') }}</van-button>
+                    <van-button type="primary" :loading="isLoading" @click="submitFun(2)">{{ $t('home_038') }}</van-button>
+                </div>
             </div>
         </van-overlay>
-        <van-overlay :show = "showTime" @click="showTime = false">
+        <!-- <van-overlay :show = "showTime" @click="showTime = false">
             <div class="screen_down" @click.stop>
                 <ul>
                     <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(index)">{{item}}</li>
                 </ul>
             </div>
-        </van-overlay>
+        </van-overlay> -->
         <PrevNext :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext"></PrevNext>
     </div>
 </template>
@@ -93,6 +113,11 @@ export default {
         }
     },
     created() {
+        let params = this.$route.query.type||"";
+        if (params) {
+            this.timeValue = Number(params);
+            this.changeTime(this.profitTime[this.timeValue],this.timeValue)
+        }
         this.billDetail();
     },
     methods: {
@@ -139,15 +164,16 @@ export default {
             this.page = 1;
             this.stateValue = row.value;
             this.dateState = row.value!=-1?row.lable:"";
-            this.billDetail();
-            setTimeout(() =>{
-                this.showState = false;
-            },200)
+            // this.billDetail();
+            // setTimeout(() =>{
+            //     this.showState = false;
+            // },200)
         },
         // 选择收益时间
-        changeTime(idx){
+        changeTime(row,idx){
             this.page = 1;
             this.timeValue = idx;
+            this.timeText =idx!=0?row:"";
             let newDate = new Date();
             let sTime = "00"+":"+"00"+":"+"00";
             let eTime = "23"+":"+"59"+":"+"59";
@@ -175,9 +201,23 @@ export default {
                 this.sTime = "";
                 this.eTime = "";
             }
+            // this.billDetail();
+            // setTimeout(() =>{
+            //     this.showTime = false;
+            // },200)
+        },
+        submitFun(type){
+            if(type == 1){
+                this.timeText="";
+                this.dateState="";
+                this.sTime = "";
+                this.eTime = "";
+                this.stateValue=null;
+                this.timeValue=null;
+            }
             this.billDetail();
             setTimeout(() =>{
-                this.showTime = false;
+                this.showState = false;
             },200)
         },
         // 格式化金额
@@ -185,7 +225,7 @@ export default {
             return fmoney(point,2);
         },
         formatTime(time) {
-            return formatTime(time);
+            return formatTime(time,1);
         },
         filterPay(type){
             let result = this.profitType.filter(row=>{return row.value == type});
@@ -216,54 +256,89 @@ export default {
         position: relative;
     }
 }
-.promote-header {
+.promote_header {
     width: 100%;
-    display: flex;
-    color: #7e7e7e;
-    flex-direction: row;
-    padding: 12px 30px 12px;
+    height: 88px;
     font-size: 28px;
+    padding: 0 26px;
+    box-sizing: border-box;
     background-color: #fff;
-    justify-content:space-around;
-    border-bottom: 1px solid  #f2f2f2;
-    gap: 20px;
-    .tab_nav {
-        width: max-content;
-        display: flex;
-        // flex: 1;
-        padding: 20px 30px;
-        overflow: hidden;
-        border-radius: 0;
-        background-color: #FFF2F2;
-        .down_img {
-            margin-left: 6px;
-            width: 30px;
-            vertical-align: middle;
+    .fiter_icon{
+        img{
+            height: 12px;
+            margin: 6px 0 0 5px;
         }
-        border-radius: 44px;
-        align-items: center;
-        justify-content: center;
     }
-    .cash_nav{
-        flex-grow: 1;
-        background: transparent;
+    .change_value{
+        color: $color-theme;
+        span:nth-child(2){
+            margin-left: 20px;
+        }
     }
 }
 .van-overlay{
   height: calc(100vh - 66px);
   position: absolute;
-  top: 90px;
+  top: 88px;
 }
 .screen_down{
     width: 100%;
     float: left;
     padding: 40px 45px;
     background-color: #fff;
+    p{
+        margin-bottom: 32px;
+        color: $home-title-06;
+    }
+    .footer_btn{
+        gap: 34px;
+        margin-top: 36px;
+        padding-top: 20px;
+        border-top: 1px solid $home-title-17;
+        .van-button{
+            flex: 1;
+            border-radius: 8px;
+        }
+        .van-button:nth-child(1){
+            color: $color-theme;
+            border-color: $home-title-16;
+            background-color: $home-title-16;
+        }
+        .van-button:nth-child(2){
+            border-color: $color-theme;
+            background-color: $color-theme;
+        }
+    }
 }
 .record_list{
-    width: 100%;
-    float: left;
-    overflow: hidden;
+    gap: 20px;
+    padding: 20px 26px;
+    box-sizing: border-box;
+    .record_item{
+        padding: 10px 10px;
+        border-radius: 20px;
+        box-sizing: border-box;
+        background: $font-color-white;
+        .l_icon{
+            height: 52px;
+            margin-right: 14px;
+        }
+        .task_bonus{
+            font-weight: bold;
+            color: $home-title-12;
+        }
+        .task_type{
+            color: $home-title-06;
+        }
+        .task_money{
+            font-weight: bold;
+            color: $home-title-12;
+        }
+        .order_time{
+            margin-top: 14px;
+            color: $home-title-06;
+        }
+    }
 }
 .record_warp, .record_content{
     width: 100%;
@@ -319,5 +394,6 @@ export default {
     font-size: 28px;
     align-items: center;
     justify-content: center;
+    background: transparent;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div class="login_warp" @click="isIndex=false">
-		<page-header :title="$t('login_027')" :noBg="false"></page-header>
+		<page-header :title="$t('login_027')" :showBack="false"></page-header>
 		<!-- <div class="l_value" @click="showChangeBtn" @click.stop>
 			<span>{{ viewLang() }}</span>
 			<img class="down_icon" src="@/assets/images/home/xiala.png">
@@ -11,7 +11,10 @@
 			</van-transition>
 		</div> -->
 		<div class="head_main w_f flex-item flex-dir-c">
-			<div class="head_title">Sign in to your Account</div>
+			<div class="head_title">
+				Sign in to your Account
+				<img src="@/assets/images/sign/close_icon.png" @click="bankIcon">
+			</div>
 			<div class="small_text flex-item font_32">Sign in to your account</div>
 		</div>
 		<div class="login_main flex-item flex-dir-c">
@@ -28,8 +31,8 @@
 						<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="eyeBol"></i>
 					</div>
 					<div class="forget_pwd">
-						<van-checkbox v-model="autologin" shape="square" checked-color="#07c160">{{$t('other_002')}}</van-checkbox>
-						<span class="forget_text" @click="forgetFunc">{{ $t('login_003') }}</span>
+						<van-checkbox v-model="autologin" shape="square" checked-color="#008751">{{$t('other_002')}}</van-checkbox>
+						<!-- <span class="forget_text" @click="forgetFunc">{{ $t('login_003') }}</span> -->
 					</div>
 				</div>
 				<div class="login_btn">
@@ -132,6 +135,9 @@ export default {
 				this.password = storage['loginpwd'];
 			}
 		},
+		bankIcon(){
+			this.$router.push("/home")
+		},
 		eyeBol() {
 			this.regEye = !this.regEye;
 		},
@@ -172,9 +178,17 @@ export default {
 			display: flex;
 			font-weight: bold;
 			font-size: 72px;
+			position: relative;
 			align-items: center;
 			justify-content: center; 
 			color: $font-color-white;
+			img{
+				width: 48px;
+				height: 48px;
+				position: absolute;
+				top: 32px;
+				right: 0;
+			}
 		}
 		.small_text{
 			margin-top: 10px;
@@ -242,6 +256,8 @@ export default {
 				// border: none;
 				border-radius: 6px;
 				margin-bottom: 20px;
+				border-color: $color-theme;
+				background-color: $color-theme;
 			}
 			// .van-button:nth-child(2){
 			// 	color: #323aa2;

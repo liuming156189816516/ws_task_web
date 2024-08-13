@@ -3,7 +3,7 @@
         <div class="cover_gradient w_f">
             <div class="serve_top w_f flex-item flex-align">
                 <div class="serve_l serve_r">
-                    <img src="@/assets/images/\serveic/ser_bots.png" alt="" srcset="">
+                    <img src="@/assets/images/serveic/ser_bots.png" alt="" srcset="">
                 </div>
                 <div class="serve_r flex-item flex-dir-c">
                     <p class="font_32">Hi，{{ userInfo.account }}</p>

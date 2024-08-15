@@ -33,7 +33,7 @@
                         <div class="task_sure_time">
                             <p class="task_text font_24">Current Task Status</p>
                             <p class="task_num flex-item font_28">
-                                {{statusOption[teamStemp.status]}}
+                                {{taskOption[teamStemp.status]}}
                                 <van-count-down :time="taskTime" />
                             </p>
                         </div>
@@ -137,6 +137,9 @@ export default {
 			userInfo: state => state.User.userInfo,
             bannerList: state => state.User.bannerList
 		}),
+        taskOption(){
+            return ["",this.$t('home_044'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
+        },
         statusOption(){
             return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
         }

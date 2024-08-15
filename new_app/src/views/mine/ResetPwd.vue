@@ -29,7 +29,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import { revisepwd } from "@/api/login";
+import { revisepwd,logout } from "@/api/login";
 import PageHeader from "@/components/Header";
 
 export default {
@@ -74,14 +74,17 @@ export default {
             revisepwd({old_pwd:this.oPwd,new_pwd:this.nPwd}).then(res => {
                 this.isLoading=false;
                 if(res.code) return;
+                sessionStorage.clear();
+                let storage = window.localStorage;
+                storage["isstorename"] =  "no";
+                this.$store.dispatch('User/logoutClear');
                 this.$dialog.confirm({
                     title: this.$t("other_008"),
                     message: this.$t("login_022"),
                     confirmButtonText: this.$t("other_011"),
                     showCancelButton: false
                 }).then(() => {
-                    this.$store.dispatch("User/logoutUser");
-                    this.$router.push({ name: "/login" });
+                    this.$router.replace('/home');
                 })
             })
         }

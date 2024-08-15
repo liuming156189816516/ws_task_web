@@ -165,7 +165,7 @@ export default {
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_013')}));
 			} else if(payIdx==2&&!this.card_no){
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}));
-			} else if(this.income_naira < this.withdraw_cash){
+			} else if(this.income_naira < this.withdraw_cash/10){
 				return this.$toast(this.$t('pay_017'));
 			}
 			this.showModel=true;
@@ -176,7 +176,7 @@ export default {
 				return this.$toast(this.$t('pay_018'));
 			}else if(this.withdraw_num % 1 != 0){
 				return this.$toast(this.$t('pay_019'));
-			}else if(this.withdraw_num/10 < this.withdraw_cash){
+			}else if(this.withdraw_num/10 < this.withdraw_cash/10){
 				return this.$toast(this.$t('pay_028',{value:this.withdraw_cash}));
 			}
 			let params = {

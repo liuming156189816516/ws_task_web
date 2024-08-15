@@ -75,6 +75,7 @@ export default {
     home_041:"Are you sure you want to delete this WhatsApp account??",
     home_042:"<span style='color:#ff013d;'>In order to successfully complete the task, it is recommended to use the Chrome browser</span>. ",
     home_043:"Download Chrome",
+    home_044:"In Progress",
 
     home_044:"Invite Friends Bonus",
     home_045:"Millionaire",

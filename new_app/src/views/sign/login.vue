@@ -30,10 +30,10 @@
 						<input v-model="password" :placeholder="$t('login_002')" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 						<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="eyeBol"></i>
 					</div>
-					<div class="forget_pwd">
+					<!-- <div class="forget_pwd">
 						<van-checkbox v-model="autologin" shape="square" checked-color="#008751">{{$t('other_002')}}</van-checkbox>
-						<!-- <span class="forget_text" @click="forgetFunc">{{ $t('login_003') }}</span> -->
-					</div>
+						<span class="forget_text" @click="forgetFunc">{{ $t('login_003') }}</span>
+					</div> -->
 				</div>
 				<div class="login_btn">
 					<van-button type="primary" :loading="isLoading" @click="handleLogin" :loading-text="$t('login_005')">{{$t('login_004')}}</van-button>
@@ -68,7 +68,7 @@ export default {
 		}
 	},
 	created() {
-		this.userAccount();
+		// this.userAccount();
     },
 	methods: {
 		//登录
@@ -125,12 +125,14 @@ export default {
 		},
 		userAccount() {
 			let storage = window.localStorage;
+			console.log(storage['isstorename']);
 			if (storage['isstorename'] == 'yes') {
 				this.autologin = true;
 				this.username = storage['loginphone'];
 				this.password = storage['loginpwd'];
 				this.handleLogin();
 			} else {
+				console.log("88888888888888");
 				this.autologin = false;
 				this.username = storage['loginphone'];
 				this.password = storage['loginpwd'];

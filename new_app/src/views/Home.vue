@@ -92,6 +92,7 @@ export default {
     components: {PageHeader},
     data() {
         return {
+            isLogin:false,
             isScroll: false,
             isIndex: false,
             visible:true,
@@ -125,10 +126,19 @@ export default {
         }
     },
     created() {
+        // this.isLogin = this.$store.state.Global.isLogin;
         // this.$store.dispatch('User/getUserHead');
         // this.getHelpServe();
         // this.$store.dispatch('User/plantCarousel');
     },
+    // userInfo.token
+    // watch:{
+    //     isLogin(newVal, oldVal){
+    //         if(newVal){
+    //             this.syncInitApi();
+    //         }
+    //     }
+    // },
     activated() {
         if(getToken()){
             this.syncInitApi();
@@ -160,12 +170,7 @@ export default {
                     resolve(res)
                 })
             });
-            let fun4 = new Promise((resolve, reject) => {
-                getalltasklist().then(res => {
-                    resolve(res)
-                })
-            });
-            Promise.all([fun1, fun2, fun3, fun4]).then(res => {
+            Promise.all([fun1, fun2, fun3]).then(res => {
                 const [{ income }, data2, data3] = res;
                 this.user_money = income;
                 this.teamStemp = data2;

@@ -1,11 +1,11 @@
 <template>
     <div class="earn">
         <div class="custom_head">
-            <page-header :title="$t('mine_003')" :show-icon="true" :bgColor="true"></page-header>
+            <page-header :title="$t('mine_010')" :show-icon="true" :bgColor="true"></page-header>
             <div class="dropdown_warp">
                 <div class="promote_header flex-item flex-align flex-between">
                     <div class="fiter_icon flex-item flex-align" @click="pulldownState">
-                        <span class="font_28">filter</span>
+                        <span class="font_28" style="font-weight: 700;">filter</span>
                         <img src="@/assets/images/mine/down_icon.png">
                     </div>
                     <div class="change_value flex-item">
@@ -24,7 +24,8 @@
                             <p class="task_bonus font_30">{{ profitType.find(val=> val.value == item.type).lable||"" }}</p>
                             <p class="task_type font_24" v-if="item.task_type!=0">{{ taskOption[item.task_type] }}</p>
                         </div>
-                        <div class="task_money font_30">{{ item.amount }}</div>
+                        <div class="task_money font_30" v-if="item.type==9" style="color:#F52C2C;">{{ item.amount }}</div>
+                        <div class="task_money font_30" v-else>+{{ item.amount }}</div>
                     </div>
                     <div class="order_time w_f flex-item flex-align flex-between font_26">
                         <span>Balance: {{ item.balance }}</span>

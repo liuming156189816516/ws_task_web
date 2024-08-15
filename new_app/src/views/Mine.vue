@@ -186,8 +186,8 @@ export default {
                 const [{income},data2,data3,data4] = res;
                 this.user_money = income;
                 this.allIncome = data2;
-                this.minWithdrawal = Number(data4.limit_count);
-                this.withdrawalNum = data4.limit_amount;
+                this.withdrawalNum = Number(data4.limit_count);
+                this.minWithdrawal = data4.limit_amount;
                 this.isWithdrawal = data4.limit_count_status;
                 for (let k = 0; k < this.menuOption.length; k++) {
                     let item = this.menuOption[k];

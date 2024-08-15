@@ -91,7 +91,7 @@ import QRCode from 'qrcodejs2'
 import { formatTime } from "@/utils/tool";
 import { getinvitelink} from '@/api/bill';
 import PageHeader from "@/components/Header";
-import { getinvitefriendtasklist } from '@/api/task';
+import {  getbillrecordlist } from '@/api/task';
 export default {
     components: { PageHeader },
     data() {
@@ -141,7 +141,7 @@ export default {
     },
     methods:{
         getIncomeList(){
-            getinvitefriendtasklist({page: 1,limit: 200,task_type:3}).then(res => {
+            getbillrecordlist({page: 1,limit: 200,task_type:3}).then(res => {
                 this.millionList = res.list || [];
             })
         },

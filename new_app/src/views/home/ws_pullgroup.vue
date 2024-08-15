@@ -111,7 +111,7 @@
 import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
-import { getbillrecordlist } from '@/api/task';
+import { getinvitefriendtasklist } from '@/api/task';
 import { getcreatetaskinfo,submitcreatetask } from '@/api/home'
 import uniFun from "@/utils/uni-webview-js"
 export default {
@@ -166,7 +166,7 @@ export default {
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         },
         getIncomeList(){
-            getbillrecordlist({page: 1,limit: 200,task_type:2}).then(res => {
+            getinvitefriendtasklist({page: 1,limit: 200,task_type:2}).then(res => {
                 console.log(res);
                 this.pullGroupList = res.list || [];
             })

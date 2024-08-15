@@ -139,6 +139,9 @@ export default {
                     this.is_play=false;
                 })
             }
+            let list = this.$refs.tips_scroll;
+            list.addEventListener("touchmove",e => e.stopPropagation(),false)
+            // console.log();
         })
     },
     methods: {
@@ -287,7 +290,7 @@ export default {
             background: $home-title-13;
             .rule_model_hide{
                 height: 100%;
-                // overflow: hidden;
+                overflow: hidden;
                 border-radius: 30px;
                 .rule_model_box{
                     max-height: 500px;

@@ -39,7 +39,7 @@ export default {
     home_005:"Invite Now",
     home_006:"Processing",
     home_007:"Settling",
-    home_008:"Ended",
+    home_008:"Completed",
     home_009:"WhatsApp Message Task",
     home_010:"WhatsApp followers Task",
     home_011:"WhatsApp Group Task",
@@ -75,8 +75,6 @@ export default {
     home_041:"Are you sure you want to delete this WhatsApp account??",
     home_042:"<span style='color:#ff013d;'>In order to successfully complete the task, it is recommended to use the Chrome browser</span>. ",
     home_043:"Download Chrome",
-    home_044:"In Progress",
-
     home_044:"Invite Friends Bonus",
     home_045:"Millionaire",
     home_046:"Social Media Bonus",
@@ -105,7 +103,6 @@ export default {
     home_069:"When the users you invited complete tasks on the platform and their submissions are approved, you will receive a platform bonus. The bonus will be directly credited to your promotional earnings by the system",
     home_070:"If the system determines that you have violated any rules, your account will be suspended",
     home_071:"To avoid any discrepancies in interpretation, CashCow reserves the right to the final explanation of this activity",
-
     home_072:"Step 1: Import Contacts",
     home_073:"Import the contact information provided by the system into your phone's address book (simply tap the import button to do so)",
     home_074:"Step 2: Create a New Group",
@@ -114,12 +111,10 @@ export default {
     home_077:"Find the group for which you want to set up a link. Once in the group, tap the 'More' option in the top right corner, then select 'Group Settings' from the menu. In the Group Settings page, you'll see the 'Invite to Group Chat' option. Tap on it, then select 'Generate Link'. After generating the link, you’ll have a group invite link ready",
     home_078:"Step 4: Enter the Group Link into the System",
     home_079:"Copy and paste the group link you’ve set up into the designated field in the system form, then click the submit button",
-
     home_080:"1、Open your WhatsApp and use it to scan the QR code on the page (please note: choose between a personal or business account based on your account type)",
     home_081:"If the QR code on the page is not scannable, please click the ‘Refresh’ button to refresh the QR code",
     home_082:"2、Once you have successfully scanned, close this window! (Wait 3–5 minutes, then click ‘Refresh List’ to check the WhatsApp status.) After waiting 3–5 minutes, return to the bottom of this page to check the account status",
     home_083:"Once you are logged in, the system will automatically execute the tasks. To avoid affecting your earnings, please refrain from making any arbitrary changes",
-    
     home_084:"1、Once you start this task, it will be active for 30 minutes. You cannot participate in the task again until the current task is completed",
     home_085:"2、After you enter the group link into the system and it has been reviewed by the platform, the task reward will be issued within 48 hours",
     home_086:"3、If the system determines that you have violated any rules, your account will be suspended",
@@ -258,6 +253,7 @@ export default {
     other_058:"Social Media bonus",
     other_059:"Invite friends bonus",
     other_060:"Millionaire",
+    other_061:"In Progress",
 
     table_001:"Home",
     table_002:"Millionaire",

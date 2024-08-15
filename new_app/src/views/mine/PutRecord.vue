@@ -4,7 +4,7 @@
         <div class="dropdown_warp">
             <div class="promote_header flex-item flex-align flex-between">
                 <div class="fiter_icon flex-item flex-align" @click="pulldownState">
-                    <span class="font_28" style="font-weight: 700;">filter</span>
+                    <span class="font_28" style="font-weight: 700;">Filter</span>
                     <img src="@/assets/images/mine/down_icon.png">
                 </div>
                 <div class="change_value flex-item">

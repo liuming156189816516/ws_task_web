@@ -56,7 +56,7 @@
             <div class="rule_model rule_model_06 w_f flex-item flex-align flex-dir-c" v-if="type==6">
                 <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
                 <div class="rule_model_hide w_f flex-item flex-item">
-                    <div class="rule_model_box w_f flex-item flex-item flex-align flex-dir-c">
+                    <div class="rule_model_box w_f flex-item flex-item flex-align flex-dir-c" ref="tips_scroll">
                         <div class="rule_outside w_f flex-item flex-align flex-dir-c">
                             <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div>
                             <div class="rule_desc rule_desc_1 font_22">

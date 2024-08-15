@@ -48,7 +48,7 @@
                 <div class="today_record w_f flex-item flex-align flex-dir-c">
                     <div class="top_title w_f flex-item flex-align flex-center font_32">Today's performance</div>
                     <div class="self_code w_f flex-item flex-dir-c">
-                        <p class="font_32">{{ userInfo.inviteCode }}</p>
+                        <p class="font_32">{{ userInfo.account}}</p>
                         <div class="self_code_mess w_f flex-item flex-align flex-between">
                             <div class="flex-item font_24">Your current invite code ：<span class="flex-item">{{userInfo.inviteCode }}</span></div>
                             <van-button class="font_20" type="primary">{{$t('other_006')}}</van-button>
@@ -94,6 +94,7 @@ export default {
         return {
             isScroll: false,
             isIndex: false,
+            visible:true,
             user_money: 0,
             teamStemp: "",
             help_url: "",
@@ -192,7 +193,7 @@ export default {
             await this.$store.dispatch('User/plantCarousel');
         },
         handleTask(row) {
-            if (!this.userInfo.token) return this.$router.push("/login");
+            if (!getToken()) return this.$store.dispatch('Global/isShowLogin',true);
             const path = this.taskType[row.type];
             if (row.type == 2) {
                 this.$router.push(path);
@@ -226,7 +227,7 @@ export default {
             scrollTop.scrollTo({ top: 0, behavior: "smooth" });
         },
         showTask(idx){
-            this.$router.push(`/betrecord?id=${idx}`);
+            this.$router.push(`/betrecord?id=1`);
         }
     }
 };

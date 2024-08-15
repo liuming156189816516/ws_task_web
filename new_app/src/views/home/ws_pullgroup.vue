@@ -1,7 +1,7 @@
 <template>
     <div class="home-content" ref="warpBox">
         <div class="task_mian w_f">
-            <page-header :title="$t('home_011')" :show-icon="true" :bgcolor="false" />
+            <page-header :title="$t('login_027')" :show-icon="true" :bgcolor="false" />
             <div class="notice_warp w_f">
                 <div class="notice_mian w_f">
                     <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
@@ -85,12 +85,12 @@
                     <span class="flex-item flex-center">Status</span>
                     <span class="flex-item">Bonus</span>
                 </div>
-                <template v-if="recordList&&recordList.length>0">
-                    <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in recordList" :key="idx">
-                        <span class="flex-item">2024-07-31 05:57:02</span>
-                        <span class="flex-item flex-center">202408011134</span>
-                        <span class="flex-item flex-center">Processing</span>
-                        <span class="flex-item" style="font-weight: bold;">456.00</span>
+                <template v-if="pullGroupList&&pullGroupList.length>0">
+                    <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in pullGroupList" :key="idx">
+                        <span class="flex-item">{{ formatTime(item.itime) }}</span>
+                        <span class="flex-item flex-center">{{ item.ser_no }}</span>
+                        <span class="flex-item flex-center" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                        <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
                     </div>
                 </template>
                 <template v-else>
@@ -109,7 +109,9 @@
 
 <script>
 import { mapState } from 'vuex';
+import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
+import { getbillrecordlist } from '@/api/task';
 import { getcreatetaskinfo,submitcreatetask } from '@/api/home'
 import uniFun from "@/utils/uni-webview-js"
 export default {
@@ -127,7 +129,7 @@ export default {
             isLoading:false,
             taskTime: 30 * 60 * 60 * 1000,
             taskList:[],
-            recordList:[0,0,0,0,0]
+            pullGroupList:[]
 		}
 	},
 	computed: {
@@ -148,6 +150,7 @@ export default {
         // setTimeout(() => {
         //     this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
         // },500);
+        this.getIncomeList();
     },
 	methods: {
         async getGroupMess(){
@@ -161,6 +164,12 @@ export default {
            this.group_link = groupData.invite_link;
            this.isShow=groupData.status==1||groupData.status==2?true:false;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
+        },
+        getIncomeList(){
+            getbillrecordlist({page: 1,limit: 200,task_type:2}).then(res => {
+                console.log(res);
+                this.pullGroupList = res.list || [];
+            })
         },
         copySuccess(){
             this.$toast(`${this.$t("other_044")}`);
@@ -208,6 +217,9 @@ export default {
         },
         showRule(){
             this.$popDialog({ content: this.help_url, title:"Invite Friends Bonus Task Workflow", type: 6 })
+        },
+        formatTime(time) {
+            return formatTime(time);
         }
 	}
 };
@@ -281,7 +293,7 @@ export default {
                     padding: 8px 12px;
                     border-top-left-radius: 200px;
                     border-bottom-left-radius: 200px;
-                    background: rgba($color: #000000, $alpha: .7);
+                    background: rgba($color: #000000, $alpha: .5);
                     img{
                         height: 40px;
                         margin-right: 4px;
@@ -422,6 +434,7 @@ export default {
                 border-radius: 20px;
                 box-sizing: border-box;
                 line-height: 34px;
+                font-style: italic;
                 color: $home-title-19;
                 background: $font-color-white;
                 .focus_tips{
@@ -495,6 +508,7 @@ export default {
                 }
             }
             .footer_tips{
+                font-style: italic;
                 padding: 16px 20px;
                 box-sizing: border-box;
                 color: $home-title-06;

@@ -11,3 +11,9 @@ export const gettaskrecordlist = (params = {}) => {
 export const getbillrecordlist = (params = {}) => {
     return request({url: '/account/getbillrecordlist',method: 'post',data:params})
 }
+
+//邀请任务明细
+export const getinvitefriendtasklist = (params = {}) => {
+    return request({url: '/account/getinvitefriendtasklist',method: 'post',data:params})
+}
+

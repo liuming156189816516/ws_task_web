@@ -1,40 +1,29 @@
 <template>
-    <div class="reset-password">
-        <page-header :title="$t('mine_012')" :bgColor="true"></page-header>
-        <div class="content-block">
-            <van-cell-group :border="false">
-                <van-field
-                    :label="$t('login_020')"
-                    class="cell-block"
-                    autocomplete="off"
-                    :right-icon="regEye0 ? 'closed-eye': 'eye-o'"
-                    :type="regEye0 ? 'password': 'text'"
-                    @click-right-icon="regEye0 = !regEye0"
-                    :placeholder="$t('login_020')"
-                    v-model="oPwd"
-                ></van-field>
-                <van-field
-                    :label="$t('login_021')"
-                    class="cell-block"
-                    autocomplete="off"
-                    :right-icon="regEye1 ? 'closed-eye': 'eye-o'"
-                    :type="regEye1 ? 'password': 'text'"
-                    @click-right-icon="regEye1 = !regEye1"
-                    :placeholder="$t('login_021')"
-                    v-model="nPwd"
-                ></van-field>
-                <van-field
-                    :label="$t('login_007')"
-                    class="cell-block"
-                    autocomplete="off"
-                    :right-icon="regEye2 ? 'closed-eye': 'eye-o'"
-                    :type="regEye2 ? 'password': 'text'"
-                    @click-right-icon="regEye2 = !regEye2"
-                    :placeholder="$t('login_007')"
-                    v-model="cPwd"
-                ></van-field>
-            </van-cell-group>
-            <van-button type="primary" :loading="isLoading" @click="submitFun">{{ $t('home_038') }}</van-button>
+    <div class="reset_password">
+        <page-header :title="$t('mine_012')" :bgColor="true" />
+        <div class="password_block w_f flex-item flex-dir-c">
+            <div class="password_item w_f flex-item flex-dir-c">
+                <p class="w_f flex-item font_24">{{ $t('login_030') }}</p>
+                <div class="password_text w_f flex-item">
+                    <input class="font_24" v-model="oPwd" :type="regEye ? 'password' : 'text'" :placeholder="$t('login_031')">
+                    <i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye" oninput="value=value.replace(/[^\w_]/g,'')"></i>
+                </div>
+            </div>
+            <div class="password_item w_f flex-item flex-dir-c">
+                <p class="w_f flex-item font_24">{{ $t('login_021') }}</p>
+                <div class="password_text w_f flex-item">
+                    <input class="font_24" v-model="nPwd" :type="regEye ? 'password' : 'text'" :placeholder="$t('login_031')">
+                    <i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye" oninput="value=value.replace(/[^\w_]/g,'')"></i>
+                </div>
+            </div>
+            <div class="password_item w_f flex-item flex-dir-c">
+                <p class="w_f flex-item font_24">{{ $t('login_032') }}</p>
+                <div class="password_text w_f flex-item">
+                    <input class="font_24" v-model="cPwd" :type="regEye ? 'password' : 'text'" :placeholder="$t('login_031')">
+                    <i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye" oninput="value=value.replace(/[^\w_]/g,'')"></i>
+                </div>
+            </div>
+            <van-button type="primary" :class="[!oPwd||!nPwd||!cPwd?'progress_award':'']" :disabled="!oPwd||!nPwd||!cPwd" :loading="isLoading" @click="submitFun">{{ $t('home_038') }}</van-button>
         </div>
     </div>
 </template>
@@ -52,17 +41,8 @@ export default {
             nPwd:"", 
             cPwd:"", 
             isLoading:false,
-            regEye0: true,
-            regEye1: true,
-            regEye2: true,
+            regEye: true,
             countTime:  60,
-
-            num1 : 2,
-			num2: 3,
-			operate: 'jia',
-			code_verify_v: '',
-			uuid: '',
-			code_verify_v_r: '',
         };
     },
     computed: {
@@ -78,6 +58,9 @@ export default {
         })
     },
     methods: {
+        showEye(){
+            this.regEye = !this.regEye;
+        },
         submitFun() {
             if (!this.oPwd) {
                 return this.$toast(this.$t('other_001',{value:this.$t('login_020')}));
@@ -106,23 +89,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.reset-password {
+.reset_password {
     height: 100vh;
     background-color: $font-color-white;
-}
-.header {
-    height: 102px;
-    width: 100%;
-    padding: 0 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #ffffff;
-    font-size: 36px;
-    background-image: linear-gradient(90deg, #709fff 0%, #597ef7 100%);
-    div i {
-        vertical-align: middle;
-    }
 }
 .cell-block {
     padding: 24px;
@@ -135,19 +104,51 @@ export default {
 .van-cell-group {
     background-color: transparent;
 }
-.content-block {
-    padding: 0 35px;
-    .van-cell{
-        border-radius: 5px;
+.password_block {
+    gap: 20px;
+    padding: 0 40px;
+    margin-top: 88px;
+    box-sizing: border-box;
+    .password_item{
+        border-bottom: 1px solid $home-title-13;
+        p{
+            margin-left: 20px;
+            color: $home-title-15;
+        }
+        input {
+            height: 88px;
+			border: transparent;
+			outline: none;
+			color: $home-title-06;
+			padding-left: 20px;
+			flex-grow: 1;
+            // background: darkcyan;
+		}
+        .password_text{
+            position: relative;
+            margin-top: 8px;
+            .icon_biyan, .icon_zhenyan {
+                width: 48px;
+                height: 48px;
+                background: url("../../assets/images/sign/icon_biyan.png") no-repeat;
+                background-size: 100% 100% !important;
+            }
+            .icon_zhenyan {
+                background: url("../../assets/images/sign/icon_zhenyan.png") no-repeat;
+            }
+        }
     }
     .van-button{
         margin-top: 50px;
         border-color: $color-theme;
         background-color: $color-theme;
     }
+    .progress_award{
+        border-color: $home-title-06;
+        background-color: $home-title-06;
+    }
 }
 .submit-button {
-    // width: 680px;
     padding:20px 0;
     margin: 60px 35px;
     text-align: center;
@@ -166,59 +167,8 @@ export default {
         height: 100%;
     }
 }
-.header-nav {
-    display: flex;
-    height: 88px;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding-left: 10%;
-    margin-bottom: 20px;
-    .nav-item {
-        margin-right: 20%;
-        .title {
-            font-size: 32px;
-            color: #7e868d;
-        }
-        .b_line {
-            height: 6px;
-            width: 50px;
-            border-radius: 3px;
-            position: relative;
-            margin: 20px auto 0 auto;
-            visibility: hidden;
-            &.active {
-                visibility: visible;
-            }
-        }
-    }
-}
-::v-deep {
-    .van-cell__value{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        .van-field__body{
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .van-button--primary, .van-button--info{
-            background-color: $color-theme;
-            border-color: $color-theme;
-        }
-        .van-button--info{
-            opacity: 0.75;pointer-events: none;
-        }
-    }
-}
 .van-button{
     width: 100%;
     border-radius: 5px;
-}
-::v-deep .van-field__label{
-    min-width: 130px;
-    margin-right: 0;
 }
 </style>

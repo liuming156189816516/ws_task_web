@@ -1,6 +1,6 @@
 <template>
 	<div class="login_warp">
-		<page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header>
+		<!-- <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header> -->
 		<div class="head_main w_f flex-item flex-dir-c">
 			<div class="head_title">
 				Sign up
@@ -53,7 +53,7 @@
 import { getcode } from '@/api/login';
 import PageHeader from "@/components/Header";
 export default {
-	components: { PageHeader },
+	// components: { PageHeader },
 	data() {
 		return {
 			regEye:true,
@@ -82,13 +82,15 @@ export default {
 	},
 	methods: {
 		goLogin() {
-			this.$router.push("/login")
+			// this.$router.push("/login")
+			this.$store.dispatch('Global/isShowType',1);
 		},
 		showEye(){
 			this.regEye = !this.regEye;
 		},
 		bankIcon(){
-			this.$router.go("-1")
+			this.$store.dispatch('Global/isShowType',1);
+			// this.$router.go("-1")
 		},
 		// handleBlur(){
 		// 	if (!this.username) return;
@@ -150,9 +152,10 @@ export default {
 				this.isLoading = false;
 				this.getVerfyBtn();
 				if(!res.token) return;
-				if(process.env.NODE_ENV == 'production'){
-					fbq('track', 'CompleteRegistration');
-				}
+				// if(process.env.NODE_ENV == 'production'){
+				// 	fbq('track', 'CompleteRegistration');
+				// }
+				this.$store.dispatch('Global/isShowLogin',false);
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())
 				}else{
@@ -192,7 +195,7 @@ export default {
 		flex-grow: 1;
 	}
 	.head_main{
-		padding: 48px 48px;
+		padding: 48px 48px 0 48px;
 		box-sizing: border-box;
 		// background-color: $color-theme;
 		.head_title{
@@ -214,7 +217,7 @@ export default {
 			}
 		}
 		.small_text{
-			margin-top: 10px;
+			margin: 80px 0 96px 0;
 			color: $home-title-04;
 		}
 	}
@@ -362,8 +365,8 @@ export default {
 
 .icon_biyan,
 .icon_zhenyan {
-	width: 40px;
-	height: 20px;
+	width: 48px;
+	height: 48px;
 	background: url("../../assets/images/sign/icon_biyan.png") no-repeat;
 	background-size: 100% 100% !important;
 }

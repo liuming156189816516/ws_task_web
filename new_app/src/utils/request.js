@@ -48,7 +48,7 @@ service.interceptors.response.use(res => {
         }).then(() => {
           localStorage.clear();
           localStorage.removeItem('token');
-          window.likevm.$router.replace('/login');
+          window.likevm.$router.replace('/home');
         })
       }else{
         vant.Toast.fail(data.msg);
@@ -57,9 +57,9 @@ service.interceptors.response.use(res => {
       vant.Toast.fail(data.msg);
       localStorage.clear();
       localStorage.removeItem('token');
-      if(!window.location.href.includes("/login")){
+      if(!window.location.href.includes("/home")){
         setTimeout(() => {
-          window.likevm.$router.replace('/login');
+          window.likevm.$router.replace('/home');
         },1000);
       }
     }

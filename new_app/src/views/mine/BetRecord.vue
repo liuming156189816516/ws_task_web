@@ -15,19 +15,19 @@
                 </div>
             </div>
         </div>
-        <div class="record_list w_f flex-item flex-dir-c" v-if="list&&list.length>0">
+        <div class="record_list w_f" v-if="list&&list.length>0">
             <div class="record_item flex-item flex-align" v-for="(item,index) in list" :key="index">
                 <img class="l_icon" src="@/assets/images/mine/order_icon.png" alt="">
                 <div class="w_f flex-item flex-align flex-dir-c">
                     <div class="w_f flex-item flex-align flex-between">
                         <div class="flex-item flex-dir-c">
-                            <p class="task_bonus font_30">Task bonus</p>
-                            <p class="task_type font_24">Invite friends bonus</p>
+                            <p class="task_bonus font_30">{{ profitType.find(val=> val.value == item.type).lable||"" }}</p>
+                            <p class="task_type font_24" v-if="item.task_type!=0">{{ taskOption[item.task_type] }}</p>
                         </div>
                         <div class="task_money font_30">{{ item.amount }}</div>
                     </div>
                     <div class="order_time w_f flex-item flex-align flex-between font_26">
-                        <span>Balance: 2,999.00</span>
+                        <span>Balance: {{ item.balance }}</span>
                         <span>{{ formatTime(item.itime) }}</span>
                     </div>
                 </div>
@@ -44,6 +44,7 @@
                     <span class="record_cash">{{item.amount}}</span>
                 </div>
             </div> -->
+            <PrevNext :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext"></PrevNext>
         </div>
         <div v-else class="empty_tips">{{$t("other_022")}}</div>
         <van-overlay :show = "showState" @click="showState = false">
@@ -73,7 +74,6 @@
                 </ul>
             </div>
         </van-overlay> -->
-        <PrevNext :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext"></PrevNext>
     </div>
 </template>
 <script>
@@ -106,17 +106,29 @@ export default {
     },
     computed:{
         profitTime(){
-            return [this.$t('other_024'),this.$t('other_016'),this.$t('other_017'),this.$t('other_023')];
+            return [this.$t('other_016'),this.$t('other_017'),this.$t('other_018'),this.$t('other_057')];
         },
         profitType(){
-            return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('other_027'),value:8 }];
+            return [{lable:this.$t('other_052'),value:-1},{lable:this.$t('other_054'),value:1 },{lable:this.$t('other_056'),value:8 },{lable:this.$t('other_055'),value:9 }];
+        },
+        taskOption(){
+            return ["",this.$t('other_058'),this.$t('other_059'),this.$t('other_060')];
         }
     },
     created() {
-        let params = this.$route.query.type||"";
-        if (params) {
+        this.stateValue=-1;
+        this.timeValue = 3;
+        this.dateState = this.$t('other_052');
+        this.timeText = this.$t('other_057');
+        let params = this.$route.query||"";
+        if (params.type) {
             this.timeValue = Number(params);
             this.changeTime(this.profitTime[this.timeValue],this.timeValue)
+        }
+        if (params.id) {
+            this.stateValue = Number(params.id);
+            this.dateState = this.$t('other_054');
+            // this.changeTime(this.profitTime[this.timeValue],this.timeValue)
         }
         this.billDetail();
     },
@@ -163,33 +175,31 @@ export default {
         changeType(row){
             this.page = 1;
             this.stateValue = row.value;
-            this.dateState = row.value!=-1?row.lable:"";
-            // this.billDetail();
-            // setTimeout(() =>{
-            //     this.showState = false;
-            // },200)
+            this.dateState = row.lable;
         },
         // 选择收益时间
         changeTime(row,idx){
+            console.log(row);
+            console.log(idx);
             this.page = 1;
             this.timeValue = idx;
-            this.timeText =idx!=0?row:"";
+            this.timeText = row;
             let newDate = new Date();
             let sTime = "00"+":"+"00"+":"+"00";
             let eTime = "23"+":"+"59"+":"+"59";
-            if(idx == 1){
+            if(idx == 0){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = today;
                 this.sTime = today +" "+ sTime;
                 this.eTime = today +" "+ eTime;
-            }else if(idx == 2){
+            }else if(idx == 1){
                 newDate.setTime(newDate.getTime()-24*60*60*1000);
                 let yTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = yTady;
                 this.sTime = yTady +" "+ sTime;
                 this.eTime = yTady +" "+ eTime;
-            }else if(idx == 3){
+            }else if(idx == 2){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 newDate.setTime(newDate.getTime()-7*24*60*60*1000);
@@ -312,9 +322,13 @@ export default {
 }
 .record_list{
     gap: 20px;
+    height: 100%;
+    overflow-y: auto;
     padding: 20px 26px;
+    padding-bottom: 160px;
     box-sizing: border-box;
     .record_item{
+        margin-bottom: 20px;
         padding: 10px 10px;
         border-radius: 20px;
         box-sizing: border-box;
@@ -392,6 +406,7 @@ export default {
     width:100%;
     display: flex;
     font-size: 28px;
+    margin-bottom: 30px;
     align-items: center;
     justify-content: center;
     background: transparent;

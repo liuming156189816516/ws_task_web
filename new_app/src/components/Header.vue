@@ -5,7 +5,7 @@
                 <img v-show="showBack" src="@/assets/images/bank_icon.png" alt="" srcset="">
             </div>
             <div class="lable_center flex-item flex-center font_36" v-show="showTitle">{{title}}</div>
-            <div class="lable_right flex-item" v-show="rightIcon" @click="showRule">{{ $t('other_051') }}</div>
+            <div class="lable_right flex-item" @click="showRule"><span v-show="rightIcon">{{ $t('other_051') }}</span></div>
         </div>
     </div>
 </template>

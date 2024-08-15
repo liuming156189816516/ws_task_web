@@ -1,7 +1,11 @@
 import router from "../../router";
+import { getToken } from '@/utils/tool';
 export default {
 	namespaced: true,
 	state: {
+		isType:1,
+		logOut:false,
+		isLogin:false,
 		keepAliveComponents: [],
 		matainInfo: {
 			startTime: '--:--:--',
@@ -53,9 +57,27 @@ export default {
 		},
 		triggerUdateTaskAddList(state){
 			state.updateTaskAddList=!state.updateTaskAddList;
+		},
+		STORE_LOGIN(state, value) {
+			state.isLogin = value;
+		},
+		STORE_Type(state, value) {
+			state.isType = value;
+		},
+		STORE_tips(state, value) {
+			state.logOut = value;
 		}
 	},
 	actions:{
+		isShowLogin({ commit },login) {
+			commit('STORE_LOGIN', login);
+		},
+		isShowType({ commit },type) {
+			commit('STORE_Type', type);
+		},
+		isCloseTips({ commit },type) {
+			commit('STORE_tips', type);
+		},
 		applying_task({state}){
 			get_applying_list().then(data=>{
 				state.applying_list = data;

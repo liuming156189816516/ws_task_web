@@ -8,13 +8,32 @@
 			<router-view name="tabBar"></router-view>
 			<float-ball v-if="assistiveTouch"></float-ball>
 		</div>
+		<van-overlay :show="global.isLogin">
+            <login v-if="global.isType==1" />
+			<register v-else />
+        </van-overlay>
+		<van-overlay :show="global.logOut">
+			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
+				<div class="log_main">
+					After logging out, you will no longer be able to view real-time earnings. Are you sure you want to log out?
+					<div class="footer_bnt w_f flex-item flex-center">
+						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">Confirm</van-button>
+						<van-button class="footer_cancel" type="primary" @click="handle_close">Cancel</van-button>
+					</div>
+				</div>
+			</div>
+        </van-overlay>
 	</div>
 </template>
 <script>
+import { mapState } from 'vuex';
+import { logout } from '@/api/login';
 import FloatBall from './components/FloatBall';
 import preLoad from './core/PreLoadProxy';
+import login from './views/sign/login.vue';
+import register from './views/sign/register.vue';
 export default {
-	components: {FloatBall},
+	components: {FloatBall,login,register},
 	provide: function(){
 		return {
 			isPc: !window.navigator.userAgent.match(
@@ -26,6 +45,7 @@ export default {
 		return {
 			title: '',
 			device:"",
+			isLoading: false,
 			hasTabBar: false,
 			showNavBar: false,
 			transitionName: '',
@@ -36,14 +56,42 @@ export default {
             )
 		}
 	},
+	computed: {
+		...mapState({
+			global: state => state.Global,
+			userInfo: state => state.User,
+		})
+	},
 	beforeCreate() {},
 	created() {
+		// console.log(this.$store.state);
 		let preLoadTemp = new preLoad();
 		preLoadTemp.setup();
 		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.checkBrowser();
+	},
+	methods: {
+		handle_close(){
+			this.$store.dispatch('Global/isCloseTips',false);
+		},
+		handle_confirm(){
+			this.isLoading=true;
+			logout().then(result => {
+				this.isLoading=false;
+				var storage = window.localStorage;
+				storage["isstorename"] =  "no";
+				this.$store.dispatch('Global/isCloseTips',false);
+				this.$store.dispatch('User/logoutClear');
+				sessionStorage.clear();
+				state.userInfo = {};
+				this.$router.replace('/home');
+			}).catch(err => {
+				this.$router.replace('/home');
+				localStorage.removeItem('token');
+			})
+		}
 	}
 };
 </script>
@@ -363,6 +411,25 @@ img {
 		-webkit-transform: translate3d(-50%,-50%,0);
 		transform: translate3d(-50%,-50%,0);
 	}
+}
+
+.footer_bnt{
+  gap: 50px;
+  margin-top: 48px;
+  .van-button{
+    flex: 1;
+    border-radius: 12px;
+  }
+  .footer_cancel{
+    color: #008751;
+    background: #F2F3FF;
+    border-color: #F2F3FF;
+  }
+  .footer_confirm{
+    color: #fff;
+    background: #008751;
+    border-color: #008751;
+  }
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div class="login_warp" @click="isIndex=false">
-		<page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header>
+		<!-- <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header> -->
 		<!-- <div class="l_value" @click="showChangeBtn" @click.stop>
 			<span>{{ viewLang() }}</span>
 			<img class="down_icon" src="@/assets/images/home/xiala.png">
@@ -52,7 +52,7 @@
 <script>
 import PageHeader from "@/components/Header";
 export default {
-	components: { PageHeader },
+	// components: { PageHeader },
 	data() {
 		return {
 			regEye:true,
@@ -102,6 +102,7 @@ export default {
 				setTimeout(()=>{this.isLoading= false},2000)
 				if(!res.token) return;
 				this.checkChange();
+				this.$store.dispatch('Global/isShowLogin',false);
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())
 				}else{
@@ -136,13 +137,15 @@ export default {
 			}
 		},
 		bankIcon(){
-			this.$router.push("/home")
+			// this.$router.push("/home")
+			this.$store.dispatch('Global/isShowLogin',false);
 		},
 		eyeBol() {
 			this.regEye = !this.regEye;
 		},
 		goRegister() {
-			this.$router.push("/register")
+			// this.$router.push("/register")
+			this.$store.dispatch('Global/isShowType',2);
 		},
 		forgetFunc(){
 			this.$router.push("/forget_pwd")
@@ -171,7 +174,7 @@ export default {
 	background: url('../../assets/images/home/bg_img.png') no-repeat;
     background-size: cover;
 	.head_main{
-		padding: 48px 48px;
+		padding: 48px 48px 0 48px;
 		box-sizing: border-box;
 		.head_title{
 			width: 100%;
@@ -191,7 +194,7 @@ export default {
 			}
 		}
 		.small_text{
-			margin-top: 10px;
+			margin: 80px 0 96px 0;
 			color: $home-title-04;
 		}
 	}
@@ -236,7 +239,6 @@ export default {
 					box-sizing: border-box;
 					background-color: #F6F6F6;
 					margin-bottom: 32px;
-					>img{width: 23px;height: auto;}
 					&:nth-last-child(1){
 						border-bottom: transparent;
 						margin-bottom: 56px;
@@ -276,8 +278,8 @@ export default {
 	}
 }
 .icon_biyan, .icon_zhenyan {
-	width: 40px;
-	height: 20px;
+	width: 48px;
+	height: 48px;
 	background: url("../../assets/images/sign/icon_biyan.png") no-repeat;
 	background-size: 100% 100% !important;
 }

@@ -8,22 +8,22 @@
                     <img src="@/assets/images/mine/down_icon.png">
                 </div>
                 <div class="change_value flex-item">
-                    <span class="flex-item">{{ dateState }}</span>
                     <span class="flex-item"> {{ timeText }}</span>
+                    <span class="flex-item">{{ dateState }}</span>
                 </div>
             </div>
             <van-overlay :show = "showState" @click="showState = false">
                 <div class="screen_down" @click.stop>
                     <div class="w_f flex-item flex-dir-c">
+                        <p class="font_24">Date</p>
+                        <ul>
+                            <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
+                        </ul>
                         <p class="font_24">Types of</p>
                         <ul>
                             <li v-for="item in profitType" :key="item.value" :class="stateValue===item.value?'checkActive':''" @click="changeType(item)">
                                 {{item.lable}}
                             </li>
-                        </ul>
-                        <p class="font_24">Date</p>
-                        <ul>
-                            <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
                         </ul>
                     </div>
                     <div class="footer_btn w_f flex-item flex-between">
@@ -40,17 +40,17 @@
                     <div class="w_f flex-item flex-align flex-dir-c">
                         <div class="w_f flex-item flex-align flex-between">
                             <div class="flex-item flex-dir-c">
-                                <p class="task_bonus font_30">Task bonus</p>
+                                <p class="task_bonus font_30">{{ $t('other_055') }}</p>
                                 <p class="task_type font_24" v-if="item.status==3" :style="{color:`${orderOption[item.status].color}`}" @click="showReject(item)">{{ orderOption[item.status].name }}</p>
                                 <p class="task_type font_24" v-else :style="{color:`${orderOption[item.status].color}`}">{{ orderOption[item.status].name }}</p>
                             </div>
                             <div class="task_money flex-item flex-align flex-dir-c">
                                 <p class="font_30">-{{ item.amount }}</p>
-                                <p class="font_24">Balance: 2,999.00</p>
+                                <p class="font_24">Balance: {{ item.balance }}</p>
                             </div>
                         </div>
                         <div class="order_time w_f flex-item flex-align flex-between font_26">
-                            <span>ID:20240801546824</span>
+                            <span>ID:{{ item.txid }}</span>
                             <span>{{ formatTime(item.itime) }}</span>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ export default {
         return {
             dialogContent:"",
             stateValue:-1,
-            timeValue:"",
+            timeValue:3,
             timeText:"",
             showState:false,
             showTime:false,
@@ -95,10 +95,10 @@ export default {
     },
     computed:{
         profitTime(){
-            return [this.$t('other_024'),this.$t('other_016'),this.$t('other_017'),this.$t('other_023')];
+            return [this.$t('other_016'),this.$t('other_017'),this.$t('other_018'),this.$t('other_057')];
         },
         profitType(){
-            return [{lable:this.$t('other_024'),value:-1},{lable:this.$t('tail_005'),value:1 },{lable:this.$t('tail_006'),value:2 },{lable:this.$t('tail_011'),value:3 }];
+            return [{lable:this.$t('other_052'),value:-1},{lable:this.$t('home_006'),value:1 },{lable:this.$t('pay_031'),value:2 },{lable:this.$t('pay_032'),value:3 }];
         },
         orderOption(){
             return ["",
@@ -109,6 +109,8 @@ export default {
         }
     },
     created() {
+        this.dateState = this.$t('other_052');
+        this.timeText = this.$t('other_057');
         this.getPointflow();
     },
     methods: {
@@ -193,23 +195,23 @@ export default {
         changeTime(row,idx){
             this.page = 1;
             this.timeValue = idx;
-            this.timeText =idx!=0?row:"";
+            this.timeText = row;
             let newDate = new Date();
             let sTime = "00"+":"+"00"+":"+"00";
             let eTime = "23"+":"+"59"+":"+"59";
-            if(idx == 1){
+            if(idx == 0){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = today;
                 this.sTime = today +" "+ sTime;
                 this.eTime = today +" "+ eTime;
-            }else if(idx == 2){
+            }else if(idx == 1){
                 newDate.setTime(newDate.getTime()-24*60*60*1000);
                 let yTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = yTady;
                 this.sTime = yTady +" "+ sTime;
                 this.eTime = yTady +" "+ eTime;
-            }else if(idx == 3){
+            }else if(idx == 2){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 newDate.setTime(newDate.getTime()-7*24*60*60*1000);

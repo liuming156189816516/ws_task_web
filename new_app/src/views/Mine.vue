@@ -10,7 +10,7 @@
                     </div>
                     <div class="user_info">
                         <div class="user_name font_32">{{ userInfo.account }}</div>
-                        <div class="user_code font_24">{{$t('other_005')}} <span style="font-weight: bold;">{{userInfo.inviteCode}}</span>： <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
+                        <div class="user_code font_24">{{$t('other_005')}}&nbsp;:&nbsp;<span style="font-weight: bold;">{{userInfo.inviteCode}}</span> <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <van-button class="font_30" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">Withdraw</van-button>
-                    <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
+                    <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal" style="color:#F52C2C">You are only {{ (minWithdrawal*20)-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
                     <div class="draw_tips font_22" v-else-if="withdrawalNum>=0" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
                     <!-- <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
                 </div>
@@ -223,7 +223,8 @@ export default {
                 link.click();
             }
             if(path == "/log_out"){
-                this.logoutHandle();
+                // this.logoutHandle();
+                this.$store.dispatch('Global/isCloseTips',true);
             }else{
                 this.$router.push(path);
             }
@@ -232,7 +233,7 @@ export default {
             this.$router.push("/myHead");
         },
         showRule(){
-            this.$popDialog({ content: this.help_url, title:"Notes", type: 4 })
+            this.$popDialog({ content: this.help_url, title:"Notes",type: 4,times:this.withdrawalNum,money:this.minWithdrawal })
         },
         goWithdraw(){
             this.$router.push("/withdraw");
@@ -249,17 +250,16 @@ export default {
                 cancelButtonText: this.$t("other_007")
             }).then(() => {
                 this.$store.dispatch("User/logoutUser");
-                var storage = window.localStorage;
-                storage["isstorename"] =  "no";
-                try{
-                    if(this.isAndroid){
-                        JSInterface.onLoginout();
-                    }else if(this.isIOS){
-                        let params = {"method":"onLoginout"};
-                        window.webkit.messageHandlers.jsCallNativeMethod.postMessage(params);
-                    }
-                }catch(e){}
-                this.$router.push("/login")
+                // try{
+                //     if(this.isAndroid){
+                //         JSInterface.onLoginout();
+                //     }else if(this.isIOS){
+                //         let params = {"method":"onLoginout"};
+                //         window.webkit.messageHandlers.jsCallNativeMethod.postMessage(params);
+                //     }
+                // }catch(e){}
+                // this.$router.push('/home');
+                // this.$router.push("/login")
             })
         }
     }

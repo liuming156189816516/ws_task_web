@@ -114,6 +114,14 @@ export default {
 			state.baseNotice = data.bulletin_content;
 			window.localStorage.setItem('baseBanner',data.list);
 			window.localStorage.setItem('baseNotice',data.bulletin_content);
+		},
+		clear_token(state){
+			state.token = null;
+			localStorage.removeItem('uid');
+			localStorage.removeItem('token');
+			localStorage.removeItem('is_play')
+			localStorage.removeItem('account');
+			localStorage.removeItem('inviteCode');
 		}
 	},
 	actions: {
@@ -180,21 +188,8 @@ export default {
 				})
 			})
 		},
-		logoutUser({ state }) {
-			return new Promise((resolve, reject) => {
-				logout().then(result => {
-					sessionStorage.clear();
-					state.userInfo = {};
-					state.token = null;
-					localStorage.removeItem('token');
-					router.replace({path: '/login' });
-					resolve();
-				}).catch(err => {
-					router.replace({path: '/login' });
-					localStorage.removeItem('token');
-					reject();
-				})
-			})
+		logoutClear({ commit }) {
+			commit('clear_token');
 		},
 		logoutClearAndJump({ commit }) {
 			commit('clearUserInfo');

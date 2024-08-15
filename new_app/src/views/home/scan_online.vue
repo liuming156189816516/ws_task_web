@@ -1,7 +1,7 @@
 <template>
     <div class="home-content" ref="warpBox">
         <div class="task_mian w_f">
-            <page-header :title="$t('home_009')" :show-icon="true" :bgcolor="false" />
+            <page-header :title="$t('home_046')" :show-icon="true" :bgcolor="false" />
             <div class="notice_warp w_f">
                 <div class="notice_mian w_f">
                     <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
@@ -46,16 +46,16 @@
                                 <img src="@/assets/images/home/refsh_icon.png" alt="" srcset="">
                             </div>
                         </div>
-                        <div class="title_top title_head_top w_f flex-item flex-align flex-between font_28">
+                        <div class="title_top title_head_top w_f flex-item flex-align flex-between font_28" v-if="wechaList&&wechaList.length>0">
                             <span class="flex-item flex-align">Account</span>
                             <span class="flex-item flex-center">Status</span>
                             <span class="flex-item flex-center">Operation</span>
                         </div>
                     </div>
-                    <div class="ws_list w_f flex-item flex-dir-c">
-                        <div class="ws_account">
+                    <div class="ws_list w_f flex-item flex-dir-c" >
+                        <div class="ws_account" :style="wechaList.length==0?'background:transparent;':''">
                             <template v-if="wechaList&&wechaList.length>0">
-                                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in 2" :key="idx">
+                                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in wechaList" :key="idx">
                                     <span class="flex-item">{{item.account}}</span>
                                     <span class="item_title item_status" :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">
                                         <a class="line_status" :class="item.status!=2?'down_status':''" href=""></a>
@@ -68,7 +68,7 @@
                             <template v-else>
                                 <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
                                     <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                                    <p class="font_28">Invite your friends quickly to earn cash!</p>
+                                    <p class="font_28">Add your account and win cash</p>
                                 </div>
                             </template>
                         </div>
@@ -81,14 +81,14 @@
             <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
         </div>
         <div class="record_list w_f flex-item flex-dir-c">
-            <div class="title_top w_f flex-item flex-align flex-between font_28">
+            <div class="title_top title_top_head w_f flex-item flex-align flex-between font_28">
                 <span class="flex-item flex-align">Time</span>
                 <span class="flex-item">Bonus</span>
             </div>
-            <template v-if="recordList&&recordList.length>0">
-                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in recordList" :key="idx">
-                    <span class="flex-item">2024-07-31 05:57:02</span>
-                    <span class="flex-item">456.00</span>
+            <template v-if="wsTaskList&&wsTaskList.length>0">
+                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in wsTaskList" :key="idx">
+                    <span class="flex-item">{{ formatTime(item.itime) }}</span>
+                    <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
                 </div>
             </template>
             <template v-else>
@@ -161,7 +161,9 @@
 import QRCode from 'qrcodejs2'
 import { mapState } from 'vuex';
 import { Toast,Dialog} from 'vant';
+import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
+import { getbillrecordlist } from '@/api/task';
 import { getincome,getaccountlist,delaccount,getqrcode } from'@/api/home'
 export default {
 	name: 'scan_online',
@@ -192,7 +194,7 @@ export default {
             wechaList:[],
             taskList:[],
             taskTime: 30 * 60 * 60 * 1000,
-            recordList:[0,0,0,0,0],
+            wsTaskList:[],
             whatsOption:["","WhatsApp","WhatsApp Business"]
 		}
 	},
@@ -202,19 +204,26 @@ export default {
             bannerList: state => state.User.bannerList
 		}),
         statusOption(){
-            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
+            return ["",this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
         }
 	},
-    // created(){
+    created(){
+        this.getIncomeList();
+        this.initWechatList();
     //     this.timestamp = Math.floor(new Date().getTime() / 1000);
     //     this.task_id = this.$route.query.id||"";
-    // },
+    },
     mounted(){
         // setTimeout(() => {
         //     this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
         // },500);
     },
 	methods: {
+        getIncomeList(){
+            getbillrecordlist({page: 1,limit: 200,task_type:1}).then(res => {
+                this.wsTaskList = res.list || [];
+            })
+        },
         addQrcode(){
             clearInterval(this.timer);
             this.countTime = 60;
@@ -328,6 +337,9 @@ export default {
         },
         showRule(){
             this.$popDialog({ content: this.help_url, title:"Social Media Bonus", type: 8 })
+        },
+        formatTime(time) {
+            return formatTime(time);
         }
 	}
 };
@@ -524,6 +536,7 @@ export default {
                         .title_top{
                             height: 88px;
                             padding: 0 20px;
+                            font-weight: bold;
                             box-sizing: border-box;
                             border-top-left-radius: 20px;
                             border-top-right-radius: 20px;
@@ -541,7 +554,7 @@ export default {
                         border-bottom-right-radius: 20px;
                         background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
                         .ws_account{
-                            padding: 20px 20px 30px 20px;
+                            padding: 20px 20px 10px 20px;
                             background: $font-color-white;
                             .log_out{
                                 width: 140px;
@@ -555,6 +568,11 @@ export default {
                         }
                         .title_top{
                             padding: 20px 0;
+                        }
+                        .empty_box{
+                            img{
+                               height: 120px; 
+                            }
                         }
                     }
                     .task_book{ 
@@ -572,6 +590,7 @@ export default {
                 margin: 20px 0;
             }
             .record_derc{
+                font-style: italic;
                 padding: 12.2px 0 12.2px 18.82px;
                 border-radius: 20px;
                 box-sizing: border-box;
@@ -579,6 +598,7 @@ export default {
                 background: $font-color-white;
                 .focus_tips{
                     color: $home-title-02;
+                    text-decoration: u;
                 }
             }
         }
@@ -588,6 +608,9 @@ export default {
             padding-bottom: 30px;
             box-sizing: border-box;
             color: $font-color-black;
+            .title_top_head{
+                font-weight: bold;
+            }
             .title_top{
                 height: 100px;
                 padding: 0 40px;

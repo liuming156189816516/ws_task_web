@@ -5,6 +5,8 @@ Dialog.install = function (data) {
     let instance = new DialogBox().$mount()
     instance.type = data.type
     instance.title = data.title
+    instance.times = data.times
+    instance.money = data.money
     instance.content = data.content
     document.getElementById("app").appendChild(instance.$el);
     Vue.nextTick(() => {instance.visible = true})

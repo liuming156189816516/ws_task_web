@@ -28,8 +28,8 @@
                         <p>{{restLanuage('home_063')}}</p>
                     </div>
                     <div class="rule_desc rule_desc_04 font_22" v-if="type==4">
-                        <p>{{restLanuage('home_064')}}</p>
-                        <p>{{restLanuage('home_065')}}</p>
+                        <p>{{restLanuage('home_064',times)}}</p>
+                        <p>{{restLanuage('home_065',money)}}</p>
                         <p>{{restLanuage('home_066')}}</p>
                         <p>{{restLanuage('home_067')}}</p>
                     </div>
@@ -98,6 +98,7 @@
 </template>
 <script>
 import { i18n } from '@/assets/lang'
+import Global from "@/store/module/global";
 export default {
     props: {
         type:{
@@ -106,7 +107,15 @@ export default {
         },
         title: {
             type: String,
-            default: "" //默认高度
+            default: ""
+        },
+        times: {
+            type: Number,
+            default: 0 
+        },
+        money: {
+            type: Number,
+            default:0
         },
         content: {
             type: String,
@@ -142,12 +151,18 @@ export default {
             this.$refs.myVideo.play();
             this.is_play=true;
         },
-        restLanuage(val){
-            return i18n.t(val)
+        restLanuage(val,num){
+            if(num){
+                return i18n.t(val,{value:num})
+            }else{
+                return i18n.t(val)
+            }
         },
         jumpLogin(){
             this.visible=false;
-            this.$Helper.RedirectLogin()
+            // console.log(this.$store);
+            // this.$Helper.RedirectLogin()
+            // this.$store.dispatch('Global/isShowLogin',true)
         },
     }
     // beforeDestroy(){
@@ -242,7 +257,7 @@ export default {
                 box-sizing: border-box;
                 p{
                     line-height: 14px;
-                    color: $font-color-black;
+                    color: $home-title-19;
                     margin-bottom: 12px;
                 }
                 .task_list{
@@ -271,20 +286,35 @@ export default {
             padding-bottom: 0;
             background: $home-title-13;
             .rule_model_hide{
-                overflow: hidden;
+                height: 100%;
+                // overflow: hidden;
                 border-radius: 30px;
                 .rule_model_box{
                     max-height: 500px;
-                    overflow-y: auto;
+                    overflow-y: scroll;
                     .rule_outside{
                         // overflow-y: auto;
                         border-radius: 26px;
                         background: $font-color-white;
+                        .top_header{
+                            width: 257px;
+                            height: 34px;
+                            font-weight: bold;
+                            margin-bottom: 10px;
+                            color: $home-title-12;
+                            background: url('../../assets/images/max_head_icon.png') no-repeat;
+                            background-size: cover;
+                        }
                         .rule_desc_1{
                             padding: 10px 12px;
                             box-sizing: border-box;
                             border-bottom-left-radius: 27px;
                             border-bottom-right-radius: 27px;
+                            .secound_tiitle{
+                                p{
+                                    color: $home-title-15;
+                                }
+                            }
                         }
                     }
                 }

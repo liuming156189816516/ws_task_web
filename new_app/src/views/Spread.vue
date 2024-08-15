@@ -47,6 +47,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="share_continer w_f flex-item flex-dir-c">
             <div class="earn_warp flex-item flex-dir-c">
                 <p class="font_32">Earn rewards in just 4 simple steps</p>
                 <div class="w_f step_warp flex-item">
@@ -72,9 +74,9 @@
                     <span>Time</span>
                     <span>Bonus</span>
                 </div>
-                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in recordList" :key="idx">
-                    <span>2024-07-31 05:57:02</span>
-                    <span class="record_cash">456.00</span>
+                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in millionList" :key="idx">
+                    <span>{{ formatTime(item.itime) }}</span>
+                    <span class="record_cash">{{ item.amount }}</span>
                 </div>
                 <div class="title_top footer_tips w_f flex-item font_24">
                     Task time is based on the start time of the task ,the system currently retains records for up to 3 months
@@ -86,9 +88,10 @@
 <script>
 import { mapState } from "vuex";
 import QRCode from 'qrcodejs2'
+import { formatTime } from "@/utils/tool";
 import { getinvitelink} from '@/api/bill';
-import { getbrokeragestatis} from '@/api/home';
 import PageHeader from "@/components/Header";
+import { getinvitefriendtasklist } from '@/api/task';
 export default {
     components: { PageHeader },
     data() {
@@ -100,7 +103,7 @@ export default {
             today_invit:"",
             invit_link:"",
             today_incomet:0,
-            recordList:[0,0,0,0,0]
+            millionList:[]
         }
     },
     computed: {
@@ -134,22 +137,28 @@ export default {
     },
     created() {
         this.syncInitApi();
+        this.getIncomeList();
     },
     methods:{
+        getIncomeList(){
+            getinvitefriendtasklist({page: 1,limit: 200,task_type:3}).then(res => {
+                this.millionList = res.list || [];
+            })
+        },
         syncInitApi(){
+            // let fun1 = new Promise((resolve,reject)=>{
+            //     getbrokeragestatis().then(res =>{
+            //         resolve(res)
+            //     })
+            // });
             let fun1 = new Promise((resolve,reject)=>{
-                getbrokeragestatis().then(res =>{
-                    resolve(res)
-                })
-            });
-            let fun2 = new Promise((resolve,reject)=>{
                 getinvitelink().then(res =>{
                     resolve(res)
                 })
             });
-            Promise.all([fun1,fun2]).then( res => {
-                const [income,{invite_link}] = res;
-                this.allIncome = income;
+            Promise.all([fun1]).then( res => {
+                const [{invite_link}] = res;
+                // this.allIncome = income;
                 this.invit_link = invite_link;
                 // this.$refs.qrcodeImg.textContent="";
                 // this.createQrcode(this.invit_link);
@@ -170,6 +179,9 @@ export default {
         },
         showRule(){
             this.$popDialog({ content: this.help_url, title:"Millionaire Task Rules", type: 5 })
+        },
+        formatTime(time) {
+            return formatTime(time);
         }
     }
 }
@@ -222,7 +234,7 @@ export default {
                 transform: translateY(-50%);
             }
         }
-        .share_main{
+        .share_main, .share_continer{
             height: 613px;
             margin-top: 20px;
             position: relative;
@@ -237,7 +249,7 @@ export default {
                 padding: 8px 12px;
                 border-top-left-radius: 200px;
                 border-bottom-left-radius: 200px;
-                background: rgba($color: #000000, $alpha: .7);
+                background: rgba($color: #000000, $alpha: .5);
                 img{
                     height: 40px;
                     margin-right: 4px;
@@ -248,6 +260,7 @@ export default {
                 padding: 0 20px;
                 margin-bottom: 30px;
                 box-sizing: border-box;
+                z-index: 1;
                 .mask_img{
                     margin-top: 168px;
                 }
@@ -395,6 +408,7 @@ export default {
                     box-sizing: border-box;
                     line-height: 34px;
                     font-style: italic;
+                    color: $home-title-19;
                     background: $font-color-white;
                     .focus_tips{
                         text-decoration: underline;
@@ -405,7 +419,6 @@ export default {
             .record_list{
                 padding: 0 30px;
                 margin-top: 20px;
-                padding-bottom: 30px;
                 box-sizing: border-box;
                 color: $font-color-black;
                 .title_top{
@@ -441,6 +454,14 @@ export default {
                     border-bottom-right-radius: 20px;
                 }
             }
+        }
+        .share_continer{
+            height: auto;
+            padding-top: 84px;
+            margin-top: 0px;
+            padding-bottom: 20px;
+            background: $home-title-20;
+            // background: linear-gradient(to top, #ffff 0%, #008751 100%);
         }
     }
 </style>

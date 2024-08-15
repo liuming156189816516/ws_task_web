@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <van-button class="font_30" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">Withdraw</van-button>
-                    <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal" style="color:#F52C2C">You are only {{ (minWithdrawal*20)-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
+                    <div class="draw_tips font_22" v-if="user_money<minWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
                     <div class="draw_tips font_22" v-else-if="withdrawalNum>=0" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
                     <!-- <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
                 </div>

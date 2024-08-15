@@ -292,6 +292,7 @@ export default {
                 .rule_model_box{
                     max-height: 500px;
                     overflow-y: scroll;
+                    -webkit-overflow-scrolling: touch;
                     .rule_outside{
                         // overflow-y: auto;
                         border-radius: 26px;

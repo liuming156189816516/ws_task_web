@@ -242,19 +242,28 @@ export default {
         }
 
         .notice_warp {
-            position: relative;
             padding: 0 70px;
             margin-top: 50px;
+            position: relative;
             box-sizing: border-box;
+            .left_icon{
+                position: absolute;
+                height: 58px;
+                top: 50%;
+                left: 80px;
+                z-index: 1;
+                transform: translateY(-50%);
+            }
             .notice_mian{
                 display: flex;
-                max-width: 100%;
+                width: 100%;
                 overflow: hidden;
                 border-radius: 60px;
                 .van-notice-bar{
                     display: flex;
                     height: 26px;
                     flex-shrink: 0;
+                    margin-left: 15px;
                     padding: 0 4px 0 20px;
                     color: $color-theme;
                     background-color: $home-title-04;
@@ -284,14 +293,6 @@ export default {
                         background-color: $home-title-04;
                     }
                 }
-            }
-            .left_icon{
-                position: absolute;
-                height: 58px;
-                top: 50%;
-                left: 50px;
-                z-index: 1;
-                transform: translateY(-50%);
             }
         }
         .adv_warp{

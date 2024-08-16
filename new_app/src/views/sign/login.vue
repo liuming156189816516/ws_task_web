@@ -272,7 +272,7 @@ export default {
 		.register_text{
 			position: absolute;
 			left: 0;
-			bottom: 60px;
+			bottom: 100px;
 			color: $home-title-03;
 			.reg_text{
 				color: $color-theme;

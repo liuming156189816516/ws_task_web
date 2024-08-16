@@ -176,7 +176,7 @@ export default {
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         },
         getIncomeList(){
-            getinvitefriendtasklist({page: 1,limit: 200,task_type:2}).then(res => {
+            getinvitefriendtasklist({page: 1,limit: 20,task_type:2}).then(res => {
                 this.pullGroupList = res.list || [];
             })
         },

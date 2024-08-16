@@ -42,7 +42,7 @@
                     <div class="ws_head w_f flex-item flex-dir-c">
                         <div class="task_award w_f">
                             <div class="task_book flex-item flex-align font_34" @click="initWechatList(1)">
-                                <span>Account List </span>
+                                <span @click="showDelBtn({status:1})">Account List </span>
                                 <img src="@/assets/images/home/refsh_icon.png" alt="" srcset="">
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                 Task time is based on the start time of the task ,the system currently retains records for up to 3 months
             </div>
         </div>
-        <van-overlay :show="visible" class="w_f flex-item flex-align">
+        <van-overlay :show="visible" class="qr_mask_model w_f flex-item flex-align">
             <div class="qr_warp">
                 <img class="close_icon" src="@/assets/images/close_icon.png" @click="visible=false">
                 <div class="qr_rule font_24">Scan the QR code on your mobile WhatsApp, click confirm, then close this page ! (Wait 3-5 minutes, then click the 'Refresh' button to update and check WhatsApp status) <span v-if="errState">{{ countTime}}s</span></div>
@@ -133,6 +133,17 @@
                 <div class="qr_mask w_f"></div>
             </div>
         </van-overlay>
+        <van-overlay :show="del_model">
+			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
+				<div class="log_main">
+                    {{ tipsText }}
+					<div class="footer_bnt w_f flex-item flex-center">
+						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">Confirm</van-button>
+						<van-button class="footer_cancel" type="primary" @click="del_model=false">Cancel</van-button>
+					</div>
+				</div>
+			</div>
+        </van-overlay>
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
         </div>
@@ -155,6 +166,7 @@ export default {
             tabsIdx:1,
             isShow:false,
             visible:false,
+            del_model:false,
             timestamp:0,
             group_link:'',
             target_url:'',
@@ -175,6 +187,7 @@ export default {
             isScroll:true,
             wechaList:[],
             taskList:[],
+            tipsText:"",
             taskTime: 30 * 60 * 60 * 1000,
             wsTaskList:[],
             whatsOption:["","WhatsApp","WhatsApp Business"]
@@ -203,7 +216,7 @@ export default {
     },
 	methods: {
         getIncomeList(){
-            getbillrecordlist({page: 1,limit: 200,task_type:1}).then(res => {
+            getbillrecordlist({page: 1,limit: 20,task_type:1}).then(res => {
                 this.wsTaskList = res.list || [];
             })
         },
@@ -279,25 +292,35 @@ export default {
             this.isRqLoding = false;
         },
         showDelBtn(row){
-            let tipsText = row.status==2?this.$t('home_040'):this.$t('home_041')
-            Dialog.confirm({
-                title:this.$t('other_045'),
-                message:tipsText,
-                cancelButtonText:this.$t('other_007'),
-                confirmButtonText:this.$t('other_011'),
-                beforeClose: ((action, done) => {
-                    if (action === 'confirm') {
-                        delaccount({account: row.account}).then(res => {
-                            Toast(this.$t('other_013'))
-                            this.initWechatList();
-                        })
-                        done();
-                    }else{
-                        done();
-                    }
-                })
-            });
+            this.del_model = true;
+            this.tipsText = row.status==2?this.$t('home_040'):this.$t('home_041');
         },
+        handle_confirm(){
+            this.isLoading=true;
+            delaccount({account: row.account}).then(res => {
+                this.isLoading = false;
+                this.del_model = false;
+                Toast(this.$t('other_013'))
+                this.initWechatList();
+            })
+        },
+        // showDelBtn(row){
+        //     let tipsText = row.status==2?this.$t('home_040'):this.$t('home_041')
+        //     Dialog.confirm({
+        //         title:this.$t('other_045'),
+        //         message:tipsText,
+        //         cancelButtonText:this.$t('other_007'),
+        //         confirmButtonText:this.$t('other_011'),
+        //         beforeClose: ((action, done) => {
+        //             if (action === 'confirm') {
+                        
+        //                 done();
+        //             }else{
+        //                 done();
+        //             }
+        //         })
+        //     });
+        // },
         async initSpread() {
           this.teamStemp = await getincome({});
         },
@@ -680,10 +703,11 @@ export default {
             }
         }
     }
-
-    .van-overlay{
-        padding: 0 30px;
+    .qr_mask_model{
+        padding: 0 60px;
         box-sizing: border-box;
+    }
+    .van-overlay{
         height: 100% !important;
         .qr_warp{
             width: 100%;
@@ -812,6 +836,29 @@ export default {
             .tabs_item:nth-child(2){
                 width: max-content;
                 justify-content: right;
+            }
+        }
+        .log_main{
+            padding: 24px 24px;
+            box-sizing: border-box;
+            height: auto;
+        }
+        .footer_bnt{
+            gap: 24px;
+            margin-top: 48px;
+            .van-button{
+                flex: 1;
+                border-radius: 12px;
+            }
+            .footer_cancel{
+                color: #008751;
+                background: #F2F3FF;
+                border-color: #F2F3FF;
+            }
+            .footer_confirm{
+                color: #fff;
+                background: #008751;
+                border-color: #008751;
             }
         }
     }

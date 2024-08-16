@@ -109,9 +109,9 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_046'),type:3,status:null,task_info_id:null,award:this.$t('home_048',{value:6500}),btn:this.$t('home_058'),desc:this.$t('home_051')},
-                {name:this.$t('home_045'),type:2,status:null,task_info_id:null,award:this.$t('home_047',{value:7200}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_044'),type:1,status:null,task_info_id:null,award:this.$t('home_047',{value:7000}),btn:this.$t('home_056'),desc:this.$t('home_049')}
+                {name:this.$t('home_046'),type:3,status:null,task_info_id:null,award:this.$t('home_048',{value:888}),btn:this.$t('home_058'),desc:this.$t('home_051')},
+                {name:this.$t('home_045'),type:2,status:null,task_info_id:null,award:this.$t('home_047',{value:888}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_044'),type:1,status:null,task_info_id:null,award:this.$t('home_047',{value:999}),btn:this.$t('home_056'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {

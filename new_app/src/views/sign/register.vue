@@ -155,6 +155,7 @@ export default {
 				// if(process.env.NODE_ENV == 'production'){
 				// 	fbq('track', 'CompleteRegistration');
 				// }
+				this.moveNews.$emit('login-env',"hello");
 				this.$store.dispatch('Global/isShowLogin',false);
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())
@@ -181,10 +182,12 @@ export default {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	overflow: hidden;
+	// overflow: hidden;
+	padding-bottom: 20px;
 	overflow-y: auto;
 	background: url('../../assets/images/home/bg_img.png') no-repeat;
     background-size: cover;
+	-webkit-overflow-scrolling: touch;
 	input {
 		background: transparent !important;
 		border: transparent;

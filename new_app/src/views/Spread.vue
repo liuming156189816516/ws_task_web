@@ -156,7 +156,7 @@ export default {
     },
     methods:{
         getIncomeList(){
-            getbillrecordlist({page: 1,limit: 200,task_type:3}).then(res => {
+            getbillrecordlist({page: 1,limit: 20,task_type:3}).then(res => {
                 this.millionList = res.list || [];
             })
         },

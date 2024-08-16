@@ -27,7 +27,8 @@
                         </div>
                     </div>
                     <van-button :class="['font_30',user_money<minWithdrawal||user_money>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">Withdraw</van-button>
-                    <div class="draw_tips font_22" v-if="user_money<minWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
+                    <div class="draw_tips font_22" v-if="user_money>minWithdrawal&&isWithdrawal">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
+                    <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
                     <div class="draw_tips font_22" v-else-if="user_money>0&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
                     <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
                         <p>Number of withdrawals remaining Today：{{ withdrawalNum }}</p>
@@ -82,6 +83,7 @@ export default {
             apk_url:"",
             user_money:0,
             allIncome:"",
+            isTotalNum:null,
             minWithdrawal:null,
             withdrawalNum:null,
             isWithdrawal:false,
@@ -191,8 +193,8 @@ export default {
                 this.user_money = income;
                 this.allIncome = data2;
                 // this.withdrawalNum = Number(data4.limit_count);
+                this.isTotalNum = data4.limit_count;
                 this.withdrawalNum = data4.lave_count;
-                // lave_count
                 this.minWithdrawal = data4.limit_amount;
                 this.isWithdrawal = data4.limit_count_status;
                 for (let k = 0; k < this.menuOption.length; k++) {
@@ -239,7 +241,7 @@ export default {
             this.$router.push("/myHead");
         },
         showRule(){
-            this.$popDialog({ content: this.help_url, title:"Notes",type: 4,times:this.withdrawalNum,money:this.minWithdrawal })
+            this.$popDialog({ content: this.help_url, title:"Notes",type: 4,times:this.isTotalNum,money:this.minWithdrawal })
         },
         goWithdraw(){
             this.$router.push("/withdraw");

@@ -40,7 +40,7 @@
 					<!-- <van-button plain type="primary" @click="goRegister" >{{ $t('login_006') }}</van-button> -->
 				</div>
 			</div>
-			<div class="register_text w_f flex-item flex-center font_32" @click="goRegister">{{$t('login_028')}}<span class="reg_text"> {{$t('login_029')}}</span></div>
+			<div class="register_text w_f flex-item flex-center font_32" :class="{'is_bottom':isBottom}" @click="goRegister">{{$t('login_028')}}<span class="reg_text"> {{$t('login_029')}}</span></div>
 		</div>
 		   <!-- <drag-icon ref="dragIconCom" :gapWidthPx="24" :coefficientHeight="0.68">
             <div class="serve_icon" slot="icon" @click="contactService">
@@ -59,6 +59,7 @@ export default {
 			autologin:true,
 			username:"",
 			password:"",
+			isBottom:false,
 			langIdx:Cookies.get("language")||'en',
 			isIndex:false,
 			langOptions: [
@@ -68,6 +69,11 @@ export default {
 		}
 	},
 	created() {
+		if(this.$Helper.checkBrowser()&&this.$Helper.isIos()){
+			this.isBottom = true;
+		}else{
+			this.isBottom = true;
+		}
 		// this.userAccount();
     },
 	methods: {
@@ -269,15 +275,18 @@ export default {
 			// 	background: #e9edfe;
 			// }
 		}
-		.register_text{
+		.register_text, .is_bottom{
 			margin-top: 30%;
-			// position: absolute;
-			// left: 0;
-			// bottom: 100px;
+			position: absolute;
+			left: 0;
+			bottom: 100px;
 			color: $home-title-03;
 			.reg_text{
 				color: $color-theme;
 			}
+		}
+		.is_bottom{
+			bottom: 200px;
 		}
 	}
 }

@@ -28,10 +28,10 @@
                     </div>
                     <van-button :class="['font_30',user_money<minWithdrawal||user_money>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">Withdraw</van-button>
                     <div class="draw_tips font_22" v-if="user_money>minWithdrawal&&isWithdrawal">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
-                    <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
-                    <div class="draw_tips font_22" v-else-if="user_money>0&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
+                    <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&isWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
+                    <div class="draw_tips font_22" v-else-if="user_money>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
                     <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
-                        <p>Number of withdrawals remaining Today：{{ withdrawalNum }}</p>
+                        <p class="w_f flex-item flex-align flex-center">Number of withdrawals remaining Today：{{ withdrawalNum }}</p>
                         <p>You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</p>
                     </div>
                     <!-- <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->

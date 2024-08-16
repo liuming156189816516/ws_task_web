@@ -24,8 +24,9 @@
                             <p class="task_bonus font_30">{{ profitType.find(val=> val.value == item.type).lable||"" }}</p>
                             <p class="task_type font_24" v-if="item.task_type!=0">{{ taskOption[item.task_type] }}</p>
                         </div>
-                        <div class="task_money font_30" v-if="item.type==8||item.type==9" style="color:#F52C2C;">{{ item.amount }}</div>
-                        <div class="task_money font_30" v-else>+{{ item.amount }}</div>
+                        <div class="task_money font_30" v-if="item.type==9" style="color:#F52C2C;">{{ item.amount }}</div>
+                        <div class="task_money font_30" v-else-if="item.type==8&&checkReduce(item.amount)">+{{ item.amount }}</div>
+                        <div class="task_money font_30" v-else>{{ item.amount }}</div>
                     </div>
                     <div class="order_time w_f flex-item flex-align flex-between font_26">
                         <span>Balance: {{ item.balance }}</span>
@@ -245,6 +246,13 @@ export default {
                 return result[0].lable;
             }else{
                 return "-";
+            }
+        },
+        checkReduce(val){
+            if (String(val).indexOf("-") > -1) {
+                return false;
+            }else{
+                return true;
             }
         }
     }

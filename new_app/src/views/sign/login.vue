@@ -282,6 +282,7 @@ export default {
 			// left: 0;
 			// bottom: 100px;
 			// color: $home-title-03;
+			color: $home-title-03;
 			.reg_text{
 				color: $color-theme;
 			}

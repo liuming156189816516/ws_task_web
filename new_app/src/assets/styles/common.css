@@ -561,43 +561,4 @@
   background: #fff;
   border-radius: 26px;
   font-size: 32px;
-  /* position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%); */
 }
-
-/* [class*=van-hairline]::after{
-  border: none;
-}
-.van-dialog__message{
-  padding-left: 40px;
-  padding-right: 40px;
-  font-size: 14px;
-  text-align: left;
-}
-.van-dialog__footer{
-  padding: 0 40px 24px 40px;
-  box-sizing: border-box;
-  .van-dialog__cancel, .van-dialog__confirm{
-    display: flex;
-    width: 125px;
-    padding: 16px 0;
-    background: #F2F3FF;
-    justify-content: center;
-    border-radius: 12px;
-    .van-button__text{
-      color: #008751;
-    }
-  }
-  .van-dialog__confirm{
-    background: #008751;
-    margin-left: 24px;
-    .van-button__text{
-      color: #fff;
-    }
-  }
-  .van-button::before{
-    border: none;
-  }
-} */

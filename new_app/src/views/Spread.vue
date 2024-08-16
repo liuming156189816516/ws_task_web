@@ -1,5 +1,5 @@
 <template>
-    <div class="spread_warp">
+    <div class="spread_warp" ref="warpBox" @scroll="handleScrolStop">
         <page-header :title="$t('table_002')" :noBg="false" :bgColor="false" :showBack="false" />
         <div class="w_f spread_title flex-item font_50 flex-dir-c">
             <p class="flex-item flex-center">Profit from sharing</p>
@@ -27,7 +27,7 @@
                 <div class="spred_mess w_f">
                     <div class="top_title w_f font_32 flex-item flex-align flex-center">Receive a large bonus</div>
                     <div class="spred_m w_f">
-                        <p class="w_f font_30">Sharing your invitation link or referral code</p>
+                        <p class="w_f font_28">Sharing your invitation link or referral code</p>
                         <div class="spred_l">
                            <div class="w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
@@ -74,14 +74,27 @@
                     <span>Time</span>
                     <span>Bonus</span>
                 </div>
-                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in millionList" :key="idx">
-                    <span>{{ formatTime(item.itime) }}</span>
-                    <span class="record_cash">{{ item.amount }}</span>
-                </div>
+                <template v-if="millionList&&millionList.length>0">
+                    <div class="record_scroll w_f flex-item flex-dir-c">
+                        <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in millionList" :key="idx">
+                            <span>{{ formatTime(item.itime) }}</span>
+                            <span class="record_cash">{{ item.amount }}</span>
+                        </div>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+                        <p class="font_28">Invite your friends quickly to earn cash!</p>
+                    </div>
+                </template>
                 <div class="title_top footer_tips w_f flex-item font_24">
                     Task time is based on the start time of the task ,the system currently retains records for up to 3 months
                 </div>
             </div>
+        </div>
+        <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
+            <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
         </div>
     </div>
 </template>
@@ -91,7 +104,7 @@ import QRCode from 'qrcodejs2'
 import { formatTime } from "@/utils/tool";
 import { getinvitelink} from '@/api/bill';
 import PageHeader from "@/components/Header";
-import {  getbillrecordlist } from '@/api/task';
+import {  getbillrecordlist,getinvitefriendtasklist } from '@/api/task';
 export default {
     components: { PageHeader },
     data() {
@@ -103,6 +116,7 @@ export default {
             today_invit:"",
             invit_link:"",
             today_incomet:0,
+            isScroll:true,
             millionList:[]
         }
     },
@@ -136,6 +150,7 @@ export default {
         }
     },
     created() {
+        this.isScroll = false;
         this.syncInitApi();
         this.getIncomeList();
     },
@@ -146,11 +161,6 @@ export default {
             })
         },
         syncInitApi(){
-            // let fun1 = new Promise((resolve,reject)=>{
-            //     getbrokeragestatis().then(res =>{
-            //         resolve(res)
-            //     })
-            // });
             let fun1 = new Promise((resolve,reject)=>{
                 getinvitelink().then(res =>{
                     resolve(res)
@@ -182,6 +192,19 @@ export default {
         },
         formatTime(time) {
             return formatTime(time);
+        },
+        handleScrolStop(){
+            let scrollTop = this.$refs.warpBox;
+            if(scrollTop.scrollTop >= 200){
+                this.isScroll = true;
+            }else{
+                this.isScroll = false;
+            }
+        },
+        scrollTopBtn(){
+            this.isScroll = false;
+            let scrollTop = this.$refs.warpBox;
+            scrollTop.scrollTo({top: 0,behavior:"smooth"});
         }
     }
 }
@@ -190,11 +213,37 @@ export default {
     .spread_warp {
         width: 100%;
         height: 100%;
+        position: relative;
         overflow-y: auto;
         margin-bottom: 100px;
         background: url('../assets/images/home/bg_img.png') no-repeat;
         background-size: cover;
         -webkit-overflow-scrolling: touch;
+        .top_icon{
+            width: 70px;
+            height: 70px;
+            position: fixed;
+            right:5px;
+            bottom: 120px;
+            display: flex;
+            z-index: 99999;
+            flex-shrink: 0;
+            opacity: 0;
+            align-items: center;
+            border-radius: 50%;
+            transition: all .5s;
+            justify-content: center;
+            // background: $color-theme;
+            img{
+                height: 42px;
+            }
+        }
+        .icon_active{
+            opacity: 1;
+        }
+        .icon_hide{
+            opacity: 0;
+        }
         .spread_title{
             width: 100%;
             margin-bottom: 28px;
@@ -424,8 +473,13 @@ export default {
                 .title_top{
                     height: 100px;
                     padding: 0 40px;
+                    flex-shrink: 0;
                     box-sizing: border-box;
                     background: $home-title-10;
+                }
+                .record_scroll{
+                    max-height: 1100px;
+                    overflow-y: auto;
                 }
                 .top_title_1{
                     font-weight: bold;
@@ -444,6 +498,14 @@ export default {
                 }
                 .record_cash{
                     font-weight: bold;
+                }
+                .empty_box{
+                    height: 364px;
+                    color: $home-title-14;
+                    background-color: $font-color-white;
+                    img{
+                        height: 202px;
+                    }
                 }
                 .footer_tips{
                     padding: 16px 0 16px 20px;

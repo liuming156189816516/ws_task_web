@@ -1,5 +1,5 @@
 <template>
-    <div class="home-content" ref="warpBox">
+    <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
             <page-header :title="$t('home_046')" :show-icon="true" :bgcolor="false" />
             <div class="notice_warp w_f">
@@ -86,9 +86,11 @@
                 <span class="flex-item">Bonus</span>
             </div>
             <template v-if="wsTaskList&&wsTaskList.length>0">
-                <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in wsTaskList" :key="idx">
-                    <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                    <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
+                <div class="record_scroll w_f flex-item flex-dir-c">
+                    <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in wsTaskList" :key="idx">
+                        <span class="flex-item">{{ formatTime(item.itime) }}</span>
+                        <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
+                    </div>
                 </div>
             </template>
             <template v-else>
@@ -130,40 +132,18 @@
                 </div>
             </div>
         </van-overlay>
+        <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
+            <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
+        </div>
     </div>
 </template>
-<style lang="scss" scoped>
-    .tabs_list{
-        width: 100%;
-        height: 88px;
-        padding: 0 30px;
-        box-sizing: border-box;
-        .tabs_item{
-            position: relative;
-            // background-color: chartreuse;
-            .tabs_active{
-                width: 60%;
-                position: absolute;
-                left: 50%;
-                bottom: -10px;
-                color: $home-title-12;
-                transform: translateX(-50%);
-                border-bottom: 4px solid red;
-            }
-        }
-        .tabs_item:nth-child(2){
-            width: max-content;
-            justify-content: right;
-        }
-    }
-</style>
 <script>
 import QRCode from 'qrcodejs2'
 import { mapState } from 'vuex';
 import { Toast,Dialog} from 'vant';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
-import { getbillrecordlist } from '@/api/task';
+import { getbillrecordlist,getinvitefriendtasklist } from '@/api/task';
 import { getincome,getaccountlist,delaccount,getqrcode } from'@/api/home'
 export default {
 	name: 'scan_online',
@@ -191,6 +171,7 @@ export default {
             refreState:false,
             showProvince:false,
             isRqLoding:false,
+            isScroll:true,
             wechaList:[],
             taskList:[],
             taskTime: 30 * 60 * 60 * 1000,
@@ -208,6 +189,7 @@ export default {
         }
 	},
     created(){
+        this.isScroll=false;
         this.getIncomeList();
         this.initWechatList();
     //     this.timestamp = Math.floor(new Date().getTime() / 1000);
@@ -220,7 +202,7 @@ export default {
     },
 	methods: {
         getIncomeList(){
-            getbillrecordlist({page: 1,limit: 200,task_type:1}).then(res => {
+            getinvitefriendtasklist({page: 1,limit: 200,task_type:3}).then(res => {
                 this.wsTaskList = res.list || [];
             })
         },
@@ -281,7 +263,7 @@ export default {
             getaccountlist().then(res => {
                 this.loading=false;
                 this.total = Math.ceil(res.total/this.limit);
-                this.wechaList = res.list;
+                this.wechaList = res.list||[];
             })
         },
         createQrcode(url){
@@ -340,6 +322,19 @@ export default {
         },
         formatTime(time) {
             return formatTime(time);
+        },
+        handleScrolStop(){
+            let scrollTop = this.$refs.warpBox;
+            if(scrollTop.scrollTop >= 200){
+                this.isScroll = true;
+            }else{
+                this.isScroll = false;
+            }
+        },
+        scrollTopBtn(){
+            this.isScroll = false;
+            let scrollTop = this.$refs.warpBox;
+            scrollTop.scrollTo({top: 0,behavior:"smooth"});
         }
 	}
 };
@@ -350,9 +345,35 @@ export default {
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
-        background-color: #f2f2f2;
+        position: relative;
+        background: $home-title-18;
         -webkit-overflow-scrolling: touch; 
-        padding-bottom: 120px;
+        padding-bottom: 20px;
+        .top_icon{
+            width: 70px;
+            height: 70px;
+            position: fixed;
+            right:5px;
+            bottom: 50px;
+            display: flex;
+            z-index: 99999;
+            flex-shrink: 0;
+            opacity: 0;
+            align-items: center;
+            border-radius: 50%;
+            transition: all .5s;
+            justify-content: center;
+            // background: $color-theme;
+            img{
+                height: 42px;
+            }
+        }
+        .icon_active{
+            opacity: 1;
+        }
+        .icon_hide{
+            opacity: 0;
+        }
         .task_mian{
             height: 1048px;
             position: relative;
@@ -554,7 +575,10 @@ export default {
                         border-bottom-right-radius: 20px;
                         background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
                         .ws_account{
-                            padding: 20px 20px 10px 20px;
+                            // max-height: 300px;
+                            // overflow-y: auto;
+                            // overflow: hidden;
+                            // padding: 20px 20px 10px 20px;
                             background: $font-color-white;
                             .log_out{
                                 width: 140px;
@@ -598,7 +622,7 @@ export default {
                 background: $font-color-white;
                 .focus_tips{
                     color: $home-title-02;
-                    text-decoration: u;
+                    text-decoration: underline;
                 }
             }
         }
@@ -611,9 +635,14 @@ export default {
             .title_top_head{
                 font-weight: bold;
             }
+            .record_scroll{
+                max-height: 1100px;
+                overflow-y: auto;
+            }
             .title_top{
                 height: 100px;
                 padding: 0 40px;
+                flex-shrink: 0;
                 box-sizing: border-box;
                 background: $home-title-10;
             }
@@ -641,6 +670,7 @@ export default {
                 }
             }
             .footer_tips{
+                font-style: italic;
                 padding: 10px 0 10px 16px;
                 box-sizing: border-box;
                 color: $home-title-06;
@@ -736,6 +766,29 @@ export default {
                     left: 50%;
                     transform: translate(-50%,-50%);
                 }
+            }
+        }
+        .tabs_list{
+            width: 100%;
+            height: 88px;
+            padding: 0 30px;
+            box-sizing: border-box;
+            .tabs_item{
+                position: relative;
+                // background-color: chartreuse;
+                .tabs_active{
+                    width: 60%;
+                    position: absolute;
+                    left: 50%;
+                    bottom: -10px;
+                    color: $home-title-12;
+                    transform: translateX(-50%);
+                    border-bottom: 4px solid red;
+                }
+            }
+            .tabs_item:nth-child(2){
+                width: max-content;
+                justify-content: right;
             }
         }
     }

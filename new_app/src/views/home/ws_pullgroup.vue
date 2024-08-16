@@ -1,5 +1,5 @@
 <template>
-    <div class="home-content" ref="warpBox">
+    <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
             <page-header :title="$t('login_027')" :show-icon="true" :bgcolor="false" />
             <div class="notice_warp w_f">
@@ -86,11 +86,13 @@
                     <span class="flex-item">Bonus</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
-                    <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in pullGroupList" :key="idx">
-                        <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                        <span class="flex-item flex-center">{{ item.ser_no }}</span>
-                        <span class="flex-item flex-center" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
-                        <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
+                    <div class="record_scroll w_f flex-item flex-dir-c">
+                        <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in pullGroupList" :key="idx">
+                            <span class="flex-item">{{ formatTime(item.itime) }}</span>
+                            <span class="flex-item flex-center">{{ item.ser_no }}</span>
+                            <span class="flex-item flex-center" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                            <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
+                        </div>
                     </div>
                 </template>
                 <template v-else>
@@ -103,6 +105,9 @@
                     Task time is based on the start time of the task ,the system currently retains records for up to 3 months
                 </div>
             </div>
+        </div>
+        <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
+            <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
         </div>
     </div>
 </template>
@@ -120,6 +125,7 @@ export default {
 	data() {
 		return {
             task_id:"",
+            isScroll:true,
             isShow:false,
             teamStemp:'',
             timestamp:0,
@@ -145,6 +151,7 @@ export default {
         }
 	},
     created(){
+        this.isScroll = false;
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         this.task_id = this.$route.query.id||"";
         this.getGroupMess();
@@ -170,7 +177,6 @@ export default {
         },
         getIncomeList(){
             getinvitefriendtasklist({page: 1,limit: 200,task_type:2}).then(res => {
-                console.log(res);
                 this.pullGroupList = res.list || [];
             })
         },
@@ -223,6 +229,19 @@ export default {
         },
         formatTime(time) {
             return formatTime(time);
+        },
+        handleScrolStop(){
+            let scrollTop = this.$refs.warpBox;
+            if(scrollTop.scrollTop >= 200){
+                this.isScroll = true;
+            }else{
+                this.isScroll = false;
+            }
+        },
+        scrollTopBtn(){
+            this.isScroll = false;
+            let scrollTop = this.$refs.warpBox;
+            scrollTop.scrollTo({top: 0,behavior:"smooth"});
         }
 	}
 };
@@ -233,9 +252,35 @@ export default {
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
+        position: relative;
         background-color: #f2f2f2;
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
+        .top_icon{
+            width: 70px;
+            height: 70px;
+            position: fixed;
+            right:5px;
+            bottom: 50px;
+            display: flex;
+            z-index: 99999;
+            flex-shrink: 0;
+            opacity: 0;
+            align-items: center;
+            border-radius: 50%;
+            transition: all .5s;
+            justify-content: center;
+            // background: $color-theme;
+            img{
+                height: 42px;
+            }
+        }
+        .icon_active{
+            opacity: 1;
+        }
+        .icon_hide{
+            opacity: 0;
+        }
         .task_mian{
             height: 1048px;
             position: relative;
@@ -447,6 +492,8 @@ export default {
             }
         }
         .record_list{
+            // max-height: 300px;
+            // overflow-y: auto;
             padding: 0 30px;
             margin-top: 20px;
             padding-bottom: 30px;
@@ -456,9 +503,14 @@ export default {
                 font-weight: bold;
                 color: $home-title-12;
             }
+            .record_scroll{
+                max-height: 1100px;
+                overflow-y: auto;
+            }
             .title_top{
                 height: 100px;
                 padding: 0 40px;
+                flex-shrink: 0;
                 box-sizing: border-box;
                 background: $home-title-10;
                 span{
@@ -485,15 +537,6 @@ export default {
                 flex-grow: 0.8;
                 justify-content: right;
             }
-            // span{
-            //     flex-shrink: 0;
-            // }
-            // span:nth-child(1), span:nth-child(2){
-            //     flex-grow: 2;
-            // }
-            // span:nth-child(3), span:nth-child(4){
-            //     flex-grow: 2;
-            // }
             .record_item{
                 height: 108px;
                 background: $font-color-white;

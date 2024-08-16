@@ -98,6 +98,7 @@
 </template>
 <script>
 import { i18n } from '@/assets/lang'
+import { getToken } from '@/utils/tool';
 import Global from "@/store/module/global";
 export default {
     props: {
@@ -140,8 +141,9 @@ export default {
                 })
             }
             let list = this.$refs.tips_scroll;
-            list.addEventListener("touchmove",e => e.stopPropagation(),false)
-            // console.log();
+            if (list) {
+                list.addEventListener("touchmove",e => e.stopPropagation(),false)
+            }
         })
     },
     methods: {
@@ -162,10 +164,10 @@ export default {
             }
         },
         jumpLogin(){
-            this.visible=false;
-            // console.log(this.$store);
-            // this.$Helper.RedirectLogin()
-            // this.$store.dispatch('Global/isShowLogin',true)
+            if(!getToken()){
+                this.visible=false;
+                this.moveNews.$emit('login-cover',"hello");
+            }
         },
     }
     // beforeDestroy(){

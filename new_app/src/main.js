@@ -33,6 +33,7 @@ import 'animate.css'
 
 import JsonExcel from 'vue-json-excel'
 import { Popover, Calendar  } from 'vant';
+Vue.prototype.EventBus = new Vue();
 
 Vue.use(Popover).use(Calendar);
 Vue.component('downloadExcel', JsonExcel)

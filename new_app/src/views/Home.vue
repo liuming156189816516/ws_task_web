@@ -1,5 +1,5 @@
 <template>
-    <div class="home_warp w_f" @click="isIndex = false" ref="warpBox" @scroll="handleScrolStop">
+    <div class="home_warp w_f" ref="warpBox">
         <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true" />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <!-- <div class="logo_title w_f flex-item flex-center font_36">
@@ -7,14 +7,12 @@
                 <span class="flex-item font_32" @click="showRule">{{$t('other_051')}}</span>
             </div> -->
             <div class="ui_time flex-item flex-center font_50">Ultimate Wealth Challenge</div>
-            <div class="notice_warp w_f">
-                <div class="notice_mian w_f">
+            <div class="notice_warp">
+                <div class="notice_mian">
                     <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
                     <van-notice-bar :scrollable="false">
-                        <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
+                        <van-swipe vertical :autoplay="3000000" :show-indicators="false">
                             <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
-                            <!-- <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
-                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item> -->
                         </van-swipe>
                     </van-notice-bar>
                 </div>
@@ -93,8 +91,6 @@ export default {
     data() {
         return {
             isLogin:false,
-            isScroll: false,
-            isIndex: false,
             visible:true,
             user_money: 0,
             teamStemp: "",
@@ -125,35 +121,30 @@ export default {
             return this.$Helper.randomStrings(100)
         }
     },
-    created() {
-        // this.isLogin = this.$store.state.Global.isLogin;
-        // this.$store.dispatch('User/getUserHead');
-        // this.getHelpServe();
-        // this.$store.dispatch('User/plantCarousel');
+    created(){
+        this.moveNews.$on("login-env",res=>{
+            this.initHandle();
+        })
+        this.moveNews.$on("login-cover",res=>{
+            this.$store.dispatch('Global/isShowLogin',true)
+        })
     },
-    // userInfo.token
-    // watch:{
-    //     isLogin(newVal, oldVal){
-    //         if(newVal){
-    //             this.syncInitApi();
-    //         }
-    //     }
-    // },
     activated() {
         if(getToken()){
-            this.syncInitApi();
-            this.isIndex = false;
-            this.isScroll = false;
-            if (JSON.parse(window.localStorage.getItem('is_play'))) {
-                setTimeout(() => {
-                    this.$popDialog({ content: this.help_url, title: this.$t("serv_004"), type: 1 })
-                },500)
-            }
+           this.initHandle();
         }else{
             this.taskOption= this.$Helper.defaultOption();
         }
     },
     methods: {
+        initHandle(){
+            this.syncInitApi();
+            if (JSON.parse(window.localStorage.getItem('is_play'))) {
+                setTimeout(() => {
+                    this.$popDialog({ content: this.help_url, title: this.$t("serv_004"), type: 1 })
+                },500)
+            }
+        },
         syncInitApi() {
             let fun1 = new Promise((resolve, reject) => {
                 getaccountincome().then(res => {
@@ -187,9 +178,6 @@ export default {
         copySuccess() {
             this.$toast(`${this.$t("other_044")}`);
         },
-        showChangeBtn() {
-            this.isIndex = !this.isIndex;
-        },
         async onChangeType(row) {
             this.langIdx = row.lang;
             this.$i18n.locale = row.lang;
@@ -217,19 +205,6 @@ export default {
             } else {
                 uniFun.postMessage({ data: path });
             }
-        },
-        handleScrolStop() {
-            let scrollTop = this.$refs.warpBox;
-            if (scrollTop.scrollTop >= 100) {
-                this.isScroll = true;
-            } else {
-                this.isScroll = false;
-            }
-        },
-        scrollTopBtn() {
-            this.isScroll = false;
-            let scrollTop = this.$refs.warpBox;
-            scrollTop.scrollTo({ top: 0, behavior: "smooth" });
         },
         showTask(idx){
             this.$router.push(`/betrecord?id=1`);
@@ -272,18 +247,42 @@ export default {
             margin-top: 50px;
             box-sizing: border-box;
             .notice_mian{
+                display: flex;
+                max-width: 100%;
                 overflow: hidden;
                 border-radius: 60px;
                 .van-notice-bar{
+                    display: flex;
                     height: 26px;
+                    flex-shrink: 0;
                     padding: 0 4px 0 20px;
                     color: $color-theme;
                     background-color: $home-title-04;
                 }
+                ::v-deep .van-notice-bar__wrap, ::v-deep .van-ellipsis, ::v-deep .van-swipe{
+                    display: flex;
+                    width: max-content;
+                    overflow: initial;
+                }
                 ::v-deep .van-swipe__track{
+                    width: max-content;
+                    padding: 0;
+                    margin: 0;
                     height: 26px !important;
                     line-height: 26px;
                     text-align: center;
+                    // background: salmon;
+                    .van-swipe-item{
+                        display: flex;
+                        width: max-content;
+                        padding-right: 10px;
+                        align-items: center;
+                        box-sizing: border-box;
+                        justify-content: center;
+                        border-top-right-radius: 30px;
+                        border-bottom-right-radius: 30px;
+                        background-color: $home-title-04;
+                    }
                 }
             }
             .left_icon{

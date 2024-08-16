@@ -156,7 +156,7 @@ export default {
     pay_007:"Add",
     pay_008:"Modify",
     pay_009:"Withdrawal Instructions",
-    pay_010:"Minimum withdrawal amount {value} naira",
+    pay_010:"Minimum withdrawal amount {value} integral",
     pay_011:"Withdraw money before 21:00 on the same day and receive it before 24:00 on the same day",
     pay_012:"This platform cooperates with a third party to safely withdraw money. Please do not transfer it back after receiving the money.",
     pay_013:"Bank Card",

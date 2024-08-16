@@ -99,6 +99,7 @@ export default {
 			// console.log(this.$Helper.aesDecrptHost(pp));
 			this.$store.dispatch('User/userLogin',params).then(res => {
 				Toast.clear();
+				this.moveNews.$emit('login-env',"hello");
 				setTimeout(()=>{this.isLoading= false},2000)
 				if(!res.token) return;
 				this.checkChange();

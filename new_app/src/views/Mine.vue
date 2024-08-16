@@ -26,21 +26,25 @@
                             <span>{{user_money||0.00}}</span>
                         </div>
                     </div>
-                    <van-button class="font_30" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">Withdraw</van-button>
+                    <van-button :class="['font_30',user_money<minWithdrawal||user_money>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">Withdraw</van-button>
                     <div class="draw_tips font_22" v-if="user_money<minWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
-                    <div class="draw_tips font_22" v-else-if="withdrawalNum>=0" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
+                    <div class="draw_tips font_22" v-else-if="user_money>0&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
+                    <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
+                        <p>Number of withdrawals remaining Today：{{ withdrawalNum }}</p>
+                        <p>You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</p>
+                    </div>
                     <!-- <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
                 </div>
             </div>
             <div class="self_jinbi w_f flex-item">
-                <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(1)">
+                <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(0)">
                     <div class="flex-item flex-align flex-between">
                         <span class="font_28">Today's Earnings</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
                     <div class="self_dold flex-item">{{ allIncome.today_bonus ||0 }}</div>
                 </div>
-                <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(2)">
+                <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(1)">
                     <div class="flex-item flex-align flex-between">
                         <span class="font_28">Yesterday's Earnings</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
@@ -186,7 +190,9 @@ export default {
                 const [{income},data2,data3,data4] = res;
                 this.user_money = income;
                 this.allIncome = data2;
-                this.withdrawalNum = Number(data4.limit_count);
+                // this.withdrawalNum = Number(data4.limit_count);
+                this.withdrawalNum = data4.lave_count;
+                // lave_count
                 this.minWithdrawal = data4.limit_amount;
                 this.isWithdrawal = data4.limit_count_status;
                 for (let k = 0; k < this.menuOption.length; k++) {
@@ -368,6 +374,10 @@ export default {
                     padding-left: 30px;
                     margin-top: 20px;
                     box-sizing: border-box;
+                }
+                .progress_award{
+                    border-color: $home-title-06;
+                    background-color: $home-title-06;
                 }
             }
         }

@@ -517,12 +517,14 @@
 }
 .empty_tips{
   width: 100%;
+  height: 100%;
   display: flex;
   font-size: 28px;
-  padding-top: 5%;
-  height:100vh;
   justify-content: center;
   background-color: #fff;
+}
+.empty_tips img{
+  height: auto; 
 }
 .van-dialog__footer{
   .van-button{

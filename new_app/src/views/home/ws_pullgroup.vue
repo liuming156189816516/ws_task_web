@@ -1,7 +1,7 @@
 <template>
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
-            <page-header :title="$t('login_027')" :show-icon="true" :bgcolor="false" />
+            <page-header :title="$t('home_044')" :show-icon="true" :bgcolor="false" />
             <div class="notice_warp w_f">
                 <div class="notice_mian w_f">
                     <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
@@ -86,13 +86,16 @@
                     <span class="flex-item">Bonus</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
+                        <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
                     <div class="record_scroll w_f flex-item flex-dir-c">
-                        <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in pullGroupList" :key="idx">
-                            <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                            <span class="flex-item flex-center">{{ item.ser_no }}</span>
-                            <span class="flex-item flex-center" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
-                            <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
-                        </div>
+                        <van-list v-model="loading" :finished="finished" loading-text="loading..." finished-text="No more" offset="60" @load="onLoad">
+                            <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in pullGroupList" :key="idx">
+                                <span class="flex-item">{{ formatTime(item.itime) }}</span>
+                                <span class="flex-item flex-center">{{ item.ser_no }}</span>
+                                <span class="flex-item flex-center" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                                <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
+                            </div>
+                        </van-list>
                     </div>
                 </template>
                 <template v-else>
@@ -124,10 +127,15 @@ export default {
 	components: {PageHeader},
 	data() {
 		return {
+            page:1,
+            limit:20,
             task_id:"",
+            page_total:0,
             isScroll:true,
             isShow:false,
+            loading:false,
             teamStemp:'',
+            finished :false,
             timestamp:0,
             group_link:'',
             target_url:'',
@@ -175,9 +183,19 @@ export default {
            this.isShow=groupData.status==1||groupData.status==2?true:false;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         },
+        onLoad(){
+            this.page++;
+            if(this.page >= this.page_total){
+                this.finished = true;
+            }else{
+                this.getIncomeList()
+            }
+        },
         getIncomeList(){
-            getinvitefriendtasklist({page: 1,limit: 20,task_type:2}).then(res => {
-                this.pullGroupList = res.list || [];
+            getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:2}).then(res => {
+                this.loading = false;
+                this.page_total = Math.ceil(res.total / this.limit);
+                this.pullGroupList = [...this.pullGroupList,...res.list] || [];
             })
         },
         copySuccess(){

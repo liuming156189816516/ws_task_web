@@ -47,7 +47,10 @@
             </div> -->
             <PrevNext :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext"></PrevNext>
         </div>
-        <div v-else class="empty_tips">{{$t("other_022")}}</div>
+        <div v-else class="empty_tips w_f flex-item flex-align flex-center flex-dir-c">
+            <img src="../../assets/images/empty_icon.png" alt="" />
+            <p>ops，still no records</p>
+        </div>
         <van-overlay :show = "showState" @click="showState = false">
             <div class="screen_down" @click.stop>
                 <div class="w_f flex-item flex-dir-c">

@@ -59,6 +59,7 @@ export default {
 			state.updateTaskAddList=!state.updateTaskAddList;
 		},
 		STORE_LOGIN(state, value) {
+			state.isType = 1;
 			state.isLogin = value;
 		},
 		STORE_Type(state, value) {

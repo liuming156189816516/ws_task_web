@@ -107,7 +107,7 @@
             <div class="qr_warp">
                 <img class="close_icon" src="@/assets/images/close_icon.png" @click="visible=false">
                 <div class="qr_rule font_24">Scan the QR code on your mobile WhatsApp, click confirm, then close this page ! (Wait 3-5 minutes, then click the 'Refresh' button to update and check WhatsApp status) <span v-if="errState">{{ countTime}}s</span></div>
-                <div class="qr_continer w_f">
+                <div class="qr_continer w_f flex-item flex-dir-c">
                     <!-- <van-tabs v-model="active" @change="changeCard">
                         <van-tab title="WhatsApp" />
                         <van-tab title="WhatsApp Business" />
@@ -130,6 +130,7 @@
                         <van-button v-show="!isRqLoding" icon="replay" :disabled="countTime>0&&countTime<60" @click="refreQrBtn">{{countTime==60?$t('other_031'):countTime+$t('other_032')}}</van-button>
                     </div>
                 </div>
+                <div class="qr_mask w_f"></div>
             </div>
         </van-overlay>
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
@@ -690,9 +691,26 @@ export default {
             border-radius: 10px;
             position: relative;
             box-sizing: border-box;
-            background-color: #fff;
+            background: url("../../assets/images/home/qr_bg.png") no-repeat;
+            background-size: 100% 100%;
+            .qr_mask{
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                background: url("../../assets/images/home/qr_mask.png") no-repeat;
+                background-size: 100% 100%;
+            }
             .qr_rule{
+                position: relative;
                 color: $color-theme;
+                z-index: 2;
+            }
+            .qr_continer{
+                margin-top: 30px;
+                border-radius: 24px;
+                background: #FEFCEF;
             }
             .close_icon{
                 height: 24px;
@@ -717,7 +735,7 @@ export default {
                 }
             }
             .qr-code, .err_code{
-                height: 200px;
+                min-height: 200px;
                 display: flex;
                 // margin-top: 20px;
                 flex-wrap: wrap;
@@ -739,8 +757,13 @@ export default {
                     }
                 }
             }
+            .qr-code{
+                padding-bottom: 24px;
+                // padding: 30px 0 24px 0;
+            }
             .err_code{
                 position: relative;
+                box-sizing: border-box;
                 .van-button{
                     position: absolute;
                     top: 50%;
@@ -770,8 +793,8 @@ export default {
         }
         .tabs_list{
             width: 100%;
-            height: 88px;
-            padding: 0 30px;
+            height: 66px;
+            padding: 0 20px;
             box-sizing: border-box;
             .tabs_item{
                 position: relative;

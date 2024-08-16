@@ -184,10 +184,10 @@ export default {
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         },
         onLoad(){
-            this.page++;
             if(this.page >= this.page_total){
                 this.finished = true;
             }else{
+                this.page++;
                 this.getIncomeList()
             }
         },
@@ -195,6 +195,7 @@ export default {
             getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:2}).then(res => {
                 this.loading = false;
                 this.page_total = Math.ceil(res.total / this.limit);
+                console.log(this.page_total);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
             })
         },

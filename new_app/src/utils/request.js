@@ -46,8 +46,8 @@ service.interceptors.response.use(res => {
           confirmButtonColor: "#ff9600",
           confirmButtonText: i18n.t('other_003'),
         }).then(() => {
-          localStorage.clear();
-          localStorage.removeItem('token');
+          window.localStorage.clear();
+          window.localStorage.removeItem('token');
           window.likevm.$router.replace('/home');
         })
       }else{

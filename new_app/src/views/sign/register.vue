@@ -64,6 +64,8 @@ export default {
 			password: "",
 			verfyList:[],
 			pwd: "",
+			bext_id: "",
+			pixe_id: "",
 			sur_pwd: "",
 			timestamp:"",
 			user_verify: "",
@@ -74,8 +76,14 @@ export default {
 	},
 	created() {
 		let url = window.location.search;
-		if (url.indexOf("r=") > -1) {
-			this.user_code = url.split("r=").pop();
+		if (url.indexOf("inviteCode=") > -1) {
+			this.user_code = this.$Helper.getUrlParams("inviteCode");
+		}
+		if (url.indexOf("pixellid=") > -1) {
+			this.pixe_id = this.$Helper.getUrlParams("pixellid");
+		}
+		if (url.indexOf("fbclid=") > -1) {
+			this.bext_id = this.$Helper.getUrlParams("fbclid");
 		}
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();
@@ -139,6 +147,8 @@ export default {
 				pwd: this.pwd,
 				uuid: this.timestamp,
 				code: this.safe_code,
+				fbclid: this.bext_id,
+				pixellid: this.pixe_id,
 				finvite_Code: this.user_code
 			};
 			// let Toast = this.$toast.loading({

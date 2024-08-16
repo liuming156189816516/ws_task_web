@@ -294,6 +294,13 @@ const Helper = {
 	RedirectLogin(){
 		if(getToken()) return;
 		window.likevm.$router.replace('/login');
+	},
+	//获取地址栏参数，key:参数名称
+	getUrlParams(key) {
+		let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+		let r = window.location.search.slice(1).match(reg);
+		if (r != null) return decodeURIComponent(r[2]);
+		return null;
 	}
 };
 export default Helper;

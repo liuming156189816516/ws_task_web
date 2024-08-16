@@ -72,10 +72,8 @@ export default {
 	},
 	created() {
 		let url = window.location.search;
-		if (url.indexOf("r=") > -1) {
-			this.user_code = this.$Helper.getUrlParams("r");
-			console.log(this.user_code);
-			// this.user_code = url.split("r=").pop();
+		if (url.indexOf("inviteCode=") > -1) {
+			this.user_code = this.$Helper.getUrlParams("inviteCode");
 		}
 		if (url.indexOf("pixellid=") > -1) {
 			this.pixe_id = this.$Helper.getUrlParams("pixellid");

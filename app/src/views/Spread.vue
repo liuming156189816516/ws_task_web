@@ -45,7 +45,7 @@
                         <span class="l_label"> {{$t('spre_006')}}：</span>
                         <span>{{invit_link}}</span>
                     </div>
-                    <div class="copay_text" v-clipboard:copy="invit_link+'?r='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{ $t('other_006') }}</div>
+                    <div class="copay_text" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{ $t('other_006') }}</div>
                 </div>
                 <div class="invit_code" ref="qrcodeImg">
                     <!-- <img src="../assets/images/home/qrCode.jpg" alt="" srcset=""> -->

@@ -11,7 +11,7 @@
                 <div class="notice_mian">
                     <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
                     <van-notice-bar :scrollable="false">
-                        <van-swipe vertical :autoplay="3000000" :show-indicators="false">
+                        <van-swipe vertical :autoplay="3000" :show-indicators="false">
                             <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
                         </van-swipe>
                     </van-notice-bar>

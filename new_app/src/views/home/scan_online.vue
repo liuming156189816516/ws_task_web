@@ -618,6 +618,7 @@ export default {
                             padding: 20px 0;
                         }
                         .empty_box{
+                            color: $home-title-03;
                             img{
                                height: 120px; 
                             }
@@ -643,6 +644,7 @@ export default {
                 border-radius: 20px;
                 box-sizing: border-box;
                 line-height: 34px;
+                color:$home-title-03;
                 background: $font-color-white;
                 .focus_tips{
                     color: $home-title-02;

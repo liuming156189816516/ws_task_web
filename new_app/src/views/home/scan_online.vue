@@ -203,7 +203,7 @@ export default {
     },
 	methods: {
         getIncomeList(){
-            getinvitefriendtasklist({page: 1,limit: 200,task_type:3}).then(res => {
+            getbillrecordlist({page: 1,limit: 200,task_type:1}).then(res => {
                 this.wsTaskList = res.list || [];
             })
         },

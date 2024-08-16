@@ -32,9 +32,6 @@
                     <div class="task_name">{{taskNameOption[item.type].name}}</div>
                     <div class="task_award font_30">
                         <div v-html="$t(taskNameOption[item.type].award)"></div>
-                        <!-- <template v-if="item.type==3">
-                            taskStatusOption
-                        </template> -->
                         <van-count-down v-if="item.invalid_time" :time="item.invalid_time/1000" />
                         <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
                         <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
@@ -341,7 +338,7 @@ export default {
                 .task_name{
                     color: $color-theme;
                     font-weight: 900;
-                    margin-bottom: 20px;
+                    margin-bottom: 24px;
                     text-shadow: 0px 3px 3px #005440;
                 }
                 .task_award{
@@ -354,7 +351,7 @@ export default {
                     }
                     .van-count-down{
                         position: absolute;
-                        top: -22px;
+                        top: -23px;
                         right: 41px;
                         z-index: 9;
                         font-weight: 700;
@@ -380,6 +377,7 @@ export default {
                     }
                 }
                 .task_desc{
+                    margin-top: 6px;
                     line-height: 32px;
                     color: $home-title-03;
                     display: -webkit-box;

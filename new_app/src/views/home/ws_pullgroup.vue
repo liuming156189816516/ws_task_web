@@ -195,7 +195,6 @@ export default {
             getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:2}).then(res => {
                 this.loading = false;
                 this.page_total = Math.ceil(res.total / this.limit);
-                console.log(this.page_total);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
             })
         },
@@ -525,6 +524,7 @@ export default {
             .record_scroll{
                 max-height: 1100px;
                 overflow-y: auto;
+                background: $font-color-white;
             }
             .title_top{
                 height: 100px;
@@ -536,10 +536,14 @@ export default {
                     flex: 1;
                 }
             }
-            .title_top:nth-child(1){
+            .task_title_head {
                 border-top-left-radius: 20px;
                 border-top-right-radius: 20px;
             }
+            // .title_top:nth-child(1){
+            //     border-top-left-radius: 20px;
+            //     border-top-right-radius: 20px;
+            // }
             span:nth-child(1){
                 flex-grow: 1.3;
                 flex-shrink: 0;

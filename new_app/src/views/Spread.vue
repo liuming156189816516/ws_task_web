@@ -70,16 +70,18 @@
                 <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
-                <div class="title_top top_title_1 w_f flex-item flex-align flex-between font_28">
+                <div class="title_top task_title_head top_title_1 w_f flex-item flex-align flex-between font_28">
                     <span>Time</span>
                     <span>Bonus</span>
                 </div>
                 <template v-if="millionList&&millionList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
-                        <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in millionList" :key="idx">
-                            <span>{{ formatTime(item.itime) }}</span>
-                            <span class="record_cash">{{ item.amount }}</span>
-                        </div>
+                        <van-list v-model="loading" :finished="finished" loading-text="loading..." finished-text="No more" offset="60" @load="onLoad">
+                            <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in millionList" :key="idx">
+                                <span>{{ formatTime(item.itime) }}</span>
+                                <span class="record_cash">{{ item.amount }}</span>
+                            </div>
+                        </van-list>
                     </div>
                 </template>
                 <template v-else>
@@ -109,6 +111,8 @@ export default {
     components: { PageHeader },
     data() {
         return {
+            page:1,
+            limit:20,
             wk_name:'',
             iframeSrc:'',
             allIncome:"",
@@ -117,6 +121,9 @@ export default {
             invit_link:"",
             today_incomet:0,
             isScroll:true,
+            loading:false,
+            finished :false,
+            page_total:0,
             millionList:[]
         }
     },
@@ -156,9 +163,19 @@ export default {
     },
     methods:{
         getIncomeList(){
-            getbillrecordlist({page: 1,limit: 20,task_type:3}).then(res => {
+            getbillrecordlist({page:this.page,limit:this.limit,task_type:3}).then(res => {
+                this.loading = false;
+                this.page_total = Math.ceil(res.total / this.limit);
                 this.millionList = res.list || [];
             })
+        },
+        onLoad(){
+            if(this.page >= this.page_total){
+                this.finished = true;
+            }else{
+                this.page++;
+                this.getIncomeList()
+            }
         },
         syncInitApi(){
             let fun1 = new Promise((resolve,reject)=>{
@@ -477,17 +494,22 @@ export default {
                     box-sizing: border-box;
                     background: $home-title-10;
                 }
+                .task_title_head {
+                    border-top-left-radius: 20px;
+                    border-top-right-radius: 20px;
+                }
                 .record_scroll{
                     max-height: 1100px;
                     overflow-y: auto;
+                    background: $font-color-white;
                 }
                 .top_title_1{
                     font-weight: bold;
                 }
-                .title_top:nth-child(1){
-                    border-top-left-radius: 20px;
-                    border-top-right-radius: 20px;
-                }
+                // .title_top:nth-child(1){
+                //     border-top-left-radius: 20px;
+                //     border-top-right-radius: 20px;
+                // }
                 .record_item{
                     height: 108px;
                     background: $font-color-white;

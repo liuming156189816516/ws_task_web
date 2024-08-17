@@ -162,10 +162,8 @@ export default {
     created(){
         this.isScroll = false;
         this.timestamp = Math.floor(new Date().getTime() / 1000);
-        this.task_id = this.$Helper.getUrlParams("id")||"";
-        // if(!this.task_id){
-            // this.task_id = localStorage.getItem('task_id');
-        // }
+        // this.task_id = this.$Helper.getUrlParams("id");
+        this.task_id = this.$route.query.id||"";
         this.getGroupMess();
     },
     mounted(){

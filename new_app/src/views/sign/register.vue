@@ -39,12 +39,12 @@
 						<img :src="require(`@/assets/images/code/${item}.png`)" v-for="(item,idx) in verfyList" :key="idx">
 					</div>
 				</div>
-			</div>
-			<div class="login_btn">
-				<van-button type="primary" :loading="isLoading" @click="handleRegister()" :loading-text="$t('login_010')">{{$t('login_014') }}</van-button>
-			</div>
-			<div class="register_btn w_f flex-item flex-center font_32">
-				{{ $t('login_015') }}<span @click="goLogin">{{ $t('login_016') }}</span>
+				<div class="login_btn">
+					<van-button type="primary" :loading="isLoading" @click="handleRegister()" :loading-text="$t('login_010')">{{$t('login_014') }}</van-button>
+				</div>
+				<div class="register_btn w_f flex-item flex-center font_32">
+					{{ $t('login_015') }}<span @click="goLogin">{{ $t('login_016') }}</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -350,10 +350,8 @@ export default {
 	.login_btn {
 		width: 100%;
 		display: flex;
-		margin-top: 20px;
+		margin-top: 70px;
 		flex-direction: column;
-		padding: 0 48px;
-		box-sizing: border-box;
 		.van-button {
 			width: 100%;
 			border: none;

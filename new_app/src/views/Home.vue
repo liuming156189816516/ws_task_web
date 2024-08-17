@@ -2,16 +2,12 @@
     <div class="home_warp w_f" ref="warpBox">
         <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true" />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
-            <!-- <div class="logo_title w_f flex-item flex-center font_36">
-                {{$t('login_027')}}
-                <span class="flex-item font_32" @click="showRule">{{$t('other_051')}}</span>
-            </div> -->
             <div class="ui_time flex-item flex-center font_50">Ultimate Wealth Challenge</div>
             <div class="notice_warp">
                 <div class="notice_mian">
-                    <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
+                    <img class="left_icon" src="@/assets/images/home/news_icon.png">
                     <van-notice-bar :scrollable="false">
-                        <van-swipe vertical :autoplay="3000" :show-indicators="false">
+                        <van-swipe vertical style="height: 24px;" :autoplay="3000" :show-indicators="false"  >
                             <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
                         </van-swipe>
                     </van-notice-bar>
@@ -95,7 +91,10 @@ export default {
             taskOption: [],
             langIdx: Cookies.get("language") || 'en',
             taskType: ['', 'scanOnline', 'spread', 'pullgroupTask'],
-            langOptions: [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" }]
+            langOptions: [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" }],
+            animationStyle: {
+                animation: 'scrolling 5s linear infinite',
+            }
         }
     },
     computed: {
@@ -248,48 +247,34 @@ export default {
                 position: absolute;
                 height: 58px;
                 top: 50%;
-                left: 80px;
+                left: 95px;
                 z-index: 1;
                 transform: translateY(-50%);
             }
             .notice_mian{
-                display: flex;
-                width: 100%;
+                max-width: 540px;
                 overflow: hidden;
                 border-radius: 60px;
+                margin: 0 auto;
                 .van-notice-bar{
-                    display: flex;
                     height: 26px;
-                    flex-shrink: 0;
-                    margin-left: 15px;
                     padding: 0 4px 0 20px;
                     color: $color-theme;
-                    background-color: $home-title-04;
-                }
-                ::v-deep .van-notice-bar__wrap, ::v-deep .van-ellipsis, ::v-deep .van-swipe{
-                    display: flex;
-                    width: max-content;
-                    overflow: initial;
+                    background-color: #86c6af;
                 }
                 ::v-deep .van-swipe__track{
-                    width: max-content;
-                    padding: 0;
-                    margin: 0;
                     height: 26px !important;
                     line-height: 26px;
                     text-align: center;
-                    // background: salmon;
-                    .van-swipe-item{
-                        display: flex;
-                        width: max-content;
-                        padding-right: 10px;
-                        align-items: center;
-                        box-sizing: border-box;
-                        justify-content: center;
-                        border-top-right-radius: 30px;
-                        border-bottom-right-radius: 30px;
-                        background-color: $home-title-04;
-                    }
+                }
+                .van-swipe-item{
+                    height: 26px;
+                    line-height: 26px;
+                    margin-left: 2px;
+                    color: $color-theme;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
             }
         }

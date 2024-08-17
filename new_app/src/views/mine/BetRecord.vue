@@ -16,25 +16,27 @@
             </div>
         </div>
         <div class="record_list w_f" v-if="list&&list.length>0">
-            <div class="record_item flex-item flex-align" v-for="(item,index) in list" :key="index">
-                <img class="l_icon" src="@/assets/images/mine/order_icon.png" alt="">
-                <div class="w_f flex-item flex-align flex-dir-c">
-                    <div class="w_f flex-item flex-align flex-between">
-                        <div class="flex-item flex-dir-c">
-                            <p class="task_bonus font_30">{{ profitType.find(val=> val.value == item.type).lable||"" }}</p>
-                            <p class="task_type font_24" v-if="item.task_type!=0">{{ taskOption[item.task_type] }}</p>
+            <van-list v-model="loading" :finished="finished" loading-text="loading..." finished-text="No more" offset="60" @load="onLoad">
+                <div class="record_item flex-item flex-align" v-for="(item,index) in list" :key="index">
+                    <img class="l_icon" src="@/assets/images/mine/order_icon.png" alt="">
+                    <div class="w_f flex-item flex-align flex-dir-c">
+                        <div class="w_f flex-item flex-align flex-between">
+                            <div class="flex-item flex-dir-c">
+                                <p class="task_bonus font_30">{{ profitType.find(val=> val.value == item.type).lable||"" }}</p>
+                                <p class="task_type font_24" v-if="item.task_type!=0">{{ taskOption[item.task_type] }}</p>
+                            </div>
+                            <div class="task_money font_30" v-if="item.type==9" style="color:#F52C2C;">{{ item.amount }}</div>
+                            <div class="task_money font_30" v-else-if="item.type==8&&checkReduce(item.amount)">+{{ item.amount }}</div>
+                            <div class="task_money font_30" v-else-if="item.type==8&&!checkReduce(item.amount)" style="color:#F52C2C;">{{ item.amount }}</div>
+                            <div class="task_money font_30" v-else>{{ item.amount }}</div>
                         </div>
-                        <div class="task_money font_30" v-if="item.type==9" style="color:#F52C2C;">{{ item.amount }}</div>
-                        <div class="task_money font_30" v-else-if="item.type==8&&checkReduce(item.amount)">+{{ item.amount }}</div>
-                        <div class="task_money font_30" v-else-if="item.type==8&&!checkReduce(item.amount)" style="color:#F52C2C;">{{ item.amount }}</div>
-                        <div class="task_money font_30" v-else>{{ item.amount }}</div>
-                    </div>
-                    <div class="order_time w_f flex-item flex-align flex-between font_26">
-                        <span>Balance: {{ item.balance }}</span>
-                        <span>{{ formatTime(item.itime) }}</span>
+                        <div class="order_time w_f flex-item flex-align flex-between font_26">
+                            <span>Balance: {{ item.balance }}</span>
+                            <span>{{ formatTime(item.itime) }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </van-list>
             <!-- <div class="record_warp record_title">
                 <span>{{$t("tail_004")}}</span>
                 <span>{{$t("tail_002")}}</span>
@@ -47,7 +49,7 @@
                     <span class="record_cash">{{item.amount}}</span>
                 </div>
             </div> -->
-            <PrevNext :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext"></PrevNext>
+            <!-- <PrevNext :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext"></PrevNext> -->
         </div>
         <div v-else class="empty_tips w_f flex-item flex-align flex-center flex-dir-c">
             <img src="../../assets/images/empty_icon.png" alt="" />
@@ -73,13 +75,6 @@
                 </div>
             </div>
         </van-overlay>
-        <!-- <van-overlay :show = "showTime" @click="showTime = false">
-            <div class="screen_down" @click.stop>
-                <ul>
-                    <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(index)">{{item}}</li>
-                </ul>
-            </div>
-        </van-overlay> -->
     </div>
 </template>
 <script>
@@ -89,13 +84,16 @@ import { fmoney,formatTime } from "@/utils/tool";
 import PrevNext from "@/components/PrevNext";
 import { getbillrecordlist } from '@/api/task';
 export default {
-    components: { PageHeader,PrevNext },
+    components: { PageHeader },
     data() {
         return {
             currentPage:1,
             total_point:0,
             stateValue:null,
             timeValue:"",
+            loading:false,
+            page_total:0,
+            finished :false,
             showState:false,
             showTime:false,
             datetime: "",
@@ -104,7 +102,7 @@ export default {
             eTime:"",
             currentDate: "", //初始化当前时间
             page: 1,
-            limit: 20,
+            limit: 100,
             total: 0,
             state:0,
             list: []
@@ -149,25 +147,19 @@ export default {
                 type: this.stateValue||-1
             }).then(res => {
                 isLoading.clear();
-                this.total = res.total;
+                this.loading = false;
+                this.page_total = Math.ceil(res.total / this.limit);
                 this.list = res.list || [];
                 this.total_point = res.total_point;
-                // for(let i = 0;i<this.list.length;i++){
-                //     if(String(this.list[i].amount).indexOf("-") == -1){
-                //         this.list[i].amount = "+"+(this.list[i].amount/100)    
-                //     }else{
-                //        this.list[i].amount = this.list[i].amount/100
-                //     }
-                // }
             });
         },
-        onPrev() {
-            this.page--;
-            this.billDetail();
-        },
-        onNext() {
-            this.page++;
-            this.billDetail();
+        onLoad(){
+            if(this.page >= this.page_total){
+                this.finished = true;
+            }else{
+                this.page++;
+                this.billDetail()
+            }
         },
         pulldownState(){
             this.showTime = false;
@@ -267,33 +259,33 @@ export default {
     position: relative;
     background-color: #f2f2f2;
     -webkit-overflow-scrolling: touch;
-    .dropdown_warp{
-        position: relative;
-    }
     .custom_head{
         width:100%;
         float: left;
         z-index: 2;
         position: relative;
-    }
-}
-.promote_header {
-    width: 100%;
-    height: 88px;
-    font-size: 28px;
-    padding: 0 26px;
-    box-sizing: border-box;
-    background-color: #fff;
-    .fiter_icon{
-        img{
-            height: 12px;
-            margin: 6px 0 0 5px;
-        }
-    }
-    .change_value{
-        color: $color-theme;
-        span:nth-child(2){
-            margin-left: 20px;
+        .dropdown_warp{
+            position: relative;
+            .promote_header {
+                width: 100%;
+                height: 88px;
+                font-size: 28px;
+                padding: 0 26px;
+                box-sizing: border-box;
+                background-color: #fff;
+                .fiter_icon{
+                    img{
+                        height: 12px;
+                        margin: 6px 0 0 5px;
+                    }
+                }
+                .change_value{
+                    color: $color-theme;
+                    span:nth-child(2){
+                        margin-left: 20px;
+                    }
+                }
+            }
         }
     }
 }

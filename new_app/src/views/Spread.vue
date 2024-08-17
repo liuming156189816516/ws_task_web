@@ -5,14 +5,12 @@
             <p class="flex-item flex-center">Profit from sharing</p>
             <p class="flex-item flex-center">Earn continuously by inviting</p>
         </div>
-        <div class="notice_warp w_f">
-            <div class="notice_mian w_f">
+        <div class="notice_warp">
+            <div class="notice_mian">
                 <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
                 <van-notice-bar :scrollable="false">
                     <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
-                        <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
-                        <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
-                        <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
+                        <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
                     </van-swipe>
                 </van-notice-bar>
             </div>
@@ -131,6 +129,9 @@ export default {
         ...mapState({
             userInfo: state => state.User,
         }),
+        winNotis(){
+            return this.$Helper.randomStrings(100)
+        },
         stepOptopn(){
             return [
                 {
@@ -166,7 +167,7 @@ export default {
             getbillrecordlist({page:this.page,limit:this.limit,task_type:3}).then(res => {
                 this.loading = false;
                 this.page_total = Math.ceil(res.total / this.limit);
-                this.millionList = res.list || [];
+                this.millionList = [...this.millionList,...res.list];
             })
         },
         onLoad(){
@@ -274,11 +275,20 @@ export default {
         .notice_warp {
             position: relative;
             padding: 0 70px;
-            // margin-top: 24px;
             box-sizing: border-box;
+            .left_icon{
+                position: absolute;
+                height: 58px;
+                top: 50%;
+                left: 95px;
+                z-index: 1;
+                transform: translateY(-50%);
+            }
             .notice_mian{
+                max-width: 540px;
                 overflow: hidden;
                 border-radius: 60px;
+                margin: 0 auto;
                 .van-notice-bar{
                     height: 26px;
                     padding: 0 4px 0 20px;
@@ -290,14 +300,15 @@ export default {
                     line-height: 26px;
                     text-align: center;
                 }
-            }
-            .left_icon{
-                position: absolute;
-                height: 58px;
-                top: 50%;
-                left: 50px;
-                z-index: 1;
-                transform: translateY(-50%);
+                .van-swipe-item{
+                    height: 26px;
+                    line-height: 26px;
+                    margin-left: 2px;
+                    color: $color-theme;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
             }
         }
         .share_main, .share_continer{

@@ -2,14 +2,12 @@
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
             <page-header :title="$t('home_044')" :show-icon="true" :bgcolor="false" />
-            <div class="notice_warp w_f">
-                <div class="notice_mian w_f">
-                    <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
+            <div class="notice_warp">
+                <div class="notice_mian">
+                    <img class="left_icon" src="@/assets/images/home/news_icon.png">
                     <van-notice-bar :scrollable="false">
-                        <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
-                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
-                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
-                            <van-swipe-item>Alexander Complet tasks to earn ₦999.00</van-swipe-item>
+                        <van-swipe vertical style="height: 24px;" :autoplay="3000" :show-indicators="false"  >
+                            <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
                         </van-swipe>
                     </van-notice-bar>
                 </div>
@@ -156,6 +154,9 @@ export default {
         },
         statusOption(){
             return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
+        },
+        winNotis(){
+            return this.$Helper.randomStrings(100)
         }
 	},
     created(){
@@ -305,32 +306,36 @@ export default {
             background: url('../../assets/images/home/task_001.png') no-repeat;
             background-size: 100% 100%;
             .notice_warp {
-                position: relative;
                 padding: 0 70px;
                 margin-top: 50px;
+                position: relative;
                 box-sizing: border-box;
-                .notice_mian{
-                    overflow: hidden;
-                    border-radius: 60px;
-                    .van-notice-bar{
-                        height: 26px;
-                        padding: 0 4px 0 20px;
-                        color: $color-theme;
-                        background-color: $font-color-white;
-                    }
-                    ::v-deep .van-swipe__track{
-                        height: 26px !important;
-                        line-height: 26px;
-                        text-align: center;
-                    }
-                }
                 .left_icon{
                     position: absolute;
                     height: 58px;
                     top: 50%;
-                    left: 50px;
+                    left: 100px;
                     z-index: 1;
                     transform: translateY(-50%);
+                }
+                .notice_mian{
+                    max-width: 524px;
+                    height: 50px;
+                    overflow: hidden;
+                    border-radius: 60px;
+                    margin: 0 auto;
+                    justify-content: center;
+                    .van-notice-bar{
+                        height: 26px;
+                        padding: 0;
+                        background-color: $font-color-white ;
+                    }
+                    .van-swipe-item{
+                        height: 26px;
+                        line-height: 26px;
+                        margin-left: 24px;
+                        color: $color-theme;
+                    }
                 }
             }
             .share_bonus{

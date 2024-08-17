@@ -1,40 +1,22 @@
 <template>
     <div class="earn">
-        <page-header :title="$t('mine_011')" :show-icon="true" :bgColor="true"></page-header>
-        <div class="dropdown_warp">
-            <div class="promote_header flex-item flex-align flex-between">
-                <div class="fiter_icon flex-item flex-align" @click="pulldownState">
-                    <span class="font_28" style="font-weight: 700;">Filter</span>
-                    <img src="@/assets/images/mine/down_icon.png">
-                </div>
-                <div class="change_value flex-item">
-                    <span class="flex-item"> {{ timeText }}</span>
-                    <span class="flex-item">{{ dateState }}</span>
+        <div class="custom_head">
+            <page-header :title="$t('mine_010')" :show-icon="true" :bgColor="true"></page-header>
+            <div class="dropdown_warp">
+                <div class="promote_header flex-item flex-align flex-between">
+                    <div class="fiter_icon flex-item flex-align" @click="pulldownState">
+                        <span class="font_28" style="font-weight: 700;">Filter</span>
+                        <img src="@/assets/images/mine/down_icon.png">
+                    </div>
+                    <div class="change_value flex-item">
+                        <span class="flex-item"> {{ timeText }}</span>
+                        <span class="flex-item">{{ dateState }}</span>
+                    </div>
                 </div>
             </div>
-            <van-overlay :show = "showState" @click="showState = false">
-                <div class="screen_down" @click.stop>
-                    <div class="w_f flex-item flex-dir-c">
-                        <p class="font_24">Date</p>
-                        <ul>
-                            <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
-                        </ul>
-                        <p class="font_24">Types of</p>
-                        <ul>
-                            <li v-for="item in profitType" :key="item.value" :class="stateValue===item.value?'checkActive':''" @click="changeType(item)">
-                                {{item.lable}}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer_btn w_f flex-item flex-between">
-                        <van-button type="primary" :loading="isLoading" @click="submitFun(1)">{{ $t('other_053') }}</van-button>
-                        <van-button type="primary" :loading="isLoading" @click="submitFun(2)">{{ $t('home_038') }}</van-button>
-                    </div>
-                </div>
-            </van-overlay>
         </div>
-        <div class="service-body" v-if="list&&list.length>0">
-            <div class="record_list w_f flex-item flex-dir-c">
+        <div class="record_list w_f" v-if="list&&list.length>0">
+            <van-list v-model="loading" :finished="finished" loading-text="loading..." finished-text="No more" offset="60" @load="onLoad">
                 <div class="record_item flex-item flex-align" v-for="(item,index) in list" :key="index">
                     <img class="l_icon" src="@/assets/images/mine/order_icon.png" alt="">
                     <div class="w_f flex-item flex-align flex-dir-c">
@@ -55,13 +37,33 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </van-list>
         </div>
         <div v-else class="empty_tips w_f flex-item flex-align flex-center flex-dir-c">
             <img src="../../assets/images/empty_icon.png" alt="" />
             <p>ops，still no records</p>
         </div>
-        <PrevNext v-if="list&&list.length>0" :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext" />
+        <van-overlay :show = "showState" @click="showState = false">
+            <div class="screen_down" @click.stop>
+                <div class="w_f flex-item flex-dir-c">
+                    <p class="font_24">Date</p>
+                    <ul>
+                        <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
+                    </ul>
+                    <p class="font_24">Types of</p>
+                    <ul>
+                        <li v-for="item in profitType" :key="item.value" :class="stateValue===item.value?'checkActive':''" @click="changeType(item)">
+                            {{item.lable}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer_btn w_f flex-item flex-between">
+                    <van-button type="primary" :loading="isLoading" @click="submitFun(1)">{{ $t('other_053') }}</van-button>
+                    <van-button type="primary" :loading="isLoading" @click="submitFun(2)">{{ $t('home_038') }}</van-button>
+                </div>
+            </div>
+        </van-overlay>
+        <!-- <PrevNext v-if="list&&list.length>0" :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext" /> -->
         <popDialog ref="isDialog" :title="$t('tail_012')" :titleContent = "dialogContent" :isCancel = false :isConfirm = true @confirm_btn = "confirm_btn"></popDialog>
     </div>
 </template>
@@ -75,13 +77,16 @@ import popDialog from "@/components/popDialog";
 import { getwithdrawapprovallist } from "@/api/pay";
 
 export default {
-    components: { PageHeader, PrevNext,popDialog },
+    components: { PageHeader,popDialog },
     data() {
         return {
             dialogContent:"",
             stateValue:-1,
             timeValue:3,
             timeText:"",
+            loading:false,
+            finished :false,
+            page_total:0,
             showState:false,
             showTime:false,
             currentDate: "",
@@ -91,7 +96,7 @@ export default {
             eTime:"",
             list: [],
             page: 1,
-            limit: 20,
+            limit: 100,
             ptype: -1,
             total: 0
         };
@@ -128,17 +133,18 @@ export default {
             let isLoading = Toast.loading({message:this.$t('other_029'),forbidClick: true})
             getwithdrawapprovallist(params).then(res => {
                 isLoading.clear();
-                this.list = res.list || [];
-                this.total = res.total;
+                this.loading = false;
+                this.page_total = Math.ceil(res.total / this.limit);
+                this.list = [...this.list,...res.list];
             })
         },
-        onPrev() {
-            this.page--;
-            this.getPointflow();
-        },
-        onNext() {
-            this.page++;
-            this.getPointflow();
+        onLoad(){
+            if(this.page >= this.page_total){
+                this.finished = true;
+            }else{
+                this.page++;
+                this.getIncomeList()
+            }
         },
         getTime(times) {
             return moment(times * 1000).format("YYYY-MM-DD HH:mm:ss");
@@ -255,12 +261,16 @@ export default {
 .earn {
     width: 100%;
     height: 100vh;
-    overflow-x: hidden;
-    float: left;
-    overflow-y: scroll;
+    overflow: hidden;
+    position: relative;
     background-color: #f2f2f2;
+    -webkit-overflow-scrolling: touch;
+    .custom_head{
+        width:100%;
+        float: left;
+        z-index: 2;
+        position: relative;
         .dropdown_warp{
-            // margin-top: 10px;
             position: relative;
             .promote_header {
                 width: 100%;
@@ -283,24 +293,18 @@ export default {
                 }
             }
         }
-        .custom_head{
-            width:100%;
-            float: left;
-            z-index: 2;
-            position: relative;
-        }
+    }
 }
 
 .van-overlay{
-  height: calc(100vh - 66px);
-  position: absolute;
-  top: 44px;
-//   background: transparent;
+    height: calc(100vh - 66px);
+    position: absolute;
+    top: 88px;
 }
 .screen_down{
     width: 100%;
     float: left;
-    padding: 0 45px 40px 45px;
+    padding: 40px 45px;
     background-color: #fff;
     p{
         margin-bottom: 32px;
@@ -326,102 +330,96 @@ export default {
         }
     }
 }
-.service-body{
+.record_list{
+    gap: 20px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px 26px;
+    padding-bottom: 160px;
+    box-sizing: border-box;
+    .record_item{
+        margin-bottom: 20px;
+        padding: 10px 10px;
+        border-radius: 20px;
+        box-sizing: border-box;
+        background: $font-color-white;
+        .l_icon{
+            height: 52px;
+            margin-right: 14px;
+        }
+        .task_bonus{
+            font-weight: bold;
+            color: $home-title-12;
+        }
+        .task_type{
+            color: $home-title-06;
+        }
+        .task_money{
+            font-weight: bold;
+            color: $home-title-12;
+        }
+        .order_time{
+            margin-top: 14px;
+            color: $home-title-06;
+        }
+    }
+}
+.record_warp{
+    padding: 10px 0;
+    background-color: #e9e9e9;
+}
+.record_warp, .record_content{
     width: 100%;
     float: left;
-    // background-color: #fff;
-    font-size: 28px;
+    text-align: center;
+    span{
+        float: left;
+        height: 60px;
+        line-height: 62px;
+    }
+    span:nth-child(1) {
+        width: 46%;
+    }
+    span:nth-child(2){
+        width: 30%;
+    }
+    span:nth-child(3){
+        width: 24%;
+    }
+}
+.record_content{
+    width: 100%;
+    overflow-y: auto;
+    font-size: 0.28rem;
     box-sizing: border-box;
-    .record_list{
-        gap: 20px;
-        padding: 20px 26px;
-        box-sizing: border-box;
-        .record_item{
-            padding: 10px 10px;
-            border-radius: 20px;
-            box-sizing: border-box;
-            background: $font-color-white;
-            .l_icon{
-                height: 52px;
-                margin-right: 14px;
-            }
-            .task_bonus{
-                font-weight: bold;
-                color: $home-title-12;
-            }
-            .task_type{
-                color: $home-title-06;
-            }
-            .task_money{
-                color: $home-title-06;
-                p:nth-child(1){
-                    color: $home-title-12;
-                    font-weight: bold;
-                }
-            }
-            .order_time{
-                margin-top: 14px;
-                color: $home-title-06;
-            }
-        }
-    }
-    .record_warp{
-        padding: 10px 0;
-        background-color: #e9e9e9;
-    }
-    .record_warp, .record_content{
+    position: relative;
+    height: calc(100vh - 430px);
+    .buy-number{
         width: 100%;
         float: left;
-        text-align: center;
-        span{
-            float: left;
-            height: 60px;
-            line-height: 62px;
-        }
-        span:nth-child(1) {
-            width: 46%;
-        }
-        span:nth-child(2){
-            width: 30%;
-        }
-        span:nth-child(3){
-            width: 24%;
-        }
+        padding: 10px 0;
+        background-color: #fff;
+        border-bottom: 1px solid  #e9e9e9;
     }
-    .record_content{
-        width: 100%;
-        overflow-y: auto;
+    .record_cash{
+        float: right;
+        font-weight: 550;
+        color: #fe003c;
         font-size: 0.28rem;
-        box-sizing: border-box;
-        position: relative;
-        height: calc(100vh - 430px);
-        .buy-number{
-            width: 100%;
-            float: left;
-            padding: 10px 0;
-            background-color: #fff;
-            border-bottom: 1px solid  #e9e9e9;
-        }
-        .record_cash{
-            float: right;
-            font-weight: 550;
-            color: #fe003c;
-            font-size: 0.28rem;
-        }
     }
-    .buy-title {
-        flex-shrink: 0;
-        background-color: rgb(233, 233, 233);
-        font-size: 28px !important;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        overflow: hidden;
-        border-bottom: none !important;
-    }
-    .reject_tips{
-        img{
-            width: 21px;
-        }
+}
+.buy-title {
+    flex-shrink: 0;
+    background-color: rgb(233, 233, 233);
+    font-size: 28px !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+    border-bottom: none !important;
+}
+.reject_tips{
+    img{
+        width: 21px;
     }
 }
 

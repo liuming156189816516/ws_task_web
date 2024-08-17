@@ -116,7 +116,7 @@ export default {
 				}else{
 					this.$router.push('/home');
 				}
-				this.isLoading= false
+				this.isLoading= false;
 			}).catch(error => {
 				this.isLoading= false
 				if (window.location.host == 'fcwk.dpqcblzs.com' || window.location.host == 'fcwk.hnjsjzdl.com' || window.location.host == 'www.mifengxj.com') {

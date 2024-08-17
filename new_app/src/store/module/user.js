@@ -68,7 +68,6 @@ export default {
 			state.inviteCode = invite_code;
 			window.localStorage.setItem('uid',uid);
 			window.localStorage.setItem('token',token);
-			window.localStorage.setItem('is_play',true)
 			window.localStorage.setItem('account',account);
 			window.localStorage.setItem('inviteCode',invite_code);
 			// this.dispatch('User/plantCarousel');
@@ -119,7 +118,6 @@ export default {
 			state.token = null;
 			localStorage.removeItem('uid');
 			localStorage.removeItem('token');
-			localStorage.removeItem('is_play')
 			localStorage.removeItem('account');
 			localStorage.removeItem('inviteCode');
 		}

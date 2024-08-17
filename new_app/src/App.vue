@@ -82,10 +82,11 @@ export default {
 				this.isLoading=false;
 				var storage = window.localStorage;
 				storage["isstorename"] =  "no";
+				storage["is_play"] = false;
 				this.$store.dispatch('Global/isCloseTips',false);
 				this.$store.dispatch('User/logoutClear');
 				sessionStorage.clear();
-				state.userInfo = {};
+				localStorage.setItem('is_play',true);
 				this.$router.replace('/home');
 			}).catch(err => {
 				this.$router.replace('/home');

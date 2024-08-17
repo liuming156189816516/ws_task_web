@@ -126,28 +126,32 @@ export default {
         })
     },
     activated() {
-        let isTips = JSON.parse(localStorage.getItem('is_play'));
-        if (!isTips) {
-            setTimeout(() => {
-                this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
-                // this.$popDialog({ content: this.help_url, title: this.$t("serv_004"), type: 1 })
-            },500)
-        }
         if(getToken()){
            this.initHandle();
         }else{
+            this.initRuleTips();
             this.taskOption= this.$Helper.defaultOption();
         }
     },
     methods: {
         initHandle(){
             this.syncInitApi();
-            // let isTips = JSON.parse(localStorage.getItem('is_play'));
-            // if (!isTips) {
-            //     setTimeout(() => {
+            this.initRuleTips();
+        },
+        initRuleTips(){
+            // console.log("8888");
+            // this.$nextTick(() => {
+            //     const isTips = JSON.parse(localStorage.getItem('is_play'));
+            //     if (!isTips) {
             //         this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
-            //     },500)
-            // }
+            //     }
+            // },600)
+            setTimeout(() => {
+                const isTips = JSON.parse(localStorage.getItem('is_play'));
+                if (!isTips) {
+                    this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
+                }
+            }, 600);
         },
         syncInitApi() {
             let fun1 = new Promise((resolve, reject) => {

@@ -1,7 +1,7 @@
 <template>
     <div class="earn">
         <div class="custom_head">
-            <page-header :title="$t('mine_010')" :show-icon="true" :bgColor="true"></page-header>
+            <page-header :title="$t('mine_011')" :show-icon="true" :bgColor="true"></page-header>
             <div class="dropdown_warp">
                 <div class="promote_header flex-item flex-align flex-between">
                     <div class="fiter_icon flex-item flex-align" @click="pulldownState">
@@ -130,6 +130,7 @@ export default {
                 start_time: !this.sTime ? -1: dateStamp(this.sTime),
                 end_time: !this.eTime ? -1: dateStamp(this.eTime),
             }
+            this.list = [];
             let isLoading = Toast.loading({message:this.$t('other_029'),forbidClick: true})
             getwithdrawapprovallist(params).then(res => {
                 isLoading.clear();

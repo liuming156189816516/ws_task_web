@@ -40,7 +40,7 @@
                     <div class="ws_head w_f flex-item flex-dir-c">
                         <div class="task_award w_f">
                             <div class="task_book flex-item flex-align font_34" @click="initWechatList(1)">
-                                <span @click="showDelBtn({status:1})">Account List </span>
+                                <span>Account List </span>
                                 <img src="@/assets/images/home/refsh_icon.png" alt="" srcset="">
                             </div>
                         </div>

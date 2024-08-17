@@ -139,7 +139,7 @@ export default {
             target_url:'',
             chrome_url:'',
             isLoading:false,
-            taskTime: 30 * 60 * 60 * 1000,
+            taskTime: null,
             taskList:[],
             pullGroupList:[]
 		}

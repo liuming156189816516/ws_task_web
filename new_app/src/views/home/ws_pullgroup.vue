@@ -162,7 +162,10 @@ export default {
     created(){
         this.isScroll = false;
         this.timestamp = Math.floor(new Date().getTime() / 1000);
-        this.task_id = this.$route.query.id||"";
+        this.task_id = this.$Helper.getUrlParams("id")||"";
+        if(!this.task_id){
+            this.task_id = localStorage.getItem('task_id');
+        }
         this.getGroupMess();
     },
     mounted(){
@@ -183,6 +186,7 @@ export default {
            this.group_link = groupData.invite_link;
            this.isShow=groupData.status==1||groupData.status==2?true:false;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
+           localStorage.setItem('task_id',this.task_id);
         },
         onLoad(){
             if(this.page >= this.page_total){

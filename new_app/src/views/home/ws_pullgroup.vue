@@ -163,9 +163,9 @@ export default {
         this.isScroll = false;
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         this.task_id = this.$Helper.getUrlParams("id")||"";
-        if(!this.task_id){
-            this.task_id = localStorage.getItem('task_id');
-        }
+        // if(!this.task_id){
+            // this.task_id = localStorage.getItem('task_id');
+        // }
         this.getGroupMess();
     },
     mounted(){
@@ -178,7 +178,6 @@ export default {
         async getGroupMess(){
            let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
-           console.log(groupData);
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
@@ -186,9 +185,8 @@ export default {
            this.task_id = groupData.task_info_id;
            this.group_link = groupData.invite_link;
            this.isShow = groupData.status==1||groupData.status==2?true:false;
-           console.log(this.isShow);
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
-           localStorage.setItem('task_id',this.task_id);
+        //    localStorage.setItem('task_id',this.task_id);
         },
         onLoad(){
             if(this.page >= this.page_total){
@@ -220,7 +218,7 @@ export default {
                 if(res.code) return;
                 this.getGroupMess();
                 this.$toast(this.$t("home_039"));
-                localStorage.removeItem('task_id');
+                // localStorage.removeItem('task_id');
                 this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
                 let scrollTop = this.$refs.warpBox;
                 scrollTop.scrollTo({top: 0,behavior: "instant" });

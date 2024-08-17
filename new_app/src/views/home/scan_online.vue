@@ -232,14 +232,17 @@ export default {
         //     this.refreQrBtn();
         // },
         changeTabs(idx){
-            if (this.countTime != 60) return;
+            // if (this.countTime != 60) return;
+            // this.isRqLoding = true;
             this.tabsIdx = idx;
+            this.errState=false;
             this.refreQrBtn();
         },
         //刷新二维码
         refreQrBtn(){
             clearInterval(this.timer);
             this.countTime = 60;
+            this.$refs.qrcodeImg.textContent="";
             this.initQrcode();
         },
         initQrcode(row,tips){

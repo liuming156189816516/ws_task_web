@@ -109,6 +109,7 @@ export default {
 				setTimeout(()=>{this.isLoading= false},2000)
 				if(!res.token) return;
 				this.checkChange();
+				localStorage.setItem('is_play',false);
 				this.$store.dispatch('Global/isShowLogin',false);
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())

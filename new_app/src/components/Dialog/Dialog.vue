@@ -149,7 +149,7 @@ export default {
     methods: {
         closeBtn(){
             document.getElementById("app").removeChild(this.$el);
-            window.localStorage.setItem('is_play',false)
+            window.localStorage.setItem('is_play',true)
             this.visible=false;
         },
         palySource(){

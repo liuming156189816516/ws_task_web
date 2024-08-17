@@ -218,6 +218,7 @@ export default {
                 if(res.code) return;
                 this.getGroupMess();
                 this.$toast(this.$t("home_039"));
+                localStorage.removeItem('task_id');
                 this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
                 let scrollTop = this.$refs.warpBox;
                 scrollTop.scrollTo({top: 0,behavior: "instant" });

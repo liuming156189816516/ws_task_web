@@ -165,6 +165,7 @@ export default {
 				// if(process.env.NODE_ENV == 'production'){
 				// 	fbq('track', 'CompleteRegistration');
 				// }
+				localStorage.setItem('is_play',false);
 				this.moveNews.$emit('login-env',"hello");
 				this.$store.dispatch('Global/isShowLogin',false);
 				if(window.location.href.includes("?")){

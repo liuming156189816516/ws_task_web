@@ -122,11 +122,17 @@ export default {
             this.initHandle();
         })
         this.moveNews.$on("login-cover",res=>{
-            // this.$store.dispatch('Global/isShowType',2);
             this.$store.dispatch('Global/isShowLogin',{type:2,isShow:true})
         })
     },
     activated() {
+        let isTips = JSON.parse(localStorage.getItem('is_play'));
+        if (!isTips) {
+            setTimeout(() => {
+                this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
+                // this.$popDialog({ content: this.help_url, title: this.$t("serv_004"), type: 1 })
+            },500)
+        }
         if(getToken()){
            this.initHandle();
         }else{
@@ -136,11 +142,12 @@ export default {
     methods: {
         initHandle(){
             this.syncInitApi();
-            if (JSON.parse(window.localStorage.getItem('is_play'))) {
-                setTimeout(() => {
-                    this.$popDialog({ content: this.help_url, title: this.$t("serv_004"), type: 1 })
-                },500)
-            }
+            // let isTips = JSON.parse(localStorage.getItem('is_play'));
+            // if (!isTips) {
+            //     setTimeout(() => {
+            //         this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
+            //     },500)
+            // }
         },
         syncInitApi() {
             let fun1 = new Promise((resolve, reject) => {

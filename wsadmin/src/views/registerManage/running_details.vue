@@ -31,6 +31,11 @@
                             {{formatType(scope.row.type)||"-" }}
                         </template>
                     </u-table-column>
+                    <u-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{tasksOption[scope.row.task_type]||"-" }}
+                        </template>
+                    </u-table-column>
                     <u-table-column prop="amount" :label="$t('sys_m076')" minWidth="130" />
                     <u-table-column prop="l_account" :label="$t('sys_m068')" minWidth="100" />
                     <u-table-column prop="f_account" :label="$t('sys_q134')" minWidth="100">
@@ -73,7 +78,11 @@ export default {
     },
     computed: {
         taskOption(){
-            return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
+            return [{lable:this.$t('other_052'),value:-1},{lable:"Task bonus",value:1 },{lable:"System adjustment",value:8 },{lable:"Withdraw",value:9 }];
+            // return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
+        },
+        tasksOption(){
+            return ["","Invite Friends Bonus","Millionaire","Invite Friends Bonus"];
         }
     },
     created() {

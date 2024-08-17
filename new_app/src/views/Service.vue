@@ -13,7 +13,10 @@
             <div class="sys_task w_f">
                 <div class="task_desc w_f">
                     <p class="font_32">Self-service video support</p>
-                    <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls="controls" style="width: 100%;height: 200px;" :src="help_url"></video>
+                    <div class="w_f flex-item flex-align flex-center">
+                        <img src="@/assets/images/serveic/play_icon.png" alt="" srcset="">
+                    </div>
+                    <!-- <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls="controls" style="width: 100%;height: 200px;" :src="help_url"></video> -->
                 </div>
             </div>
             <div class="sys_serve w_f">
@@ -101,6 +104,7 @@ export default {
             box-sizing: border-box;
             .task_desc{
                 width: 100%;
+                height: 300px;
                 background: $font-color-white;
                 border-radius: 24px;
                 margin-top: -58px;
@@ -108,6 +112,13 @@ export default {
                     font-weight: bold;
                     padding: 14px 14px;
                     box-sizing: border-box;
+                }
+                img{
+                  height: 60px;  
+                  margin-top: 60px;
+                //   display: flex;
+                //   align-items: center;
+                //   justify-content: center;
                 }
             }
         }

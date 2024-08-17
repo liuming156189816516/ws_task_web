@@ -28,7 +28,7 @@
                     <div class="task_name">{{taskNameOption[item.type].name}}</div>
                     <div class="task_award font_30">
                         <div v-html="$t(taskNameOption[item.type].award)"></div>
-                        <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />{{ item.invalid_time }}
+                        <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
                         <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
                         <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>

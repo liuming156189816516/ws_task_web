@@ -69,7 +69,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return ["",this.$t('sys_m069'),this.$t('sys_m070')]
+            return ["","Social media bonus","Invite friends bonus"]
         }
     },
     created() {

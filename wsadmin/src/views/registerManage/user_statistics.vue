@@ -43,10 +43,10 @@
                     <u-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
                     <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                     <u-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
-                    <u-table-column prop="bounty_amount" :label="$t('sys_m093')" minWidth="100" />
-                    <u-table-column prop="commission_amount" :label="$t('sys_m094')" minWidth="100" />
+                    <u-table-column prop="bounty_amount" :label="$t('sys_m102')" minWidth="100" />
+                    <u-table-column prop="commission_amount" :label="$t('sys_m103')" minWidth="100" />
                     <u-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
-                    <u-table-column prop="user_income_amount" :label="$t('sys_l108')" minWidth="100" />
+                    <!-- <u-table-column prop="user_income_amount" :label="$t('sys_l108')" minWidth="100" /> -->
                     <u-table-column prop="personal_amount" :label="$t('sys_m096')" minWidth="100" />
                     <u-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
@@ -119,7 +119,7 @@ export default {
                     t_c:"#b357ff"
                 },
                  {
-                    label:this.$t('sys_m093'),
+                    label:this.$t('sys_m102'),
                     num:0,
                     b_g:"#ffebeb",
                     t_c:"#ff0f0"
@@ -155,11 +155,11 @@ export default {
                     t_c:"#369aff"
                 },
                 {
-                    label:this.$t('sys_m094'),
+                    label:this.$t('sys_m103'),
                     num:0,
                     b_g:"#f9edff",
                     t_c:"#b357ff"
-                },
+                }
             ]
         }
     },

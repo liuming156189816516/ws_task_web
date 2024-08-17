@@ -149,7 +149,7 @@ export default {
                 isLoading.clear();
                 this.loading = false;
                 this.page_total = Math.ceil(res.total / this.limit);
-                this.list = res.list || [];
+                this.list = [...this.list,...res.list];
                 this.total_point = res.total_point;
             });
         },

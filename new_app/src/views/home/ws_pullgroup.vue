@@ -66,8 +66,8 @@
                             <!-- <div class="task_desc font_20">Click the Import button on the right to add the contact information provided by the system to the system’s address book!</div> -->
                         </div>
                         <div class="group_link w_f flex-item flex-between flex-align font_24">
-                            <input type="text" v-model="group_link" :disabled="!isShow" placeholder="Enter Group Link">
-                            <van-button :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||!isShow?'progress_award':'']">Submit</van-button>
+                            <input type="text" v-model="group_link" :disabled="isShow" placeholder="Enter Group Link">
+                            <van-button :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">Submit</van-button>
                         </div>
                     </div>
                 </div>
@@ -178,13 +178,14 @@ export default {
         async getGroupMess(){
            let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
+           console.log(groupData);
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
            this.chrome_url = groupData.chrome_url;
            this.task_id = groupData.task_info_id;
            this.group_link = groupData.invite_link;
-           this.isShow = groupData.status==1||groupData.status==2?true:false;
+           this.isShow = groupData.status==1||groupData.status==2?false:true;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         //    localStorage.setItem('task_id',this.task_id);
         },

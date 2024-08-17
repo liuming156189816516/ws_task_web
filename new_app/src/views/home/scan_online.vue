@@ -31,7 +31,7 @@
                         <div class="task_book font_34">Scan QR code</div>
                     </div>
                     <div class="w_f flex-item flex-between flex-align font_24">
-                        <span class="show_account" @click="viewTaskNum">Add your WhatsApp account</span>
+                        <span class="show_account">Add your WhatsApp account</span>
                         <van-button type="primary" @click="addQrcode">Add Now</van-button>
                     </div>
                 </div>
@@ -186,6 +186,7 @@ export default {
             wechaList:[],
             taskList:[],
             tipsText:"",
+            account:"",
             taskTime: 30 * 60 * 60 * 1000,
             wsTaskList:[],
             whatsOption:["","WhatsApp","WhatsApp Business"]
@@ -299,12 +300,13 @@ export default {
             this.isRqLoding = false;
         },
         showDelBtn(row){
+            this.account = row.account;
             this.del_model = true;
             this.tipsText = row.status==2?this.$t('home_040'):this.$t('home_041');
         },
         handle_confirm(){
             this.isLoading=true;
-            delaccount({account: row.account}).then(res => {
+            delaccount({account:this.account}).then(res => {
                 this.isLoading = false;
                 this.del_model = false;
                 Toast(this.$t('other_013'))

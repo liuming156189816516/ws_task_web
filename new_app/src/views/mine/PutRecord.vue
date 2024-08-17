@@ -295,7 +295,7 @@ export default {
   height: calc(100vh - 66px);
   position: absolute;
   top: 44px;
-  background: transparent;
+//   background: transparent;
 }
 .screen_down{
     width: 100%;

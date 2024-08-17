@@ -284,7 +284,15 @@ const Helper = {
 	defaultOption() {
 		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:1}];
 	},
-	globalContact(){
+	globalSupport(){
+		// if (this.checkBrowser()) {
+		// 	window.open(process.env.VUE_APP_SERVEIC, "_blank");
+		// } else {
+		// 	uniFun.postMessage({ data:process.env.VUE_APP_SERVEIC });
+		// }
+		window.likevm.$router.replace('/service');
+	},
+	globalService(){
 		if (this.checkBrowser()) {
 			window.open(process.env.VUE_APP_SERVEIC, "_blank");
 		} else {

@@ -59,8 +59,8 @@ export default {
 			state.updateTaskAddList=!state.updateTaskAddList;
 		},
 		STORE_LOGIN(state, value) {
-			state.isType = 1;
-			state.isLogin = value;
+			state.isType = value.type;
+			state.isLogin = value.isShow;
 		},
 		STORE_Type(state, value) {
 			state.isType = value;
@@ -70,8 +70,8 @@ export default {
 		}
 	},
 	actions:{
-		isShowLogin({ commit },login) {
-			commit('STORE_LOGIN', login);
+		isShowLogin({ commit },params) {
+			commit('STORE_LOGIN', params);
 		},
 		isShowType({ commit },type) {
 			commit('STORE_Type', type);

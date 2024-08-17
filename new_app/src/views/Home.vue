@@ -69,7 +69,7 @@
             </div>
         </div>
         <!-- <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
-            <div class="serve_icon" slot="icon" @click="$Helper.globalContact()">
+            <div class="serve_icon" slot="icon" @click="$Helper.globalSupport()">
                 <img src="../assets/images/ms_serve.png" alt="" />
             </div>
         </drag-icon> -->
@@ -123,7 +123,8 @@ export default {
             this.initHandle();
         })
         this.moveNews.$on("login-cover",res=>{
-            this.$store.dispatch('Global/isShowLogin',true)
+            // this.$store.dispatch('Global/isShowType',2);
+            this.$store.dispatch('Global/isShowLogin',{type:2,isShow:true})
         })
     },
     activated() {
@@ -183,7 +184,7 @@ export default {
             await this.$store.dispatch('User/plantCarousel');
         },
         handleTask(row) {
-            if (!getToken()) return this.$store.dispatch('Global/isShowLogin',true);
+            if (!getToken()) return this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true});
             const path = this.taskType[row.type];
             if (row.type == 2) {
                 this.$router.push(path);

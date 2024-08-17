@@ -67,7 +67,7 @@
             </div>
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">Records：</h3>
-                <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
+                <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalSupport()">online customer service</span></div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head top_title_1 w_f flex-item flex-align flex-between font_28">

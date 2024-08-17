@@ -78,7 +78,7 @@
         </div>
         <div class="record_legend w_f flex-item flex-dir-c">
             <h3 class="font_28">Records：</h3>
-            <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalContact()">online customer service</span></div>
+            <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalSupport()">online customer service</span></div>
         </div>
         <div class="record_list w_f flex-item flex-dir-c">
             <div class="title_top title_top_head w_f flex-item flex-align flex-between font_28">
@@ -791,18 +791,17 @@ export default {
                 position: relative;
                 box-sizing: border-box;
                 .van-button{
+                    height: max-content;
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    margin: 0;
-                    transform: translate(-50%,-50%);
-                    // width: auto;
-                    height: max-content;
                     padding: 0;
+                    z-index: 3;
                     outline: none;
                     border: none;
                     color: #ff976a; 
                     background: transparent;
+                    transform: translate(-50%,-50%);
                 }
                 .van-button::before{
                     background-color:transparent!important;
@@ -824,6 +823,7 @@ export default {
             box-sizing: border-box;
             .tabs_item{
                 position: relative;
+                z-index: 3;
                 // background-color: chartreuse;
                 .tabs_active{
                     width: 60%;

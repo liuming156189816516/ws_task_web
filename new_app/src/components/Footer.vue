@@ -67,7 +67,7 @@ export default {
         goToPage(path) {
 			if (this.$route.name === path)return;
 			if(path !== '/home'&&!this.userInfo.token){
-				this.$store.dispatch('Global/isShowLogin',true);
+				this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true})
 				// return this.$router.push("/login");
 			}else{
 				this.$router.push(`/${path}`);

@@ -25,7 +25,7 @@
                             <p class="font_24">24/7 service</p>
                         </div>
                     </div>
-                    <van-button class="font_28" type="primary" @click="$Helper.globalContact()">NOW</van-button>
+                    <van-button class="font_28" type="primary" @click="$Helper.globalService()">NOW</van-button>
                 </div>
             </div>
         </div>

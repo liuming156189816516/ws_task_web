@@ -194,7 +194,7 @@ export default {
 	height: 100%;
 	position: relative;
 	// overflow: hidden;
-	padding-bottom: 20px;
+	// padding-bottom: 20px;
 	overflow-y: auto;
 	background: url('../../assets/images/home/bg_img.png') no-repeat;
     background-size: cover;
@@ -369,6 +369,7 @@ export default {
 
 	.register_btn {
 		color: $home-title-03;
+		margin-bottom: 40px;
 		span{
 			color: $color-theme;
 		}

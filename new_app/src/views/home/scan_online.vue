@@ -226,6 +226,9 @@ export default {
             this.countTime = 60;
             this.initQrcode();
             this.visible = true;
+            this.$nextTick(() => {
+                this.$refs.qrcodeImg.textContent="";
+            })
         },
         // changeCard(){
         //     if (this.countTime != 60) return this.active = this.active;

@@ -29,10 +29,16 @@
                     <div class="task_award font_30">
                         <div v-html="$t(taskNameOption[item.type].award)"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
-                        <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
-                        <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>
-                    <div class="task_desc font_24">{{taskNameOption[item.type].desc}}</div>
+                    <div class="task_desc w_f flex-item flex-between flex-dir-r font_24">
+                        <div class="task_desc_item flex-item">
+                            {{taskNameOption[item.type].desc}}
+                        </div>
+                        <div class="task_btn flex-item">
+                            <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
+                            <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="record_warp w_f flex-item" v-if="userInfo.token">
@@ -105,9 +111,9 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_046'),type:3,status:null,task_info_id:null,award:this.$t('home_048',{value:888}),btn:this.$t('home_058'),desc:this.$t('home_051')},
-                {name:this.$t('home_045'),type:2,status:null,task_info_id:null,award:this.$t('home_047',{value:888}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_044'),type:1,status:null,task_info_id:null,award:this.$t('home_047',{value:999}),btn:this.$t('home_056'),desc:this.$t('home_049')}
+                {name:this.$t('home_046'),type:3,status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
+                {name:this.$t('home_045'),type:2,status:null,task_info_id:null,award:this.$t('home_088',{value:'10%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_044'),type:1,status:null,task_info_id:null,award:this.$t('home_047',{value:277777}),btn:this.$t('home_056'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {
@@ -331,14 +337,14 @@ export default {
             background-size: cover;
             background-position: 0 40px;
             .task_item{
-                height: 250.8px;
+                // height: 250.8px;
                 padding: 35px 0 0 20px;
                 background: url('../assets/images/home/task_icon.png') no-repeat;
                 background-size: 100% 100%;
                 .task_name{
                     color: $color-theme;
                     font-weight: 900;
-                    margin-bottom: 24px;
+                    margin-bottom: 6px;
                     text-shadow: 0px 3px 3px #005440;
                 }
                 .task_award{
@@ -351,40 +357,80 @@ export default {
                     }
                     .van-count-down{
                         position: absolute;
-                        top: -23px;
-                        right: 41px;
+                        top: 4px;
+                        right: 20px;
                         z-index: 9;
                         font-weight: 700;
                         font-size: 12px !important;
                         color: $home-title-02;
                     }
-                    .van-button{
-                        width: 114px;
-                        padding: 0;
-                        position: absolute;
-                        top: -4px;
-                        right: 10px;
-                        height: 30px;
-                        line-height: 30px;
-                        border-radius: 100px;
-                        color: $font-color-white;
-                        border-color: $color-theme;
-                        background-color: $color-theme;
-                    }
-                    .progress_award{
-                        border-color: $home-title-06;
-                        background-color: $home-title-06;
-                    }
                 }
                 .task_desc{
-                    margin-top: 6px;
-                    line-height: 32px;
+                    // height: 160px;
+                    // margin-top: 6px;
+                    // line-height: 32px;
+                    padding-right: 15px;
                     color: $home-title-03;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    box-sizing: border-box;
+                    .task_desc_item{
+                        // height: 140px;
+                        margin-right: -10px;
+                    }
+                    .task_btn{
+                        flex-grow: 2;
+                        flex-shrink: 0;
+                        align-items: center;
+                        .van-button{
+                            width: 114px;
+                            padding: 0;
+                            // position: absolute;
+                            // top: -4px;
+                            // right: 10px;
+                            height: 30px;
+                            line-height: 30px;
+                            border-radius: 100px;
+                            color: $font-color-white;
+                            border-color: $color-theme;
+                            background-color: $color-theme;
+                        }
+                        .progress_award{
+                            border-color: $home-title-06;
+                            background-color: $home-title-06;
+                        }
+                    }
+                    // display: -webkit-box;
+                    // -webkit-line-clamp: 2;
+                    // -webkit-box-orient: vertical;
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
+                    // .task_desc_item{
+                    //     flex-grow: 2;
+                    //     flex-shrink: 0;
+                    //     flex-wrap: wrap;
+                    // }
+                    // .task_btn{
+                    //     flex-wrap: 1;
+                    //     flex-shrink: 0;
+                    // }
+                }
+            }
+            .task_item:nth-child(1){
+                .task_desc{
+                    height: 130px;
+                    margin-bottom: 20px;
+                    // background: darkblue;
+                }
+                .task_btn{
+                    height: 130px;
+                }
+            }
+            .task_item:nth-child(2), .task_item:nth-child(3){
+                .task_desc{
+                    height: 100px;
+                    margin-bottom: 20px;
+                }
+                .task_btn{
+                    height: 100px;
                 }
             }
         }

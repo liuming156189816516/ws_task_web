@@ -79,8 +79,8 @@ export default {
     home_044:"Invite Friends Bonus",
     home_045:"Millionaire",
     home_046:"Social Media Bonus",
-    home_047:"Earn up to <span class='font_36' style='color:#FF4E28;font-weight: bold;'>{value}</span> per task",
-    home_048:"Earn up to <span class='font_36' style='color:#FF4E28;font-weight: bold;'>{value}</span> a day",
+    home_047:"Earn up to <span class='font_36' style='color:#FF4E28;font-weight: bold;'>{value}</span> coins per day",
+    home_048:"Earn up to <span class='font_36' style='color:#FF4E28;font-weight: bold;'>{value}</span> coins a day",
     home_049:"Share the joy and earn cash! Invite friends to join the group now and start a new era of making money together!",
     home_050:"Share your exclusive link, invite more people to sign up, and earn generous rewards together !",
     home_051:"Simply manage your social media accounts and receive generous cash rewards daily !",
@@ -120,6 +120,7 @@ export default {
     home_085:"2、After you enter the group link into the system and it has been reviewed by the platform, the task reward will be issued within 48 hours",
     home_086:"3、If the system determines that you have violated any rules, your account will be suspended",
     home_087:"4、To avoid any discrepancies in interpretation, CashCow reserves the right to the final explanation of this activity",
+    home_088:"Earn up to <span class='font_36' style='color:#FF4E28;font-weight: bold;'>{value}</span> of the downline agent's coins",
     
     spre_001:"Promotion",
     spre_002:"Accumulated Promo",

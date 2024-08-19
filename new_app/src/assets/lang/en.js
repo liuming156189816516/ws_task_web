@@ -89,7 +89,7 @@ export default {
     home_054:"Task Earnings",
     home_055:"Millionaire Earnings",
     home_056:"Invite Now",
-    home_057:"Share Now",
+    home_057:"Find Now",
     home_058:"Managing Now",
     home_059:"1、Before participating in any task, please log in to your account. If you don't have an account, you can <span style='color:#008751;font-weight: bold; text-decoration: underline;'>click here to sign up</span>",
     home_060:'2、When you intend to participate in a specific task, to improve the quality and efficiency of your task completion, please review the task process and rules by clicking the <"Rules">button on the task details page',

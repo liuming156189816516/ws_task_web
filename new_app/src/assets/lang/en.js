@@ -83,7 +83,7 @@ export default {
     home_048:"Earn up to<span class='font_32' style='color:#FF4E28;font-weight: bold;'>{value}</span>coins a day",
     home_049:"Complete a round of tasks every 10 minutes! Start a new era of quick earning!(Click shake now, details on task Tutorials & Rules available)",
     home_050:"Share your exclusive link to invite more people to join and earn coins. The more people you invite, the more you earn!",
-    home_051:"Simply manage your social media accounts and receive generous cash rewards daily !",
+    home_051:"Simply manage your social media accounts and receive generous cash rewards daily!",
     home_052:"Today's performance",
     home_053:"Your current invite code :",
     home_054:"Task Earnings",
@@ -120,7 +120,7 @@ export default {
     home_085:"2、After you enter the group link into the system and it has been reviewed by the platform, the task reward will be issued within 48 hours",
     home_086:"3、If the system determines that you have violated any rules, your account will be suspended",
     home_087:"4、To avoid any discrepancies in interpretation, CashCow reserves the right to the final explanation of this activity",
-    home_088:"Earn up to <span class='font_32' style='color:#FF4E28;font-weight: bold;height:16px;'>{value}</span> coins from subordinate teammates",
+    home_088:"Continuously earn<span class='font_32' style='color:#FF4E28;font-weight: bold;height:16px;'>{value}</span>coins from subordinate teammates",
     home_089:"Cash Bag",
     
     spre_001:"Promotion",

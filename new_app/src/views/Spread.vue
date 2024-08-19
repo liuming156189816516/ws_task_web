@@ -18,7 +18,7 @@
         <div class="share_main w_f">
             <div class="share_rule flex-item flex-center" @click="showRule">
                 <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                <span class="flex-item font_26">Rules</span>
+                <span class="flex-item font_26">Tutorials & Rules</span>
             </div>
             <div class="cover_img flex-item">
                 <img class="mask_img" src="@/assets/images/mill/bg_02.png" alt="" srcset="">
@@ -323,7 +323,7 @@ export default {
                 top: -10px;
                 right: 0;
                 z-index: 9;
-                padding: 8px 12px;
+                padding: 11px 14px;
                 border-top-left-radius: 200px;
                 border-bottom-left-radius: 200px;
                 background: rgba($color: #000000, $alpha: .5);

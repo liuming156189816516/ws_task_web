@@ -15,9 +15,9 @@
             <div class="share_bonus w_f flex-item flex-dir-c">
                 <p class="Win_l font_52 flex-item">Add Your Social Account</p>
                 <p class="Win_r font_64 flex-item">Win Extra Cash</p>
-                <div class="share_rule flex-item flex-center" @click="showRule">
+                <div class="share_rule flex-item flex-center font_38" @click="showRule">
                     <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                    <span class="flex-item font_26">Rules</span>
+                    <span class="flex-item font_26">Tutorials & Rules</span>
                 </div>
             </div>
             <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">
@@ -408,7 +408,7 @@ export default {
             opacity: 0;
         }
         .task_mian{
-            height: 1048px;
+            height: 990px;
             position: relative;
             background: url('../../assets/images/home/task_002.png') no-repeat;
             background-size: 100% 100%;
@@ -455,7 +455,7 @@ export default {
             .share_bonus{
                 font-weight: bold;
                 font-style: italic;
-                margin-top:105px;
+                margin-top:82px;
                 position: relative;
                 color: $font-color-white;
                 p{
@@ -472,10 +472,10 @@ export default {
                     color: $font-color-white;
                     position: absolute;
                     right: 0;
-                    bottom: -70px;
+                    bottom: -100px;
                     z-index: 9;
                     font-weight: initial;
-                    padding: 8px 12px;
+                    padding: 11px 14px;
                     border-top-left-radius: 200px; 
                     border-bottom-left-radius: 200px;
                     background: rgba($color: #000000, $alpha: .5);

@@ -17,7 +17,7 @@
                 <p class="Win_r font_72 flex-item">Win bonus</p>
                 <div class="share_rule flex-item flex-center" @click="showRule">
                     <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                    <span class="flex-item font_26">Rules</span>
+                    <span class="flex-item font_26">Tutorials & Rules</span>
                 </div>
             </div>
             <div class="task_box w_f flex-item">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">Complete task to win bonus</div>
+            <!-- <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">Complete task to win bonus</div> -->
         </div>
         <div class="task_box_main">
             <div class="task_warp w_f flex-item">
@@ -345,14 +345,14 @@ export default {
             .share_bonus{
                 font-weight: bold;
                 font-style: italic;
-                margin-top: 126px;
+                margin-top: 186px;
                 position: relative;
                 color: $font-color-white;
                 p{
                     text-shadow: 0 5px 3px #FF4F2B,0 -2px 0 #FF4F2B;
                 }
                 .Win_l{
-                  padding-left: 104px;
+                  padding-left: 88px;
                 }
                 .Win_r{
                     align-self: flex-end;
@@ -365,7 +365,7 @@ export default {
                     right: 0;
                     z-index: 9;
                     font-weight: initial;
-                    padding: 8px 12px;
+                    padding: 11px 14px;
                     border-top-left-radius: 200px;
                     border-bottom-left-radius: 200px;
                     background: rgba($color: #000000, $alpha: .5);
@@ -377,7 +377,7 @@ export default {
             }
             .task_box{
                 padding: 0 76px;
-                margin-top: 106px;
+                margin-top: 60px;
                 box-sizing: border-box;
                 .task_Progress{
                     border-radius: 24px;
@@ -415,6 +415,7 @@ export default {
             }
         }
         .task_box_main{
+            margin-top: -216px;
             background: #E6F2EF;
             // background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
         }

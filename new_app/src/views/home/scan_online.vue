@@ -1,7 +1,7 @@
 <template>
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
-            <page-header :title="$t('home_046')" :show-icon="true" :bgcolor="false" />
+            <page-header :title="$t('home_089')" :show-icon="true" :bgcolor="false" />
             <div class="notice_warp w_f">
                 <div class="notice_mian w_f">
                     <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">

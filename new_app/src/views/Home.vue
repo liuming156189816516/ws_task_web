@@ -24,20 +24,29 @@
                 </div>
             </div>
             <div class="task_main w_f flex-item flex-dir-c">
-                <div class="task_item w_f flex-item flex-dir-c font_34" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
-                    <div class="task_name">{{taskNameOption[item.type].name}}</div>
-                    <div class="task_award font_30">
-                        <div v-html="$t(taskNameOption[item.type].award)"></div>
+                <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
+                    <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
+                    <div class="task_live flex-item flex-align font_22">
+                        <div class="task_live_1 flex-item flex-align">
+                            <span class="flex-item">difficulty level</span>
+                            <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
+                        </div>
+                        <div class="task_live_2 flex-item flex-align">
+                            <span class="flex-item">earns level</span>
+                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
+                        </div>
+                    </div>
+                    <div class="task_award flex-item font_24">
+                        <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
+                        <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
+                        <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>
                     <div class="task_desc w_f flex-item flex-between flex-dir-r font_24">
-                        <div class="task_desc_item flex-item">
+                        <!-- <div class="task_desc_item flex-item"> -->
                             {{taskNameOption[item.type].desc}}
-                        </div>
-                        <div class="task_btn flex-item">
-                            <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
-                            <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
-                        </div>
+                        <!-- <div class="task_btn flex-item">
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -111,9 +120,9 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_046'),type:3,status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
-                {name:this.$t('home_045'),type:2,status:null,task_info_id:null,award:this.$t('home_088',{value:'10%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_044'),type:1,status:null,task_info_id:null,award:this.$t('home_047',{value:277777}),btn:this.$t('home_056'),desc:this.$t('home_049')}
+                {name:this.$t('home_089'),live1:1,live2:2,type:1,status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
+                {name:this.$t('home_045'),live1:2,live2:4,type:2,status:null,task_info_id:null,award:this.$t('home_088',{value:'10%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_044'),live1:3,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:277777}),btn:this.$t('home_056'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {
@@ -338,31 +347,65 @@ export default {
             background-position: 0 40px;
             .task_item{
                 // height: 250.8px;
-                padding: 35px 0 0 20px;
+                padding: 18px 0 11px 20px;
                 background: url('../assets/images/home/task_icon.png') no-repeat;
                 background-size: 100% 100%;
                 .task_name{
                     color: $color-theme;
                     font-weight: 900;
-                    margin-bottom: 6px;
-                    text-shadow: 0px 3px 3px #005440;
+                    margin-bottom: 18px;
+                    text-shadow: 0px 2px 3px #005440;
+                }
+                .task_live{
+                    margin-bottom: 14px;
+                    .task_live_1, .task_live_2{
+                        color: $home-title-21;
+                        width: 250px;
+                        span{
+                            margin-right: 14px;
+                        }
+                        img{
+                            height: 20px; 
+                        }
+                    }
                 }
                 .task_award{
                     position: relative;
                     color: $font-color-black;
                     margin-bottom: 10px;
+                    .task_small_title{
+                        width: 73%;
+                        flex-wrap: wrap;
+                    }
                     .award_money{
                         font-weight: bold;
                         color: $home-title-02;
                     }
                     .van-count-down{
                         position: absolute;
-                        top: 4px;
-                        right: 20px;
+                        top: -25px;
+                        right: 40px;
                         z-index: 9;
                         font-weight: 700;
                         font-size: 12px !important;
                         color: $home-title-02;
+                    }
+                    .van-button{
+                        width: 114px;
+                        padding: 0;
+                        position: absolute;
+                        top: -4px;
+                        right: 10px;
+                        height: 30px;
+                        line-height: 30px;
+                        border-radius: 100px;
+                        color: $font-color-white;
+                        border-color: $color-theme;
+                        background-color: $color-theme;
+                    }
+                    .progress_award{
+                        border-color: $home-title-06;
+                        background-color: $home-title-06;
                     }
                 }
                 .task_desc{
@@ -376,28 +419,11 @@ export default {
                         // height: 140px;
                         margin-right: -10px;
                     }
-                    .task_btn{
-                        flex-grow: 2;
-                        flex-shrink: 0;
-                        align-items: center;
-                        .van-button{
-                            width: 114px;
-                            padding: 0;
-                            // position: absolute;
-                            // top: -4px;
-                            // right: 10px;
-                            height: 30px;
-                            line-height: 30px;
-                            border-radius: 100px;
-                            color: $font-color-white;
-                            border-color: $color-theme;
-                            background-color: $color-theme;
-                        }
-                        .progress_award{
-                            border-color: $home-title-06;
-                            background-color: $home-title-06;
-                        }
-                    }
+                    // .task_btn{
+                    //     flex-grow: 2;
+                    //     flex-shrink: 0;
+                    //     align-items: center;
+                    // }
                     // display: -webkit-box;
                     // -webkit-line-clamp: 2;
                     // -webkit-box-orient: vertical;
@@ -414,25 +440,25 @@ export default {
                     // }
                 }
             }
-            .task_item:nth-child(1){
-                .task_desc{
-                    height: 130px;
-                    margin-bottom: 20px;
-                    // background: darkblue;
-                }
-                .task_btn{
-                    height: 130px;
-                }
-            }
-            .task_item:nth-child(2), .task_item:nth-child(3){
-                .task_desc{
-                    height: 100px;
-                    margin-bottom: 20px;
-                }
-                .task_btn{
-                    height: 100px;
-                }
-            }
+            // .task_item:nth-child(1){
+            //     .task_desc{
+            //         height: 130px;
+            //         margin-bottom: 20px;
+            //         // background: darkblue;
+            //     }
+            //     .task_btn{
+            //         height: 130px;
+            //     }
+            // }
+            // .task_item:nth-child(2), .task_item:nth-child(3){
+            //     .task_desc{
+            //         height: 100px;
+            //         margin-bottom: 20px;
+            //     }
+            //     .task_btn{
+            //         height: 100px;
+            //     }
+            // }
         }
         .record_warp{
             padding: 0 30px;

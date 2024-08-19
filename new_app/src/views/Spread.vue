@@ -1,6 +1,6 @@
 <template>
     <div class="spread_warp" ref="warpBox" @scroll="handleScrolStop">
-        <page-header :title="$t('table_002')" :noBg="false" :bgColor="false" :showBack="false" />
+        <page-header :title="$t('home_045')" :noBg="false" :bgColor="false" :showBack="false" />
         <div class="w_f spread_title flex-item font_50 flex-dir-c">
             <p class="flex-item flex-center">Profit from sharing</p>
             <p class="flex-item flex-center">Earn continuously by inviting</p>

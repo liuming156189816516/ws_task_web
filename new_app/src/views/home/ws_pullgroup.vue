@@ -14,7 +14,7 @@
             </div>
             <div class="share_bonus w_f flex-item flex-dir-c">
                 <p class="Win_l font_72 flex-item">Share the joy</p>
-                <p class="Win_r font_72 flex-item">Win bonus</p>
+                <p class="Win_r font_72 flex-item">Win cash </p>
                 <div class="share_rule flex-item flex-center" @click="showRule">
                     <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
                     <span class="flex-item font_26">Tutorials & Rules</span>
@@ -311,7 +311,7 @@ export default {
             background-size: 100% 100%;
             .notice_warp {
                 padding: 0 70px;
-                margin-top: 50px;
+                margin-top: 44px;
                 position: relative;
                 box-sizing: border-box;
                 .left_icon{
@@ -345,11 +345,11 @@ export default {
             .share_bonus{
                 font-weight: bold;
                 font-style: italic;
-                margin-top: 186px;
+                margin-top: 100px;
                 position: relative;
                 color: $font-color-white;
                 p{
-                    text-shadow: 0 5px 3px #FF4F2B,0 -2px 0 #FF4F2B;
+                    text-shadow: 0 5px 3px $color-theme,0 -2px 0 $color-theme;
                 }
                 .Win_l{
                   padding-left: 88px;
@@ -361,7 +361,7 @@ export default {
                 .share_rule{
                     color: $font-color-white;
                     position: absolute;
-                    top: -60px;
+                    top: -80px;
                     right: 0;
                     z-index: 9;
                     font-weight: initial;

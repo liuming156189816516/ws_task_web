@@ -76,13 +76,13 @@ export default {
     home_041:"Are you sure you want to delete this WhatsApp account?",
     home_042:"<span style='color:#ff013d;'>In order to successfully complete the task, it is recommended to use the Chrome browser</span>. ",
     home_043:"Download Chrome",
-    home_044:"Invite Friends Bonus",
-    home_045:"Millionaire",
+    home_044:"CashCow",
+    home_045:"Finding Teammates",
     home_046:"Social Media Bonus",
-    home_047:"Earn up to <span class='font_36' style='color:#FF4E28;font-weight: bold;'>{value}</span> coins per day",
-    home_048:"Earn up to <span class='font_36' style='color:#FF4E28;font-weight: bold;'>{value}</span> coins a day",
-    home_049:"Share the joy and earn cash! Invite friends to join the group now and start a new era of making money together!",
-    home_050:"Share your exclusive link, invite more people to sign up, and earn generous rewards together !",
+    home_047:"Earn up to<span class='font_32' style='color:#FF4E28;font-weight: bold;'>{value}</span>coins per day",
+    home_048:"Earn up to<span class='font_32' style='color:#FF4E28;font-weight: bold;'>{value}</span>coins a day",
+    home_049:"Complete a round of tasks every 10 minutes! Start a new era of quick earning!(Click shake now, details on task Tutorials & Rules available)",
+    home_050:"Share your exclusive link to invite more people to join and earn coins. The more people you invite, the more you earn!",
     home_051:"Simply manage your social media accounts and receive generous cash rewards daily !",
     home_052:"Today's performance",
     home_053:"Your current invite code :",
@@ -120,7 +120,8 @@ export default {
     home_085:"2、After you enter the group link into the system and it has been reviewed by the platform, the task reward will be issued within 48 hours",
     home_086:"3、If the system determines that you have violated any rules, your account will be suspended",
     home_087:"4、To avoid any discrepancies in interpretation, CashCow reserves the right to the final explanation of this activity",
-    home_088:"Earn up to <span class='font_36' style='color:#FF4E28;font-weight: bold;'>{value}</span> of the downline agent's coins",
+    home_088:"Earn up to <span class='font_32' style='color:#FF4E28;font-weight: bold;height:16px;'>{value}</span> coins from subordinate teammates",
+    home_089:"Cash Bag",
     
     spre_001:"Promotion",
     spre_002:"Accumulated Promo",
@@ -258,7 +259,7 @@ export default {
     other_061:"In Progress",
 
     table_001:"Home",
-    table_002:"Millionaire",
+    table_002:"Teammates",
     table_003:"Support",
     table_004:"Account"
 }

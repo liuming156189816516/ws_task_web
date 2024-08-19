@@ -37,7 +37,7 @@ export default {
     home_002:"Today's Task",
     home_003:"Today's Promo",
     home_004:"Please choose task type",
-    home_005:"Invite Now",
+    home_005:"Shake Now",
     home_006:"Processing",
     home_007:"Settling",
     home_008:"Completed",

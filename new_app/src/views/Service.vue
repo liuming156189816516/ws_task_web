@@ -10,15 +10,15 @@
                     <p class="font_28">How can I assist you</p>
                 </div>
             </div>
-            <div class="sys_task w_f">
+            <!-- <div class="sys_task w_f">
                 <div class="task_desc w_f">
                     <p class="font_32">Self-service video support</p>
                     <div class="w_f flex-item flex-align flex-center">
                         <img src="@/assets/images/serveic/play_icon.png" alt="" srcset="">
                     </div>
-                    <!-- <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls="controls" style="width: 100%;height: 200px;" :src="help_url"></video> -->
                 </div>
-            </div>
+            </div> -->
+             <!-- <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls="controls" style="width: 100%;height: 200px;" :src="help_url"></video> -->
             <div class="sys_serve w_f">
                 <div class="serve_box w_f flex-item flex-align flex-between">
                     <div class="w_f flex-item flex-align">

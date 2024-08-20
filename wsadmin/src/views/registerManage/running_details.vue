@@ -78,11 +78,11 @@ export default {
     },
     computed: {
         taskOption(){
-            return [{lable:this.$t('other_052'),value:-1},{lable:"Task bonus",value:1 },{lable:"",value:2 },{lable:"System adjustment",value:8 },{lable:"Withdraw",value:9 }];
+            return [{lable:this.$t('other_052'),value:-1},{lable:"任务赏金",value:1 },{lable:"",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }];
             // return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
         },
         tasksOption(){
-            return ["","Invite Friends Bonus","Millionaire","Invite Friends Bonus"];
+            return ["","挂机","拉群","分享链接"];
         }
     },
     created() {

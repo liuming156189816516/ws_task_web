@@ -4,7 +4,7 @@
       <div class="detail_card">
         <el-button v-if="isLoading" class="loading_icon" style="margin-top: 10px;" type="primary" :loading="true"></el-button>
         <template v-else>
-          <div class="card_item" v-for="(item,idx) in cardOption" :style="{background:`${item.b_g}`}" @click="getStatistics">
+          <div class="card_item" v-for="(item,idx) in cardOption" :key="idx" :style="{background:`${item.b_g}`}" @click="getStatistics">
             <span>{{ item.label }}</span>
             <span class="card_num" :style="{color:`${item.t_c}`}" v-text="idx==4||idx==5?(item.num*100).toFixed(2)+'%':item.num"></span>
           </div>

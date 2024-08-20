@@ -38,7 +38,9 @@
                     <u-table-column prop="account_num" :label="$t('sys_m087')" minWidth="100" />
                     <u-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
                     <u-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
-                    <u-table-column prop="today_active_account_num" :label="$t('sys_m089')" minWidth="120" />
+                    <u-table-column prop="submit_num" :label="$t('sys_m089')" minWidth="120" />
+                    <u-table-column prop="submit_user_num" :label="$t('sys_m104')" minWidth="180" />
+                    <u-table-column prop="today_active_account_num" :label="$t('sys_m105')" minWidth="120" />
                     <u-table-column prop="today_create_group_task_num" :label="$t('sys_rai122')" minWidth="100" />
                     <u-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
                     <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
@@ -124,6 +126,12 @@ export default {
                     b_g:"#ffebeb",
                     t_c:"#ff0f0"
                 },
+                 {
+                    label:this.$t('sys_m104'),
+                    num:0,
+                    b_g:"#fffee6",
+                    t_c:"#f2bb16"
+                },
                 {
                     label:this.$t('sys_rai122'),
                     num:0,
@@ -159,6 +167,12 @@ export default {
                     num:0,
                     b_g:"#f9edff",
                     t_c:"#b357ff"
+                },
+                {
+                    label:this.$t('sys_m105'),
+                    num:0,
+                    b_g:"#ffebeb",
+                    t_c:"#ff0f0"
                 }
             ]
         }
@@ -187,17 +201,21 @@ export default {
                     }else if(k == 5){
                        item.num = vita.bounty_amount||0;
                     }else if(k == 6){
-                        item.num = vita.today_create_group_task_num||0;
+                        item.num = vita.submit_num||0;
                     }else if(k == 7){
-                        item.num = vita.data_num||0;
+                        item.num = vita.today_create_group_task_num||0;
                     }else if(k == 8){
-                        item.num = vita.withdraw_user_num||0;
+                        item.num = vita.data_num||0;
                     }else if(k == 9){
-                        item.num = vita.withdraw_amount||0;
+                        item.num = vita.withdraw_user_num||0;
                     }else if(k == 10){
-                        item.num = vita.personal_amount||0;
+                        item.num = vita.withdraw_amount||0;
                     }else if(k == 11){
+                        item.num = vita.personal_amount||0;
+                    }else if(k == 12){
                         item.num = vita.commission_amount||0;
+                    }else if(k == 13){
+                        item.num = vita.submit_user_num||0;
                     }
                 }
                 this.isLoading=false;
@@ -290,7 +308,7 @@ export default {
 		justify-content: flex-start;
     .card_item{
       height: 60px;
-      width: calc((100% - (6 - 1) * 30px) / 6);
+      width: calc((100% - (7 - 1) * 30px) / 7);
       display: flex;
       font-size: 14px;
       cursor: pointer;
@@ -312,7 +330,7 @@ export default {
         }
       }
     }
-    .card_item:nth-of-type(6n + 1) {
+    .card_item:nth-of-type(7n + 1) {
         margin-left: 0;
     }
   }

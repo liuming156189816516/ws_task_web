@@ -69,7 +69,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return ["","Social media bonus","Invite friends bonus"]
+            return ["","挂机","拉群"]
         }
     },
     created() {

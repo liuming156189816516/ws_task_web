@@ -36,20 +36,20 @@
                     <u-table-column prop="statis_time_str" :label="$t('sys_c134')" width="180" />
                     <u-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
                     <u-table-column prop="account_num" :label="$t('sys_m087')" minWidth="100" />
+                    <u-table-column prop="submit_num" :label="$t('sys_m089')" minWidth="120" />
                     <u-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
                     <u-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
-                    <u-table-column prop="submit_num" :label="$t('sys_m089')" minWidth="120" />
                     <u-table-column prop="submit_user_num" :label="$t('sys_m104')" minWidth="180" />
                     <u-table-column prop="today_active_account_num" :label="$t('sys_m105')" minWidth="120" />
                     <u-table-column prop="today_create_group_task_num" :label="$t('sys_rai122')" minWidth="100" />
                     <u-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
-                    <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
-                    <u-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
                     <u-table-column prop="bounty_amount" :label="$t('sys_m102')" minWidth="100" />
                     <u-table-column prop="commission_amount" :label="$t('sys_m103')" minWidth="100" />
+                    <u-table-column prop="personal_amount" :label="$t('sys_m096')" minWidth="100" />
+                    <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
+                    <u-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
                     <u-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
                     <!-- <u-table-column prop="user_income_amount" :label="$t('sys_l108')" minWidth="100" /> -->
-                    <u-table-column prop="personal_amount" :label="$t('sys_m096')" minWidth="100" />
                     <u-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.statis_time > 0 ? $baseFun.resetTime(scope.row.statis_time * 1000) : "-" }}
@@ -103,6 +103,12 @@ export default {
                     t_c:"#369aff"
                 },
                 {
+                    label:this.$t('sys_m089'),
+                    num:0,
+                    b_g:"#f9edff",
+                    t_c:"#b357ff"
+                },
+                {
                     label:this.$t('sys_m101'),
                     num:0,
                     b_g:"#dbfeff",
@@ -114,23 +120,17 @@ export default {
                     b_g:"#dbfff1",
                     t_c:"#02c97a"
                 },
-                {
-                    label:this.$t('sys_m089'),
-                    num:0,
-                    b_g:"#f9edff",
-                    t_c:"#b357ff"
-                },
-                 {
-                    label:this.$t('sys_m102'),
-                    num:0,
-                    b_g:"#ffebeb",
-                    t_c:"#ff0f0"
-                },
                  {
                     label:this.$t('sys_m104'),
                     num:0,
                     b_g:"#fffee6",
                     t_c:"#f2bb16"
+                },
+                {
+                    label:this.$t('sys_m105'),
+                    num:0,
+                    b_g:"#ffebeb",
+                    t_c:"#ff0f0"
                 },
                 {
                     label:this.$t('sys_rai122'),
@@ -145,22 +145,10 @@ export default {
                     t_c:"#f2bb16"
                 },
                 {
-                    label:this.$t('sys_m091'),
+                    label:this.$t('sys_m102'),
                     num:0,
-                    b_g:"#fffee6",
-                    t_c:"#f2bb16"
-                },
-                {
-                    label: this.$t('sys_m092'),
-                    num:0,
-                    b_g:"#dbfeff",
-                    t_c:"#1dcfdb"
-                },
-                {
-                    label: this.$t('sys_m096'),
-                    num:0,
-                    b_g:"#eef6fe",
-                    t_c:"#369aff"
+                    b_g:"#ffebeb",
+                    t_c:"#ff0f0"
                 },
                 {
                     label:this.$t('sys_m103'),
@@ -169,11 +157,24 @@ export default {
                     t_c:"#b357ff"
                 },
                 {
-                    label:this.$t('sys_m105'),
+                    label: this.$t('sys_m096'),
                     num:0,
-                    b_g:"#ffebeb",
-                    t_c:"#ff0f0"
-                }
+                    b_g:"#eef6fe",
+                    t_c:"#369aff"
+                },
+                {
+                    label:this.$t('sys_m091'),
+                    num:0,
+                    b_g:"#fffee6",
+                    t_c:"#f2bb16"
+                },
+                 {
+                    label: this.$t('sys_m092'),
+                    num:0,
+                    b_g:"#dbfeff",
+                    t_c:"#1dcfdb"
+                },
+                
             ]
         }
     },
@@ -190,32 +191,48 @@ export default {
                     let item = this.cardOption[k];
                     if (k == 0) {
                         item.num = vita.register_num||0;
+                        // item.num = "新增注册";
                     }else if(k == 1){
                         item.num = vita.account_num||0;
+                        // item.num = "新增账号";
                     }else if(k == 2){
-                        item.num = vita.today_new_active_user_num||0;
-                    }else if(k == 3){
-                        item.num = vita.today_active_user_num||0;
-                    }else if(k == 4){
                         item.num = vita.today_active_account_num||0;
+                        // item.num = "活跃账号";
+                    }else if(k == 3){
+                        item.num = vita.today_new_active_user_num||0;
+                        // item.num = "新增活跃用户";
+                    }else if(k == 4){
+                       item.num = vita.today_active_user_num||0;
+                    //    item.num ="活跃用户";
                     }else if(k == 5){
-                       item.num = vita.bounty_amount||0;
-                    }else if(k == 6){
                         item.num = vita.submit_num||0;
-                    }else if(k == 7){
-                        item.num = vita.today_create_group_task_num||0;
-                    }else if(k == 8){
-                        item.num = vita.data_num||0;
-                    }else if(k == 9){
-                        item.num = vita.withdraw_user_num||0;
-                    }else if(k == 10){
-                        item.num = vita.withdraw_amount||0;
-                    }else if(k == 11){
-                        item.num = vita.personal_amount||0;
-                    }else if(k == 12){
-                        item.num = vita.commission_amount||0;
-                    }else if(k == 13){
+                        // item.num = "拉群任务提交";
+                    }else if(k == 6){
                         item.num = vita.submit_user_num||0;
+                        // item.num = "拉群提交用户";
+                    }else if(k == 7){
+                         item.num = vita.today_create_group_task_num||0;
+                        // item.num = "拉群任务数"
+                    }else if(k == 8){
+                           item.num = vita.data_num||0;
+                        // item.num = "推广资源";
+                    }else if(k == 9){
+                          item.num = vita.bounty_amount||0;
+                    //    item.num = "任务收益";
+                    
+                    }else if(k == 10){
+                        item.num = vita.commission_amount||0;
+                        // item.num = "返佣收益";
+                        
+                    }else if(k == 11){
+                         item.num = vita.personal_amount||0;
+                        // item.num = "个人收益";
+                    }else if(k == 12){
+                         item.num = vita.withdraw_user_num||0;
+                        // item.num = "提现人数";
+                    }else if(k == 13){
+                         // item.num = vita.withdraw_amount||0;
+                        // item.num = "提现扣款";
                     }
                 }
                 this.isLoading=false;

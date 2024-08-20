@@ -25,6 +25,11 @@ export const dotaskconfiginfo = (params)=> {
 export const getmarketgrouplist = (params)=> {
   return request({url:'/taskconfig/getmarketgrouplist',method:'post',data:params})
 }
+export const getuserstatis = (params)=> {
+  return request({url:'/adminmember/getuserstatis',method:'post',data:params})
+}
+
+
 
 
 

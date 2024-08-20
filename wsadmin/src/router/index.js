@@ -567,6 +567,15 @@ export const asyncRoutes = [
         meta: {
           title: i18n.t('sys_s008')
         }
+      },
+      {
+        hidden: true,
+        path: '/userDataDetail',
+        component: () => import('@/views/permission/userDataDetail'),
+        name: 'userDataDetail',
+        meta: {
+          title: i18n.t('sys_s009')
+        }
       }
       // {
       //   path: '/logManage',

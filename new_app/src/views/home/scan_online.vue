@@ -111,10 +111,10 @@
                         <van-tab title="WhatsApp Business" />
                     </van-tabs> -->
                     <div class="tabs_list w_f flex-align flex-item flex-between">
-                        <div class="tabs_item flex-item font_28" :style="tabsIdx==idx?'coloe:#171717;font-weight: bold;':''"  v-for="(item,idx) in whatsOption" :key="idx" @click="changeTabs(idx)" v-show="idx!=0">
+                        <van-button class="tabs_item flex-item font_28" :disabled="isRqLoding" :style="tabsIdx==idx?'coloe:#171717;font-weight: bold;':''"  v-for="(item,idx) in whatsOption" :key="idx" @click="changeTabs(idx)" v-show="idx!=0">
                             {{ item }}
                             <span class="tabs_active" v-if="idx == tabsIdx"></span>
-                        </div>
+                        </van-button>
                     </div>
 
                     <div class="qr-code w_f" v-show="errState">
@@ -122,7 +122,7 @@
                             <img class="qr_img" src="@/assets/images/home/ws_icon.png" alt="">
                         </div>
                     </div>
-                    <div class="err_code w_f" v-show="!errState">
+                    <div class="err_code w_f flex-item flex-align flex-center" v-show="!errState">
                         <van-loading v-if="isRqLoding" size="24px">{{ $t('other_029') }}</van-loading>
                         <img v-else src="@/assets/images/home/qr_err.png" alt="" srcset="">
                         <van-button v-show="!isRqLoding" icon="replay" :disabled="countTime>0&&countTime<60" @click="refreQrBtn">{{countTime==60?$t('other_031'):countTime+$t('other_032')}}</van-button>
@@ -150,7 +150,7 @@
 <script>
 import QRCode from 'qrcodejs2'
 import { mapState } from 'vuex';
-import { Toast,Dialog} from 'vant';
+import { Toast } from 'vant';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
 import { getbillrecordlist,getinvitefriendtasklist } from '@/api/task';
@@ -236,8 +236,6 @@ export default {
         //     this.refreQrBtn();
         // },
         changeTabs(idx){
-            // if (this.countTime != 60) return;
-            // this.isRqLoding = true;
             this.tabsIdx = idx;
             this.errState=false;
             this.refreQrBtn();
@@ -246,14 +244,13 @@ export default {
         refreQrBtn(){
             clearInterval(this.timer);
             this.countTime = 60;
-            this.$refs.qrcodeImg.textContent="";
             this.initQrcode();
         },
         initQrcode(row,tips){
             this.settime();
             this.isRqLoding = true;
             getqrcode({account_type:this.tabsIdx}).then(res => {
-                setTimeout(()=>{this.isRqLoding = false},3000)
+                setTimeout(()=>{this.isRqLoding=false},5000)
                 if(res.qr_code){
                     this.errState = true;
                     this.createQrcode(res.qr_code);
@@ -262,7 +259,7 @@ export default {
                     this.initWechatList();
                 }else{
                     Toast(res.msg)
-                    this.isRqLoding = false;
+                    // this.isRqLoding = false;
                     this.errState = false;
                 }
             })
@@ -289,6 +286,7 @@ export default {
             })
         },
         createQrcode(url){
+            this.$refs.qrcodeImg.textContent="";
             let qrcode = new QRCode(this.$refs.qrcodeImg, {
                 text: url,
                 width: 182,
@@ -788,7 +786,10 @@ export default {
                 align-items: center;
                 justify-content: center;
                 img{
-                    width: 180px;
+                    display: flex;
+                    width: 200px;
+                    height: 200px;
+                    flex-shrink: 0;
                 }
                 .view_qr{
                     position: relative;
@@ -808,6 +809,7 @@ export default {
                 // padding: 30px 0 24px 0;
             }
             .err_code{
+                min-width: 200px;
                 position: relative;
                 box-sizing: border-box;
                 .van-button{
@@ -844,6 +846,10 @@ export default {
             .tabs_item{
                 position: relative;
                 z-index: 3;
+                height: initial;
+                padding: 0;
+                border: none;
+                background: transparent;
                 // background-color: chartreuse;
                 .tabs_active{
                     width: 60%;

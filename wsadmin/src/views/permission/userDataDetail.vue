@@ -209,7 +209,7 @@ export default {
         },
         getStatistics(){
             this.isLoading=true;
-            gettodaystatisinfo({uid:this.task_id}).then(res=>{
+            gettodaystatisinfo({uid:this.task_id,pixellids:this.pixe_id}).then(res=>{
                 let vita = res.data;
                 for (let k = 0; k < this.cardOption.length; k++) {
                     let item = this.cardOption[k];

@@ -144,13 +144,13 @@ export default {
 			commit('clearUserInfo');
 			return new Promise((resolve, reject) => {
 				register(params).then(res => {
-					const userData = scehelper.aesDecrptHost(res);
-					if(userData.token){
+					if(res.code){
+						resolve(res);
+					}else{
+						const userData = scehelper.aesDecrptHost(res);
 						commit('store_info', userData);
-						dispatch('getUserHead');
-						dispatch('plantCarousel');
+						resolve(userData);
 					}
-					resolve(userData);
 				}).catch(error => {
 					reject(error)
 				})

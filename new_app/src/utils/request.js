@@ -52,6 +52,7 @@ service.interceptors.response.use(res => {
         })
       }else{
         vant.Toast.fail(data.msg);
+        return data;
       }
     } else {
       vant.Toast.fail(data.msg);

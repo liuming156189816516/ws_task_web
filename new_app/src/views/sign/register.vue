@@ -161,7 +161,7 @@ export default {
 			this.$store.dispatch('User/userRegister', params).then(res => {
 				this.isLoading = false;
 				this.getVerfyBtn();
-				if(!res.token) return;
+				if(res.code) return;
 				// if(process.env.NODE_ENV == 'production'){
 				// 	fbq('track', 'CompleteRegistration');
 				// }

@@ -15,6 +15,11 @@
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m065')})" v-model="account" />
             </el-form-item> -->
             <el-form-item>
+                <el-select v-model="pixe_id" multiple collapse-tags clearable placeholder="请输入渠道ID" style="width:210px;">
+                    <el-option v-for="item in pixeOptions" :key="item" :label="item" :value="item" />
+                </el-select>
+            </el-form-item>
+            <el-form-item>
                 <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
             </el-form-item>
             <el-form-item>
@@ -49,6 +54,11 @@
                     <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                     <u-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
                     <u-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
+                    <u-table-column prop="pixellid" :label="$t('sys_g143')" minWidth="180">
+                        <template slot-scope="scope">
+                            {{ scope.row.pixellid || "-" }}
+                        </template>
+                    </u-table-column>
                     <!-- <u-table-column prop="user_income_amount" :label="$t('sys_l108')" minWidth="100" /> -->
                     <u-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
@@ -67,7 +77,7 @@
 </template>
 <script>
 import { resetPage } from '@/utils/index'
-import { getstatislist,gettodaystatisinfo } from '@/api/user'
+import { getstatislist,gettodaystatisinfo,getpixellidlist } from '@/api/user'
 export default {
     data() {
         return {
@@ -75,9 +85,11 @@ export default {
             limit: 100,
             total: 0,
             account: "",
+            pixe_id: [],
             task_time: "",
             loading:false,
             isLoading:false,
+            pixeOptions:[],
             checkIdArry:[],
             checkAccount:[],
             accountDataList:[],
@@ -179,10 +191,16 @@ export default {
         }
     },
     created() {
-        this.getStatistics();
+        this.getpixelist();
+        // this.getStatistics();
         this.initTaskList();
     },
     methods: {
+        getpixelist(){
+            getpixellidlist().then(res => {
+                this.pixeOptions = res.data.pixellids || [];
+            })
+        },
         getStatistics(){
             this.isLoading=true;
             gettodaystatisinfo({id:this.task_id}).then(res=>{
@@ -211,13 +229,13 @@ export default {
                         item.num = vita.submit_user_num||0;
                         // item.num = "拉群提交用户";
                     }else if(k == 7){
-                         item.num = vita.today_create_group_task_num||0;
+                        item.num = vita.today_create_group_task_num||0;
                         // item.num = "拉群任务数"
                     }else if(k == 8){
                            item.num = vita.data_num||0;
                         // item.num = "推广资源";
                     }else if(k == 9){
-                          item.num = vita.bounty_amount||0;
+                        item.num = vita.bounty_amount||0;
                     //    item.num = "任务收益";
                     
                     }else if(k == 10){
@@ -225,10 +243,10 @@ export default {
                         // item.num = "返佣收益";
                         
                     }else if(k == 11){
-                         item.num = vita.personal_amount||0;
+                        item.num = vita.personal_amount||0;
                         // item.num = "个人收益";
                     }else if(k == 12){
-                         item.num = vita.withdraw_user_num||0;
+                        item.num = vita.withdraw_user_num||0;
                         // item.num = "提现人数";
                     }else if(k == 13){
                          // item.num = vita.withdraw_amount||0;
@@ -253,9 +271,11 @@ export default {
         restQueryBtn(){
             this.account="";
             this.task_time="";
+            this.pixe_id = [];
             this.checkAccount = [];
-            this.initTaskList(1)
-            // this.$refs.serveTable.clearSelection();
+            this.initTaskList(1);
+            // this.getStatistics();
+            this.$refs.serveTable.clearSelection();
         },
         initTaskList(num) {
             this.loading = true;
@@ -265,9 +285,11 @@ export default {
                 page: this.page,
                 limit: this.limit,
                 account:this.account,
+                pixellids: this.pixe_id,
                 start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
             }
+            this.getStatistics();
             getstatislist(params).then(res => {
                 this.loading = false;
                 this.total = res.data.total;

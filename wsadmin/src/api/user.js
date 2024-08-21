@@ -28,6 +28,9 @@ export const getmarketgrouplist = (params)=> {
 export const getuserstatis = (params)=> {
   return request({url:'/adminmember/getuserstatis',method:'post',data:params})
 }
+export const getpixellidlist = (params)=> {
+  return request({url:'/statis/getpixellidlist',method:'post',data:params})
+}
 
 
 

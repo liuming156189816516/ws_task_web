@@ -383,6 +383,7 @@ export default {
     'sys_g140': '静态ipv4',
     'sys_g141': '静态ipv4',
     'sys_g142': '数据汇总',
+    'sys_g143': '渠道ID',
 
     'sys_m001': '云控系统菜单',
     'sys_m002': '新增菜单',

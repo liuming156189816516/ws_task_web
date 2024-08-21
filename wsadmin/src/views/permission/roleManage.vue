@@ -138,9 +138,10 @@
         })
       },
       setPageSize(){
+        
       },
       switchPage(){
-    
+        
       },
       changeCheck(data,node){
         this.checkTree = [];

@@ -279,7 +279,7 @@ export default {
 			// }
 		}
 		.register_text, .is_bottom{
-			margin-top: 10%;
+			margin-top: 45%;
 			justify-self: flex-end;
 			// position: absolute;
 			// left: 0;

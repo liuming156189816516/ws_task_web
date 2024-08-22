@@ -167,10 +167,14 @@ export default {
         this.getGroupMess();
     },
     mounted(){
-        // setTimeout(() => {
-        //     this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
-        // },500);
         this.getIncomeList();
+        this.$nextTick(()=>{
+            const isTips = JSON.parse(localStorage.getItem('step_03'));
+            if(!isTips){
+                this.$popDialog({ steps:true, type: 11 })
+            }
+        })
+        this.$store.dispatch('Global/actionReport',13) 
     },
 	methods: {
         async getGroupMess(){
@@ -210,6 +214,7 @@ export default {
             this.$popDialog({ content: this.taskList, title:"Contact Numbers", type: 7 })
         },
         submitTask(){
+            this.$store.dispatch('Global/actionReport',16);
             if(!this.group_link) return this.$toast(this.$t('other_001',{value:this.$t('home_036')})); 
             this.isLoading=true;
             submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
@@ -226,8 +231,8 @@ export default {
                 // },1000)
             })
         },
-        
         downAddress(){
+            this.$store.dispatch('Global/actionReport',15);
             if(this.$Helper.checkBrowser()){
                 const link = document.createElement('a');
                 link.href = this.target_url;
@@ -248,6 +253,7 @@ export default {
             link.click();
         },
         showRule(){
+            this.$store.dispatch('Global/actionReport',14);
             this.$popDialog({ content: this.help_url, title:"Invite Friends Bonus Task Workflow", type: 6 })
         },
         formatTime(time) {

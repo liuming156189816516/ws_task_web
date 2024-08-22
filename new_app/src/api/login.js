@@ -35,4 +35,7 @@ export const revisehead = (param) => {
 export const gethead = (param) => {
     return request({url: '/adminmember/gethead',method: 'post',data:param})
 }
+export const buriedpoint = (param) => {
+    return request({url: '/account/buriedpoint',method: 'post',data:param})
+}
 

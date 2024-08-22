@@ -74,6 +74,7 @@ export default {
 		}else{
 			this.isBottom = true;
 		}
+		this.$store.dispatch('Global/actionReport',1)
 		// this.userAccount();
     },
 	methods: {
@@ -109,6 +110,7 @@ export default {
 				setTimeout(()=>{this.isLoading= false},2000)
 				if(!res.token) return;
 				this.checkChange();
+				localStorage.removeItem('step_01');
 				localStorage.setItem('is_play',false);
 				this.$store.dispatch('Global/isShowLogin',false);
 				if(window.location.href.includes("?")){

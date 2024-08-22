@@ -4,6 +4,7 @@ const DialogBox = Vue.extend(Dialog)
 Dialog.install = function (data) {
     let instance = new DialogBox().$mount()
     instance.type = data.type
+    instance.steps = data.steps
     instance.title = data.title
     instance.times = data.times
     instance.money = data.money

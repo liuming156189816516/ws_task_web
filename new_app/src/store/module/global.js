@@ -1,5 +1,6 @@
 import router from "../../router";
 import { getToken } from '@/utils/tool';
+import { buriedpoint } from '@/api/login';
 export default {
 	namespaced: true,
 	state: {
@@ -111,6 +112,16 @@ export default {
 					}
 				).catch(reason => reject(reason));
 			})
+		},
+		// 用户行为上报
+		actionReport({state}, data){
+			// return new Promise((resolve, reject) => {
+			// 	buriedpoint({type:data}).then (res => {
+			// 		resolve()
+			// 	}).catch(error => {
+			// 		reject(error);
+			// 	})
+			// })
 		}
 	}
 }

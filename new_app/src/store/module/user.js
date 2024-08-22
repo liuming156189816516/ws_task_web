@@ -120,6 +120,9 @@ export default {
 			localStorage.removeItem('token');
 			localStorage.removeItem('account');
 			localStorage.removeItem('inviteCode');
+			localStorage.removeItem('step_02');
+			localStorage.removeItem('step_03');
+			localStorage.removeItem('step_04');
 		}
 	},
 	actions: {

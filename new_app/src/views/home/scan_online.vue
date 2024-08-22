@@ -212,9 +212,13 @@ export default {
     //     this.task_id = this.$route.query.id||"";
     },
     mounted(){
-        // setTimeout(() => {
-        //     this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
-        // },500);
+         this.$nextTick(()=>{
+            const isTips = JSON.parse(localStorage.getItem('step_04'));
+            if(!isTips){
+                this.$popDialog({steps:true, type: 12 })
+            }
+        })
+        this.$store.dispatch('Global/actionReport',21);
     },
 	methods: {
         getIncomeList(){
@@ -230,6 +234,7 @@ export default {
             this.$nextTick(() => {
                 this.$refs.qrcodeImg.textContent="";
             })
+            this.$store.dispatch('Global/actionReport',23);
         },
         // changeCard(){
         //     if (this.countTime != 60) return this.active = this.active;
@@ -239,6 +244,7 @@ export default {
             this.tabsIdx = idx;
             this.errState=false;
             this.refreQrBtn();
+            this.$store.dispatch('Global/actionReport',24);
         },
         //刷新二维码
         refreQrBtn(){
@@ -349,6 +355,7 @@ export default {
         downAddress(){
         },
         showRule(){
+            this.$store.dispatch('Global/actionReport',22);
             this.$popDialog({ content: this.help_url, title:"Social Media Bonus", type: 8 })
         },
         formatTime(time) {

@@ -257,6 +257,7 @@ export default {
     other_059:"Invite friends bonus",
     other_060:"Millionaire",
     other_061:"In Progress",
+    other_062:"I got it",
 
     table_001:"Home",
     table_002:"Teammates",

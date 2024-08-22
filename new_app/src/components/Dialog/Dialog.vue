@@ -1,6 +1,6 @@
 <template>
-    <van-overlay :show="visible">
-        <div class="overlay-mian" @click.stop>
+    <van-overlay :show="visible" :class="{'mian_padding':!steps}">
+        <div class="overlay_mian" @click.stop v-if="!steps">
             <template v-if="type==1||type==2">
                 <div class="header_title">
                     {{ title }}
@@ -94,6 +94,26 @@
                 </div>
             </div>
         </div>
+        <div class="steps_main w_f h_f" v-if="steps&&type==9">
+            <div class="bg_step w_f">
+                <div class="step_text flex-item flex-align flex-dir-c">
+                    <p class="font_24">Click the <span class="font_28">Tips</span> button view the guide</p>
+                    <van-button type="primary" @click="kenwBtn(1)">{{restLanuage('other_062')}}</van-button>
+                </div>
+            </div>
+        </div>
+        <div :class="['steps_main group_steps w_f h_f',type==11?'task_steps':type==12?'qr_steps':'']" v-if="steps&&type==10||type==11||type==12">
+            <div class="bg_step w_f">
+                <div class="step_text flex-item flex-align flex-dir-c">
+                    <p class="font_24">
+                        Click <span class="font_28">Tutorials & Rules </span> to learn about the task details and complete task more quickly
+                    </p>
+                    <van-button v-if="type==10" type="primary" @click="kenwBtn(2)">{{restLanuage('other_062')}}</van-button>
+                    <van-button v-if="type==11" type="primary" @click="kenwBtn(3)">{{restLanuage('other_062')}}</van-button>
+                    <van-button v-if="type==12" type="primary" @click="kenwBtn(4)">{{restLanuage('other_062')}}</van-button>
+                </div>
+            </div>
+        </div>
     </van-overlay>
 </template>
 <script>
@@ -121,6 +141,10 @@ export default {
         content: {
             type: String,
             default: "" 
+        },
+        steps: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -169,6 +193,11 @@ export default {
                 this.moveNews.$emit('login-cover',"hello");
             }
         },
+        kenwBtn(val){
+            document.getElementById("app").removeChild(this.$el);
+            window.localStorage.setItem(`step_0${val}`,true)
+            this.visible=false;
+        }
     }
     // beforeDestroy(){
     //     window.removeEventListener('play');
@@ -180,11 +209,10 @@ export default {
 .van-overlay{
     width: 100%;
     height: 100%;
-    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    .overlay-mian{
+    .overlay_mian{
         width: 100%;
         border-radius: 8px;
         // overflow: hidden;
@@ -326,42 +354,87 @@ export default {
                 }
             }
         }
-        // .continer{
-        //     width: 100%;
-        //     height: 320px;
-        //     po
-        //     background: cadetblue;
-        // }
-        // background: $font-color-white;
+    }
+    .steps_main, .group_steps{
+        position: relative;
+        .bg_step{
+            height: 190px;
+            flex-shrink: 0;
+            position: relative;
+            background: url('../../assets/images/steps_01.png') no-repeat;
+            background-size: 100% 100%;
+            .step_text{
+                width: 280px;
+                height: 102px;
+                padding: 23px 0 0 30px;
+                box-sizing: border-box;
+                position: absolute;
+                right: 12px;
+                bottom: 4px;
+                border-radius: 10px;
+                p{
+                    color: $home-title-06;
+                    margin-bottom: 18px;
+                }
+                span{
+                    font-style: italic;
+                    font-weight: bold;
+                    color: $home-title-12;
+                }
+                .van-button{
+                    width: 80px;
+                    height: 24px;
+                    border-radius: 100px;
+                    border-color: $color-theme;
+                    background-color: $color-theme;
+                    .van-button__text{
+                        font-size: 13px;
+                        font-weight: initial;
+                        color: $font-color-white;
+                    }
+                }
+            }
+        }
+    }
+    .group_steps{
+        .bg_step{
+            height: 190px;
+            flex-shrink: 0;
+            margin-top:150px;
+            position: relative;
+            background: url('../../assets/images/steps_02.png') no-repeat;
+            background-size: 100% 100%;
+            .step_text{
+                padding: 10px 22px 0 45px;
+                box-sizing: border-box;
+                position: absolute;
+                right: 25px;
+                bottom: 8px;
+                // background: rgba($color: red, $alpha: .7);
+                p{
+                    margin-bottom: 0px;
+                }
+                .van-button{
+                   position: absolute;
+                   right: 15px;
+                   bottom: 12px;
+                }
+            }
+        }
+    }
+    .task_steps{
+        .bg_step{
+            margin-top:95px;
+        }
+    }
+    .qr_steps{
+       .bg_step{
+            margin-top:225px;
+        } 
     }
 }
-// .van-dialog{
-//     display: flex !important;
-//     width: 85% !important;
-//     top: 50%;
-//     flex-direction: column !important;
-//     ::v-deep .van-dialog__content{
-//         background-color: darkcyan;
-//     }
-//     ::v-deep .van-dialog__header{
-//         padding: 10px 0;
-//     }
-//     .close_btn{
-//         color: $home-eart-status-value;
-//         font-size: 20px;
-//         position: absolute;
-//         top: 12px;
-//         right: 12px;
-//     }
-//     .video_tips{
-//         width: 100%;
-//         padding: 0;
-//         overflow: hidden;
-//         padding-bottom: 20px;
-//         background: $font-color-white;
-//         video{
-//             width: 100%;
-//         }
-//     }
-// }
+.mian_padding{
+    padding: 0 20px;
+    box-sizing: border-box;
+}
 </style>

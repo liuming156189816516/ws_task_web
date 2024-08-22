@@ -2,7 +2,7 @@
     <div class="home_warp w_f" ref="warpBox">
         <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true" />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
-            <div class="ui_time flex-item flex-center font_50">Ultimate Wealth Challenge</div>
+            <div class="ui_time flex-item flex-center font_50" id="step1">Ultimate Wealth Challenge</div>
             <div class="notice_warp">
                 <div class="notice_mian">
                     <img class="left_icon" src="@/assets/images/home/news_icon.png">
@@ -122,7 +122,7 @@ export default {
                 {},
                 {name:this.$t('home_089'),live1:1,live2:2,type:1,status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
                 {name:this.$t('home_045'),live1:2,live2:4,type:2,status:null,task_info_id:null,award:this.$t('home_088',{value:'10%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_044'),live1:3,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:277777}),btn:this.$t('home_056'),desc:this.$t('home_049')}
+                {name:this.$t('home_044'),live1:2,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:27777}),btn:this.$t('home_056'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {
@@ -143,28 +143,24 @@ export default {
     activated() {
         if(getToken()){
            this.initHandle();
+            this.$store.dispatch('Global/actionReport',1)
         }else{
-            this.initRuleTips();
+            // this.initRuleTips();
+            this.$store.dispatch('Global/actionReport',2)
             this.taskOption= this.$Helper.defaultOption();
         }
     },
     methods: {
         initHandle(){
             this.syncInitApi();
-            this.initRuleTips();
+            // this.initRuleTips();
         },
         initRuleTips(){
-            // console.log("8888");
-            // this.$nextTick(() => {
-            //     const isTips = JSON.parse(localStorage.getItem('is_play'));
-            //     if (!isTips) {
-            //         this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
-            //     }
-            // },600)
             setTimeout(() => {
-                const isTips = JSON.parse(localStorage.getItem('is_play'));
+                const isTips = JSON.parse(localStorage.getItem('step_01'));
                 if (!isTips) {
-                    this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
+                    this.$popDialog({steps:true, type: 9 })
+                    // this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
                 }
             }, 600);
         },
@@ -209,8 +205,30 @@ export default {
             await this.$store.dispatch('User/plantCarousel');
         },
         handleTask(row) {
-            if (!getToken()) return this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true});
             const path = this.taskType[row.type];
+            if(!getToken()){
+                if(path=="pullgroupTask"){
+                    this.$store.dispatch('Global/actionReport',7) 
+                }
+                if(path=="spread"){
+                    this.$store.dispatch('Global/actionReport',9) 
+                }
+                if(path=="scanOnline"){
+                    this.$store.dispatch('Global/actionReport',11) 
+                }
+            }
+            if(getToken()){
+                if(path=="pullgroupTask"){
+                    this.$store.dispatch('Global/actionReport',8) 
+                }
+                if(path=="spread"){
+                    this.$store.dispatch('Global/actionReport',10) 
+                }
+                if(path=="scanOnline"){
+                    this.$store.dispatch('Global/actionReport',12) 
+                }
+            }
+            if (!getToken()) return this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true});
             if (row.type == 2) {
                 this.$router.push(path);
             }else{

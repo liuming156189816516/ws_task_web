@@ -78,7 +78,7 @@ export default {
       this.initAccount()
     },
     showUserDetail(row){
-      this.$router.push({path:"/user_statistics",query:{id:row.uid}})
+      this.$router.push({path:"/userDataDetail",query:{id:row.uid}})
     }
   }
 }

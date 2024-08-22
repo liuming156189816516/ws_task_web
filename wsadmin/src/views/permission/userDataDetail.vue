@@ -12,7 +12,6 @@
         </div>
         <el-form size="small" :inline="true" style="margin-top: 10px;">
             <el-form-item>
-                <!-- <el-button type="primary" @click="jumpCreatTask(0,0)">{{ $t('sys_g123') }}</el-button> -->
                 <el-button size="small" @click="$router.go(-1)">
                     <i class="el-icon-back"></i>
                     <span>{{$t('sys_q006')}}</span>
@@ -48,8 +47,8 @@
                     <u-table-column prop="today_active_account_num" :label="$t('sys_m089')" minWidth="120" />
                     <u-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
                     <u-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
-                    <u-table-column prop="submit_user_num" :label="$t('sys_m104')" minWidth="180" />
-                    <u-table-column prop="submit_num" :label="$t('sys_m105')" minWidth="120" />
+                    <u-table-column prop="submit_num" :label="$t('sys_m104')" minWidth="180" />
+                    <u-table-column prop="submit_user_num" :label="$t('sys_m105')" minWidth="120" />
                     <u-table-column prop="today_create_group_task_num" :label="$t('sys_rai122')" minWidth="100" />
                     <u-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
                     <u-table-column prop="bounty_amount" :label="$t('sys_m102')" minWidth="100" />
@@ -197,13 +196,12 @@ export default {
     },
     created() {
         this.task_id = this.$route.query.id;
-        // this.getStatistics();
         this.getpixelist();
         this.initTaskList();
     },
     methods: {
         getpixelist(){
-            getpixellidlist().then(res => {
+            getpixellidlist({uid:this.task_id}).then(res => {
                 this.pixeOptions = res.data.pixellids || [];
             })
         },
@@ -235,24 +233,23 @@ export default {
                         item.num = vita.submit_user_num||0;
                         // item.num = "拉群提交用户";
                     }else if(k == 7){
-                         item.num = vita.today_create_group_task_num||0;
+                        item.num = vita.today_create_group_task_num||0;
                         // item.num = "拉群任务数"
                     }else if(k == 8){
                            item.num = vita.data_num||0;
                         // item.num = "推广资源";
                     }else if(k == 9){
-                          item.num = vita.bounty_amount||0;
+                        item.num = vita.bounty_amount||0;
                     //    item.num = "任务收益";
                     
                     }else if(k == 10){
                         item.num = vita.commission_amount||0;
                         // item.num = "返佣收益";
-                        
                     }else if(k == 11){
-                         item.num = vita.personal_amount||0;
+                        item.num = vita.personal_amount||0;
                         // item.num = "个人收益";
                     }else if(k == 12){
-                         item.num = vita.withdraw_user_num||0;
+                        item.num = vita.withdraw_user_num||0;
                         // item.num = "提现人数";
                     }else if(k == 13){
                          item.num = vita.withdraw_amount||0;
@@ -279,9 +276,9 @@ export default {
             this.task_time="";
             this.pixe_id = [];
             this.checkAccount = [];
+            this.initTaskList(1);
             // this.getStatistics();
-            this.initTaskList(1)
-            // this.$refs.serveTable.clearSelection();
+            this.$refs.serveTable.clearSelection();
         },
         initTaskList(num) {
             this.loading = true;
@@ -290,12 +287,12 @@ export default {
             const params = {
                 page: this.page,
                 limit: this.limit,
-                uid:this.task_id,
                 account:this.account,
-                pixellids:this.pixe_id,
+                pixellids: this.pixe_id,
                 start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
             }
+            this.task_id?params.uid=this.task_id:"";
             this.getStatistics();
             getstatislist(params).then(res => {
                 this.loading = false;

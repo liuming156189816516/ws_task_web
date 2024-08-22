@@ -268,14 +268,14 @@ const routes = [{
             title: "404",
             showNavBar: false,
         },
-    },
+    }
 ];
 
 const router = new VueRouter({
     mode: "hash",
     base: process.env.BASE_URL,
     routes,
-});
+})
 
 router.beforeEach((to, from, next) => {
     window.scrollTo(0, 0);

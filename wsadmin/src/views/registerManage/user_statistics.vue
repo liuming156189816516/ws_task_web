@@ -200,7 +200,6 @@ export default {
     created() {
         this.task_id = this.$route.query.id;
         this.getpixelist();
-        // this.getStatistics();
         this.initTaskList();
     },
     methods: {

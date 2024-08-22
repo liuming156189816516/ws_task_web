@@ -14,6 +14,12 @@
             <!-- <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m065')})" v-model="account" />
             </el-form-item> -->
+            <el-form-item v-if="task_id">
+                <el-button size="small" @click="$router.go(-1)">
+                    <i class="el-icon-back"></i>
+                    <span>{{$t('sys_q006')}}</span>
+                </el-button>
+            </el-form-item>
             <el-form-item>
                 <el-select v-model="pixe_id" multiple collapse-tags clearable placeholder="请输入渠道ID" style="width:210px;">
                     <el-option v-for="item in pixeOptions" :key="item" :label="item" :value="item" />
@@ -44,8 +50,8 @@
                     <u-table-column prop="today_active_account_num" :label="$t('sys_m089')" minWidth="120" />
                     <u-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
                     <u-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
-                    <u-table-column prop="submit_user_num" :label="$t('sys_m104')" minWidth="180" />
-                    <u-table-column prop="submit_num" :label="$t('sys_m105')" minWidth="120" />
+                    <u-table-column prop="submit_num" :label="$t('sys_m104')" minWidth="180" />
+                    <u-table-column prop="submit_user_num" :label="$t('sys_m105')" minWidth="120" />
                     <u-table-column prop="today_create_group_task_num" :label="$t('sys_rai122')" minWidth="100" />
                     <u-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
                     <u-table-column prop="bounty_amount" :label="$t('sys_m102')" minWidth="100" />
@@ -85,6 +91,7 @@ export default {
             limit: 100,
             total: 0,
             account: "",
+            task_id: "",
             pixe_id: [],
             task_time: "",
             loading:false,
@@ -191,6 +198,7 @@ export default {
         }
     },
     created() {
+        this.task_id = this.$route.query.id;
         this.getpixelist();
         // this.getStatistics();
         this.initTaskList();
@@ -203,7 +211,7 @@ export default {
         },
         getStatistics(){
             this.isLoading=true;
-            gettodaystatisinfo({id:this.task_id,pixellids:this.pixe_id}).then(res=>{
+            gettodaystatisinfo({uid:this.task_id,pixellids:this.pixe_id}).then(res=>{
                 let vita = res.data;
                 for (let k = 0; k < this.cardOption.length; k++) {
                     let item = this.cardOption[k];
@@ -249,7 +257,7 @@ export default {
                         item.num = vita.withdraw_user_num||0;
                         // item.num = "提现人数";
                     }else if(k == 13){
-                         // item.num = vita.withdraw_amount||0;
+                         item.num = vita.withdraw_amount||0;
                         // item.num = "提现扣款";
                     }
                 }
@@ -289,6 +297,7 @@ export default {
                 start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
             }
+            this.task_id?params.uid=this.task_id:"";
             this.getStatistics();
             getstatislist(params).then(res => {
                 this.loading = false;

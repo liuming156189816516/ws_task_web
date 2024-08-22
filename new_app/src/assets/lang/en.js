@@ -91,7 +91,7 @@ export default {
     home_056:"Invite Now",
     home_057:"Find Now",
     home_058:"Managing Now",
-    home_059:"1、Please log in to your account, before you participate in any task. If you don't have an account<span style='color:#008751;font-weight: bold; text-decoration: underline;'>click here to sign up</span>",
+    home_059:"1、Please log in to your account, before you participate in any task. If you don't have an account,<span style='color:#008751;font-weight: bold; text-decoration: underline;'>click here to sign up</span>",
     home_060:'2、To improve the quality and efficiency of your task completion, Kindly read through the tutorial and rules and ensure you have a good understanding before you begin. You may do so by clicking the <"Rules">button on the task details page',
     home_061:'3、When tasks are completed successfully and passed the system verification, bonuses will be credited to you. You can view bonus information through <<span style="color:#008751;font-weight: bold;">Account</span> -> "<span style="color:#008751;font-weight: bold;">Earnings Records</span>"> or the<"<span style="color:#008751;font-weight: bold;">Records</span>">module on the task details page',
     home_062:"4、Please note that when you withdraw funds, the system converts your bonuses to legal currency at a ratio of 1:10 for transfer to your bank account. (For example, if you withdraw a bonus of 3000, the system will calculate this as 3000/10 = 300 legal currency units transferred to your bank account)",

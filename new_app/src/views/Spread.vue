@@ -163,12 +163,12 @@ export default {
         this.getIncomeList();
     },
     mounted(){
-        this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_02'));
-            if(!isTips){
-                this.$popDialog({steps:true, type: 10 })
-            }
-        })
+        // this.$nextTick(()=>{
+        //     const isTips = JSON.parse(localStorage.getItem('step_02'));
+        //     if(!isTips){
+        //         this.$popDialog({steps:true, type: 10 })
+        //     }
+        // })
         this.$store.dispatch('Global/actionReport',17);
     },
     methods:{

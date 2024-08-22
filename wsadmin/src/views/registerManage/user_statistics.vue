@@ -205,7 +205,7 @@ export default {
     },
     methods: {
         getpixelist(){
-            getpixellidlist().then(res => {
+            getpixellidlist({uid:this.task_id}).then(res => {
                 this.pixeOptions = res.data.pixellids || [];
             })
         },
@@ -249,7 +249,6 @@ export default {
                     }else if(k == 10){
                         item.num = vita.commission_amount||0;
                         // item.num = "返佣收益";
-                        
                     }else if(k == 11){
                         item.num = vita.personal_amount||0;
                         // item.num = "个人收益";

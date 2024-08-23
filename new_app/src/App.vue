@@ -10,7 +10,7 @@
 		</div>
 		<van-overlay :show="global.isLogin" style="overflow-y: auto;">
             <login v-if="global.isType==1" />
-			<register v-else />
+			<register v-if="global.isType==2" />
         </van-overlay>
 		<van-overlay :show="global.logOut">
 			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">

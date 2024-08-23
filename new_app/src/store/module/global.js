@@ -3,7 +3,7 @@ import { getToken } from '@/utils/tool';
 export default {
 	namespaced: true,
 	state: {
-		isType:1,
+		isType:null,
 		logOut:false,
 		isLogin:false,
 		keepAliveComponents: [],

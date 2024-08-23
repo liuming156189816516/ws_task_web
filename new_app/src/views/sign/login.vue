@@ -74,7 +74,7 @@ export default {
 		}else{
 			this.isBottom = true;
 		}
-		this.$store.dispatch('Global/actionReport',1)
+		this.$store.dispatch('Global/actionReport',4)
 		// this.userAccount();
     },
 	methods: {

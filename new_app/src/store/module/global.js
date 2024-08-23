@@ -115,13 +115,13 @@ export default {
 		},
 		// 用户行为上报
 		actionReport({state}, data){
-			// return new Promise((resolve, reject) => {
-			// 	buriedpoint({type:data}).then (res => {
-			// 		resolve()
-			// 	}).catch(error => {
-			// 		reject(error);
-			// 	})
-			// })
+			return new Promise((resolve, reject) => {
+				buriedpoint({type:data}).then (res => {
+					resolve()
+				}).catch(error => {
+					reject(error);
+				})
+			})
 		}
 	}
 }

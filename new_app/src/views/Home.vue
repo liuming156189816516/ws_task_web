@@ -145,7 +145,7 @@ export default {
            this.initHandle();
             this.$store.dispatch('Global/actionReport',1)
         }else{
-            // this.initRuleTips();
+            this.initRuleTips();
             this.$store.dispatch('Global/actionReport',2)
             this.taskOption= this.$Helper.defaultOption();
         }
@@ -153,7 +153,7 @@ export default {
     methods: {
         initHandle(){
             this.syncInitApi();
-            // this.initRuleTips();
+            this.initRuleTips();
         },
         initRuleTips(){
             setTimeout(() => {

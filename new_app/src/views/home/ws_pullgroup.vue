@@ -168,12 +168,12 @@ export default {
     },
     mounted(){
         this.getIncomeList();
-        // this.$nextTick(()=>{
-        //     const isTips = JSON.parse(localStorage.getItem('step_03'));
-        //     if(!isTips){
-        //         this.$popDialog({ steps:true, type: 11 })
-        //     }
-        // })
+        this.$nextTick(()=>{
+            const isTips = JSON.parse(localStorage.getItem('step_03'));
+            if(!isTips){
+                this.$popDialog({ steps:true, type: 11 })
+            }
+        })
         this.$store.dispatch('Global/actionReport',13) 
     },
 	methods: {

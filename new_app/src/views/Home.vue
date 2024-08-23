@@ -143,10 +143,10 @@ export default {
     activated() {
         if(getToken()){
             this.initHandle();
-            this.$store.dispatch('Global/actionReport',2)
+            this.$store.dispatch('User/actionReport',1)
         }else{
             // this.initRuleTips();
-            this.$store.dispatch('Global/loggedInReport',1);
+            this.$store.dispatch('User/actionReport',1)
             this.taskOption= this.$Helper.defaultOption();
         }
     },
@@ -206,28 +206,29 @@ export default {
         },
         handleTask(row) {
             const path = this.taskType[row.type];
-            if(!getToken()){
-                if(path=="pullgroupTask"){
-                    this.$store.dispatch('Global/loggedInReport',7) 
-                }
-                if(path=="spread"){
-                    this.$store.dispatch('Global/loggedInReport',9) 
-                }
-                if(path=="scanOnline"){
-                    this.$store.dispatch('Global/loggedInReport',11) 
-                }
+            if(path=="pullgroupTask"){
+                this.$store.dispatch('User/actionReport',5) 
             }
-            if(getToken()){
-                if(path=="pullgroupTask"){
-                    this.$store.dispatch('Global/actionReport',8) 
-                }
-                if(path=="spread"){
-                    this.$store.dispatch('Global/actionReport',10) 
-                }
-                if(path=="scanOnline"){
-                    this.$store.dispatch('Global/actionReport',12) 
-                }
+            if(path=="spread"){
+                this.$store.dispatch('User/actionReport',6) 
             }
+            if(path=="scanOnline"){
+                this.$store.dispatch('User/actionReport',7) 
+            }
+            // if(!getToken()){
+               
+            // }
+            // if(getToken()){
+            //     if(path=="pullgroupTask"){
+            //         this.$store.dispatch('User/actionReport',8) 
+            //     }
+            //     if(path=="spread"){
+            //         this.$store.dispatch('User/actionReport',10) 
+            //     }
+            //     if(path=="scanOnline"){
+            //         this.$store.dispatch('User/actionReport',12) 
+            //     }
+            // }
             if (!getToken()) return this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true});
             if (row.type == 2) {
                 this.$router.push(path);

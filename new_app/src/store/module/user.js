@@ -1,7 +1,8 @@
 import router from '../../router/';
 import { getincome } from'@/api/home'
 import scehelper from '@/utils/helper';
-import { login,register,logout,getcarousellist,gethead } from '@/api/login';
+import { login,register,getcarousellist,gethead,buriedpoint } from '@/api/login';
+// import { buriedpoint,buriedpointlogout } from '@/api/login';
 export default {
 	namespaced: true,
 	state: {
@@ -10,6 +11,7 @@ export default {
 		interval: null,
 		market: false,
 		httpManager: {},
+		uid:window.localStorage.getItem('uid') || null,
 		token: window.localStorage.getItem('token') || null,
 		account: window.localStorage.getItem('account') || null,
 		baseBanner: window.localStorage.getItem('baseBanner')||null,
@@ -115,6 +117,7 @@ export default {
 			window.localStorage.setItem('baseNotice',data.bulletin_content);
 		},
 		clear_token(state){
+			state.uid = "";
 			state.token = null;
 			localStorage.removeItem('uid');
 			localStorage.removeItem('token');
@@ -194,6 +197,17 @@ export default {
 		},
 		logoutClearAndJump({ commit }) {
 			commit('clearUserInfo');
+		},
+		// 用户登录行为上报
+		actionReport({state}, data){
+			console.log(state.uid);
+			return new Promise((resolve, reject) => {
+				buriedpoint({uid:state.uid,type:data}).then (res => {
+					resolve()
+				}).catch(error => {
+					reject(error);
+				})
+			})
 		}
 	},
 	modules: {}

@@ -218,7 +218,7 @@ export default {
                 this.$popDialog({steps:true, type: 12 })
             }
         })
-        this.$store.dispatch('Global/actionReport',21);
+        this.$store.dispatch('User/actionReport',16);
     },
 	methods: {
         getIncomeList(){
@@ -234,7 +234,7 @@ export default {
             this.$nextTick(() => {
                 this.$refs.qrcodeImg.textContent="";
             })
-            this.$store.dispatch('Global/actionReport',23);
+            this.$store.dispatch('User/actionReport',18);
         },
         // changeCard(){
         //     if (this.countTime != 60) return this.active = this.active;
@@ -244,7 +244,7 @@ export default {
             this.tabsIdx = idx;
             this.errState=false;
             this.refreQrBtn();
-            this.$store.dispatch('Global/actionReport',24);
+            this.$store.dispatch('User/actionReport',19);
         },
         //刷新二维码
         refreQrBtn(){
@@ -355,7 +355,7 @@ export default {
         downAddress(){
         },
         showRule(){
-            this.$store.dispatch('Global/actionReport',22);
+            this.$store.dispatch('User/actionReport',17);
             this.$popDialog({ content: this.help_url, title:"Social Media Bonus", type: 8 })
         },
         formatTime(time) {

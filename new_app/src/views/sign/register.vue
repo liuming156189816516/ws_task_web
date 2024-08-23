@@ -87,12 +87,12 @@ export default {
 		}
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();
-		this.$store.dispatch('Global/loggedInReport',3)
+		this.$store.dispatch('User/actionReport',3)
 	},
 	methods: {
 		goLogin() {
 			// this.$router.push("/login")
-			this.$store.dispatch('Global/isShowType',1);
+			this.$store.dispatch('Global/isShowType',2);
 		},
 		showEye(){
 			this.regEye = !this.regEye;

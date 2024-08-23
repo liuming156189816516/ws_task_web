@@ -30,14 +30,14 @@
                            <div class="w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
                                 <span class="left_desc flex-item font_28">My invitation link</span>
-                                <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/register'" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button>
+                                <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                             </div>
                             <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
                            </div>
                            <div class="invit_code w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
                                 <span class="left_desc flex-item font_28">My invite code</span>
-                                <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess1">{{$t('other_006')}}</van-button>
+                                <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button>
                             </div>
                             <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
                            </div>
@@ -169,7 +169,7 @@ export default {
                 this.$popDialog({steps:true, type: 10 })
             }
         })
-        this.$store.dispatch('Global/actionReport',17);
+        this.$store.dispatch('User/actionReport',12);
     },
     methods:{
         getIncomeList(){
@@ -213,14 +213,14 @@ export default {
         },
         copySuccess(){
             this.$toast(`${this.$t("other_044")}`);
-            this.$store.dispatch('Global/actionReport',19);
+            this.$store.dispatch('User/actionReport',14);
         },
         copCodeSuccess(){
             this.$toast(`${this.$t("other_044")}`);
-            this.$store.dispatch('Global/actionReport',20);
+            this.$store.dispatch('User/actionReport',15);
         },
         showRule(){
-            this.$store.dispatch('Global/actionReport',18);
+            this.$store.dispatch('User/actionReport',13);
             this.$popDialog({ content: this.help_url, title:"Millionaire Task Rules", type: 5 })
         },
         formatTime(time) {

@@ -70,11 +70,12 @@ export default {
             this.$emit("read_all");
         },
         showRule(){
-            if(!getToken()){
-                this.$store.dispatch('Global/actionReport',5)
-            }else{
-                this.$store.dispatch('Global/actionReport',6)
-            }
+            // if(!getToken()){
+            //     this.$store.dispatch('User/actionReport',5)
+            // }else{
+            //     this.$store.dispatch('User/actionReport',6)
+            // }
+            this.$store.dispatch('User/actionReport',4)
             this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
         }
     },

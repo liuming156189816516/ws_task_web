@@ -167,7 +167,6 @@ export default {
         this.getGroupMess();
     },
     mounted(){
-        this.$store.dispatch('User/actionReport',8) 
         this.getIncomeList();
         this.$nextTick(()=>{
             const isTips = JSON.parse(localStorage.getItem('step_03'));
@@ -175,6 +174,7 @@ export default {
                 this.$popDialog({ steps:true, type: 11 })
             }
         })
+        this.$store.dispatch('User/actionReport',8) 
     },
 	methods: {
         async getGroupMess(){

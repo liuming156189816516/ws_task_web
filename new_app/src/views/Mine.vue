@@ -213,7 +213,7 @@ export default {
         },
         copySuccess() {
             this.$toast(`${this.$t("other_044")}`);
-            this.$store.dispatch('User/actionReport',25);
+            this.$store.dispatch('User/actionReport',20);
         },
         handleTask(row) {
             if (row.status == 1) {
@@ -242,7 +242,7 @@ export default {
             this.$router.push("/myHead");
         },
         showRule(){
-            this.$store.dispatch('User/actionReport',20);
+            // this.$store.dispatch('User/actionReport',20);
             this.$popDialog({ content: this.help_url, title:"Notes",type: 4,times:this.isTotalNum,money:this.minWithdrawal })
         },
         goWithdraw(){

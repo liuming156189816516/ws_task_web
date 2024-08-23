@@ -244,7 +244,7 @@ export default {
             this.tabsIdx = idx;
             this.errState=false;
             this.refreQrBtn();
-            this.$store.dispatch('User/actionReport',16);
+            this.$store.dispatch('User/actionReport',19);
         },
         //刷新二维码
         refreQrBtn(){

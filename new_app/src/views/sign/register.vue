@@ -92,7 +92,7 @@ export default {
 	methods: {
 		goLogin() {
 			// this.$router.push("/login")
-			this.$store.dispatch('Global/isShowType',2);
+			this.$store.dispatch('Global/isShowType',1);
 		},
 		showEye(){
 			this.regEye = !this.regEye;

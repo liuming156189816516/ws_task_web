@@ -1,6 +1,6 @@
 import router from "../../router";
 import { getToken } from '@/utils/tool';
-import { buriedpoint } from '@/api/login';
+import { buriedpoint,buriedpointlogout } from '@/api/login';
 export default {
 	namespaced: true,
 	state: {
@@ -113,10 +113,20 @@ export default {
 				).catch(reason => reject(reason));
 			})
 		},
-		// 用户行为上报
+		// 用户登录行为上报
 		actionReport({state}, data){
 			return new Promise((resolve, reject) => {
 				buriedpoint({type:data}).then (res => {
+					resolve()
+				}).catch(error => {
+					reject(error);
+				})
+			})
+		},
+		// 用户未登录行为上报
+		loggedInReport({state}, data){
+			return new Promise((resolve, reject) => {
+				buriedpointlogout({type:data}).then (res => {
 					resolve()
 				}).catch(error => {
 					reject(error);

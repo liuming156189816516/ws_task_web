@@ -38,4 +38,8 @@ export const gethead = (param) => {
 export const buriedpoint = (param) => {
     return request({url: '/account/buriedpoint',method: 'post',data:param})
 }
+export const buriedpointlogout = (param) => {
+    return request({url: '/account/buriedpointlogout',method: 'post',data:param})
+}
+
 

@@ -146,7 +146,7 @@ export default {
             this.$store.dispatch('Global/actionReport',2)
         }else{
             // this.initRuleTips();
-            this.$store.dispatch('Global/actionReport',1);
+            this.$store.dispatch('Global/loggedInReport',1);
             this.taskOption= this.$Helper.defaultOption();
         }
     },
@@ -208,13 +208,13 @@ export default {
             const path = this.taskType[row.type];
             if(!getToken()){
                 if(path=="pullgroupTask"){
-                    this.$store.dispatch('Global/actionReport',7) 
+                    this.$store.dispatch('Global/loggedInReport',7) 
                 }
                 if(path=="spread"){
-                    this.$store.dispatch('Global/actionReport',9) 
+                    this.$store.dispatch('Global/loggedInReport',9) 
                 }
                 if(path=="scanOnline"){
-                    this.$store.dispatch('Global/actionReport',11) 
+                    this.$store.dispatch('Global/loggedInReport',11) 
                 }
             }
             if(getToken()){

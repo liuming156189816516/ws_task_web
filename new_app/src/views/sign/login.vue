@@ -74,7 +74,7 @@ export default {
 		}else{
 			this.isBottom = true;
 		}
-		this.$store.dispatch('Global/actionReport',4)
+		this.$store.dispatch('Global/loggedInReport',4)
 		// this.userAccount();
     },
 	methods: {
@@ -135,14 +135,12 @@ export default {
 		},
 		userAccount() {
 			let storage = window.localStorage;
-			console.log(storage['isstorename']);
 			if (storage['isstorename'] == 'yes') {
 				this.autologin = true;
 				this.username = storage['loginphone'];
 				this.password = storage['loginpwd'];
 				this.handleLogin();
 			} else {
-				console.log("88888888888888");
 				this.autologin = false;
 				this.username = storage['loginphone'];
 				this.password = storage['loginpwd'];

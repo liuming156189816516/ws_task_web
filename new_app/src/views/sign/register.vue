@@ -87,7 +87,7 @@ export default {
 		}
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();
-		this.$store.dispatch('Global/actionReport',3)
+		this.$store.dispatch('Global/loggedInReport',3)
 	},
 	methods: {
 		goLogin() {

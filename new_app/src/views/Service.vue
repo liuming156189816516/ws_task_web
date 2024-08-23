@@ -38,6 +38,7 @@
 <script>
 import { mapState } from 'vuex';
 import { gethelp } from '@/api/home';
+import uniFun from "@/utils/uni-webview-js"
 export default {
     data() {
         return {

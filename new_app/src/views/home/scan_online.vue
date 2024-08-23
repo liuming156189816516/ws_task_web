@@ -212,12 +212,12 @@ export default {
     //     this.task_id = this.$route.query.id||"";
     },
     mounted(){
-        this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_04'));
-            if(!isTips){
-                this.$popDialog({steps:true, type: 12 })
-            }
-        })
+        // this.$nextTick(()=>{
+        //     const isTips = JSON.parse(localStorage.getItem('step_04'));
+        //     if(!isTips){
+        //         this.$popDialog({steps:true, type: 12 })
+        //     }
+        // })
         this.$store.dispatch('Global/actionReport',21);
     },
 	methods: {

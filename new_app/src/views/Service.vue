@@ -28,7 +28,7 @@
                             <p class="font_24">24/7 service</p>
                         </div>
                     </div>
-                    <van-button class="font_28" type="primary" @click="$Helper.globalService()">NOW</van-button>
+                    <van-button class="font_28" type="primary" @click="contactService">NOW</van-button>
                 </div>
             </div>
         </div>
@@ -68,6 +68,13 @@ export default {
         async getHelpVideo() {
             const { url } = await gethelp({});
             this.help_url = url;
+        },
+        contactService(){
+            if(this.$Helper.checkBrowser()){
+                window.open(process.env.VUE_APP_SERVICE,"_blank");
+            }else{
+                uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
+            }
         }
     }
 }

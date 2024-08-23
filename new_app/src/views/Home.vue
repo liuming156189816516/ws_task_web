@@ -142,11 +142,11 @@ export default {
     },
     activated() {
         if(getToken()){
-           this.initHandle();
-            this.$store.dispatch('Global/actionReport',1)
+            this.initHandle();
+            this.$store.dispatch('Global/actionReport',2)
         }else{
             // this.initRuleTips();
-            this.$store.dispatch('Global/actionReport',2)
+            this.$store.dispatch('Global/actionReport',1);
             this.taskOption= this.$Helper.defaultOption();
         }
     },

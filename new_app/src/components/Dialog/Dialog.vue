@@ -382,11 +382,8 @@ export default {
                             position: absolute;
                             top: 0;
                             left: 0;
-                             z-index: 1;
-                            background: $font-color-white;
-                            img{
-                                
-                            }
+                            z-index: 1;
+                            background: rgba($color: #fff, $alpha: .5);
                         }
                     }
                     .tips_icon{

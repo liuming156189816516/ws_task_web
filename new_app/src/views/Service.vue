@@ -205,8 +205,7 @@ export default {
                             top: 0;
                             left: 0;
                             z-index: 1;
-                            background: $font-color-white;
-                            // background: rgba($color: #000000, $alpha: .5);
+                            background: rgba($color: #fff, $alpha: .5);
                             img{
                                 height: 60px;  
                             }

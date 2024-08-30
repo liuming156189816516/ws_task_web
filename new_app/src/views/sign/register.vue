@@ -3,10 +3,10 @@
 		<!-- <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header> -->
 		<div class="head_main w_f flex-item flex-dir-c">
 			<div class="head_title">
-				Sign up
+				{{$t('login_014')}}
 				<img src="@/assets/images/sign/close_icon.png" @click="bankIcon">
 			</div>
-			<div class="small_text flex-item font_32">Create your account</div>
+			<div class="small_text flex-item font_32"> {{$t('login_035')}} </div>
 		</div>
 		<div class="sign_login">
 			<!-- <img class="login_img" src="@/assets/images/logo.png" alt="" srcset=""> -->

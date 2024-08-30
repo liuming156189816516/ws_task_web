@@ -12,10 +12,10 @@
 		</div> -->
 		<div class="head_main w_f flex-item flex-dir-c">
 			<div class="head_title">
-				Sign in to your Account
+				{{$t('login_034')}}
 				<img src="@/assets/images/sign/close_icon.png" @click="bankIcon">
 			</div>
-			<div class="small_text flex-item font_32">Sign in to your account</div>
+			<div class="small_text flex-item font_32">{{$t('login_034')}}</div>
 		</div>
 		<div class="login_main flex-item flex-dir-c">
 			<div class="sign_login">

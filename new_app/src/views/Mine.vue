@@ -3,7 +3,7 @@
         <div class="top_model w_f flex-item flex-dir-c">
             <div class="user_mess w_f flex-item flex-dir-c">
                 <!-- <page-header :title="$t('login_027')" :showBack="false"/> -->
-                <div class="page_title w_f flex-item font_32 flex-center">Account</div>
+                <div class="page_title w_f flex-item font_32 flex-center"> {{$t('table_004')}} </div>
                 <div class="w_f flex-item">
                     <div class="user_head" @click="updateHead">
                         <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
@@ -26,13 +26,13 @@
                             <span>{{user_money||0.00}}</span>
                         </div>
                     </div>
-                    <van-button :class="['font_30',user_money<minWithdrawal||user_money>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">Withdraw</van-button>
-                    <div class="draw_tips font_22" v-if="user_money>minWithdrawal&&isWithdrawal">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
-                    <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&isWithdrawal" style="color:#F52C2C">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div>
-                    <div class="draw_tips font_22" v-else-if="user_money>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">Number of withdrawals remaining Today：{{ withdrawalNum }}</div>
+                    <van-button :class="['font_30',user_money<minWithdrawal||user_money>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">{{$t('other_055')}}</van-button>
+                    <div class="draw_tips font_22" v-if="user_money>minWithdrawal&&isWithdrawal"> {{$t('mine_014',{value:withdrawalNum})}}</div>
+                    <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&isWithdrawal" style="color:#F52C2C">{{$t('mine_015',{value:minWithdrawal-user_money})}}</div>
+                    <div class="draw_tips font_22" v-else-if="user_money>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">{{$t('mine_014',{value:withdrawalNum})}}</div>
                     <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
-                        <p class="w_f flex-item flex-align flex-center">Number of withdrawals remaining Today：{{ withdrawalNum }}</p>
-                        <p>You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</p>
+                        <p class="w_f flex-item flex-align flex-center">{{$t('mine_014',{value:withdrawalNum})}}</p>
+                        <p>{{$t('mine_015',{value:minWithdrawal-user_money})}}</p>
                     </div>
                     <!-- <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
                 </div>
@@ -40,14 +40,14 @@
             <div class="self_jinbi w_f flex-item">
                 <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(0)">
                     <div class="flex-item flex-align flex-between">
-                        <span class="font_28">Today's Earnings</span>
+                        <span class="font_28">{{$t('mine_016')}}</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
                     <div class="self_dold flex-item">{{ allIncome.today_bonus ||0 }}</div>
                 </div>
                 <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(1)">
                     <div class="flex-item flex-align flex-between">
-                        <span class="font_28">Yesterday's Earnings</span>
+                        <span class="font_28">{{$t('mine_017')}}</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
                     <div class="self_dold flex-item">{{ allIncome.yesterday_bonus ||0 }}</div>

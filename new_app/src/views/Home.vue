@@ -2,7 +2,7 @@
     <div class="home_warp w_f" ref="warpBox">
         <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true" />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
-            <div class="ui_time flex-item flex-center font_50" id="step1">Ultimate Wealth Challenge</div>
+            <div class="ui_time flex-item flex-center font_50" id="step1">{{$t('home_091')}}</div>
             <div class="notice_warp">
                 <div class="notice_mian">
                     <img class="left_icon" src="@/assets/images/home/news_icon.png">
@@ -15,9 +15,9 @@
             </div>
             <div class="adv_warp w_f flex-item">
                 <div class="adv_text">
-                    <h2 class="font_32">CashCow</h2>
-                    <p class="flex-item">Do the tasks well</p>
-                    <p class="flex-item">get your cash quickly</p>
+                    <h2 class="font_32">{{$t('home_044')}}</h2>
+                    <p class="flex-item">{{$t('home_092')}}</p>
+                    <p class="flex-item">{{$t('home_095')}}</p>
                 </div>
                 <div class="adv_img">
                     <img src="@/assets/images/home/money_01.png" alt="" srcset="">
@@ -28,11 +28,11 @@
                     <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
                     <div class="task_live flex-item flex-align font_22">
                         <div class="task_live_1 flex-item flex-align">
-                            <span class="flex-item">difficulty level</span>
+                            <span class="flex-item">{{$t('home_093')}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
                         </div>
                         <div class="task_live_2 flex-item flex-align">
-                            <span class="flex-item">earns level</span>
+                            <span class="flex-item">{{$t('home_094')}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
                         </div>
                     </div>
@@ -52,11 +52,11 @@
             </div>
             <div class="record_warp w_f flex-item" v-if="userInfo.token">
                 <div class="today_record w_f flex-item flex-align flex-dir-c">
-                    <div class="top_title w_f flex-item flex-align flex-center font_32">Today's performance</div>
+                    <div class="top_title w_f flex-item flex-align flex-center font_32">{{$t('home_052')}}</div>
                     <div class="self_code w_f flex-item flex-dir-c">
                         <p class="font_32">{{ userInfo.account}}</p>
                         <div class="self_code_mess w_f flex-item flex-align flex-between">
-                            <div class="flex-item font_24">Your current invite code ：<span class="flex-item">{{userInfo.inviteCode }}</span></div>
+                            <div class="flex-item font_24">{{$t('home_053')}}<span class="flex-item">{{userInfo.inviteCode }}</span></div>
                             <van-button class="font_20" type="primary">{{$t('other_006')}}</van-button>
                         </div>
                     </div>
@@ -64,14 +64,14 @@
                         <div class="self_item w_f flex-item flex-dir-c">
                             <div class="self_dold flex-item flex-center">{{ teamStemp.task_income || 0.00 }}</div>
                             <div class="task_type flex-item flex-center flex-align" @click="showTask(1)">
-                                <span class="font_28">Task Earnings</span>
+                                <span class="font_28">{{$t('home_054')}}</span>
                                 <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                             </div>
                         </div>
                         <div class="self_item w_f flex-item flex-dir-c">
                             <div class="self_dold flex-item flex-center">{{ teamStemp.promotion_income || 0.00 }}</div>
                             <div class="flex-item flex-center flex-align" @click="showTask(2)">
-                                <span class="task_type font_28">Millionaire Earnings</span>
+                                <span class="task_type font_28">{{$t('home_055')}}</span>
                                 <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                             </div>
                         </div>
@@ -91,7 +91,6 @@ import { mapState } from 'vuex';
 import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
 import PageHeader from "@/components/Header";
-import dragIcon from "../components/dragIcon.vue";
 import { getaccountincome, gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
 export default {
     name: 'home',
@@ -300,7 +299,7 @@ export default {
                 transform: translateY(-50%);
             }
             .notice_mian{
-                max-width: 540px;
+                width: 540px;
                 overflow: hidden;
                 border-radius: 60px;
                 margin: 0 auto;

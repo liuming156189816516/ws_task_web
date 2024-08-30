@@ -118,6 +118,15 @@
 .font_72 {
   font-size: 72px;
 }
+.mg_24 {
+  margin: 24px 0;
+}
+.mb_24 {
+  margin-bottom: 24px;
+}
+.mt_24 {
+  margin-top: 24px;
+}
 .no-pxtorem-s{
   padding-bottom: 50px;
 }

@@ -5,7 +5,7 @@
             <div class="dropdown_warp">
                 <div class="promote_header flex-item flex-align flex-between">
                     <div class="fiter_icon flex-item flex-align" @click="pulldownState">
-                        <span class="font_28" style="font-weight: 700;">Filter</span>
+                        <span class="font_28" style="font-weight: 700;">{{$t('tail_013')}}</span>
                         <img src="@/assets/images/mine/down_icon.png">
                     </div>
                     <div class="change_value flex-item">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="record_list w_f" v-if="list&&list.length>0">
-            <van-list v-model="loading" :finished="finished" loading-text="loading..." finished-text="No more" offset="60" @load="onLoad">
+            <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                 <div class="record_item flex-item flex-align" v-for="(item,index) in list" :key="index">
                     <img class="l_icon" src="@/assets/images/mine/order_icon.png" alt="">
                     <div class="w_f flex-item flex-align flex-dir-c">
@@ -31,40 +31,27 @@
                             <div class="task_money font_30" v-else>+{{ item.amount }}</div>
                         </div>
                         <div class="order_time w_f flex-item flex-align flex-between font_26">
-                            <span>Balance: {{ item.balance }}</span>
+                            <span>{{$t('home_001',{value:item.balance})}}</span>
                             <span>{{ formatTime(item.itime) }}</span>
                         </div>
                     </div>
                 </div>
             </van-list>
-            <!-- <div class="record_warp record_title">
-                <span>{{$t("tail_004")}}</span>
-                <span>{{$t("tail_002")}}</span>
-                <span>{{$t("pay_016")}}</span>
-            </div>
-            <div class="record_content">
-                <div class="buy-number" v-for="(item,index) in list" :key="index">
-                    <span class="head_title">{{formatTime(item.itime)}}</span>
-                    <span class="head_title">{{filterPay(item.type)}}</span>
-                    <span class="record_cash">{{item.amount}}</span>
-                </div>
-            </div> -->
-            <!-- <PrevNext :len="list.length" :page="page" :limit="limit" :total="total" @to-prev="onPrev" @to-next="onNext"></PrevNext> -->
         </div>
         <div v-else class="empty_tips w_f flex-item flex-align flex-center flex-dir-c">
             <img src="../../assets/images/empty_icon.png" alt="" />
-            <p>ops，still no records</p>
+            <p>{{$t('tail_001')}}</p>
         </div>
         <van-overlay :show = "showState" @click="showState = false">
             <div class="screen_down" @click.stop>
                 <div class="w_f flex-item flex-dir-c">
-                    <p class="font_24">Types of</p>
+                    <p class="font_24">{{$t('tail_002')}}</p>
                     <ul>
                         <li v-for="item in profitType" :key="item.value" :class="stateValue===item.value?'checkActive':''" @click="changeType(item)">
                             {{item.lable}}
                         </li>
                     </ul>
-                    <p class="font_24">Date</p>
+                    <p class="font_24">{{$t('tail_004')}}</p>
                     <ul>
                         <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
                     </ul>

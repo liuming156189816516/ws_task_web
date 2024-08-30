@@ -2,7 +2,7 @@ import store from "../store/";
 import Home from "../views/Home.vue";
 import Footer from "../components/Footer";
 // const initPath = window.localStorage.getItem('token') && window.localStorage.getItem("prologin")? "/home" : "/login";
-// const Login = () => import('../views/sign/login');
+const Login = () => import('../views/sign/login');
 const Register = () => import('../views/sign/register');
 const ForgotPassword = () => import("../views/sign/ForgotPassword");
 //me
@@ -211,16 +211,16 @@ const routes = [{
             title: "投注详情"
         }
     },
-    // {
-    //     path: "/login",
-    //     name: "login",
-    //     component: Login,
-    //     meta: {
-    //         showNavBar: false,
-    //         hasTabBar: false,
-    //         index: 0
-    //     },
-    // },
+    {
+        path: "/login",
+        name: "login",
+        component: Login,
+        meta: {
+            showNavBar: false,
+            hasTabBar: false,
+            index: 0
+        },
+    },
     {
         path: "/register",
         name: "register",
@@ -283,12 +283,12 @@ router.beforeEach((to, from, next) => {
         next({path: "/home",});
         // store.commit('Global/clearKeepAlive', '')
     }
-    if (to.name === 'sign') {
-        store.commit('Global/clearKeepAlive', '')
-    }
-    if (to.meta.keepAlive) {
-        store.commit('Global/keepAlive', to.name)
-    }
+    // if (to.name === 'sign') {
+    //     store.commit('Global/clearKeepAlive', '')
+    // }
+    // if (to.meta.keepAlive) {
+    //     store.commit('Global/keepAlive', to.name)
+    // }
     let token = localStorage.getItem('token');
     if (to.meta.requireAuth) {
         if (token) {

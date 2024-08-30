@@ -47,7 +47,7 @@ export default {
 			device:"",
 			isLoading: false,
 			hasTabBar: false,
-			showNavBar: false,
+			showNavBar: true,
 			transitionName: '',
 			keepAliveNames: ['home'],
 			assistiveTouch: sessionStorage.getItem('plus_ready') && sessionStorage.getItem('plus_ready') === '1',
@@ -62,17 +62,40 @@ export default {
 			userInfo: state => state.User,
 		})
 	},
-	beforeCreate() {},
+	watch: {
+		'$route'(to, from) {
+			// console.log('路由变化:', from.fullPath, '->', to.fullPath);
+		// 处理路由变化后的逻辑
+			if(to.path == "/home"||to.path == "/spread"){
+				this.customHeader("#0e8c60");	
+			}else{
+				this.customHeader();	
+			}
+		}
+	},
 	created() {
-		// console.log(this.$store.state);
 		let preLoadTemp = new preLoad();
 		preLoadTemp.setup();
 		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
-		this.showNavBar = this.$Helper.checkBrowser();
+	},
+	mounted(){
+		this.customHeader("#0e8c60");
 	},
 	methods: {
+		customHeader(color){
+			// if (navigator.userAgent.match(/Android/i)) {
+			// 动态设置 meta theme-color
+			let metaThemeColor = document.querySelector('meta[name=theme-color]');
+			if (!metaThemeColor) {
+				metaThemeColor = document.createElement('meta');
+				metaThemeColor.name = 'theme-color';
+				document.head.appendChild(metaThemeColor);
+			}
+			metaThemeColor.content = color||'#008751'; // 设定颜色
+			// }	
+		},
 		handle_close(){
 			this.$store.dispatch('Global/isCloseTips',false);
 		},

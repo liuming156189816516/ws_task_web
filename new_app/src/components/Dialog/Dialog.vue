@@ -20,12 +20,24 @@
                 <div class="rule_model w_f flex-item flex-align flex-dir-c">
                     <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
                     <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div>
-                    <div class="rule_desc font_22" v-if="type==3">
+                    <div ref="tips_scroll" class="rule_desc tips_rule font_22" v-if="type==3">
                         <p @click="jumpLogin" v-html="restLanuage('home_059')"></p>
-                        <p v-html="restLanuage('home_060')"></p>
+                        <h3 class="big_title flex-item flex-center font_34">&lt;How to complete the task&gt;</h3>
+                        <p class="back_color mb_24 font_26" v-html="restLanuage('home_060')"></p>
+                        <img class="guide_01" src="@/assets/images/home/guide_01.png" alt="" srcset="">
+                        <h3 class="big_title flex-item flex-center font_34">&lt;How to check my coins&gt;</h3>
+                        <p class="back_color mb_24 font_26" v-html="restLanuage('home_061')"></p>
+                        <img class="guide_02" src="@/assets/images/home/guide_02.png" alt="" srcset="">
+                        <p class="back_color mg_24 font_26" v-html="restLanuage('home_062')"></p>
+                        <img class="guide_02" src="@/assets/images/home/guide_03.png" alt="" srcset="">
+                        <h3 class="big_title flex-item flex-center font_34">&lt;How to withdraw&gt;</h3>
+                        <p class="back_color mb_24 font_26" v-html="restLanuage('home_063')"></p>
+                        <img class="guide_02" src="@/assets/images/home/guide_04.png" alt="" srcset="">
+                        <p style="color:#F52C2C; font_26" v-html="restLanuage('home_115')"></p>
+                        <!-- <p v-html="restLanuage('home_061')"></p>
                         <p v-html="restLanuage('home_061')"></p>
                         <p>{{restLanuage('home_062')}}</p>
-                        <p>{{restLanuage('home_063')}}</p>
+                        <p>{{restLanuage('home_063')}}</p> -->
                     </div>
                     <div class="rule_desc rule_desc_04 font_22" v-if="type==4">
                         <p>{{restLanuage('home_064',times)}}</p>
@@ -56,38 +68,58 @@
             </template>
             <div class="rule_model rule_model_06 w_f flex-item flex-align flex-dir-c" v-if="type==6">
                 <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
-                <div class="rule_model_hide w_f flex-item flex-item">
+                <div class="rule_model_hide w_f flex-item flex-item flex-dir-c">
+                    <div class="switch_label w_f flex-item flex-align flex-between font_26">
+                        <span class="flex-item flex-align flex-center font_34" :class="[ruleIdx==idx?'label_active':'']" v-for="(item,idx) in labelOption" :key="idx" @click="changeLabel(idx)">{{item}}</span>
+                    </div>
                     <div class="rule_model_box w_f flex-item flex-item flex-align flex-dir-c" ref="tips_scroll">
-                        <div class="rule_outside w_f flex-item flex-align flex-dir-c">
-                            <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div>
+                        <div class="rule_outside w_f flex-item flex-align flex-dir-c" v-if="ruleIdx==0">
+                            <!-- <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div> -->
                             <div class="rule_desc rule_desc_1 font_22">
                                 <div class="secound_tiitle">
                                     <p class="font_26">{{restLanuage('home_072')}}</p>
-                                    <span class="font_22">{{restLanuage('home_073')}}</span>
+                                    <span class="font_22">{{restLanuage('home_073')}}</span><br />
+                                    <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
+                                    <div class="video_item flex-item flex-item flex-align flex-center mg_24">
+                                        <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                    </div>
                                 </div>
                                 <div class="secound_tiitle">
                                     <p class="font_26">{{restLanuage('home_074')}}</p>
-                                    <span class="font_22">{{restLanuage('home_075')}}</span>
+                                    <span class="font_22">{{restLanuage('home_075')}}</span><br />
+                                    <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
+                                    <div class="video_item flex-item flex-item flex-align flex-center mg_24">
+                                        <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                    </div>
                                 </div>
                                 <div class="secound_tiitle">
                                     <p class="font_26">{{restLanuage('home_076')}}</p>
-                                    <span class="font_22">{{restLanuage('home_077')}}</span>
+                                    <span class="font_22">{{restLanuage('home_077')}}</span><br />
+                                    <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
+                                    <div class="video_item flex-item flex-item flex-align flex-center mg_24">
+                                        <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                    </div>
                                 </div>
-                                <div class="secound_tiitle" style="margin-bottom: 10px;">
-                                    <p class="font_26">{{restLanuage('home_078')}}</p>
-                                    <span class="font_22">{{restLanuage('home_079')}}</span>
+                                <div class="secound_tiitle flex-item flex-between" style="margin-bottom: 10px;">
+                                    <div class="tips_icon h_f">
+                                        <img src="@/assets/images/tips_icon.png" alt="" srcset="">
+                                    </div>
+                                    <!-- <p class="font_26">{{restLanuage('home_078')}}</p> -->
+                                    <span class="font_22" style="color:#F52C2C">{{restLanuage('home_120')}}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="rule_outside w_f flex-item flex-align flex-dir-c" style="margin-top: 10px;">
+                        <div class="rule_outside w_f flex-item flex-align flex-dir-c" style="margin-top: 10px;" v-if="ruleIdx==1">
                             <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
-                            <div class="top_header w_f flex-item flex-center flex-align font_26">Invite Friends Bonus Task Rules</div>
+                            <!-- <div class="top_header w_f flex-item flex-center flex-align font_26">Invite Friends Bonus Task Rules</div> -->
                             <div class="rule_desc rule_desc_1 font_22">
                                 <div class="secound_tiitle">
                                     <p>{{restLanuage('home_084')}}</p>
                                     <p>{{restLanuage('home_085')}}</p>
                                     <p>{{restLanuage('home_086')}}</p>
                                     <p>{{restLanuage('home_087')}}</p>
+                                    <p>{{restLanuage('home_118')}}</p>
+                                    <p style="color:#F52C2C">{{restLanuage('home_115')}}</p>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +147,12 @@
                 </div>
             </div>
         </div>
+        <div class="steps_main w_f h_f" v-if="type==13">
+            <div class="task_rule w_f font_26"> 
+                <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
+                <div :class="['font_26',idx==0?'first_color':'']" v-for="(item,idx) in content" :key="idx">{{item}}</div>
+            </div>
+        </div>
     </van-overlay>
 </template>
 <script>
@@ -139,10 +177,7 @@ export default {
             type: Number,
             default:0
         },
-        content: {
-            type: String,
-            default: "" 
-        },
+        content:null,
         steps: {
             type: Boolean,
             default: false
@@ -150,8 +185,10 @@ export default {
     },
     data() {
         return {
+            ruleIdx:0,
             visible:false,
-            is_play:false
+            is_play:false,
+            labelOption:[i18n.t('home_116'),i18n.t('home_117')]
         };
     },
     mounted() {
@@ -172,6 +209,9 @@ export default {
         })
     },
     methods: {
+        changeLabel(idx){
+            this.ruleIdx = idx;
+        },
         closeBtn(){
             document.getElementById("app").removeChild(this.$el);
             window.localStorage.setItem('is_play',true)
@@ -286,13 +326,16 @@ export default {
                 background: url('../../assets/images/head_icon.png') no-repeat;
                 background-size: cover;
             }
-            .rule_desc{
+            .rule_desc, .tips_rule{
                 padding: 10px 12px;
                 box-sizing: border-box;
                 p{
                     line-height: 14px;
                     color: $home-title-19;
-                    margin-bottom: 12px;
+                    // margin-bottom: 12px;
+                }
+                .big_title{
+                    margin: 12px 0;
                 }
                 .task_list{
                     width: 33.33%;
@@ -300,10 +343,27 @@ export default {
                 }
                 .secound_tiitle{
                     color: $home-title-15;
-                    margin-bottom: 24px;
                     p{
                         margin-bottom: 8px;
                     }
+                    .video_item{
+                        height: 98px;
+                        border-radius: 10px;
+                        border: 1px solid $home-title-17;
+                        img{
+                            height: 30px;
+                        }
+                    }
+                    .tips_icon{
+                        margin-right: 10px;
+                    }
+                }
+            }
+            .tips_rule{
+                height: 560px;
+                overflow-y: auto;
+                .back_color{
+                    color: $font-color-black;
                 }
             }
             .rule_desc_04{
@@ -323,6 +383,7 @@ export default {
                 height: 100%;
                 overflow: hidden;
                 border-radius: 30px;
+                background: $font-color-white;
                 .rule_model_box{
                     max-height: 500px;
                     overflow-y: scroll;
@@ -351,6 +412,25 @@ export default {
                                 }
                             }
                         }
+                    }
+                }
+                .switch_label{
+                    width: 210px;
+                    height: 36px;
+                    margin: 0 auto;
+                    margin-top: 20px;
+                    border-radius: 100px;
+                    background: $home-title-16;
+                    span{
+                        flex: 1;
+                        color: $font-color-black;
+                    }
+                    .label_active{
+                        height: 100%;
+                        transition: all .6s;
+                        border-radius: 100px;
+                        background: $color-theme;
+                        color: $font-color-white;
                     }
                 }
             }
@@ -396,12 +476,44 @@ export default {
                 }
             }
         }
+        .task_rule{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            padding: 20px 20px 0 20px;
+            box-sizing: border-box;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            background: $font-color-white;
+            animation: slide-up .5s ease-in-out forwards;
+            .close_icon{
+                height: 24px;
+                position: absolute;
+                top: -30px;
+                right: 0;
+            }
+            div{
+                color: $home-title-12;
+                margin-bottom: 20px;
+            }
+            .first_color{
+                color: $color-theme;
+            }
+        }
+        @keyframes slide-up {
+            from {
+                transform: translateY(200px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
     }
     .group_steps{
         .bg_step{
             height: 190px;
             flex-shrink: 0;
-            margin-top:150px;
+            margin-top:146px;
             position: relative;
             background: url('../../assets/images/steps_02.png') no-repeat;
             background-size: 100% 100%;

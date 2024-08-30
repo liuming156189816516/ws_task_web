@@ -13,23 +13,23 @@
                 </div>
             </div>
             <div class="share_bonus w_f flex-item flex-dir-c">
-                <p class="Win_l font_72 flex-item">Share the joy</p>
-                <p class="Win_r font_72 flex-item">Win cash </p>
+                <p class="Win_l font_72 flex-item">{{$t('home_104')}}</p>
+                <p class="Win_r font_72 flex-item">{{$t('home_105')}}</p>
                 <div class="share_rule flex-item flex-center" @click="showRule">
                     <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                    <span class="flex-item font_26">Tutorials & Rules</span>
+                    <span class="flex-item font_26">{{$t('spre_003')}}</span>
                 </div>
             </div>
             <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">
-                    <p class="task_title w_f flex-item flex-center font_28">Task Information</p>
+                    <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
                     <div class="w_f flex-item flex-between">
                         <div class="task_item">
-                            <p class="task_text font_24">Current Task Number</p>
+                            <p class="task_text font_24">{{$t('home_107')}}</p>
                             <p class="task_num font_28">{{ teamStemp.ser_no }}</p>
                         </div>
                         <div class="task_sure_time">
-                            <p class="task_text font_24">Current Task Status</p>
+                            <p class="task_text font_24">{{$t('home_108')}}</p>
                             <p class="task_num flex-item font_28">
                                 {{taskOption[teamStemp.status]}}
                                 <van-count-down :time="taskTime" />
@@ -48,12 +48,12 @@
                             <img src="@/assets/images/home/num1_icon.png">
                         </div>
                         <div class="task_award w_f">
-                            <div class="task_book font_28">Import contacts to your phone's address book</div>
-                            <div class="task_desc font_20">Click the 'Import' button on the right to add the contact information provided by the system to the system's address book!</div>
+                            <div class="task_book font_28">{{$t('home_109')}}</div>
+                            <div class="task_desc font_20">{{$t('home_110')}}</div>
                         </div>
                         <div class="w_f flex-item flex-between flex-align font_24">
-                            <span class="show_account" @click="viewTaskNum">View Contact Numbers</span>
-                            <van-button type="primary" :disabled="isShow" @click="downAddress">Import</van-button>
+                            <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
+                            <van-button type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                     </div>
 
@@ -62,31 +62,31 @@
                             <img src="@/assets/images/home/num2_icon.png">
                         </div>
                         <div class="task_award w_f">
-                            <div class="task_book font_28">Submit Group Link</div>
+                            <div class="task_book font_28">{{$t('home_113')}}</div>
                             <!-- <div class="task_desc font_20">Click the Import button on the right to add the contact information provided by the system to the system’s address book!</div> -->
                         </div>
                         <div class="group_link w_f flex-item flex-between flex-align font_24">
                             <input type="text" v-model="group_link" :disabled="isShow" placeholder="Enter Group Link">
-                            <van-button :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">Submit</van-button>
+                            <van-button :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="record_legend w_f flex-item flex-dir-c">
-                <h3 class="font_28">Records：</h3>
-                <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalSupport()">online customer service</span></div>
+                <h3 class="font_28">{{$t('spre_009')}}</h3>
+                <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_28">
-                    <span class="flex-item flex-align">Time</span>
-                    <span class="flex-item flex-center">Task Number</span>
-                    <span class="flex-item flex-center">Status</span>
-                    <span class="flex-item">Bonus</span>
+                    <span class="flex-item flex-align">{{$t('tail_003')}}</span>
+                    <span class="flex-item flex-center">{{$t('home_031')}}</span>
+                    <span class="flex-item flex-center">{{$t('tail_008')}}</span>
+                    <span class="flex-item">{{$t('spre_012')}}</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
                         <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
                     <div class="record_scroll w_f flex-item flex-dir-c">
-                        <van-list v-model="loading" :finished="finished" loading-text="loading..." finished-text="No more" offset="60" @load="onLoad">
+                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in pullGroupList" :key="idx">
                                 <span class="flex-item">{{ formatTime(item.itime) }}</span>
                                 <span class="flex-item flex-center">{{ item.ser_no }}</span>
@@ -99,11 +99,11 @@
                 <template v-else>
                     <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
                         <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                        <p class="font_28">Invite your friends quickly to earn cash!</p>
+                        <p class="font_28">{{$t('spre_013')}}</p>
                     </div>
                 </template>
                 <div class="title_top footer_tips w_f flex-item font_24">
-                    Task time is based on the start time of the task ,the system currently retains records for up to 3 months
+                    {{$t('spre_014')}}
                 </div>
             </div>
         </div>

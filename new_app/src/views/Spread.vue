@@ -2,8 +2,8 @@
     <div class="spread_warp" ref="warpBox" @scroll="handleScrolStop">
         <page-header :title="$t('home_045')" :noBg="false" :bgColor="false" :showBack="false" />
         <div class="w_f spread_title flex-item font_50 flex-dir-c">
-            <p class="flex-item flex-center">Profit from sharing</p>
-            <p class="flex-item flex-center">Earn continuously by inviting</p>
+            <p class="flex-item flex-center">{{$t('spre_001')}}</p>
+            <p class="flex-item flex-center">{{$t('spre_002')}}</p>
         </div>
         <div class="notice_warp">
             <div class="notice_mian">
@@ -18,25 +18,25 @@
         <div class="share_main w_f">
             <div class="share_rule flex-item flex-center" @click="showRule">
                 <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                <span class="flex-item font_26">Tutorials & Rules</span>
+                <span class="flex-item font_26">{{$t('spre_003')}}</span>
             </div>
             <div class="cover_img flex-item">
                 <img class="mask_img" src="@/assets/images/mill/bg_02.png" alt="" srcset="">
                 <div class="spred_mess w_f">
-                    <div class="top_title w_f font_32 flex-item flex-align flex-center">Receive a large bonus</div>
+                    <div class="top_title w_f font_32 flex-item flex-align flex-center">{{$t('spre_004')}}</div>
                     <div class="spred_m w_f">
-                        <p class="w_f font_28">Sharing your invitation link or referral code</p>
+                        <p class="w_f font_28">{{$t('spre_005')}}</p>
                         <div class="spred_l">
                            <div class="w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
-                                <span class="left_desc flex-item font_28">My invitation link</span>
+                                <span class="left_desc flex-item font_28">{{$t('spre_006')}}</span>
                                 <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                             </div>
                             <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
                            </div>
                            <div class="invit_code w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
-                                <span class="left_desc flex-item font_28">My invite code</span>
+                                <span class="left_desc flex-item font_28">{{$t('spre_007')}}</span>
                                 <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button>
                             </div>
                             <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
@@ -48,7 +48,7 @@
         </div>
         <div class="share_continer w_f flex-item flex-dir-c">
             <div class="earn_warp flex-item flex-dir-c">
-                <p class="font_32">Earn rewards in just 4 simple steps</p>
+                <p class="font_32">{{$t('spre_008')}}</p>
                 <div class="w_f step_warp flex-item">
                     <div class="step_item w_f flex-item flex-align flex-dir-c" v-for="(item,idx) in stepOptopn" :key="idx">
                         <div class="w_f flex-item flex-center">
@@ -64,17 +64,17 @@
                 </div>
             </div>
             <div class="record_legend w_f flex-item flex-dir-c">
-                <h3 class="font_28">Records：</h3>
-                <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalSupport()">online customer service</span></div>
+                <h3 class="font_28">{{$t('spre_009')}}</h3>
+                <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head top_title_1 w_f flex-item flex-align flex-between font_28">
-                    <span>Time</span>
-                    <span>Bonus</span>
+                    <span>{{$t('tail_003')}}</span>
+                    <span>{{$t('spre_012')}}</span>
                 </div>
                 <template v-if="millionList&&millionList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
-                        <van-list v-model="loading" :finished="finished" loading-text="loading..." finished-text="No more" offset="60" @load="onLoad">
+                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in millionList" :key="idx">
                                 <span>{{ formatTime(item.itime) }}</span>
                                 <span class="record_cash">{{ item.amount }}</span>
@@ -85,11 +85,11 @@
                 <template v-else>
                     <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
                         <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                        <p class="font_28">Invite your friends quickly to earn cash!</p>
+                        <p class="font_28">{{$t('spre_013')}}</p>
                     </div>
                 </template>
                 <div class="title_top footer_tips w_f flex-item font_24">
-                    Task time is based on the start time of the task ,the system currently retains records for up to 3 months
+                    {{$t('spre_014')}}
                 </div>
             </div>
         </div>
@@ -100,7 +100,6 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import QRCode from 'qrcodejs2'
 import { formatTime } from "@/utils/tool";
 import { getinvitelink} from '@/api/bill';
 import PageHeader from "@/components/Header";
@@ -135,22 +134,22 @@ export default {
         stepOptopn(){
             return [
                 {
-                    text:"Share your link",
+                    text:this.$t('spre_015'),
                     img:"s_01",
                     icon:"img_001"
                 },
                 {
-                    text:"Invitee register and log in",
+                    text:this.$t('spre_016'),
                     img:"s_02",
                     icon:"img_002"
                 },
                 {
-                    text:"Invitee completes the task",
+                    text:this.$t('spre_017'),
                     img:"s_03",
                     icon:"img_003"
                 },
                 {
-                    text:"Distribute bonus",
+                    text:this.$t('spre_018'),
                     img:"s_04",
                     icon:"img_004"
                 }
@@ -199,16 +198,6 @@ export default {
                 this.invit_link = invite_link;
                 // this.$refs.qrcodeImg.textContent="";
                 // this.createQrcode(this.invit_link);
-            })
-        },
-        createQrcode(url){
-            new QRCode(this.$refs.qrcodeImg, {
-                text: url,
-                width: 182,
-                height: 182,
-                colorDark: "#333333",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.L
             })
         },
         copySuccess(){

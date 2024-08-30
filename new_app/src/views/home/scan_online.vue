@@ -13,11 +13,11 @@
                 </div>
             </div>
             <div class="share_bonus w_f flex-item flex-dir-c">
-                <p class="Win_l font_52 flex-item">Add Your Social Account</p>
-                <p class="Win_r font_64 flex-item">Win Extra Cash</p>
+                <p class="Win_l font_52 flex-item">{{$t('home_096')}}</p>
+                <p class="Win_r font_64 flex-item">{{$t('home_097')}}</p>
                 <div class="share_rule flex-item flex-center font_38" @click="showRule">
                     <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                    <span class="flex-item font_26">Tutorials & Rules</span>
+                    <span class="flex-item font_26">{{$t('spre_003')}}</span>
                 </div>
             </div>
             <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">
@@ -28,11 +28,11 @@
             <div class="task_main w_f flex-item flex-dir-c">
                 <div class="task_item w_f flex-item flex-dir-c font_34">
                     <div class="task_award w_f">
-                        <div class="task_book font_34">Scan QR code</div>
+                        <div class="task_book font_34"> {{$t('home_098')}} </div>
                     </div>
                     <div class="w_f flex-item flex-between flex-align font_24">
-                        <span class="show_account">Add your WhatsApp account</span>
-                        <van-button type="primary" @click="addQrcode">Add Now</van-button>
+                        <span class="show_account">{{$t('home_099')}}</span>
+                        <van-button type="primary" @click="addQrcode">{{$t('home_100')}}</van-button>
                     </div>
                 </div>
 
@@ -40,14 +40,14 @@
                     <div class="ws_head w_f flex-item flex-dir-c">
                         <div class="task_award w_f">
                             <div class="task_book flex-item flex-align font_34" @click="initWechatList(1)">
-                                <span>Account List </span>
+                                <span> {{$t('home_101')}} </span>
                                 <img src="@/assets/images/home/refsh_icon.png" alt="" srcset="">
                             </div>
                         </div>
                         <div class="title_top title_head_top w_f flex-item flex-align flex-between font_28" v-if="wechaList&&wechaList.length>0">
-                            <span class="flex-item flex-align">Account</span>
-                            <span class="flex-item flex-center">Status</span>
-                            <span class="flex-item flex-center">Operation</span>
+                            <span class="flex-item flex-align">{{$t('home_020')}}</span>
+                            <span class="flex-item flex-center">{{$t('home_021')}}</span>
+                            <span class="flex-item flex-center">{{$t('home_022')}}</span>
                         </div>
                     </div>
                     <div class="ws_list w_f flex-item flex-dir-c" >
@@ -60,13 +60,13 @@
                                         {{statusOption[item.status]}}
                                     </span>
                                     <!-- <span class="flex-item flex-center">On Line</span> -->
-                                    <span class="log_out flex-item flex-align flex-center font_26" @click="showDelBtn(item)">Log Out</span>
+                                    <span class="log_out flex-item flex-align flex-center font_26" @click="showDelBtn(item)">{{$t('other_010')}}</span>
                                 </div>
                             </template>
                             <template v-else>
                                 <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
                                     <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                                    <p class="font_28">Add your account and win cash</p>
+                                    <p class="font_28">{{$t('home_102')}}</p>
                                 </div>
                             </template>
                         </div>
@@ -75,13 +75,13 @@
             </div>
         </div>
         <div class="record_legend w_f flex-item flex-dir-c">
-            <h3 class="font_28">Records：</h3>
-            <div class="record_derc font_22">If you have any questions about the invitation records，please contact <span class="focus_tips" @click="$Helper.globalSupport()">online customer service</span></div>
+            <h3 class="font_28">{{$t('spre_009')}}</h3>
+            <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
         </div>
         <div class="record_list w_f flex-item flex-dir-c">
             <div class="title_top title_top_head w_f flex-item flex-align flex-between font_28">
-                <span class="flex-item flex-align">Time</span>
-                <span class="flex-item">Bonus</span>
+                <span class="flex-item flex-align">{{$t('tail_003')}}</span>
+                <span class="flex-item">{{$t('spre_012')}}</span>
             </div>
             <template v-if="wsTaskList&&wsTaskList.length>0">
                 <div class="record_scroll w_f flex-item flex-dir-c">
@@ -94,17 +94,19 @@
             <template v-else>
                 <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
                     <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                    <p class="font_28">Invite your friends quickly to earn cash!</p>
+                    <p class="font_28">{{$t('spre_013')}}</p>
                 </div>
             </template>
             <div class="title_top footer_tips w_f flex-item font_24">
-                Task time is based on the start time of the task ,the system currently retains records for up to 3 months
+                {{$t('spre_014')}}
             </div>
         </div>
         <van-overlay :show="visible" class="qr_mask_model w_f flex-item flex-align">
             <div class="qr_warp">
                 <img class="close_icon" src="@/assets/images/close_icon.png" @click="visible=false">
-                <div class="qr_rule font_24">Scan the QR code on your mobile WhatsApp, click confirm, then close this page ! (Wait 3-5 minutes, then click the 'Refresh' button to update and check WhatsApp status) <span v-if="errState">{{ countTime}}s</span></div>
+                <div class="qr_rule font_24">
+                    {{$t('home_103')}}
+                <span v-if="errState">{{ countTime}}s</span></div>
                 <div class="qr_continer w_f flex-item flex-dir-c">
                     <!-- <van-tabs v-model="active" @change="changeCard">
                         <van-tab title="WhatsApp" />
@@ -136,8 +138,8 @@
 				<div class="log_main">
                     {{ tipsText }}
 					<div class="footer_bnt w_f flex-item flex-center">
-						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">Confirm</van-button>
-						<van-button class="footer_cancel" type="primary" @click="del_model=false">Cancel</van-button>
+						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">{{('other_003')}}</van-button>
+						<van-button class="footer_cancel" type="primary" @click="del_model=false">{{('other_007')}}</van-button>
 					</div>
 				</div>
 			</div>

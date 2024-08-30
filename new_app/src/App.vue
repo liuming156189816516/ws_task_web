@@ -8,7 +8,7 @@
 			<router-view name="tabBar"></router-view>
 			<float-ball v-if="assistiveTouch"></float-ball>
 		</div>
-		<van-overlay :show="global.isLogin" style="overflow-y: auto;">
+		<van-overlay :show="global.isLogin" style="height:100%;overflow-y: auto;">
             <login v-if="global.isType==1" />
 			<register v-if="global.isType==2" />
         </van-overlay>

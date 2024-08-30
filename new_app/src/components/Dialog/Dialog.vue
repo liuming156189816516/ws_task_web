@@ -81,7 +81,8 @@
                                     <span class="font_22">{{restLanuage('home_073')}}</span><br />
                                     <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
                                     <div class="video_item flex-item flex-item flex-align flex-center mg_24">
-                                        <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                       <video ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
+                                        <!-- <img src="@/assets/images/serveic/play_icon.png" alt=""> -->
                                     </div>
                                 </div>
                                 <div class="secound_tiitle">
@@ -89,7 +90,8 @@
                                     <span class="font_22">{{restLanuage('home_075')}}</span><br />
                                     <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
                                     <div class="video_item flex-item flex-item flex-align flex-center mg_24">
-                                        <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                        <video ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
+                                        <!-- <img src="@/assets/images/serveic/play_icon.png" alt=""> -->
                                     </div>
                                 </div>
                                 <div class="secound_tiitle">
@@ -97,7 +99,8 @@
                                     <span class="font_22">{{restLanuage('home_077')}}</span><br />
                                     <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
                                     <div class="video_item flex-item flex-item flex-align flex-center mg_24">
-                                        <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                        <video ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
+                                        <!-- <img src="@/assets/images/serveic/play_icon.png" alt=""> -->
                                     </div>
                                 </div>
                                 <div class="secound_tiitle flex-item flex-between" style="margin-bottom: 10px;">
@@ -347,9 +350,14 @@ export default {
                         margin-bottom: 8px;
                     }
                     .video_item{
-                        height: 98px;
+                        height: 120px;
+                        overflow: hidden;
                         border-radius: 10px;
                         border: 1px solid $home-title-17;
+                        .video{
+                            position: relative;
+                            z-index: 1;
+                        }
                         img{
                             height: 30px;
                         }

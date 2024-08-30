@@ -28,10 +28,13 @@
                     <p class="font_32">{{$t('serv_012')}}</p>
                     <div class="video_item flex-item flex-align flex-center">
                         <div class="w_f item_dir flex-item flex-align flex-center flex-dir-c" v-for="(item,idx) in videoOption" :key="idx">
-                            <img src="@/assets/images/serveic/play_icon.png">
+                            <!-- <img src="@/assets/images/serveic/play_icon.png"> -->
+                            <!-- <div class="studay_video flex-item flex-align"> -->
+                            <video ref="myVideo" poster="../assets/images/home/cover_img.jpg" controls="controls" style="width:100%;height:88px;" :src="item.url" />
+                            <!-- </div> -->
                             <div class="text_item font_18 flex-item flex-align flex-center flex-dir-c">
                                 <p>{{$t('login_027')}}:</p>
-                                <div class="flex-item flex-align flex-center">{{item}}</div>
+                                <div class="flex-item flex-align flex-center">{{item.name}}</div>
                             </div>
                         </div>
                     </div>
@@ -73,7 +76,20 @@ export default {
             return [this.$t('serv_007'),this.$t('serv_008'),this.$t('serv_009'),this.$t('serv_010'),this.$t('serv_011')]
         },
         videoOption(){
-            return [this.$t('serv_013'),this.$t('serv_014'),this.$t('serv_015')]
+            return [
+                {
+                    url:require("../assets/video/1.mp4"),
+                    name:this.$t('serv_013')
+                },
+                {
+                    url:require("../assets/video/2.mp4"),
+                    name:this.$t('serv_014')
+                },
+                {
+                    url:require("../assets/video/3.mp4"),
+                    name:this.$t('serv_015')
+                }
+            ]
         },
         taskRuleOption(){
             return [
@@ -168,6 +184,10 @@ export default {
                         p{
                             padding: 0;
                         }
+                        // .studay_video{
+                        //     height: 88px;
+                        //     overflow: hidden;
+                        // }
                     }   
                     .text_item{
                         margin-top: 20px;

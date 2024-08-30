@@ -278,8 +278,8 @@ export default {
 <style lang="scss" scoped>
 .home_warp {
     height: 100%;
-    height: 100vh;
-    overflow-x: hidden;
+    // height: 100vh;
+    // overflow-x: hidden;
     overflow-y: scroll;
     padding-bottom: 240px;
     background-color: #f2f2f2;

@@ -41,14 +41,14 @@
                     </div>
                     <div class="rule_desc rule_desc_04 font_22" v-if="type==4">
                         <p>{{restLanuage('home_064',times)}}</p>
-                        <p>{{restLanuage('home_065',money)}}</p>
-                        <p>{{restLanuage('home_066')}}</p>
+                        <p class="mg_24">{{restLanuage('home_065',money)}}</p>
+                        <p class="mb_24">{{restLanuage('home_066')}}</p>
                         <p>{{restLanuage('home_067')}}</p>
                     </div>
                     <div class="rule_desc rule_desc_5 font_22" v-if="type==5">
                         <p>{{restLanuage('home_068')}}</p>
-                        <p>{{restLanuage('home_069')}}</p>
-                        <p>{{restLanuage('home_070')}}</p>
+                        <p class="mg_24">{{restLanuage('home_069')}}</p>
+                        <p class="mb_24">{{restLanuage('home_070')}}</p>
                         <p>{{restLanuage('home_071')}}</p>
                     </div>
                     <div class="rule_desc w_f flex-item flex-between font_22" style="flex-wrap: wrap;" v-if="type==7">
@@ -409,6 +409,7 @@ export default {
                             .secound_tiitle{
                                 p{
                                     color: $home-title-15;
+                                    margin-bottom: 24px;
                                 }
                             }
                         }

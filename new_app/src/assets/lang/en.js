@@ -154,8 +154,12 @@ export default {
     home_117:"Rules",
     home_118:"5、To avoid any discrepancies in interpretation, CashCow reserves the right to the final explanation of this activity",
     home_119:"How to do it?（Click the video below to watch）",
-    home_120:"  Do remember to delete the contact list in your address book for this task before you take on the next task and save the next address book",
-  
+    home_120:"Do remember to delete the contact list in your address book for this task before you take on the next task and save the next address book",
+    home_121:"New WhatsApp Group",
+    home_122:'Click the "New Group" button on the right to open WhatsApp and create a group',
+    home_123:"Open WhatsApp",
+
+
     spre_001:"Profit from sharing",
     spre_002:"Earn continuously by inviting",
     spre_003:"Tutorials & Rules",

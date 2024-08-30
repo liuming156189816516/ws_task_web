@@ -62,8 +62,21 @@
                             <img src="@/assets/images/home/num2_icon.png">
                         </div>
                         <div class="task_award w_f">
+                            <div class="task_book font_28">{{$t('home_121')}}</div>
+                            <div class="task_desc font_20">{{$t('home_122')}}</div>
+                        </div>
+                        <div class="w_f flex-item flex-between flex-align font_24">
+                            <span class="show_account"></span>
+                            <van-button type="primary" @click="openWhatsapp">{{$t('home_123')}}</van-button>
+                        </div>
+                    </div>
+
+                    <div class="task_item w_f flex-item flex-dir-c font_34">
+                        <div class="task_name w_f flex-item">
+                            <img src="@/assets/images/home/num3_icon.png">
+                        </div>
+                        <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
-                            <!-- <div class="task_desc font_20">Click the Import button on the right to add the contact information provided by the system to the system’s address book!</div> -->
                         </div>
                         <div class="group_link w_f flex-item flex-between flex-align font_24">
                             <input type="text" v-model="group_link" :disabled="isShow" placeholder="Enter Group Link">
@@ -230,6 +243,13 @@ export default {
                 //     this.$router.go(-1)
                 // },1000)
             })
+        },
+        openWhatsapp(){
+            if(this.$Helper.checkBrowser()){
+                window.open(process.env.VUE_APP_SERVICE,"_blank");
+            }else{
+                uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
+            }
         },
         downAddress(){
             this.$store.dispatch('User/actionReport',10);
@@ -490,7 +510,7 @@ export default {
                         }
                     }
                     .van-button{
-                        width: 80px;
+                        min-width: 80px;
                         height: 30px;
                         line-height: 30px;
                         margin-right: 10px;

@@ -28,10 +28,11 @@
                     <p class="font_32">{{$t('serv_012')}}</p>
                     <div class="video_item flex-item flex-align flex-center">
                         <div class="w_f item_dir flex-item flex-align flex-center flex-dir-c" v-for="(item,idx) in videoOption" :key="idx">
-                            <!-- <img src="@/assets/images/serveic/play_icon.png"> -->
-                            <!-- <div class="studay_video flex-item flex-align"> -->
-                            <video ref="myVideo" poster="../assets/images/home/cover_img.jpg" controls="controls" style="width:100%;height:88px;" :src="item.url" />
-                            <!-- </div> -->
+                            <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:60px;" :src="item.url" />
+                            <div v-if="palyIdx != idx" class="studay_video w_f flex-item flex-align flex-center" @click="playAudio(idx)">
+                                <!-- <video ref="myVideo" poster="../assets/images/home/cover_img.jpg" controls="controls" style="width:100%;height:88px;" :src="item.url" /> -->
+                                <img src="@/assets/images/serveic/play_icon.png"> 
+                            </div>
                             <div class="text_item font_18 flex-item flex-align flex-center flex-dir-c">
                                 <p>{{$t('login_027')}}:</p>
                                 <div class="flex-item flex-align flex-center">{{item.name}}</div>
@@ -64,6 +65,7 @@ import uniFun from "@/utils/uni-webview-js"
 export default {
     data() {
         return {
+            palyIdx:null,
             help_url:"",
             is_play:false,
         }
@@ -131,6 +133,17 @@ export default {
             let tips = this.taskRuleOption[idx];
             this.$popDialog({content:tips,steps:true, type: 13 })
             // this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 13 })
+        },
+        playAudio(idx){
+            let allVideo = document.querySelectorAll(".myVideo");
+            // console.log(allVideo);
+            for (let k = 0; k < allVideo.length; k++) {
+                allVideo[k].pause();
+                if(idx === k){
+                    this.palyIdx = k;
+                    allVideo[k].play();
+                }
+            }
         }
     }
 }
@@ -180,14 +193,24 @@ export default {
                     .item_dir{
                         overflow: hidden;
                         border-radius: 32px;
+                        position: relative;
                         border: 1px solid $home-title-16;
                         p{
                             padding: 0;
                         }
-                        // .studay_video{
-                        //     height: 88px;
-                        //     overflow: hidden;
-                        // }
+                        .studay_video{
+                            height: 120px;
+                            overflow: hidden;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            z-index: 1;
+                            background: $font-color-white;
+                            // background: rgba($color: #000000, $alpha: .5);
+                            img{
+                                height: 60px;  
+                            }
+                        }
                     }   
                     .text_item{
                         margin-top: 20px;
@@ -200,13 +223,6 @@ export default {
                     font-weight: bold;
                     padding: 14px 14px;
                     box-sizing: border-box;
-                }
-                img{
-                  height: 60px;  
-                  margin-top: 46px;
-                //   display: flex;
-                //   align-items: center;
-                //   justify-content: center;
                 }
             }
         }

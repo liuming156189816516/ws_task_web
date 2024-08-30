@@ -80,9 +80,11 @@
                                     <p class="font_26">{{restLanuage('home_072')}}</p>
                                     <span class="font_22">{{restLanuage('home_073')}}</span><br />
                                     <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
-                                    <div class="video_item flex-item flex-item flex-align flex-center mg_24">
-                                       <video ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
-                                        <!-- <img src="@/assets/images/serveic/play_icon.png" alt=""> -->
+                                    <div class="video_item flex-item flex-align flex-center mg_24">
+                                       <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
+                                       <div v-if="palyIdx!=0" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(0)">
+                                            <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                       </div>
                                     </div>
                                 </div>
                                 <div class="secound_tiitle">
@@ -90,8 +92,10 @@
                                     <span class="font_22">{{restLanuage('home_075')}}</span><br />
                                     <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
                                     <div class="video_item flex-item flex-item flex-align flex-center mg_24">
-                                        <video ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
-                                        <!-- <img src="@/assets/images/serveic/play_icon.png" alt=""> -->
+                                        <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
+                                        <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
+                                            <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="secound_tiitle">
@@ -99,8 +103,10 @@
                                     <span class="font_22">{{restLanuage('home_077')}}</span><br />
                                     <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
                                     <div class="video_item flex-item flex-item flex-align flex-center mg_24">
-                                        <video ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
-                                        <!-- <img src="@/assets/images/serveic/play_icon.png" alt=""> -->
+                                        <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
+                                        <div v-if="palyIdx!=2" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(2)">
+                                            <img src="@/assets/images/serveic/play_icon.png" alt="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="secound_tiitle flex-item flex-between" style="margin-bottom: 10px;">
@@ -189,6 +195,7 @@ export default {
     data() {
         return {
             ruleIdx:0,
+            palyIdx:null,
             visible:false,
             is_play:false,
             labelOption:[i18n.t('home_116'),i18n.t('home_117')]
@@ -241,6 +248,17 @@ export default {
             document.getElementById("app").removeChild(this.$el);
             window.localStorage.setItem(`step_0${val}`,true)
             this.visible=false;
+        },
+        palyVideo(idx){
+            let allVideo = document.querySelectorAll(".myVideo");
+            for (let k = 0; k < allVideo.length; k++) {
+                allVideo[k].pause();
+                if(idx === k){
+                    this.palyIdx = k;
+                    allVideo[k].play();
+                }
+            }
+        //   this.$refs.myVideo[k].play();
         }
     }
     // beforeDestroy(){
@@ -353,13 +371,22 @@ export default {
                         height: 120px;
                         overflow: hidden;
                         border-radius: 10px;
+                        position: relative;
+                        z-index: 2;
                         border: 1px solid $home-title-17;
                         .video{
                             position: relative;
                             z-index: 1;
                         }
-                        img{
-                            height: 30px;
+                        .paly_btn{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                             z-index: 1;
+                            background: $font-color-white;
+                            img{
+                                
+                            }
                         }
                     }
                     .tips_icon{

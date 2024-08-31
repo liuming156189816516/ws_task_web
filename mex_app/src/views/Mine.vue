@@ -178,37 +178,36 @@ export default {
                     resolve(res)
                 })
             });
+            // let fun3 = new Promise((resolve,reject)=>{
+            //     getdownloadurl().then(res =>{
+            //         resolve(res)
+            //     })
+            // });
             let fun3 = new Promise((resolve,reject)=>{
-                getdownloadurl().then(res =>{
-                    resolve(res)
-                })
-            });
-            let fun4 = new Promise((resolve,reject)=>{
                 getwithdrawconfig().then(res =>{
                     resolve(res)
                 })
             });
-            Promise.all([fun1,fun2,fun3,fun4]).then( res => {
-                const [{income},data2,data3,data4] = res;
+            Promise.all([fun1,fun2,fun3]).then( res => {
+                const [{income},data2,data3] = res;
                 this.user_money = income;
                 this.allIncome = data2;
-                // this.withdrawalNum = Number(data4.limit_count);
-                this.isTotalNum = data4.limit_count;
-                this.withdrawalNum = data4.lave_count;
-                this.minWithdrawal = data4.limit_amount;
-                this.isWithdrawal = data4.limit_count_status;
-                for (let k = 0; k < this.menuOption.length; k++) {
-                    let item = this.menuOption[k];
-                    if(k == 4 && !this.$Helper.checkBrowser()&&!this.$Helper.isAndroid()){
-                        item.isShow = false;
-                        item.path = data3.url;
-                    }
-                    if(k == 4 && this.$Helper.checkBrowser()&&this.$Helper.isAndroid()){
-                        item.isShow = true;
-                        item.path = data3.url;
-                    }
-                    this.$set(this.menuOption,k,item)
-                }
+                this.isTotalNum = data3.limit_count;
+                this.withdrawalNum = data3.lave_count;
+                this.minWithdrawal = data3.limit_amount;
+                this.isWithdrawal = data3.limit_count_status;
+                // for (let k = 0; k < this.menuOption.length; k++) {
+                //     let item = this.menuOption[k];
+                //     if(k == 4 && !this.$Helper.checkBrowser()&&!this.$Helper.isAndroid()){
+                //         item.isShow = false;
+                //         item.path = data3.url;
+                //     }
+                //     if(k == 4 && this.$Helper.checkBrowser()&&this.$Helper.isAndroid()){
+                //         item.isShow = true;
+                //         item.path = data3.url;
+                //     }
+                //     this.$set(this.menuOption,k,item)
+                // }
             })
         },
         copySuccess() {

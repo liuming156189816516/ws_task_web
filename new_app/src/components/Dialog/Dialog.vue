@@ -92,7 +92,7 @@
                                     <span class="font_22">{{restLanuage('home_075')}}</span><br />
                                     <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
                                     <div class="video_item flex-item flex-item flex-align flex-center mg_24">
-                                        <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
+                                        <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/2.mp4" />
                                         <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
                                             <img src="@/assets/images/serveic/play_icon.png" alt="">
                                         </div>
@@ -103,7 +103,7 @@
                                     <span class="font_22">{{restLanuage('home_077')}}</span><br />
                                     <span class="font_22" style="color:#F52C2C">{{restLanuage('home_119')}}</span>
                                     <div class="video_item flex-item flex-item flex-align flex-center mg_24">
-                                        <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/1.mp4" />
+                                        <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:120px;" src="../../assets/video/3.mp4" />
                                         <div v-if="palyIdx!=2" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(2)">
                                             <img src="@/assets/images/serveic/play_icon.png" alt="">
                                         </div>

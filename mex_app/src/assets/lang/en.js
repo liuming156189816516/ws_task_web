@@ -258,6 +258,7 @@ export default {
     pay_030:"Processing",
     pay_031:"Successful",
     pay_032:"Failed",
+    pay_033:"Account Type",
 
     tail_001:"ops，still no records",
     tail_002:"Types of",

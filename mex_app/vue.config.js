@@ -88,7 +88,7 @@ module.exports = {
 	productionSourceMap: false,
 	devServer: {
 		host: '0.0.0.0',
-		port: 8079,
+		port: 8082,
 		open: false,
 		https: false,
 		overlay: {

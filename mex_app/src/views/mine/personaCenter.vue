@@ -7,14 +7,21 @@
                     <span class="lable_text">{{ $t('pay_006') }}</span>
                     <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_006')})" :border="false" />
                 </div>
-                <div class="user_info bank_account" @click="showBank">
+                <div class="user_info bank_account" @click="showBank(0)">
+                    <span class="lable_text">{{ $t('pay_033') }}</span>
+                    <div class="flex-between">
+                        <van-field v-model="bankName" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
+                        <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${accountModel == true ? 90 : 0}deg)`}" />
+                    </div>
+                </div>
+                <div class="user_info bank_account" @click="showBank(1)">
                     <span class="lable_text">{{ $t('pay_021') }}</span>
                     <div class="flex-between">
                         <van-field v-model="bankName" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
                         <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${selectBank == true ? 90 : 0}deg)`}" />
                     </div>
                 </div>
-                <div class="user_info" v-if="collectName">
+                <div class="user_info">
                     <span class="lable_text">{{ $t('pay_022') }}</span>
                     <van-field v-model="collectName" disabled :placeholder="$t('other_001',{value:$t('pay_022')})" :border="false" />
                 </div>
@@ -42,7 +49,8 @@
                     </template>
                 </van-field>
             </div> -->
-            <van-action-sheet :round="false" v-model="selectBank" :actions="malayBank" @close="hideBankSelect" @select="changeSelect" :cancel-text="$t('other_007')" />
+            <van-action-sheet :round="false" v-model="selectBank" :actions="malayBank" @close="selectBank=false" @select="changeSelect" :cancel-text="$t('other_007')" />
+            <van-action-sheet :round="false" v-model="accountModel" :actions="bankOption" @close="accountModel=false" @select="changeAccount" :cancel-text="$t('other_007')" />
             <div class="button_area">
                 <van-button type="primary" @click="submitBtn" :loading="isLoading">{{ $t('other_015') }}</van-button>
             </div>
@@ -64,27 +72,14 @@ export default {
             collectName:"",
             openBranch:"",
             usdtCard:"",
+            selectType:null,
             verify_code:"",
             countTime:"",
             isLoading:false,
             selectBank:false,
-            malayBank: [
-                // { name: ('Bangkok Bank')},
-                // { name: ('Maybank')},
-                // { name: ('CIMB Bank')},
-                // { name: ('Public Bank Berhad')},
-                // { name: ('RHB Bank')},
-                // { name: ('Hong Leong Bank')},
-                // { name: ('AmBank')},
-                // { name: ('Alliance Bank Malaysia Berhad')},
-                // { name: ('Affin Bank')},
-                // { name: ('HSBC')},
-                // { name: ('Bank Islam Malaysia')},
-                // { name: ('OCBC')},
-                // { name: ('AGRO')},
-                // { name: ('Bank Rakyat')},
-                // { name: ('BSN')}
-            ]
+            accountModel:false,
+            malayBank: [],
+            bankOption: [{}'CLABE','BANK']
         }
     },
     computed: {
@@ -118,16 +113,16 @@ export default {
                 this.collectName = payee_name||"";
             })
         },
-        showBank(){
-            this.selectBank = true;
+        showBank(idx){
+            idx==1?this.selectBank=true:this.accountModel=true;
         },
         changeSelect(val){
             this.bankCode=val.code;
             this.bankName=val.name;
             this.selectBank = false;
         },
-        hideBankSelect(){
-            this.selectBank = false;
+        changeAccount(){
+
         },
         async submitBtn(){
             let params = {};

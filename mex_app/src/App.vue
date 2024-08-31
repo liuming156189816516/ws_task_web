@@ -15,10 +15,10 @@
 		<van-overlay :show="global.logOut">
 			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
 				<div class="log_main">
-					After logging out, you will no longer be able to view real-time earnings. Are you sure you want to log out?
+					{{$t('other_009')}}
 					<div class="footer_bnt w_f flex-item flex-center">
-						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">Confirm</van-button>
-						<van-button class="footer_cancel" type="primary" @click="handle_close">Cancel</van-button>
+						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">{{$t('other_003')}}</van-button>
+						<van-button class="footer_cancel" type="primary" @click="handle_close">{{$t('other_007')}}</van-button>
 					</div>
 				</div>
 			</div>

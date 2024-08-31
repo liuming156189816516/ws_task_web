@@ -138,8 +138,8 @@
 				<div class="log_main">
                     {{ tipsText }}
 					<div class="footer_bnt w_f flex-item flex-center">
-						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">{{('other_003')}}</van-button>
-						<van-button class="footer_cancel" type="primary" @click="del_model=false">{{('other_007')}}</van-button>
+						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">{{$t('other_003')}}</van-button>
+						<van-button class="footer_cancel" type="primary" @click="del_model=false">{{$t('other_007')}}</van-button>
 					</div>
 				</div>
 			</div>

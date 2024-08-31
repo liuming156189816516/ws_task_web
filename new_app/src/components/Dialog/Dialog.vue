@@ -384,6 +384,9 @@ export default {
                             left: 0;
                             z-index: 1;
                             background: rgba($color: #fff, $alpha: .5);
+                            img{
+                                min-height: 80px;
+                            }
                         }
                     }
                     .tips_icon{

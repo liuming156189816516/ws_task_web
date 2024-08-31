@@ -73,7 +73,7 @@
 
                     <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num3_icon.png">
+                            <img src="@/assets/images/home/num2_icon.png">
                         </div>
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>

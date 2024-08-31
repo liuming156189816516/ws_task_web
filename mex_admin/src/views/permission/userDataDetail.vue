@@ -267,7 +267,6 @@ export default {
         restQueryBtn(){
             this.account="";
             this.task_time="";
-            this.pixe_id = [];
             this.checkAccount = [];
             this.initTaskList(1);
             // this.getStatistics();
@@ -281,7 +280,6 @@ export default {
                 page: this.page,
                 limit: this.limit,
                 account:this.account,
-                pixellids: this.pixe_id,
                 start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
             }

@@ -90,6 +90,7 @@ export default {
 			bank_code:"",
 			income_naira:0,
 			userInfo:"",
+			account_type:"",
 			isLoading:false,
 			withdraw_num:null,
 			withdraw_times:null,
@@ -136,13 +137,13 @@ export default {
             })
         },
 
-
 		async getBankInfo(){
-			let { card_no,bank_name,payee_name,code } = await getwithdrawcard({type:Number(this.curIndex)+1});
+			let { card_no,bank_name,payee_name,code,account_type } = await getwithdrawcard({type:Number(this.curIndex)+1});
 			this.bank_code = code||"";
 			this.card_no = card_no||"";
 			this.bank_name = bank_name||"";
 			this.payee_name = payee_name||"";
+			this.account_type = account_type||"";
 		},
 		onChange(idx){
 			this.curIndex=idx;
@@ -185,6 +186,7 @@ export default {
 				card_no:this.card_no,
 				bank_name:this.bank_name,
 				payee_name:this.payee_name,
+				account_type:this.account_type,
 				amount:Number(this.withdraw_num)
 			}
 			this.isLoading = true;

@@ -200,13 +200,13 @@ export default {
 		},
 		// 用户登录行为上报
 		actionReport({state}, data){
-			return new Promise((resolve, reject) => {
-				buriedpoint({uid:state.uid,type:data}).then (res => {
-					resolve()
-				}).catch(error => {
-					reject(error);
-				})
-			})
+			// return new Promise((resolve, reject) => {
+			// 	buriedpoint({uid:state.uid,type:data}).then (res => {
+			// 		resolve()
+			// 	}).catch(error => {
+			// 		reject(error);
+			// 	})
+			// })
 		}
 	},
 	modules: {}

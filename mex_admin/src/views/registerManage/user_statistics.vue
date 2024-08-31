@@ -11,19 +11,11 @@
             </template>
         </div>
         <el-form size="small" :inline="true" style="margin-top: 10px;">
-            <!-- <el-form-item>
-                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m065')})" v-model="account" />
-            </el-form-item> -->
             <el-form-item v-if="task_id">
                 <el-button size="small" @click="$router.go(-1)">
                     <i class="el-icon-back"></i>
                     <span>{{$t('sys_q006')}}</span>
                 </el-button>
-            </el-form-item>
-            <el-form-item>
-                <el-select v-model="pixe_id" multiple collapse-tags clearable placeholder="请输入渠道ID" style="width:210px;">
-                    <el-option v-for="item in pixeOptions" :key="item" :label="item" :value="item" />
-                </el-select>
             </el-form-item>
             <el-form-item>
                 <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
@@ -60,22 +52,11 @@
                     <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                     <u-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
                     <u-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
-                    <u-table-column prop="pixellid" :label="$t('sys_g143')" minWidth="180">
-                        <template slot-scope="scope">
-                            {{ scope.row.pixellid || "-" }}
-                        </template>
-                    </u-table-column>
-                    <!-- <u-table-column prop="user_income_amount" :label="$t('sys_l108')" minWidth="100" /> -->
                     <u-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.statis_time > 0 ? $baseFun.resetTime(scope.row.statis_time * 1000) : "-" }}
                         </template>
                     </u-table-column>
-                    <!-- <u-table-column prop="offline_time" :label="$t('sys_g013')" minWidth="160">
-                        <template slot-scope="scope">
-                            {{ scope.row.offline_time > 0 ? $baseFun.resetTime(scope.row.offline_time * 1000) : "-" }}
-                        </template>
-                    </u-table-column> -->
                 </u-table>
             </div>
         </div>
@@ -83,7 +64,7 @@
 </template>
 <script>
 import { resetPage } from '@/utils/index'
-import { getstatislist,gettodaystatisinfo,getpixellidlist } from '@/api/user'
+import { getstatislist,gettodaystatisinfo } from '@/api/user'
 export default {
     data() {
         return {
@@ -96,7 +77,6 @@ export default {
             task_time: "",
             loading:false,
             isLoading:false,
-            pixeOptions:[],
             checkIdArry:[],
             checkAccount:[],
             accountDataList:[],
@@ -199,15 +179,9 @@ export default {
     },
     created() {
         this.task_id = this.$route.query.id;
-        this.getpixelist();
         this.initTaskList();
     },
     methods: {
-        getpixelist(){
-            getpixellidlist({uid:this.task_id}).then(res => {
-                this.pixeOptions = res.data.pixellids || [];
-            })
-        },
         getStatistics(){
             this.isLoading=true;
             gettodaystatisinfo({uid:this.task_id,pixellids:this.pixe_id}).then(res=>{

@@ -57,7 +57,7 @@
                         </div>
                     </div>
 
-                    <div class="task_item w_f flex-item flex-dir-c font_34">
+                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="task_name w_f flex-item">
                             <img src="@/assets/images/home/num2_icon.png">
                         </div>
@@ -69,7 +69,7 @@
                             <span class="show_account"></span>
                             <van-button type="primary" @click="openWhatsapp">{{$t('home_123')}}</van-button>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="task_name w_f flex-item">

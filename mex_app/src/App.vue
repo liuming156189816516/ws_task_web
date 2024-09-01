@@ -444,7 +444,7 @@ img {
     border-radius: 12px;
   }
   .footer_cancel{
-    color: #008751;
+    color: $color-theme;
     background: #F2F3FF;
     border-color: #F2F3FF;
   }

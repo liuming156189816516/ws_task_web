@@ -184,8 +184,9 @@ export default {
 	.head_main{
 		padding: 48px 48px 0 48px;
 		box-sizing: border-box;
-		background: url('../../assets/images/home/bg_img.png') no-repeat;
-    	background-size: cover;
+		background: $color-theme;
+		// background: url('../../assets/images/home/bg_img.png') no-repeat;
+    	// background-size: cover;
 		.head_title{
 			width: 100%;
 			display: flex;

@@ -135,7 +135,6 @@ export default {
     },
     activated() {
         if(getToken()){
-            console.log(this.userInfo);
             this.initHandle();
             this.$store.dispatch('User/actionReport',1)
         }else{

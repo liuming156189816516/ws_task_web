@@ -328,7 +328,8 @@ export default {
         .task_mian{
             height: 1048px;
             position: relative;
-            background: url('../../assets/images/home/task_001.png') no-repeat;
+            background: #E6F2EF;
+            // background: url('../../assets/images/home/task_001.png') no-repeat;
             background-size: 100% 100%;
             .task_box{
                 padding: 0 30px;

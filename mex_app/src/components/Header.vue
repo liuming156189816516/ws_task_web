@@ -13,7 +13,7 @@
     </div>
 </template>
 <script>
-import { getToken } from '@/utils/tool';
+// import { getToken } from '@/utils/tool';
 import WebsiteSetting from "../mixin/websiteSetting";
 export default {
     mixins: [WebsiteSetting],

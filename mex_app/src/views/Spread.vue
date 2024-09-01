@@ -7,37 +7,36 @@
                 <img src="@/assets/images/serveic/play_icon.png" alt="">
             </div> -->
         </div>
-        <div class="share_main w_f">
+        <!-- <div class="share_main w_f">
             <div class="cover_img flex-item">
                 <img class="mask_img" src="@/assets/images/mill/bg_02.png" alt="" srcset="">
                 <div class="spred_mess w_f">
                     <div class="top_title w_f font_32 flex-item flex-align flex-center">{{$t('spre_004')}}</div>
-                    <div class="spred_m w_f">
-                        <!-- <p class="w_f font_28">{{$t('spre_005')}}</p> -->
-                        <div class="spred_l">
-                           <div class="w_f flex-item flex-dir-c">
-                            <div class="copay_desc flex-item flex-align flex-between">
-                                <span class="left_desc flex-item font_28">{{$t('spre_006')}}</span>
-                                <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
-                            </div>
-                            <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
-                           </div>
-                           <div class="invit_code w_f flex-item flex-dir-c">
-                                <div class="copay_desc flex-item flex-align flex-between">
-                                    <span class="left_desc flex-item font_28">{{$t('spre_007')}}</span>
-                                    <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button>
-                                </div>
-                                <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
-                            </div>
-                           <div class="invit_code w_f flex-item flex-dir-c">
-                                <div class="copay_desc flex-item flex-align flex-between">
-                                    <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
-                                    <!-- <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button> -->
-                                </div>
-                                <div class="copay_text flex-item font_28">120</div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="spred_m w_f">
+            <div class="spred_l">
+                <p class="top_title flex-item flex-align flex-center font_36">{{$t('spre_004')}}</p>
+                <div class="w_f flex-item flex-dir-c">
+                    <div class="copay_desc flex-item flex-align flex-between">
+                        <span class="left_desc flex-item font_28">{{$t('spre_006')}}</span>
+                        <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                     </div>
+                    <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
+                </div>
+                <div class="invit_code w_f flex-item flex-dir-c">
+                    <div class="copay_desc flex-item flex-align flex-between">
+                        <span class="left_desc flex-item font_28">{{$t('spre_007')}}</span>
+                        <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button>
+                    </div>
+                    <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
+                </div>
+                <div class="invit_code w_f flex-item flex-dir-c">
+                    <div class="copay_desc flex-item flex-align flex-between">
+                        <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
+                    </div>
+                    <div class="copay_text flex-item font_28">120</div>
                 </div>
             </div>
         </div>
@@ -237,8 +236,8 @@ export default {
             height: 613px;
             margin-top: 20px;
             position: relative;
-            background: url('../assets/images/mill/bg_01.png') no-repeat;
-            background-size: 100% 100%;
+            // background: url('../assets/images/mill/bg_01.png') no-repeat;
+            // background-size: 100% 100%;
             .share_rule{
                 color: $font-color-white;
                 position: absolute;
@@ -272,46 +271,6 @@ export default {
                     padding: 0 20px;
                     box-sizing: border-box;
                     // background: rgba($color: #000000, $alpha: 0.5);
-                    .top_title{
-                        height:66px;
-                        color: $font-color-white;
-                        font-weight: bold;
-                        text-shadow: 4px 4px 0px #00000040;
-                    }
-                    .spred_m{
-                        padding: 13px 70px;
-                        box-sizing: border-box;
-                        margin-top: 40px;
-                        // background: rgba($color: plum, $alpha: 0.5);
-                        p{
-                            overflow: hidden;
-                            white-space: nowrap;
-                            font-weight: bold;
-                            text-overflow: ellipsis;
-                        }
-                        .copay_desc{
-                            height: 32px;
-                            margin-top: 18px;
-                            .left_desc{
-                                font-weight: bold;
-                            }
-                            .van-button{
-                                height: 22px;
-                                padding: 0 8px;
-                                border-radius: 100px;
-                                border-color: $color-theme;
-                                background-color: $color-theme;
-                            }
-                        }
-                        .copay_text{
-                            margin-top: 18px;
-                            color: $home-title-06;
-                        }
-                        .invit_code{
-                            margin-top: 16px;
-                            border-top: 1px solid $home-title-07;
-                        }
-                    }
                 }
             }
             .record_legend{
@@ -390,12 +349,58 @@ export default {
                 }
             }
         }
+        .spred_m{
+            padding: 0 30px;
+            margin-top: 40px;
+            box-sizing: border-box;
+            .spred_l{
+                overflow: hidden;
+                padding: 10px 20px;
+                border-radius: 20px;
+                box-sizing: border-box;
+                background: $font-color-white;
+                .top_title{
+                    height:66px;
+                    font-weight: bold;
+                    color: $font-color-black;
+                    text-shadow: 4px 4px 0px #00000040;
+                }
+            }
+            p{
+                overflow: hidden;
+                white-space: nowrap;
+                font-weight: bold;
+                text-overflow: ellipsis;
+            }
+            .copay_desc{
+                height: 32px;
+                margin-top: 18px;
+                .left_desc{
+                    font-weight: bold;
+                }
+                .van-button{
+                    height: 22px;
+                    padding: 0 8px;
+                    border-radius: 100px;
+                    border-color: $color-theme;
+                    background-color: $color-theme;
+                }
+            }
+            .copay_text{
+                margin-top: 18px;
+                color: $home-title-06;
+            }
+            .invit_code{
+                margin-top: 16px;
+                border-top: 1px solid $home-title-07;
+            }
+        }
         .share_continer{
             height: auto;
-            padding-top: 84px;
+            // padding-top: 20px;
             margin-top: 0px;
             padding-bottom: 20px;
-            background: $home-title-20;
+            // background: $home-title-20;
             // background: linear-gradient(to top, #ffff 0%, #008751 100%);
         }
     }

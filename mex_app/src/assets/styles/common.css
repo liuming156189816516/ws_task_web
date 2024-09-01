@@ -397,13 +397,6 @@
   margin-bottom: 19px;
   background-color: #f2f2f2;
 }
-.screen_down .checkActive, .singular_down .checkActive{
-  color: #fff;
-  background-color: #008751;
-}
-.singular_down .checkActive{
-  background-color: transparent;
-}
 .screen_down ul li:nth-child(even){
   margin-left: 26px;
   float: right;

@@ -402,4 +402,11 @@ export default {
     justify-content: center;
     background: transparent;
 }
+.screen_down .checkActive, .singular_down .checkActive{
+  color: #fff;
+  background-color: $color-theme;
+}
+.singular_down .checkActive{
+  background-color: transparent;
+}
 </style>

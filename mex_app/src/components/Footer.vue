@@ -29,26 +29,26 @@ export default {
 			return [
                 {
                     name: this.$t("table_001"),
-                    active: require("../assets/images/tabbar/home-icon-a.png"),
-                    inactive: require("../assets/images/tabbar/home-icon.png"),
+                    active: require("../assets/images/new_tab/home-icon-a.png"),
+                    inactive: require("../assets/images/new_tab/home-icon.png"),
                     path: "home"
                 },
                 {
                     name: this.$t("table_002"),
-                    active: require("../assets/images/tabbar/prom_icon-a.png"),
-                    inactive: require("../assets/images/tabbar/prom_icon.png"),
+                    active: require("../assets/images/new_tab/prom_icon-a.png"),
+                    inactive: require("../assets/images/new_tab/prom_icon.png"),
                     path: "spread"
                 },
 				{
                     name: this.$t("table_003"),
-                    active: require("../assets/images/tabbar/server-icon-a.png"),
-                    inactive: require("../assets/images/tabbar/server-icon.png"),
+                    active: require("../assets/images/new_tab/server-icon-a.png"),
+                    inactive: require("../assets/images/new_tab/server-icon.png"),
                     path: "service"
                 },
                 {
                     name: this.$t("table_004"),
-                    active: require("../assets/images/tabbar/mine-icon-a.png"),
-                    inactive: require("../assets/images/tabbar/mine-icon.png"),
+                    active: require("../assets/images/new_tab/mine-icon-a.png"),
+                    inactive: require("../assets/images/new_tab/mine-icon.png"),
                     path: "mine"
                 }
             ]

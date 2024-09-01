@@ -139,6 +139,7 @@ export default {
     activated() {
         if(getToken()){
             this.initHandle();
+            this.$store.dispatch('User/getUserIncome',1)
             this.$store.dispatch('User/actionReport',1)
         }else{
             // this.initRuleTips();
@@ -162,25 +163,19 @@ export default {
         },
         syncInitApi() {
             let fun1 = new Promise((resolve, reject) => {
-                getaccountincome().then(res => {
-                    resolve(res)
-                })
-            });
-            let fun2 = new Promise((resolve, reject) => {
                 gettodayincome().then(res => {
                     resolve(res)
                 })
             });
-            let fun3 = new Promise((resolve, reject) => {
+            let fun2 = new Promise((resolve, reject) => {
                 gettaskliststatus().then(res => {
                     resolve(res)
                 })
             });
-            Promise.all([fun1, fun2, fun3]).then(res => {
-                const [{ income }, data2, data3] = res;
-                this.user_money = income;
-                this.teamStemp = data2;
-                this.taskOption = data3.list;
+            Promise.all([fun1, fun2,]).then(res => {
+                const [data1, data2] = res;
+                this.teamStemp = data1;
+                this.taskOption = data2.list;
             })
         },
         showRule(){

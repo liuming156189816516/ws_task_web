@@ -3,20 +3,31 @@
         <img class="le_logn" src="@/assets/images/logo-h.png" />
         <!-- <img class="le_logn" src="@/assets/images/logo.png" /> -->
         <div class="login_area flex-item flex-align font_24">
-            <div class="flex-item flex-align">
-                <span>SIGN IN</span>
-                <span class="sign_bt flex-item flex-align">SING UP</span>
+            <div class="flex-item flex-align" v-if="!userInfo.token">
+                <span @click="jumpPage(0)">SIGN IN</span>
+                <span class="sign_bt flex-item flex-align" @click="jumpPage(1)">SING UP</span>
             </div>
-            <!-- <div class="user_info flex-item flex-align">
-                <img src="@/assets/images/gold_icon.png"> <span>8000</span>
-            </div> -->
+            <div class="user_info flex-item flex-align" v-else>
+                <img src="@/assets/images/gold_icon.png"> <span class="font_28" style="font-weight: bold;">{{userInfo.balance}}</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-
+    computed: {
+        ...mapState({
+            userInfo: state => state.User,
+        })
+    },
+    methods: {
+        jumpPage(idx){
+            let path = ['/login','/register']
+            this.$router.push(path[idx]);
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

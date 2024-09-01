@@ -1,5 +1,5 @@
 import router from '../../router/';
-import { getincome } from'@/api/home'
+import { getincome,getaccountincome } from'@/api/home'
 import scehelper from '@/utils/helper';
 import { login,register,getcarousellist,gethead,buriedpoint } from '@/api/login';
 // import { buriedpoint,buriedpointlogout } from '@/api/login';
@@ -14,6 +14,7 @@ export default {
 		uid:window.localStorage.getItem('uid') || null,
 		token: window.localStorage.getItem('token') || null,
 		account: window.localStorage.getItem('account') || null,
+		balance:window.localStorage.getItem('baseBalance') || 0,
 		baseBanner: window.localStorage.getItem('baseBanner')||null,
 		baseNotice: window.localStorage.getItem('baseNotice')||null,
 		inviteCode: window.localStorage.getItem('inviteCode')||null,
@@ -82,22 +83,6 @@ export default {
 			state.IMtoken = null;
 			state.userInfo = {};
 		},
-		userInfo: (state, data) => {
-			state.userInfo = {
-				...state.userInfo,
-				...data,
-			}
-		},
-		userBalance(state, data) {
-			state.userInfo = {
-				...state.userInfo,
-				balance: data.balance,
-				usdb: data.usdb,
-			}
-		},
-		updateConfig(state, data) {
-			state.config = data;
-		},
 		closeInterval(state) {
 			if (state.interval) {
 				clearInterval(state.interval);
@@ -115,6 +100,10 @@ export default {
 			state.baseNotice = data.bulletin_content;
 			window.localStorage.setItem('baseBanner',data.list);
 			window.localStorage.setItem('baseNotice',data.bulletin_content);
+		},
+		store_balance(state, data) {
+			state.balance = data.income;
+			window.localStorage.setItem('baseBalance ',data.income);
 		},
 		clear_token(state){
 			state.uid = "";
@@ -186,6 +175,16 @@ export default {
 			return new Promise((resolve, reject) => {
 				getcarousellist().then(res => {
 					commit('store_carousel', res);
+					resolve();
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getUserIncome({ commit }) {
+			return new Promise((resolve, reject) => {
+				getaccountincome().then(res => {
+					commit('store_balance', res);
 					resolve();
 				}).catch(error => {
 					reject(error)

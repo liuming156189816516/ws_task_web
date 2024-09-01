@@ -290,7 +290,7 @@ export default {
             box-sizing: border-box;
             color: $font-color-black;
             align-items: center;
-            background: linear-gradient(180deg, #008751 1.61%, rgba(255, 255, 255, 0.5) 100%);
+            background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
             .page_title{
                 margin: 40px 0;
                 font-style: italic;

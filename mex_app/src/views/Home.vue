@@ -1,6 +1,6 @@
 <template>
     <div class="home_warp w_f" ref="warpBox">
-        <page-header :title="$t('login_027')" :showBack="false" />
+        <Sgin-header />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">
                 <div class="user_head">
@@ -8,7 +8,6 @@
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
-                     <!-- <div class="user_name">nocode</div> -->
                     <div class="user_code">{{$t('other_005')}}：{{userInfo.inviteCode}} 
                         <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
                     </div>
@@ -86,11 +85,11 @@
 import { mapState } from 'vuex';
 import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
-import PageHeader from "@/components/Header";
+import SginHeader from "@/components/SginHeader";
 import { getaccountincome, gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
 export default {
     name: 'home',
-    components: {PageHeader},
+    components: { SginHeader },
     data() {
         return {
             isLogin:false,
@@ -262,8 +261,10 @@ export default {
     height: 100%;
     position: relative;
     padding-bottom: 140px;
-    background: url('../assets/images/home/bg_img.png') no-repeat;
-    background-size: cover;
+    // background: $color-theme;
+    background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+    // background: url('../assets/images/home/bg_img.png') no-repeat;
+    // background-size: cover;
     -webkit-overflow-scrolling: touch;
     .warp_mian {
         padding: 0 20px;
@@ -309,6 +310,7 @@ export default {
             width: 100%;
             display: flex;
             margin-bottom: 30px;
+            // margin-top: 20px;
             position: relative;
             flex-direction: column;
             .my_swipe{

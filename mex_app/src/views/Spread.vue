@@ -229,8 +229,9 @@ export default {
         position: relative;
         overflow-y: auto;
         padding-bottom: 95px;
-        background: url('../assets/images/home/bg_img.png') no-repeat;
-        background-size: cover;
+        background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+        // background: url('../assets/images/home/bg_img.png') no-repeat;
+        // background-size: cover;
         -webkit-overflow-scrolling: touch;
         .share_main, .share_continer{
             height: 613px;

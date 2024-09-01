@@ -64,10 +64,9 @@ export default {
 	},
 	watch: {
 		'$route'(to, from) {
-			// console.log('路由变化:', from.fullPath, '->', to.fullPath);
 		// 处理路由变化后的逻辑
 			if(to.path == "/home"||to.path == "/spread"){
-				this.customHeader("#0e8c60");	
+				this.customHeader("#31acf2");	
 			}else{
 				this.customHeader();	
 			}
@@ -81,7 +80,7 @@ export default {
 		this.hasTabBar = !!hasTabBar;
 	},
 	mounted(){
-		this.customHeader("#0e8c60");
+		this.customHeader("#31acf2");
 	},
 	methods: {
 		customHeader(color){
@@ -93,7 +92,7 @@ export default {
 				metaThemeColor.name = 'theme-color';
 				document.head.appendChild(metaThemeColor);
 			}
-			metaThemeColor.content = color||'#008751'; // 设定颜色
+			metaThemeColor.content = color||'#31acf2'; // 设定颜色
 			// }	
 		},
 		handle_close(){

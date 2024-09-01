@@ -23,14 +23,13 @@
                     </div>
                 </div>
             </div>
-            <div class="sys_task w_f flex-item">
+            <!-- <div class="sys_task w_f flex-item">
                 <div class="task_desc w_f">
                     <p class="font_32">{{$t('serv_012')}}</p>
                     <div class="video_item flex-item flex-align flex-center">
                         <div class="w_f item_dir flex-item flex-align flex-center flex-dir-c" v-for="(item,idx) in videoOption" :key="idx">
                             <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:60px;" :src="item.url" />
                             <div v-if="palyIdx != idx" class="studay_video w_f flex-item flex-align flex-center" @click="playAudio(idx)">
-                                <!-- <video ref="myVideo" poster="../assets/images/home/cover_img.jpg" controls="controls" style="width:100%;height:88px;" :src="item.url" /> -->
                                 <img src="@/assets/images/serveic/play_icon.png"> 
                             </div>
                             <div class="text_item font_18 flex-item flex-align flex-center flex-dir-c">
@@ -40,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
              <!-- <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls="controls" style="width: 100%;height: 200px;" :src="help_url"></video> -->
             <div class="sys_serve w_f">
                 <div class="serve_box w_f flex-item flex-align flex-between">

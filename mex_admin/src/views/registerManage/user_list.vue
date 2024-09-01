@@ -3,7 +3,7 @@
         <!-- 筛选条件 -->
         <el-form size="small" :inline="true" style="margin-top: 10px;">
             <el-form-item>
-                <el-input clearable :placeholder="$t('sys_g006')" v-model="account" />
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m062')})" v-model="account" />
             </el-form-item>
              <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q134')})" v-model="fuser_name" />

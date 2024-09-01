@@ -21,6 +21,10 @@
                     </van-swipe-item>
                 </van-swipe>
             </div>
+            <div class="adv_warp flex-item flex-between font_24">
+                <div class="adv_item flex-item flex-align flex-center">转盘</div>
+                <div class="adv_item flex-item flex-align flex-center">签到</div>
+            </div>
             <div class="task_main w_f flex-item flex-dir-c">
                 <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
                     <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
@@ -315,6 +319,20 @@ export default {
                     width: 100%;
                     height: 100%;
                 }
+            }
+        }
+        .adv_warp{
+            gap: 20px;
+            margin-bottom: 20px;
+            .adv_item{
+                flex: 1;
+                height: 88px;
+                flex-shrink: 0;
+                border-radius: 10px;
+                background-color: aqua;
+            }
+            .adv_item:nth-child(2){
+                background: darkmagenta;
             }
         }
         .task_main{

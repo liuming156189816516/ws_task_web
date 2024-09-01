@@ -152,15 +152,17 @@ export default {
         }
     },
     created() {
-        for (let k = 0; k < this.menuOption.length; k++) {
-            let item = this.menuOption[k];
-            if (item.path == "/down_apk" && this.$Helper.checkBrowser() && this.$Helper.isAndroid()) {
-                item.isShow = true;
-            }
-            this.$set(this.menuOption,k,item)
-        }
-        this.syncInitApi();
+        // for (let k = 0; k < this.menuOption.length; k++) {
+        //     let item = this.menuOption[k];
+        //     if (item.path == "/down_apk" && this.$Helper.checkBrowser() && this.$Helper.isAndroid()) {
+        //         item.isShow = true;
+        //     }
+        //     this.$set(this.menuOption,k,item)
+        // }
+        this.user_money= this.userInfo.balance
+        this.$store.dispatch('User/getUserIncome');
         this.$store.dispatch('User/getUserHead');
+        this.syncInitApi();
     },
     mounted(){
         let scrollTop = this.$refs.warpBox;
@@ -169,33 +171,22 @@ export default {
     methods: {
         syncInitApi(){
             let fun1 = new Promise((resolve,reject)=>{
-                getaccountincome().then(res =>{
-                    resolve(res)
-                })
-            });
-            let fun2 = new Promise((resolve,reject)=>{
                 getbonus().then(res =>{
                     resolve(res)
                 })
             });
-            // let fun3 = new Promise((resolve,reject)=>{
-            //     getdownloadurl().then(res =>{
-            //         resolve(res)
-            //     })
-            // });
-            let fun3 = new Promise((resolve,reject)=>{
+            let fun2 = new Promise((resolve,reject)=>{
                 getwithdrawconfig().then(res =>{
                     resolve(res)
                 })
             });
-            Promise.all([fun1,fun2,fun3]).then( res => {
-                const [{income},data2,data3] = res;
-                this.user_money = income;
-                this.allIncome = data2;
-                this.isTotalNum = data3.limit_count;
-                this.withdrawalNum = data3.lave_count;
-                this.minWithdrawal = data3.limit_amount;
-                this.isWithdrawal = data3.limit_count_status;
+            Promise.all([fun1,fun2]).then( res => {
+                const [data1,data2] = res;
+                this.allIncome = data1;
+                this.isTotalNum = data2.limit_count;
+                this.withdrawalNum = data2.lave_count;
+                this.minWithdrawal = data2.limit_amount;
+                this.isWithdrawal = data2.limit_count_status;
                 // for (let k = 0; k < this.menuOption.length; k++) {
                 //     let item = this.menuOption[k];
                 //     if(k == 4 && !this.$Helper.checkBrowser()&&!this.$Helper.isAndroid()){

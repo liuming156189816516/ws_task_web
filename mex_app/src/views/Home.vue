@@ -86,7 +86,7 @@ import { mapState } from 'vuex';
 import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
 import SginHeader from "@/components/SginHeader";
-import { getaccountincome, gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
+import { gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
 export default {
     name: 'home',
     components: { SginHeader },
@@ -139,7 +139,7 @@ export default {
     activated() {
         if(getToken()){
             this.initHandle();
-            this.$store.dispatch('User/getUserIncome',1)
+            this.$store.dispatch('User/getUserIncome');
             this.$store.dispatch('User/actionReport',1)
         }else{
             // this.initRuleTips();

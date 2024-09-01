@@ -192,14 +192,9 @@ export default {
 <style lang="scss" scoped>
 .login_warp {
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	position: relative;
-	// overflow: hidden;
-	// padding-bottom: 20px;
-	overflow-y: auto;
-	background: url('../../assets/images/home/bg_img.png') no-repeat;
-    background-size: cover;
-	-webkit-overflow-scrolling: touch;
+	background: $font-color-white;
 	input {
 		background: transparent !important;
 		border: transparent;
@@ -212,7 +207,8 @@ export default {
 	.head_main{
 		padding: 48px 48px 0 48px;
 		box-sizing: border-box;
-		// background-color: $color-theme;
+		background: url('../../assets/images/home/bg_img.png') no-repeat;
+    	background-size: cover;
 		.head_title{
 			width: 100%;
 			height: 188px;
@@ -232,7 +228,7 @@ export default {
 			}
 		}
 		.small_text{
-			margin: 80px 0 96px 0;
+			margin: 40px 0;
 			color: $home-title-04;
 		}
 	}

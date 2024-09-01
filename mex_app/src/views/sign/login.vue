@@ -178,14 +178,14 @@ export default {
 <style lang="scss" scoped>
 .login_warp {
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	position: relative;
-	min-height: 100vh;
-	background: url('../../assets/images/home/bg_img.png') no-repeat;
-    background-size: cover;
+	background: $font-color-white;
 	.head_main{
 		padding: 48px 48px 0 48px;
 		box-sizing: border-box;
+		background: url('../../assets/images/home/bg_img.png') no-repeat;
+    	background-size: cover;
 		.head_title{
 			width: 100%;
 			display: flex;
@@ -204,16 +204,15 @@ export default {
 			}
 		}
 		.small_text{
-			margin: 80px 0 96px 0;
+			margin: 40px 0;
 			color: $home-title-04;
 		}
 	}
 	.login_main {
 		width: 100%;
 		position: relative;
-		height: calc(100% - 428px);
+		// height: calc(100% - 300px);
 		position: relative;
-		background: $font-color-white;
 		input {
 			background: transparent !important;
 			border: transparent;

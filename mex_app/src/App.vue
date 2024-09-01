@@ -450,8 +450,8 @@ img {
   }
   .footer_confirm{
     color: #fff;
-    background: #008751;
-    border-color: #008751;
+    background: $color-theme;
+    border-color: $color-theme;
   }
 }
 

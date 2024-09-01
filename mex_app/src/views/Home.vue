@@ -1,6 +1,6 @@
 <template>
     <div class="home_warp w_f" ref="warpBox">
-        <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true" />
+        <page-header :title="$t('login_027')" :showBack="false" />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">
                 <div class="user_head">
@@ -22,8 +22,8 @@
                 </van-swipe>
             </div>
             <div class="adv_warp flex-item flex-between font_24">
-                <div class="adv_item flex-item flex-align flex-center">转盘</div>
-                <div class="adv_item flex-item flex-align flex-center">签到</div>
+                <div class="adv_item flex-item flex-align flex-center"></div>
+                <div class="adv_item flex-item flex-align flex-center"></div>
             </div>
             <div class="task_main w_f flex-item flex-dir-c">
                 <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
@@ -323,16 +323,18 @@ export default {
         }
         .adv_warp{
             gap: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             .adv_item{
                 flex: 1;
                 height: 88px;
                 flex-shrink: 0;
-                border-radius: 10px;
-                background-color: aqua;
+                // border-radius: 10px;
+                background: url("../assets/images/lucky_icon.png");
+                background-size: 100% 100%;
             }
             .adv_item:nth-child(2){
-                background: darkmagenta;
+                background: url("../assets/images/sign_icon.png");
+                background-size: 100% 100%;
             }
         }
         .task_main{

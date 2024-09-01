@@ -5,6 +5,9 @@
             <el-form-item>
                 <el-input clearable :placeholder="$t('sys_g006')" v-model="account" />
             </el-form-item>
+             <el-form-item>
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q134')})" v-model="fuser_name" />
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" icon="el-icon-search" @click="initNumberList(1)">{{ $t('sys_c002') }}</el-button>
                 <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
@@ -29,16 +32,12 @@
                             <el-avatar v-else icon="el-icon-user-solid"></el-avatar>
                         </template>
                     </u-table-column>
-                    <u-table-column prop="account" :label="$t('sys_g027')" minWidth="130" />
+                    <u-table-column prop="account" :label="$t('sys_m062')" minWidth="130" />
+                    <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" />
                     <u-table-column prop="invite_code" :label="$t('sys_q133')" minWidth="130" />
                     <u-table-column prop="fuser_name" :label="$t('sys_q134')" minWidth="100">
                         <template slot-scope="scope">
                             {{ scope.row.fuser_name?scope.row.fuser_name:"-" }}
-                        </template>
-                    </u-table-column>
-                    <u-table-column prop="tuser_name" :label="$t('sys_q135')" minWidth="100">
-                        <template slot-scope="scope">
-                            {{ scope.row.tuser_name?scope.row.tuser_name:"-" }}
                         </template>
                     </u-table-column>
                     <u-table-column prop="level" :label="$t('sys_q136')" minWidth="100">
@@ -76,6 +75,7 @@ export default {
             limit: 100,
             total: 0,
             account: "",
+            fuser_name: "",
             loading:false,
             checkIdArry:[],
             checkAccount:[],
@@ -103,6 +103,7 @@ export default {
         },
         restQueryBtn(){
             this.account="";
+            this.fuser_name="";
             this.checkAccount = [];
             this.initNumberList(1)
             this.$refs.serveTable.clearSelection();
@@ -113,7 +114,8 @@ export default {
             const params = {
                 page: this.page,
                 limit: this.limit,
-                account:this.account
+                account:this.account,
+                fuser_name:this.fuser_name
             }
             getappuserlist(params).then(res => {
                 this.loading = false;

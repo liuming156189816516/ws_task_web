@@ -35,7 +35,7 @@ module.exports = {
     proxy: {
       '/api': {
         // target: 'http://52.77.3.222:8099',  //正试环境
-        target: 'http://13.229.25.219:8099',  //测试环境
+        target: 'http://35.171.37.75:8099',  //测试环境
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''  // 将请求中的/api路径替换为空

@@ -39,13 +39,13 @@ export default {
             height: 60px;
         }
         .login_area, .user_info{
-            font-weight: bold;
             color: $font-color-white;
             .sign_bt{
                 height: 100%;
-                height: 80px;
+                height: 66px;
                 padding: 0 20px;
                 margin-left: 20px;
+                font-weight: bold;
                 border-radius: 10px;
                 box-sizing: border-box;
                 background: $home-bg-value;

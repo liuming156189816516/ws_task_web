@@ -3,9 +3,6 @@
         <!-- 筛选条件 -->
         <el-form size="small" :inline="true" style="margin-top: 10px;">
             <el-form-item>
-                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m065')})" v-model="account" />
-            </el-form-item>
-            <el-form-item>
                 <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
             </el-form-item>
             <el-form-item>
@@ -25,15 +22,9 @@
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
                     <u-table-column type="index" :label="$t('sys_g020')" width="60" />
-                    <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130" />
                     <u-table-column prop="type" :label="$t('sys_m075')" minWidth="100">
                         <template slot-scope="scope">
                             {{formatType(scope.row.type)||"-" }}
-                        </template>
-                    </u-table-column>
-                    <u-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
-                        <template slot-scope="scope">
-                            {{tasksOption[scope.row.task_type]||"-" }}
                         </template>
                     </u-table-column>
                     <u-table-column prop="amount" :label="$t('sys_m076')" minWidth="130" />

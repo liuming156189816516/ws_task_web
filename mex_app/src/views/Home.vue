@@ -369,7 +369,7 @@ export default {
                     color: $font-color-black;
                     margin-bottom: 10px;
                     .task_small_title{
-                        width: 73%;
+                        width: 70%;
                         flex-wrap: wrap;
                     }
                     .award_money{

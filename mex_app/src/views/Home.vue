@@ -274,6 +274,7 @@ export default {
             font-size: 28px;
             height: 180px;
             color: #fff;
+            margin-bottom: -30px;
             align-items: center;
             .user_head{
                 width: 120px;
@@ -310,7 +311,7 @@ export default {
             width: 100%;
             display: flex;
             margin-bottom: 30px;
-            // margin-top: 20px;
+            margin-top: 30px;
             position: relative;
             flex-direction: column;
             .my_swipe{

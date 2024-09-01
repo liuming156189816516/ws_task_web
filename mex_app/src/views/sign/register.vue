@@ -230,7 +230,7 @@ export default {
 		}
 		.small_text{
 			margin: 40px 0;
-			color: $home-title-04;
+			color: $font-color-white;
 		}
 	}
 	.sign_login {

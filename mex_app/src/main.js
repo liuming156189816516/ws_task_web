@@ -8,6 +8,7 @@ import Global from "./core/Global"
 import situantpop  from '@/components/Dialog/Dialog'
 import popDialog  from '@/components/popDialog'
 import './assets/iconfont/iconfont.css';
+import VueLuckyCanvas from '@lucky-canvas/vue';
 window.Global = Global
 Global.setup();
 // 导入资源文件
@@ -23,6 +24,7 @@ import 'amfe-flexible/index.js';
 // import "swiper/css/swiper.min.css";
 import "./utils/pcRem"
 import "./utils/setInterval"
+Vue.use(VueLuckyCanvas);
 Vue.component("popDialog", popDialog)
 Vue.prototype.$popDialog = situantpop.install
 Vue.component("Scroll", scroll)

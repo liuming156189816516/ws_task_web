@@ -2,23 +2,19 @@
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
             <page-header :title="$t('home_044')" :show-icon="true" :bgcolor="false" />
-            <div class="notice_warp">
-                <div class="notice_mian">
-                    <img class="left_icon" src="@/assets/images/home/news_icon.png">
-                    <van-notice-bar :scrollable="false">
-                        <van-swipe vertical style="height: 24px;" :autoplay="3000" :show-indicators="false"  >
-                            <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
-                        </van-swipe>
-                    </van-notice-bar>
-                </div>
-            </div>
-            <div class="share_bonus w_f flex-item flex-dir-c">
+            <!-- <div class="share_bonus w_f flex-item flex-dir-c">
                 <p class="Win_l font_72 flex-item">{{$t('home_104')}}</p>
                 <p class="Win_r font_72 flex-item">{{$t('home_105')}}</p>
                 <div class="share_rule flex-item flex-center" @click="showRule">
                     <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
                     <span class="flex-item font_26">{{$t('spre_003')}}</span>
                 </div>
+            </div> -->
+            <div class="video_box flex-item flex-item flex-align flex-center mg_24">
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="@/assets/video/2.mp4" />
+                <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
+                    <img src="@/assets/images/serveic/play_icon.png" alt="">
+                </div> -->
             </div>
             <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">
@@ -73,7 +69,7 @@
 
                     <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num3_icon.png">
+                            <img src="@/assets/images/home/num2_icon.png">
                         </div>
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
@@ -89,7 +85,7 @@
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div>
-            <div class="record_list w_f flex-item flex-dir-c">
+            <!-- <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_28">
                     <span class="flex-item flex-align">{{$t('tail_003')}}</span>
                     <span class="flex-item flex-center">{{$t('home_031')}}</span>
@@ -97,7 +93,6 @@
                     <span class="flex-item">{{$t('spre_012')}}</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
-                        <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in pullGroupList" :key="idx">
@@ -118,7 +113,7 @@
                 <div class="title_top footer_tips w_f flex-item font_24">
                     {{$t('spre_014')}}
                 </div>
-            </div>
+            </div> -->
         </div>
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
@@ -159,7 +154,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			userInfo: state => state.User.userInfo,
+			userInfo: state => state.User,
             bannerList: state => state.User.bannerList
 		}),
         taskOption(){
@@ -181,12 +176,12 @@ export default {
     },
     mounted(){
         this.getIncomeList();
-        this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_03'));
-            if(!isTips){
-                this.$popDialog({ steps:true, type: 11 })
-            }
-        })
+        // this.$nextTick(()=>{
+        //     const isTips = JSON.parse(localStorage.getItem('step_03'));
+        //     if(!isTips){
+        //         this.$popDialog({ steps:true, type: 11 })
+        //     }
+        // })
         this.$store.dispatch('User/actionReport',8) 
     },
 	methods: {
@@ -335,75 +330,9 @@ export default {
             position: relative;
             background: url('../../assets/images/home/task_001.png') no-repeat;
             background-size: 100% 100%;
-            .notice_warp {
-                padding: 0 70px;
-                margin-top: 44px;
-                position: relative;
-                box-sizing: border-box;
-                .left_icon{
-                    position: absolute;
-                    height: 58px;
-                    top: 50%;
-                    left: 100px;
-                    z-index: 1;
-                    transform: translateY(-50%);
-                }
-                .notice_mian{
-                    max-width: 524px;
-                    height: 50px;
-                    overflow: hidden;
-                    border-radius: 60px;
-                    margin: 0 auto;
-                    justify-content: center;
-                    .van-notice-bar{
-                        height: 26px;
-                        padding: 0;
-                        background-color: $font-color-white ;
-                    }
-                    .van-swipe-item{
-                        height: 26px;
-                        line-height: 26px;
-                        margin-left: 24px;
-                        color: $color-theme;
-                    }
-                }
-            }
-            .share_bonus{
-                font-weight: bold;
-                font-style: italic;
-                margin-top: 100px;
-                position: relative;
-                color: $font-color-white;
-                p{
-                    text-shadow: 0 5px 3px $color-theme,0 -2px 0 $color-theme;
-                }
-                .Win_l{
-                  padding-left: 88px;
-                }
-                .Win_r{
-                    align-self: flex-end;
-                    padding-right: 102px;
-                }
-                .share_rule{
-                    color: $font-color-white;
-                    position: absolute;
-                    top: -80px;
-                    right: 0;
-                    z-index: 9;
-                    font-weight: initial;
-                    padding: 11px 14px;
-                    border-top-left-radius: 200px;
-                    border-bottom-left-radius: 200px;
-                    background: rgba($color: #000000, $alpha: .5);
-                    img{
-                        height: 40px;
-                        margin-right: 4px;
-                    }
-                }
-            }
             .task_box{
-                padding: 0 76px;
-                margin-top: 60px;
+                padding: 0 30px;
+                margin-top: 30px;
                 box-sizing: border-box;
                 .task_Progress{
                     border-radius: 24px;
@@ -441,7 +370,7 @@ export default {
             }
         }
         .task_box_main{
-            margin-top: -216px;
+            margin-top: -376px;
             background: #E6F2EF;
             // background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
         }
@@ -450,7 +379,7 @@ export default {
             z-index: 9;
             margin-top: -60px;
              .task_main{
-                padding: 0 24px 0 36px;
+                padding: 0 30px;
                 gap: 30px;
                 box-sizing: border-box;
                 // background: url('../../assets/images/home/jinbi.png') no-repeat;

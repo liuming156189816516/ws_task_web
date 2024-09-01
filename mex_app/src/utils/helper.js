@@ -282,7 +282,7 @@ const Helper = {
 		return result;
 	},
 	defaultOption() {
-		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:1}];
+		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
 	},
 	globalSupport(){
 		// if (this.checkBrowser()) {

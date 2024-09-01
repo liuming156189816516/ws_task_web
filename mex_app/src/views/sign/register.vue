@@ -91,15 +91,15 @@ export default {
 	},
 	methods: {
 		goLogin() {
-			// this.$router.push("/login")
-			this.$store.dispatch('Global/isShowType',1);
+			this.$router.push("/login")
+			// this.$store.dispatch('Global/isShowType',1);
 		},
 		showEye(){
 			this.regEye = !this.regEye;
 		},
 		bankIcon(){
-			this.$store.dispatch('Global/isShowType',1);
-			// this.$router.go("-1")
+			// this.$store.dispatch('Global/isShowType',1);
+			this.$router.go("-1")
 		},
 		// handleBlur(){
 		// 	if (!this.username) return;

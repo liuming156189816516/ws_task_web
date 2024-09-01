@@ -5,7 +5,10 @@
                 <img v-show="showBack" src="@/assets/images/bank_icon.png" alt="" srcset="">
             </div>
             <div class="lable_center flex-item flex-center font_36" v-show="showTitle">{{title}}</div>
-            <div class="lable_right flex-item" @click="showRule"><span v-show="rightIcon">{{ $t('other_051') }}</span></div>
+            <div class="lable_right flex-item" @click="showRule">
+                <img v-show="rightIcon" src="../assets/images/qiandao.png" alt="" srcset="">
+                <!-- <span v-show="rightIcon">{{ $t('other_051') }}</span> -->
+            </div>
         </div>
     </div>
 </template>
@@ -75,8 +78,8 @@ export default {
             // }else{
             //     this.$store.dispatch('User/actionReport',6)
             // }
-            this.$store.dispatch('User/actionReport',4)
-            this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
+            // this.$store.dispatch('User/actionReport',4)
+            // this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
         }
     },
     created() {
@@ -94,7 +97,7 @@ export default {
     // border-bottom: 1px solid #D8D8D8;
     .header {
         height: 100%;
-        padding: 0 36px;
+        padding: 0 30px;
         box-sizing: border-box;
         color: $font-color-white;
         .lable_left, .lable_right{
@@ -116,6 +119,9 @@ export default {
         .lable_right {
             font-style: italic;
             justify-content: right;
+            img{
+                height: 42px;
+            }
         }
     }
     ::v-deep{

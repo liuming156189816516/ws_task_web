@@ -104,7 +104,7 @@ export default {
         }
     },
     created() {
-        this.getHelpVideo();
+        // this.getHelpVideo();
     },
     mounted() {
         // setTimeout(()=>{

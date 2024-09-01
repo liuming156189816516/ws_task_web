@@ -178,6 +178,7 @@ export default {
     spre_016:"Invitee register and log in",
     spre_017:"Invitee completes the task",
     spre_018:"Distribute bonus",
+    spre_019:"Team size",
 
     serv_001:"Hi，{value}",
     serv_002:"How can I assist you",

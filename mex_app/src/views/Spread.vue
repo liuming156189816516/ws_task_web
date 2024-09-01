@@ -1,31 +1,19 @@
 <template>
     <div class="spread_warp" ref="warpBox" @scroll="handleScrolStop">
         <page-header :title="$t('home_045')" :noBg="false" :bgColor="false" :showBack="false" />
-        <div class="w_f spread_title flex-item font_50 flex-dir-c">
-            <p class="flex-item flex-center">{{$t('spre_001')}}</p>
-            <p class="flex-item flex-center">{{$t('spre_002')}}</p>
-        </div>
-        <div class="notice_warp">
-            <div class="notice_mian">
-                <img class="left_icon" src="@/assets/images/home/news_icon.png" alt="" srcset="">
-                <van-notice-bar :scrollable="false">
-                    <van-swipe vertical class="notice-swipe" :autoplay="3000" :show-indicators="false">
-                        <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
-                    </van-swipe>
-                </van-notice-bar>
-            </div>
+        <div class="video_box flex-item flex-item flex-align flex-center mg_24">
+            <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:140px;" src="../assets/video/2.mp4" />
+            <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
+                <img src="@/assets/images/serveic/play_icon.png" alt="">
+            </div> -->
         </div>
         <div class="share_main w_f">
-            <div class="share_rule flex-item flex-center" @click="showRule">
-                <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                <span class="flex-item font_26">{{$t('spre_003')}}</span>
-            </div>
             <div class="cover_img flex-item">
                 <img class="mask_img" src="@/assets/images/mill/bg_02.png" alt="" srcset="">
                 <div class="spred_mess w_f">
                     <div class="top_title w_f font_32 flex-item flex-align flex-center">{{$t('spre_004')}}</div>
                     <div class="spred_m w_f">
-                        <p class="w_f font_28">{{$t('spre_005')}}</p>
+                        <!-- <p class="w_f font_28">{{$t('spre_005')}}</p> -->
                         <div class="spred_l">
                            <div class="w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-between">
@@ -35,19 +23,26 @@
                             <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
                            </div>
                            <div class="invit_code w_f flex-item flex-dir-c">
-                            <div class="copay_desc flex-item flex-align flex-between">
-                                <span class="left_desc flex-item font_28">{{$t('spre_007')}}</span>
-                                <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button>
+                                <div class="copay_desc flex-item flex-align flex-between">
+                                    <span class="left_desc flex-item font_28">{{$t('spre_007')}}</span>
+                                    <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button>
+                                </div>
+                                <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
                             </div>
-                            <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
-                           </div>
+                           <div class="invit_code w_f flex-item flex-dir-c">
+                                <div class="copay_desc flex-item flex-align flex-between">
+                                    <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
+                                    <!-- <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button> -->
+                                </div>
+                                <div class="copay_text flex-item font_28">120</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="share_continer w_f flex-item flex-dir-c">
-            <div class="earn_warp flex-item flex-dir-c">
+            <!-- <div class="earn_warp flex-item flex-dir-c">
                 <p class="font_32">{{$t('spre_008')}}</p>
                 <div class="w_f step_warp flex-item">
                     <div class="step_item w_f flex-item flex-align flex-dir-c" v-for="(item,idx) in stepOptopn" :key="idx">
@@ -62,12 +57,12 @@
                         <img :class="['line_triang',`triang_${idx}`]" src="@/assets/images/mill/dire_row.png" alt="" v-if="idx!=0">
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
-                <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
+                <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div>
-            <div class="record_list w_f flex-item flex-dir-c">
+            <!-- <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head top_title_1 w_f flex-item flex-align flex-between font_28">
                     <span>{{$t('tail_003')}}</span>
                     <span>{{$t('spre_012')}}</span>
@@ -91,10 +86,7 @@
                 <div class="title_top footer_tips w_f flex-item font_24">
                     {{$t('spre_014')}}
                 </div>
-            </div>
-        </div>
-        <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
-            <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
+            </div> -->
         </div>
     </div>
 </template>
@@ -162,12 +154,12 @@ export default {
         this.getIncomeList();
     },
     mounted(){
-        this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_02'));
-            if(!isTips){
-                this.$popDialog({steps:true, type: 10 })
-            }
-        })
+        // this.$nextTick(()=>{
+        //     const isTips = JSON.parse(localStorage.getItem('step_02'));
+        //     if(!isTips){
+        //         this.$popDialog({steps:true, type: 10 })
+        //     }
+        // })
         this.$store.dispatch('User/actionReport',12);
     },
     methods:{
@@ -234,87 +226,12 @@ export default {
 <style lang="scss" scoped>
     .spread_warp {
         width: 100%;
-        height: 100%;
         position: relative;
         overflow-y: auto;
-        margin-bottom: 100px;
+        padding-bottom: 95px;
         background: url('../assets/images/home/bg_img.png') no-repeat;
         background-size: cover;
         -webkit-overflow-scrolling: touch;
-        .top_icon{
-            width: 70px;
-            height: 70px;
-            position: fixed;
-            right:5px;
-            bottom: 120px;
-            display: flex;
-            z-index: 99999;
-            flex-shrink: 0;
-            opacity: 0;
-            align-items: center;
-            border-radius: 50%;
-            transition: all .5s;
-            justify-content: center;
-            // background: $color-theme;
-            img{
-                height: 42px;
-            }
-        }
-        .icon_active{
-            opacity: 1;
-        }
-        .icon_hide{
-            opacity: 0;
-        }
-        .spread_title{
-            width: 100%;
-            margin-bottom: 28px;
-            color: $home-title-01;
-            p{
-                padding: 0;
-                margin: 0;
-                font-weight: 700;
-            }
-        }
-        .notice_warp {
-            position: relative;
-            padding: 0 70px;
-            box-sizing: border-box;
-            .left_icon{
-                position: absolute;
-                height: 58px;
-                top: 50%;
-                left: 95px;
-                z-index: 1;
-                transform: translateY(-50%);
-            }
-            .notice_mian{
-                max-width: 540px;
-                overflow: hidden;
-                border-radius: 60px;
-                margin: 0 auto;
-                .van-notice-bar{
-                    height: 26px;
-                    padding: 0 4px 0 20px;
-                    color: $color-theme;
-                    background-color: #86c6af;
-                }
-                ::v-deep .van-swipe__track{
-                    height: 26px !important;
-                    line-height: 26px;
-                    text-align: center;
-                }
-                .van-swipe-item{
-                    height: 26px;
-                    line-height: 26px;
-                    margin-left: 2px;
-                    color: $color-theme;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                }
-            }
-        }
         .share_main, .share_continer{
             height: 613px;
             margin-top: 20px;
@@ -343,6 +260,7 @@ export default {
                 box-sizing: border-box;
                 z-index: 1;
                 .mask_img{
+                    height: 540px;
                     margin-top: 168px;
                 }
                 .spred_mess{
@@ -371,7 +289,7 @@ export default {
                             text-overflow: ellipsis;
                         }
                         .copay_desc{
-                            height: 44px;
+                            height: 32px;
                             margin-top: 18px;
                             .left_desc{
                                 font-weight: bold;
@@ -392,89 +310,6 @@ export default {
                             margin-top: 16px;
                             border-top: 1px solid $home-title-07;
                         }
-                    }
-                }
-            }
-            .earn_warp{
-                margin: 0 20px;
-                padding: 30px 20px;
-                padding-bottom: 60px;
-                border-radius: 32px;
-                box-sizing: border-box;
-                background: $font-color-white;
-                p{
-                    color: $color-theme;
-                    font-style: italic;
-                    font-weight: bold;
-                }
-                .step_warp{
-                    margin-top: 40px;
-                    .step_item{
-                        flex: 1;
-                        height: 192px;
-                        position: relative;
-                        .step_number{
-                            height: 50px;
-                        }
-                        .step_text{
-                            position: absolute;
-                            top: 28px;
-                            left: 50%;
-                            text-align: center;
-                            color: $home-title-08;
-                            transform: translateX(-50%);
-                        }
-                        .step_img{
-                            margin-top: 68px;
-                            img{
-                                height: 100px;
-                                position: absolute;
-                                z-index: 2;
-                            }
-                        }
-                        .line_model{
-                            // width: 90%;
-                            position: absolute;
-                            left: 0;
-                            bottom: 29px;
-                            z-index: 1;
-                            border-bottom: 1px dotted $home-title-09;
-                        }
-                        .line_triang{
-                            height: 18px;
-                            position: absolute;
-                            left: 0;
-                            bottom: 21px;
-                            z-index: 1;
-                        }
-                        .triang_1{
-                            left: 12px;
-                        }
-                        .triang_2{
-                            left: 10px;
-                        }
-                        .triang_3{
-                            left: -35px;
-                        }
-                    }
-                }
-                .step_item:nth-child(1), .step_item:nth-child(4){
-                    flex-grow: 1;
-                }
-                .step_item:nth-child(2){
-                     flex-grow: 1.6;
-                }
-                .step_item:nth-child(3){
-                    flex-grow: 2;
-                }
-                .step_item:nth-child(1){
-                    .line_model{
-                        margin-left: 20px;
-                    }
-                }
-                .step_item:nth-child(4){
-                    .line_model{
-                        width: 100px;
                     }
                 }
             }

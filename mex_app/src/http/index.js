@@ -78,7 +78,7 @@ const ProMisePost = (func, data = {}, conf = {},resolve, reject)=>{
             sessionStorage.clear();
             localStorage.clear();
             setTimeout(() => {
-                window.likevm.$router.replace('/login')
+                window.likevm.$router.replace('/home')
             }, 1000);
         } else {
             if (data.code != 513) {

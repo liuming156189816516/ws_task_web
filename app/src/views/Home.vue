@@ -49,13 +49,14 @@
                 <van-notice-bar speed='20' :left-icon="require('../assets/images/home/earn-icon-a.png')" scrollable :text="userInfo.baseNotice" />
             </div>
             <van-swipe class="my_swipe" :autoplay="3000" indicator-color="white">
-                <van-swipe-item v-for="(item,idx) in userInfo.baseBanner" :key="idx" @click="jumpLink(item.link)">
-                    <template v-if="item.link">
+                <van-swipe-item v-for="(item,idx) in imagesList" :key="idx" @click="jumpLink(item.link)">
+                     <img :src="item">
+                    <!-- <template v-if="item.link">
                         <img :src="item.file_url">
                     </template>
                     <template v-else>
                         <img :src="item.file_url" alt="">
-                    </template>
+                    </template> -->
                 </van-swipe-item>
             </van-swipe>
         </div>
@@ -101,7 +102,8 @@ export default {
             taskOption:[],
             langIdx:Cookies.get("language")||'en',
             taskType:['','scanOnline','pullPownTask','pullgroupTask'],
-            langOptions:[{lang:"en",name:"en-US"},{lang:"zh",name:"zh_CN"}]
+            langOptions:[{lang:"en",name:"en-US"},{lang:"zh",name:"zh_CN"}],
+            imagesList:[require("../assets/images/banner/banner1.png"),require("../assets/images/banner/banner2.png")]
 		}
 	},
 	computed: {
@@ -416,7 +418,7 @@ export default {
             flex-direction: column;
             box-sizing: border-box;
             .my_swipe{
-                width: 100%;
+                width: 100vw;
                 height: 300px;
                 border-radius: 10px;
                 img{

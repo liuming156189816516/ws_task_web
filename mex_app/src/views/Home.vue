@@ -2,26 +2,24 @@
     <div class="home_warp w_f" ref="warpBox">
         <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true" />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
-            <div class="ui_time flex-item flex-center font_50" id="step1">{{$t('home_091')}}</div>
-            <div class="notice_warp">
-                <div class="notice_mian">
-                    <img class="left_icon" src="@/assets/images/home/news_icon.png">
-                    <van-notice-bar :scrollable="false">
-                        <van-swipe vertical style="height: 24px;" :autoplay="3000" :show-indicators="false"  >
-                            <van-swipe-item v-for="(item,idx) in winNotis" :key="idx">{{ item }}</van-swipe-item>
-                        </van-swipe>
-                    </van-notice-bar>
+            <div class="user_mess" v-if="userInfo.token">
+                <div class="user_head">
+                    <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
+                </div>
+                <div class="user_info">
+                    <div class="user_name">{{ userInfo.account }}</div>
+                     <!-- <div class="user_name">nocode</div> -->
+                    <div class="user_code">{{$t('other_005')}}：{{userInfo.inviteCode}} 
+                        <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
+                    </div>
                 </div>
             </div>
-            <div class="adv_warp w_f flex-item">
-                <div class="adv_text">
-                    <h2 class="font_32">{{$t('home_044')}}</h2>
-                    <p class="flex-item">{{$t('home_092')}}</p>
-                    <p class="flex-item">{{$t('home_095')}}</p>
-                </div>
-                <div class="adv_img">
-                    <img src="@/assets/images/home/money_01.png" alt="" srcset="">
-                </div>
+            <div class="notice_warp">
+                <van-swipe class="my_swipe" :autoplay="3500" indicator-color="white">
+                    <van-swipe-item v-for="(item,idx) in imagesList" :key="idx" @click="jumpLink(item.link)">
+                        <img :src="item">
+                    </van-swipe-item>
+                </van-swipe>
             </div>
             <div class="task_main w_f flex-item flex-dir-c">
                 <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
@@ -42,15 +40,9 @@
                         <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
                         <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>
-                    <div class="task_desc w_f flex-item flex-between flex-dir-r font_24">
-                        <!-- <div class="task_desc_item flex-item"> -->
-                            {{taskNameOption[item.type].desc}}
-                        <!-- <div class="task_btn flex-item">
-                        </div> -->
-                    </div>
                 </div>
             </div>
-            <div class="record_warp w_f flex-item" v-if="userInfo.token">
+            <!-- <div class="record_warp w_f flex-item" v-if="userInfo.token">
                 <div class="today_record w_f flex-item flex-align flex-dir-c">
                     <div class="top_title w_f flex-item flex-align flex-center font_32">{{$t('home_052')}}</div>
                     <div class="self_code w_f flex-item flex-dir-c">
@@ -77,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
             <div class="serve_icon" slot="icon" @click="$Helper.globalSupport()">
@@ -106,9 +98,11 @@ export default {
             langIdx: Cookies.get("language") || 'en',
             taskType: ['', 'scanOnline', 'spread', 'pullgroupTask'],
             langOptions: [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" }],
-            animationStyle: {
-                animation: 'scrolling 5s linear infinite',
-            }
+            imagesList:[
+                require("../assets/images/banner/banner1.png"),
+                require("../assets/images/banner/banner2.png"),
+                require("../assets/images/banner/banner3.png")
+            ]
         }
     },
     computed: {
@@ -141,6 +135,7 @@ export default {
     },
     activated() {
         if(getToken()){
+            console.log(this.userInfo);
             this.initHandle();
             this.$store.dispatch('User/actionReport',1)
         }else{
@@ -152,7 +147,7 @@ export default {
     methods: {
         initHandle(){
             this.syncInitApi();
-            this.initRuleTips();
+            // this.initRuleTips();
         },
         initRuleTips(){
             setTimeout(() => {
@@ -228,7 +223,7 @@ export default {
             //         this.$store.dispatch('User/actionReport',12) 
             //     }
             // }
-            if (!getToken()) return this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true});
+            if (!getToken()) return this.$router.push("/login");
             if (row.type == 2) {
                 this.$router.push(path);
             }else{
@@ -250,6 +245,9 @@ export default {
         showTask(idx){
             this.$router.push(`/betrecord?id=1`);
         },
+        jumpLucky(){
+            // this.$router.push(`/luckyWheel`);   
+        },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);
         }
@@ -258,114 +256,76 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home_warp {
+    height: 100%;
     position: relative;
     padding-bottom: 140px;
     background: url('../assets/images/home/bg_img.png') no-repeat;
     background-size: cover;
     -webkit-overflow-scrolling: touch;
     .warp_mian {
-        .logo_title {
-            position: relative;
-            color: $font-color-white;
-            margin-top: 60px;
-            font-weight: bold;
-            span{
-                font-style: italic;
-                position: absolute;
-                top: 50%;
-                right: 36px;
-                transform: translateY(-50%);
-            }
-        }
-
-        .ui_time {
-            font-weight: bold;
-            color: $home-title-01;
-            margin-top: 50px;
-            text-shadow: 0px 8px 3px #005440;
-        }
-
-        .notice_warp {
-            padding: 0 70px;
-            margin-top: 50px;
-            position: relative;
-            box-sizing: border-box;
-            .left_icon{
-                position: absolute;
-                height: 58px;
-                top: 50%;
-                left: 95px;
-                z-index: 1;
-                transform: translateY(-50%);
-            }
-            .notice_mian{
-                width: 540px;
-                overflow: hidden;
-                border-radius: 60px;
-                margin: 0 auto;
-                .van-notice-bar{
-                    height: 26px;
-                    padding: 0 4px 0 20px;
-                    color: $color-theme;
-                    background-color: #86c6af;
-                }
-                ::v-deep .van-swipe__track{
-                    height: 26px !important;
-                    line-height: 26px;
-                    text-align: center;
-                }
-                .van-swipe-item{
-                    height: 26px;
-                    line-height: 26px;
-                    margin-left: 2px;
-                    color: $color-theme;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                }
-            }
-        }
-        .adv_warp{
-            // height: 360px;
-            padding-left: 30px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        .user_mess, .l_value{
+            display: flex;
+            font-size: 28px;
+            height: 180px;
+            color: #fff;
             align-items: center;
-            margin-top: 10px;
-            .adv_text{
-                flex-grow:1;
-                color: $font-color-white;
-                text-shadow: 0px 8px 3px #005440;
-                h2{
-                    font-size: 64px;
-                    font-weight: bold; 
-                    margin-top: -70px;
-                    margin-bottom: 10px;
-                }
-                p{
-                    font-weight: bold;
-                    font-size: 38px;
-                    line-height: 62px;
-                }
-                p:nth-child(3){
-                    margin-right: -80px;
+            .user_head{
+                width: 120px;
+                height: 120px;
+                flex-shrink: 0;
+                overflow: hidden;
+                border-radius: 50%;
+                border: 1px solid #fff;
+                img{
+                    width: 100%;
+                    height: 100%;
                 }
             }
-            .adv_img{
-                flex-shrink: 0;
+            .user_info{
+                margin-left: 20px;
+                .user_name{
+                    font-weight: bold;
+                    font-size: 36px;
+                }
+                .user_code{
+                    margin-top: 10px;
+                    .copay_text{
+                        padding: 8px 26px;
+                        font-size: 24px;
+                        margin-left:10px;
+                        border-radius:30px;
+                        color: $color-theme;
+                        background: $font-color-white;
+                    }
+                }
+            }
+        }
+        .notice_warp {
+            width: 100%;
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+            flex-direction: column;
+            .my_swipe{
+                width: calc(100vw - 40px);
+                height: 280px;
+                border-radius: 20px;
                 img{
-                    height: 306px;
+                    width: 100%;
+                    height: 100%;
                 }
             }
         }
         .task_main{
-            padding: 0 30px;
             gap: 30px;
             box-sizing: border-box;
             background: url('../assets/images/home/jinbi.png') no-repeat;
             background-size: cover;
             background-position: 0 40px;
             .task_item{
-                // height: 250.8px;
-                padding: 18px 0 11px 20px;
+                padding: 30px 0 30px 20px;
                 background: url('../assets/images/home/task_icon.png') no-repeat;
                 background-size: 100% 100%;
                 .task_name{

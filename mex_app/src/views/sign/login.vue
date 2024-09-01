@@ -106,12 +106,12 @@ export default {
 			// console.log(this.$Helper.aesDecrptHost(pp));
 			this.$store.dispatch('User/userLogin',params).then(res => {
 				Toast.clear();
-				this.moveNews.$emit('login-env',"hello");
+				// this.moveNews.$emit('login-env',"hello");
 				setTimeout(()=>{this.isLoading= false},2000)
 				if(!res.token) return;
 				this.checkChange();
-				localStorage.removeItem('step_01');
-				localStorage.setItem('is_play',false);
+				// localStorage.removeItem('step_01');
+				// localStorage.setItem('is_play',false);
 				this.$store.dispatch('Global/isShowLogin',false);
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())
@@ -147,15 +147,15 @@ export default {
 			}
 		},
 		bankIcon(){
-			// this.$router.push("/home")
-			this.$store.dispatch('Global/isShowLogin',false);
+			this.$router.push("/home")
+			// this.$store.dispatch('Global/isShowLogin',false);
 		},
 		eyeBol() {
 			this.regEye = !this.regEye;
 		},
 		goRegister() {
-			// this.$router.push("/register")
-			this.$store.dispatch('Global/isShowType',2);
+			this.$router.push("/register")
+			// this.$store.dispatch('Global/isShowType',2);
 		},
 		forgetFunc(){
 			this.$router.push("/forget_pwd")

@@ -8,10 +8,10 @@
 			<router-view name="tabBar"></router-view>
 			<float-ball v-if="assistiveTouch"></float-ball>
 		</div>
-		<van-overlay :show="global.isLogin" style="height:100%;overflow-y: auto;">
+		<!-- <van-overlay :show="global.isLogin" style="height:100%;overflow-y: auto;">
             <login v-if="global.isType==1" />
 			<register v-if="global.isType==2" />
-        </van-overlay>
+        </van-overlay> -->
 		<van-overlay :show="global.logOut">
 			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
 				<div class="log_main">
@@ -30,10 +30,10 @@ import { mapState } from 'vuex';
 import { logout } from '@/api/login';
 import FloatBall from './components/FloatBall';
 import preLoad from './core/PreLoadProxy';
-import login from './views/sign/login.vue';
-import register from './views/sign/register.vue';
+// import login from './views/sign/login.vue';
+// import register from './views/sign/register.vue';
 export default {
-	components: {FloatBall,login,register},
+	components: {FloatBall},
 	provide: function(){
 		return {
 			isPc: !window.navigator.userAgent.match(

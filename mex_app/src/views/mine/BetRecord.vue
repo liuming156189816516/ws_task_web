@@ -31,7 +31,7 @@
                             <div class="task_money font_30" v-else>+{{ item.amount }}</div>
                         </div>
                         <div class="order_time w_f flex-item flex-align flex-between font_26">
-                            <span>{{$t('home_001',{value:item.balance})}}</span>
+                            <!-- <span>{{$t('home_001',{value:item.balance})}}</span> -->
                             <span>{{ formatTime(item.itime) }}</span>
                         </div>
                     </div>

@@ -28,13 +28,13 @@
                             </div>
                             <div class="task_money flex-item flex-align flex-dir-c">
                                 <p class="font_30">-{{ item.amount }}</p>
-                                <p class="font_24"> 
+                                <!-- <p class="font_24"> 
                                     {{$t('home_001',{value:item.balance})}}
-                                </p>
+                                </p> -->
                             </div>
                         </div>
                         <div class="order_time w_f flex-item flex-align flex-between font_26">
-                            <span>{{$t('tail_014',{value:item.txid})}}</span>
+                            <!-- <span>{{$t('tail_014',{value:item.txid})}}</span> -->
                             <span>{{ formatTime(item.itime) }}</span>
                         </div>
                     </div>

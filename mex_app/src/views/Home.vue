@@ -8,12 +8,12 @@
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
-                    <div class="user_code">{{$t('other_005')}}：{{userInfo.inviteCode}} 
+                    <div class="user_code">{{$t('login_012')}}：{{userInfo.inviteCode}} 
                         <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
                     </div>
                 </div>
                 <div class="l_value" @click="showChangeBtn" @click.stop>
-                    <span>{{ viewLang() }}</span>
+                    <span class="font_28">{{ viewLang() }}</span>
                     <img class="down_icon" src="../assets/images/home/down_arrow_white.png" alt="" srcset="">
                     <van-transition name="fade-up">
                         <div class="down_list" :class="isIndex?'active_open':'active_close'">
@@ -329,7 +329,6 @@ export default {
                 width: 100%;
                 flex-grow: 1;
                 color: #fff;
-                font-size: 32px;
                 border-radius: 8px;
             }
             .down_icon{
@@ -341,7 +340,7 @@ export default {
                 width: 160px;
                 max-height: 230px;
                 position: absolute;
-                left: 0;
+                right: 0px;
                 top: 60px;
                 z-index: 1;
                 color: $font-color-black;

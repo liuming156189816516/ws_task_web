@@ -63,7 +63,7 @@
 				<van-cell-group inset :border="false" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
 					<van-field v-model="withdraw_num" type="number" clearable placeholder="0" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</van-cell-group>
-				<div class="auto_computed">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num/10}}{{ $t('pay_024') }}</div>
+				<div class="auto_computed">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.03}}{{ $t('pay_024') }}</div>
 				<div class="custom_dialog__footer">
 					<van-button class="custom_dialog_cancel" @click="showModel=false">{{ $t('other_007') }}</van-button>
 					<span class="model_line"></span>
@@ -166,7 +166,7 @@ export default {
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_013')}));
 			} else if(payIdx==2&&!this.card_no){
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}));
-			} else if(this.income_naira < this.withdraw_cash/10){
+			} else if(this.WithdMoney<this.withdraw_cash){
 				return this.$toast(this.$t('pay_017'));
 			}
 			this.showModel=true;
@@ -177,7 +177,7 @@ export default {
 				return this.$toast(this.$t('pay_018'));
 			}else if(this.withdraw_num % 1 != 0){
 				return this.$toast(this.$t('pay_019'));
-			}else if(this.withdraw_num/10 < this.withdraw_cash/10){
+			}else if(this.withdraw_num < this.withdraw_cash){
 				return this.$toast(this.$t('pay_028',{value:this.withdraw_cash}));
 			}
 			let params = {

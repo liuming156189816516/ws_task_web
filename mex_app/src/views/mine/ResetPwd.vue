@@ -3,7 +3,7 @@
         <page-header :title="$t('mine_012')" :bgColor="true" />
         <div class="password_block w_f flex-item flex-dir-c">
             <div class="password_item w_f flex-item flex-dir-c">
-                <p class="w_f flex-item font_30">{{ $t('login_030') }}</p>
+                <p class="w_f flex-item font_30">{{ $t('mine_019') }}</p>
                 <div class="password_text w_f flex-item">
                     <input class="font_28" v-model="oPwd" :type="regEye ? 'password' : 'text'" :placeholder="$t('login_031')" oninput="value=value.replace(/[^\w_]/g,'')">
                     <i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
@@ -17,9 +17,9 @@
                 </div>
             </div>
             <div class="password_item w_f flex-item flex-dir-c">
-                <p class="w_f flex-item font_30">{{ $t('login_032') }}</p>
+                <p class="w_f flex-item font_30">{{ $t('login_007') }}</p>
                 <div class="password_text w_f flex-item">
-                    <input class="font_28" v-model="cPwd" :type="regEye ? 'password' : 'text'" :placeholder="$t('login_033')" oninput="value=value.replace(/[^\w_]/g,'')">
+                    <input class="font_28" v-model="cPwd" :type="regEye ? 'password' : 'text'" :placeholder="$t('login_031')" oninput="value=value.replace(/[^\w_]/g,'')">
                     <i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
                 </div>
             </div>

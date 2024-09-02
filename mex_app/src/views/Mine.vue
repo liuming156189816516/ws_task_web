@@ -10,7 +10,7 @@
                     </div>
                     <div class="user_info">
                         <div class="user_name font_32">{{ userInfo.account }}</div>
-                        <div class="user_code font_24">{{$t('other_005')}}&nbsp;:&nbsp;<span style="font-weight: bold;">{{userInfo.inviteCode}}</span> <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
+                        <div class="user_code font_24">{{$t('login_012')}}&nbsp;:&nbsp;<span style="font-weight: bold;">{{userInfo.inviteCode}}</span> <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
                     </div>
                 </div>
             </div>

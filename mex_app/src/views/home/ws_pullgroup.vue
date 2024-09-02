@@ -75,7 +75,7 @@
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>
                         <div class="group_link w_f flex-item flex-between flex-align font_24">
-                            <input type="text" v-model="group_link" :disabled="isShow" placeholder="Enter Group Link">
+                            <input type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
                             <van-button :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
                         </div>
                     </div>
@@ -219,7 +219,7 @@ export default {
         },
         viewTaskNum(){
             // console.log(this.taskList);
-            this.$popDialog({ content: this.taskList, title:"Contact Numbers", type: 7 })
+            this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
         },
         submitTask(){
             this.$store.dispatch('User/actionReport',11);

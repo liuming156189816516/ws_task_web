@@ -162,6 +162,8 @@ export default {
     home_123:"Open WhatsApp",
     home_124:"Lucky Wheel",
     home_125:"Sign in",
+    home_126:"Contact Numbers",
+    home_127:" Enter Group Link",
 
 
     spre_001:"Profit from sharing",

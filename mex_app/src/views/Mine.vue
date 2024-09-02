@@ -56,7 +56,7 @@
         </div>
         <div class="task_continer w_f flex-item flex-dir-c">
             <div class="task_main">
-                <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click="handleJump(item.path,idx)" v-show="item.isShow">
+                <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click="handleJump(item,idx)" v-show="item.isShow">
                     <div class="left_text">
                         <img class="ws_icon" :src="require(`@/assets/images/mine/${item.icon}.png`)" alt="">
                         <span class="font_32">{{ item.name }}</span>
@@ -75,7 +75,7 @@
 <script>
 import { mapState } from 'vuex';
 import { getwithdrawconfig } from '@/api/pay';
-import { getaccountincome,getbonus,getdownloadurl } from '@/api/home'
+import { getbonus } from '@/api/home'
 export default {
     name: 'Mine',
     data() {
@@ -212,18 +212,18 @@ export default {
                 this.$router.push("/pullPownTask")
             }
         },
-        handleJump(path,idx){
-            if(path == '/down_apk'){
-                let link = document.createElement('a');
-                link.href = path;
-                link.setAttribute('download', 'cashcow');
-                link.click();
-            }
-            if(path == "/log_out"){
+        handleJump(val,idx){
+            // if(path == '/down_apk'){
+            //     let link = document.createElement('a');
+            //     link.href = val.path;
+            //     link.setAttribute('download', 'cashcow');
+            //     link.click();
+            // }
+            if(val.path == "/log_out"){
                 // this.logoutHandle();
                 this.$store.dispatch('Global/isCloseTips',true);
             }else{
-                this.$router.push(path);
+                this.$router.push(val.path);
             }
         },
         updateHead(){

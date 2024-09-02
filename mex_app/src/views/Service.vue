@@ -59,13 +59,13 @@
 
 <script>
 import { mapState } from 'vuex';
-import { gethelp } from '@/api/home';
+import { getwithdrawconfig } from '@/api/pay';
 import uniFun from "@/utils/uni-webview-js"
 export default {
     data() {
         return {
             palyIdx:null,
-            help_url:"",
+            limit_amount:0,
             is_play:false,
         }
     },
@@ -94,32 +94,21 @@ export default {
         },
         taskRuleOption(){
             return [
-                [this.$t('serv_016'),this.$t('serv_017'),this.$t('serv_018')],
-                [this.$t('serv_019'),this.$t('serv_020'),this.$t('serv_021')],
-                [this.$t('serv_022'),this.$t('serv_023'),this.$t('serv_024')],
-                [this.$t('serv_025'),this.$t('serv_026')],
-                [this.$t('serv_027'),this.$t('serv_028')]
+                [this.$t('serv_007'),this.$t('serv_017'),this.$t('serv_018')],
+                [this.$t('serv_008'),this.$t('serv_020'),this.$t('serv_021')],
+                [this.$t('serv_009'),this.$t('serv_023',{value:this.limit_amount}),this.$t('serv_024')],
+                [this.$t('serv_010'),this.$t('serv_026')],
+                [this.$t('serv_011'),this.$t('serv_028')]
             ]
         }
     },
     created() {
-        // this.getHelpVideo();
-    },
-    mounted() {
-        // setTimeout(()=>{
-        //     let video = this.$refs.myVideo;
-        //     video.addEventListener('play', (e)=> {
-        //         this.is_play=true;
-        //     })
-        //     video.addEventListener('pause',(e)=> {
-        //         this.is_play=false;
-        //     })
-        // })
+        this.getWithdrawalAmount();
     },
     methods: {
-        async getHelpVideo() {
-            const { url } = await gethelp({});
-            this.help_url = url;
+        async getWithdrawalAmount() {
+            const { limit_amount } = await getwithdrawconfig()
+            this.limit_amount = limit_amount;
         },
         contactService(){
             if(this.$Helper.checkBrowser()){

@@ -5,36 +5,44 @@
   -webkit-overflow-scrolling: touch;
   .lucky_bg{
     .bg_01{
+      height: 740px;
       position: relative;
+      // background: rgba($color: red, $alpha: .5);
       .img_01{
         position: absolute;
         top: 0;
         left: 0;
       }
       .lucky_bg2{
+        position: absolute;
+        top: 0;
+        left: 0;
         padding: 60px;
         box-sizing: border-box;
         background: transparent;
       }
       .lucky_bg3{
-        height: 600px;
         padding: 60px;
         box-sizing: border-box;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-50%);
+        top: 0;
+        left: 0;
         .lucky_main{
-          width: 600px;
-          height: 600px;
-          padding: 60px;
-          box-sizing: border-box;
+          width: 594px;
+          height: 594px;
+          // padding: 60px;
+          // box-sizing: border-box;
           position: absolute;
-          top: 50%;
+          top: 80px;
           left: 50%;
-          transform: translate(-50%,-50%);
-          // background: transparent;
-          // background: darkmagenta;
+          transform: translateX(-50%);
+          // background: rgba($color: #000000, $alpha: .5);
+          .custom_lucky{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+          }
         }
       }
     }
@@ -55,6 +63,7 @@
             <img class="img_03" src="../../assets/images/lucky/bg_03.png" alt="">
             <div class="lucky_main w_f">
               <LuckyWheel
+                class="custom_lucky"
                 ref="myLucky"
                 width="247px"
                 height="247px"
@@ -85,7 +94,7 @@ export default {
           background: "#eee", //转盘背景色
           imgs: [
             {
-              //   src:require('@/assets/LuckyWheel.png'),   //图片url
+              // src:require('@/assets/images/lucky_btn.png'),   //图片url
               top: "0", //图片距顶部距离
               width: "400px", //图片宽
               height: "400px", //图片高
@@ -124,12 +133,12 @@ export default {
         //   background: "#FFF402", //扇形背景色
         //   range: 10, //当前prize.range/所有prize中range总和
         // },
-        { fonts: [{ text: "7金币", top: "60%" }], background: "#76C5F0",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "20%",width:"36px",height:"36px"}] },
-        { fonts: [{ text: "10金币", top:"60%" }], background: "#2A1570",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "20%",width:"36px",height:"36px"}]},
-        { fonts: [{ text: "5金币", top: "60%" }], background: "#009241",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "20%",width:"36px",height:"36px"}]},
-        { fonts: [{ text: "2金币", top: "60%" }], background: "#DD167B",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "20%",width:"36px",height:"36px"}]},
-        { fonts: [{ text: '6金币', top: '60%' }], background: '#F8C301',imgs:[{src:require("../../assets/images/gold_icon.png"),top: "20%",width:"36px",height:"36px"}]},
-        { fonts: [{ text: '0金币', top: '60%' }], background: '#E77841',imgs:[{src:require("../../assets/images/gold_icon.png"),top: "20%",width:"36px",height:"36px"}]},
+        { fonts: [{ text: "7金币", top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text: "10金币", top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text: "5金币", top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text: "2金币", top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text: '6金币', top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text: '0金币', top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         // { fonts: [{ text: '柚子', top: '10%' }], background: '#42929D' },
         // { fonts: [{ text: '山竹', top: '10%' }], background: '#E3556B' },
       ],

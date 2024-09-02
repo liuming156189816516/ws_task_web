@@ -149,7 +149,7 @@ export default {
     },
     created() {
         this.isScroll = false;
-        this.syncInitApi();
+        // this.syncInitApi();
         this.getIncomeList();
     },
     mounted(){

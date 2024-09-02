@@ -21,7 +21,7 @@
                 </van-swipe>
             </div>
             <div class="adv_warp flex-item flex-between font_24">
-                <div class="adv_item flex-item flex-align flex-center"></div>
+                <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky"></div>
                 <div class="adv_item flex-item flex-align flex-center"></div>
             </div>
             <div class="task_main w_f flex-item flex-dir-c">
@@ -149,7 +149,7 @@ export default {
     },
     methods: {
         initHandle(){
-            this.syncInitApi();
+            this.getTaskList();
             // this.initRuleTips();
         },
         initRuleTips(){
@@ -161,21 +161,9 @@ export default {
                 }
             }, 600);
         },
-        syncInitApi() {
-            let fun1 = new Promise((resolve, reject) => {
-                gettodayincome().then(res => {
-                    resolve(res)
-                })
-            });
-            let fun2 = new Promise((resolve, reject) => {
-                gettaskliststatus().then(res => {
-                    resolve(res)
-                })
-            });
-            Promise.all([fun1, fun2,]).then(res => {
-                const [data1, data2] = res;
-                this.teamStemp = data1;
-                this.taskOption = data2.list;
+        getTaskList() {
+            gettaskliststatus().then(res => {
+                this.taskOption = res.list||[];
             })
         },
         showRule(){

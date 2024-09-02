@@ -1,18 +1,72 @@
+<style lang="scss" scoped>
+.earn {
+  width: 100%;
+  background-color: #f2f2f2;
+  -webkit-overflow-scrolling: touch;
+  .lucky_bg{
+    .bg_01{
+      position: relative;
+      .img_01{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .lucky_bg2{
+        padding: 60px;
+        box-sizing: border-box;
+        background: transparent;
+      }
+      .lucky_bg3{
+        height: 600px;
+        padding: 60px;
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%);
+        .lucky_main{
+          width: 600px;
+          height: 600px;
+          padding: 60px;
+          box-sizing: border-box;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          // background: transparent;
+          // background: darkmagenta;
+        }
+      }
+    }
+  }
+}
+</style>
 <template>
   <div class="earn">
     <div class="custom_head">
       <page-header :title="$t('mine_010')" :show-icon="true" :bgColor="true" />
-      <div>
-        <LuckyWheel
-          ref="myLucky"
-          width="400px"
-          height="400px"
-          :prizes="prizes"
-          :blocks="blocks"
-          :buttons="buttons"
-          @start="startLucky"
-          @end="luckyEnd"
-        />
+      <div class="lucky_bg w_f">
+        <div class="bg_01">
+          <img class="img_01" src="../../assets/images/lucky/bg_01.png" alt="">
+          <div class="lucky_bg2">
+            <img class="img_02" src="../../assets/images/lucky/bg_02.png" alt="">
+          </div>
+          <div class="lucky_bg3 w_f">
+            <img class="img_03" src="../../assets/images/lucky/bg_03.png" alt="">
+            <div class="lucky_main w_f">
+              <LuckyWheel
+                ref="myLucky"
+                width="247px"
+                height="247px"
+                :prizes="prizes"
+                :blocks="blocks"
+                :buttons="buttons"
+                @start="startLucky"
+                @end="luckyEnd"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -27,7 +81,7 @@ export default {
       index: null,
       blocks: [
         {
-          padding: "40px", //可旋转区域与转盘边缘的距离
+          // padding: "40px", //可旋转区域与转盘边缘的距离
           background: "#eee", //转盘背景色
           imgs: [
             {
@@ -125,10 +179,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.earn {
-  width: 100%;
-  background-color: #f2f2f2;
-  -webkit-overflow-scrolling: touch;
-}
-</style>

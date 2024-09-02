@@ -86,7 +86,7 @@ import { mapState } from 'vuex';
 import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
 import SginHeader from "@/components/SginHeader";
-import { gettodayincome, gettaskliststatus, getalltasklist, setappuserlanguage, gethelp } from '@/api/home'
+import { gettaskliststatus,setappuserlanguage,gethelp } from '@/api/home'
 export default {
     name: 'home',
     components: { SginHeader },
@@ -231,7 +231,7 @@ export default {
             this.$router.push(`/betrecord?id=1`);
         },
         jumpLucky(){
-            // this.$router.push(`/luckyWheel`);   
+            this.$router.push(`/luckyWheel`);   
         },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);

@@ -1,8 +1,9 @@
 <style lang="scss" scoped>
 .earn {
   width: 100%;
-  background-color: #f2f2f2;
+  height: 100vh;
   -webkit-overflow-scrolling: touch;
+  background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
   .lucky_bg{
     .bg_01{
       height: 740px;
@@ -30,8 +31,6 @@
         .lucky_main{
           width: 594px;
           height: 594px;
-          // padding: 60px;
-          // box-sizing: border-box;
           position: absolute;
           top: 80px;
           left: 50%;
@@ -45,6 +44,13 @@
           }
         }
       }
+    }
+  }
+  .award_record{
+    height: 300px;
+    background: salmon;
+    .my_swipe{
+      height: auto;
     }
   }
 }
@@ -77,10 +83,18 @@
           </div>
         </div>
       </div>
+      <div class="award_record w_f">
+        <van-swipe class="my_swipe" :autoplay="3000" vertical :show-indicators="false">
+          <van-swipe-item v-for="(item,idx) in winNotis" :key="idx" style="height: 34px;">
+            <span class="font_24">{{item}}</span>
+          </van-swipe-item>
+        </van-swipe>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 import PageHeader from "@/components/Header";
 export default {
   name: "luckyWheel",
@@ -104,35 +118,6 @@ export default {
       ],
       // 扇形数组
       prizes: [
-        //单个扇形
-        // {
-        //   //奖品文字
-        //   fonts: [
-        //     {
-        //       text: "苹果", //文字
-        //       top: "10%", //文字距顶部距离
-        //       fontColor: "#f00", //文字颜色
-        //       fontSize: "16px", //文字大小
-        //       fontStyle: "微软雅黑", //字体
-        //       fontWeight: "500", //加粗
-        //       lineHeight: "16px", //行高
-        //       wordWrap: true, //换行
-        //       lineClamp: 2, //2行，剩下的...
-        //       wordWrap: true, //换行
-        //     }
-        //   ],
-        //   //奖品图
-        //   imgs: [
-        //     {
-        //       src: "https://img95.699pic.com/xsj/1s/5e/0g.jpg%21/fh/300", //图片url
-        //       top: "30%", //图片距顶部距离
-        //       width: "60px", //图片宽
-        //       height: "60px", //图片高
-        //     }
-        //   ],
-        //   background: "#FFF402", //扇形背景色
-        //   range: 10, //当前prize.range/所有prize中range总和
-        // },
         { fonts: [{ text: "7金币", top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         { fonts: [{ text: "10金币", top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         { fonts: [{ text: "5金币", top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
@@ -171,8 +156,16 @@ export default {
       ]
     }
   },
-  computed: {},
-  created() {},
+  computed: {
+    ...mapState({
+      userInfo: state => state.User
+    }),
+    winNotis(){
+      return this.$Helper.randomStrings(100)
+    }
+  },
+  created() {
+  },
   methods: {
     startLucky() {
       this.$refs.myLucky.play();
@@ -184,7 +177,7 @@ export default {
     // 抽奖结束会触发end回调
     luckyEnd(prize) {
       console.log(prize);
-    },
-  },
+    }
+  }
 };
 </script>

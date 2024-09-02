@@ -23,18 +23,18 @@
                         </div>
                         <div class="text_2 flex-item font_48">
                             <!-- <img src="../assets/images/gold_icon.png" alt="" srcset=""> -->
-                            <span>{{user_money||0.00}}</span>
+                            <span>{{userInfo.balance||0.00}}</span>
                         </div>
                     </div>
-                    <van-button :class="['font_30',user_money<minWithdrawal||user_money>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||user_money<minWithdrawal" @click="goWithdraw">{{$t('other_055')}}</van-button>
-                    <div class="draw_tips font_22" v-if="user_money>minWithdrawal&&isWithdrawal"> {{$t('mine_014',{value:withdrawalNum})}}</div>
-                    <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&isWithdrawal" style="color:#F52C2C">{{$t('mine_015',{value:minWithdrawal-user_money})}}</div>
-                    <div class="draw_tips font_22" v-else-if="user_money>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">{{$t('mine_014',{value:withdrawalNum})}}</div>
-                    <div class="draw_tips font_22" v-else-if="user_money<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
+                    <van-button :class="['font_30',userInfo.balance<minWithdrawal||userInfo.balance>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||userInfo.balance<minWithdrawal" @click="goWithdraw">{{$t('other_055')}}</van-button>
+                    <div class="draw_tips font_22" v-if="userInfo.balance>minWithdrawal&&isWithdrawal"> {{$t('mine_014',{value:withdrawalNum})}}</div>
+                    <div class="draw_tips font_22" v-else-if="userInfo.balance<minWithdrawal&&isWithdrawal" style="color:#F52C2C">{{$t('mine_015',{value:minWithdrawal-userInfo.balance})}}</div>
+                    <div class="draw_tips font_22" v-else-if="userInfo.balance>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">{{$t('mine_014',{value:withdrawalNum})}}</div>
+                    <div class="draw_tips font_22" v-else-if="userInfo.balance<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
                         <p class="w_f flex-item flex-align flex-center">{{$t('mine_014',{value:withdrawalNum})}}</p>
-                        <p>{{$t('mine_015',{value:minWithdrawal-user_money})}}</p>
+                        <p>{{$t('mine_015',{value:minWithdrawal-userInfo.balance})}}</p>
                     </div>
-                    <!-- <div class="draw_tips font_22" v-if="user_money/20<minWithdrawal">You are only {{ minWithdrawal-user_money }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
+                    <!-- <div class="draw_tips font_22" v-if="userInfo.balance/20<minWithdrawal">You are only {{ minWithdrawal-userInfo.balance }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
                 </div>
             </div>
             <div class="self_jinbi w_f flex-item">
@@ -81,7 +81,7 @@ export default {
     data() {
         return {
             apk_url:"",
-            user_money:0,
+            userInfo.balance:0,
             allIncome:"",
             isTotalNum:null,
             minWithdrawal:null,
@@ -159,7 +159,6 @@ export default {
         //     }
         //     this.$set(this.menuOption,k,item)
         // }
-        this.user_money= this.userInfo.balance
         this.$store.dispatch('User/getUserIncome');
         this.$store.dispatch('User/getUserHead');
         this.syncInitApi();

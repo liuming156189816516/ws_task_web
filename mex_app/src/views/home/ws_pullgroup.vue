@@ -44,8 +44,8 @@
                             <img src="@/assets/images/home/num1_icon.png">
                         </div>
                         <div class="task_award w_f">
-                            <div class="task_book font_28">{{$t('home_109')}}</div>
-                            <div class="task_desc font_20">{{$t('home_110')}}</div>
+                            <div class="task_book font_28">{{$t('home_037')}}</div>
+                            <!-- <div class="task_desc font_20">{{$t('home_110')}}</div> -->
                         </div>
                         <div class="w_f flex-item flex-between flex-align font_24">
                             <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
@@ -388,7 +388,7 @@ export default {
                 // background-size: cover;
                 // background-position: 0 40px;
                 .task_item{
-                    height: 264px;
+                    height: 230px;
                     padding: 16px 0 0 20px;
                     box-sizing: border-box;
                     background: url('../../assets/images/home/task_icon.png') no-repeat;
@@ -423,7 +423,7 @@ export default {
                         text-decoration: underline;
                     }
                     .group_link{
-                        margin-top: 30px;
+                        margin-top: 20px;
                         input {
                             width: 408px;
                             height: 72px;

@@ -43,7 +43,7 @@
         </div>
         <div v-else class="empty_tips w_f flex-item flex-align flex-center flex-dir-c">
             <img src="../../assets/images/empty_icon.png" alt="" />
-            <p>{{$t('tail_001')}}</p>
+            <p>{{$t('tail_010')}}</p>
         </div>
         <van-overlay :show = "showState" @click="showState = false">
             <div class="screen_down" @click.stop>

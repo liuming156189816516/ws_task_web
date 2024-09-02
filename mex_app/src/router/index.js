@@ -291,10 +291,10 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     window.scrollTo(0, 0);
-    if (to.path === '/login') {
-        next({path: "/home",});
-        // store.commit('Global/clearKeepAlive', '')
-    }
+    // if (to.path === '/login') {
+    //     next({path: "/home",});
+    //     // store.commit('Global/clearKeepAlive', '')
+    // }
     // if (to.name === 'sign') {
     //     store.commit('Global/clearKeepAlive', '')
     // }

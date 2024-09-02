@@ -186,6 +186,7 @@ export default {
     spre_020:"Today's Commission",
     spre_021:"Yesterday's Commission",
     spre_022:"Accumulated Commission",
+    spre_023:"Sign up for free",
 
     serv_001:"Hi，{value}",
     serv_002:"How can I assist you",
@@ -279,7 +280,7 @@ export default {
     tail_007:"Rejected",
     tail_008:"Status",
     tail_009:"Reason for rejection",
-    tail_010:"Income details",
+    tail_010:"No data yet",
     tail_011:"Failed",
     tail_012:"Reason for failure",
     tail_013:"Filter",

@@ -32,7 +32,7 @@
                     <div class="draw_tips font_22" v-else-if="userInfo.balance>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">{{$t('mine_014',{value:withdrawalNum})}}</div>
                     <div class="draw_tips font_22" v-else-if="userInfo.balance<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
                         <p class="w_f flex-item flex-align flex-center">{{$t('mine_014',{value:withdrawalNum})}}</p>
-                        <p>{{$t('mine_015',{value:minWithdrawal-userInfo.balance})}}</p>
+                        <!-- <p>{{$t('mine_015',{value:minWithdrawal-userInfo.balance})}}</p> -->
                     </div>
                     <!-- <div class="draw_tips font_22" v-if="userInfo.balance/20<minWithdrawal">You are only {{ minWithdrawal-userInfo.balance }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
                 </div>

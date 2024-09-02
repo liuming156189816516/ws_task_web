@@ -4,13 +4,13 @@
             <page-header :title="$t('mine_010')" :show-icon="true" :bgColor="true"></page-header>
             <div class="dropdown_warp">
                 <div class="promote_header flex-item flex-align flex-between">
-                    <div class="fiter_icon flex-item flex-align" @click="pulldownState">
-                        <span class="font_28" style="font-weight: 700;">{{$t('tail_013')}}</span>
-                        <img src="@/assets/images/mine/down_icon.png">
-                    </div>
                     <div class="change_value flex-item">
                         <span class="flex-item">{{ dateState }}</span>
                         <span class="flex-item"> {{ timeText }}</span>
+                    </div>
+                    <div class="fiter_icon flex-item flex-align" @click="pulldownState">
+                        <span class="font_28" style="font-weight: 700;">{{$t('tail_013')}}</span>
+                        <img src="@/assets/images/mine/down_icon.png">
                     </div>
                 </div>
             </div>

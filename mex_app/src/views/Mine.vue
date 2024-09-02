@@ -81,7 +81,6 @@ export default {
     data() {
         return {
             apk_url:"",
-            userInfo.balance:0,
             allIncome:"",
             isTotalNum:null,
             minWithdrawal:null,

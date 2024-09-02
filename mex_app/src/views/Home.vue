@@ -231,7 +231,7 @@ export default {
             this.$router.push(`/betrecord?id=1`);
         },
         jumpLucky(){
-            this.$router.push(`/luckyWheel`);   
+            // this.$router.push(`/luckyWheel`);   
         },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);

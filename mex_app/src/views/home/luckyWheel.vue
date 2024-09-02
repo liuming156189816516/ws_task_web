@@ -50,7 +50,8 @@
     height: 300px;
     background: salmon;
     .my_swipe{
-      height: auto;
+      height: 64px;
+      overflow: initial;
     }
   }
 }

@@ -175,7 +175,7 @@ export default {
         this.getGroupMess();
     },
     mounted(){
-        this.getIncomeList();
+        // this.getIncomeList();
         // this.$nextTick(()=>{
         //     const isTips = JSON.parse(localStorage.getItem('step_03'));
         //     if(!isTips){

@@ -127,6 +127,9 @@ export default {
     spre_017:"Invitee completes the task",
     spre_018:"Distribute bonus",
     spre_019:"Team size",
+    spre_020:"今日佣金",
+    spre_021:"昨日佣金",
+    spre_022:"累计佣金",
 
     serv_001:"您好，{value}",
     serv_002:"我可以帮您什么忙",

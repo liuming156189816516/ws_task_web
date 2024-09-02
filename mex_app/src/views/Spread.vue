@@ -34,21 +34,27 @@
                 </div>
                 <div class="invit_code w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">
-                        <span class="left_desc flex-item font_28">{{$t('mine_016')}}</span>
+                        <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
+                    </div>
+                    <div class="copay_text flex-item font_28">{{team_size}}</div>
+                </div>
+                <div class="invit_code w_f flex-item flex-dir-c">
+                    <div class="copay_desc flex-item flex-align flex-between">
+                        <span class="left_desc flex-item font_28">{{$t('spre_020')}}</span>
                     </div>
                     <div class="copay_text flex-item font_28">{{today_rebate}}</div>
                 </div>
                 <div class="invit_code w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">
-                        <span class="left_desc flex-item font_28">{{$t('mine_017')}}</span>
+                        <span class="left_desc flex-item font_28">{{$t('spre_021')}}</span>
                     </div>
                     <div class="copay_text flex-item font_28">{{yesterday_rebate}}</div>
                 </div>
                 <div class="invit_code w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">
-                        <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
+                        <span class="left_desc flex-item font_28">{{$t('spre_022')}}</span>
                     </div>
-                    <div class="copay_text flex-item font_28">{{team_size}}</div>
+                    <div class="copay_text flex-item font_28">{{total_rebate}}</div>
                 </div>
             </div>
         </div>
@@ -119,6 +125,7 @@ export default {
             team_size:"",
             invit_link:"",
             today_rebate:0,
+            total_rebate:0,
             yesterday_rebate:0,
             isScroll:true,
             loading:false,
@@ -175,9 +182,10 @@ export default {
     },
     methods:{
         async getIncomeList(){
-            let {team_size,today_rebate,yesterday_rebate} = await getteammatesinfo();
+            let {team_size,today_rebate,yesterday_rebate,total_rebate} = await getteammatesinfo();
             this.team_size = team_size;
             this.today_rebate = today_rebate;
+            this.total_rebate = total_rebate;
             this.yesterday_rebate = yesterday_rebate;
         },
         onLoad(){

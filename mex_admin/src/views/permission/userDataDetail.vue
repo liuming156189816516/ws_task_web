@@ -37,27 +37,34 @@
                     <i slot="reference" class="el-icon-info"></i>
                     <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
                 </div> -->
-                <u-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading"
-                    element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
+                <el-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading"
+                    element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" :summary-method="getSummaries" show-summary>
+                     <!-- showBodyOverflow="title" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
-                    @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
-                    <u-table-column prop="statis_time_str" :label="$t('sys_c134')" width="180" />
-                    <u-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
-                    <u-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
-                    <u-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
-                    <u-table-column prop="today_create_group_task_num" :label="$t('sys_rai122')" minWidth="100" />
-                    <u-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
-                    <u-table-column prop="bounty_amount" :label="$t('sys_m102')" minWidth="100" />
-                    <u-table-column prop="commission_amount" :label="$t('sys_m103')" minWidth="100" />
-                    <u-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
-                    <u-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
-                    <u-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
-                    <u-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
+                    @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage"> -->
+                    <el-table-column prop="statis_time_str" :label="$t('sys_c134')" width="180" />
+                    <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
+                    <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
+                    <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
+                    <el-table-column prop="today_create_group_task_num" :label="$t('sys_rai122')" minWidth="100" />
+                    <el-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
+                    <el-table-column prop="bounty_amount" :label="$t('sys_m102')" minWidth="100" />
+                    <el-table-column prop="commission_amount" :label="$t('sys_m103')" minWidth="100" />
+                    <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
+                    <el-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
+                    <el-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
+                    <el-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.statis_time > 0 ? $baseFun.resetTime(scope.row.statis_time * 1000) : "-" }}
                         </template>
-                    </u-table-column>
-                </u-table>
+                    </el-table-column>
+                </el-table>
+                <div class="layui_page">
+                    <el-pagination @size-change="handleSizeFun" @current-change="handlePageFun"
+                        :page-sizes="pageOption" :current-page.sync="page" :page-size="limit"
+                        layout="total, sizes, prev, pager, next, jumper" :total="total">
+                    </el-pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -80,7 +87,8 @@ export default {
             checkIdArry:[],
             checkAccount:[],
             accountDataList:[],
-            pageOption: resetPage()
+            pageOption: resetPage(),
+            showNum: [1,2,3,4,5,6,7,8,9,10]
         }
     },
     computed: {
@@ -257,26 +265,55 @@ export default {
                 this.loading = false;
                 this.total = res.data.total;
                 this.accountDataList = res.data.list || [];
+                this.$nextTick(()=>{
+                    if (this.$refs.serveTable) {
+                        this.$refs.serveTable.doLayout(); 
+                    }
+                })
             })
         },
         handleSizeFun(limit){
             this.limit = limit;
-            this.initNumberList(1);
+            this.initTaskList(1);
         },
         handlePageFun(page){
             this.page = page;
             this.initTaskList();
         },
-        switchPage({page,size}) {
-            this.loading = true;
-            if (this.limit != size) {
-                this.page = 1;
-            }else{
-                this.page = page;
-            }
-            this.limit = size;
-            this.initTaskList();
-        }
+        // @size-change="setPageSize" @current-change="switchPage"
+        // switchPage({page,size}) {
+        //     this.loading = true;
+        //     if (this.limit != size) {
+        //         this.page = 1;
+        //     }else{
+        //         this.page = page;
+        //     }
+        //     this.limit = size;
+        //     this.initTaskList();
+        // },
+        getSummaries(param) {
+			const { columns, data } = param;
+			const sums = [];
+			columns.forEach((column, index) => {
+				const values = data.map(item => Number(item[column.property]));
+				if (index === 0) {
+					sums[index] = this.$t('sys_c125');
+					return;
+				}else if(this.showNum.indexOf(index) > -1){
+					sums[index] = values.reduce((prev, curr) => {
+						const value = Number(curr);
+						if (!isNaN(value)) {
+							return prev+curr;
+						} else {
+							return prev;
+						}
+					},0);
+				}else{
+					sums[index] = '--';	
+				}
+			});
+			return sums;
+		}
     },
     watch:{
         closeModel(val){

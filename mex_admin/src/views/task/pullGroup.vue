@@ -85,7 +85,7 @@
             </el-table-column> -->
             <el-table-column prop="match_num" :label="$t('sys_q131')" width="100">
               <template slot-scope="scope">
-                <el-button class="jump_un_link"type="text" :disabled="!scope.row.material_list" @click.stop="scamperBtn(scope.row,1)">{{ scope.row.material_list==null?0:scope.row.material_list.length }}</el-button>
+                <el-button class="jump_un_link" type="text" :disabled="!scope.row.material_list" @click.stop="scamperBtn(scope.row,1)">{{ scope.row.material_list==null?0:scope.row.material_list.length }}</el-button>
                 <!-- <div class="jump_un_link" @click.stop="scamperBtn(scope.row,1)"></div> -->
               </template>
             </el-table-column>

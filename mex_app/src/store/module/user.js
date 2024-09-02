@@ -174,7 +174,6 @@ export default {
 		plantCarousel({ commit }) {
 			return new Promise((resolve, reject) => {
 				getcarousellist().then(res => {
-					console.log(res);
 					commit('store_carousel', res);
 					resolve();
 				}).catch(error => {

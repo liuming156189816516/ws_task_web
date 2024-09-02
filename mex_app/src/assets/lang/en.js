@@ -183,6 +183,9 @@ export default {
     spre_017:"Invitee completes the task",
     spre_018:"Distribute bonus",
     spre_019:"Team size",
+    spre_020:"Today's Commission",
+    spre_021:"Yesterday's Commission",
+    spre_022:"Accumulated Commission",
 
     serv_001:"Hi，{value}",
     serv_002:"How can I assist you",

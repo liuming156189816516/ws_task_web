@@ -97,9 +97,9 @@ export default {
 		},
 		store_carousel(state, data) {
 			state.baseBanner = data.list;
-			state.baseNotice = data.bulletin_content;
+			// state.baseNotice = data.bulletin_content;
 			window.localStorage.setItem('baseBanner',data.list);
-			window.localStorage.setItem('baseNotice',data.bulletin_content);
+			// window.localStorage.setItem('baseNotice',data.bulletin_content);
 		},
 		store_balance(state, data) {
 			state.balance = data.income;
@@ -174,6 +174,7 @@ export default {
 		plantCarousel({ commit }) {
 			return new Promise((resolve, reject) => {
 				getcarousellist().then(res => {
+					console.log(res);
 					commit('store_carousel', res);
 					resolve();
 				}).catch(error => {

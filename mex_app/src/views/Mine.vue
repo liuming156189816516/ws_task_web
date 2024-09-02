@@ -231,7 +231,7 @@ export default {
         },
         showRule(){
             // this.$store.dispatch('User/actionReport',20);
-            this.$popDialog({ content: this.help_url, title:"Notes",type: 4,times:this.isTotalNum,money:this.minWithdrawal })
+            this.$popDialog({ content: this.help_url, title:this.$t('mine_018'),type: 4,times:this.isTotalNum,money:this.minWithdrawal })
         },
         goWithdraw(){
             this.$router.push("/withdraw");

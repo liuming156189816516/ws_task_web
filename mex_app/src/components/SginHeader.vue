@@ -1,11 +1,11 @@
 <template>
     <div class="login_head w_f flex-item flex-align flex-between">
-        <img class="le_logn" src="@/assets/images/logo-h.png" />
-        <!-- <img class="le_logn" src="@/assets/images/logo.png" /> -->
+        <!-- <img class="le_logn" src="@/assets/images/logo-h.png" /> -->
+        <img class="le_logn" src="@/assets/images/logo.png" />
         <div class="login_area flex-item flex-align font_24">
             <div class="flex-item flex-align" v-if="!userInfo.token">
-                <span @click="jumpPage(0)">SIGN IN</span>
-                <span class="sign_bt flex-item flex-align" @click="jumpPage(1)">SING UP</span>
+                <span @click="jumpPage(0)">{{lanageType($t('login_004'))}}</span>
+                <span class="sign_bt flex-item flex-align flex-center" @click="jumpPage(1)">{{lanageType($t('login_014'))}}</span>
             </div>
             <div class="user_info flex-item flex-align" v-else>
                 <img src="@/assets/images/gold_icon.png"> <span class="font_28" style="font-weight: bold;">{{userInfo.balance}}</span>
@@ -26,6 +26,14 @@ export default {
         jumpPage(idx){
             let path = ['/login','/register']
             this.$router.push(path[idx]);
+        },
+        lanageType(val){
+            let langeType = Cookies.get("language");
+            if(langeType == 'en'){
+                return val.toUpperCase();
+            }else{
+                return val;
+            }
         }
     }
 }
@@ -41,9 +49,9 @@ export default {
         .login_area, .user_info{
             color: $font-color-white;
             .sign_bt{
+                width: 140px;
                 height: 100%;
-                height: 66px;
-                padding: 0 20px;
+                padding: 20px 0;
                 margin-left: 20px;
                 font-weight: bold;
                 border-radius: 10px;

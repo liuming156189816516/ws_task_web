@@ -1,7 +1,7 @@
 <template>
 	<div class="login_warp" @click="isIndex=false">
 		<!-- <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header> -->
-		<!-- <div class="l_value" @click="showChangeBtn" @click.stop>
+		<div class="l_value" @click="showChangeBtn" @click.stop>
 			<span>{{ viewLang() }}</span>
 			<img class="down_icon" src="@/assets/images/home/xiala.png">
 			<van-transition name="fade-up">
@@ -9,9 +9,9 @@
 					<p v-for="item in langOptions" :key="item.lang" :style="langIdx==item.lang?'color:#07c160;':''" @click="onChangeType(item)">{{item.name}}</p>
 				</div>
 			</van-transition>
-		</div> -->
+		</div>
 		<div class="head_main w_f flex-item flex-dir-c">
-			<div class="head_title">
+			<div class="head_title flex-item">
 				{{$t('login_034')}}
 				<img src="@/assets/images/sign/close_icon.png" @click="bankIcon">
 			</div>
@@ -189,12 +189,9 @@ export default {
     	// background-size: cover;
 		.head_title{
 			width: 100%;
-			display: flex;
 			font-weight: bold;
 			font-size: 72px;
 			position: relative;
-			align-items: center;
-			justify-content: center; 
 			color: $font-color-white;
 			img{
 				width: 48px;
@@ -357,7 +354,7 @@ export default {
 		border-radius: 8px;
 		box-sizing: border-box;
 		color: $font-color-black;
-		//background-color: $home-eart-status-value;
+		background:$font-color-white;
 		// background-color: $color-Nobtnbg;
 		p{
 			padding: 10px 0;
@@ -374,7 +371,7 @@ export default {
 		width:0;
 		height: 0;
 		border: 16px solid transparent;
-		border-bottom-color: rgba(100, 100, 111, .1);
+		border-bottom-color: $font-color-white;
 		left: 40px;
 		top: -30px;
 	}

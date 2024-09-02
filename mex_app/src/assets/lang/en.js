@@ -34,6 +34,8 @@ export default {
     login_033:"Re-enter new passwords",
     login_034:"Sign in to your Account",
     login_035:"Create your account",
+    login_036:"SIGN IN",
+    login_037:"SING UP",
 
     home_001:"Balance: {value}",
     home_002:"Today's Task",
@@ -158,6 +160,8 @@ export default {
     home_121:"New WhatsApp Group",
     home_122:'Click the "New Group" button on the right to open WhatsApp and create a group',
     home_123:"Open WhatsApp",
+    home_124:"Lucky Wheel",
+    home_125:"Sign in",
 
 
     spre_001:"Profit from sharing",
@@ -226,6 +230,7 @@ export default {
     mine_015:"You are only {value} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach",
     mine_016:"Today's Earnings",
     mine_017:"Yesterday's Earnings",
+    mine_018:"Notes",
 
     pay_001:"Withdraw cash",
     pay_002:"Account Informadion",

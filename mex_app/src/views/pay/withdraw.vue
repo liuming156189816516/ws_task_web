@@ -357,7 +357,9 @@ export default {
 					color: #feeeee;
 					float: right;
 					font-size: 12px;
-					border-radius: 36px;
+					border-radius: 20px;
+					border-color: $color-theme;
+                    background-color: $color-theme;
 				}
 			}
 			.share_link{

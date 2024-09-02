@@ -299,6 +299,7 @@ export default {
                 .van-button{
                     width: max-content;
                     height: 32px;
+                    flex-shrink: 0;
                     padding: 0 20px;
                     font-size: 14px;
                     line-height: 32px;

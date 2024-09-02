@@ -21,7 +21,7 @@ export const getcode = (param) => {
 }
 // 轮播
 export const getcarousellist = (param) => {
-    return request({url: '/adminmember/getcarousellist',method: 'post',data:param})
+    return request({url: '/account/getcarousellist',method: 'post',data:param})
 }
 // 修改密码
 export const revisepwd = (param) => {

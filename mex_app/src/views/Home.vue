@@ -1,5 +1,5 @@
 <template>
-    <div class="home_warp w_f" ref="warpBox">
+    <div class="home_warp w_f" ref="warpBox" @click="isIndex=false">
         <Sgin-header />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">
@@ -12,17 +12,30 @@
                         <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
                     </div>
                 </div>
+                <div class="l_value" @click="showChangeBtn" @click.stop>
+                    <span>{{ viewLang() }}</span>
+                    <img class="down_icon" src="../assets/images/home/down_arrow_white.png" alt="" srcset="">
+                    <van-transition name="fade-up">
+                        <div class="down_list" :class="isIndex?'active_open':'active_close'">
+                            <p :class="[langIdx==item.lang?'select_active':'']" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">{{item.name}}</p>
+                        </div>
+                    </van-transition>
+                </div>
             </div>
             <div class="notice_warp">
                 <van-swipe class="my_swipe" :autoplay="3500" indicator-color="white">
-                    <van-swipe-item v-for="(item,idx) in imagesList" :key="idx" @click="jumpLink(item.link)">
-                        <img :src="item">
+                    <van-swipe-item v-for="(item,idx) in userInfo.baseBanner||imagesList" :key="idx" @click="jumpLink(item.link)">
+                        <img :src="item.file_url">
                     </van-swipe-item>
                 </van-swipe>
             </div>
-            <div class="adv_warp flex-item flex-between font_24">
-                <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky"></div>
-                <div class="adv_item flex-item flex-align flex-center"></div>
+            <div class="adv_warp flex-item flex-between font_28">
+                <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky">
+                    {{$t('home_124')}}
+                </div>
+                <div class="adv_item flex-item flex-align flex-center">
+                    {{$t('home_125')}}
+                </div>
             </div>
             <div class="task_main w_f flex-item flex-dir-c">
                 <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
@@ -94,17 +107,28 @@ export default {
         return {
             isLogin:false,
             visible:true,
+            isIndex:false,
             user_money: 0,
             teamStemp: "",
             help_url: "",
             taskOption: [],
-            langIdx: Cookies.get("language") || 'en',
+            langIdx:Cookies.get("language")||'en',
             taskType: ['', 'scanOnline', 'spread', 'pullgroupTask'],
             langOptions: [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" }],
+            bannerList:[],
             imagesList:[
-                require("../assets/images/banner/banner1.png"),
-                require("../assets/images/banner/banner2.png"),
-                require("../assets/images/banner/banner3.png")
+                {
+                  link:"",
+                  file_url:require("../assets/images/banner/banner1.png"),
+                },
+                {
+                  link:"",
+                  file_url:require("../assets/images/banner/banner2.png"),
+                },
+                {
+                  link:"",
+                  file_url:require("../assets/images/banner/banner3.png"),
+                }
             ]
         }
     },
@@ -135,6 +159,7 @@ export default {
         this.moveNews.$on("login-cover",res=>{
             this.$store.dispatch('Global/isShowLogin',{type:2,isShow:true})
         })
+        this.$store.dispatch('User/plantCarousel');
     },
     activated() {
         if(getToken()){
@@ -176,11 +201,14 @@ export default {
         copySuccess() {
             this.$toast(`${this.$t("other_044")}`);
         },
+        showChangeBtn(){
+			this.isIndex=!this.isIndex;
+		},
         async onChangeType(row) {
             this.langIdx = row.lang;
             this.$i18n.locale = row.lang;
             Cookies.set("language", row.lang);
-            await setappuserlanguage({ language: row.lang });
+            // await setappuserlanguage({ language: row.lang });
             await this.$store.dispatch('User/plantCarousel');
         },
         handleTask(row) {
@@ -252,11 +280,12 @@ export default {
     .warp_mian {
         padding: 0 20px;
         box-sizing: border-box;
-        .user_mess, .l_value{
+        .user_mess{
             display: flex;
             font-size: 28px;
             height: 180px;
             color: #fff;
+            position: relative;
             margin-bottom: -30px;
             align-items: center;
             .user_head{
@@ -290,6 +319,79 @@ export default {
                 }
             }
         }
+        .l_value{
+            position: absolute;
+            top: 60px;
+            right: 0;
+            display: flex;
+            align-items: center;
+            span{
+                width: 100%;
+                flex-grow: 1;
+                color: #fff;
+                font-size: 32px;
+                border-radius: 8px;
+            }
+            .down_icon{
+                display: flex;
+                width: 30px;
+                margin-left: 20px;
+            }
+            .down_list{
+                width: 160px;
+                max-height: 230px;
+                position: absolute;
+                left: 0;
+                top: 60px;
+                z-index: 1;
+                color: $font-color-black;
+                font-size: 28px;
+                padding: 16px 20px;
+                border-radius: 8px;
+                box-sizing: border-box;
+                background-color: #fff;
+                p{
+                    padding: 10px 0;
+                    border-bottom: 1px solid #ebedf0;
+                }
+                p:last-child{
+                    border: none;
+                }
+                .select_active{
+                    color: $color-theme;
+                }
+            }
+            .down_list:before {
+                content: "";
+                display: block;
+                position: absolute;
+                width:0;
+                height: 0;
+                border: 16px solid transparent;
+                border-bottom-color: #fff;
+                left: 40px;
+                top: -30px;
+            }
+            .active_open{
+                display: block;
+                transition: all .2s;
+                // animation: slide-down .2s ease-in;
+                transition: .2s ease-in;
+                transform-origin: 50% 0;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            }
+            .active_close{
+                display: none;
+                transition: all .5s;
+                animation: select-close .5s ease-in;
+                transition: .3s ease-in;
+                transform-origin: 50% 0;
+            }
+            @keyframes slide-down{
+                0%{transform: scale(1,.5)}
+                100%{transform: scale(1,1)}
+            }
+        }
         .notice_warp {
             width: 100%;
             display: flex;
@@ -314,11 +416,18 @@ export default {
                 flex: 1;
                 height: 88px;
                 flex-shrink: 0;
+                font-weight: bold;
+                color: $font-color-white;
                 // border-radius: 10px;
                 background: url("../assets/images/lucky_icon.png");
                 background-size: 100% 100%;
+                box-sizing: border-box;
+            }
+            .adv_item:nth-child(1){
+                padding-left: 80px;
             }
             .adv_item:nth-child(2){
+                padding-right: 80px;
                 background: url("../assets/images/sign_icon.png");
                 background-size: 100% 100%;
             }

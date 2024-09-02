@@ -47,11 +47,21 @@
     }
   }
   .award_record{
-    height: 300px;
-    background: salmon;
+    height: 440px;
+    overflow: hidden;
+    // background: salmon;
     .my_swipe{
       height: 64px;
       overflow: initial;
+      .award_item{
+        height: 100%;
+      }
+      .van-swipe-item{
+        background: #e4eaf2;
+      }
+      .van-swipe-item:nth-child(even){
+        background: #ecf0f6;
+      }
     }
   }
 }
@@ -85,9 +95,9 @@
         </div>
       </div>
       <div class="award_record w_f">
-        <van-swipe class="my_swipe" :autoplay="3000" vertical :show-indicators="false">
+        <van-swipe class="my_swipe" style="height: 34px;" :autoplay="3000" :duration="1000" vertical :show-indicators="false">
           <van-swipe-item v-for="(item,idx) in winNotis" :key="idx" style="height: 34px;">
-            <span class="font_24">{{item}}</span>
+            <span class="award_item flex-item flex-align flex-center font_24">{{item}}</span>
           </van-swipe-item>
         </van-swipe>
       </div>
@@ -148,9 +158,9 @@ export default {
           imgs: [
             {
               src: require("@/assets/images/lucky_btn.png"), //图片url
-              top: "-95%", //图片距顶部距离
-              width: "88px", //图片宽
-              height: "88px", //图片高
+              top: "-110%", //图片距顶部距离
+              width: "60px", //图片宽
+              height: "80px", //图片高
             }
           ]
         }

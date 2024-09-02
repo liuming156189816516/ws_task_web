@@ -34,9 +34,21 @@
                 </div>
                 <div class="invit_code w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">
+                        <span class="left_desc flex-item font_28">{{$t('mine_016')}}</span>
+                    </div>
+                    <div class="copay_text flex-item font_28">{{today_rebate}}</div>
+                </div>
+                <div class="invit_code w_f flex-item flex-dir-c">
+                    <div class="copay_desc flex-item flex-align flex-between">
+                        <span class="left_desc flex-item font_28">{{$t('mine_017')}}</span>
+                    </div>
+                    <div class="copay_text flex-item font_28">{{yesterday_rebate}}</div>
+                </div>
+                <div class="invit_code w_f flex-item flex-dir-c">
+                    <div class="copay_desc flex-item flex-align flex-between">
                         <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
                     </div>
-                    <div class="copay_text flex-item font_28">120</div>
+                    <div class="copay_text flex-item font_28">{{team_size}}</div>
                 </div>
             </div>
         </div>
@@ -94,7 +106,7 @@ import { mapState } from "vuex";
 import { formatTime } from "@/utils/tool";
 import { getinvitelink} from '@/api/bill';
 import PageHeader from "@/components/Header";
-import {  getbillrecordlist,getinvitefriendtasklist } from '@/api/task';
+import { getteammatesinfo } from '@/api/home';
 export default {
     components: { PageHeader },
     data() {
@@ -104,10 +116,10 @@ export default {
             wk_name:'',
             iframeSrc:'',
             allIncome:"",
-            today_task:"",
-            today_invit:"",
+            team_size:"",
             invit_link:"",
-            today_incomet:0,
+            today_rebate:0,
+            yesterday_rebate:0,
             isScroll:true,
             loading:false,
             finished :false,
@@ -162,12 +174,11 @@ export default {
         this.$store.dispatch('User/actionReport',12);
     },
     methods:{
-        getIncomeList(){
-            getbillrecordlist({page:this.page,limit:this.limit,task_type:3}).then(res => {
-                this.loading = false;
-                this.page_total = Math.ceil(res.total / this.limit);
-                this.millionList = [...this.millionList,...res.list];
-            })
+        async getIncomeList(){
+            let {team_size,today_rebate,yesterday_rebate} = await getteammatesinfo();
+            this.team_size = team_size;
+            this.today_rebate = today_rebate;
+            this.yesterday_rebate = yesterday_rebate;
         },
         onLoad(){
             if(this.page >= this.page_total){

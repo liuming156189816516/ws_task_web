@@ -53,6 +53,10 @@ export const getbonus = (param) => {
 export const getdownloadurl = (param) => {
     return request({url: '/account/getdownloadurl',method: 'post',data:param})
 }
+export const getteammatesinfo = (param) => {
+    return request({url: '/account/getteammatesinfo',method: 'post',data:param})
+}
+
 
 
 

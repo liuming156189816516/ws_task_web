@@ -114,7 +114,6 @@ export default {
             taskOption: [],
             langIdx:Cookies.get("language")||'en',
             taskType: ['', 'scanOnline', 'spread', 'pullgroupTask'],
-            langOptions: [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" }],
             bannerList:[],
             imagesList:[
                 {
@@ -150,6 +149,9 @@ export default {
         },
         winNotis(){
             return this.$Helper.randomStrings(100)
+        },
+        langOptions(){
+            return this.$Helper.langOptions();
         }
     },
     created(){
@@ -321,7 +323,7 @@ export default {
         }
         .l_value{
             position: absolute;
-            top: 60px;
+            top: 40px;
             right: 0;
             display: flex;
             align-items: center;
@@ -337,11 +339,11 @@ export default {
                 margin-left: 20px;
             }
             .down_list{
-                width: 160px;
+                width: 180px;
                 max-height: 230px;
                 position: absolute;
                 right: 0px;
-                top: 60px;
+                top: 50px;
                 z-index: 1;
                 color: $font-color-black;
                 font-size: 28px;

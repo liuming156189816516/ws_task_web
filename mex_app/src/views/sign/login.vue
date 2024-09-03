@@ -62,10 +62,10 @@ export default {
 			isBottom:false,
 			langIdx:Cookies.get("language")||'en',
 			isIndex:false,
-			langOptions: [
-				{lang:"en",name:"en-US"},
-				{lang:"zh",name:"zh_CN"}
-			]
+			// langOptions: [
+			// 	{lang:"en",name:"en-US"},
+			// 	{lang:"zh",name:"zh_CN"}
+			// ]
 		}
 	},
 	created() {
@@ -76,6 +76,11 @@ export default {
 		}
 		this.$store.dispatch('User/actionReport',3)
 		// this.userAccount();
+    },
+	computed: {
+        langOptions(){
+            return this.$Helper.langOptions();
+        }
     },
 	methods: {
 		//登录

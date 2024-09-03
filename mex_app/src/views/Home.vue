@@ -112,7 +112,7 @@ export default {
             teamStemp: "",
             help_url: "",
             taskOption: [],
-            langIdx:Cookies.get("language")||'en',
+            langIdx:Cookies.get("language")||'es',
             taskType: ['', 'scanOnline', 'spread', 'pullgroupTask'],
             bannerList:[],
             imagesList:[

@@ -727,6 +727,7 @@ export default {
     'sys_rai120': '复制',
     'sys_rai121': '已复制到剪贴板！',
     'sys_rai122': '拉群任务数',
+    'sys_rai123': 'WS炒群',
 
     'sys_q001': '话术名称',
     'sys_q002': '话术库',

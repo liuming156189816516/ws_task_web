@@ -56,7 +56,7 @@
             <div class="sys_serve w_f">
                 <div class="serve_box w_f flex-item flex-align flex-between">
                     <div class="w_f flex-item flex-align">
-                        <img src="@/assets/images/serveic/serve_icon.png" alt="">
+                        <img src="@/assets/images/serveic/telege_icon.png" alt="">
                         <div>
                             <p class="font_28" style="font-weight: bold;">{{$t('serv_003')}}</p>
                             <p class="font_24">{{$t('serv_004')}}</p>

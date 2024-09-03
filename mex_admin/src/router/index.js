@@ -402,6 +402,15 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_m035')
         }
+      },
+      {
+        hidden: true,
+        path: '/super-channel',
+        component: () => import('@/views/task/super-channel'),
+        name: 'super-channel',
+        meta: {
+          title:i18n.t('sys_rai123')
+        }
       }
     ]
   },

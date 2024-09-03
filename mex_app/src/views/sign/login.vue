@@ -120,8 +120,11 @@ export default {
 				}else{
 					this.$router.push('/home');
 				}
+				console.log(this.$Helper.checkBrowser());
 				if(!this.$Helper.checkBrowser()){
-					uniFun.postMessage({data:"apk"});
+					console.log();
+					
+					uniFun.postMessage({data:{type:"apk",uid:localStorage.getItem('uid')}});
 				}
 				this.isLoading = false;
 			}).catch(error => {

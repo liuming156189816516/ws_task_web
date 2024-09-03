@@ -268,16 +268,24 @@ const Helper = {
 		for (let i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
 		return n
 	},
-	randomStrings(count) {
+	randomStrings(count,type) {
 		const result = [];
 		let seedArry = [3,4,5,6,7,8,9];
 		const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		const randomString = length => Array.from({ length }, () => charset[Math.floor(Math.random() * charset.length)]).join('');
-		for (let i = 0; i < count; i++) {
-			let index = Math.floor(Math.random() * seedArry.length);
-			let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,4);
-			let newObj = `${randomString(6)} Complet ${index} tasks to earn ${randomNum}`
-			result.push(newObj)
+		if(type==1){
+			for (let i = 0; i < count; i++) {
+				let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,2);
+				let newObj = {name:randomString(6),desc:"Received",goldNum:randomNum}
+				result.push(newObj)
+			}
+		}else{
+			for (let i = 0; i < count; i++) {
+				let index = Math.floor(Math.random() * seedArry.length);
+				let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,4);
+				let newObj = `${randomString(6)} Complet ${index} tasks to earn ${randomNum}`
+				result.push(newObj)
+			}
 		}
 		return result;
 	},

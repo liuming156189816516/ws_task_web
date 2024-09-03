@@ -147,9 +147,6 @@ export default {
         taskStatusOption() {
             return ["", this.$t('home_005'), this.$t('home_006'), this.$t('home_007'), this.$t('home_008')]
         },
-        winNotis(){
-            return this.$Helper.randomStrings(100)
-        },
         langOptions(){
             return this.$Helper.langOptions();
         }

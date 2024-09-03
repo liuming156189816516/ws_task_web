@@ -47,20 +47,36 @@
     }
   }
   .award_record{
-    height: 440px;
-    overflow: hidden;
-    // background: salmon;
-    .my_swipe{
-      height: 64px;
-      overflow: initial;
-      .award_item{
-        height: 100%;
-      }
-      .van-swipe-item{
-        background: #e4eaf2;
-      }
-      .van-swipe-item:nth-child(even){
-        background: #ecf0f6;
+    padding: 0 20px;
+    box-sizing: border-box;
+    .record_list{
+      height: 470px;
+      overflow: hidden;
+      border-radius: 20px;
+      .my_swipe{
+        height: 64px;
+        overflow: initial;
+        .award_item{
+          height: 100%;
+        }
+        .aeard_icon{
+          color: $color-theme;
+          img{
+            height: 32px;
+            margin-right: 5px;
+          }
+        }
+        .van-swipe-item{
+          padding: 0 20px;
+          box-sizing: border-box;
+          span{
+            flex: 1;
+          }
+          background: #e4eaf2;
+        }
+        .van-swipe-item:nth-child(even){
+          background: #ecf0f6;
+        }
       }
     }
   }
@@ -95,11 +111,18 @@
         </div>
       </div>
       <div class="award_record w_f">
-        <van-swipe class="my_swipe" style="height: 34px;" :autoplay="3000" :duration="1000" vertical :show-indicators="false">
-          <van-swipe-item v-for="(item,idx) in winNotis" :key="idx" style="height: 34px;">
-            <span class="award_item flex-item flex-align flex-center font_24">{{item}}</span>
-          </van-swipe-item>
-        </van-swipe>
+        <div class="record_list w_f">
+          <van-swipe class="my_swipe" style="height: 34px;" :autoplay="3000" :duration="1000" vertical :show-indicators="false">
+            <van-swipe-item class="flex-item flex-align flex-center" v-for="(item,idx) in winNotis" :key="idx" style="height: 34px;width:100%;">
+              <span class="award_item flex-item flex-align font_24">{{item.name}}</span>
+              <span class="flex-item flex-center font_24">{{item.desc}}</span>
+              <span class="aeard_icon flex-item flex-content-r font_24">
+                <img src="@/assets/images/gold_icon.png" alt="" srcset="">
+                {{item.goldNum}}
+              </span>
+            </van-swipe-item>
+          </van-swipe>
+        </div>
       </div>
     </div>
   </div>
@@ -172,10 +195,11 @@ export default {
       userInfo: state => state.User
     }),
     winNotis(){
-      return this.$Helper.randomStrings(100)
+      return this.$Helper.randomStrings(100,1)
     }
   },
   created() {
+    // console.log(this.winNotis);
   },
   methods: {
     startLucky() {

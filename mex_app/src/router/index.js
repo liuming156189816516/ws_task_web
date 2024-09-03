@@ -291,16 +291,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     window.scrollTo(0, 0);
-    // if (to.path === '/login') {
-    //     next({path: "/home",});
-    //     // store.commit('Global/clearKeepAlive', '')
-    // }
-    // if (to.name === 'sign') {
-    //     store.commit('Global/clearKeepAlive', '')
-    // }
-    // if (to.meta.keepAlive) {
-    //     store.commit('Global/keepAlive', to.name)
-    // }
+    if (to.name === 'sign') {
+        store.commit('Global/clearKeepAlive', '')
+    }
+    if (to.meta.keepAlive) {
+        store.commit('Global/keepAlive', to.name)
+    }
     let token = localStorage.getItem('token');
     if (to.meta.requireAuth) {
         if (token) {

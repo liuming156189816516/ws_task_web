@@ -255,7 +255,7 @@ export default {
     other_018:"Casi siete días",
     other_019:"Página anterior",
     other_020:"Página siguiente",
-    other_021:"{oferta}/{total} páginas",
+    other_021:"{offest}/{total} páginas",
     other_022:"Aún no hay datos...",
     other_023:"Últimos siete días (incluido hoy)",
     other_024:"Reiniciar",

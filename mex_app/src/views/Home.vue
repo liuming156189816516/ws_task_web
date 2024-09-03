@@ -271,7 +271,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home_warp {
-    height: 100%;
     position: relative;
     padding-bottom: 140px;
     // background: $color-theme;

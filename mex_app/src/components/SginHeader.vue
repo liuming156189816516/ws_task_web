@@ -49,9 +49,9 @@ export default {
         .login_area, .user_info{
             color: $font-color-white;
             .sign_bt{
-                width: 140px;
+                min-width: 140px;
                 height: 100%;
-                padding: 20px 0;
+                padding: 20px 12px;
                 margin-left: 20px;
                 font-weight: bold;
                 border-radius: 10px;

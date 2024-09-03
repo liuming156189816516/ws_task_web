@@ -60,12 +60,8 @@ export default {
 			username:"",
 			password:"",
 			isBottom:false,
-			langIdx:Cookies.get("language")||'en',
-			isIndex:false,
-			// langOptions: [
-			// 	{lang:"en",name:"en-US"},
-			// 	{lang:"zh",name:"zh_CN"}
-			// ]
+			langIdx:Cookies.get("language")||"es",
+			isIndex:false
 		}
 	},
 	created() {

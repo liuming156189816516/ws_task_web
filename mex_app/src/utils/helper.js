@@ -285,7 +285,8 @@ const Helper = {
 		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
 	},
 	langOptions(){
-		return [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];
+		return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];
+		// return [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];
 	},
 	globalSupport(){
 		// if (this.checkBrowser()) {

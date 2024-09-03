@@ -17,6 +17,7 @@ const BetRecord = () => import('../views/mine/BetRecord')
 const SysMsg = () => import('../views/mine/SysMsg')
 const ResetPwd = () => import('../views/mine/ResetPwd')
 const luckyWheel = () => import('../views/home/luckyWheel')
+const dailySign = () => import('../views/home/dailySign')
 // 提现
 const Withdraw = () => import('../views/pay/withdraw')
 const BackBind = () => import('../views/pay/backBind')
@@ -99,6 +100,16 @@ const routes = [{
         path: "/luckyWheel",
         name: "luckyWheel",
         component: luckyWheel,
+        meta: {
+            hasTabBar: false,
+            title: "个人中心",
+            requireAuth: true,
+            index: 1
+        },
+    },{
+        path: "/dailySign",
+        name: "dailySign",
+        component: dailySign,
         meta: {
             hasTabBar: false,
             title: "个人中心",

@@ -1,7 +1,7 @@
 <template>
     <div class="login_head w_f flex-item flex-align flex-between">
-        <!-- <img class="le_logn" src="@/assets/images/logo-h.png" /> -->
-        <img class="le_logn" src="@/assets/images/logo.png" />
+        <img class="le_logn" src="@/assets/images/logo-h.png" />
+        <!-- <img class="le_logn" src="@/assets/images/logo.png" /> -->
         <div class="login_area flex-item flex-align font_24">
             <div class="flex-item flex-align" v-if="!userInfo.token">
                 <span @click="jumpPage(0)">{{lanageType($t('login_004'))}}</span>

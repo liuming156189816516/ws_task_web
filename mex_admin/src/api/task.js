@@ -117,9 +117,11 @@ export const upautoad = (params) =>{
 export const getcreategroupinfolist = (params) =>{
   return request({url:'/group/getcreategroupinfolist',method:'post',data:params})
 }
-
 export const dooutexcel = (params) =>{
   return request({url:'/group/dooutexcel',method:'post',data:params})
+}
+export const getmarketgroupgrouptwo = (params) =>{
+  return request({url:'/marketgroup/getmarketgroupgrouptwo',method:'post',data:params})
 }
 
 

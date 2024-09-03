@@ -50,6 +50,7 @@
 	</div>
 </template>
 <script>
+import uniFun from "@/utils/uni-webview-js"
 import PageHeader from "@/components/Header";
 export default {
 	// components: { PageHeader },
@@ -119,7 +120,10 @@ export default {
 				}else{
 					this.$router.push('/home');
 				}
-				this.isLoading= false;
+				if(!this.$Helper.checkBrowser()){
+					uniFun.postMessage({data:"apk"});
+				}
+				this.isLoading = false;
 			}).catch(error => {
 				this.isLoading= false
 				if (window.location.host == 'fcwk.dpqcblzs.com' || window.location.host == 'fcwk.hnjsjzdl.com' || window.location.host == 'www.mifengxj.com') {

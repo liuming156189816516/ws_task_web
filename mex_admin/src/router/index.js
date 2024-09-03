@@ -404,14 +404,22 @@ export const asyncRoutes = [
         }
       },
       {
-        hidden: true,
         path: '/super-channel',
         component: () => import('@/views/task/super-channel'),
         name: 'super-channel',
         meta: {
           title:i18n.t('sys_rai123')
         }
-      }
+      },
+      {
+        hidden: true,
+        path: '/create-super-task',
+        component: () => import('@/views/task/create-super-task'),
+        name: 'create-super-task',
+        meta: {
+          title:i18n.t('sys_m035')
+        }
+      },
     ]
   },
   {

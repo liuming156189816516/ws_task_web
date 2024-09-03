@@ -230,9 +230,9 @@ export default {
       },
       jumpCreatTask(row,idx){
         if (idx == 0) {
-          this.$router.push("/create-was-task")
+          this.$router.push("/create-super-task")
         }else{
-          this.$router.push({path:"/create-was-task",query:{config:row}})
+          this.$router.push({path:"/create-super-task",query:{config:row}})
         }
       },
       handleCommand(row,command) {

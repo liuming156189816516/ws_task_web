@@ -32,19 +32,21 @@
                     </div>
                     <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
                 </div>
-                <div class="invit_code w_f flex-item flex-dir-c">
-                    <div class="copay_desc flex-item flex-align flex-between">
-                        <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
+                <div class="flex-item flex-align">
+                    <div class="invit_code w_f flex-item flex-dir-c">
+                        <div class="copay_desc flex-item flex-align flex-between">
+                            <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
+                        </div>
+                        <div class="copay_text flex-item font_28">{{team_size}}</div>
                     </div>
-                    <div class="copay_text flex-item font_28">{{team_size}}</div>
-                </div>
-                <div class="invit_code w_f flex-item flex-dir-c">
-                    <div class="copay_desc flex-item flex-align flex-between">
-                        <span class="left_desc flex-item font_28">{{$t('spre_020')}}</span>
+                    <div class="invit_code w_f flex-item flex-dir-c">
+                        <div class="copay_desc flex-item flex-align flex-between">
+                            <span class="left_desc flex-item font_28">{{$t('spre_020')}}</span>
+                        </div>
+                        <div class="copay_text flex-item font_28">{{today_rebate}}</div>
                     </div>
-                    <div class="copay_text flex-item font_28">{{today_rebate}}</div>
                 </div>
-                <div class="invit_code w_f flex-item flex-dir-c">
+                <!-- <div class="invit_code w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">
                         <span class="left_desc flex-item font_28">{{$t('spre_021')}}</span>
                     </div>
@@ -55,7 +57,7 @@
                         <span class="left_desc flex-item font_28">{{$t('spre_022')}}</span>
                     </div>
                     <div class="copay_text flex-item font_28">{{total_rebate}}</div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="share_continer w_f flex-item flex-dir-c">

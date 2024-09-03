@@ -127,6 +127,12 @@
 .mt_24 {
   margin-top: 24px;
 }
+.mb_10 {
+  margin-bottom: 10px;
+}
+.mb_20 {
+  margin-bottom: 20px;
+}
 .no-pxtorem-s{
   padding-bottom: 50px;
 }

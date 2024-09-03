@@ -85,7 +85,7 @@
 <template>
   <div class="earn">
     <div class="custom_head">
-      <page-header :title="$t('mine_010')" :show-icon="true" :bgColor="true" />
+      <page-header :title="$t('home_124')" :show-icon="true" :bgColor="true" />
       <div class="lucky_bg w_f">
         <div class="bg_01">
           <img class="img_01" src="../../assets/images/lucky/bg_01.png" alt="">
@@ -152,14 +152,12 @@ export default {
       ],
       // 扇形数组
       prizes: [
-        { fonts: [{ text: "7金币", top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text: "10金币", top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text: "5金币", top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text: "2金币", top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text: '6金币', top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text: '0金币', top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/gold_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        // { fonts: [{ text: '柚子', top: '10%' }], background: '#42929D' },
-        // { fonts: [{ text: '山竹', top: '10%' }], background: '#E3556B' },
+        { fonts: [{ text:this.$t('pay_034',{value:7}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:10}), top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:5}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:2}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:6}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:0}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
       ],
       buttons: [
         {

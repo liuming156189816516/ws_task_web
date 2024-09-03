@@ -2,6 +2,7 @@
 // import {off} from "vant/lib/utils/dom/event";
 import Helper from './helper';
 import crypto  from 'crypto'
+import { i18n } from '@/assets/lang'
 
 //加密向量
 const iv = '3214567898765432'
@@ -99,8 +100,14 @@ export function decryption (data) {
 	cipherChunks.push(decipher.final(clearEncoding));
 	return cipherChunks.join('');
 }
+export function boforeWeek(type) {
+	var now = new Date();
+	var day = now.getDay();
+	var weeks = new Array(i18n.t('other_070'),i18n.t('other_064'),i18n.t('other_065'),i18n.t('other_066'),i18n.t('other_067'),i18n.t('other_068'),i18n.t('other_069'));
+	return weeks[day];
+}
 
-export function boforeWeek() {
+export function boforeDay() {
 	var now = new Date();
 	var day = now.getDay();
 	var weeks = new Array('星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日');
@@ -174,7 +181,7 @@ export function timetamp(time) {
 }
 //将时间戳转成年月日时分秒
 export function formatTime(date,type) {
-	var myDate = new Date(date * 1000);
+	var myDate = date ? new Date(date * 1000): new Date();
 	var Year = myDate.getFullYear(); //获取年
 	var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
 	var Dates = myDate.getDate(); //获取日
@@ -199,6 +206,8 @@ export function formatTime(date,type) {
 	}
 	if(type == 1){
 		return Year + '/' + Month + '/' + Dates + ' ' + Hour + ':' + Minute + ':' + Seconds;
+	}else if(type == 2){
+		return [Month,Dates];
 	}else{
 		return Year + '-' + Month + '-' + Dates + ' ' + Hour + ':' + Minute + ':' + Seconds;
 	}

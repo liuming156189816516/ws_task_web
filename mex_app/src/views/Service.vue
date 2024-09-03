@@ -50,7 +50,19 @@
                             <p class="font_24">{{$t('serv_004')}}</p>
                         </div>
                     </div>
-                    <van-button class="font_28" type="primary" @click="contactService">{{$t('serv_005')}}</van-button>
+                    <van-button class="font_28" type="primary" @click="contactService(0)">{{$t('serv_005')}}</van-button>
+                </div>
+            </div>
+            <div class="sys_serve w_f">
+                <div class="serve_box w_f flex-item flex-align flex-between">
+                    <div class="w_f flex-item flex-align">
+                        <img src="@/assets/images/serveic/serve_icon.png" alt="">
+                        <div>
+                            <p class="font_28" style="font-weight: bold;">{{$t('serv_003')}}</p>
+                            <p class="font_24">{{$t('serv_004')}}</p>
+                        </div>
+                    </div>
+                    <van-button class="font_28" type="primary" @click="contactService(1)">{{$t('serv_005')}}</van-button>
                 </div>
             </div>
         </div>
@@ -110,12 +122,22 @@ export default {
             const { limit_amount } = await getwithdrawconfig()
             this.limit_amount = limit_amount;
         },
-        contactService(){
-            if(this.$Helper.checkBrowser()){
-                window.open(process.env.VUE_APP_SERVICE,"_blank");
+        contactService(idx){
+            console.log(idx);
+            if(idx == 1){
+                if(this.$Helper.checkBrowser()){
+                    window.open(process.env.VUE_APP_TELEGRAM,"_blank");
+                }else{
+                    uniFun.postMessage({data:process.env.VUE_APP_TELEGRAM});
+                }
             }else{
-                uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
+                if(this.$Helper.checkBrowser()){
+                    window.open(process.env.VUE_APP_SERVICE,"_blank");
+                }else{
+                    uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
+                }
             }
+           
         },
         showRule(idx){
             let tips = this.taskRuleOption[idx];

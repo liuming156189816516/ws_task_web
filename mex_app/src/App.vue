@@ -135,6 +135,7 @@ body,
 		position: fixed;
 		top: 0;
 		left: 0;
+		background: $color-theme;
 		background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);
 	}
 	.app_top_continer, .app_continer{

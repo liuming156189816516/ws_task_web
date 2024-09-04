@@ -302,10 +302,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home_warp {
-    // height: 100%;
+    height: 100%;
     overflow-y: auto;
     position: relative;
-    padding-bottom: 140px;
+    padding-bottom: 160px;
     // background: $color-theme;
     background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
     // background: url('../assets/images/home/bg_img.png') no-repeat;

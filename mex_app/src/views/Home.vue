@@ -302,7 +302,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home_warp {
-    height: 100%;
+    // height: 100%;
     overflow-y: auto;
     position: relative;
     padding-bottom: 140px;

@@ -144,8 +144,9 @@ export default {
   methods: {
     initLucky(){
       getruletainfo().then(res=>{
-        // console.log(res);
+        console.log(res);
         this.task_type = res.msg_type;
+        console.log(this.task_type);
         this.isLucky = res.flag||false;
         if(res.type){
           const luckyNum = res.type-1;

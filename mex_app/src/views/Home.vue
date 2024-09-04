@@ -45,7 +45,7 @@
             <div class="down_text font_24">{{$t('other_072',{value:5000})}}</div>
             <div class="down_apk flex-item flex-align flex-center font_24">
                 <img src="@/assets/images/home/shouji.png" alt="" srcset="">
-                {{$t('mine_009')}}{{$Helper.checkBrowser()}} {{this.$Helper.isAndroid()}}
+                {{$t('mine_009')}}{{$Helper.checkBrowser()}} {{this.$Helper.androidDevice()}}
             </div>
         </div>
         <Sgin-header />

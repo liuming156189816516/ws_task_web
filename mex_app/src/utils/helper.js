@@ -120,6 +120,11 @@ const Helper = {
 	isIos() {
 		return this.openInWebview() && this.judgeClient() == "ios"
 	},
+
+	//安卓设备
+	androidDevice() {
+		return this.judgeClient() == "Android"
+	},
 	
 	isSimulator() {
 		const userAgent = navigator.userAgent || navigator.vendor || window.opera;

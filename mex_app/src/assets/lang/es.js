@@ -334,6 +334,7 @@ export default {
     other_086: "3. Si olvida iniciar sesión, el sistema se restablecerá al inicio de sesión del primer día",
     other_087:"Afortunado",
     other_088:"ver por qué",
+    other_089:"Debes completar la tarea antes de continuar.",
 
     table_001:"Inicio",
     table_002:"Equipo",

@@ -136,6 +136,11 @@ const Helper = {
 		const userAgent = navigator.userAgent || navigator.vendor;
 		return /iPhone|iPad|iPod|Android/i.test(userAgent);
   	},
+	checkAPK() {
+		const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		// 这里的 "myApp" 是一个示例，实际应用中需要替换为你应用的实际标识符
+		return /__UNI__3C006A3/i.test(userAgent);
+	},
 	//是否是web端
 	isWeb() {
 		return !this.openInWebview()

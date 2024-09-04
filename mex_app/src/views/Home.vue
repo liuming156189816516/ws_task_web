@@ -79,7 +79,7 @@
             </div>
             <div class="adv_warp flex-item flex-between font_28">
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(0)">
-                    {{$t('home_124')}}{{$Helper.isMobileBrowser()}}
+                    {{$t('home_124')}}{{$Helper.checkAPK()}}
                 </div>
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(1)">
                     {{$t('home_125')}}
@@ -208,6 +208,7 @@ export default {
         }
     },
     created(){
+        console.log(uniFun);
         this.moveNews.$on("login-env",res=>{
             this.initHandle();
         })

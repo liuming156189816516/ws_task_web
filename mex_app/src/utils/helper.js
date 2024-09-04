@@ -133,7 +133,7 @@ const Helper = {
 	},
 	
 	isSimulator() {
-		const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		const userAgent = navigator.userAgent || navigator.vendor;
 		return /iPhone|iPad|iPod|Android/i.test(userAgent);
   	},
 	//是否是web端

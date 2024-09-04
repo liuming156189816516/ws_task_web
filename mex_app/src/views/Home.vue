@@ -191,7 +191,7 @@ export default {
     methods: {
         handleScroll(){
             let scrollTop = this.$refs.warpBox;
-            if(scrollTop.scrollTop >= 60){
+            if(scrollTop.scrollTop >= 80){
                 this.filexTop = true;
             }else{
                 this.filexTop = false;

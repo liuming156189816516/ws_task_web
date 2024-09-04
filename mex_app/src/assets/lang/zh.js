@@ -179,7 +179,7 @@ export default {
     mine_006:"修改头像",
     mine_007:"今日奖金",
     mine_008:"昨日奖金",
-    mine_009:"下载 App",
+    mine_009:"下载 APP",
     mine_010:"收益记录",
     mine_011:"提现记录",
     mine_012:"修改密码",
@@ -312,6 +312,7 @@ export default {
     other_069:"星期六",
     other_070:"星期日",
     other_071:"活动规则：",
+    other_072:"下载应用程序并获取 {value} 金币",
 
     table_001:"首页",
     table_002:"团队",

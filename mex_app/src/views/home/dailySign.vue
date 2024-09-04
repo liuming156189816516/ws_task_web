@@ -27,6 +27,7 @@
         .daily_item{
           width: calc(100% / 4);
           flex-shrink: 0;
+          position: relative;
           // background: darkcyan;
           .day_text, .even_gold{
             padding: 10px 0;
@@ -43,7 +44,7 @@
           .even_gold{
             border-bottom: 1px solid rgba($color: $color-theme, $alpha: .5);
             img{
-              height: 60px;
+              height: 88px;
             }
             .day_gold{
               margin-top: 5px;
@@ -63,6 +64,18 @@
         }
         .day_daily{
           background:rgba($color:$color-theme, $alpha: .5);
+        }
+        .finish_cover{
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          background: rgba($color: #000000, $alpha: .1);
+          img{
+            height: 66px;
+          }
         }
       }
       .sgin_btn{
@@ -102,6 +115,9 @@
             <div class="even_gold flex-item flex-align flex-center w_f flex-dir-c">
               <img src="@/assets/images/more_icon.png" alt="">
               <p class="day_gold flex-item">+{{item+item*2}}</p>
+            </div>
+            <div class="finish_cover flex-item flex-align flex-center" v-if="item==1">
+              <img src="@/assets/images/home/ok_icon.png" alt="" srcset="">
             </div>
           </div>
         </div>

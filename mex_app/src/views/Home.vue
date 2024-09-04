@@ -45,7 +45,7 @@
             <div class="down_text font_24">{{$t('other_072',{value:5000})}}</div>
             <div class="down_apk flex-item flex-align flex-center font_24">
                 <img src="@/assets/images/home/shouji.png" alt="" srcset="">
-                {{$t('mine_009')}}{{$Helper.isAndroid()}}
+                {{$t('mine_009')}}{{checkDevice}}
             </div>
         </div>
         <Sgin-header />
@@ -200,7 +200,7 @@ export default {
             return this.$Helper.langOptions();
         },
         checkDevice(){
-            if(!this.$Helper.checkBrowser()&&this.$Helper.androidDevice()){
+            if(this.$Helper.checkBrowser()&&this.$Helper.isAndroid()){
                 return true;
             }else{
                 return false;

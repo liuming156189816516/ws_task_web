@@ -1,49 +1,8 @@
-<style lang="scss" scoped>
-    .down_app{
-        height: 92px;
-        overflow: hidden;
-        position: relative;
-        padding: 14px 20px 14px 20px;
-        box-sizing: border-box;
-        background: linear-gradient(90deg, #ff9600, #ff013d);
-        .close_btn{
-            width: 60px;
-            height: 60px;
-            position: absolute;
-            top: -16px;
-            left: -16px;
-            font-weight: bold;
-            padding: 8px 0 0 12px;
-            box-sizing: border-box;
-            color: $home-title-09;
-            border-radius: 50%;
-            background: rgba($color: hsl(0, 0%, 0%), $alpha: .3);
-        }
-        .down_text{
-            font-weight: bold;
-            padding-left: 30px;
-            color: $font-color-white;
-        }
-        .down_apk{
-            min-width: 166px;
-            height: 100%;
-            padding: 0 10px;
-            font-weight: 500;
-            box-sizing: border-box;
-            border-radius: 10px;
-            color: $home-order-title;
-            background: $font-color-white;
-            img{
-                height: 32px;
-            }
-        }
-    }
-</style>
 <template>
     <div class="home_warp w_f" ref="warpBox" @click="isIndex=false">
         <div class="down_app w_f flex-item flex-align flex-between" v-if="showApk&&$Helper.checkApkBag()">
             <span class="close_btn flex-item flex-align flex-center font_20" @click="showApk=false">✕</span>
-            <div class="down_text font_24">{{$t('other_072',{value:5000})}}</div>
+            <div class="down_text font_24">{{$t('other_072',{value:100})}}</div>
             <div class="down_apk flex-item flex-align flex-center font_24">
                 <img src="@/assets/images/home/shouji.png" alt="" srcset="">
                 {{$t('mine_009')}}
@@ -331,6 +290,45 @@ export default {
     // background: url('../assets/images/home/bg_img.png') no-repeat;
     // background-size: cover;
     -webkit-overflow-scrolling: touch;
+     .down_app{
+        height: 92px;
+        overflow: hidden;
+        position: relative;
+        padding: 14px 20px 14px 20px;
+        box-sizing: border-box;
+        background: linear-gradient(90deg, #ff9600, #ff013d);
+        .close_btn{
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            top: -16px;
+            left: -16px;
+            font-weight: bold;
+            padding: 8px 0 0 12px;
+            box-sizing: border-box;
+            color: $home-title-09;
+            border-radius: 50%;
+            background: rgba($color: hsl(0, 0%, 0%), $alpha: .3);
+        }
+        .down_text{
+            font-weight: bold;
+            padding-left: 30px;
+            color: $font-color-white;
+        }
+        .down_apk{
+            min-width: 166px;
+            height: 100%;
+            padding: 0 10px;
+            font-weight: 500;
+            box-sizing: border-box;
+            border-radius: 10px;
+            color: $home-order-title;
+            background: $font-color-white;
+            img{
+                height: 32px;
+            }
+        }
+    }
     .warp_mian {
         padding: 0 20px;
         box-sizing: border-box;

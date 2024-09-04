@@ -110,7 +110,7 @@ export default {
     home_124:"Ruleta",
     home_125:"Iniciar sesión",
     home_126:"Número de contacto",
-    home_127:"Ingrese el enlace del grupo",
+    home_127:"Ingrese al enlace del grupo",
     home_128:"Registro diario",
     home_129:"Día{value}",
     home_130:"{month} luna {number} Número {week}",

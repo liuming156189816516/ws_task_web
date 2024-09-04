@@ -1,29 +1,40 @@
 <style lang="scss" scoped>
 .earn {
   width: 100%;
-  height: 100vh;
+  padding-bottom: 40px;
   -webkit-overflow-scrolling: touch;
   background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
   .lucky_bg{
+    position: relative;
+    .lucky_rule{
+      width: 120px;
+      padding: 10px 0;
+      position: absolute;
+      top: 0;
+      right: 30px;
+      border-radius: 10px;
+      color: $font-color-white;
+      background: $home-month-value;
+    }
     .bg_01{
-      height: 740px;
+      height: 700px;
       position: relative;
       // background: rgba($color: red, $alpha: .5);
       .img_01{
         position: absolute;
-        top: 0;
+        top: -30px;
         left: 0;
       }
       .lucky_bg2{
         position: absolute;
         top: 0;
         left: 0;
-        padding: 60px;
+        padding: 20px 60px;
         box-sizing: border-box;
         background: transparent;
       }
       .lucky_bg3{
-        padding: 60px;
+        padding: 20px 60px;
         box-sizing: border-box;
         position: absolute;
         top: 0;
@@ -32,7 +43,7 @@
           width: 594px;
           height: 594px;
           position: absolute;
-          top: 80px;
+          top: 40px;
           left: 50%;
           transform: translateX(-50%);
           // background: rgba($color: #000000, $alpha: .5);
@@ -43,6 +54,23 @@
             transform: translate(-50%,-50%);
           }
         }
+      }
+    }
+  }
+  .lucky_desc{
+    // p{
+    //   margin-top: 10px;
+    // }
+    .win_text{
+      padding: 20px 0;
+      color: $home-order-title;
+      img{
+        height: 48px;
+        margin-right: 8px;
+      }
+      .serveic_line{
+        color: $color-theme;
+        text-decoration: underline;
       }
     }
   }
@@ -87,6 +115,7 @@
     <div class="custom_head">
       <page-header :title="$t('home_124')" :show-icon="true" :bgColor="true" />
       <div class="lucky_bg w_f">
+        <div class="lucky_rule flex-item flex-align flex-center font_32">rules</div>
         <div class="bg_01">
           <img class="img_01" src="../../assets/images/lucky/bg_01.png" alt="">
           <div class="lucky_bg2">
@@ -101,7 +130,6 @@
                 width="247px"
                 height="247px"
                 :prizes="prizes"
-                :blocks="blocks"
                 :buttons="buttons"
                 @start="startLucky"
                 @end="luckyEnd"
@@ -110,7 +138,15 @@
           </div>
         </div>
       </div>
+      <div class="lucky_desc flex-item flex-align flex-center flex-dir-c font_32">
+        <!-- <p>幸运转盘剩余次数：5</p> -->
+        <div class="win_text flex-item flex-align flex-center">
+          <img src="../../assets/images/win_icon.png" alt="" srcset="">
+          {{$t('other_075',{value:10000})}},<span class="serveic_line">{{$t('serv_005')}}</span>{{$t('other_074')}}
+        </div>
+      </div>
       <div class="award_record w_f">
+        <h4 class="font_26 mb_24">{{$t('other_073')}}</h4>
         <div class="record_list w_f">
           <van-swipe class="my_swipe" style="height: 34px;" :autoplay="3000" :duration="1000" vertical :show-indicators="false">
             <van-swipe-item class="flex-item flex-align flex-center" v-for="(item,idx) in winNotis" :key="idx" style="height: 34px;width:100%;">
@@ -128,14 +164,17 @@
   </div>
 </template>
 <script>
+
 import { mapState } from 'vuex';
 import PageHeader from "@/components/Header";
+import { getruletainfo,doblarruleta } from '@/api/home'
 export default {
   name: "luckyWheel",
   components: { PageHeader },
   data() {
     return {
       index: null,
+      isLucky:true,
       blocks: [
         {
           // padding: "40px", //可旋转区域与转盘边缘的距离
@@ -152,12 +191,12 @@ export default {
       ],
       // 扇形数组
       prizes: [
-        { fonts: [{ text:this.$t('pay_034',{value:7}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:10}), top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:5}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:2}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:6}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:0}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:50}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:200}), top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:"",top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/win_icon.png"),top: "25%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:1000}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:1800}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('pay_034',{value:5000}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
       ],
       buttons: [
         {
@@ -197,19 +236,39 @@ export default {
     }
   },
   created() {
+    console.log(this.prizes[1].fonts);
+    this.initLucky();
     // console.log(this.winNotis);
   },
   methods: {
-    startLucky() {
+    initLucky(){
+      getruletainfo().then(res=>{
+        // this.isLucky = res.flag||false;
+      })
+    },
+    async startLucky() {
+      if(!this.isLucky){
+        return this.$toast(this.$t('other_076'))
+      }
+      this.isLucky = false;
       this.$refs.myLucky.play();
-      setTimeout(() => {
-        const index = 0;
-        this.$refs.myLucky.stop(index);
-      }, 3000);
+      const result = await doblarruleta();
+      if(result.type){
+        console.log(result);
+        this.$refs.myLucky.stop(result.type);
+      }else{
+        this.isLucky = true;
+        this.$refs.myLucky.stop(null);
+      }
+      // setTimeout(() => {
+      //   const index = 0;
+      //   this.$refs.myLucky.stop(index);
+      // }, 3000);
     },
     // 抽奖结束会触发end回调
     luckyEnd(prize) {
       console.log(prize);
+      this.isLucky = true;
     }
   }
 };

@@ -121,26 +121,10 @@ const Helper = {
 		return this.openInWebview() && this.judgeClient() == "ios"
 	},
 
-	//安卓设备
-	androidDevice() {
-		return this.judgeClient() == "Android"
-	},
-	
-	isMobileBrowser() {
-		const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-		// 正则表达式匹配常见的移动设备标识符
-		return /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-	},
-	
 	isSimulator() {
 		const userAgent = navigator.userAgent || navigator.vendor;
 		return /iPhone|iPad|iPod|Android/i.test(userAgent);
   	},
-	checkAPK() {
-		const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-		// 这里的 "myApp" 是一个示例，实际应用中需要替换为你应用的实际标识符
-		return /__UNI__3C006A3/i.test(userAgent);
-	},
 	//是否是web端
 	isWeb() {
 		return !this.openInWebview()
@@ -212,6 +196,14 @@ const Helper = {
 		sysInfo.osVersion = md.versionStr('Build') ? md.versionStr('Build') : "";
 		sysInfo.isXbox = md.match('playstation|xbox') ? md.match('playstation|xbox') : false;
 		return {};
+	},
+	//安卓设备
+	checkApkBag(type) {
+		if(type){
+			return this.checkBrowser()&&this.judgeClient() == "Android"?0:1;
+		}else{
+			return this.checkBrowser()&&this.judgeClient() == "Android";
+		}
 	},
 	//时间戳转换
 	format_newDate(strtime) {

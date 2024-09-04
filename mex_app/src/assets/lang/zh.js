@@ -313,6 +313,10 @@ export default {
     other_070:"星期日",
     other_071:"活动规则：",
     other_072:"下载应用程序并获取 {value} 金币",
+    other_073:"优胜者",
+    other_074:"领取",
+    other_075:"中将{value}金币",
+    other_076:"幸运转盘次数已用完,明日再来！",
 
     table_001:"首页",
     table_002:"团队",

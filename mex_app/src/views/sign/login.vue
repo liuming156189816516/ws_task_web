@@ -95,7 +95,8 @@ export default {
 			let params = {
 				account: this.username,
 				pwd:this.password,
-				language:this.langIdx
+				language:this.langIdx,
+				device:this.$Helper.checkApkBag(1)
 			};
 			const Toast = this.$toast.loading({
 				duration: 3000,

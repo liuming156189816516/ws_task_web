@@ -53,6 +53,12 @@ export const getdownloadurl = (param) => {
 export const getteammatesinfo = (param) => {
     return request({url: '/account/getteammatesinfo',method: 'post',data:param})
 }
+export const getruletainfo = (param) => {
+    return request({url: '/account/getruletainfo',method: 'post',data:param})
+}
+export const doblarruleta = (param) => {
+    return request({url: '/account/doblarruleta',method: 'post',data:param})
+}
 
 
 

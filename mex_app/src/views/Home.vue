@@ -3,7 +3,7 @@
         height: 92px;
         overflow: hidden;
         position: relative;
-        padding: 14px 20px 14px 30px;
+        padding: 14px 20px 14px 20px;
         box-sizing: border-box;
         background: linear-gradient(90deg, #ff9600, #ff013d);
         .close_btn{
@@ -21,6 +21,7 @@
         }
         .down_text{
             font-weight: bold;
+            padding-left: 30px;
             color: $font-color-white;
         }
         .down_apk{
@@ -40,7 +41,7 @@
 </style>
 <template>
     <div class="home_warp w_f" ref="warpBox" @click="isIndex=false">
-        <div class="down_app w_f flex-item flex-align flex-between" v-if="showApk&&checkDevice">
+        <div class="down_app w_f flex-item flex-align flex-between" v-if="showApk&&$Helper.checkApkBag()">
             <span class="close_btn flex-item flex-align flex-center font_20" @click="showApk=false">✕</span>
             <div class="down_text font_24">{{$t('other_072',{value:5000})}}</div>
             <div class="down_apk flex-item flex-align flex-center font_24">
@@ -79,7 +80,7 @@
             </div>
             <div class="adv_warp flex-item flex-between font_28">
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(0)">
-                    {{$t('home_124')}}{{$Helper.checkAPK()}}
+                    {{$t('home_124')}}
                 </div>
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(1)">
                     {{$t('home_125')}}
@@ -198,17 +199,9 @@ export default {
         },
         langOptions(){
             return this.$Helper.langOptions();
-        },
-        checkDevice(){
-            if(this.$Helper.checkBrowser()&&this.$Helper.isAndroid()){
-                return true;
-            }else{
-                return false;
-            }
         }
     },
     created(){
-        console.log(uniFun);
         this.moveNews.$on("login-env",res=>{
             this.initHandle();
         })
@@ -320,7 +313,7 @@ export default {
         },
         jumpLucky(idx){
             const activRouter = ['/luckyWheel','/dailySign'];
-            this.$router.push(activRouter[idx]);   
+            // this.$router.push(activRouter[idx]);   
         },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);

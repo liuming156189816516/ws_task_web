@@ -312,6 +312,10 @@ export default {
     other_070:"Domingo",
     other_071:"Reglas de actividad:",
     other_072:"Descarga la aplicación y obtén {value} oro",
+    other_073:"Ganador",
+    other_074:"recibir",
+    other_075:"Victorioso{value}oro",
+    other_076:"The lucky wheel has been used up. Try again tomorrow.幸运转盘次数已用完,明日再来！",
 
     table_001:"Inicio",
     table_002:"Equipo",

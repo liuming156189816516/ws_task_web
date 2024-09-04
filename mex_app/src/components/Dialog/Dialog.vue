@@ -59,12 +59,8 @@
                             <!-- <span v-for="(item,idx) in content" :key="idx">{{ item.target }}</span> -->
                         </div>
                     </div>
-                    <div class="rule_desc font_22" v-if="type==8">
-                        <p>{{restLanuage('home_090')}}</p>
-                        <p>{{restLanuage('home_080')}}</p>
-                        <p>{{restLanuage('home_081')}}</p>
-                        <p>{{restLanuage('home_082')}}</p>
-                        <p>{{restLanuage('home_083')}}</p>
+                    <div class="rule_desc font_28" v-if="type==8">
+                        <p style="line-height: 20px;" >{{content}}</p>
                     </div>
                 </div>
             </template>

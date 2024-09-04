@@ -117,6 +117,7 @@ export default {
     home_131:"Iniciar sesión ahora",
     home_132:"Iniciar sesión completado",
     home_133:"Registrarse...",
+    home_134:"La tarea de atraer fans.",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -332,6 +333,7 @@ export default {
     other_085: "2. Sólo iniciando sesión continuamente podrás obtener las monedas de oro correspondientes",
     other_086: "3. Si olvida iniciar sesión, el sistema se restablecerá al inicio de sesión del primer día",
     other_087:"Afortunado",
+    other_088:"ver por qué",
 
     table_001:"Inicio",
     table_002:"Equipo",

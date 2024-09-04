@@ -1,7 +1,7 @@
 <template>
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
-            <page-header :title="$t('home_044')" :show-icon="true" :bgcolor="false" />
+            <page-header :title="$t('home_134')" :show-icon="true" :bgcolor="false" />
             <!-- <div class="share_bonus w_f flex-item flex-dir-c">
                 <p class="Win_l font_72 flex-item">{{$t('home_104')}}</p>
                 <p class="Win_r font_72 flex-item">{{$t('home_105')}}</p>
@@ -16,7 +16,7 @@
                     <img src="@/assets/images/serveic/play_icon.png" alt="">
                 </div> -->
             </div>
-            <div class="task_box w_f flex-item">
+            <!-- <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">
                     <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
                     <div class="w_f flex-item flex-between">
@@ -33,13 +33,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">Complete task to win bonus</div> -->
+            </div> -->
         </div>
         <div class="task_box_main">
             <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
-                    <div class="task_item w_f flex-item flex-dir-c font_34">
+                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="task_name w_f flex-item">
                             <img src="@/assets/images/home/num1_icon.png">
                         </div>
@@ -51,25 +50,11 @@
                             <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
                             <van-button type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
-                    </div>
-
-                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num2_icon.png">
-                        </div>
-                        <div class="task_award w_f">
-                            <div class="task_book font_28">{{$t('home_121')}}</div>
-                            <div class="task_desc font_20">{{$t('home_122')}}</div>
-                        </div>
-                        <div class="w_f flex-item flex-between flex-align font_24">
-                            <span class="show_account"></span>
-                            <van-button type="primary" @click="openWhatsapp">{{$t('home_123')}}</van-button>
-                        </div>
                     </div> -->
 
                     <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num2_icon.png">
+                            <img src="@/assets/images/home/num1_icon.png">
                         </div>
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
@@ -124,9 +109,9 @@
 <script>
 import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
+import { getcreatetaskinfo } from '@/api/home'
 import PageHeader from "@/components/Header";
-import { getinvitefriendtasklist } from '@/api/task';
-import { getcreatetaskinfo,submitcreatetask } from '@/api/home'
+import { getinvitefriendtasklist,submitgrouplinktask } from '@/api/task';
 import uniFun from "@/utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
@@ -172,7 +157,7 @@ export default {
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         // this.task_id = this.$Helper.getUrlParams("id");
         this.task_id = this.$route.query.id||"";
-        this.getGroupMess();
+        // this.getGroupMess();
     },
     mounted(){
         this.getIncomeList();
@@ -208,7 +193,7 @@ export default {
             }
         },
         getIncomeList(){
-            getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:1}).then(res => {
+            getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:2}).then(res => {
                 this.loading = false;
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
@@ -222,16 +207,16 @@ export default {
             this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
         },
         submitTask(){
-            // this.$store.dispatch('User/actionReport',11);
+            this.$store.dispatch('User/actionReport',11);
             if(!this.group_link) return this.$toast(this.$t('other_001',{value:this.$t('home_036')})); 
             this.isLoading=true;
-            console.log("8888");
-            submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
+            submitgrouplinktask({invite_link:this.group_link}).then(res =>{
                 this.isLoading=false;
-                if(res.code) return;
-                this.getGroupMess();
+                let result = this.$Helper.aesDecrptHost(res);
+                if(result.code) return;
+                this.group_link ="";
                 this.$toast(this.$t("home_039"));
-                this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
+                // this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
                 let scrollTop = this.$refs.warpBox;
                 scrollTop.scrollTo({top: 0,behavior: "instant" });
             })
@@ -371,7 +356,9 @@ export default {
             }
         }
         .task_box_main{
-            margin-top: -376px;
+            position: relative;
+            margin-top: -576px;
+            z-index: 2;
             // background: #E6F2EF;
             // background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
         }

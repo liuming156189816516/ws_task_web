@@ -58,11 +58,7 @@
                         </div>
                     </div>
                     <div class="rule_desc font_22" v-if="type==8">
-                        <p>{{restLanuage('home_090')}}</p>
-                        <p>{{restLanuage('home_080')}}</p>
-                        <p>{{restLanuage('home_081')}}</p>
-                        <p>{{restLanuage('home_082')}}</p>
-                        <p>{{restLanuage('home_083')}}</p>
+                        <p>{{content}}</p>
                     </div>
                 </div>
             </template>

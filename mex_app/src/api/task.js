@@ -17,3 +17,8 @@ export const getinvitefriendtasklist = (params = {}) => {
     return request({url: '/account/getinvitefriendtasklist',method: 'post',data:params})
 }
 
+export const submitgrouplinktask = (params = {}) => {
+    return request({url: '/account/submitgrouplinktask$',method: 'post',data:params})
+}
+
+

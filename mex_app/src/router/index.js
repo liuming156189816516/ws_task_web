@@ -29,6 +29,7 @@ const MyHead = () => import('../views/home/myhead');
 const scanOnline = () => import('../views/home/scan_online');
 const pullgroupTask = () => import('../views/home/ws_pullgroup');
 const pullPownTask = () => import('../views/home/ws_pullpower');
+const pulledTask = () => import('../views/home/ws_pulledTask');
 Vue.use(VueRouter);
 
 const routes = [{
@@ -157,6 +158,17 @@ const routes = [{
         meta: {
             hasTabBar: false,
             title: "WhatsApp邀请任务",
+            requireAuth: true,
+            index: 1
+        }
+    },
+    {
+        path: "/pulledTask",
+        name: "pulledTask",
+        component: pulledTask,
+        meta: {
+            hasTabBar: false,
+            title: "WhatsApp拉粉任务",
             requireAuth: true,
             index: 1
         }
@@ -301,7 +313,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
+    window.scrollTo({top:0, behavior: "instant"});
     if (to.name === 'sign') {
         store.commit('Global/clearKeepAlive', '')
     }

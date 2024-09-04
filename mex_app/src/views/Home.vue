@@ -1,14 +1,16 @@
 <template>
-    <div class="home_warp w_f" ref="warpBox" @click="isIndex=false">
+    <div class="home_warp w_f" ref="warpBox" @click="isIndex=false" @scroll="handleScroll">
         <div class="down_app w_f flex-item flex-align flex-between" v-if="showApk&&$Helper.checkApkBag()">
             <span class="close_btn flex-item flex-align flex-center font_20" @click="showApk=false">✕</span>
             <div class="down_text font_24">{{$t('other_072',{value:100})}}</div>
-            <div class="down_apk flex-item flex-align flex-center font_24">
+            <div class="down_apk flex-item flex-align flex-center font_24" @click="downApk">
                 <img src="@/assets/images/home/shouji.png" alt="" srcset="">
                 {{$t('mine_009')}}
             </div>
         </div>
-        <Sgin-header />
+        <div class="top_fles w_f" :class="{'top_fixed':filexTop}">
+            <Sgin-header />
+        </div>
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">
                 <div class="user_head">
@@ -117,12 +119,13 @@ export default {
             isLogin:false,
             visible:true,
             isIndex:false,
+            filexTop:false,
             user_money: 0,
             teamStemp: "",
             help_url: "",
             taskOption: [],
             langIdx:Cookies.get("language")||'es',
-            taskType: ['', 'scanOnline', 'spread', 'pullgroupTask'],
+            taskType: ['', 'scanOnline', 'spread', 'pullgroupTask','pulledTask'],
             bannerList:[],
             imagesList:[
                 {
@@ -150,7 +153,8 @@ export default {
                 {},
                 {name:this.$t('home_089'),live1:1,live2:2,type:1,status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
                 {name:this.$t('home_045'),live1:2,live2:4,type:2,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_044'),live1:2,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:7777}),btn:this.$t('home_056'),desc:this.$t('home_049')}
+                {name:this.$t('home_044'),live1:2,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:7777}),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                {name:this.$t('home_134'),live1:2,live2:5,type:4,status:null,task_info_id:null,award:this.$t('home_047',{value:7777}),btn:this.$t('home_056'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {
@@ -182,9 +186,18 @@ export default {
         window.addEventListener('message', function(event) {
             this.appLogin = event.data;
             // console.log('Message received from UniApp:', event.data);
-        });
+        })
     },
     methods: {
+        handleScroll(){
+            let scrollTop = this.$refs.warpBox;
+            if(scrollTop.scrollTop >= 45){
+                this.filexTop = true;
+            }else{
+                this.filexTop = false;
+            }
+        },
+        
         initHandle(){
             this.getTaskList();
             // this.initRuleTips();
@@ -225,15 +238,15 @@ export default {
         },
         handleTask(row) {
             const path = this.taskType[row.type];
-            if(path=="pullgroupTask"){
-                this.$store.dispatch('User/actionReport',5) 
-            }
-            if(path=="spread"){
-                this.$store.dispatch('User/actionReport',6) 
-            }
-            if(path=="scanOnline"){
-                this.$store.dispatch('User/actionReport',7) 
-            }
+            // if(path=="pullgroupTask"){
+            //     this.$store.dispatch('User/actionReport',5) 
+            // }
+            // if(path=="spread"){
+            //     this.$store.dispatch('User/actionReport',6) 
+            // }
+            // if(path=="scanOnline"){
+            //     this.$store.dispatch('User/actionReport',7) 
+            // }
             // if(!getToken()){
                
             // }
@@ -277,12 +290,20 @@ export default {
         },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);
+        },
+        downApk(){
+            const link = document.createElement('a');
+            link.href = process.env.VUE_APP_APK;
+            link.setAttribute('download', 'Chrome');
+            link.click();
         }
     }
 };
 </script>
 <style lang="scss" scoped>
 .home_warp {
+    height: 100%;
+    overflow-y: auto;
     position: relative;
     padding-bottom: 140px;
     // background: $color-theme;
@@ -328,6 +349,14 @@ export default {
                 height: 32px;
             }
         }
+    }
+    .top_fles{
+        background: $color-theme;
+    }
+    .top_fixed{
+        position: fixed;
+        top: 0;
+        z-index: 1000;
     }
     .warp_mian {
         padding: 0 20px;
@@ -503,9 +532,9 @@ export default {
                     margin-bottom: 14px;
                     .task_live_1, .task_live_2{
                         color: $home-title-21;
-                        width: 250px;
+                        width: 260px;
                         span{
-                            margin-right: 14px;
+                            margin-right: 8px;
                         }
                         img{
                             height: 20px; 

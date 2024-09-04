@@ -81,11 +81,10 @@ export default {
 .bottom-box {
 	width: 750px;
 	height: 98px;
-	z-index: 99;
 	position: fixed;
 	left: 50%;
 	bottom: 0;
-	z-index: 103;
+	z-index: 9;
 	box-sizing: content-box;
 	transform: translateX(-50%);
 	box-shadow: 10px 10px 10px 10px #f2f2f2;

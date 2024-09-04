@@ -14,6 +14,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import { getToken } from '@/utils/tool';
 export default {
     data() {
         return {
@@ -66,7 +67,7 @@ export default {
     methods: {
         goToPage(path) {
 			if (this.$route.name === path)return;
-			if(path !== '/home'&&!this.userInfo.token){
+			if(path !== '/home'&&!getToken()){
 				// this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true})
 				return this.$router.push("/login");
 			}else{

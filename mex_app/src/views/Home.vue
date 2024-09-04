@@ -312,6 +312,7 @@ export default {
             this.$router.push(`/betrecord?id=1`);
         },
         jumpLucky(idx){
+            if (!getToken()) return this.$router.push("/login");
             const activRouter = ['/luckyWheel','/dailySign'];
             this.$router.push(activRouter[idx]);   
         },

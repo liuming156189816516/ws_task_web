@@ -517,7 +517,7 @@ export default {
                     color: $font-color-black;
                     margin-bottom: 10px;
                     .task_small_title{
-                        width: 70%;
+                        width: 68%;
                         flex-wrap: wrap;
                     }
                     .award_money{
@@ -534,7 +534,7 @@ export default {
                         color: $home-title-02;
                     }
                     .van-button{
-                        width: 114px;
+                        width: 108px;
                         padding: 0;
                         position: absolute;
                         top: -4px;

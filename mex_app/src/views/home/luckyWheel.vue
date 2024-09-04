@@ -1,127 +1,4 @@
-<style lang="scss" scoped>
-.earn {
-  width: 100%;
-  padding-bottom: 40px;
-  -webkit-overflow-scrolling: touch;
-  background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
-  .lucky_bg{
-    position: relative;
-    .lucky_rule{
-      width: 120px;
-      padding: 10px 0;
-      position: absolute;
-      top: 0;
-      right: 30px;
-      z-index: 3;
-      border-radius: 10px;
-      color: $font-color-white;
-      background: rgba($color: $home-month-value, $alpha: .7);
-    }
-    .bg_01{
-      height: 700px;
-      position: relative;
-      // background: rgba($color: red, $alpha: .5);
-      .img_01{
-        position: absolute;
-        top: -30px;
-        left: 0;
-      }
-      .lucky_bg2{
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 20px 60px;
-        box-sizing: border-box;
-        background: transparent;
-      }
-      .lucky_bg3{
-        padding: 20px 60px;
-        box-sizing: border-box;
-        position: absolute;
-        top: 0;
-        left: 0;
-        .lucky_main{
-          width: 594px;
-          height: 594px;
-          position: absolute;
-          top: 40px;
-          left: 50%;
-          transform: translateX(-50%);
-          // background: rgba($color: #000000, $alpha: .5);
-          .custom_lucky{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-          }
-        }
-      }
-    }
-  }
-  .lucky_desc{
-    // p{
-    //   margin-top: 10px;
-    // }
-    .win_text{
-      padding: 20px 0;
-      color: $home-order-title;
-      .content_service{
-        width:100%;
-        padding:0 20px;
-        box-sizing: border-box;
-        span{
-          display: inline-block;
-        }
-        .serve_text{
-          flex-wrap: wrap;
-        }
-        .serveic_line{
-          color: $color-theme;
-          text-decoration: underline;
-        }
-      }
-      img{
-        height: 48px;
-        margin-right: 10px;
-      }
-    }
-  }
-  .award_record{
-    padding: 0 20px;
-    box-sizing: border-box;
-    .record_list{
-      height: 470px;
-      overflow: hidden;
-      border-radius: 20px;
-      .my_swipe{
-        height: 64px;
-        overflow: initial;
-        .award_item{
-          height: 100%;
-        }
-        .aeard_icon{
-          color: $color-theme;
-          img{
-            height: 32px;
-            margin-right: 5px;
-          }
-        }
-        .van-swipe-item{
-          padding: 0 20px;
-          box-sizing: border-box;
-          span{
-            flex: 1;
-          }
-          background: #e4eaf2;
-        }
-        .van-swipe-item:nth-child(even){
-          background: #ecf0f6;
-        }
-      }
-    }
-  }
-}
-</style>
+
 <template>
   <div class="earn">
     <div class="custom_head">
@@ -283,8 +160,8 @@ export default {
       this.$refs.myLucky.play();
       const result = await doblarruleta();
       if(result.type){
-        // console.log(result);
-        this.$refs.myLucky.stop(result.type);
+        const luckyNum = result.type-1;
+        this.$refs.myLucky.stop(luckyNum);
       }else{
         this.isLucky = true;
         this.$refs.myLucky.stop(null);
@@ -294,6 +171,7 @@ export default {
       this.$popDialog({content:"",title:this.$t('other_078'),type:5})
     },
     luckyEnd(prize) {
+      // console.log(prize.fonts[0].text);
       let goldNum = parseFloat(prize.fonts[0].text);
       this.winGold = goldNum?goldNum:"lucky";
       // this.winGold = "lucky";
@@ -302,3 +180,127 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.earn {
+  width: 100%;
+  padding-bottom: 40px;
+  -webkit-overflow-scrolling: touch;
+  background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+  .lucky_bg{
+    position: relative;
+    .lucky_rule{
+      width: 120px;
+      padding: 10px 0;
+      position: absolute;
+      top: 0;
+      right: 30px;
+      z-index: 3;
+      border-radius: 10px;
+      color: $font-color-white;
+      background: rgba($color: $home-month-value, $alpha: .7);
+    }
+    .bg_01{
+      height: 700px;
+      position: relative;
+      // background: rgba($color: red, $alpha: .5);
+      .img_01{
+        position: absolute;
+        top: -30px;
+        left: 0;
+      }
+      .lucky_bg2{
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px 60px;
+        box-sizing: border-box;
+        background: transparent;
+      }
+      .lucky_bg3{
+        padding: 20px 60px;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        .lucky_main{
+          width: 594px;
+          height: 594px;
+          position: absolute;
+          top: 40px;
+          left: 50%;
+          transform: translateX(-50%);
+          // background: rgba($color: #000000, $alpha: .5);
+          .custom_lucky{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+          }
+        }
+      }
+    }
+  }
+  .lucky_desc{
+    // p{
+    //   margin-top: 10px;
+    // }
+    .win_text{
+      padding: 20px 0;
+      color: $home-order-title;
+      .content_service{
+        width:100%;
+        padding:0 20px;
+        box-sizing: border-box;
+        span{
+          display: inline-block;
+        }
+        .serve_text{
+          flex-wrap: wrap;
+        }
+        .serveic_line{
+          color: $color-theme;
+          text-decoration: underline;
+        }
+      }
+      img{
+        height: 48px;
+        margin-right: 10px;
+      }
+    }
+  }
+  .award_record{
+    padding: 0 20px;
+    box-sizing: border-box;
+    .record_list{
+      height: 470px;
+      overflow: hidden;
+      border-radius: 20px;
+      .my_swipe{
+        height: 64px;
+        overflow: initial;
+        .award_item{
+          height: 100%;
+        }
+        .aeard_icon{
+          color: $color-theme;
+          img{
+            height: 32px;
+            margin-right: 5px;
+          }
+        }
+        .van-swipe-item{
+          padding: 0 20px;
+          box-sizing: border-box;
+          span{
+            flex: 1;
+          }
+          background: #e4eaf2;
+        }
+        .van-swipe-item:nth-child(even){
+          background: #ecf0f6;
+        }
+      }
+    }
+  }
+}
+</style>

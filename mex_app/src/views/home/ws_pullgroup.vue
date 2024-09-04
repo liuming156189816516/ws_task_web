@@ -11,7 +11,7 @@
                 </div>
             </div> -->
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="@/assets/video/2.mp4" />
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="@/assets/video/1.mp4" />
                 <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
                     <img src="@/assets/images/serveic/play_icon.png" alt="">
                 </div> -->
@@ -45,7 +45,7 @@
                         </div>
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_037')}}</div>
-                            <!-- <div class="task_desc font_20">{{$t('home_110')}}</div> -->
+                            <div class="task_desc font_20">{{$t('home_110')}}</div>
                         </div>
                         <div class="w_f flex-item flex-between flex-align font_24">
                             <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
@@ -85,8 +85,8 @@
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div>
-            <!-- <div class="record_list w_f flex-item flex-dir-c">
-                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_28">
+            <div class="record_list w_f flex-item flex-dir-c">
+                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('tail_003')}}</span>
                     <span class="flex-item flex-center">{{$t('home_031')}}</span>
                     <span class="flex-item flex-center">{{$t('tail_008')}}</span>
@@ -95,7 +95,7 @@
                 <template v-if="pullGroupList&&pullGroupList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                            <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in pullGroupList" :key="idx">
+                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                                 <span class="flex-item">{{ formatTime(item.itime) }}</span>
                                 <span class="flex-item flex-center">{{ item.ser_no }}</span>
                                 <span class="flex-item flex-center" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
@@ -113,7 +113,7 @@
                 <div class="title_top footer_tips w_f flex-item font_24">
                     {{$t('spre_014')}}
                 </div>
-            </div> -->
+            </div>
         </div>
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
@@ -175,7 +175,7 @@ export default {
         this.getGroupMess();
     },
     mounted(){
-        // this.getIncomeList();
+        this.getIncomeList();
         // this.$nextTick(()=>{
         //     const isTips = JSON.parse(localStorage.getItem('step_03'));
         //     if(!isTips){
@@ -388,7 +388,7 @@ export default {
                 // background-size: cover;
                 // background-position: 0 40px;
                 .task_item{
-                    height: 230px;
+                    height: 240px;
                     padding: 16px 0 0 20px;
                     box-sizing: border-box;
                     background: url('../../assets/images/home/task_icon.png') no-repeat;
@@ -415,7 +415,7 @@ export default {
                             line-height: 32px;
                             // letter-spacing: -2px;
                             color: $home-title-03;
-                            margin-right: -20px;
+                            margin-right: -10px;
                         }
                     }
                     .show_account{
@@ -455,6 +455,9 @@ export default {
                         background-color: $home-title-06;
                     }
                 }
+                .task_item:nth-child(1){
+                    height: 260px;
+                }
             }
         }
         .record_legend{
@@ -466,7 +469,6 @@ export default {
                 padding: 12.2px 0 12.2px 18.82px;
                 border-radius: 20px;
                 box-sizing: border-box;
-                line-height: 34px;
                 font-style: italic;
                 color: $home-title-19;
                 background: $font-color-white;
@@ -544,9 +546,9 @@ export default {
                 }
             }
             .footer_tips{
+                height: auto;
                 font-style: italic;
                 padding: 16px 20px;
-                box-sizing: border-box;
                 color: $home-title-06;
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;

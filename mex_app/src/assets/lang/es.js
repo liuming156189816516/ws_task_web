@@ -99,7 +99,7 @@ export default {
     home_107:"Número de tarea",
     home_108:"Estado de la tarea",
     home_109:"Importar contactos a la libreta de direcciones del teléfono móvil",
-    home_110:'¡Haga clic en el botón "Importar" a la derecha para agregar la información de contacto proporcionada por el sistema a la libreta de direcciones del sistema!',
+    home_110:'Una cuenta de WhatsApp solo puede enviar una tarea una vez al día;de lo contrario, no se liquidará normalmente',
     home_111:"Ver número de contacto",
     home_112:"importar",
     home_113:"Enviar enlace",

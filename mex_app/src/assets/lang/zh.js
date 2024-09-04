@@ -129,7 +129,7 @@ export default {
     spre_009:"温馨提示：",
     spre_010:"如果您有任何疑问，请联系",
     spre_011:"在线客服",
-    spre_012:"Bonus",
+    spre_012:"奖金",
     spre_013:"Invite your friends quickly to earn cash!",
     spre_014:"Task time is based on the start time of the task ,the system currently retains records for up to 3 months",
     spre_015:"Share your link",

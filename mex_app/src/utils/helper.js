@@ -126,6 +126,12 @@ const Helper = {
 		return this.judgeClient() == "Android"
 	},
 	
+	isMobileBrowser() {
+		const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		// 正则表达式匹配常见的移动设备标识符
+		return /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+	},
+	
 	isSimulator() {
 		const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 		return /iPhone|iPad|iPod|Android/i.test(userAgent);

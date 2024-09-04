@@ -37,10 +37,6 @@
 				<div class="title_item">
 					<van-tag type="warning" /> {{$t('pay_010',{value:withdraw_cash})}}
 				</div>
-				<!-- <div class="title_item" style="color:#F52C2C;">
-					<van-tag type="warning" />
-					{{ $t('pay_011') }}
-				</div> -->
 				<div class="title_item">
 					<van-tag type="warning" />
 					{{ $t('pay_025',{value:withdraw_times}) }}
@@ -500,15 +496,6 @@ export default {
 			padding-left: 20px;
 			padding-bottom: 20px;
 			box-sizing: border-box;
-			.van-tag {
-				width: 8px;
-				height: 8px;
-				padding: 0;
-				margin: -8px 5px 0 0;
-				line-height: 0;
-				border-radius: 50%;
-				background-color: #000;
-			}
 			.trends_content {
 				color: #ee0a24;
 				font-weight: 600;

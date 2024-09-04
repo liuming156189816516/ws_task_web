@@ -58,11 +58,11 @@
                     <div class="w_f flex-item flex-align">
                         <img src="@/assets/images/serveic/telege_icon.png" alt="">
                         <div>
-                            <p class="font_28" style="font-weight: bold;">{{$t('serv_003')}}</p>
+                            <p class="font_28" style="font-weight: bold;">{{$t('spre_002')}}</p>
                             <p class="font_24">{{$t('serv_004')}}</p>
                         </div>
                     </div>
-                    <van-button class="font_28" type="primary" @click="contactService(1)">{{$t('serv_005')}}</van-button>
+                    <van-button class="font_28" type="primary" @click="contactService(1)">{{$t('spre_001')}}</van-button>
                 </div>
             </div>
         </div>
@@ -311,7 +311,7 @@ export default {
                     width: max-content;
                     height: 32px;
                     flex-shrink: 0;
-                    padding: 0 20px;
+                    padding: 0 14px;
                     font-size: 14px;
                     line-height: 32px;
                     border-radius: 100px;

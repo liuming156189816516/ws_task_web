@@ -59,6 +59,14 @@ export const getruletainfo = (param) => {
 export const doblarruleta = (param) => {
     return request({url: '/account/doblarruleta',method: 'post',data:param})
 }
+export const getsigninfo = (param) => {
+    return request({url: '/account/getsigninfo',method: 'post',data:param})
+}
+export const dosign = (param) => {
+    return request({url: '/account/dosign',method: 'post',data:param})
+}
+
+
 
 
 

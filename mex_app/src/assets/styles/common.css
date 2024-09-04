@@ -573,4 +573,13 @@
   border-radius: 26px;
   font-size: 32px;
 }
+.van-tag {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  margin: -8px 5px 0 0;
+  line-height: 0;
+  border-radius: 50%;
+  background-color: #000;
+}
 

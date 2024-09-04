@@ -313,7 +313,7 @@ export default {
         },
         jumpLucky(idx){
             const activRouter = ['/luckyWheel','/dailySign'];
-            // this.$router.push(activRouter[idx]);   
+            this.$router.push(activRouter[idx]);   
         },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);

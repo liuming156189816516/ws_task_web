@@ -12,9 +12,10 @@
       position: absolute;
       top: 0;
       right: 30px;
+      z-index: 3;
       border-radius: 10px;
       color: $font-color-white;
-      background: $home-month-value;
+      background: rgba($color: $home-month-value, $alpha: .7);
     }
     .bg_01{
       height: 700px;
@@ -64,13 +65,24 @@
     .win_text{
       padding: 20px 0;
       color: $home-order-title;
+      .content_service{
+        width:100%;
+        padding:0 20px;
+        box-sizing: border-box;
+        span{
+          display: inline-block;
+        }
+        .serve_text{
+          flex-wrap: wrap;
+        }
+        .serveic_line{
+          color: $color-theme;
+          text-decoration: underline;
+        }
+      }
       img{
         height: 48px;
-        margin-right: 8px;
-      }
-      .serveic_line{
-        color: $color-theme;
-        text-decoration: underline;
+        margin-right: 10px;
       }
     }
   }
@@ -115,7 +127,7 @@
     <div class="custom_head">
       <page-header :title="$t('home_124')" :show-icon="true" :bgColor="true" />
       <div class="lucky_bg w_f">
-        <div class="lucky_rule flex-item flex-align flex-center font_32">rules</div>
+        <div class="lucky_rule flex-item flex-align flex-center font_32" @click="showRule">{{$t('home_117')}}</div>
         <div class="bg_01">
           <img class="img_01" src="../../assets/images/lucky/bg_01.png" alt="">
           <div class="lucky_bg2">
@@ -138,11 +150,22 @@
           </div>
         </div>
       </div>
-      <div class="lucky_desc flex-item flex-align flex-center flex-dir-c font_32">
-        <!-- <p>幸运转盘剩余次数：5</p> -->
-        <div class="win_text flex-item flex-align flex-center">
-          <img src="../../assets/images/win_icon.png" alt="" srcset="">
-          {{$t('other_075',{value:10000})}},<span class="serveic_line">{{$t('serv_005')}}</span>{{$t('other_074')}}
+      <div class="lucky_desc flex-item flex-align flex-center flex-dir-c font_28">
+        <div class="win_text flex-item flex-align flex-center" v-if="winGold">
+          <template v-if="winGold=='lucky'">
+            <div class="content_service flex-item flex-align">
+              <img src="../../assets/images/win_icon.png">
+              <div class="serve_text flex-item" @click="$Helper.globalSupport()">
+                <span class="flex-item">{{$t('other_077')}}<span class="serveic_line flex-item">{{$t('serv_005')}}</span></span>
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <div class="content_service flex-item flex-align">
+              <img src="../../assets/images/win_icon2.png">
+              {{$t('other_075',{value:winGold})}}
+            </div>
+          </template>
         </div>
       </div>
       <div class="award_record w_f">
@@ -173,8 +196,10 @@ export default {
   components: { PageHeader },
   data() {
     return {
+      winGold:null,
       index: null,
       isLucky:true,
+      showWin:false,
       blocks: [
         {
           // padding: "40px", //可旋转区域与转盘边缘的距离
@@ -193,7 +218,7 @@ export default {
       prizes: [
         { fonts: [{ text:this.$t('pay_034',{value:50}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         { fonts: [{ text:this.$t('pay_034',{value:200}), top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:"",top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/win_icon.png"),top: "25%",width:"32px",height:"32px"}]},
+        { fonts: [{ text:this.$t('other_087'),top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/win_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         { fonts: [{ text:this.$t('pay_034',{value:1000}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         { fonts: [{ text:this.$t('pay_034',{value:1800}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         { fonts: [{ text:this.$t('pay_034',{value:5000}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
@@ -236,14 +261,17 @@ export default {
     }
   },
   created() {
-    console.log(this.prizes[1].fonts);
     this.initLucky();
-    // console.log(this.winNotis);
   },
   methods: {
     initLucky(){
       getruletainfo().then(res=>{
-        // this.isLucky = res.flag||false;
+        // console.log(res);
+        this.isLucky = res.flag||false;
+        if(res.type){
+          let goldNum = parseFloat(this.prizes[res.type].fonts[0].text);
+          this.winGold = goldNum?goldNum:"lucky";
+        }
       })
     },
     async startLucky() {
@@ -254,20 +282,20 @@ export default {
       this.$refs.myLucky.play();
       const result = await doblarruleta();
       if(result.type){
-        console.log(result);
+        // console.log(result);
         this.$refs.myLucky.stop(result.type);
       }else{
         this.isLucky = true;
         this.$refs.myLucky.stop(null);
       }
-      // setTimeout(() => {
-      //   const index = 0;
-      //   this.$refs.myLucky.stop(index);
-      // }, 3000);
     },
-    // 抽奖结束会触发end回调
+    showRule(){
+      this.$popDialog({content:"",title:this.$t('other_078'),type:5})
+    },
     luckyEnd(prize) {
-      console.log(prize);
+      let goldNum = parseFloat(prize.fonts[0].text);
+      this.winGold = goldNum?goldNum:"lucky";
+      // this.winGold = "lucky";
       this.isLucky = true;
     }
   }

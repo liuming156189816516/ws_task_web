@@ -268,7 +268,7 @@ const Helper = {
 		decryptedStr = JSON.parse(Global.Toolkit.strReplaceCtrChar(decryptedStr));
 		return decryptedStr;
 	},
-	randomString(e) {    
+	randomString(e) {
 		var e = e || 32;
 		var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678",
 		a = t.length,
@@ -283,7 +283,7 @@ const Helper = {
 		const randomString = length => Array.from({ length }, () => charset[Math.floor(Math.random() * charset.length)]).join('');
 		if(type==1){
 			for (let i = 0; i < count; i++) {
-				let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,2);
+				let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,3);
 				let newObj = {name:randomString(6),desc:"Received",goldNum:randomNum}
 				result.push(newObj)
 			}

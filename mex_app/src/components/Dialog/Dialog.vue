@@ -45,11 +45,13 @@
                         <p class="mb_24">{{restLanuage('home_066')}}</p>
                         <p>{{restLanuage('home_067')}}</p>
                     </div>
-                    <div class="rule_desc rule_desc_5 font_22" v-if="type==5">
-                        <p>{{restLanuage('home_068')}}</p>
-                        <p class="mg_24">{{restLanuage('home_069')}}</p>
-                        <p class="mb_24">{{restLanuage('home_070')}}</p>
-                        <p>{{restLanuage('home_071')}}</p>
+                    <div class="rule_desc rule_desc_5 font_28" v-if="type==5">
+                        <p>{{restLanuage('other_081')}}</p>
+                        <p class="mg_24">{{restLanuage('other_082')}}</p>
+                        <p>{{restLanuage('other_083')}}</p>
+                        <!-- <p class="mg_24">{{restLanuage('other_081')}}</p>
+                        <p class="mb_24">{{restLanuage('other_082')}}</p>
+                        <p>{{restLanuage('other_083')}}</p> -->
                     </div>
                     <div class="rule_desc w_f flex-item flex-between font_22" style="flex-wrap: wrap;" v-if="type==7">
                         <div class="task_list flex-item flex-center" v-for="(item,idx) in content" :key="idx">

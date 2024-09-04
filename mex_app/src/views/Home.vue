@@ -8,7 +8,7 @@
                 {{$t('mine_009')}}
             </div>
         </div>
-        <div class="top_fles w_f" :class="{'top_fixed':filexTop}">
+        <div class="top_fles w_f" :class="{'top_fixed':filexTop&&$Helper.checkApkBag()}">
             <Sgin-header />
         </div>
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
@@ -305,8 +305,7 @@ export default {
     height: 100%;
     overflow-y: auto;
     position: relative;
-    padding-bottom: 180px;
-    // background: $color-theme;
+    padding-bottom: 160px;
     background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
     // background: url('../assets/images/home/bg_img.png') no-repeat;
     // background-size: cover;

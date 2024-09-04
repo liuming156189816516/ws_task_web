@@ -17,11 +17,11 @@
 </style>
 <template>
     <div class="home_warp w_f" ref="warpBox" @click="isIndex=false">
-        <div class="down_app w_f">
+        <!-- <div class="down_app w_f">
             <span class="close_btn flex-item"></span>
             <div></div>
             <div></div>
-        </div>
+        </div> -->
         <Sgin-header />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">

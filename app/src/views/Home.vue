@@ -418,7 +418,7 @@ export default {
             flex-direction: column;
             box-sizing: border-box;
             .my_swipe{
-                width: 100vw;
+                width: calc(100vw - 40px);
                 height: 300px;
                 border-radius: 10px;
                 img{

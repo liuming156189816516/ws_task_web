@@ -200,7 +200,7 @@ const Helper = {
 	//安卓设备
 	checkApkBag(type) {
 		if(type){
-			return this.checkBrowser()&&this.judgeClient() == "Android"?0:1;
+			return !this.checkBrowser()&&this.judgeClient() == "Android"?1:0;
 		}else{
 			return this.checkBrowser()&&this.judgeClient() == "Android";
 		}

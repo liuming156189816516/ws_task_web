@@ -269,7 +269,8 @@ export default {
         // console.log(res);
         this.isLucky = res.flag||false;
         if(res.type){
-          let goldNum = parseFloat(this.prizes[res.type].fonts[0].text);
+          const luckyNum = res.type-1;
+          let goldNum = parseFloat(this.prizes[luckyNum].fonts[0].text);
           this.winGold = goldNum?goldNum:"lucky";
         }
       })

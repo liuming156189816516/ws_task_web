@@ -122,16 +122,11 @@ export default {
 				}
 				console.log(this.$Helper.checkBrowser());
 				if(!this.$Helper.checkBrowser()){
-					console.log();
-					
 					uniFun.postMessage({data:{type:"apk",uid:localStorage.getItem('uid')}});
 				}
 				this.isLoading = false;
 			}).catch(error => {
 				this.isLoading= false
-				if (window.location.host == 'fcwk.dpqcblzs.com' || window.location.host == 'fcwk.hnjsjzdl.com' || window.location.host == 'www.mifengxj.com') {
-					this.qrcodeImg.show = true;
-				}
 				Toast.clear();
 			});
 		},

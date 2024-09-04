@@ -1,5 +1,5 @@
 <template>
-    <div class="bottom-box" :class="{isPcBottom: isPc}">
+    <div class="bottom-box">
 		<div class="six-tabbar">
 			<div class="six-tabbar-item"  v-for="(item, index) in tabBarList" :key="index" @click="goToPage(item.path)" @click.stop>
 				<div class="item_bg">
@@ -78,14 +78,15 @@ export default {
 </script>
 <style lang='scss'>
 .bottom-box {
+	width: 750px;
+	height: 98px;
+	z-index: 99;
 	position: fixed;
-	left: 0;
+	left: 50%;
 	bottom: 0;
 	z-index: 103;
 	box-sizing: content-box;
-	width: 100%;
-	height: 98px;
-	z-index: 99;
+	transform: translateX(-50%);
 	box-shadow: 10px 10px 10px 10px #f2f2f2;
 	-moz-box-shadow: 10px 10px 10px 10px #f2f2f2;
 	border-top: 1px solid #E6E6E6;
@@ -209,7 +210,7 @@ export default {
 	}
 }
 .isPcBottom{
-	max-width: 1000px;
+	max-width: 750px;
 	margin: 0 auto;
 	left: 50%;
 	transform: translateX(-50%);

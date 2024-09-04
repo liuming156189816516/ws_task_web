@@ -1,5 +1,27 @@
+<style lang="scss" scoped>
+    .down_app{
+        height: 92px;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(90deg, #ff9600, #ff013d);
+        .close_btn{
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            top: -16px;
+            left: -16px;
+            border-radius: 50%;
+            background: rgba($color: hsl(0, 0%, 0%), $alpha: .5);
+        }
+    }
+</style>
 <template>
     <div class="home_warp w_f" ref="warpBox" @click="isIndex=false">
+        <div class="down_app w_f">
+            <span class="close_btn flex-item"></span>
+            <div></div>
+            <div></div>
+        </div>
         <Sgin-header />
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">
@@ -263,7 +285,7 @@ export default {
         },
         jumpLucky(idx){
             const activRouter = ['/luckyWheel','/dailySign'];
-            // this.$router.push(activRouter[idx]);   
+            this.$router.push(activRouter[idx]);   
         },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);

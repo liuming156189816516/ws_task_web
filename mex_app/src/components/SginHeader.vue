@@ -42,7 +42,7 @@ export default {
     .login_head{
         padding: 10px 20px;
         box-sizing: border-box;
-        background: $home-eart-long;
+        background: rgba($color: $home-eart-long, $alpha: .5);
         .le_logn{
             height: 60px;
         }

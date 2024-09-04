@@ -47,8 +47,11 @@ service.interceptors.response.use(res => {
           confirmButtonText: i18n.t('other_003'),
         }).then(() => {
           window.localStorage.clear();
+          window.localStorage.removeItem('uid');
           window.localStorage.removeItem('token');
-          window.likevm.$router.replace('/home');
+          window.localStorage.removeItem('account');
+          window.localStorage.removeItem('inviteCode');
+          window.likevm.$router.replace('/login');
         })
       }else{
         vant.Toast.fail(data.msg);

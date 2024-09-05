@@ -184,15 +184,6 @@ export default {
             this.$store.dispatch('User/actionReport',1)
             this.taskOption= this.$Helper.defaultOption();
         }
-        window.addEventListener('message', function(event) {
-            this.appLogin = event.data;
-            // console.log('Message received from UniApp:', event.data);
-        })
-        // const homeTop = this.$refs.warpBox;
-        // homeTop.scrollTo({
-        //     top: 0,
-        //     behavior: "smooth", //auto-自动滚动 instant-瞬间滚动 smooth-平滑滚动
-        // })
     },
     methods: {
         handleScroll(){

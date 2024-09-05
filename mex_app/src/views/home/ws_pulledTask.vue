@@ -211,6 +211,7 @@ export default {
             if(!this.group_link) return this.$toast(this.$t('other_001',{value:this.$t('home_036')})); 
             this.isLoading=true;
             submitgrouplinktask({invite_link:this.group_link}).then(res =>{
+                this.isShow = true;
                 this.isLoading=false;
                 let result = this.$Helper.aesDecrptHost(res);
                 if(result.code) return;

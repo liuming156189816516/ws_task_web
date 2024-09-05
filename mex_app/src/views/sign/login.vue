@@ -2,7 +2,7 @@
 	<div class="login_warp" @click="isIndex=false">
 		<!-- <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header> -->
 		<div class="l_value" @click="showChangeBtn" @click.stop>
-			<span>{{ viewLang() }}</span>
+			<span>{{ viewLang }}</span>
 			<img class="down_icon" src="@/assets/images/home/xiala.png">
 			<van-transition name="fade-up">
 				<div class="down_list" :class="isIndex?'active_open':'active_close'">
@@ -77,6 +77,10 @@ export default {
 	computed: {
         langOptions(){
             return this.$Helper.langOptions();
+        },
+        viewLang() {
+            let lang = this.$Helper.langOptions().find(item => item.lang == this.langIdx);
+            return lang.name;
         }
     },
 	methods: {
@@ -170,10 +174,6 @@ export default {
 		onChangeType(row){
 			this.langIdx=row.lang;
 			this.$Helper.initLanguage(row.lang);
-		},
-		viewLang(){
-			let lang = this.langOptions.find(item=>item.lang == this.langIdx);
-			return lang.name
 		}
 	}
 };

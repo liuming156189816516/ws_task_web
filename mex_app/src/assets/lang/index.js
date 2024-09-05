@@ -10,12 +10,12 @@ const messages = {
 	en: {
 		...enCN
 	},
+	es: {
+		...esCN
+	},
 	zh: {
 		...zhCN
 	},
-	es: {
-		...esCN
-	}
 }
 const i18n = new VueI18n({
 	locale: Cookies.get('language') || "es", // 设置默认语言

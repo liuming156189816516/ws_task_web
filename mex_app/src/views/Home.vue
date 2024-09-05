@@ -308,7 +308,7 @@ export default {
     // background-size: cover;
     -webkit-overflow-scrolling: touch;
      .down_app{
-        height: 92px;
+        height: 80px;
         overflow: hidden;
         position: relative;
         padding: 14px 20px 14px 20px;

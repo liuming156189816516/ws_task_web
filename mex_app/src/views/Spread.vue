@@ -2,7 +2,7 @@
     <div class="spread_warp" ref="warpBox" @scroll="handleScrolStop">
         <page-header :title="$t('home_045')" :noBg="false" :bgColor="false" :showBack="false" />
         <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-            <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:140px;" src="../assets/video/2.mp4" />
+            <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:140px;" src="../assets/video/3.mp4" />
             <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
                 <img src="@/assets/images/serveic/play_icon.png" alt="">
             </div> -->

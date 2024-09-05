@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="l_value" @click="showChangeBtn" @click.stop>
-                    <span class="font_28">{{ viewLang() }}</span>
+                    <span class="font_28">{{ viewLang }}</span>
                     <img class="down_icon" src="../assets/images/home/down_arrow_white.png">
                     <van-transition name="fade-up">
                         <div class="down_list" :class="isIndex?'active_open':'active_close'">
@@ -162,6 +162,10 @@ export default {
         },
         langOptions(){
             return this.$Helper.langOptions();
+        },
+        viewLang() {
+            let lang = this.$Helper.langOptions().find(item => item.lang == this.langIdx);
+            return lang.name
         }
     },
     created(){
@@ -265,10 +269,6 @@ export default {
             }else{
                 this.$router.push(`${path}?id=${row.task_info_id}`);
             }
-        },
-        viewLang() {
-            let lang = this.langOptions.find(item => item.lang == this.langIdx);
-            return lang.name
         },
         jumpLink(path) {
             if (!path) return;

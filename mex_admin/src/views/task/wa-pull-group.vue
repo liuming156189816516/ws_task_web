@@ -183,7 +183,7 @@ export default {
       return ["","开始任务","进行中","结算中","已结束"]
     },
     taskOption(){
-      return ["","挂机","拉群","拉粉"]
+      return ["","拉群","拉粉"]
     },
     taskRules() {
       return {

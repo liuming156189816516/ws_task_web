@@ -1,7 +1,7 @@
 <template>
     <div class="bottom-box">
 		<div class="six-tabbar">
-			<div class="six-tabbar-item"  v-for="(item, index) in tabBarList" :key="index" @click="goToPage(item.path)" @click.stop>
+			<div class="six-tabbar-item"  v-for="(item, index) in tabBarList" :key="index" @click.stop="goToPage(item.path)">
 				<div class="item_bg">
 					<img class="icon-cl" :class="{'animate__animated animate__rotateIn': $route.path.indexOf(item.path) > -1}" :src="$route.path.includes(item.path)?item.active:item.inactive" alt="icons" />
 				</div>
@@ -66,7 +66,7 @@ export default {
     },
     methods: {
         goToPage(path) {
-			if (this.$route.path === path)return;
+			if (this.$route.path === path) return;
 			if(path !== '/home'&&!getToken()){
 				// this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true})
 				return this.$router.push("/login");

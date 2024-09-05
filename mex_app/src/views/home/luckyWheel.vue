@@ -4,7 +4,7 @@
     <div class="custom_head w_f">
       <page-header :title="$t('home_124')" :show-icon="true" :bgColor="true" />
       <div class="lucky_bg w_f">
-        <!-- <div class="lucky_rule flex-item flex-align flex-center font_32" @click="showRule">{{$t('home_117')}}</div> -->
+        <div class="lucky_rule flex-item flex-align flex-center font_32" @click="showRule">{{$t('home_117')}}</div>
         <div class="bg_01 w_f">
           <img class="img_01 w_f" src="../../assets/images/lucky/bg_01.png" alt="">
           <div class="lucky_bg2 w_f">

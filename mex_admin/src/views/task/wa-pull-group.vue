@@ -43,6 +43,11 @@
           <el-table-column prop="app_account" label="用户账号" minWidth="100" />
           <el-table-column prop="account" label="拉群账号" width="140" />
           <el-table-column prop="ad_account" label="营销账号" width="120" />
+          <el-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
+            <template slot-scope="scope">
+              {{taskOption[scope.row.task_type]||"-" }}
+            </template>
+          </el-table-column>
           <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
             <template slot="header">
               <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
@@ -59,13 +64,13 @@
               <el-tag size="small" :type="scope.row.status == 2 ? 'success' : scope.row.status == 3 ? 'danger' : ''"> {{ statusOptions[scope.row.status] }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="members" label="群成员" minWidth="120" show-overflow-tooltip>
+          <el-table-column prop="members" label="群成员" minWidth="120" show-overflow-tooltip />
             <!-- <template slot-scope="scope">
               <el-tooltip class="item" effect="dark" :content="scope.row.members" placement="top">
                 <div style="width: max-content;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.members||"-" }}</div>
               </el-tooltip>
             </template> -->
-          </el-table-column>
+          <!-- </el-table-column> -->
           <!-- <el-table-column prop="members" label="群成员" minWidth="120">
             <template slot-scope="scope">
               <el-popover width="250" placement="top-start" trigger="hover" :content="scope.row.members">
@@ -89,7 +94,13 @@
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column prop="reason" label="原因" minWidth="100" />
+          <el-table-column prop="reason" label="原因" minWidth="140">
+            <template slot-scope="scope">
+              <el-tooltip class="item" effect="dark" :content="scope.row.reason" placement="top">
+                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.reason||"-" }}</div>
+              </el-tooltip>
+            </template>
+          </el-table-column>
           <el-table-column prop="itime" :label="$t('sys_c008')" minWidth="120">
             <template slot-scope="scope">
               <div>{{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}</div>
@@ -170,6 +181,9 @@ export default {
   computed: {
     statusOptions(){
       return ["","开始任务","进行中","结算中","已结束"]
+    },
+    taskOption(){
+      return ["","挂机","拉群","拉粉"]
     },
     taskRules() {
       return {

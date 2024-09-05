@@ -83,6 +83,7 @@ export default {
     home_042:"<span style='color:#ff013d;'>为了顺利完成任务，推荐使用chrome浏览器</span>。",
     home_043:"下载Chrome",
     home_044:"拉群任务",
+    home_056:"Invite Now",
     home_064:"1、每天最多只能提现{value}次",
     home_065:"2、只有当您的金币达到 {value} 或者以上时，才可以申请提现",
     home_057:"立即寻找",

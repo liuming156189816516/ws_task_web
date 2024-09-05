@@ -117,7 +117,7 @@ export default {
     home_131:"Iniciar sesión ahora",
     home_132:"Iniciar sesión completado",
     home_133:"Registrarse...",
-    home_134:"La tarea de atraer fans.",
+    home_134:"La tarea de atraer fans",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

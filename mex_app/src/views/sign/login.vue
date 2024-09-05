@@ -72,7 +72,7 @@ export default {
 			this.isBottom = true;
 		}
 		this.$store.dispatch('User/actionReport',3)
-		// this.userAccount();
+		this.userAccount();
     },
 	computed: {
         langOptions(){

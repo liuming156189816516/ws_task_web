@@ -2,10 +2,12 @@
 	<div id="app" ref="appBox" :class="[hasTabBar ? 'set-padding-top' : '', isPc?'isPc': '']">
 		<div v-if="!showNavBar" class="mobile_head_top"></div>
 		<div :class="!showNavBar?'app_top_continer':'app_continer'">
+			<!-- <transition :name="transitionName"> -->
 			<keep-alive :include="keepAliveNames">
-				<router-view></router-view>
+				<router-view />
 			</keep-alive>
-			<router-view name="tabBar"></router-view>
+			<!-- </transition> -->
+			<router-view name="tabBar" />
 			<float-ball v-if="assistiveTouch"></float-ball>
 		</div>
 		<!-- <van-overlay :show="global.isLogin" style="height:100%;overflow-y: auto;">
@@ -29,7 +31,6 @@
 import { mapState } from 'vuex';
 import { logout } from '@/api/login';
 import FloatBall from './components/FloatBall';
-import preLoad from './core/PreLoadProxy';
 // import login from './views/sign/login.vue';
 // import register from './views/sign/register.vue';
 export default {
@@ -43,13 +44,14 @@ export default {
 	},
 	data() {
 		return {
-			title: '',
+			title:"",
 			device:"",
 			isLoading: false,
 			hasTabBar: false,
 			showNavBar: true,
-			transitionName: '',
+			transitionName:"",
 			keepAliveNames: ['home'],
+			whiteOption:['/home','/spread','/service','/mine'],
 			assistiveTouch: sessionStorage.getItem('plus_ready') && sessionStorage.getItem('plus_ready') === '1',
 			isPc: !window.navigator.userAgent.match(
                 /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
@@ -64,7 +66,15 @@ export default {
 	},
 	watch: {
 		'$route'(to, from) {
-		// 处理路由变化后的逻辑
+			// 处理路由变化后的逻辑
+			// if (!this.whiteOption.includes(from.path)) {
+			// 	// this.transitionName = 'slide-right'
+			// }
+			// // if (!this.whiteOption.includes(from.path)) {
+			// if (from.path) {
+			// 	// console.log('即将进入页面', to.path);
+			// 	this.transitionName = 'slide-right'
+			// }
 			if(to.path == "/home"||to.path == "/spread"){
 				this.customHeader("#31acf2");	
 			}else{
@@ -152,15 +162,10 @@ body,
 	}
 }
 
-img {
-	max-width: 100%;
-}
-
-.set-padding-top {
-	padding-bottom: 120px;
-}
-
 #app {
+	max-width: 750px;
+	margin: 0 auto;
+	overflow: hidden;
 	font-family: 'Microsoft YaHei';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -169,150 +174,7 @@ img {
 	display: flex;
 	flex-direction: column;
 }
-#app{
-	max-width: 750px;
-	margin: 0 auto;
-	overflow: hidden;
-}
-//全局唐朝
-.g-notice-wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
 
-	&.single {
-		.tit {
-			font-size: 36px;
-			font-weight: 500;
-			color: rgba(51, 51, 51, 1);
-			line-height: 50px;
-			text-align: center;
-			padding: 60px 0 20px !important;
-		}
-	}
-
-	.wrapperInner {
-		width: 670px;
-		padding: 10px 65px;
-		background: #ffffff;
-		border-radius: 16px;
-		position: relative;
-
-		.close {
-			width: 88px;
-			height: 88px;
-			position: absolute;
-			left: 50%;
-			margin-left: -44px;
-			bottom: -160px;
-		}
-
-		.tit {
-			font-size: 36px;
-			font-weight: 500;
-			color: rgba(51, 51, 51, 1);
-			text-align: center;
-			padding: 20px 0 45px;
-		}
-
-		.desc-tit {
-			font-size: 30px;
-			text-align: center;
-			color: rgba(102, 102, 102, 1);
-			line-height: 150px;
-			font-weight: bold;
-		}
-
-		.desc {
-			height: 250px;
-			overflow-y: auto;
-			font-size: 30px;
-			font-weight: 400;
-			color: rgba(102, 102, 102, 1);
-			line-height: 1.4;
-		}
-
-		.btm {
-			display: flex;
-			align-items: center;
-			margin-top: 61px;
-			padding-bottom: 35px;
-		}
-
-		.btn {
-			width: 250px;
-			height: 88px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			border-radius: 44px;
-			font-size: 36px;
-		}
-
-		.btn-border {
-			border: 1px solid rgba(153, 153, 153, 1);
-			color: #333333;
-		}
-
-		.btn-primary {
-			border: 1px solid #0e63ff;
-			background: #0e63ff;
-			color: #fff;
-			margin-left: 30px;
-		}
-	}
-}
-.van-icon-location-acc {
-	&:after {
-		content: '';
-		width: 0.36rem;
-		height: 0.382rem;
-		background-image: url('./assets/images/sign/uname.png');
-		background-repeat: no-repeat;
-		background-size: contain;
-		background-position: center center;
-		display: block;
-	}
-}
-.van-icon-location-pwd {
-	&:after {
-		content: '';
-		width: 0.36rem;
-		height: 0.4rem;
-		background-image: url('./assets/images/sign/password.png');
-		background-repeat: no-repeat;
-		background-size: contain;
-		background-position: center center;
-		display: block;
-	}
-}
-.van-icon-location-promo {
-	&:after {
-		content: '';
-		width: 0.36rem;
-		height: 0.4rem;
-		background-image: url('./assets/images/sign/promo_code.png');
-		background-repeat: no-repeat;
-		background-size: contain;
-		display: block;
-	}
-}
-.van-icon-location-valid {
-	&:after {
-		content: '';
-		width: 0.36rem;
-		height: 0.4rem;
-		background-image: url('./assets/images/sign/valid_code.png');
-		background-repeat: no-repeat;
-		background-size: contain;
-		display: block;
-	}
-}
-
-.van-empty__description {
-	margin-top: 0 !important;
-}
 .slide-right-enter-active,
 .slide-right-leave-active,
 .slide-left-enter-active,
@@ -457,5 +319,4 @@ img {
     border-color: $color-theme;
   }
 }
-
 </style>

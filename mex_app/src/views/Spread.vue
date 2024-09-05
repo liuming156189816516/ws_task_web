@@ -217,15 +217,11 @@ export default {
         },
         copySuccess(){
             this.$toast(`${this.$t("other_044")}`);
-            this.$store.dispatch('User/actionReport',14);
+            // this.$store.dispatch('User/actionReport',14);
         },
         copCodeSuccess(){
             this.$toast(`${this.$t("other_044")}`);
-            this.$store.dispatch('User/actionReport',15);
-        },
-        showRule(){
-            this.$store.dispatch('User/actionReport',13);
-            this.$popDialog({ content: this.help_url, title:"Millionaire Task Rules", type: 5 })
+            // this.$store.dispatch('User/actionReport',15);
         },
         formatTime(time) {
             return formatTime(time);

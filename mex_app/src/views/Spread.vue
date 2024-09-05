@@ -128,7 +128,7 @@ export default {
             iframeSrc:'',
             allIncome:"",
             team_size:"",
-            invit_link:"http://13.229.25.219:8096",
+            invit_link:"https://www.beoyyo.com",
             today_rebate:0,
             total_rebate:0,
             yesterday_rebate:0,

@@ -98,7 +98,7 @@
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                                 <span class="flex-item">{{ formatTime(item.itime) }}</span>
                                 <span class="flex-item flex-center">{{ item.ser_no }}</span>
-                                <span class="flex-item flex-center" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}" @click="showResult(item)">{{statusOption[item.status]}}</span>
+                                <span :class="['flex-item flex-center',item.status==4?'record_click':'']" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}" @click="showResult(item)">{{statusOption[item.status]}}</span>
                                 <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
                             </div>
                         </van-list>
@@ -535,6 +535,9 @@ export default {
             }
             .record_item:last-child{
                 border-bottom: 1px solid transparent;
+            }
+            .record_click{
+                text-decoration: underline;
             }
             .empty_box{
                 height: 364px;

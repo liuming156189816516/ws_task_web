@@ -1,17 +1,17 @@
 
 <template>
-  <div class="earn">
-    <div class="custom_head">
+  <div class="earn w_f">
+    <div class="custom_head w_f">
       <page-header :title="$t('home_124')" :show-icon="true" :bgColor="true" />
       <div class="lucky_bg w_f">
-        <div class="lucky_rule flex-item flex-align flex-center font_32" @click="showRule">{{$t('home_117')}}</div>
-        <div class="bg_01">
-          <img class="img_01" src="../../assets/images/lucky/bg_01.png" alt="">
-          <div class="lucky_bg2">
-            <img class="img_02" src="../../assets/images/lucky/bg_02.png" alt="">
+        <!-- <div class="lucky_rule flex-item flex-align flex-center font_32" @click="showRule">{{$t('home_117')}}</div> -->
+        <div class="bg_01 w_f">
+          <img class="img_01 w_f" src="../../assets/images/lucky/bg_01.png" alt="">
+          <div class="lucky_bg2 w_f">
+            <img class="img_02 w_f" src="../../assets/images/lucky/bg_02.png" alt="">
           </div>
           <div class="lucky_bg3 w_f">
-            <img class="img_03" src="../../assets/images/lucky/bg_03.png" alt="">
+            <img class="img_03 w_f" src="../../assets/images/lucky/bg_03.png" alt="">
             <div class="lucky_main w_f">
               <LuckyWheel
                 class="custom_lucky"
@@ -77,7 +77,6 @@ export default {
       index: null,
       isLucky:true,
       showWin:false,
-      task_type:null,
       blocks: [
         {
           // padding: "40px", //可旋转区域与转盘边缘的距离
@@ -144,9 +143,7 @@ export default {
   methods: {
     initLucky(){
       getruletainfo().then(res=>{
-        console.log(res);
-        this.task_type = res.msg_type;
-        console.log(this.task_type);
+        // console.log(res);
         this.isLucky = res.flag||false;
         if(res.type){
           const luckyNum = res.type-1;
@@ -156,11 +153,8 @@ export default {
       })
     },
     async startLucky() {
-      if(!this.isLucky&&this.task_type==1){
+      if(!this.isLucky){
         return this.$toast(this.$t('other_076'))
-      }
-      if(!this.isLucky&&this.task_type==2){
-        return this.$toast(this.$t('other_089'))
       }
       this.isLucky = false;
       this.$refs.myLucky.play();

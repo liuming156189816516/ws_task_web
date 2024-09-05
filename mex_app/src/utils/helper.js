@@ -283,13 +283,15 @@ const Helper = {
 		const result = [];
 		let seedArry = [3,4,5,6,7,8,9];
 		let winArry = [1800,50,1000,600,5000,200];
+		const probabilities = [0.1,0.3,0.1,0.2,0.1,0.2];
 		const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		const randomString = length => Array.from({ length }, () => charset[Math.floor(Math.random() * charset.length)]).join('');
 		if(type==1){
 			for (let i = 0; i < count; i++) {
 				let index = Math.floor(Math.random() * winArry.length);
+				let randomNum = this.getRanProbability(winArry,probabilities); 
 				// let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,3);
-				let newObj = {name:randomString(6),desc:"Received",goldNum:winArry[index]}
+				let newObj = {name:randomString(6),desc:"Received",goldNum:randomNum}
 				result.push(newObj)
 			}
 		}else{
@@ -302,6 +304,44 @@ const Helper = {
 		}
 		return result;
 	},
+	getRanProbability(array, probabilities) {
+		// 确保概率数组的长度与元素数组一致
+		if (array.length !== probabilities.length) {
+			throw new Error('数组和概率数组的长度不匹配');
+		}
+	
+		// 确保概率的总和为1
+		const totalProbability = probabilities.reduce((acc, prob) => acc + prob, 0);
+		if (totalProbability !== 1) {
+			throw new Error('概率总和必须为1');
+		}
+	
+		// 计算每个元素的累积概率
+		const cumulativeProbabilities = [];
+		let cumulativeSum = 0;
+		for (const prob of probabilities) {
+			cumulativeSum += prob;
+			cumulativeProbabilities.push(cumulativeSum);
+		}
+	
+		// 生成一个0到1之间的随机数
+		const random = Math.random();
+	
+		// 根据随机数选择元素
+		for (let i = 0; i < cumulativeProbabilities.length; i++) {
+			if (random < cumulativeProbabilities[i]) {
+				return array[i];
+			}
+		}
+	},
+	
+	// // 示例数据
+	// const elements = ['apple', 'banana', 'cherry'];
+	// const probabilities = [0.5, 0.3, 0.2]; // 确保这些概率加起来是1
+	
+	// const randomElement = getRandomElementWithProbability(elements, probabilities);
+	// console.log(randomElement);
+	
 	defaultOption() {
 		return [{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
 	},

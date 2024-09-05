@@ -69,7 +69,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return ["","挂机","拉群"]
+            return ["","挂机","拉群","拉粉"]
         }
     },
     created() {

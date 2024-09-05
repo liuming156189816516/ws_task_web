@@ -8,7 +8,7 @@
                 {{$t('mine_009')}}
             </div>
         </div>
-        <div class="top_fles w_f" :class="{'top_fixed':filexTop&&$Helper.checkApkBag()}">
+        <div class="top_fles w_f" :class="{'top_fixed':filexTop}">
             <Sgin-header />
         </div>
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
@@ -109,7 +109,7 @@ import { mapState } from 'vuex';
 import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
 import SginHeader from "@/components/SginHeader";
-import { gettaskliststatus,setappuserlanguage,gethelp } from '@/api/home'
+import { gettaskliststatus,gethelp } from '@/api/home'
 export default {
     name: 'home',
     components: { SginHeader },

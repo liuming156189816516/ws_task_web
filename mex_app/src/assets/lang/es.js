@@ -216,7 +216,7 @@ export default {
     pay_018:"¡Ingrese el monto de retiro correcto!",
     pay_019:"Los retiros de efectivo solo se pueden realizar en múltiplos enteros positivos. ¡Ingrese el monto de retiro correcto!",
     pay_020:"Número de tarjeta de pago",
-    pay_021:"Banco de apertura de cuenta",
+    pay_021:"banco de deposito",
     pay_022:"Nombre del pago",
     pay_023:"Vincular información de retiro",
     pay_024:"pesos",

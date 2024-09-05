@@ -180,7 +180,7 @@ export default {
     width: 100%;
     height: 100%;
     float: left;
-    font-size: 0.32rem;
+    font-size: 28px;
     background-color: #f2f2f2;
     .person_content{
         width: 100%;
@@ -203,10 +203,8 @@ export default {
             .lable_text{
                 width: 260px;
                 color: #969799;
-                line-height: 80px;
+                line-height: 28px;
                 float: left;
-                margin-right: -10px;
-                margin-left: 20px;
             }
             .van-icon{
                 float: right;

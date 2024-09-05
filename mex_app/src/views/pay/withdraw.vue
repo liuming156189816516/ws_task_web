@@ -23,7 +23,7 @@
 				<div class="share_box">
 					<div class="share_link">
 						<span class="account_name" v-text="curIndex==0?$t('login_026')+'：':$t('pay_014')+'：'"></span>
-						<span class="account_text" v-text="curIndex==0?card_no||$t('pay_013'):card_no||$t('pay_014',{value:$t('pay_014')})"></span>
+						<span class="account_text" v-text="curIndex==0?card_no||$t('pay_006'):card_no||$t('pay_014',{value:$t('pay_014')})"></span>
 					</div>
 					<div class="share_btn" @click="bindCardBtn">
 						<van-button type="primary">{{curIndex==0&&card_no?$t('pay_008'):curIndex==1&&card_no?$t('pay_008'):$t('pay_007')}}</van-button>

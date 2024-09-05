@@ -1,74 +1,55 @@
 <template>
     <div class="bottom-box">
 		<div class="six-tabbar">
-			<div class="six-tabbar-item"  v-for="(item, index) in tabBarList" :key="index" @click.stop="goToPage(item.path)">
+			<div class="six-tabbar-item"  v-for="(item,idx) in tabBarList" :key="idx" @click.stop="handlePage(item.path)">
 				<div class="item_bg">
-					<img class="icon-cl" :class="{'animate__animated animate__rotateIn': $route.path.indexOf(item.path) > -1}" :src="$route.path.includes(item.path)?item.active:item.inactive" alt="icons" />
+					<img class="icon-cl" :class="{'animate__animated animate__rotateIn':$route.path.includes(item.path)}" :src="$route.path.includes(item.path)?item.active:item.inactive" alt="icons" />
 				</div>
 				<div class="tabbar_name font_24" >
-					<span :class="{ active: $route.path.indexOf(item.path) > -1 }">{{ item.name }}</span>
+					<span :class="{active: $route.path.includes(item.path)}" >{{$t(item.name)}}</span>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-import { mapState } from "vuex";
 import { getToken } from '@/utils/tool';
 export default {
     data() {
         return {
             active: 0,
-            newStatus:0
-        };
-    },
-	computed: {
-		...mapState({
-            userInfo: state => state.User,
-        }),
-		tabBarList(){
-			return [
-                {
-                    name: this.$t("table_001"),
-                    active: require("../assets/images/new_tab/home-icon-a.png"),
-                    inactive: require("../assets/images/new_tab/home-icon.png"),
-                    path: "/home"
-                },
-                {
-                    name: this.$t("table_002"),
-                    active: require("../assets/images/new_tab/prom_icon-a.png"),
-                    inactive: require("../assets/images/new_tab/prom_icon.png"),
-                    path: "/spread"
-                },
+            newStatus:0,
+			tabBarList: [
 				{
-                    name: this.$t("table_003"),
-                    active: require("../assets/images/new_tab/server-icon-a.png"),
-                    inactive: require("../assets/images/new_tab/server-icon.png"),
-                    path: "/service"
-                },
-                {
-                    name: this.$t("table_004"),
-                    active: require("../assets/images/new_tab/mine-icon-a.png"),
-                    inactive: require("../assets/images/new_tab/mine-icon.png"),
-                    path: "/mine"
-                }
-            ]
-		}
-	},
-    created() {
-        this.moveNews.$on('moveState', (data)=> {
-            this.newStatus = sessionStorage.getItem("newsStatus")
-        })
-        if(sessionStorage.getItem("newsStatus") != null){
-            this.newStatus = sessionStorage.getItem("newsStatus")
+					name: "table_001",
+					active: require("../assets/images/new_tab/home-icon-a.png"),
+					inactive: require("../assets/images/new_tab/home-icon.png"),
+					path: "/home"
+				},
+				{
+					name: "table_002",
+					active: require("../assets/images/new_tab/prom_icon-a.png"),
+					inactive: require("../assets/images/new_tab/prom_icon.png"),
+					path: "/spread"
+				},
+				{
+					name: "table_003",
+					active: require("../assets/images/new_tab/server-icon-a.png"),
+					inactive: require("../assets/images/new_tab/server-icon.png"),
+					path: "/service"
+				},
+				{
+					name: "table_004",
+					active: require("../assets/images/new_tab/mine-icon-a.png"),
+					inactive: require("../assets/images/new_tab/mine-icon.png"),
+					path: "/mine"
+				}
+			]
         }
-        // this.$store.commit("User/openInterval");
     },
     methods: {
-        goToPage(path) {
-			if (this.$route.path === path) return;
-			if(path !== '/home'&&!getToken()){
-				// this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true})
+        handlePage(path) {
+			if(this.$route.path !== '/login'&&!getToken()){
 				return this.$router.push("/login");
 			}else{
 				this.$router.push(path);

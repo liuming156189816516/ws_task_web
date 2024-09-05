@@ -37,8 +37,8 @@ module.exports = {
 				{
 					filename: `${process.env.NODE_ENV === 'production' ? 'css/[name].[chunkhash].css' : 'css/[name].[hash].css'}`,
 					chunkFilename: `${process.env.NODE_ENV === 'production' ? 'css/[name].[chunkhash].css' : 'css/[name].[hash].css'}`,
-				},
-			]);
+				}
+			])
 		// }
 	},
 	configureWebpack: {

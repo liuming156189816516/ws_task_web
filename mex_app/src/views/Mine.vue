@@ -59,7 +59,7 @@
                 <div class="task_item" v-for="(item,idx) in menuOption" :key="idx" @click.stop="handleJump(item,idx)">
                     <div class="left_text">
                         <img class="ws_icon" :src="require(`@/assets/images/mine/${item.icon}.png`)" alt="">
-                        <span class="font_32">{{ item.name }}</span>
+                        <span class="font_32">{{$t(item.name)}}</span>
                     </div>
                     <div class="right_icon">
                         <img src="../assets/images/home/xiala_icon.png" alt="" srcset="">
@@ -74,28 +74,41 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import { getwithdrawconfig } from '@/api/pay';
 import { getbonus } from '@/api/home'
+import { getwithdrawconfig } from '@/api/pay';
 export default {
     name: 'Mine',
     data() {
         return {
-            apk_url:"",
             allIncome:"",
             isTotalNum:null,
             minWithdrawal:null,
             withdrawalNum:null,
             isWithdrawal:false,
-            withdrawConfig:"",
-            taskOption: [
+            menuOption:[
                 {
-                    status: 1,
+                    isShow:true,
+                    name:"mine_010",
+                    path:"/betrecord",
+                    icon:"draw_icon"
                 },
                 {
-                    status: 2,
+                    isShow:true,
+                    name:"mine_011",
+                    path:"/putrecord",
+                    icon:"task_icon"
                 },
                 {
-                    status: 3,
+                    isShow:true,
+                    name:"mine_012",
+                    path:"/ResetPwd",
+                    icon:"pwd_icon"
+                },
+                {
+                    isShow:true,
+                    name:"mine_013",
+                    path:"/log_out",
+                    icon:"quit_icon"
                 }
             ]
         }
@@ -103,52 +116,7 @@ export default {
     computed: {
         ...mapState({
             userInfo: state => state.User
-        }),
-        menuOption() {
-            return [
-                {
-                    isShow:true,
-                    name:this.$t("mine_010"),
-                    path:"/betrecord",
-                    icon:"draw_icon"
-                },
-                // {
-                //     isShow:true,
-                //     name:this.$t("mine_002"),
-                //     path:"/withdraw",
-                //     icon:"task_icon"
-                // },
-                {
-                    isShow:true,
-                    name:this.$t("mine_011"),
-                    path:"/putrecord",
-                    icon:"task_icon"
-                },
-                // {
-                //     name:"消息中心",
-                //     path:"/sysMsg",
-                //     icon:require("../assets/images/mine/mine-message-center.png")
-                // },
-                {
-                    isShow:true,
-                    name:this.$t("mine_012"),
-                    path:"/ResetPwd",
-                    icon:"pwd_icon"
-                },
-                // {
-                //     isShow:false,
-                //     name:this.$t("mine_009"),
-                //     path:"/down_apk",
-                //     icon:"anzhuo"
-                // },
-                {
-                    isShow:true,
-                    name:this.$t("mine_013"),
-                    path:"/log_out",
-                    icon:"quit_icon"
-                }
-            ]
-        }
+        })
     },
     created() {
         // for (let k = 0; k < this.menuOption.length; k++) {

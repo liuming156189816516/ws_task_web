@@ -1,19 +1,12 @@
 <template>
-	<div id="app" ref="appBox" :class="[hasTabBar ? 'set-padding-top' : '', isPc?'isPc': '']">
+	<div id="app" :class="{'set-padding-top':hasTabBar}">
 		<div v-if="!showNavBar" class="mobile_head_top"></div>
 		<div :class="!showNavBar?'app_top_continer':'app_continer'">
-			<!-- <transition :name="transitionName"> -->
 			<keep-alive :include="keepAliveNames">
 				<router-view />
 			</keep-alive>
-			<!-- </transition> -->
 			<router-view name="tabBar" />
-			<float-ball v-if="assistiveTouch"></float-ball>
 		</div>
-		<!-- <van-overlay :show="global.isLogin" style="height:100%;overflow-y: auto;">
-            <login v-if="global.isType==1" />
-			<register v-if="global.isType==2" />
-        </van-overlay> -->
 		<van-overlay :show="global.logOut">
 			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
 				<div class="log_main">
@@ -30,18 +23,7 @@
 <script>
 import { mapState } from 'vuex';
 import { logout } from '@/api/login';
-import FloatBall from './components/FloatBall';
-// import login from './views/sign/login.vue';
-// import register from './views/sign/register.vue';
 export default {
-	components: {FloatBall},
-	provide: function(){
-		return {
-			isPc: !window.navigator.userAgent.match(
-                /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-            )
-		}
-	},
 	data() {
 		return {
 			title:"",
@@ -50,12 +32,7 @@ export default {
 			hasTabBar: false,
 			showNavBar: true,
 			transitionName:"",
-			keepAliveNames: ['home'],
-			whiteOption:['/home','/spread','/service','/mine'],
-			assistiveTouch: sessionStorage.getItem('plus_ready') && sessionStorage.getItem('plus_ready') === '1',
-			isPc: !window.navigator.userAgent.match(
-                /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-            )
+			keepAliveNames: ['home']
 		}
 	},
 	computed: {

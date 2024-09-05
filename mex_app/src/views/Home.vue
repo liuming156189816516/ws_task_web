@@ -302,7 +302,7 @@ export default {
     height: 100%;
     overflow-y: auto;
     position: relative;
-    padding-bottom: 230px;
+    padding-bottom: 320px;
     background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
     // background: url('../assets/images/home/bg_img.png') no-repeat;
     // background-size: cover;
@@ -338,7 +338,7 @@ export default {
             padding: 0 10px;
             font-weight: 500;
             box-sizing: border-box;
-            border-radius: 10px;
+            border-radius: 8px;
             color: $home-order-title;
             background: $font-color-white;
             img{

@@ -132,7 +132,7 @@ export default {
     spre_011:"在线客服",
     spre_012:"奖金",
     spre_013:"Invite your friends quickly to earn cash!",
-    spre_014:"Task time is based on the start time of the task ,the system currently retains records for up to 3 months",
+    spre_014:"系统目前保留记录最多1个月",
     spre_015:"Share your link",
     spre_016:"Invitee register and log in",
     spre_017:"Invitee completes the task",

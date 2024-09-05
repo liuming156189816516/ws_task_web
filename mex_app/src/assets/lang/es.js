@@ -132,7 +132,7 @@ export default {
     spre_011:"Servicio al cliente en línea",
     spre_012:"Bonificación",
     spre_013:"¡Invita a tus amigos rápidamente para ganar dinero!",
-    spre_014:"El tiempo de la tarea se basa en la hora de inicio de la tarea, el sistema actualmente retiene registros por hasta 3 meses",
+    spre_014:"Actualmente, el sistema conserva registros hasta por 1 mes",
     spre_015:"Comparte tu enlace",
     spre_016:"Registro del invitado e inicio de sesión",
     spre_017:"El invitado completa la tarea",

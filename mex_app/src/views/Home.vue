@@ -354,9 +354,18 @@ export default {
         position: fixed;
         top: 0;
         z-index: 1000;
+        animation: slide-up .5s ease-in-out forwards;
     }
     .apk_fixed{
         top: 80px;
+    }
+     @keyframes slide-up {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
     .warp_mian {
         padding: 0 20px;

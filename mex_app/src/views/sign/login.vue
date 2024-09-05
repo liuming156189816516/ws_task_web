@@ -61,7 +61,7 @@ export default {
 			username:"",
 			password:"",
 			isBottom:false,
-			langIdx:Cookies.get("language")||"es",
+			langIdx:Cookies.get("language"),
 			isIndex:false
 		}
 	},
@@ -169,8 +169,7 @@ export default {
 		},
 		onChangeType(row){
 			this.langIdx=row.lang;
-			this.$i18n.locale=row.lang;
-            Cookies.set("language",row.lang)
+			this.$Helper.initLanguage(row.lang);
 		},
 		viewLang(){
 			let lang = this.langOptions.find(item=>item.lang == this.langIdx);

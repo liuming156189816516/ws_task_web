@@ -73,8 +73,9 @@ export default {
 		}
 	},
 	created() {
-		let preLoadTemp = new preLoad();
-		preLoadTemp.setup();
+		// let preLoadTemp = new preLoad();
+		// preLoadTemp.setup();
+		this.$Helper.initLanguage();
 		const { title, hasTabBar } = this.$route.meta;
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;

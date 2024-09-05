@@ -124,7 +124,7 @@ export default {
             teamStemp: "",
             help_url: "",
             taskOption: [],
-            langIdx:Cookies.get("language")||'es',
+            langIdx:Cookies.get("language"),
             taskType: ['', 'scanOnline', 'spread', 'pullgroupTask','pulledTask'],
             bannerList:[],
             imagesList:[
@@ -233,10 +233,9 @@ export default {
 		},
         async onChangeType(row) {
             this.langIdx = row.lang;
-            this.$i18n.locale = row.lang;
-            Cookies.set("language", row.lang);
+            this.$Helper.initLanguage(row.lang);
             // await setappuserlanguage({ language: row.lang });
-            await this.$store.dispatch('User/plantCarousel');
+            // await this.$store.dispatch('User/plantCarousel');
         },
         handleTask(row) {
             const path = this.taskType[row.type];

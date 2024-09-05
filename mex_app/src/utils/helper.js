@@ -3,6 +3,7 @@ import router from  "../router/index";
 import CryptoJS from '../utils/crypto-js';
 import uniFun from "@/utils/uni-webview-js"
 import { getToken } from '@/utils/tool';
+import { i18n } from '@/assets/lang'
 // const releaseCrypKey = 'ZGdIobme/Sb4Idwg';//加密key
 const releaseCrypIv = 'ZGdIobme/Sb4Idwg'
 const releaseCrypKey = '8dw/JfjjoMs0dzVGOX2ntb1iw2k9+JD4'
@@ -331,6 +332,17 @@ const Helper = {
 		let r = window.location.search.slice(1).match(reg);
 		if (r != null) return decodeURIComponent(r[2]);
 		return null;
+	},
+	//重置语言
+	initLanguage(lang) {
+		let storeLang = Cookies.get("language");
+		if(storeLang&&!lang){
+			i18n.locale = storeLang;
+		}else{
+			let setLang = lang||"es";
+			i18n.locale = setLang;
+			Cookies.set("language",setLang)
+		}
 	}
 };
 export default Helper;

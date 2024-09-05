@@ -4,17 +4,17 @@
             <span class="close_btn flex-item flex-align flex-center font_20" @click="showApk=false">✕</span>
             <div class="down_text font_24">{{$t('other_072',{value:100})}}</div>
             <div class="down_apk flex-item flex-align flex-center font_24" @click="downApk">
-                <img src="@/assets/images/home/shouji.png" alt="" srcset="">
+                <img src="@/assets/images/home/shouji.png">
                 {{$t('mine_009')}}
             </div>
         </div>
-        <div class="top_fles w_f" ref="navTop" :class="{'top_fixed':filexTop}">
+        <div class="top_fles w_f" ref="navTop" :class="[filexTop&&$Helper.checkApkBag(2)?'apk_fixed':filexTop&&$Helper.checkApkBag()?'top_fixed':'']">
             <Sgin-header />
         </div>
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">
                 <div class="user_head">
-                    <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
+                    <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)">
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="l_value" @click="showChangeBtn" @click.stop>
                     <span class="font_28">{{ viewLang() }}</span>
-                    <img class="down_icon" src="../assets/images/home/down_arrow_white.png" alt="" srcset="">
+                    <img class="down_icon" src="../assets/images/home/down_arrow_white.png">
                     <van-transition name="fade-up">
                         <div class="down_list" :class="isIndex?'active_open':'active_close'">
                             <p :class="[langIdx==item.lang?'select_active':'']" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">{{item.name}}</p>
@@ -83,14 +83,14 @@
                             <div class="self_dold flex-item flex-center">{{ teamStemp.task_income || 0.00 }}</div>
                             <div class="task_type flex-item flex-center flex-align" @click="showTask(1)">
                                 <span class="font_28">{{$t('home_054')}}</span>
-                                <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
+                                <img class="more_icon" src="@/assets/images/home/more_icon.png">
                             </div>
                         </div>
                         <div class="self_item w_f flex-item flex-dir-c">
                             <div class="self_dold flex-item flex-center">{{ teamStemp.promotion_income || 0.00 }}</div>
                             <div class="flex-item flex-center flex-align" @click="showTask(2)">
                                 <span class="task_type font_28">{{$t('home_055')}}</span>
-                                <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
+                                <img class="more_icon" src="@/assets/images/home/more_icon.png">
                             </div>
                         </div>
                     </div>
@@ -174,6 +174,7 @@ export default {
         this.$store.dispatch('User/plantCarousel');
     },
     activated() {
+        this.filexTop = false;
         if(getToken()){
             this.initHandle();
             this.$store.dispatch('User/getUserIncome');
@@ -187,6 +188,11 @@ export default {
             this.appLogin = event.data;
             // console.log('Message received from UniApp:', event.data);
         })
+        // const homeTop = this.$refs.warpBox;
+        // homeTop.scrollTo({
+        //     top: 0,
+        //     behavior: "smooth", //auto-自动滚动 instant-瞬间滚动 smooth-平滑滚动
+        // })
     },
     methods: {
         handleScroll(){
@@ -353,10 +359,13 @@ export default {
     .top_fles{
         background: $color-theme;
     }
-    .top_fixed{
+    .top_fixed, .apk_fixed{
         position: fixed;
         top: 0;
         z-index: 1000;
+    }
+    .apk_fixed{
+        top: 80px;
     }
     .warp_mian {
         padding: 0 20px;

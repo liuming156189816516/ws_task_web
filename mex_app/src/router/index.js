@@ -313,8 +313,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    // window.scrollTo(0, 0);
-    window.scrollTo({top:0, behavior: "instant"});
+    window.scrollTo(0, 0);
+    // window.scrollTo({top:0, behavior: "smooth"});
     if (to.name === 'sign') {
         store.commit('Global/clearKeepAlive', '')
     }

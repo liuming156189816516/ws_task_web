@@ -199,8 +199,10 @@ const Helper = {
 	},
 	//安卓设备
 	checkApkBag(type) {
-		if(type){
+		if(type==1){
 			return !this.checkBrowser()&&this.judgeClient() == "Android"?1:0;
+		}else if(type==2){
+			return !this.checkBrowser()&&this.judgeClient();
 		}else{
 			return this.checkBrowser()&&this.judgeClient() == "Android";
 		}

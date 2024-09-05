@@ -282,12 +282,14 @@ const Helper = {
 	randomStrings(count,type) {
 		const result = [];
 		let seedArry = [3,4,5,6,7,8,9];
+		let winArry = [1800,50,1000,600,5000,200];
 		const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		const randomString = length => Array.from({ length }, () => charset[Math.floor(Math.random() * charset.length)]).join('');
 		if(type==1){
 			for (let i = 0; i < count; i++) {
-				let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,3);
-				let newObj = {name:randomString(6),desc:"Received",goldNum:randomNum}
+				let index = Math.floor(Math.random() * winArry.length);
+				// let randomNum = String(Math.floor(100000 + Math.random() * 900000)).slice(0,3);
+				let newObj = {name:randomString(6),desc:"Received",goldNum:winArry[index]}
 				result.push(newObj)
 			}
 		}else{

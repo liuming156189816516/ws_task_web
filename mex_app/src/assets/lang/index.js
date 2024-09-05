@@ -24,9 +24,9 @@ const i18n = new VueI18n({
 })
 // 更新vant组件库本身的语言变化，支持国际化
 function vantLocales(lang) {
-	// if (lang === 'zh') {
-	// 	Locale.use(lang, messages.zh)
-	// } 
+	if (lang === 'zh') {
+		Locale.use(lang, messages.zh)
+	} 
 }
 
 export {

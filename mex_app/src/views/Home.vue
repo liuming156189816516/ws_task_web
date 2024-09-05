@@ -8,7 +8,7 @@
                 {{$t('mine_009')}}
             </div>
         </div>
-        <div class="top_fles w_f" :class="{'top_fixed':filexTop}">
+        <div class="top_fles w_f" ref="navTop" :class="{'top_fixed':filexTop}">
             <Sgin-header />
         </div>
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
@@ -190,8 +190,9 @@ export default {
     },
     methods: {
         handleScroll(){
-            let scrollTop = this.$refs.warpBox;
-            if(scrollTop.scrollTop >= 46){
+            const scrollTop = this.$refs.warpBox;
+            const navHeight = this.$refs.navTop.clientHeight;
+            if(scrollTop.scrollTop >= navHeight){
                 this.filexTop = true;
             }else{
                 this.filexTop = false;
@@ -305,7 +306,7 @@ export default {
     height: 100%;
     overflow-y: auto;
     position: relative;
-    padding-bottom: 160px;
+    padding-bottom: 230px;
     background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
     // background: url('../assets/images/home/bg_img.png') no-repeat;
     // background-size: cover;

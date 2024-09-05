@@ -275,7 +275,7 @@ export default {
     padding: 0 20px;
     box-sizing: border-box;
     .record_list{
-      height: 485px;
+      height: 685px;
       overflow: hidden;
       border-radius: 20px;
       .my_swipe{

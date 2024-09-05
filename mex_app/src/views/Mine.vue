@@ -56,7 +56,7 @@
         </div>
         <div class="task_continer w_f flex-item flex-dir-c">
             <div class="task_main">
-                <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click="handleJump(item,idx)" v-show="item.isShow">
+                <div class="task_item" v-for="(item, idx) in menuOption" :key="idx" @click.stop="handleJump(item,idx)" v-show="item.isShow">
                     <div class="left_text">
                         <img class="ws_icon" :src="require(`@/assets/images/mine/${item.icon}.png`)" alt="">
                         <span class="font_32">{{ item.name }}</span>

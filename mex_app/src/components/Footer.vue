@@ -3,10 +3,10 @@
 		<div class="six-tabbar">
 			<div class="six-tabbar-item"  v-for="(item, index) in tabBarList" :key="index" @click="goToPage(item.path)" @click.stop>
 				<div class="item_bg">
-					<img class="icon-cl"  :class="{'animate__animated animate__rotateIn': $route.name.indexOf(item.path) > -1 && item.path != 'strategy', 'animate__animated animate__bounceIn': $route.name.indexOf(item.path) > -1 && item.path == 'strategy'}" :src="$route.name.indexOf(item.path) > -1 ? item.active : item.inactive" alt="icons" />
+					<img class="icon-cl" :class="{'animate__animated animate__rotateIn': $route.path.indexOf(item.path) > -1}" :src="$route.path.includes(item.path)?item.active:item.inactive" alt="icons" />
 				</div>
 				<div class="tabbar_name font_24" >
-					<span :class="{ active: $route.name.indexOf(item.path) > -1 }">{{ item.name }}</span>
+					<span :class="{ active: $route.path.indexOf(item.path) > -1 }">{{ item.name }}</span>
 				</div>
 			</div>
 		</div>
@@ -32,25 +32,25 @@ export default {
                     name: this.$t("table_001"),
                     active: require("../assets/images/new_tab/home-icon-a.png"),
                     inactive: require("../assets/images/new_tab/home-icon.png"),
-                    path: "home"
+                    path: "/home"
                 },
                 {
                     name: this.$t("table_002"),
                     active: require("../assets/images/new_tab/prom_icon-a.png"),
                     inactive: require("../assets/images/new_tab/prom_icon.png"),
-                    path: "spread"
+                    path: "/spread"
                 },
 				{
                     name: this.$t("table_003"),
                     active: require("../assets/images/new_tab/server-icon-a.png"),
                     inactive: require("../assets/images/new_tab/server-icon.png"),
-                    path: "service"
+                    path: "/service"
                 },
                 {
                     name: this.$t("table_004"),
                     active: require("../assets/images/new_tab/mine-icon-a.png"),
                     inactive: require("../assets/images/new_tab/mine-icon.png"),
-                    path: "mine"
+                    path: "/mine"
                 }
             ]
 		}
@@ -66,12 +66,12 @@ export default {
     },
     methods: {
         goToPage(path) {
-			if (this.$route.name === path)return;
+			if (this.$route.path === path)return;
 			if(path !== '/home'&&!getToken()){
 				// this.$store.dispatch('Global/isShowLogin',{type:1,isShow:true})
 				return this.$router.push("/login");
 			}else{
-				this.$router.push(`/${path}`);
+				this.$router.push(path);
 			}
         }
     }

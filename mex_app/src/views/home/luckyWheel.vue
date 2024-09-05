@@ -134,7 +134,7 @@ export default {
       userInfo: state => state.User
     }),
     winNotis(){
-      return this.$Helper.randomStrings(100,1)
+      return this.$Helper.randomStrings(200,1)
     }
   },
   created() {

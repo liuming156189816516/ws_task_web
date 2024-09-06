@@ -61,7 +61,7 @@
                     </div>
                     <div class="rule_desc font_28" v-if="type==8">
                         <p class="mb_24">{{restLanuage('home_031')}}：{{number}}</p>
-                        <p style="line-height: 20px;" >{{content}}</p>
+                        <p class="mb_24" style="line-height: 20px;" >{{content}}</p>
                     </div>
                 </div>
             </template>

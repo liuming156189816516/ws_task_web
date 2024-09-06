@@ -621,6 +621,9 @@ export default {
                     // }
                 }
             }
+            .task_item:last-child{
+                margin-bottom: 0;
+            }
             // .task_item:nth-child(1){
             //     .task_desc{
             //         height: 130px;

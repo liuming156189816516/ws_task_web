@@ -118,6 +118,7 @@ export default {
     home_132:"Iniciar sesión completado",
     home_133:"Registrarse...",
     home_134:"La tarea de atraer fans",
+    home_135:"Controlar",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

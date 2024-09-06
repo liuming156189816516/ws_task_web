@@ -73,18 +73,20 @@
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('tail_003')}}</span>
-                    <span class="flex-item flex-center">{{$t('home_031')}}</span>
+                    <!-- <span class="flex-item flex-center">{{$t('home_031')}}</span> -->
                     <span class="flex-item flex-center">{{$t('tail_008')}}</span>
                     <span class="flex-item">{{$t('spre_012')}}</span>
+                    <span class="flex-item">{{$t('home_022')}}</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                                 <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                                <span class="flex-item flex-center">{{ item.ser_no }}</span>
-                                <span :class="['flex-item flex-center',item.status==4?'record_click':'']" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}" @click="showResult(item)">{{statusOption[item.status]}}</span>
+                                <!-- <span class="flex-item flex-center">{{ item.ser_no }}</span> -->
+                                <span :class="['flex-item flex-center',item.status==4?'':'']" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
                                 <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
+                                <span class="record_click flex-item" @click="showResult(item)" v-text="item.status==4?$t('home_135'):'...'"></span>
                             </div>
                         </van-list>
                     </div>
@@ -252,7 +254,7 @@ export default {
         },
         showResult(row){
             if(row.status == 4){
-                this.$popDialog({ content:row.Reason, title:this.$t('other_088'), type: 8 })
+                this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
             }
             // this.$store.dispatch('User/actionReport',9);
         },
@@ -484,12 +486,13 @@ export default {
             }
             .title_top{
                 height: 100px;
-                padding: 0 40px;
+                padding: 0 20px;
                 flex-shrink: 0;
                 box-sizing: border-box;
                 background: $home-title-10;
                 span{
                     flex: 1;
+                    flex-shrink: 0;
                 }
             }
             .task_title_head {
@@ -500,17 +503,16 @@ export default {
             //     border-top-left-radius: 20px;
             //     border-top-right-radius: 20px;
             // }
-            span:nth-child(1){
-                flex-grow: 1.3;
-                flex-shrink: 0;
-                // background-color: darkblue;
-            }
-            span:nth-child(2){
-                flex-grow: 1.6;
-                // background-color: salmon;
-            }
+            // span:nth-child(1){
+            //     flex-grow: 1.8;
+            //     flex-shrink: 0;
+            // }
+            // span:nth-child(2){
+            //     flex-grow: 1.6;
+            // }
             span:nth-child(3){
-                flex-grow: 1.2;
+                // flex-grow: 0.8;
+                justify-content: center;
             }
             span:nth-child(4){
                 flex-grow: 0.8;
@@ -525,6 +527,7 @@ export default {
                 border-bottom: 1px solid transparent;
             }
             .record_click{
+                color: $home-copay-title;
                 text-decoration: underline;
             }
             .empty_box{

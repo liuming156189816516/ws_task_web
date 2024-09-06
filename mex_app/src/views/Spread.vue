@@ -21,9 +21,9 @@
                 <div class="w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">
                         <span class="left_desc flex-item font_28">{{$t('spre_006')}}</span>
-                        <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
+                        <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/home'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                     </div>
-                    <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
+                    <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/home' }}</div>
                 </div>
                 <div class="invit_code w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">

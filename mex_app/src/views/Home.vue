@@ -191,13 +191,13 @@ export default {
     },
     methods: {
         handleScroll(){
-            const scrollTop = this.$refs.warpBox;
-            const navHeight = this.$refs.navTop.clientHeight;
-            if(scrollTop.scrollTop >= navHeight){
-                this.filexTop = true;
-            }else{
-                this.filexTop = false;
-            }
+            // const scrollTop = this.$refs.warpBox;
+            // const navHeight = this.$refs.navTop.clientHeight;
+            // if(scrollTop.scrollTop >= navHeight){
+            //     this.filexTop = true;
+            // }else{
+            //     this.filexTop = false;
+            // }
         },
         
         initHandle(){

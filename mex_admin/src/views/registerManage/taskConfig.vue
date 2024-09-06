@@ -27,17 +27,17 @@
                                 <el-button type="primary" size="mini" v-for="(item,idx) in btnOption" :key="idx" @click="showPropModel(idx)" v-show="item!=''">{{ item }}</el-button>
                                 <el-table :data="taskForm.materialData" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" style="width: 100%">
                                     <el-table-column type="index" :label="$t('sys_g020')"></el-table-column>
-                                    <el-table-column prop="type" :label="$t('sys_g091')" minWidth="120">
+                                    <el-table-column prop="type" :label="$t('sys_g091')" minWidth="100">
                                         <template slot-scope="scope">
                                             <span>{{ sourceOption[scope.row.type]}}</span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column prop="content" :label="$t('sys_mat019')" minWidth="100">
+                                    <el-table-column prop="content" :label="$t('sys_mat019')" minWidth="230">
                                         <template slot-scope="scope">
                                             <span class="content_01" v-if="scope.row.type==1||scope.row.type==5||scope.row.type==6||scope.row.type==7">{{ scope.row.content }}</span>
                                             <div v-if="scope.row.type==2">
                                                 <img class="content_02" :src="scope.row.content" @click="showImg(scope.row.content)">
-                                                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="scope.row.remark" />
+                                                <el-input type="textarea" :rows="3" placeholder="请输入内容" v-model="scope.row.remark" />
                                             </div>
                                             <audio v-if="scope.row.type==3" controls class="audio_src">
                                                 <source :src="scope.row.content" type="audio/mpeg">

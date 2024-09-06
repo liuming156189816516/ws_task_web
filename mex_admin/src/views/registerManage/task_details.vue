@@ -6,6 +6,9 @@
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m065')})" v-model="account" />
             </el-form-item>
             <el-form-item>
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="l_account" />
+            </el-form-item>
+            <el-form-item>
                 <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
             </el-form-item>
             <el-form-item>
@@ -59,6 +62,7 @@ export default {
             limit: 100,
             total: 0,
             account: "",
+            l_account: "",
             task_time: "",
             loading:false,
             checkIdArry:[],
@@ -92,6 +96,7 @@ export default {
         restQueryBtn(){
             this.account="";
             this.task_time="";
+            this.l_account="";
             this.checkAccount = [];
             this.initTaskList(1)
             // this.$refs.serveTable.clearSelection();
@@ -104,6 +109,7 @@ export default {
                 page: this.page,
                 limit: this.limit,
                 account:this.account,
+                l_account:this.l_account,
                 start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.resetTime(sTime[1], 1) : -1
             }

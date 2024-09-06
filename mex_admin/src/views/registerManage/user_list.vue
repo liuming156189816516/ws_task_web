@@ -33,6 +33,11 @@
                         </template>
                     </u-table-column>
                     <u-table-column prop="account" :label="$t('sys_m062')" minWidth="130" />
+                    <u-table-column prop="ip" :label="$t('sys_g144')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.ip?scope.row.ip:"-" }}
+                        </template>
+                    </u-table-column>
                     <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" />
                     <u-table-column prop="invite_code" :label="$t('sys_q133')" minWidth="130" />
                     <u-table-column prop="fuser_name" :label="$t('sys_q134')" minWidth="100">

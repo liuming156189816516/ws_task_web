@@ -498,7 +498,7 @@ export default {
             }
         }
         .adv_warp{
-            gap: 20px;
+            // gap: 20px;
             margin-bottom: 30px;
             .adv_item{
                 flex: 1;
@@ -513,9 +513,11 @@ export default {
             }
             .adv_item:nth-child(1){
                 padding-left: 80px;
+                margin-right: 10px;
             }
             .adv_item:nth-child(2){
                 padding-right: 80px;
+                margin-left: 10px;
                 background: url("../assets/images/sign_icon.png");
                 background-size: 100% 100%;
             }

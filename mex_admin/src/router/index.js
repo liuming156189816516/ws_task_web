@@ -419,7 +419,7 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_m035')
         }
-      },
+      }
     ]
   },
   {

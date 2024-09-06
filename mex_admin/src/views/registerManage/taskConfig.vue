@@ -36,7 +36,7 @@
                                         <template slot-scope="scope">
                                             <span class="content_01" v-if="scope.row.type==1||scope.row.type==5||scope.row.type==6||scope.row.type==7">{{ scope.row.content }}</span>
                                             <div v-if="scope.row.type==2">
-                                                <img class="content_02" :src="scope.row.content">
+                                                <img class="content_02" :src="scope.row.content" @click="showImg(scope.row.content)">
                                                 <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="scope.row.remark" />
                                             </div>
                                             <audio v-if="scope.row.type==3" controls class="audio_src">
@@ -102,7 +102,7 @@
         </el-dialog>
         <el-image-viewer v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="[taskForm.qavatar]" />
     </div>
-  </template>
+ </template>
   <script>
   import { successTips } from '@/utils/index'
   import material from '../content/material.vue';
@@ -323,6 +323,18 @@
                     this.taskForm.materialData.splice(k,1)
                 }
             }
+        },
+        showImg(img){
+            this.imgModel = true;
+            this.taskForm.qavatar = img;
+        },
+        closeViewer(e) {
+            this.imgModel = false;
+        },
+        cloneImgpreview(e) {
+            if (e.target.getAttribute('class') === 'el-image-viewer__mask') {
+                this.imgModel = false;
+            }
         }
     }
   }
@@ -352,6 +364,7 @@
     .content_02{
         width: 44px;
         height: 28px;
+        cursor: pointer;
     }
     .custom_btn{
         padding: 0;

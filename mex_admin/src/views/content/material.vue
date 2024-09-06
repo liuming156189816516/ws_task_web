@@ -194,7 +194,7 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-    <el-image-viewer v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="imgList" />
+    <el-image-viewer v-if="imgModel" style="z-index: 999999;" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="imgList" />
   </div>
 </template>
 <script>

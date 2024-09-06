@@ -521,7 +521,7 @@ export default {
             }
         }
         .task_main{
-            gap: 30px;
+            // gap: 30px;
             box-sizing: border-box;
             background: url('../assets/images/home/jinbi.png') no-repeat;
             background-size: cover;
@@ -530,6 +530,7 @@ export default {
                 padding: 30px 0 30px 20px;
                 background: url('../assets/images/home/task_icon.png') no-repeat;
                 background-size: 100% 100%;
+                margin-bottom: 30px;
                 .task_name{
                     color: $color-theme;
                     font-weight: 900;

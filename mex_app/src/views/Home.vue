@@ -154,7 +154,7 @@ export default {
                 {name:this.$t('home_089'),live1:1,live2:2,type:1,status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
                 {name:this.$t('home_045'),live1:2,live2:4,type:2,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:7777}),btn:this.$t('home_056'),desc:this.$t('home_049')},
-                {name:this.$t('home_134'),live1:2,live2:5,type:4,status:null,task_info_id:null,award:this.$t('home_047',{value:77777}),btn:this.$t('home_005'),desc:this.$t('home_049')}
+                {name:this.$t('home_134'),live1:2,live2:5,type:4,status:null,task_info_id:null,award:this.$t('home_047',{value:7777}),btn:this.$t('home_005'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {

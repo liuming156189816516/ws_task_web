@@ -37,16 +37,11 @@
                     <u-table-column prop="num" :label="$t('sys_m067')" minWidth="130" />
                     <u-table-column prop="l_account" :label="$t('sys_m068')" minWidth="100" />
                     <u-table-column prop="f_account" :label="$t('sys_q134')" minWidth="100" />
-                    <!-- <u-table-column prop="sys_c008" :label="$t('sys_c008')" width="180">
+                    <u-table-column prop="sys_c008" :label="$t('sys_c008')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}
                         </template>
-                    </u-table-column> -->
-                    <!-- <u-table-column prop="offline_time" :label="$t('sys_g013')" minWidth="160">
-                        <template slot-scope="scope">
-                            {{ scope.row.offline_time > 0 ? $baseFun.resetTime(scope.row.offline_time * 1000) : "-" }}
-                        </template>
-                    </u-table-column> -->
+                    </u-table-column>
                 </u-table>
             </div>
         </div>

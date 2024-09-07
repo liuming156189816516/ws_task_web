@@ -1,7 +1,7 @@
 <template>
     <div class="bottom-box">
 		<div class="six-tabbar">
-			<div class="six-tabbar-item"  v-for="(item,idx) in tabBarList" :key="idx" @click.stop="handlePage(item.path)">
+			<div class="six-tabbar-item"  v-for="(item,idx) in tabBarList" :key="idx" @touchstart.stop="handlePage(item.path)">
 				<div class="item_bg">
 					<img class="icon-cl" :class="{'animate__animated animate__rotateIn':$route.path.includes(item.path)}" :src="$route.path.includes(item.path)?item.active:item.inactive" alt="icons" />
 				</div>

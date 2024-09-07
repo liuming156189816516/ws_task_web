@@ -18,6 +18,18 @@
 				</div>
 			</div>
         </van-overlay>
+		<van-overlay :show="uploadApk">
+			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
+				<div class="log_main flex-item flex-align flex-dir-c">
+					<h3 class="mb_24">{{$t('other_008')}}</h3>
+					检测到新版本,立即更新页面
+					<div class="footer_bnt flex-item flex-center">
+						<van-button class="update_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_update">{{$t('other_003')}}</van-button>
+						<!-- <van-button class="footer_cancel" type="primary" @click="handle_close">{{$t('other_007')}}</van-button> -->
+					</div>
+				</div>
+			</div>
+        </van-overlay>
 	</div>
 </template>
 <script>
@@ -28,6 +40,7 @@ export default {
 		return {
 			title:"",
 			device:"",
+			uploadApk:false,
 			isLoading: false,
 			hasTabBar: false,
 			showNavBar: true,
@@ -43,15 +56,6 @@ export default {
 	},
 	watch: {
 		'$route'(to, from) {
-			// 处理路由变化后的逻辑
-			// if (!this.whiteOption.includes(from.path)) {
-			// 	// this.transitionName = 'slide-right'
-			// }
-			// // if (!this.whiteOption.includes(from.path)) {
-			// if (from.path) {
-			// 	// console.log('即将进入页面', to.path);
-			// 	this.transitionName = 'slide-right'
-			// }
 			if(to.path == "/home"||to.path == "/spread"){
 				this.customHeader("#31acf2");	
 			}else{
@@ -67,9 +71,13 @@ export default {
 		this.title = title || '';
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.checkBrowser();
+		const VERSION_TIME = Date.parse(new Date());
 	},
-	mounted(){
+	async mounted(){
 		this.customHeader("#31acf2");
+		// const publicVersion = await axios.get(location.origin + '/version.json?t=' + Date.now(), {
+		// 	headers: {'Cache-Control': 'no-cache',Pragma: 'no-cache',Expires: '-1',}
+		// })
 	},
 	methods: {
 		customHeader(color){
@@ -103,6 +111,9 @@ export default {
 				this.$router.replace('/home');
 				localStorage.removeItem('token');
 			})
+		},
+		handle_update(){
+			console.log(8888);
 		}
 	}
 };
@@ -296,6 +307,11 @@ body,
 	margin-right: 25px;
     background: $color-theme;
     border-color: $color-theme;
+  }
+  .update_confirm{
+	width: max-content;
+	background: rgba($color: $color-theme, $alpha: .7);
+    border-color: rgba($color: $color-theme, $alpha: .7);
   }
 }
 </style>

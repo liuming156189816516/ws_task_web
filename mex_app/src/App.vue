@@ -40,10 +40,12 @@ export default {
 		return {
 			title:"",
 			device:"",
+			checkTimer:null,
 			uploadApk:false,
 			isLoading: false,
 			hasTabBar: false,
 			showNavBar: true,
+			currentTIme:null,
 			transitionName:"",
 			keepAliveNames: ['home']
 		}
@@ -73,13 +75,33 @@ export default {
 		this.showNavBar = this.$Helper.checkBrowser();
 		const VERSION_TIME = Date.parse(new Date());
 	},
-	async mounted(){
+	 mounted(){
 		this.customHeader("#31acf2");
-		// const publicVersion = await axios.get(location.origin + '/version.json?t=' + Date.now(), {
-		// 	headers: {'Cache-Control': 'no-cache',Pragma: 'no-cache',Expires: '-1',}
-		// })
+		this.handleVersion().then(res=>{
+			this.currentTIme = res||"";
+		})
+		
+		this.checkTimer = setInterval(() => {
+			this.initCheckVersion();
+		}, 5000);
 	},
 	methods: {
+		initCheckVersion (){
+			this.handleVersion().then(res=>{
+				console.log(res);
+				if(this.currentTIme !== res){
+					clearInterval(this.checkTimer);
+					location.reload(true);
+				}
+			})
+		},
+		async handleVersion(){
+			return await axios.get(location.origin + '/version.json?t=' + Date.now(), {
+				headers: {'Cache-Control': 'no-cache',Pragma: 'no-cache',Expires: '-1',}
+			}).then(res=>{
+				return res.data;
+			})
+		},
 		customHeader(color){
 			// if (navigator.userAgent.match(/Android/i)) {
 			// 动态设置 meta theme-color

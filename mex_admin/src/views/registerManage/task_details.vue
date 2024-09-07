@@ -110,8 +110,8 @@ export default {
                 limit: this.limit,
                 account:this.account,
                 l_account:this.l_account,
-                start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
-                end_time: sTime ? this.$baseFun.resetTime(sTime[1], 1) : -1
+                start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1,true) : -1,
+                end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2,true) : -1
             }
             gettaskrecordlist(params).then(res => {
                 this.loading = false;

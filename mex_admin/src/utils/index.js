@@ -369,7 +369,7 @@ export function mexicoTime(date, type){
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
   var Dates = myDate.getDate(); //获取日
   if(type == 1){
-    Time = Year + "-" + Month + "-" + Dates + " 08:00:00";
+    Time = Year + "-" + Month + "-" + Dates + " 00:00:00";
   }else if(2){
     Time = Year + "-" + Month + "-" + Dates + " 08:59:59";
   }

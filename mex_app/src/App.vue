@@ -279,7 +279,7 @@ body,
 }
 
 .footer_bnt{
-  gap: 50px;
+//   gap: 50px;
   margin-top: 48px;
   .van-button{
     flex: 1;
@@ -289,9 +289,11 @@ body,
     color: $color-theme;
     background: #F2F3FF;
     border-color: #F2F3FF;
+	margin-left: 25px;
   }
   .footer_confirm{
     color: #fff;
+	margin-right: 25px;
     background: $color-theme;
     border-color: $color-theme;
   }

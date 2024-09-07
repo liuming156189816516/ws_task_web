@@ -65,7 +65,7 @@ export default {
 		this.waitTimer = setInterval(() => {
 			this.heartTimer = setTimeout(() => {
 				// console.log("heart");
-				console.log(new Date());
+				// console.log(new Date());
 				this.initCheckVersion();
 			}, this.timeout)
 		}, this.setInter)

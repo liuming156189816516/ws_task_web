@@ -5,6 +5,7 @@
  * @returns {string | null}
  */
 import i18n from '@/locale'
+import { Number } from 'core-js'
 export function resetPage(page) {
   return [10, 20, 50, 100, 200, 500, 1000]
 }       
@@ -360,16 +361,27 @@ function convertTimeToZone(date, targetTimeZone) {
   return new Date(date.toLocaleString('en-US', { timeZone: targetTimeZone }));
 }
 
-//将时间戳转成年月日时分秒
-export function resetTime(date, type,query) {
-  let myDate = null;
-  if(query){
-    myDate = date ? new Date(type == 4 ? date * 1000 : date) : new Date();
-  }else{
-    let Afr_time = new Date().toLocaleString('en-US', { timeZone: 'America/Mexico_City' });
-    const newYork = date? new Date(type == 4 ? date * 1000 : date).toLocaleString('en-US', { timeZone: 'America/Mexico_City' }):Afr_time;
-    myDate = new Date(newYork);
+
+export function mexicoTime(date, type){
+  let Time;
+  let myDate = new Date(date);
+  var Year = myDate.getFullYear(); //获取年
+  var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
+  var Dates = myDate.getDate(); //获取日
+  if(type == 1){
+    Time = Year + "-" + Month + "-" + Dates + " 07:00:00";
+  }else if(2){
+    Time = Year + "-" + Month + "-" + (Dates+1) + " 06:59:59";
   }
+  let Afr_time = Time.toLocaleString('en-US', { timeZone: 'America/Mexico_City' });
+  return Date.parse(Afr_time)/1000
+}
+
+//将时间戳转成年月日时分秒
+export function resetTime(date, type) {
+  let Afr_time = new Date().toLocaleString('en-US', { timeZone: 'America/Mexico_City' });
+  const newYork = date? new Date(type == 4 ? date * 1000 : date).toLocaleString('en-US', { timeZone: 'America/Mexico_City' }):Afr_time;
+  let myDate = new Date(newYork);
   var Year = myDate.getFullYear(); //获取年
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
   var Dates = myDate.getDate(); //获取日
@@ -393,7 +405,7 @@ export function resetTime(date, type,query) {
     Seconds = '0' + Seconds
   }
   if (type == 1) {
-    return Date.parse(Year + "-" + Month + "-" + Dates + " " + "00:00:00") / 1000;
+    return Date.parse(Year + "-" + Month + "-" + Dates + " " + "00:00:00")/1000;
   } else if (type == 2) {
     return Date.parse(Year + "-" + Month + "-" + Dates + " " + "23:59:59") / 1000;
   } else if (type == 3) {
@@ -1340,5 +1352,6 @@ export default {
   resetTime,
   emoji_icon,
   newsTime,
+  mexicoTime
 }
 

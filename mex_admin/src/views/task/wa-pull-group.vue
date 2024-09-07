@@ -212,8 +212,8 @@ export default {
         status: this.model1.status||-1,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,
-        start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
-        end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
+        start_time: sTime ? this.$baseFun.mexicoTime(sTime[0], 1) : -1,
+        end_time: sTime ? this.$baseFun.mexicoTime(sTime[1], 2) : -1
       }
       let { data:{url} } = await dooutexcel(params);
       window.location.href = url;

@@ -91,8 +91,8 @@ export default {
                 page: this.page,
                 limit: this.limit,
                 account: this.account,
-                start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
-                end_time: sTime ? this.$baseFun.resetTime(sTime[1], 1) : -1
+                start_time: sTime ? this.$baseFun.mexicoTime(sTime[0], 1) : -1,
+                end_time: sTime ? this.$baseFun.mexicoTime(sTime[1], 2) : -1
             }
             getaccountupinfologlist(params).then(res => {
                 console.log(res);

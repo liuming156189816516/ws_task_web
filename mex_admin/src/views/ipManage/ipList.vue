@@ -750,8 +750,8 @@ export default {
         expire_status:this.model1.expire_status||-1,
         disable_status:this.model1.disable_status||-1,
         group_id: this.model1.pgroup_id,
-        start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
-        end_time: sTime ? this.$baseFun.resetTime(sTime[1], 1) : -1
+        start_time: sTime ? this.$baseFun.mexicoTime(sTime[0], 1) : -1,
+        end_time: sTime ? this.$baseFun.mexicoTime(sTime[1], 2) : -1
       }
       getiplist(params).then(res => {
         this.loading=false;

@@ -56,12 +56,12 @@
         </div>
         <div class="task_continer w_f flex-item flex-dir-c">
             <div class="task_main">
-                <div class="task_item" v-for="(item,idx) in menuOption" :key="idx" @touchstart.stop="handleJump(item,idx)">
+                <div class="task_item" v-for="(item,idx) in menuOption" :key="idx">
                     <div class="left_text">
                         <img class="ws_icon" :src="require(`@/assets/images/mine/${item.icon}.png`)" alt="">
                         <span class="font_32">{{$t(item.name)}}</span>
                     </div>
-                    <div class="right_icon">
+                    <div class="right_icon" @touchstart.stop="handleJump(item,idx)">
                         <img src="../assets/images/home/xiala_icon.png" alt="" srcset="">
                     </div>
                 </div>

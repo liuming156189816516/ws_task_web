@@ -18,18 +18,6 @@
 				</div>
 			</div>
         </van-overlay>
-		<van-overlay :show="uploadApk">
-			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
-				<div class="log_main flex-item flex-align flex-dir-c">
-					<h3 class="mb_24">{{$t('other_008')}}</h3>
-					检测到新版本,立即更新页面
-					<div class="footer_bnt flex-item flex-center">
-						<van-button class="update_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_update">{{$t('other_003')}}</van-button>
-						<!-- <van-button class="footer_cancel" type="primary" @click="handle_close">{{$t('other_007')}}</van-button> -->
-					</div>
-				</div>
-			</div>
-        </van-overlay>
 	</div>
 </template>
 <script>
@@ -40,13 +28,15 @@ export default {
 		return {
 			title:"",
 			device:"",
-			checkTimer:null,
-			uploadApk:false,
+			waitTimer:null,
+			heartTimer:null,
 			isLoading: false,
 			hasTabBar: false,
 			showNavBar: true,
 			currentTIme:null,
 			transitionName:"",
+			timeout: 1000,   
+      		setInter: 5000,
 			keepAliveNames: ['home']
 		}
 	},
@@ -55,15 +45,6 @@ export default {
 			global: state => state.Global,
 			userInfo: state => state.User,
 		})
-	},
-	watch: {
-		'$route'(to, from) {
-			if(to.path == "/home"||to.path == "/spread"){
-				this.customHeader("#31acf2");	
-			}else{
-				this.customHeader();	
-			}
-		}
 	},
 	created() {
 		// let preLoadTemp = new preLoad();
@@ -74,24 +55,27 @@ export default {
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.checkBrowser();
 		const VERSION_TIME = Date.parse(new Date());
-		console.log(VERSION_TIME);
+		// console.log(VERSION_TIME);
 	},
 	 mounted(){
 		this.customHeader("#31acf2");
 		this.handleVersion().then(res=>{
 			this.currentTIme = res||"";
 		})
-		
-		this.checkTimer = setInterval(() => {
-			this.initCheckVersion();
-		}, 5000);
+		this.waitTimer = setInterval(() => {
+			this.heartTimer = setTimeout(() => {
+				// console.log("heart");
+				console.log(new Date());
+				this.initCheckVersion();
+			}, this.timeout)
+		}, this.setInter)
 	},
 	methods: {
 		initCheckVersion (){
 			this.handleVersion().then(res=>{
-				console.log(res);
 				if(this.currentTIme !== res){
-					clearInterval(this.checkTimer);
+					clearInterval(this.waitTimer);
+					clearInterval(this.heartTimer);
 					location.reload(true);
 				}
 			})
@@ -137,6 +121,15 @@ export default {
 		},
 		handle_update(){
 			console.log(8888);
+		}
+	},
+	watch: {
+		'$route'(to, from) {
+			if(to.path == "/home"||to.path == "/spread"){
+				this.customHeader("#31acf2");	
+			}else{
+				this.customHeader();	
+			}
 		}
 	}
 };

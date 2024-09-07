@@ -74,9 +74,9 @@ export default {
 		initCheckVersion (){
 			this.handleVersion().then(res=>{
 				if(this.currentTIme !== res){
-					location.reload(true);
 					clearInterval(this.waitTimer);
 					clearInterval(this.heartTimer);
+					location.reload(true);
 				}
 			})
 		},

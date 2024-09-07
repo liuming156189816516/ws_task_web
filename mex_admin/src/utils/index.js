@@ -371,7 +371,7 @@ export function mexicoTime(date, type){
   if(type == 1){
     Time = Year + "-" + Month + "-" + Dates + " 08:00:00";
   }else if(2){
-    Time = Year + "-" + Month + "-" + Dates + " 08:59:59";
+    Time = Year + "-" + Month + "-" + (Dates+1) + " 07:59:59";
   }
   let Afr_time = Time.toLocaleString('en-US', { timeZone: 'America/Mexico_City' });
   return Date.parse(Afr_time)/1000

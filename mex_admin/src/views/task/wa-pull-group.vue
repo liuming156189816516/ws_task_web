@@ -208,15 +208,18 @@ export default {
     },
     async exportBtn(){
       const sTime = this.model1.ipCtime;
+      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0]):-1;
+      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1]):-1;
       let params = {
         status: this.model1.status||-1,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,
-        start_time: sTime ? this.$baseFun.mexicoTime(sTime[0], 1) : -1,
-        end_time: sTime ? this.$baseFun.mexicoTime(sTime[1], 2) : -1
+        start_time: start_time,
+        end_time: end_time
       }
-      let { data:{url} } = await dooutexcel(params);
-      window.location.href = url;
+      console.log(params);
+      // let { data:{url} } = await dooutexcel(params);
+      // window.location.href = url;
     },
     //获取订单列表
     getTaskList(num) {

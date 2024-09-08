@@ -235,7 +235,7 @@ export default {
         page: this.model1.page,
         limit: this.model1.limit,
         status: this.model1.status||-1,
-        // account: this.model1.account,
+        account: this.model1.account,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,
         start_time: start_time,

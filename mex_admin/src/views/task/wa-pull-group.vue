@@ -7,6 +7,9 @@
           <el-button type="primary" :disabled="checkArry.length==0" @click="scamperBtn(0,0)">{{ $t('sys_q111') }}</el-button>
         </el-form-item>
         <el-form-item>
+          <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
+        </el-form-item>
+         <el-form-item>
           <el-input v-model="model1.invite_link" clearable placeholder="请输入邀请链接"  style="width:180px;" />
         </el-form-item>
         <el-form-item>
@@ -211,6 +214,7 @@ export default {
       let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0]):-1;
       let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1]):-1;
       let params = {
+        account: this.model1.account,
         status: this.model1.status||-1,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,

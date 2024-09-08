@@ -18,38 +18,36 @@
         </el-form>
         <!-- 分组管理 -->
         <div class="continer_main">
-            <div class="group_continer">
-                <u-table :data="accountDataList" :row-key="new Date()" use-virtual border height="760" v-loading="loading"
-                    element-loading-spinner="el-icon-loading" style="width: 100%;" :total="total" 
-                    :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
-                    @selection-change="handleSelectionChange" @handlePageSize="switchPage">
-                    <u-table-column type="index" :label="$t('sys_g020')" width="60" />
-                    <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130" />
-                    <u-table-column prop="type" :label="$t('sys_m066')" minWidth="100">
-                        <template slot="header">
-                            <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
-                            <span style="color:#909399" :class="[task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
-                                <i class="el-icon-arrow-down el-icon--right" />
-                            </span>
-                            <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
-                            </el-dropdown-menu>
-                            </el-dropdown>
-                        </template>
-                        <template slot-scope="scope">
-                            {{ taskOption[scope.row.type] }}
-                        </template>
-                    </u-table-column>
-                    <u-table-column prop="num" :label="$t('sys_m067')" minWidth="130" />
-                    <u-table-column prop="l_account" :label="$t('sys_m068')" minWidth="100" />
-                    <u-table-column prop="f_account" :label="$t('sys_q134')" minWidth="100" />
-                    <u-table-column prop="sys_c008" :label="$t('sys_c008')" width="180">
-                        <template slot-scope="scope">
-                            {{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}
-                        </template>
-                    </u-table-column>
-                </u-table>
-            </div>
+            <u-table :data="accountDataList" use-virtual border height="760" v-loading="loading"
+                element-loading-spinner="el-icon-loading" style="width: 100%;" :total="total" 
+                :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
+                @selection-change="handleSelectionChange" @handlePageSize="switchPage">
+                <u-table-column type="index" :label="$t('sys_g020')" width="60" />
+                <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130" />
+                <u-table-column prop="type" :label="$t('sys_m066')" minWidth="100">
+                    <template slot="header">
+                        <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
+                        <span style="color:#909399" :class="[task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
+                            <i class="el-icon-arrow-down el-icon--right" />
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                        </el-dropdown-menu>
+                        </el-dropdown>
+                    </template>
+                    <template slot-scope="scope">
+                        {{ taskOption[scope.row.type] }}
+                    </template>
+                </u-table-column>
+                <u-table-column prop="num" :label="$t('sys_m067')" minWidth="130" />
+                <u-table-column prop="l_account" :label="$t('sys_m068')" minWidth="100" />
+                <u-table-column prop="f_account" :label="$t('sys_q134')" minWidth="100" />
+                <u-table-column prop="sys_c008" :label="$t('sys_c008')" width="180">
+                    <template slot-scope="scope">
+                        {{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}
+                    </template>
+                </u-table-column>
+            </u-table>
         </div>
     </div>
 </template>
@@ -104,7 +102,7 @@ export default {
             // this.$refs.serveTable.clearSelection();
         },
         handleNewwork(type){
-            this.task_type=type;
+            this.task_type = type;
             this.initTaskList(1)
         },
         initTaskList(num) {

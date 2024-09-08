@@ -2,9 +2,12 @@
 <template>
 	<div class='container_coat'>
 		<div class="condition_warp select_warp">
-			<el-form inline>
+			<el-form inline size="small">
                 <el-form-item>
-                    <el-input size="small" v-model="factorModel.card_no" clearable placeholder="请输入提现账号" style="width:180px;"></el-input>
+                    <el-input v-model="factorModel.account" clearable placeholder="请输入用户账号" style="width:180px;"></el-input>
+				</el-form-item>
+                <el-form-item>
+                    <el-input v-model="factorModel.card_no" clearable placeholder="请输入用户账号" style="width:180px;"></el-input>
 				</el-form-item>
 				<!-- <el-form-item class="change_new_time">
 					<el-date-picker size="small" v-model="factorModel.dateArry" type="daterange" value-format="yyyy-MM-dd" range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期" style='width:240px'>
@@ -26,6 +29,7 @@
 							<span>{{(factorModel.offset-1)*factorModel.limit+scope.$index+1}}</span>
 						</template>
                     </el-table-column> -->
+                    <el-table-column prop="account" :label="$t('sys_c009')" minWidth="120" align="center" />
                     <el-table-column prop="card_no" :label="$t('sys_p004')" minWidth="100" align="center" />
                     <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center">
                         <template slot-scope="scope">
@@ -123,6 +127,7 @@ export default {
                 status:0,
                 card_no:"",
                 task_name:"",
+                account:"",
                 total:0,
                 offset:1,
                 limit:100
@@ -165,6 +170,7 @@ export default {
 	methods: {
         restQueryBtn(){
             this.factorModel.card_no="";
+            this.factorModel.account="";
             this.getPayOrderList(1)
             this.$refs.serveTable.clearSelection();
         },
@@ -176,7 +182,8 @@ export default {
                 page: this.factorModel.page,
                 limit: this.factorModel.limit,
                 status:this.factorModel.status,
-                card_no:this.factorModel.card_no
+                card_no:this.factorModel.card_no,
+                account:this.factorModel.account
             }
 			getwithdrawapprovallist(params).then(res =>{
                 this.loading = false;

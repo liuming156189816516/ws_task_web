@@ -23,20 +23,20 @@
                 :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
                 @selection-change="handleSelectionChange" @handlePageSize="switchPage">
                 <u-table-column type="index" :label="$t('sys_g020')" width="60" />
-                <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130" />
+                <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130"/>
                 <u-table-column prop="type" :label="$t('sys_m066')" minWidth="100">
                     <template slot="header">
-                        <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
-                        <span style="color:#909399" :class="[task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
-                            <i class="el-icon-arrow-down el-icon--right" />
-                        </span>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
-                        </el-dropdown-menu>
+                        <el-dropdown trigger="click" size="medium" @command="(command) => handleNewwork(command)">
+                            <span style="color:#909399" :class="{'dropdown_title':task_type}"> {{ $t('sys_m066') }}
+                                <i class="el-icon-arrow-down el-icon--right" />
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                            </el-dropdown-menu>
                         </el-dropdown>
                     </template>
                     <template slot-scope="scope">
-                        {{ taskOption[scope.row.type] }}
+                        {{ taskOption[scope.row.type] }} {{task_type}}
                     </template>
                 </u-table-column>
                 <u-table-column prop="num" :label="$t('sys_m067')" minWidth="130" />

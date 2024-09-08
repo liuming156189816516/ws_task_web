@@ -167,6 +167,12 @@ export default {
     home_128:"Registro diario",
     home_129:"Día{value}",
     home_130:"Día{value}",
+    home_131:"Inicia sesión ahora",
+    home_132:"Inicio de sesión completado",
+    home_133:"Iniciando sesión...",
+    home_134:"Tarea del editor",
+    home_135:"Ver",
+    home_136:"Cuantos más miembros haya en el grupo, más puntos obtendrás",
 
 
     spre_001:"Profit from sharing",

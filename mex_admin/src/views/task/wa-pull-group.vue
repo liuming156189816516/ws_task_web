@@ -13,7 +13,7 @@
           <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
         </el-form-item>
         <el-form-item>
-          <el-date-picker v-model="model1.ipCtime" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+          <el-date-picker v-model="model1.ipCtime" type="datetimerange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
         </el-form-item>
         <!-- <el-form-item>
           <el-button type="warning" :disabled="checkIdArry.length==0" @click="handleGroupBtn(1)">{{ $t('sys_rai081') }}</el-button>
@@ -223,6 +223,8 @@ export default {
       this.loading = true;
       const sTime = this.model1.ipCtime;
       this.model1.page = num ? num : this.model1.page;
+      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0]):-1;
+      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1]):-1;
       let params = {
         page: this.model1.page,
         limit: this.model1.limit,
@@ -230,8 +232,8 @@ export default {
         // account: this.model1.account,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,
-        start_time: sTime ? this.$baseFun.resetTime(sTime[0], 1) : -1,
-        end_time: sTime ? this.$baseFun.resetTime(sTime[1], 2) : -1
+        start_time: start_time,
+        end_time: end_time
       }
       getcreategroupinfolist(params).then(res => {
         this.loading = false;

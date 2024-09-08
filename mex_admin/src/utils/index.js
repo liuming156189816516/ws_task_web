@@ -368,10 +368,16 @@ export function mexicoTime(date, type){
   var Year = myDate.getFullYear(); //获取年
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
   var Dates = myDate.getDate(); //获取日
+  var Hour = myDate.getHours(); //获取小时
+  var Minute = myDate.getMinutes(); //获取分
+  var Seconds = myDate.getSeconds(); //获取秒
   if(type == 1){
     Time = Year + "-" + Month + "-" + Dates + " 08:00:00";
-  }else if(2){
+  }else if(type == 2){
     Time = Year + "-" + Month + "-" + (Dates+1) + " 07:59:59";
+  }else{
+    Time = Year + "-" + Month + "-"+ Dates +" "+ (Hour+8)+":"+Minute+":"+Seconds;
+    // console.log(Time);
   }
   let Afr_time = Time.toLocaleString('en-US', { timeZone: 'America/Mexico_City' });
   return Date.parse(Afr_time)/1000

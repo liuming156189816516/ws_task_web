@@ -211,8 +211,8 @@ export default {
     },
     async exportBtn(){
       const sTime = this.model1.ipCtime;
-      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0]):-1;
-      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1]):-1;
+      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0],3):-1;
+      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1],3):-1;
       let params = {
         account: this.model1.account,
         status: this.model1.status||-1,

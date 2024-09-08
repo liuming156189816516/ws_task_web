@@ -7,7 +7,7 @@
                     <span class="lable_text">{{ $t('pay_006') }}</span>
                     <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_006')})" :border="false" />
                 </div>
-                <div class="user_info bank_account" @click="showBank(0)">
+                <div class="user_info bank_account">
                     <span class="lable_text">{{ $t('pay_033') }}</span>
                     <div class="flex-between">
                         <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
@@ -54,6 +54,14 @@
             <div class="button_area">
                 <van-button type="primary" @click="submitBtn" :loading="isLoading">{{ $t('other_015') }}</van-button>
             </div>
+            <div class="tip w_f flex-item flex-dir-c">
+                <div class="cash_adverice">
+                    <div class="title-tip w_f mb_10 font_34">{{ $t('other_008') }}</div>
+                    <div class="title_item font_30">
+                        <van-tag type="warning" /> {{$t('pay_035')}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -68,7 +76,7 @@ export default {
             bank_id:"",
             bankName:"",
             bankCode:"",
-            accountType:"",
+            accountType:"CLABE",
             collectCard:"",
             collectName:"",
             openBranch:"",
@@ -112,7 +120,7 @@ export default {
                 this.bankName = bank_name||"";
                 this.collectCard = card_no||"";
                 this.collectName = payee_name||"";
-                this.accountType = account_type||"";
+                // this.accountType = account_type||"CLABE";
             })
         },
         showBank(idx){
@@ -178,7 +186,6 @@ export default {
 <style lang="scss" scoped>
 .person_c {
     width: 100%;
-    height: 100%;
     float: left;
     font-size: 28px;
     background-color: #f2f2f2;
@@ -296,6 +303,15 @@ export default {
         .van-button--info{
             opacity: 0.75;pointer-events: none;
         }
+    }
+}
+.cash_adverice{
+    margin-top: 60px;
+    .title-tip{
+        font-weight: bold;
+    }
+    .title_item{
+        color: $home-title-15;
     }
 }
 </style>

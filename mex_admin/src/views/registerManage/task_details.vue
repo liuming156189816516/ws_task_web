@@ -19,19 +19,25 @@
         <!-- 分组管理 -->
         <div class="continer_main">
             <div class="group_continer">
-                <!-- <div class="tab_check_warp">
-                    <i slot="reference" class="el-icon-info"></i>
-                    <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
-                </div> -->
-                <u-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading"
-                    element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
+                <u-table :data="accountDataList" :row-key="new Date()" use-virtual border height="760" v-loading="loading"
+                    element-loading-spinner="el-icon-loading" style="width: 100%;" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
-                    @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
+                    @selection-change="handleSelectionChange" @handlePageSize="switchPage">
                     <u-table-column type="index" :label="$t('sys_g020')" width="60" />
                     <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130" />
                     <u-table-column prop="type" :label="$t('sys_m066')" minWidth="100">
+                        <template slot="header">
+                            <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
+                            <span style="color:#909399" :class="[task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
+                                <i class="el-icon-arrow-down el-icon--right" />
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                            </el-dropdown-menu>
+                            </el-dropdown>
+                        </template>
                         <template slot-scope="scope">
-                            {{taskOption[scope.row.type]||"-" }}
+                            {{ taskOption[scope.row.type] }}
                         </template>
                     </u-table-column>
                     <u-table-column prop="num" :label="$t('sys_m067')" minWidth="130" />
@@ -60,6 +66,7 @@ export default {
             l_account: "",
             task_time: "",
             loading:false,
+            task_type:"",
             checkIdArry:[],
             checkAccount:[],
             accountDataList:[],
@@ -96,6 +103,10 @@ export default {
             this.initTaskList(1)
             // this.$refs.serveTable.clearSelection();
         },
+        handleNewwork(type){
+            this.task_type=type;
+            this.initTaskList(1)
+        },
         initTaskList(num) {
             this.loading = true;
             this.page = num || this.page;
@@ -105,6 +116,7 @@ export default {
                 limit: this.limit,
                 account:this.account,
                 l_account:this.l_account,
+                type:this.task_type||-1,
                 start_time: sTime ? this.$baseFun.mexicoTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.mexicoTime(sTime[1], 2) : -1
             }

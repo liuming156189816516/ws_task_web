@@ -22,7 +22,7 @@
                 <el-popover placement="bottom" width="500" :offset="195" v-model="visible">
                     <div class="custom_popover">
                         <div class="select_01 select_02" style="margin-bottom: 10px;">
-                            <div v-for="(genre,index) in screenSelect">
+                            <div v-for="(genre,index) in screenSelect" :key="index">
                                 <el-row :gutter="10" style="display: flex; align-items: center; margin-bottom: 10px;">
                                     <el-col :span="24">
                                         <el-col :span="8">
@@ -263,7 +263,7 @@
                     </u-table-column>
                     <u-table-column prop="account_type" :label="$t('sys_l057')" minWidth="100">
                         <template slot="header">
-                            <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,3)">
+                            <el-dropdown trigger="click" size="medium" @command="(command) => handleNewwork(command,3)">
                                 <span style="color:#909399" :class="[model1.account_type?'dropdown_title':'']"> {{ $t('sys_l057') }}
                                     <i class="el-icon-arrow-down el-icon--right" />
                                 </span>

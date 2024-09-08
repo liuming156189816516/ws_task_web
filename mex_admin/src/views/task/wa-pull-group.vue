@@ -229,8 +229,8 @@ export default {
       this.loading = true;
       const sTime = this.model1.ipCtime;
       this.model1.page = num ? num : this.model1.page;
-      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0]):-1;
-      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1]):-1;
+      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0],3):-1;
+      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1],3):-1;
       let params = {
         page: this.model1.page,
         limit: this.model1.limit,

@@ -186,18 +186,22 @@ export default {
         }else{
             // this.initRuleTips();
             this.$store.dispatch('User/actionReport',1)
-            this.taskOption= this.$Helper.defaultOption();
+            this.taskOption = this.$Helper.defaultOption();
         }
     },
     methods: {
         handleScroll(){
-            // const scrollTop = this.$refs.warpBox;
-            // const navHeight = this.$refs.navTop.clientHeight;
-            // if(scrollTop.scrollTop >= navHeight){
-            //     this.filexTop = true;
-            // }else{
-            //     this.filexTop = false;
-            // }
+            console.log(this.taskOption.length);
+            
+            if (this.taskOption&&this.taskOption.length>2) {
+                const scrollTop = this.$refs.warpBox;
+                const navHeight = this.$refs.navTop.clientHeight;
+                if(scrollTop.scrollTop >= navHeight){
+                    this.filexTop = true;
+                }else{
+                    this.filexTop = false;
+                } 
+            }
         },
         
         initHandle(){
@@ -353,7 +357,7 @@ export default {
         position: fixed;
         top: 0;
         z-index: 1000;
-        animation: slide-up .5s ease-in-out forwards;
+        animation: slide-up .3s ease-in-out forwards;
     }
     .apk_fixed{
         top: 80px;

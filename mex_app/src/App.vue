@@ -55,7 +55,7 @@ export default {
 		this.hasTabBar = !!hasTabBar;
 		this.showNavBar = this.$Helper.checkBrowser();
 		const VERSION_TIME = Date.parse(new Date());
-		// console.log(VERSION_TIME);
+		console.log(VERSION_TIME);
 	},
 	 mounted(){
 		this.customHeader("#31acf2");

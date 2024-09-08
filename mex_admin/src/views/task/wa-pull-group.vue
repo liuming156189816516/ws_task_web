@@ -217,9 +217,8 @@ export default {
         start_time: start_time,
         end_time: end_time
       }
-      console.log(params);
-      // let { data:{url} } = await dooutexcel(params);
-      // window.location.href = url;
+      let { data:{url} } = await dooutexcel(params);
+      window.location.href = url;
     },
     //获取订单列表
     getTaskList(num) {

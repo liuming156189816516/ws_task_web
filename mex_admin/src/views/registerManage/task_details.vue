@@ -24,7 +24,7 @@
                 @selection-change="handleSelectionChange" @handlePageSize="switchPage">
                 <u-table-column type="index" :label="$t('sys_g020')" width="60" />
                 <u-table-column prop="account" :label="$t('sys_m065')" minWidth="130"/>
-                <u-table-column prop="type" sortable :label="$t('sys_m066')" minWidth="100">
+                <u-table-column prop="type" :label="$t('sys_m066')" minWidth="100">
                     <template slot="header">
                         <el-dropdown trigger="click" size="medium" @command="(command) => handleNewwork(command)">
                             <span style="color:#909399" :class="{'dropdown_title':task_type}"> {{ $t('sys_m066') }}
@@ -581,9 +581,6 @@ export default {
 }
 .loading_icon{
     margin-top: 10px;
-}
-::v-deep .plTableBox .el-table .caret-wrapper{
-    display: none !important;
 }
 </style>
 <style lang="scss">

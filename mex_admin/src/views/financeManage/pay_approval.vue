@@ -7,7 +7,7 @@
                     <el-input v-model="factorModel.account" clearable placeholder="请输入用户账号" style="width:180px;"></el-input>
 				</el-form-item>
                 <el-form-item>
-                    <el-input v-model="factorModel.card_no" clearable placeholder="请输入用户账号" style="width:180px;"></el-input>
+                    <el-input v-model="factorModel.card_no" clearable placeholder="请输入提现账号" style="width:180px;"></el-input>
 				</el-form-item>
 				<!-- <el-form-item class="change_new_time">
 					<el-date-picker size="small" v-model="factorModel.dateArry" type="daterange" value-format="yyyy-MM-dd" range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期" style='width:240px'>

@@ -16,7 +16,7 @@
           <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
         </el-form-item>
         <el-form-item>
-          <el-date-picker v-model="model1.ipCtime" type="datetimerange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+          <el-date-picker v-model="model1.ipCtime" value-format="yyyy-MM-dd HH:mm:ss" type="datetimerange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
         </el-form-item>
         <!-- <el-form-item>
           <el-button type="warning" :disabled="checkIdArry.length==0" @click="handleGroupBtn(1)">{{ $t('sys_rai081') }}</el-button>
@@ -46,14 +46,29 @@
           <el-table-column prop="app_account" label="用户账号" minWidth="100" />
           <el-table-column prop="account" label="拉群账号" width="140" />
           <el-table-column prop="ad_account" label="营销账号" width="120" />
-          <el-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
+          <!-- <el-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
             <template slot-scope="scope">
               {{taskOption[scope.row.task_type]||"-" }}
             </template>
+          </el-table-column> -->
+          <el-table-column prop="task_type" :label="$t('sys_m066')" minWidth="130">
+              <template slot="header">
+                  <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">
+                  <span style="color:#909399" :class="[model1.task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
+                      <i class="el-icon-arrow-down el-icon--right" />
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item :class="{'dropdown_selected':idx==model1.task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                  </el-dropdown-menu>
+                  </el-dropdown>
+              </template>
+              <template slot-scope="scope">
+                  {{ taskOption[scope.row.task_type] }}
+              </template>
           </el-table-column>
           <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
             <template slot="header">
-              <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
+              <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">
                 <span style="color:#909399" :class="[model1.status ? 'dropdown_title' : '']"> {{ $t('sys_c005') }}
                   <i class="el-icon-arrow-down el-icon--right" />
                 </span>
@@ -162,6 +177,7 @@ export default {
         ipCtime: "",
         invite_link: "",
         ad_account: "",
+        task_type:""
       },
       taskForm:{
         relpy_type:"",
@@ -205,6 +221,7 @@ export default {
       this.model1.account = "";
       this.model1.ipCtime = "";
       this.model1.invite_link = "";
+      this.model1.task_type = "";
       this.model1.ad_account = "";
       this.getTaskList(1);
       // this.$refs.serveTable.clearSelection();
@@ -238,6 +255,7 @@ export default {
         account: this.model1.account,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,
+        task_type:this.model1.task_type||-1,
         start_time: start_time,
         end_time: end_time
       }
@@ -266,8 +284,12 @@ export default {
       }
       refsElTable.toggleRowSelection(row, true);
     },
-    handleNewwork(val) {
-      this.model1.status = val;
+    handleNewwork(val,idx) {
+      if(idx === 1){
+        this.model1.task_type = val;
+      }else{
+        this.model1.status = val;
+      }
       this.getTaskList();
     },
     limitChange(val) {

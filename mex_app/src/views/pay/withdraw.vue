@@ -15,7 +15,7 @@
 							<img src="@/assets/images/gold_icon.png">
 							{{ WithdMoney || 0 }}≈{{ income_naira || 0 }}<span>{{ $t('pay_024') }}</span>
 						</div>
-						<div class="btn-withdraw">
+						<div class="btn_withdraw">
 							<van-button type="primary" @click="submitBtn">{{ $t('pay_005') }}</van-button>
 						</div>
 					</div>
@@ -316,7 +316,7 @@ export default {
 							border-left: 1px solid #cccccc;
 						}
 					}
-					.btn-withdraw {
+					.btn_withdraw {
 						width: 100%;
 						float: left;
 						padding: 0 50px;

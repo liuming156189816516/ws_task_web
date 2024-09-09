@@ -11,7 +11,7 @@
                 </div>
             </div> -->
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="@/assets/video/1.mp4" />
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/1.mp4" />
                 <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
                     <img src="@/assets/images/serveic/play_icon.png" alt="">
                 </div> -->
@@ -53,6 +53,10 @@
                     </div> -->
 
                     <div class="task_item w_f flex-item flex-dir-c font_34">
+                        <div class="right_refresh flex-item font_24" @click="refreshBtn">
+                            <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="../../assets/images/home/shuaxin.png"> 
+                            {{$t('other_035')}}
+                        </div>
                         <div class="task_name w_f flex-item">
                             <img src="@/assets/images/home/num1_icon.png">
                         </div>
@@ -86,7 +90,7 @@
                                 <!-- <span class="flex-item flex-center">{{ item.ser_no }}</span> -->
                                 <span :class="['flex-item flex-center',item.status==4?'':'']" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
                                 <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
-                                <span class="record_click flex-item" @click="showResult(item)" v-text="item.status==4?$t('home_135'):'...'"></span>
+                                <span :class="['flex-item',item.status==4?'record_click':'']" @click="showResult(item)" v-text="item.status==4?$t('home_135'):'...'"></span>
                             </div>
                         </van-list>
                     </div>
@@ -134,6 +138,7 @@ export default {
             target_url:'',
             chrome_url:'',
             isLoading:false,
+            ref_loading:false,
             taskTime: null,
             taskList:[],
             pullGroupList:[]
@@ -175,7 +180,6 @@ export default {
         async getGroupMess(){
            let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
-        //    console.log(groupData);
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
@@ -186,6 +190,9 @@ export default {
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         //    localStorage.setItem('task_id',this.task_id);
         },
+        refreshBtn(){
+            this.getIncomeList();
+        },
         onLoad(){
             if(this.page >= this.page_total){
                 this.finished = true;
@@ -195,8 +202,10 @@ export default {
             }
         },
         getIncomeList(){
+            this.ref_loading = true;
+            this.pullGroupList = [];
             getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:2}).then(res => {
-                this.loading = false;
+                setTimeout(()=>{this.ref_loading = false;},500)
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
             })
@@ -218,8 +227,8 @@ export default {
                 let result = this.$Helper.aesDecrptHost(res);
                 if(result.code) return;
                 this.group_link ="";
+                this.getIncomeList();
                 this.$toast(this.$t("home_039"));
-                // this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
                 let scrollTop = this.$refs.warpBox;
                 scrollTop.scrollTo({top: 0,behavior: "instant" });
             })
@@ -378,10 +387,32 @@ export default {
                 // background-position: 0 40px;
                 .task_item{
                     height: 240px;
+                    position: relative;
                     padding: 16px 0 0 20px;
                     box-sizing: border-box;
                     background: url('../../assets/images/home/task_icon.png') no-repeat;
                     background-size: 100% 100%;
+                    .right_refresh{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        flex-shrink: 0;
+                        .refres_icon{
+                            height: 32px;
+                            margin-right: 10px;
+                        }
+                        .refres_animat{
+                            animation: rotate 2s linear infinite;
+                        }
+                        @keyframes rotate {
+                            from {
+                                transform: rotate(0deg);
+                            }
+                            to {
+                                transform: rotate(720deg);
+                            }
+                        }
+                    }
                     .task_name{
                         margin-top: 8px;
                         img{

@@ -11,14 +11,20 @@
                 </div>
             </div> -->
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="@/assets/video/2.mp4" />
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/2.mp4" />
                 <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
                     <img src="@/assets/images/serveic/play_icon.png" alt="">
                 </div> -->
             </div>
             <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">
-                    <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
+                    <div class="w_f flex-item flex-between">
+                        <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
+                        <div class="right_refresh flex-item font_24" @click="refreshBtn">
+                            <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="../../assets/images/home/shuaxin.png"> 
+                            {{$t('other_035')}}
+                        </div>
+                    </div>
                     <div class="w_f flex-item flex-between">
                         <div class="task_item">
                             <p class="task_text font_24">{{$t('home_107')}}</p>
@@ -88,18 +94,18 @@
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('tail_003')}}</span>
-                    <span class="flex-item flex-center">{{$t('home_031')}}</span>
                     <span class="flex-item flex-center">{{$t('tail_008')}}</span>
                     <span class="flex-item">{{$t('spre_012')}}</span>
+                    <span class="flex-item">{{$t('home_022')}}</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                                 <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                                <span class="flex-item flex-center">{{ item.ser_no }}</span>
                                 <span :class="['flex-item flex-center',item.status==4?'record_click':'']" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}" @click="showResult(item)">{{statusOption[item.status]}}</span>
                                 <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
+                                <span :class="['flex-item',item.status==4?'record_click':'']" @click="showResult(item)" v-text="item.status==4?$t('home_135'):'...'"></span>
                             </div>
                         </van-list>
                     </div>
@@ -147,6 +153,7 @@ export default {
             target_url:'',
             chrome_url:'',
             isLoading:false,
+            ref_loading:false,
             taskTime: null,
             taskList:[],
             pullGroupList:[]
@@ -188,7 +195,6 @@ export default {
         async getGroupMess(){
            let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
-        //    console.log(groupData);
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
@@ -199,6 +205,10 @@ export default {
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         //    localStorage.setItem('task_id',this.task_id);
         },
+        refreshBtn(){
+            this.getGroupMess();
+            this.getIncomeList();
+        },
         onLoad(){
             if(this.page >= this.page_total){
                 this.finished = true;
@@ -208,8 +218,10 @@ export default {
             }
         },
         getIncomeList(){
+            this.ref_loading = true;
+            this.pullGroupList = [];
             getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:1}).then(res => {
-                this.loading = false;
+                setTimeout(()=>{this.ref_loading = false;},500)
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
             })
@@ -228,7 +240,7 @@ export default {
             submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
                 this.isLoading=false;
                 if(res.code) return;
-                this.getGroupMess();
+                this.refreshBtn();
                 this.$toast(this.$t("home_039"));
                 this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
                 let scrollTop = this.$refs.warpBox;
@@ -265,7 +277,7 @@ export default {
         },
         showResult(row){
             if(row.status == 4){
-                this.$popDialog({ content:row.Reason, title:this.$t('other_088'), type: 8 })
+                 this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
             }
             // this.$store.dispatch('User/actionReport',9);
         },
@@ -343,9 +355,24 @@ export default {
                         font-weight: bold;
                         margin-bottom: 20px;
                     }
-                    // .task_sure_time{
-                    //     flex-grow: 2;
-                    // }
+                    .right_refresh{
+                        flex-shrink: 0;
+                        .refres_icon{
+                            height: 32px;
+                            margin-right: 10px;
+                        }
+                        .refres_animat{
+                            animation: rotate 2s linear infinite;
+                        }
+                        @keyframes rotate {
+                            from {
+                                transform: rotate(0deg);
+                            }
+                            to {
+                                transform: rotate(720deg);
+                            }
+                        }
+                    }
                 }
                 .task_text{
                     color: $home-title-06;
@@ -511,17 +538,9 @@ export default {
             //     border-top-left-radius: 20px;
             //     border-top-right-radius: 20px;
             // }
-            span:nth-child(1){
-                flex-grow: 1.3;
-                flex-shrink: 0;
-                // background-color: darkblue;
-            }
-            span:nth-child(2){
-                flex-grow: 1.6;
-                // background-color: salmon;
-            }
             span:nth-child(3){
-                flex-grow: 1.2;
+                // flex-grow: 0.8;
+                justify-content: center;
             }
             span:nth-child(4){
                 flex-grow: 0.8;
@@ -536,6 +555,7 @@ export default {
                 border-bottom: 1px solid transparent;
             }
             .record_click{
+                color: $home-copay-title;
                 text-decoration: underline;
             }
             .empty_box{

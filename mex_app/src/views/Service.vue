@@ -88,22 +88,6 @@ export default {
         menuOption(){
             return [this.$t('serv_007'),this.$t('serv_008'),this.$t('serv_009'),this.$t('serv_010'),this.$t('serv_011')]
         },
-        videoOption(){
-            return [
-                {
-                    url:require("../assets/video/1.mp4"),
-                    name:this.$t('serv_013')
-                },
-                {
-                    url:require("../assets/video/2.mp4"),
-                    name:this.$t('serv_014')
-                },
-                {
-                    url:require("../assets/video/3.mp4"),
-                    name:this.$t('serv_015')
-                }
-            ]
-        },
         taskRuleOption(){
             return [
                 [this.$t('serv_007'),this.$t('serv_017'),this.$t('serv_018')],

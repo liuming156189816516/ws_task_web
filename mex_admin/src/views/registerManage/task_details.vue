@@ -20,10 +20,10 @@
         <el-table :data="accountDataList" border height="760" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange">
             <el-table-column type="index" :label="$t('sys_g020')" width="80" />
             <el-table-column prop="account" :label="$t('sys_m065')" minWidth="130" />
-            <el-table-column prop="status" :label="$t('sys_l059')" minWidth="130">
+            <el-table-column prop="type" :label="$t('sys_m066')" minWidth="130">
                 <template slot="header">
                     <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
-                    <span style="color:#909399" :class="[task_type?'dropdown_title':'']"> {{ $t('sys_l059') }}
+                    <span style="color:#909399" :class="[task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
                         <i class="el-icon-arrow-down el-icon--right" />
                     </span>
                     <el-dropdown-menu slot="dropdown">

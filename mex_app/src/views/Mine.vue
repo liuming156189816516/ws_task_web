@@ -32,9 +32,7 @@
                     <div class="draw_tips font_22" v-else-if="userInfo.balance>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">{{$t('mine_014',{value:withdrawalNum})}}</div>
                     <div class="draw_tips font_22" v-else-if="userInfo.balance<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
                         <p class="w_f flex-item flex-align flex-center">{{$t('mine_014',{value:withdrawalNum})}}</p>
-                        <!-- <p>{{$t('mine_015',{value:minWithdrawal-userInfo.balance})}}</p> -->
                     </div>
-                    <!-- <div class="draw_tips font_22" v-if="userInfo.balance/20<minWithdrawal">You are only {{ minWithdrawal-userInfo.balance }} away from withdrawing. Keep pushing, complete the tasks, and the generous bonus will be within your reach</div> -->
                 </div>
             </div>
             <div class="self_jinbi w_f flex-item">
@@ -62,14 +60,11 @@
                         <span class="font_32">{{$t(item.name)}}</span>
                     </div>
                     <div class="right_icon" @touchstart.stop="handleJump(item,idx)">
-                        <img src="../assets/images/home/xiala_icon.png" alt="" srcset="">
+                        <img src="@/assets/images/home/xiala_icon.png" alt="" srcset="">
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="login_out">
-            <van-button type="primary" @click="logoutHandle">{{ $t("other_010") }}</van-button>
-        </div> -->
     </div>
 </template>
 <script>
@@ -119,20 +114,9 @@ export default {
         })
     },
     created() {
-        // for (let k = 0; k < this.menuOption.length; k++) {
-        //     let item = this.menuOption[k];
-        //     if (item.path == "/down_apk" && this.$Helper.checkBrowser() && this.$Helper.isAndroid()) {
-        //         item.isShow = true;
-        //     }
-        //     this.$set(this.menuOption,k,item)
-        // }
         this.$store.dispatch('User/getUserIncome');
         this.$store.dispatch('User/getUserHead');
         this.syncInitApi();
-    },
-    mounted(){
-        let scrollTop = this.$refs.warpBox;
-        scrollTop.scrollTo({top: 0,behavior: "instant" });
     },
     methods: {
         syncInitApi(){
@@ -153,18 +137,6 @@ export default {
                 this.withdrawalNum = data2.lave_count;
                 this.minWithdrawal = data2.limit_amount;
                 this.isWithdrawal = data2.limit_count_status;
-                // for (let k = 0; k < this.menuOption.length; k++) {
-                //     let item = this.menuOption[k];
-                //     if(k == 4 && !this.$Helper.checkBrowser()&&!this.$Helper.isAndroid()){
-                //         item.isShow = false;
-                //         item.path = data3.url;
-                //     }
-                //     if(k == 4 && this.$Helper.checkBrowser()&&this.$Helper.isAndroid()){
-                //         item.isShow = true;
-                //         item.path = data3.url;
-                //     }
-                //     this.$set(this.menuOption,k,item)
-                // }
             })
         },
         copySuccess() {
@@ -181,14 +153,7 @@ export default {
             }
         },
         handleJump(val,idx){
-            // if(path == '/down_apk'){
-            //     let link = document.createElement('a');
-            //     link.href = val.path;
-            //     link.setAttribute('download', 'cashcow');
-            //     link.click();
-            // }
-            if(val.path == "/log_out"){
-                // this.logoutHandle();
+            if(val.path === "/log_out"){
                 this.$store.dispatch('Global/isCloseTips',true);
             }else{
                 this.$router.push(val.path);
@@ -206,27 +171,6 @@ export default {
         },
         showIncome(type){
             this.$router.push(`betrecord?type=${type}`);
-        },
-        logoutHandle() {
-            this.$dialog.confirm({
-                // title: this.$t("other_008"),
-                message: this.$t("other_009"),
-                confirmButtonColor: "#ff9600",
-                confirmButtonText: this.$t("other_003"),
-                cancelButtonText: this.$t("other_007")
-            }).then(() => {
-                this.$store.dispatch("User/logoutUser");
-                // try{
-                //     if(this.isAndroid){
-                //         JSInterface.onLoginout();
-                //     }else if(this.isIOS){
-                //         let params = {"method":"onLoginout"};
-                //         window.webkit.messageHandlers.jsCallNativeMethod.postMessage(params);
-                //     }
-                // }catch(e){}
-                // this.$router.push('/home');
-                // this.$router.push("/login")
-            })
         }
     }
 };

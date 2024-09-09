@@ -326,7 +326,8 @@ export default {
             padding: 8px 0 0 12px;
             box-sizing: border-box;
             color: $home-title-09;
-            border-radius: 50%;
+            border-top-right-radius: 36px;
+            border-bottom-right-radius: 36px;
             background: rgba($color: hsl(0, 0%, 0%), $alpha: .3);
         }
         .down_text{

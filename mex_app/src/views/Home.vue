@@ -191,8 +191,6 @@ export default {
     },
     methods: {
         handleScroll(){
-            console.log(this.taskOption.length);
-            
             if (this.taskOption&&this.taskOption.length>2) {
                 const scrollTop = this.$refs.warpBox;
                 const navHeight = this.$refs.navTop.clientHeight;

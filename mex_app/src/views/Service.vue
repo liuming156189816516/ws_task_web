@@ -123,7 +123,6 @@ export default {
             this.limit_amount = limit_amount;
         },
         contactService(idx){
-            console.log(idx);
             if(idx == 1){
                 if(this.$Helper.checkBrowser()){
                     window.open(process.env.VUE_APP_TELEGRAM,"_blank");
@@ -137,7 +136,6 @@ export default {
                     uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
                 }
             }
-           
         },
         showRule(idx){
             let tips = this.taskRuleOption[idx];

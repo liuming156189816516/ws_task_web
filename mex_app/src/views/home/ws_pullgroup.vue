@@ -225,7 +225,6 @@ export default {
             // this.$store.dispatch('User/actionReport',11);
             if(!this.group_link) return this.$toast(this.$t('other_001',{value:this.$t('home_036')})); 
             this.isLoading=true;
-            console.log("8888");
             submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
                 this.isLoading=false;
                 if(res.code) return;

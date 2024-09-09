@@ -31,9 +31,7 @@ export default {
             timestamp: new Date().getTime()
         };
     },
-    created(){
-        console.log('banner list', this.list)
-    },
+    created(){},
     methods: {
         jumpUrl(val){
             if(val.open_url.indexOf("http://") > -1 || val.open_url.indexOf("https://") > -1){

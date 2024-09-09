@@ -125,7 +125,6 @@ export default {
 				}else{
 					this.$router.push('/home');
 				}
-				console.log(this.$Helper.checkBrowser());
 				if(!this.$Helper.checkBrowser()){
 					uniFun.postMessage({data:{type:"apk",uid:localStorage.getItem('uid')}});
 				}

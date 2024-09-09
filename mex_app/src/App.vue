@@ -118,9 +118,6 @@ export default {
 				this.$router.replace('/home');
 				localStorage.removeItem('token');
 			})
-		},
-		handle_update(){
-			console.log(8888);
 		}
 	},
 	watch: {

@@ -16,16 +16,11 @@
         <!-- 分组管理 -->
         <div class="continer_main">
             <div class="group_continer">
-                <!-- <div class="tab_check_warp">
-                    <i slot="reference" class="el-icon-info"></i>
-                    <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
-                </div> -->
-                <u-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading"
+                <u-table :data="accountDataList" row-key="id" use-virtual border height="860" v-loading="loading"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
                     <u-table-column type="index" :label="$t('sys_g020')" width="60" />
-                    <!-- <u-table-column type="selection" width="55" :reserve-selection="true" /> -->
                     <u-table-column prop="head" :label="$t('sys_g021')" minWidth="80">
                         <template slot-scope="scope">
                             <el-avatar v-if="scope.row.head" :src="scope.row.head" />

@@ -190,7 +190,6 @@ export default {
         //    localStorage.setItem('task_id',this.task_id);
         },
         refreshBtn(){
-            this.group_link ="";
             this.getIncomeList();
         },
         onLoad(){

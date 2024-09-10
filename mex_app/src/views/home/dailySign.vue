@@ -229,7 +229,7 @@ export default {
       })
     },
     async submitSgin(){
-      if(!this.isSgin||!this.isTask) return this.$toast(this.$t('home_137'));
+      if(this.isSgin||!this.isTask) return this.$toast(this.$t('home_137'));
       this.isLoading=true;
       setTimeout(()=>{this.isLoading=false;},5000);
       let sginItem = this.sginArry[this.sginLen];

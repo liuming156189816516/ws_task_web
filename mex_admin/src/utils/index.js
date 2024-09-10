@@ -363,7 +363,6 @@ function convertTimeToZone(date, targetTimeZone) {
 
 
 export function mexicoTime(date, type){
-  console.log(date);
   let Time;
   let myDate = new Date(date);
   var Year = myDate.getFullYear(); //获取年

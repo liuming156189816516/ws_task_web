@@ -56,10 +56,11 @@
             <div class="task_main">
                 <div class="task_item" v-for="(item,idx) in menuOption" :key="idx">
                     <div class="left_text">
+                        <!-- <span :class="['notoce_tips',userInfo.sysNotice?'notoce_active':'']" v-if="item.path=='/SysMsg'"></span> -->
                         <img class="ws_icon" :src="require(`@/assets/images/mine/${item.icon}.png`)" alt="">
                         <span class="font_32">{{$t(item.name)}}</span>
                     </div>
-                    <div class="right_icon" @touchstart.stop="handleJump(item,idx)">
+                    <div class="right_icon flex-item" @touchstart.stop="handleJump(item,idx)">
                         <img src="@/assets/images/home/xiala_icon.png" alt="" srcset="">
                     </div>
                 </div>
@@ -92,6 +93,12 @@ export default {
                     name:"mine_011",
                     path:"/putrecord",
                     icon:"task_icon"
+                },
+                {
+                    isShow:true,
+                    name:"mine_020",
+                    path:"/SysMsg",
+                    icon:"news_icon"
                 },
                 {
                     isShow:true,
@@ -328,18 +335,24 @@ export default {
             background-color: $font-color-white;
             .task_item {
                 width: 100%;
+                height: 120px;
                 display: flex;
-                padding: 20px 20px;
+                padding: 0 20px;
                 align-items: center;
                 box-sizing: border-box;
                 justify-content: space-between;
                 // border-bottom: 1px solid #ececec;
                 .left_text {
                     display: flex;
+                    position: relative;
                     align-items: center;
                     .ws_icon {
                         height: 40px;
                         margin-right: 10px;
+                    }
+                    .notoce_tips{
+                        top: -2px;
+                        left: 30px;   
                     }
                 }
                 .right_icon{

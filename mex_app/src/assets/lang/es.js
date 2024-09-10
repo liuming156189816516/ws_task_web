@@ -196,6 +196,7 @@ export default {
     mine_017:"Ganancias de ayer",
     mine_018:"Notas",
     mine_019:"Contraseña antigua",
+    mine_020:"Mensajes del sistema",
 
     pay_001:"Retirar efectivo",
     pay_002:"Retirar efectivo a tarjeta bancaria",

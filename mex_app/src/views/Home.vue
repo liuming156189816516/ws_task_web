@@ -176,6 +176,7 @@ export default {
             this.$store.dispatch('Global/isShowLogin',{type:2,isShow:true})
         })
         this.$store.dispatch('User/plantCarousel');
+        // this.$store.dispatch('User/getSysNotice');
     },
     activated() {
         this.filexTop = false;
@@ -268,6 +269,7 @@ export default {
             if (row.type == 2) {
                 this.$router.push(path);
             }else{
+                // this.$router.push(path);
                 this.$router.push(`${path}?id=${row.task_info_id}`);
             }
         },

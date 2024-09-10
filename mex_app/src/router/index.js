@@ -15,6 +15,7 @@ const PutRecord = () => import('../views/mine/PutRecord')
 const finshTask = () => import('../views/mine/finshTask')
 const BetRecord = () => import('../views/mine/BetRecord')
 const SysMsg = () => import('../views/mine/SysMsg')
+const MsgDetail = () => import('../views/mine/MsgDetail')
 const ResetPwd = () => import('../views/mine/ResetPwd')
 const luckyWheel = () => import('../views/home/luckyWheel')
 const dailySign = () => import('../views/home/dailySign')
@@ -26,10 +27,11 @@ const Deposit = () => import('../views/pay/deposit')
 const NoFound = () => import('../views/404');
 //我的头像
 const MyHead = () => import('../views/home/myhead');
-const scanOnline = () => import('../views/home/scan_online');
 const pullgroupTask = () => import('../views/home/ws_pullgroup');
 const pullPownTask = () => import('../views/home/ws_pullpower');
 const pulledTask = () => import('../views/home/ws_pulledTask');
+const scanOnline = () => import('../views/home/scan_online');
+const codeOnline = () => import('../views/home/code_online');
 Vue.use(VueRouter);
 
 const routes = [{
@@ -141,6 +143,17 @@ const routes = [{
         }
     },
     {
+        path: "/codeOnline",
+        name: "codeOnline",
+        component: codeOnline,
+        meta: {
+            hasTabBar: false,
+            title: "扫码上线赚钱",
+            requireAuth: true,
+            index: 1
+        }
+    },
+    {
         path: "/pullgroupTask",
         name: "pullgroupTask",
         component: pullgroupTask,
@@ -225,7 +238,7 @@ const routes = [{
         component: BetRecord,
         meta: {
             showNavBar: false,
-            title: "投注详情"
+            title: "提现纪录"
         }
     },
     {
@@ -234,7 +247,7 @@ const routes = [{
         component: ResetPwd,
         meta: {
             showNavBar: false,
-            title: "投注详情"
+            title: "修改密码"
         }
     },
     {
@@ -243,7 +256,16 @@ const routes = [{
         component: SysMsg,
         meta: {
             showNavBar: false,
-            title: "投注详情"
+            title: "系统消息"
+        }
+    },
+    {
+        path: "/msgDetail",
+        name: "msgDetail",
+        component: MsgDetail,
+        meta: {
+            showNavBar: false,
+            title: "系统消息"
         }
     },
     {

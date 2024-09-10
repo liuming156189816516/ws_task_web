@@ -46,7 +46,7 @@ export default {
     home_005:"开始任务",
     home_006:"进行中",
     home_007:"结算中",
-    home_008:"已结束",
+    home_008:"完成",
     home_009:"WhatsApp挂机任务",
     home_010:"WhatsApp拉粉任务",
     home_011:"WhatsApp拉群任务",
@@ -198,6 +198,7 @@ export default {
     mine_017:"昨日收益",
     mine_018:"注意事项",
     mine_019:"旧密码",
+    mine_020:"系统消息",
 
     pay_001:"提现",
     pay_002:"提现到银行卡",

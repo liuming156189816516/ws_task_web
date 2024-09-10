@@ -4,6 +4,7 @@
 			<div class="six-tabbar-item"  v-for="(item,idx) in tabBarList" :key="idx" @touchstart.stop="handlePage(item.path)">
 				<div class="item_bg">
 					<img class="icon-cl" :class="{'animate__animated animate__rotateIn':$route.path.includes(item.path)}" :src="$route.path.includes(item.path)?item.active:item.inactive" alt="icons" />
+					<!-- <span :class="['notoce_tips',userInfo.sysNotice?'notoce_active':'']" v-if="item.path=='/mine'"></span> -->
 				</div>
 				<div class="tabbar_name font_24" >
 					<span :class="{active: $route.path.includes(item.path)}" >{{$t(item.name)}}</span>
@@ -13,6 +14,7 @@
 	</div>
 </template>
 <script>
+import { mapState } from 'vuex';
 import { getToken } from '@/utils/tool';
 export default {
     data() {
@@ -47,6 +49,14 @@ export default {
 			]
         }
     },
+	computed: {
+        ...mapState({
+            userInfo: state => state.User,
+        })
+	},
+	// created(){
+	// 	console.log(this.userInfo);
+	// },
     methods: {
         handlePage(path) {
 			if(this.$route.path !== '/login'&&!getToken()){
@@ -101,15 +111,8 @@ export default {
 				color: $color-theme;
 				font-weight: bold;
 			}
-			.unread_news {
-				width: 12px;
-				height: 12px;
-				position: absolute;
-				top: 12px;
-				right: 55px;
-				background-color: red;
-				border-radius: 50%;
-				box-sizing: border-box;
+			.item_bg{
+				position: relative;
 			}
 		}
 	}

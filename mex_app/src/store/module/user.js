@@ -18,6 +18,7 @@ export default {
 		baseBanner: window.localStorage.getItem('baseBanner')||null,
 		baseNotice: window.localStorage.getItem('baseNotice')||null,
 		inviteCode: window.localStorage.getItem('inviteCode')||null,
+		sysNotice: window.localStorage.getItem('sysNotice')||null,
 		config: {
 			ex_rate: 3,
 			first_point: 0,
@@ -105,6 +106,10 @@ export default {
 			state.balance = data.income;
 			window.localStorage.setItem('baseBalance ',data.income);
 		},
+		store_notice(state, data) {
+			state.sysNotice = true;
+			window.localStorage.setItem('sysNotice ',true);
+		},
 		clear_token(state){
 			state.uid = "";
 			state.token = null;
@@ -189,6 +194,18 @@ export default {
 				}).catch(error => {
 					reject(error)
 				})
+			})
+		},
+		getSysNotice({ commit }) {
+			return new Promise((resolve, reject) => {
+				commit('store_notice', true);
+				resolve();
+				// getaccountincome().then(res => {
+				// 	commit('store_notice', res);
+				// 	resolve();
+				// }).catch(error => {
+				// 	reject(error)
+				// })
 			})
 		},
 		logoutClear({ commit }) {

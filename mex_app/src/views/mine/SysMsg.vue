@@ -1,6 +1,6 @@
 <template>
-    <div class="detailDetail" @click="showDropDown=false">
-        <page-header :title="$t('title_006')" :show-icon="true" :bgcolor="false"></page-header>
+    <div class="detailDetail">
+        <page-header :title="$route.meta.title" :show-icon="true" :bgColor="true"></page-header>
         <!-- <div class="tab_bar">
             <van-tabs :active="curIndex" @change="changeTab">
                 <van-tab :title="item.title" v-for="(item,index) in noticArry" :key="index"></van-tab>
@@ -10,7 +10,7 @@
             <div class="item-box" v-if="list.length>0">
                 <div v-for="(item,index) in list" :key="index" class="item-wrap"  @click="jumpDetail(item,tab_active)">
                     <div class="left">
-                        <img src="../../assets/images/mine/mine-msg-icon.png" alt />
+                        <img src="/assets/images/mine/empty_icon.png" alt />
                         <span class="redIcon" v-if="item.status===0"></span>
                     </div>
                     <div class="right">
@@ -39,7 +39,6 @@
     </div>
 </template>
 <script>
-// import { msglist, readmsg } from "../../api/user";
 import PageHeader from "../../components/Header";
 export default {
     components: { PageHeader },
@@ -47,10 +46,10 @@ export default {
         return {
             curIndex:0,
             list: [
-                    // {
-                    //     title:"系统熊爱心",type:0,time:'2022-12-31',
-                    //     text:'有时兼有议论、描写、评论等。新闻是包含海量资讯的新闻服务平台，真实反映每时每刻的重要事件。可以通过查看新闻事件、热点话题、人物动态、产品资讯等,快速了解它们的最新进展。'
-                    // }
+                    {
+                        title:"系统熊爱心",type:0,time:'2022-12-31',
+                        text:'有时兼有议论、描写、评论等。新闻是包含海量资讯的新闻服务平台，真实反映每时每刻的重要事件。可以通过查看新闻事件、热点话题、人物动态、产品资讯等,快速了解它们的最新进展。'
+                    }
                 ],
             tab_active: 0,
             loading: false,
@@ -77,7 +76,7 @@ export default {
         // if(sessionStorage.getItem("messType") != undefined && sessionStorage.getItem("messType") != null){
         //     this.curIndex = Number(sessionStorage.getItem("messType"));
         // }
-        this.getList();
+        // this.getList();
     },
     methods: {
         getList() {
@@ -101,23 +100,24 @@ export default {
         jumpDetail(item) {
             item.type = this.curIndex == 0 ? 1:0;
             let params = { type: item.type, id: item.id, ptype: 0 };
-            if (item.status == 1) {
-                return this.roterMsg(item);
-            } else {
-                readmsg(params).then(res => {
-                    this.roterMsg(item);
-                });
-            }
+            // if (item.status == 1) {
+            //     return this.roterMsg(item);
+            // } else {
+            //     readmsg(params).then(res => {
+            //         this.roterMsg(item);
+            //     })
+            // }
+            this.roterMsg(item);
         },
         roterMsg(item) {
-            this.moveNews.$emit("moveState", "指令");
-            this.$router.push({
-                name: "NoticeDetail",
-                params: {
-                    data: item,
-                    name: this.tab_active == 0 ? this.$t("buy_021") : this.$t("buy_021")
-                }
-            });
+            this.$router.push("/msgDetail")
+            // this.$router.push({
+            //     name: "msgDetail",
+            //     params: {
+            //         data: item,
+            //         name: this.tab_active == 0 ? this.$t("buy_021") : this.$t("buy_021")
+            //     }
+            // })
         },
         read_all() {
             let params = {

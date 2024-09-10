@@ -87,10 +87,9 @@
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                                 <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                                <!-- <span class="flex-item flex-center">{{ item.ser_no }}</span> -->
-                                <span :class="['flex-item flex-center',item.status==4?'':'']" :style="{color:item.status==2?'#008751':item.status==3?'#ff9600':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                                <span class="flex-item flex-center" :style="{color:item.status==2?'#ff9600':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
                                 <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
-                                <span :class="['flex-item',item.status==4?'record_click':'']" @click="showResult(item)" v-text="item.status==4?$t('home_135'):'...'"></span>
+                                <span :class="['flex-item',item.status==4?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
                             </div>
                         </van-list>
                     </div>
@@ -150,10 +149,10 @@ export default {
             bannerList: state => state.User.bannerList
 		}),
         taskOption(){
-            return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('home_008')]
+            return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('home_008'),this.$t('pay_032')]
         },
         statusOption(){
-            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008')]
+            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008'),this.$t('pay_032')]
         },
         winNotis(){
             return this.$Helper.randomStrings(100)

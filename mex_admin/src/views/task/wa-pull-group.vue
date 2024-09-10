@@ -194,7 +194,7 @@ export default {
   },
   computed: {
     statusOptions(){
-      return ["","开始任务","进行中","结算中","已结束"]
+      return ["","开始任务","进行中","结算中","成功","失败"]
     },
     taskOption(){
       return ["","拉群","拉粉"]

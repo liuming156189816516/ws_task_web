@@ -174,6 +174,7 @@ export default {
       index: null,
       sginLen:null,
       isSgin:true,
+      isTask:false,
       isLoading:false,
       sginDay:[1,2,3],
       sginArry:[
@@ -209,6 +210,7 @@ export default {
         // console.log(res);
         this.sginDay = res.type||[];
         this.isSgin = res.is_sign;
+        this.isTask = res.is_task;
         this.sginLen = this.sginDay.length;
         if(this.sginDay.length>0){
           for (let k = 0; k < this.sginArry.length; k++) {
@@ -227,6 +229,7 @@ export default {
       })
     },
     async submitSgin(){
+      if(!this.isSgin||!this.isTask) return this.$toast(this.$t('home_137'));
       this.isLoading=true;
       setTimeout(()=>{this.isLoading=false;},5000);
       let sginItem = this.sginArry[this.sginLen];

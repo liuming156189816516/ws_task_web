@@ -119,6 +119,9 @@ export default {
     home_133:"Registrarse...",
     home_134:"La tarea de atraer fans",
     home_135:"Controlar",
+    home_136:"Cuantos más miembros haya en el grupo, más puntos obtendrás",
+    home_137:"Puedes iniciar sesión después de completar la tarea.",
+    home_138:"群组中的成员越多，您获得的积分就越多",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -332,7 +335,7 @@ export default {
     other_081: "1. Después de completar la tarea, podrás tener una oportunidad de jugar a la ruleta todos los días",
     other_082: "2. Después de ganar el premio en monedas de oro, las ganancias se distribuirán inmediatamente a su cuenta",
     other_083: "3. Después de ganar el premio de la suerte, contacta al servicio de atención al cliente para obtener tu recompensa",
-    other_084: "1. Los usuarios pueden iniciar sesión todos los días para obtener monedas de oro",
+    other_084: "1. Después de completar la tarea, podrá obtener una oportunidad de iniciar sesión todos los días.",
     other_085: "2. Sólo iniciando sesión continuamente podrás obtener las monedas de oro correspondientes",
     other_086: "3. Si olvida iniciar sesión, el sistema se restablecerá al inicio de sesión del primer día",
     other_087:"Afortunado",

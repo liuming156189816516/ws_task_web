@@ -5,9 +5,9 @@
             <template v-if="curIndex==1">
                 <div class="user_info">
                     <span class="lable_text">{{ $t('pay_006') }}</span>
-                    <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_006')})" :border="false" />
+                    <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_006')})" oninput="value=value.replace(/[^\d]/g,'')" :border="false" />
                 </div>
-                <div class="user_info bank_account">
+                <div class="user_info bank_account" @click="showBank(0)">
                     <span class="lable_text">{{ $t('pay_033') }}</span>
                     <div class="flex-between">
                         <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
@@ -76,7 +76,7 @@ export default {
             bank_id:"",
             bankName:"",
             bankCode:"",
-            accountType:"CLABE",
+            accountType:"",
             collectCard:"",
             collectName:"",
             openBranch:"",
@@ -120,7 +120,7 @@ export default {
                 this.bankName = bank_name||"";
                 this.collectCard = card_no||"";
                 this.collectName = payee_name||"";
-                // this.accountType = account_type||"CLABE";
+                this.accountType = account_type||"";
             })
         },
         showBank(idx){
@@ -156,6 +156,8 @@ export default {
             }
             this.bank_id?params.id=this.bank_id:"";
             if(this.curIndex==1&&!this.collectCard){
+                return this.$toast(this.$t('other_001',{value:this.$t('pay_006')}))
+            }else if(this.collectCard.length!=16&&this.collectCard.length!=18){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_006')}))
             }else if(this.curIndex==1&&!this.accountType){
                 return this.$toast(this.$t('other_014',{value:this.$t('pay_033')}))

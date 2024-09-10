@@ -105,7 +105,7 @@
                                 <span class="flex-item">{{ formatTime(item.itime) }}</span>
                                 <span class="flex-item flex-center" :style="{color:item.status==2?'#ff9600':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
                                 <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
-                                <span :class="['flex-item',item.status==4?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
+                                <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
                             </div>
                         </van-list>
                     </div>

@@ -46,7 +46,7 @@ export default {
     home_005:"Iniciar tarea",
     home_006:"En progreso",
     home_007:"Liquidación en curso",
-    home_008:"Terminado",
+    home_008:"Finalizar",
     home_009:"Tarea inactiva de WhatsApp",
     home_010:"Tarea seguidores de WhatsApp",
     home_011:"Tarea grupal de WhatsApp",

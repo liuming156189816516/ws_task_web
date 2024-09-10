@@ -165,10 +165,10 @@ export default {
             bannerList: state => state.User.bannerList
 		}),
         taskOption(){
-            return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('home_008'),this.$t('pay_032')]
+            return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
         },
         statusOption(){
-            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('home_008'),this.$t('pay_032')]
+            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
         },
         winNotis(){
             return this.$Helper.randomStrings(100)

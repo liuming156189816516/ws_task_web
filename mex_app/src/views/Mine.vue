@@ -54,13 +54,13 @@
         </div>
         <div class="task_continer w_f flex-item flex-dir-c">
             <div class="task_main">
-                <div class="task_item" v-for="(item,idx) in menuOption" :key="idx">
+                <div class="task_item" v-for="(item,idx) in menuOption" :key="idx" @click.stop="handleJump(item,idx)">
                     <div class="left_text">
                         <!-- <span :class="['notoce_tips',userInfo.sysNotice?'notoce_active':'']" v-if="item.path=='/SysMsg'"></span> -->
                         <img class="ws_icon" :src="require(`@/assets/images/mine/${item.icon}.png`)" alt="">
                         <span class="font_32">{{$t(item.name)}}</span>
                     </div>
-                    <div class="right_icon flex-item" @touchstart.stop="handleJump(item,idx)">
+                    <div class="right_icon flex-item">
                         <img src="@/assets/images/home/xiala_icon.png" alt="" srcset="">
                     </div>
                 </div>
@@ -94,12 +94,12 @@ export default {
                     path:"/putrecord",
                     icon:"task_icon"
                 },
-                {
-                    isShow:true,
-                    name:"mine_020",
-                    path:"/SysMsg",
-                    icon:"news_icon"
-                },
+                // {
+                //     isShow:true,
+                //     name:"mine_020",
+                //     path:"/SysMsg",
+                //     icon:"news_icon"
+                // },
                 {
                     isShow:true,
                     name:"mine_012",

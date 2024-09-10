@@ -190,6 +190,7 @@ export default {
         //    localStorage.setItem('task_id',this.task_id);
         },
         refreshBtn(){
+            this.group_link ="";
             this.getIncomeList();
         },
         onLoad(){
@@ -197,14 +198,14 @@ export default {
                 this.finished = true;
             }else{
                 this.page++;
-                this.getIncomeList()
+                this.getIncomeList();
             }
         },
         getIncomeList(){
             this.ref_loading = true;
             this.pullGroupList = [];
             getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:2}).then(res => {
-                setTimeout(()=>{this.ref_loading = false;},500)
+                setTimeout(()=>{this.ref_loading = false;},500);
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
             })
@@ -222,10 +223,9 @@ export default {
             this.isLoading=true;
             submitgrouplinktask({invite_link:this.group_link}).then(res =>{
                 this.isShow = true;
-                this.isLoading=false;
+                this.isLoading = false;
                 let result = this.$Helper.aesDecrptHost(res);
                 if(result.code) return;
-                this.group_link ="";
                 this.getIncomeList();
                 this.$toast(this.$t("home_039"));
                 let scrollTop = this.$refs.warpBox;
@@ -261,7 +261,7 @@ export default {
             link.click();
         },
         showResult(row){
-            if(row.status == 4){
+            if(row.status == 4||row.status == 5){
                 this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
             }
             // this.$store.dispatch('User/actionReport',9);

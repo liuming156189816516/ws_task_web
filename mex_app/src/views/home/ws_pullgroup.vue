@@ -276,7 +276,7 @@ export default {
             link.click();
         },
         showResult(row){
-            if(row.status == 4){
+            if(row.status == 4||row.status == 5){
                 this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
             }
             // this.$store.dispatch('User/actionReport',9);

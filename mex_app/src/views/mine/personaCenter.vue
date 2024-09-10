@@ -157,8 +157,10 @@ export default {
             this.bank_id?params.id=this.bank_id:"";
             if(this.curIndex==1&&!this.collectCard){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_006')}))
-            }else if(this.collectCard.length!=16&&this.collectCard.length!=18){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_036')}))
+            }else if(this.accountType=="BANK"&&this.collectCard.length!=16){
+                return this.$toast(this.$t('other_001',{value:this.$t('pay_036',{value:16})}))
+            }else if(this.accountType=="CLABE"&&this.collectCard.length!=18){
+                return this.$toast(this.$t('other_001',{value:this.$t('pay_036',{value:18})}))
             }else if(this.curIndex==1&&!this.accountType){
                 return this.$toast(this.$t('other_014',{value:this.$t('pay_033')}))
             }else if(this.curIndex==2&&!this.collectCard){

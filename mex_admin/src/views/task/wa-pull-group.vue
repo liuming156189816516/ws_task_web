@@ -74,7 +74,7 @@
               </el-dropdown>
             </template>
             <template slot-scope="scope">
-              <el-tag size="small" :type="scope.row.status == 2 ? 'success' : scope.row.status == 3 ? 'danger' : ''"> {{ statusOptions[scope.row.status] }}</el-tag>
+              <el-tag size="small" :type="scope.row.status == 2 ? 'success' : scope.row.status == 3 ? 'warning' :scope.row.status == 5 ? 'danger': ''"> {{ statusOptions[scope.row.status] }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="members" label="群成员" minWidth="120" show-overflow-tooltip />

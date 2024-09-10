@@ -230,7 +230,7 @@ export default {
     spre_019:"Tamaño del equipo",
     pay_030:"En progreso",
     pay_031:"Éxito",
-    pay_032:"Error",
+    pay_032:"fallar",
     pay_033:"Tipo de cuenta",
     pay_034:"{value} oro",
     pay_035:"Agregue una cuenta de pago basada en la información de pago real. Si ocurre un error, la cuenta no podrá acreditarse",

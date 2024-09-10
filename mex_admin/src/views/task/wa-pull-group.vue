@@ -46,11 +46,6 @@
           <el-table-column prop="app_account" label="用户账号" minWidth="100" />
           <el-table-column prop="account" label="拉群账号" width="140" />
           <el-table-column prop="ad_account" label="营销账号" width="120" />
-          <!-- <el-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
-            <template slot-scope="scope">
-              {{taskOption[scope.row.task_type]||"-" }}
-            </template>
-          </el-table-column> -->
           <el-table-column prop="task_type" :label="$t('sys_m066')" minWidth="130">
               <template slot="header">
                   <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">

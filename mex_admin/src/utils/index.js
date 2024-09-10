@@ -375,10 +375,8 @@ export function mexicoTime(date, type){
     Time = Year + "-" + Month + "-" + (Dates+1) + " 07:59:59";
   }else if(type == 3){
     let Afr_time = date.toLocaleString('en-US', { timeZone: 'America/Mexico_City' });
-    console.log((Date.parse(Afr_time)/1000));
-    return Afr_time;
-    // let formatMexico = (Date.parse(Afr_time)/1000) + (16 * 3600);
-    // return formatMexico;
+    let formatMexico = (Date.parse(Afr_time)/1000) + (16 * 3600);
+    return formatMexico;
   }
   let Afr_time = Time.toLocaleString('en-US', { timeZone: 'America/Mexico_City' });
   return Date.parse(Afr_time)/1000

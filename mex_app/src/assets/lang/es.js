@@ -237,6 +237,7 @@ export default {
     pay_033:"Tipo de cuenta",
     pay_034:"{value} oro",
     pay_035:"Agregue una cuenta de pago basada en la información de pago real. Si ocurre un error, la cuenta no podrá acreditarse",
+    pay_036:"cuenta bancaria correcta",
 
     tail_001:"Detalles de ingresos",
     tail_002:"tipo",

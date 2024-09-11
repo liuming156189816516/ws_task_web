@@ -1,7 +1,8 @@
 import router from '../../router/';
 import { getincome,getaccountincome } from'@/api/home'
 import scehelper from '@/utils/helper';
-import { login,register,getcarousellist,gethead,buriedpoint } from '@/api/login';
+import { getusermessagelstatus } from '@/api/home';
+import { login,register,getcarousellist,gethead } from '@/api/login';
 // import { buriedpoint,buriedpointlogout } from '@/api/login';
 export default {
 	namespaced: true,
@@ -107,8 +108,8 @@ export default {
 			window.localStorage.setItem('baseBalance ',data.income);
 		},
 		store_notice(state, data) {
-			state.sysNotice = true;
-			window.localStorage.setItem('sysNotice ',true);
+			state.sysNotice = data;
+			window.localStorage.setItem('sysNotice ',data);
 		},
 		clear_token(state){
 			state.uid = "";
@@ -198,14 +199,13 @@ export default {
 		},
 		getSysNotice({ commit }) {
 			return new Promise((resolve, reject) => {
-				commit('store_notice', true);
 				resolve();
-				// getaccountincome().then(res => {
-				// 	commit('store_notice', res);
-				// 	resolve();
-				// }).catch(error => {
-				// 	reject(error)
-				// })
+				getusermessagelstatus().then(res => {
+					commit('store_notice', res.status);
+					resolve();
+				}).catch(error => {
+					reject(error)
+				})
 			})
 		},
 		logoutClear({ commit }) {

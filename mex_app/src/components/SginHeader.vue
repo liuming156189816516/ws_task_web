@@ -8,6 +8,7 @@
                 <span class="sign_bt flex-item flex-align flex-center" @click="jumpPage(1)">{{lanageType($t('login_014'))}}</span>
             </div>
             <div class="user_info flex-item flex-align" v-else>
+                <img :class="['msg_icon',!userInfo.sysNotice?'notoce_active':'']" src="@/assets/images/xiaoxi.png" @click="jumpMsg">
                 <img src="@/assets/images/gold_icon.png"> <span class="font_28" style="font-weight: bold;">{{userInfo.balance}}</span>
             </div>
         </div>
@@ -26,6 +27,9 @@ export default {
         jumpPage(idx){
             let path = ['/login','/register']
             this.$router.push(path[idx]);
+        },
+        jumpMsg(){
+            this.$router.push("/SysMsg");
         },
         lanageType(val){
             let langeType = Cookies.get("language");
@@ -63,6 +67,10 @@ export default {
             }
             span{
                 margin-left: 10px;
+            }
+            .msg_icon{
+                height: 48px;
+                margin-right: 10px;
             }
         }
     }

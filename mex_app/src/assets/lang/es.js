@@ -121,7 +121,7 @@ export default {
     home_135:"Controlar",
     home_136:"Cuantos más miembros haya en el grupo, más puntos obtendrás",
     home_137:"Puedes iniciar sesión después de completar la tarea.",
-    home_138:"群组中的成员越多，您获得的积分就越多",
+    home_138:"Mensaje del sitio del sistema",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

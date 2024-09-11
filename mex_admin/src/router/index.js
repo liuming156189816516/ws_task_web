@@ -533,6 +533,14 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_q138'),
         }
+      },
+      {
+        path: '/sysMessage',
+        component: () => import('@/views/bannerManage/sysMessage'),
+        name: 'sysMessage',
+        meta: {
+          title:i18n.t('sys_q138'),
+        }
       }
     ]
   },

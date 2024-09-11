@@ -3,49 +3,46 @@
         <page-header :title="$route.meta.title" :show-icon="true" :bgColor="true" />
         <div class="detail">
             <div class="d_header">
-                <div class="tit">{{cnt.title}}</div>
-                <div class="date">{{cnt.time}}</div>
+                <div class="tit">{{ n_detail.name }}</div>
+                <div class="date">{{ formatTime(n_detail.itime) }}</div>
             </div>
-            <div class="cnt" v-if="cnt.type == 0">
-                <div v-html="cnt.text" class="innerTxt" v-if="cnt.type == 0"></div>
-            </div>
-            <div class="cnt" v-if="cnt.type == 1">
+            <div class="cnt">{{n_detail.content}}</div>
+            <!-- <div class="cnt" v-if="cnt.type == 1">
                 <div v-if="cnt.url == ''" v-html="cnt.text" class="innerTxt"></div>
                 <img v-else :src="cnt.url" alt="">
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 <script>
-import PageHeader from "../../components/Header";
+import { formatTime } from "@/utils/tool";
+import { getmessagelbyid } from '@/api/home'
+import PageHeader from "@/components/Header";
 export default {
     components: { PageHeader },
     data() {
         return {
-            title: "",
-            cnt: {
-                type:0,
-                title: "hello", //客服和公告的标题、
-                time:"2024-09-10 11:08:29",
-                text: "习近平在全国教育大会上发表重要讲话 代表党中央向全国广大教师和教育工作者致以节日祝贺和诚挚问候",
-            }
+            n_id: "",
+            n_detail:""
         };
     },
     created() {
-        // this.cnt = this.$route.params.data;
-        // console.log(this.$route.meta.title);
-        
+        this.n_id = this.$route.query._id;
+        this.getNoticeList();
     },
-    methods: {}
+     methods: {
+        getNoticeList() {
+            getmessagelbyid({id:this.n_id}).then(res => {
+                this.n_detail = res;
+            })
+        },
+        formatTime(time) {
+            return formatTime(time,1);
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
-.title{
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
 .detail {
     flex: 1;
     overflow: hidden;
@@ -77,27 +74,12 @@ export default {
             text-align: right;
         }
     }
-
     .cnt {
         font-weight: 400;
         font-size: 28px;
         color: #000000;
         line-height: 1.6;
-        padding-bottom: 30px;
-        flex: 1;
-        overflow: auto;
-        .innerTxt {
-            margin-top: 20px;
-            padding-bottom: 30px;
-            word-wrap: break-word;
-        }
-        img{
-            display: table;
-            width: 6.2rem;
-            height: 7rem;
-            margin: 0 auto;
-            margin-top: 20px;
-        }
+        margin-top: 30px;
     }
 }
 </style>

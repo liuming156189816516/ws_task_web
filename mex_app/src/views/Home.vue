@@ -169,21 +169,15 @@ export default {
         }
     },
     created(){
-        this.moveNews.$on("login-env",res=>{
-            this.initHandle();
-        })
-        this.moveNews.$on("login-cover",res=>{
-            this.$store.dispatch('Global/isShowLogin',{type:2,isShow:true})
-        })
         this.$store.dispatch('User/plantCarousel');
-        // this.$store.dispatch('User/getSysNotice');
     },
     activated() {
         this.filexTop = false;
         if(getToken()){
             this.initHandle();
             this.$store.dispatch('User/getUserIncome');
-            this.$store.dispatch('User/actionReport',1)
+            this.$store.dispatch('User/actionReport',1);
+            this.$store.dispatch('User/getSysNotice');
         }else{
             // this.initRuleTips();
             this.$store.dispatch('User/actionReport',1)

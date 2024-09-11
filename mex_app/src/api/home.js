@@ -65,6 +65,19 @@ export const getsigninfo = (param) => {
 export const dosign = (param) => {
     return request({url: '/account/dosign',method: 'post',data:param})
 }
+export const getmessagellist = (params)=> {
+    return request({url:'/account/getmessagellist',method:'post',data:params})
+}
+export const getusermessagelstatus = (params)=> {
+    return request({url:'/account/getusermessagelstatus',method:'post',data:params})
+}
+export const dousermessagel = (params)=> {
+    return request({url:'/account/dousermessagel',method:'post',data:params})
+}
+export const getmessagelbyid = (params)=> {
+    return request({url:'/account/getmessagelbyid',method:'post',data:params})
+}
+
 
 
 

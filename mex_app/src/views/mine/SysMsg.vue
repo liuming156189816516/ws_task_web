@@ -7,117 +7,86 @@
             </van-tabs>
         </div> -->
         <div class="msg-main">
-            <div class="item-box" v-if="list.length>0">
-                <div v-for="(item,index) in list" :key="index" class="item-wrap"  @click="jumpDetail(item,tab_active)">
-                    <div class="left">
-                        <img src="/assets/images/mine/empty_icon.png" alt />
-                        <span class="redIcon" v-if="item.status===0"></span>
-                    </div>
-                    <div class="right">
-                        <div class="adver_content">
-                            <h4 class="adver_title" :title="item.title">{{item.title}}</h4>
-                            <span class="adver_time">{{item.time}}</span>
+            <div class="empty_tips flex-item flex-align" v-if="loading">
+                <van-loading size="24px">{{ $t('other_029') }}</van-loading>
+            </div>
+            <template>
+                <div class="item-box" v-if="noticeList&&noticeList.length>0">
+                    <div v-for="(item,index) in noticeList" :key="index" class="item-wrap"  @click="jumpDetail(item,tab_active)">
+                        <div class="left">
+                            <img src="../../assets/images/xiaoxi.png" alt />
+                            <span class="redIcon" v-if="!item.status"></span>
                         </div>
-                        <!-- <div class="adver_content">
-                            <span class="adver_time">{{item.time}}</span>
-                        </div> -->
-                        <template v-if="curIndex == 0">
-                            <img v-if="item.tip_msg_type == 1 && item.url !=''" class="adver_img" :src="item.url" alt=" ">
-                            <div v-else class="adver_descr">{{item.text}}</div>
-                        </template>
-                        <template v-else-if="curIndex == 1">
-                            <div class="adver_descr">{{item.text}}</div>
-                        </template>
+                        <div class="right">
+                            <div class="adver_content">
+                                <h4 class="adver_title">{{item.name}}</h4>
+                                <span class="adver_time">{{ formatTime(item.itime) }}</span>
+                            </div>
+                            <div class="adver_descr">{{item.content}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div v-else>
-				<van-empty :description="$t('home_064')" />
-			</div>
+                <div v-else>
+                    <van-empty :description="$t('tail_010')" />
+                </div>
+            </template>
         </div>
     </div>
 </template>
 <script>
-import PageHeader from "../../components/Header";
+import { Toast } from 'vant';
+import { formatTime } from "@/utils/tool";
+import PageHeader from "@/components/Header";
+import { getmessagellist,dousermessagel } from '@/api/home'
 export default {
     components: { PageHeader },
     data() {
         return {
             curIndex:0,
-            list: [
-                    {
-                        title:"系统熊爱心",type:0,time:'2022-12-31',
-                        text:'有时兼有议论、描写、评论等。新闻是包含海量资讯的新闻服务平台，真实反映每时每刻的重要事件。可以通过查看新闻事件、热点话题、人物动态、产品资讯等,快速了解它们的最新进展。'
-                    }
-                ],
+            noticeList: [],
             tab_active: 0,
             loading: false,
             finished: false,
             num1: 0,
-            num2: 0
-        };
-    },
-    computed:{
-        noticArry(){
-            return [
-                {
-                    type:0,
-                    title: this.$t("news_002")
-                },
-                {
-                    type:1,
-                    title:this.$t("news_003")
-                }
-            ]
+            num2: 0,
+            noticArry:["news_002","news_003"],
         }
     },
+    computed:{
+        
+    },
     created() {
-        // if(sessionStorage.getItem("messType") != undefined && sessionStorage.getItem("messType") != null){
-        //     this.curIndex = Number(sessionStorage.getItem("messType"));
-        // }
-        // this.getList();
+        this.getNoticeList();
     },
     methods: {
-        getList() {
+        getNoticeList() {
             this.loading = true;
-            msglist({}).then(res => {
-                this.list = res.msg;
-                this.loading = false;
+            getmessagellist().then(res => {
+                setTimeout(()=>{this.loading=false},100)
+                this.noticeList = res.list||[];
             })
+        },
+        formatTime(time) {
+            return formatTime(time,1);
         },
         // 信息类型切换
         changeTab(idx){
             this.curIndex = idx;
-            sessionStorage.setItem("messType",idx);
-            this.list = [];
-            this.getList();
+            this.noticeList = [];
+            this.getNoticeList();
         },
         tab_switch(tab) {
             this.tab_active = tab;
             this.onLoad();
         },
-        jumpDetail(item) {
+        async jumpDetail(item) {
             item.type = this.curIndex == 0 ? 1:0;
             let params = { type: item.type, id: item.id, ptype: 0 };
-            // if (item.status == 1) {
-            //     return this.roterMsg(item);
-            // } else {
-            //     readmsg(params).then(res => {
-            //         this.roterMsg(item);
-            //     })
-            // }
-            this.roterMsg(item);
-        },
-        roterMsg(item) {
-            this.$router.push("/msgDetail")
-            // this.$router.push({
-            //     name: "msgDetail",
-            //     params: {
-            //         data: item,
-            //         name: this.tab_active == 0 ? this.$t("buy_021") : this.$t("buy_021")
-            //     }
-            // })
+            if(item.status){
+
+            }
+            !item.status?await dousermessagel({id:item.id}):"";
+            this.$router.push({path:'/msgDetail',query:{ _id:item.id}});
         },
         read_all() {
             let params = {
@@ -127,7 +96,7 @@ export default {
             };
             readmsg(params).then(res => {
                 this.$toast(this.$t("other_006"));
-                this.getList();
+                this.getNoticeList();
             }).catch(e => {
                 this.$toast(this.$t("other_007"));
             });
@@ -177,13 +146,11 @@ export default {
                 .redIcon {
                     width: 20px;
                     height: 20px;
-                    float: left;
                     background: red;
                     border-radius: 50%;
-                    font-size: 0;
                     position: absolute;
-                    top: 10px;
-                    right: 5px;
+                    top: -8px;
+                    right: -6px;
                 }
             }
             .right {
@@ -196,10 +163,13 @@ export default {
                     font-weight: 600;
                     justify-content: space-between;
                     .adver_title{
-                        float: left;
+                        max-width: 230px;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                    }
+                    .adver_time{
+                        font-weight: normal;
                     }
                 }
                 .adver_descr{

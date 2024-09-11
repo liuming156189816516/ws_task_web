@@ -1,5 +1,6 @@
 import store from "../store/";
 import Home from "../views/Home.vue";
+import { i18n } from '@/assets/lang'
 import Footer from "../components/Footer";
 // const initPath = window.localStorage.getItem('token') && window.localStorage.getItem("prologin")? "/home" : "/login";
 const Login = () => import('../views/sign/login');
@@ -256,7 +257,7 @@ const routes = [{
         component: SysMsg,
         meta: {
             showNavBar: false,
-            title: "系统消息"
+            title:i18n.t('home_138')
         }
     },
     {
@@ -265,7 +266,7 @@ const routes = [{
         component: MsgDetail,
         meta: {
             showNavBar: false,
-            title: "系统消息"
+            title:i18n.t('home_138')
         }
     },
     {

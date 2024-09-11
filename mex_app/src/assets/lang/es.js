@@ -201,7 +201,8 @@ export default {
     mine_018:"Notas",
     mine_019:"Contraseña antigua",
     mine_020:"Mensajes del sistema",
-    mine_020:"Aún quedan <span style='color:#31acf2;'>{gold}</span> monedas de oro antes de <span class='vip_g' style='color:#FFCC00;'>VIP{vip}</span>",
+    mine_021:"Aún quedan <span style='color:#31acf2;'>{gold}</span> monedas de oro antes de <span class='vip_g' style='color:#FFCC00;'>VIP{vip}</span>",
+    mine_022:"puntos acumulados: <span style='color:#31acf2;'>{value}</span> oro",
 
     pay_001:"Retirar efectivo",
     pay_002:"Retirar efectivo a tarjeta bancaria",

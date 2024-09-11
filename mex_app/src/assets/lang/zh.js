@@ -202,7 +202,8 @@ export default {
     mine_018:"注意事项",
     mine_019:"旧密码",
     mine_020:"系统消息",
-    mine_020:"距离<span class='vip_g' style='color:#FFCC00;'>VIP{vip}</span>还差<span style='color:#31acf2;'>{gold}</span>个金币",
+    mine_021:"距离<span class='vip_g' style='color:#FFCC00;'>VIP{vip}</span>还差<span style='color:#31acf2;'>{gold}</span>个金币",
+    mine_022:"累计积分：<span style='color:#31acf2;'>{value}</span>",
 
     pay_001:"提现",
     pay_002:"提现到银行卡",

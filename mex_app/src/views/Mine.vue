@@ -18,7 +18,7 @@
                         <img src="@/assets/images/vip_icon.png" alt="" srcset="">
                         <p class="font_34">VIP{{baseInfo.level}}</p>
                     </div>
-                    <p class="grade_desc font_28" v-html="$t('mine_020',{gold:baseInfo.diferencia,vip:Number(baseInfo.level)+1})"></p>
+                    <p class="grade_desc font_28" v-html="$t('mine_021',{gold:baseInfo.diferencia,vip:Number(baseInfo.level)+1})"></p>
                     <p>
                         <van-progress :percentage="baseInfo.cronograma" :show-pivot="false" track-color="#fff" color="linear-gradient(to right, #FFFF99, #FFD700)" />
                     </p>

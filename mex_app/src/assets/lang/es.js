@@ -122,6 +122,7 @@ export default {
     home_136:"Cuantos más miembros haya en el grupo, más puntos obtendrás",
     home_137:"Puedes iniciar sesión después de completar la tarea.",
     home_138:"Mensaje del sitio del sistema",
+    home_139:"Descarga la APP y guarda tu libreta de contactos con un clic, facilitando la tarea",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -200,6 +201,7 @@ export default {
     mine_018:"Notas",
     mine_019:"Contraseña antigua",
     mine_020:"Mensajes del sistema",
+    mine_020:"Aún quedan {gold} monedas de oro antes de <span class='vip_g' style='color:#FFCC00;'>VIP{vip}</span>",
 
     pay_001:"Retirar efectivo",
     pay_002:"Retirar efectivo a tarjeta bancaria",

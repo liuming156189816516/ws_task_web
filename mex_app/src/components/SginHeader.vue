@@ -9,7 +9,7 @@
             </div>
             <div class="user_info flex-item flex-align" v-else>
                 <img :class="['msg_icon',!userInfo.sysNotice?'notoce_active':'']" src="@/assets/images/xiaoxi.png" @click="jumpMsg">
-                <img src="@/assets/images/gold_icon.png"> <span class="font_28" style="font-weight: bold;">{{userInfo.balance}}</span>
+                <img src="@/assets/images/gold_icon.png"> <span class="font_28" style="font-weight: bold;">{{baseInfo.income}}</span>
             </div>
         </div>
     </div>
@@ -21,6 +21,7 @@ export default {
     computed: {
         ...mapState({
             userInfo: state => state.User,
+            baseInfo: state => state.User.userInfo
         })
     },
     methods: {

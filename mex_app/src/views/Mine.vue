@@ -2,16 +2,26 @@
     <div class="home_warp" ref="warpBox">
         <div class="top_model w_f flex-item flex-dir-c">
             <div class="user_mess w_f flex-item flex-dir-c">
-                <!-- <page-header :title="$t('login_027')" :showBack="false"/> -->
                 <div class="page_title w_f flex-item font_32 flex-center"> {{$t('table_004')}} </div>
                 <div class="w_f flex-item">
-                    <div class="user_head" @click="updateHead">
+                    <div class="user_head">
                         <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
                     </div>
+                    <!-- <img class="vip_icon" src="" alt=""> -->
                     <div class="user_info">
                         <div class="user_name font_32">{{ userInfo.account }}</div>
                         <div class="user_code font_24">{{$t('login_012')}}&nbsp;:&nbsp;<span style="font-weight: bold;">{{userInfo.inviteCode}}</span> <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
                     </div>
+                </div>
+                <div class="user_vip w_f">
+                    <div class="user_grade w_f flex-item flex-align" :class="[baseInfo.level==0?'grade_zome':'']">
+                        <img src="@/assets/images/vip_icon.png" alt="" srcset="">
+                        <p class="font_34">VIP{{baseInfo.level}}</p>
+                    </div>
+                    <p class="grade_desc font_28" v-html="$t('mine_020',{gold:baseInfo.diferencia,vip:Number(baseInfo.level)+1})"></p>
+                    <p>
+                        <van-progress :percentage="baseInfo.cronograma" :show-pivot="false" track-color="#fff" color="linear-gradient(to right, #FFFF99, #FFD700)" />
+                    </p>
                 </div>
             </div>
             <div class="cover_model">
@@ -23,14 +33,14 @@
                         </div>
                         <div class="text_2 flex-item font_48">
                             <!-- <img src="../assets/images/gold_icon.png" alt="" srcset=""> -->
-                            <span>{{userInfo.balance||0.00}}</span>
+                            <span>{{baseInfo.income||0.00}}</span>
                         </div>
                     </div>
-                    <van-button :class="['font_30',userInfo.balance<minWithdrawal||userInfo.balance>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||userInfo.balance<minWithdrawal" @click="goWithdraw">{{$t('other_055')}}</van-button>
-                    <div class="draw_tips font_22" v-if="userInfo.balance>minWithdrawal&&isWithdrawal"> {{$t('mine_014',{value:withdrawalNum})}}</div>
-                    <div class="draw_tips font_22" v-else-if="userInfo.balance<minWithdrawal&&isWithdrawal" style="color:#F52C2C">{{$t('mine_015',{value:minWithdrawal-userInfo.balance})}}</div>
-                    <div class="draw_tips font_22" v-else-if="userInfo.balance>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">{{$t('mine_014',{value:withdrawalNum})}}</div>
-                    <div class="draw_tips font_22" v-else-if="userInfo.balance<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
+                    <van-button :class="['font_30',baseInfo.income<minWithdrawal||baseInfo.income>0&&!isWithdrawal||ser_money<minWithdrawal&&!isWithdrawal?'progress_award':'']" type="primary" :disabled="!isWithdrawal||baseInfo.income<minWithdrawal" @click="goWithdraw">{{$t('other_055')}}</van-button>
+                    <div class="draw_tips font_22" v-if="baseInfo.income>minWithdrawal&&isWithdrawal"> {{$t('mine_014',{value:withdrawalNum})}}</div>
+                    <div class="draw_tips font_22" v-else-if="baseInfo.income<minWithdrawal&&isWithdrawal" style="color:#F52C2C">{{$t('mine_015',{value:minWithdrawal-baseInfo.income})}}</div>
+                    <div class="draw_tips font_22" v-else-if="baseInfo.income>minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">{{$t('mine_014',{value:withdrawalNum})}}</div>
+                    <div class="draw_tips font_22" v-else-if="baseInfo.income<minWithdrawal&&!isWithdrawal" :style="{color:withdrawalNum==0?'#F52C2C':''}">
                         <p class="w_f flex-item flex-align flex-center">{{$t('mine_014',{value:withdrawalNum})}}</p>
                     </div>
                 </div>
@@ -76,6 +86,7 @@ export default {
     name: 'Mine',
     data() {
         return {
+            gradeIdx:0,
             allIncome:"",
             isTotalNum:null,
             minWithdrawal:null,
@@ -117,7 +128,8 @@ export default {
     },
     computed: {
         ...mapState({
-            userInfo: state => state.User
+            userInfo: state => state.User,
+            baseInfo: state => state.User.userInfo
         })
     },
     created() {
@@ -193,7 +205,7 @@ export default {
     -webkit-overflow-scrolling: touch;
     .top_model {
         .user_mess {
-            height: 280px;
+            // height: 280px;
             padding: 0 30px;
             box-sizing: border-box;
             color: $font-color-black;
@@ -215,18 +227,37 @@ export default {
                     height: 100%;
                 }
             }
-
             .user_info {
                 margin-left: 20px;
-                .user_name {
-                    font-weight: bold;
-                }
                 .user_code {
                     margin-top: 10px;
                     .copay_code {
                         padding: 8px 26px;
                         color: $font-color-white;
                         background: $color-theme;
+                    }
+                }
+            }
+            .user_vip{
+                padding-bottom: 20px;
+                .user_grade{
+                    margin-top: 10px;
+                    font-weight: bold;
+                    font-style: italic;
+                    color:$home-gold-value;
+                    img{
+                        height: 36px;
+                    }
+                }
+                .grade_zome{
+                    filter: grayscale(.9);
+                }
+                .grade_desc{
+                    margin: 2px 0 20px 0;
+                    // margin: 20px 0;
+                    color: $home-title-08;
+                    .vip_g{
+                        color: $home-gold-value;
                     }
                 }
             }

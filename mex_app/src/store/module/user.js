@@ -15,7 +15,7 @@ export default {
 		uid:window.localStorage.getItem('uid') || null,
 		token: window.localStorage.getItem('token') || null,
 		account: window.localStorage.getItem('account') || null,
-		balance:window.localStorage.getItem('baseBalance') || 0,
+		userInfo:window.localStorage.getItem('baseUserInfo') || 0,
 		baseBanner: window.localStorage.getItem('baseBanner')||null,
 		baseNotice: window.localStorage.getItem('baseNotice')||null,
 		inviteCode: window.localStorage.getItem('inviteCode')||null,
@@ -31,13 +31,6 @@ export default {
 		},
 		footerGet: [false, false, false],
 		appList: [],
-		userInfo: {
-			vip: 0,
-			up_num:'',
-			lunbo: [],
-			income_rand_infos: [],
-			promote_rand_infos: []
-		},
 		userHeadList: [
 			require('../../assets/images/head/1.png'),
 			require('../../assets/images/head/2.png'),
@@ -104,8 +97,8 @@ export default {
 			// window.localStorage.setItem('baseNotice',data.bulletin_content);
 		},
 		store_balance(state, data) {
-			state.balance = data.income;
-			window.localStorage.setItem('baseBalance ',data.income);
+			state.userInfo = data;
+			window.localStorage.setItem('baseBalance ',data);
 		},
 		store_notice(state, data) {
 			state.sysNotice = data;

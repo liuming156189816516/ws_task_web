@@ -123,6 +123,7 @@ export default {
     home_136:"群组中的成员越多，您获得的积分就越多",
     home_137:"完成任务之后可签到",
     home_138:"系统站内信",
+    home_139:"下载APP，通讯录号码一键保存，任务更简单",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",
@@ -201,6 +202,7 @@ export default {
     mine_018:"注意事项",
     mine_019:"旧密码",
     mine_020:"系统消息",
+    mine_020:"距离<span class='vip_g' style='color:#FFCC00;'>VIP{vip}</span>还差{gold}个金币",
 
     pay_001:"提现",
     pay_002:"提现到银行卡",

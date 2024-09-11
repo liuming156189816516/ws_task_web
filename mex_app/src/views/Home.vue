@@ -145,7 +145,7 @@ export default {
     },
     computed: {
         ...mapState({
-            userInfo: state => state.User,
+            userInfo: state => state.User
             // moticeText: state => state.User.baseInfo.bulletin_content,
         }),
         taskNameOption() {
@@ -153,7 +153,7 @@ export default {
                 {},
                 {name:this.$t('home_089'),live1:1,live2:2,type:1,status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
                 {name:this.$t('home_045'),live1:2,live2:4,type:2,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_044'),live1:2,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_047',{value:7777}),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                {name:this.$t('home_044'),live1:2,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:5,type:4,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
             ]
         },
@@ -168,11 +168,9 @@ export default {
             return lang.name;
         }
     },
-    created(){
-        this.$store.dispatch('User/plantCarousel');
-    },
     activated() {
         this.filexTop = false;
+        this.$store.dispatch('User/plantCarousel');
         if(getToken()){
             this.initHandle();
             this.$store.dispatch('User/getUserIncome');
@@ -293,7 +291,7 @@ export default {
             link.click();
         }
     }
-};
+}
 </script>
 <style lang="scss" scoped>
 .home_warp {
@@ -556,7 +554,7 @@ export default {
                     color: $font-color-black;
                     margin-bottom: 10px;
                     .task_small_title{
-                        width: 68%;
+                        width: 65%;
                         flex-wrap: wrap;
                     }
                     .award_money{

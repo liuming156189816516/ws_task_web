@@ -19,7 +19,7 @@ export default {
 		baseBanner: window.localStorage.getItem('baseBanner')||null,
 		baseNotice: window.localStorage.getItem('baseNotice')||null,
 		inviteCode: window.localStorage.getItem('inviteCode')||null,
-		sysNotice: window.localStorage.getItem('sysNotice')||null,
+		sysNotice: window.localStorage.getItem('sysNotice')||true,
 		config: {
 			ex_rate: 3,
 			first_point: 0,

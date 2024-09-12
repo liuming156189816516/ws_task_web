@@ -230,6 +230,7 @@ export default {
         status: this.model1.status||-1,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,
+        task_type:this.model1.task_type||-1,
         start_time: start_time,
         end_time: end_time
       }

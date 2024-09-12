@@ -266,7 +266,7 @@ export default {
                     span{
                         font-weight: bold;
                         font-style: italic;
-                        letter-spacing: -2px;
+                        letter-spacing: -1px;
                         position: relative;
                         z-index: 3;
                         padding-right: 6px;

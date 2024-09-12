@@ -13,10 +13,12 @@
                         <div class="user_code font_24">{{$t('login_012')}}&nbsp;:&nbsp;<span style="font-weight: bold;">{{userInfo.inviteCode}}</span> <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
                     </div>
                 </div>
-                <div class="user_vip w_f">
-                    <div class="user_grade w_f flex-item flex-align" :class="[baseInfo.level==0?'grade_zome':'']">
-                        <img src="@/assets/images/vip_icon.png" alt="" srcset="">
-                        <p class="font_34">VIP{{baseInfo.level}}</p>
+                <div class="user_vip w_f flex-item flex-dir-c">
+                    <p class="total_gold font_36" v-html="$t('mine_022',{value:baseInfo.his_balance})"></p>
+                    <div class="user_grade flex-item flex-align flex-center font_26" :class="[baseInfo.level==0?'grade_zome':'']">
+                        <span>V{{baseInfo.level}}</span>
+                        <!-- <img src="@/assets/images/mine/vip_icon.png" alt="" srcset=""> -->
+                        <!-- <p class="font_34">VIP{{baseInfo.level}}</p> -->
                     </div>
                     <p class="grade_desc font_28" v-html="$t('mine_021',{gold:baseInfo.diferencia,vip:Number(baseInfo.level)+1})"></p>
                     <p>
@@ -239,23 +241,52 @@ export default {
                 }
             }
             .user_vip{
+                margin: 20px 0;
+                padding: 20px 10px;
+                border-radius: 20px;
+                box-sizing: border-box;
                 padding-bottom: 20px;
-                .user_grade{
-                    margin-top: 10px;
+                position: relative;
+                color: $font-color-white;
+                background: $home-mine-value;
+                .total_gold{
                     font-weight: bold;
-                    font-style: italic;
-                    color:$home-gold-value;
+                }
+                .user_grade{
+                    width: 110px;
+                    height: 71px;
+                    position: absolute;
+                    top: -38px;
+                    right: 20px;
+                    z-index: 1;
+                    margin-top: 10px;
+                    background: url('../assets/images/mine/vip_icon.png') no-repeat;
+                    background-size: 100% 100%;
+                    // color:$home-gold-value;
+                    span{
+                        font-weight: bold;
+                        font-style: italic;
+                        letter-spacing: -2px;
+                        position: relative;
+                        z-index: 3;
+                        padding-right: 6px;
+                        background: linear-gradient(307.11deg,#A38748 88.8%, #785728 14.91%);
+                        // background: linear-gradient(168.91deg, #785728 -69%, #F5E486 -25.53%, #B0803A 5.51%, #B0803A 32.42%, #F5E486 65.53%, #B0803A 102.79%, #F5E486 137.98%);
+                        // background: linear-gradient(307.11deg, #F1DE82 14.91%, #A38748 88.8%);
+                        -webkit-text-fill-color:transparent;
+                        -webkit-background-clip:text;
+                    }
                     img{
-                        height: 36px;
+                        height: 66px;
                     }
                 }
                 .grade_zome{
                     filter: grayscale(.9);
                 }
                 .grade_desc{
-                    margin: 2px 0 20px 0;
+                    margin: 10px 0 20px 0;
                     // margin: 20px 0;
-                    color: $home-title-08;
+                    color: $font-color-white;
                     .vip_g{
                         color: $home-gold-value;
                     }

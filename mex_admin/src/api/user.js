@@ -31,6 +31,10 @@ export const getuserstatis = (params)=> {
 export const getpixellidlist = (params)=> {
   return request({url:'/statis/getpixellidlist',method:'post',data:params})
 }
+export const blacklist = (params)=> {
+  return request({url:'/adminmember/blacklist',method:'post',data:params})
+}
+
 
 
 

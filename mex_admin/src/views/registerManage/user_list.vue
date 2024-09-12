@@ -8,7 +8,11 @@
              <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q134')})" v-model="fuser_name" />
             </el-form-item>
+             <el-form-item>
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_g144')})" v-model="user_ip" />
+            </el-form-item>
             <el-form-item>
+                <el-button type="warning" :disabled="checkIdArry.length==0" icon="el-icon-user" @click="pullBlackBtn">{{ $t('sys_rai076',{value:$t('sys_m107')}) }}</el-button>
                 <el-button type="primary" icon="el-icon-search" @click="initNumberList(1)">{{ $t('sys_c002') }}</el-button>
                 <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
             </el-form-item>
@@ -20,6 +24,7 @@
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
+                     <u-table-column type="selection" width="55" />
                     <u-table-column type="index" :label="$t('sys_g020')" width="60" />
                     <u-table-column prop="head" :label="$t('sys_g021')" minWidth="80">
                         <template slot-scope="scope">
@@ -34,6 +39,21 @@
                         </template>
                     </u-table-column>
                     <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" />
+                    <u-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
+                        <!-- <template slot="header">
+                            <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">
+                            <span style="color:#909399" :class="[status?'dropdown_title':'']"> {{ $t('sys_c005') }}
+                                <i class="el-icon-arrow-down el-icon--right" />
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :class="{'dropdown_selected':idx==status}" v-for="(item,idx) in accountOptions" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                            </el-dropdown-menu>
+                            </el-dropdown>
+                        </template> -->
+                        <template slot-scope="scope">
+                            <el-tag size="small" :type="scope.row.status==1?'success':'danger'"> {{ $t(accountOptions[scope.row.status]) }}</el-tag>
+                        </template>
+                    </u-table-column>
                     <u-table-column prop="invite_code" :label="$t('sys_q133')" minWidth="130" />
                     <u-table-column prop="fuser_name" :label="$t('sys_q134')" minWidth="100">
                         <template slot-scope="scope">
@@ -67,20 +87,22 @@
 </template>
 <script>
 import { successTips, resetPage } from '@/utils/index'
-import { getappuserlist } from '@/api/user'
+import { getappuserlist,blacklist } from '@/api/user'
 export default {
     data() {
         return {
             page: 1,
             limit: 100,
             total: 0,
+            status:"",
             account: "",
+            user_ip: "",
             fuser_name: "",
             loading:false,
             checkIdArry:[],
-            checkAccount:[],
             accountDataList:[],
-            pageOption: resetPage()
+            pageOption: resetPage(),
+            accountOptions:["","sys_l023","sys_c026"]
         }
     },
     computed: {},
@@ -90,8 +112,7 @@ export default {
     },
     methods: {
         handleSelectionChange(row) {
-            this.checkIdArry = row.map(item => { return item.id })
-            this.checkAccount = row.map(item => { return item.account })
+            this.checkIdArry = row.map(item => { return item.uid })
         },
         rowSelectChange(row) {
             let tableCell = this.$refs.serveTable;
@@ -103,8 +124,8 @@ export default {
         },
         restQueryBtn(){
             this.account="";
+            this.user_ip="";
             this.fuser_name="";
-            this.checkAccount = [];
             this.initNumberList(1)
             this.$refs.serveTable.clearSelection();
         },
@@ -114,6 +135,7 @@ export default {
             const params = {
                 page: this.page,
                 limit: this.limit,
+                ip:this.user_ip,
                 account:this.account,
                 fuser_name:this.fuser_name
             }
@@ -140,6 +162,31 @@ export default {
             }
             this.limit = size;
             this.initNumberList();
+        },
+        pullBlackBtn(){
+            let that = this;
+            that.$confirm(that.$t('sys_c046',{value:that.$t('sys_m107')}),that.$t('sys_l013'), {
+                type: 'warning',
+                confirmButtonText: that.$t('sys_c024'),
+                cancelButtonText: that.$t('sys_c023'),
+                beforeClose: function (action, instance, done) {
+                    if (action === 'confirm') {
+                    instance.confirmButtonLoading = true;
+                        blacklist({ids:that.checkIdArry}).then(res=>{
+                            instance.confirmButtonLoading = false;
+                            if (res.code != 0) return;
+                            that.initNumberList();
+                            successTips(that)
+                            done();
+                        })
+                    } else {
+                        done();
+                        instance.confirmButtonLoading = false;
+                    }
+                }
+            }).catch(() => {
+                that.$message({ type: 'info', message: that.$t('sys_c048') });
+            })
         }
     },
     watch:{

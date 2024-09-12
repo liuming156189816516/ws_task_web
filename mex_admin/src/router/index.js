@@ -419,6 +419,15 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_m035')
         }
+      },
+      {
+        hidden: true,
+        path: '/lucky_details',
+        component: () => import('@/views/registerManage/lucky_detail'),
+        name: 'lucky_details',
+        meta: {
+          title:i18n.t('sys_m108')
+        }
       }
     ]
   },

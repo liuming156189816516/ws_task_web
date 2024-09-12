@@ -34,6 +34,11 @@ export const getpixellidlist = (params)=> {
 export const blacklist = (params)=> {
   return request({url:'/adminmember/blacklist',method:'post',data:params})
 }
+export const getlotteryrecordlist = (params)=> {
+  return request({url:'/record/getlotteryrecordlist',method:'post',data:params})
+}
+
+
 
 
 

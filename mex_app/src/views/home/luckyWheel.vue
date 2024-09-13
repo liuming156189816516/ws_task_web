@@ -42,7 +42,7 @@
               <!-- {{$t('home_140')}} -->
               <span class="w_f flex-item flex-align flex-between">
                 <span>{{lucky_id}}</span>
-                <span class="copay_code flex-item flex-align flex-center" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
+                <span class="copay_code flex-item flex-align flex-center" v-clipboard:copy="lucky_id" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
               </span>
             </div>
           </template>

@@ -76,7 +76,7 @@ export default {
 				if(this.currentTIme !== res){
 					clearInterval(this.waitTimer);
 					clearInterval(this.heartTimer);
-					location.reload(true);
+					window.location.reload(true);
 				}
 			})
 		},

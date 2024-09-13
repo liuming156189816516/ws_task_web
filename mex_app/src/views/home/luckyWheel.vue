@@ -27,19 +27,28 @@
           </div>
         </div>
       </div>
-      <div class="lucky_desc flex-item flex-align flex-center flex-dir-c font_28">
-        <div class="win_text flex-item flex-align flex-center" v-if="winGold">
+      <div class="lucky_desc flex-item flex-align flex-center flex-dir-c font_28" v-if="winGold">
+        <div class="win_text w_f flex-item flex-center flex-dir-c">
           <template v-if="winGold=='lucky'">
             <div class="content_service flex-item flex-align">
-              <img src="../../assets/images/win_icon.png">
-              <div class="serve_text flex-item" @click="$Helper.globalSupport()">
-                <span class="flex-item">{{$t('other_077')}}<span class="serveic_line flex-item">{{$t('serv_005')}}</span></span>
+              <img src="@/assets/images/win_icon.png">
+              <div class="serve_text flex-item">
+                <span class="flex-item">{{$t('other_077')}}
+                  <span class="serveic_line flex-item" @click="$Helper.globalSupport()">{{$t('serv_005')}}</span>
+                </span>
               </div>
+            </div>
+            <div class="lucky_code w_f flex-item" v-if="lucky_id">
+              <!-- {{$t('home_140')}} -->
+              <span class="w_f flex-item flex-align flex-between">
+                <span>{{lucky_id}}</span>
+                <span class="copay_code flex-item flex-align flex-center" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
+              </span>
             </div>
           </template>
           <template v-else>
             <div class="content_service flex-item flex-align">
-              <img src="../../assets/images/win_icon2.png">
+              <img src="@/assets/images/win_icon2.png">
               {{$t('other_075',{value:winGold})}}
             </div>
           </template>
@@ -77,6 +86,7 @@ export default {
       index: null,
       isLucky:true,
       showWin:false,
+      lucky_id:"",
       blocks: [
         {
           // padding: "40px", //可旋转区域与转盘边缘的距离
@@ -145,6 +155,7 @@ export default {
       getruletainfo().then(res=>{
         this.task_type = res.msg_type;
         this.isLucky = res.flag||false;
+        this.lucky_id = res.lucky_id||"";
         if(res.type){
           const luckyNum = res.type-1;
           let goldNum = parseFloat(this.prizes[luckyNum].fonts[0].text);
@@ -179,6 +190,9 @@ export default {
       this.winGold = goldNum?goldNum:"lucky";
       // this.winGold = "lucky";
       this.isLucky = true;
+    },
+    copySuccess() {
+      this.$toast(`${this.$t("other_044")}`);
     }
   }
 };
@@ -263,6 +277,22 @@ export default {
         .serveic_line{
           color: $color-theme;
           text-decoration: underline;
+        }
+      }
+      .lucky_code{
+        padding: 0 30px;
+        box-sizing: border-box;
+        color: $font-color-black;
+        .copay_code {
+          width: initial;
+          flex-shrink: 0;
+          padding: 0 18px;
+          padding-top: 3px;
+          margin-top: 10px;
+          margin: 10px;
+          line-height: initial;
+          color: $font-color-white;
+          background: $color-theme;
         }
       }
       img{

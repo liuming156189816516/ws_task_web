@@ -1,9 +1,9 @@
 <template>
   <div>
       <el-form size="small" :inline="true" style="margin-top: 10px;">
-        <!-- <el-form-item>
-            <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_c009')})" v-model="account" />
-        </el-form-item> -->
+        <el-form-item>
+            <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_c140')})" v-model="lucky_id" />
+        </el-form-item>
         <el-form-item>
             <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="l_account" />
         </el-form-item>
@@ -19,7 +19,7 @@
       <div class="continer_main">
         <el-table :data="accountDataList" border height="760" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange">
             <el-table-column type="index" :label="$t('sys_g020')" width="80" />
-            <!-- <el-table-column prop="account" :label="$t('sys_c009')" minWidth="130" /> -->
+            <el-table-column prop="id" :label="$t('sys_c140')" minWidth="130" />
             <el-table-column prop="type" :label="$t('sys_m066')" minWidth="130">
                 <template slot-scope="scope">
                     <span v-bind="scope.row.type">{{$t('sys_c139')}}</span>
@@ -70,6 +70,7 @@ export default {
             limit: 100,
             total: 0,
             account: "",
+            lucky_id: "",
             l_account: "",
             task_time: "",
             loading:false,
@@ -102,6 +103,7 @@ export default {
             this.account="";
             this.task_time="";
             this.l_account="";
+            this.lucky_id="";
             this.checkAccount = [];
             this.initLuckyList(1)
             // this.$refs.serveTable.clearSelection();
@@ -117,6 +119,7 @@ export default {
             const params = {
                 page: this.page,
                 limit: this.limit,
+                id:this.lucky_id,
                 l_account:this.l_account,
                 start_time: sTime ? this.$baseFun.mexicoTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.mexicoTime(sTime[1], 2) : -1

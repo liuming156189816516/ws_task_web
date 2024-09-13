@@ -123,6 +123,7 @@ export default {
     home_137:"Puedes iniciar sesión después de completar la tarea.",
     home_138:"Mensaje del sitio del sistema",
     home_139:"Descarga la APP y guarda tu libreta de contactos con un clic, facilitando la tarea",
+    home_140:"número de serie：",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -338,7 +339,7 @@ export default {
     other_080:"Completa tareas y gana monedas.",
     other_081: "1. Después de completar la tarea, podrás tener una oportunidad de jugar a la ruleta todos los días",
     other_082: "2. Después de ganar el premio en monedas de oro, las ganancias se distribuirán inmediatamente a su cuenta",
-    other_083: "3. Después de ganar el premio de la suerte, contacta al servicio de atención al cliente para obtener tu recompensa",
+    other_083: "3. Después de ganar el premio de la suerte, haga clic para copiar el número y comuníquese con el servicio de atención al cliente para obtener su recompensa.",
     other_084: "1. Después de completar la tarea, podrá obtener una oportunidad de iniciar sesión todos los días.",
     other_085: "2. Sólo iniciando sesión continuamente podrás obtener las monedas de oro correspondientes",
     other_086: "3. Si olvida iniciar sesión, el sistema se restablecerá al inicio de sesión del primer día",

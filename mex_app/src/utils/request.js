@@ -46,12 +46,13 @@ service.interceptors.response.use(res => {
           confirmButtonColor: "#ff9600",
           confirmButtonText: i18n.t('other_003'),
         }).then(() => {
+          window.location.reload(true);
           window.localStorage.clear();
           window.localStorage.removeItem('uid');
           window.localStorage.removeItem('token');
           window.localStorage.removeItem('account');
           window.localStorage.removeItem('inviteCode');
-          window.likevm.$router.replace('/login');
+          window.likevm.$router.replace('/home');
         })
       }else{
         vant.Toast.fail(data.msg);

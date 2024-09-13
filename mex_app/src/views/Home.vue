@@ -55,7 +55,11 @@
                             <span class="flex-item">{{$t('home_093')}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
                         </div>
-                        <div class="task_live_2 flex-item flex-align">
+                        <div class="task_live_2 flex-item flex-align" v-if="idx!=2">
+                            <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
+                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                        </div>
+                        <div class="task_live_2 flex-item flex-align" v-else>
                             <span class="flex-item">{{$t('home_094')}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
                         </div>
@@ -63,39 +67,11 @@
                     <div class="task_award flex-item font_24">
                         <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
-                        <van-button v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
-                        <van-button v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
+                        <van-button class="horse_run" v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
+                        <van-button class="horse_run" v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>
                 </div>
             </div>
-            <!-- <div class="record_warp w_f flex-item" v-if="userInfo.token">
-                <div class="today_record w_f flex-item flex-align flex-dir-c">
-                    <div class="top_title w_f flex-item flex-align flex-center font_32">{{$t('home_052')}}</div>
-                    <div class="self_code w_f flex-item flex-dir-c">
-                        <p class="font_32">{{ userInfo.account}}</p>
-                        <div class="self_code_mess w_f flex-item flex-align flex-between">
-                            <div class="flex-item font_24">{{$t('home_053')}}<span class="flex-item">{{userInfo.inviteCode }}</span></div>
-                            <van-button class="font_20" type="primary">{{$t('other_006')}}</van-button>
-                        </div>
-                    </div>
-                    <div class="self_jinbi w_f flex-item">
-                        <div class="self_item w_f flex-item flex-dir-c">
-                            <div class="self_dold flex-item flex-center">{{ teamStemp.task_income || 0.00 }}</div>
-                            <div class="task_type flex-item flex-center flex-align" @click="showTask(1)">
-                                <span class="font_28">{{$t('home_054')}}</span>
-                                <img class="more_icon" src="@/assets/images/home/more_icon.png">
-                            </div>
-                        </div>
-                        <div class="self_item w_f flex-item flex-dir-c">
-                            <div class="self_dold flex-item flex-center">{{ teamStemp.promotion_income || 0.00 }}</div>
-                            <div class="flex-item flex-center flex-align" @click="showTask(2)">
-                                <span class="task_type font_28">{{$t('home_055')}}</span>
-                                <img class="more_icon" src="@/assets/images/home/more_icon.png">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
         <!-- <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
             <div class="serve_icon" slot="icon" @click="$Helper.globalSupport()">
@@ -151,10 +127,10 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_089'),live1:1,live2:2,type:1,status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
-                {name:this.$t('home_045'),live1:2,live2:4,type:2,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
-                {name:this.$t('home_044'),live1:2,live2:5,type:3,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
-                {name:this.$t('home_134'),live1:2,live2:5,type:4,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
+                {name:this.$t('home_089'),live1:1,live2:3,type:1,g_num:10, status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
+                {name:this.$t('home_045'),live1:2,live2:3,type:2,g_num:10,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:10,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {
@@ -524,30 +500,33 @@ export default {
             box-sizing: border-box;
             background: url('../assets/images/home/jinbi.png') no-repeat;
             background-size: cover;
-            background-position: 0 40px;
+            background-position: 0 -30px;
             .task_item{
                 padding: 30px 0 30px 20px;
-                background: url('../assets/images/home/task_icon.png') no-repeat;
+                background: url('../assets/images/home/task_bg_1.png') no-repeat;
                 background-size: 100% 100%;
                 margin-bottom: 30px;
                 .task_name{
-                    color: $color-theme;
+                    color: $home-task-01;
                     font-weight: 900;
                     margin-bottom: 18px;
-                    text-shadow: 0px 2px 3px #005440;
+                    text-shadow: 0px 2px 3px $font-color-white;
                 }
                 .task_live{
                     margin-bottom: 14px;
                     .task_live_1, .task_live_2{
-                        color: $home-title-21;
+                        color: $home-task-01;
                         width: 260px;
                         span{
-                            margin-right: 8px;
+                            margin-right: 6px;
                         }
                         img{
-                            height: 20px; 
+                            height: 30px; 
                         }
                     }
+                    // .task_live_2{
+                    //     font-weight: bold;
+                    // }
                 }
                 .task_award{
                     position: relative;
@@ -580,8 +559,8 @@ export default {
                         line-height: 30px;
                         border-radius: 100px;
                         color: $font-color-white;
-                        border-color: $color-theme;
-                        background-color: $color-theme;
+                        border-color: $home-task-01;
+                        background-color: $home-task-01;
                     }
                     .progress_award{
                         border-color: $home-title-06;
@@ -618,6 +597,42 @@ export default {
                     //     flex-wrap: 1;
                     //     flex-shrink: 0;
                     // }
+                }
+            }
+            .task_item:nth-child(2){
+                padding: 30px 0 30px 20px;
+                background: url('../assets/images/home/task_bg_2.png') no-repeat;
+                background-size: 100% 100%;
+                margin-bottom: 30px;
+                .task_name{
+                    color: $home-task-02;
+                    text-shadow: 0px 2px 3px $font-color-white;
+                }
+                .van-button{
+                    border-color: $home-task-02;
+                    background-color: $home-task-02;
+                }
+                .task_live_1, .task_live_2{
+                    // font-weight: bold;
+                    color: $home-task-02;
+                }
+            }
+            .task_item:nth-child(3){
+                padding: 30px 0 30px 20px;
+                background: url('../assets/images/home/task_bg_3.png') no-repeat;
+                background-size: 100% 100%;
+                margin-bottom: 30px;
+                .task_name{
+                    color: $home-task-03;
+                    text-shadow: 0px 2px 3px $font-color-white;
+                }
+                .van-button{
+                    border-color: $home-task-03;
+                    background-color: $home-task-03;
+                }
+                .task_live_1, .task_live_2{
+                    // font-weight: bold;
+                    color: $home-task-03;
                 }
             }
             .task_item:last-child{
@@ -712,4 +727,94 @@ export default {
         }
     }
 }
+    // .wrapper{
+    //   position: relative;
+    //   padding: 50px;
+    //   background-color: rgb(0, 0, 0);
+    //   z-index: -4;
+    //   height: 500px;
+    // }
+
+    .btn{
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      border-radius: 7px;
+      width: 200px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 22px;
+      color: white;
+      user-select: none;
+      margin: 50px auto;
+    }
+
+    .btn::before{
+      position: absolute;
+      border-radius: 7px;
+      content: "";
+      inset: -20px;
+      background: linear-gradient(0deg, transparent 50%, rgb(255, 0, 191) , #00b7ff,  rgba(255, 0, 34, 0.719), transparent 98%);
+      transform-origin: bottom left;
+      z-index: -2;
+      transition: all .4;
+      animation: spin 2.4s linear infinite;
+      transform-origin: 50% 50%;
+    }
+    .btn::after{
+      content: "";
+      position: absolute;
+      border-radius: 8px;
+      background-color: rgb(41, 41, 41);
+      inset: 3px;
+      z-index: -1;
+    }
+    @keyframes spin {
+      0%{
+        transform: rotate(0deg);
+      }
+      100%{
+        transform: rotate(360deg);
+      }
+    }
+// .horse_run {
+//   background-image: linear-gradient(90deg, rgba(196, 233, 64, 0) 0%, rgb(62, 224, 84) 100%), linear-gradient(0deg, rgb(62, 224, 84) 0%, rgba(196, 233, 64, 0) 100%), linear-gradient(-90deg, rgba(196, 233, 64, 0) 0%, rgb(62, 224, 84) 100%), linear-gradient(0deg, rgba(196, 233, 64, 0) 0%, rgb(62, 224, 84) 100%);
+//   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+//   background-size: 100px 8px, 8px 100px, 100px 8px, 8px 100px;
+//   background-position: -100px 10px, calc(100% - 10px) -100px, calc(100% + 100px) calc(100% - 10px), 10px 0px;
+//   animation: moveLine 8s infinite linear;
+//   height: calc(100% - 2px);
+//   padding: 1px;
+//   background-clip: content-box;
+// }
+  
+// @keyframes moveLine {
+//   0% {
+//     background-position: -100px 1px, calc(100% - 1px) -100px, calc(100% + 100px) calc(100% - 1px), 1px 0px;
+//   }
+//   5% {
+//     background-position: 0px 1px, calc(100% - 1px) -100px, calc(100% + 100px) calc(100% - 1px), 1px -100px;
+//   }
+//   30% {
+//     background-position: 100% 1px, calc(100% - 1px) -100px, calc(100% + 100px) calc(100% - 1px), 1px -100px;
+//   }
+//   35% {
+//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) 0px, calc(100% + 100px) calc(100% - 1px), 1px -100px;
+//   }
+//   50% {
+//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) 100%, calc(100% + 100px) calc(100% - 1px), -100px -100px;
+//   }
+//   55% {
+//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) calc(100% + 100px), 100% calc(100% - 1px), -100px calc(100% + 100px);
+//   }
+//   80% {
+//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) calc(100% + 100px), 0px calc(100% - 1px), 1px calc(100% + 100px);
+//   }
+//   85% {
+//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) calc(100% + 100px), -100px calc(100% - 1px), 1px 100%;
+//   }
+//   100% {
+//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) calc(100% + 100px), -100px calc(100% - 1px), 1px 0px;
+//   }
+// }
 </style>

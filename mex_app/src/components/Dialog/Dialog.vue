@@ -49,6 +49,7 @@
                         <p>{{restLanuage('other_081')}}</p>
                         <p class="mg_24">{{restLanuage('other_082')}}</p>
                         <p>{{restLanuage('other_083')}}</p>
+                        <p class="mg_24">{{restLanuage('home_142')}}</p>
                         <!-- <p class="mg_24">{{restLanuage('other_081')}}</p>
                         <p class="mb_24">{{restLanuage('other_082')}}</p>
                         <p>{{restLanuage('other_083')}}</p> -->

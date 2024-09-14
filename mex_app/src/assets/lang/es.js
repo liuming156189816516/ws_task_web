@@ -125,7 +125,7 @@ export default {
     home_139:"Descarga la APP y guarda tu libreta de contactos con un clic, facilitando la tarea",
     home_140:"número de serie：",
     home_141:"un usuario x",
-    home_142:"4.Alcanza VIP 5 para obtener misiones gratis y gira la ruleta para obtener monedas de oro.",
+    home_142:"4. Alcanza VIP 5 para obtener misiones gratis y gira la ruleta para obtener monedas de oro.",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

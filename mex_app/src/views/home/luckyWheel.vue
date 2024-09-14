@@ -175,6 +175,7 @@ export default {
       const result = await doblarruleta();
       if(result.type){
         const luckyNum = result.type-1;
+        this.lucky_id = result.lucky_id||"";
         this.$refs.myLucky.stop(luckyNum);
       }else{
         this.isLucky = true;

@@ -8,6 +8,7 @@
                 {{$t('mine_009')}}
             </div>
         </div>
+        <!-- <div class="horse_run"></div> -->
         <div class="top_fles w_f" ref="navTop" :class="[filexTop&&$Helper.checkApkBag(2)?'apk_fixed':filexTop&&$Helper.checkApkBag()?'top_fixed':'']">
             <Sgin-header />
         </div>
@@ -15,6 +16,7 @@
             <div class="user_mess" v-if="userInfo.token">
                 <div class="user_head">
                     <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)">
+                    <span :class="['vip_level',baseInfo.level==0?'level_zero':'']">V{{baseInfo.level}}</span>
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
@@ -67,8 +69,8 @@
                     <div class="task_award flex-item font_24">
                         <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
-                        <van-button class="horse_run" v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
-                        <van-button class="horse_run" v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
+                        <van-button class="" v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
+                        <van-button class="" v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
                     </div>
                 </div>
             </div>
@@ -121,7 +123,8 @@ export default {
     },
     computed: {
         ...mapState({
-            userInfo: state => state.User
+            userInfo: state => state.User,
+            baseInfo: state => state.User.userInfo
             // moticeText: state => state.User.baseInfo.bulletin_content,
         }),
         taskNameOption() {
@@ -354,12 +357,33 @@ export default {
                 width: 120px;
                 height: 120px;
                 flex-shrink: 0;
-                overflow: hidden;
+                position: relative;
+                // overflow: hidden;
                 border-radius: 50%;
-                border: 1px solid #fff;
+                // border: 1px solid #fff;
                 img{
                     width: 100%;
                     height: 100%;
+                }
+                .vip_level{
+                    font-weight: bold;
+                    font-style: italic;
+                    letter-spacing: -1px;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 3;
+                    color: $home-title-01;
+                    padding-right: 6px;
+                    text-shadow: 0px 2px 3px $home-title-01;
+                    // background: linear-gradient(307.11deg,#A38748 88.8%, #FFF000 14.91%);
+                    // background: linear-gradient(168.91deg, #785728 -69%, #F5E486 -25.53%, #B0803A 5.51%, #B0803A 32.42%, #F5E486 65.53%, #B0803A 102.79%, #F5E486 137.98%);
+                    // background: linear-gradient(307.11deg, #F1DE82 14.91%, #A38748 88.8%);
+                    // -webkit-text-fill-color:transparent;
+                    // -webkit-background-clip:text;
+                }
+                .level_zero{
+                    filter: grayscale(.9);
                 }
             }
             .user_info{
@@ -727,94 +751,35 @@ export default {
         }
     }
 }
-    // .wrapper{
-    //   position: relative;
-    //   padding: 50px;
-    //   background-color: rgb(0, 0, 0);
-    //   z-index: -4;
-    //   height: 500px;
-    // }
 
-    .btn{
-      overflow: hidden;
-      position: relative;
-      text-align: center;
-      border-radius: 7px;
-      width: 200px;
-      height: 50px;
-      line-height: 50px;
-      font-size: 22px;
-      color: white;
-      user-select: none;
-      margin: 50px auto;
+.horse_run {
+    font-size: 16px;
+    border: 3px solid transparent;
+    border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1;
+    color: #000;
+    cursor: pointer;
+    animation: rotate 1s linear infinite;
+    border-radius: 50%;
+    background: #ff013d;
+}
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
     }
-
-    .btn::before{
-      position: absolute;
-      border-radius: 7px;
-      content: "";
-      inset: -20px;
-      background: linear-gradient(0deg, transparent 50%, rgb(255, 0, 191) , #00b7ff,  rgba(255, 0, 34, 0.719), transparent 98%);
-      transform-origin: bottom left;
-      z-index: -2;
-      transition: all .4;
-      animation: spin 2.4s linear infinite;
-      transform-origin: 50% 50%;
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
     }
-    .btn::after{
-      content: "";
-      position: absolute;
-      border-radius: 8px;
-      background-color: rgb(41, 41, 41);
-      inset: 3px;
-      z-index: -1;
+}
+/* 定义跑马灯动画 */
+@keyframes marquee {
+    0% {
+        border-image-slice: 2;
+        border-image-width: 2;
     }
-    @keyframes spin {
-      0%{
-        transform: rotate(0deg);
-      }
-      100%{
-        transform: rotate(360deg);
-      }
+    100% {
+        border-image-slice: 2;
+        border-image-width: 2;
+        border-image-source: linear-gradient(360deg, red, orange, yellow, green, blue, indigo, violet);
     }
-// .horse_run {
-//   background-image: linear-gradient(90deg, rgba(196, 233, 64, 0) 0%, rgb(62, 224, 84) 100%), linear-gradient(0deg, rgb(62, 224, 84) 0%, rgba(196, 233, 64, 0) 100%), linear-gradient(-90deg, rgba(196, 233, 64, 0) 0%, rgb(62, 224, 84) 100%), linear-gradient(0deg, rgba(196, 233, 64, 0) 0%, rgb(62, 224, 84) 100%);
-//   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-//   background-size: 100px 8px, 8px 100px, 100px 8px, 8px 100px;
-//   background-position: -100px 10px, calc(100% - 10px) -100px, calc(100% + 100px) calc(100% - 10px), 10px 0px;
-//   animation: moveLine 8s infinite linear;
-//   height: calc(100% - 2px);
-//   padding: 1px;
-//   background-clip: content-box;
-// }
-  
-// @keyframes moveLine {
-//   0% {
-//     background-position: -100px 1px, calc(100% - 1px) -100px, calc(100% + 100px) calc(100% - 1px), 1px 0px;
-//   }
-//   5% {
-//     background-position: 0px 1px, calc(100% - 1px) -100px, calc(100% + 100px) calc(100% - 1px), 1px -100px;
-//   }
-//   30% {
-//     background-position: 100% 1px, calc(100% - 1px) -100px, calc(100% + 100px) calc(100% - 1px), 1px -100px;
-//   }
-//   35% {
-//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) 0px, calc(100% + 100px) calc(100% - 1px), 1px -100px;
-//   }
-//   50% {
-//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) 100%, calc(100% + 100px) calc(100% - 1px), -100px -100px;
-//   }
-//   55% {
-//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) calc(100% + 100px), 100% calc(100% - 1px), -100px calc(100% + 100px);
-//   }
-//   80% {
-//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) calc(100% + 100px), 0px calc(100% - 1px), 1px calc(100% + 100px);
-//   }
-//   85% {
-//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) calc(100% + 100px), -100px calc(100% - 1px), 1px 100%;
-//   }
-//   100% {
-//     background-position: calc(100% + 100px) 1px, calc(100% - 1px) calc(100% + 100px), -100px calc(100% - 1px), 1px 0px;
-//   }
-// }
+}
 </style>

@@ -69,8 +69,16 @@
                     <div class="task_award flex-item font_24">
                         <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
-                        <van-button class="" v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
-                        <van-button class="" v-else type="primary">{{taskNameOption[item.type].btn}}</van-button>
+                        <div class="task_btn">
+                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==3" :class="[item.status==2?'progress_award':'']">
+                                {{taskStatusOption[item.status]}}
+                            </div>
+                             <div class="circle_box flex-item flex-align flex-center font_24" v-else>
+                                {{taskNameOption[item.type].btn}}
+                                <!-- <van-button class="" v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
+                                <van-button class="" v-else type="primary">{{taskNameOption[item.type].btn}}</van-button> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -556,6 +564,26 @@ export default {
                     position: relative;
                     color: $font-color-black;
                     margin-bottom: 10px;
+                    .task_btn{
+                        width: max-content;
+                        height: 60px;
+                        box-sizing: border-box;
+                        border-radius: 100px;
+                        border-color: $home-task-01;
+                        background-color: $home-task-01;
+                        .circle_box{
+                            width: 216px;
+                            height: 60px;
+                            color: $font-color-white;
+                            background: url('../assets/images/circle.gif') no-repeat;
+                            background-size: cover;
+                        }
+                        .progress_award{
+                            border-radius: 100px;
+                            border-color: $home-title-06;
+                            background-color: $home-title-06;
+                        }
+                    }
                     .task_small_title{
                         width: 65%;
                         flex-wrap: wrap;
@@ -585,10 +613,6 @@ export default {
                         color: $font-color-white;
                         border-color: $home-task-01;
                         background-color: $home-task-01;
-                    }
-                    .progress_award{
-                        border-color: $home-title-06;
-                        background-color: $home-title-06;
                     }
                 }
                 .task_desc{
@@ -632,7 +656,7 @@ export default {
                     color: $home-task-02;
                     text-shadow: 0px 2px 3px $font-color-white;
                 }
-                .van-button{
+                .task_btn{
                     border-color: $home-task-02;
                     background-color: $home-task-02;
                 }
@@ -650,7 +674,7 @@ export default {
                     color: $home-task-03;
                     text-shadow: 0px 2px 3px $font-color-white;
                 }
-                .van-button{
+                .task_btn{
                     border-color: $home-task-03;
                     background-color: $home-task-03;
                 }

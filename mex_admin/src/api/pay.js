@@ -13,3 +13,6 @@ export const getwithdrawreviselist = (params)=> {
 export const dowithdrawrevise = (params)=> {
   return request({url:'/withdraw/dowithdrawrevise',method:'post',data:params})
 }
+export const doapproval = (params)=> {
+  return request({url:'/withdraw/doapproval',method:'post',data:params})
+}

@@ -737,6 +737,12 @@ export default {
     'sys_rai121': '已复制到剪贴板！',
     'sys_rai122': '拉群/拉粉任务数',
     'sys_rai123': 'WS炒群',
+    'sys_rai124': '审批',
+    'sys_rai125': '选择类型',
+    'sys_rai126': '未审批',
+    'sys_rai127': '已通过',
+    'sys_rai128': '已驳回',
+    'sys_rai129': '审批状态',
 
     'sys_q001': '话术名称',
     'sys_q002': '话术库',

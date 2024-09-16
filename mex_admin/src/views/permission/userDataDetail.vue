@@ -6,7 +6,8 @@
             <template v-else>
             <div class="card_item" v-for="(item,idx) in cardOption" :key="idx" :style="{background:`${item.b_g}`}" @click="getStatistics">
                 <span>{{ item.label }}</span>
-                <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num"></span>
+                <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num+'/'+item.num1" v-if="idx==3||idx==4||idx==5||idx==6"></span>
+                <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num" v-else></span>
             </div>
             </template>
         </div>
@@ -46,10 +47,26 @@
                     <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
                     <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
                     <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
-                    <el-table-column prop="today_create_group_task_num" :label="$t('sys_rai122')" minWidth="100" />
-                    <el-table-column prop="data_num" :label="$t('sys_m090')" minWidth="100" />
-                    <el-table-column prop="bounty_amount" :label="$t('sys_m102')" minWidth="100" />
-                    <el-table-column prop="commission_amount" :label="$t('sys_m103')" minWidth="100" />
+                    <el-table-column prop="pull_total_num" :label="$t('sys_rai122')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.today_create_group_task_num +"/"+scope.row.pull_fan_task_num }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                     <el-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
                     <el-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
@@ -103,18 +120,6 @@ export default {
                     b_g:"#fef4e9",
                     t_c:"#ff8400"
                 },
-                // {
-                //     label:this.$t('sys_m087'),
-                //     num:0,
-                //     b_g:"#eef6fe",
-                //     t_c:"#369aff"
-                // },
-                // {
-                //     label:this.$t('sys_m089'),
-                //     num:0,
-                //     b_g:"#f9edff",
-                //     t_c:"#b357ff"
-                // },
                 {
                     label:this.$t('sys_m101'),
                     num:0,
@@ -127,48 +132,34 @@ export default {
                     b_g:"#dbfff1",
                     t_c:"#02c97a"
                 },
-                //  {
-                //     label:this.$t('sys_m104'),
-                //     num:0,
-                //     b_g:"#fffee6",
-                //     t_c:"#f2bb16"
-                // },
-                // {
-                //     label:this.$t('sys_m105'),
-                //     num:0,
-                //     b_g:"#ffebeb",
-                //     t_c:"#ff0f0"
-                // },
                 {
                     label:this.$t('sys_rai122'),
                     num:0,
+                    num1:0,
                     b_g:"#ffebeb",
                     t_c:"#ff0f0"
                 },
                 {
                     label:this.$t('sys_m090'),
                     num:0,
+                    num1:0,
                     b_g:"#fffee6",
                     t_c:"#f2bb16"
                 },
                 {
                     label:this.$t('sys_m102'),
                     num:0,
+                    num1:0,
                     b_g:"#ffebeb",
                     t_c:"#ff0f0"
                 },
                 {
                     label:this.$t('sys_m103'),
                     num:0,
+                    num1:0,
                     b_g:"#f9edff",
                     t_c:"#b357ff"
                 },
-                // {
-                //     label: this.$t('sys_m096'),
-                //     num:0,
-                //     b_g:"#eef6fe",
-                //     t_c:"#369aff"
-                // },
                 {
                     label:this.$t('sys_m091'),
                     num:0,
@@ -206,16 +197,20 @@ export default {
                        item.num = vita.today_active_user_num||0;
                     //    item.num ="活跃用户";
                     }else if(k == 3){
+                       item.num1 = vita.pull_fan_task_num||0;
                         item.num = vita.today_create_group_task_num||0;
                         // item.num = "拉群任务数"
                     }else if(k == 4){
-                           item.num = vita.data_num||0;
+                        item.num = vita.data_num||0;
+                        item.num1 = vita.pull_fan_data_num||0;
                         // item.num = "推广资源";
                     }else if(k == 5){
                         item.num = vita.bounty_amount||0;
+                        item.num1 = vita.pull_fan_bounty_amount||0;
                     //    item.num = "任务收益";
                     }else if(k == 6){
                         item.num = vita.commission_amount||0;
+                        item.num1 = vita.pull_fan_commission_amount||0;
                         // item.num = "返佣收益";
                     }else if(k == 7){
                         item.num = vita.withdraw_user_num||0;
@@ -265,6 +260,26 @@ export default {
                 this.loading = false;
                 this.total = res.data.total;
                 this.accountDataList = res.data.list || [];
+                for (let k = 0; k < this.accountDataList.length; k++) {
+                    for(let key in this.accountDataList[k]){
+                        if(key==='today_create_group_task_num'||key==='pull_fan_task_num'){
+                            let num = this.accountDataList[k].today_create_group_task_num+this.accountDataList[k].pull_fan_task_num;
+                            this.accountDataList[k].pull_total_num=num;
+                        }
+                        if(key==='data_num'||key==='pull_fan_data_num'){
+                            let num = this.accountDataList[k].data_num+this.accountDataList[k].pull_fan_data_num;
+                            this.accountDataList[k].group_total_num=num;
+                        }
+                        if(key==='bounty_amount'||key==='pull_fan_bounty_amount'){
+                            let num = this.accountDataList[k].bounty_amount+this.accountDataList[k].pull_fan_bounty_amount;
+                            this.accountDataList[k].bouns_total_num=num;
+                        }
+                        if(key==='commission_amount'||key==='pull_fan_commission_amount'){
+                            let num = this.accountDataList[k].commission_amount+this.accountDataList[k].pull_fan_commission_amount;
+                            this.accountDataList[k].comm_total_num=num;
+                        }
+                    }
+                }
                 this.$nextTick(()=>{
                     if (this.$refs.serveTable) {
                         this.$refs.serveTable.doLayout(); 

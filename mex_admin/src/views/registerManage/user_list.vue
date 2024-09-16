@@ -20,11 +20,11 @@
         <!-- 分组管理 -->
         <div class="continer_main">
             <div class="group_continer">
-                <u-table :data="accountDataList" row-key="id" use-virtual border height="860" v-loading="loading"
+                <u-table :data="accountDataList" row-key="uid" use-virtual border height="860" v-loading="loading"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
-                     <u-table-column type="selection" width="55" />
+                    <u-table-column type="selection" width="55" />
                     <u-table-column type="index" :label="$t('sys_g020')" width="60" />
                     <u-table-column prop="head" :label="$t('sys_g021')" minWidth="80">
                         <template slot-scope="scope">
@@ -116,7 +116,7 @@ export default {
         },
         rowSelectChange(row) {
             let tableCell = this.$refs.serveTable;
-            if (this.checkIdArry.includes(row.id)) {
+            if (this.checkIdArry.includes(row.uid)) {
                 tableCell.toggleRowSelection([{row:row,selected:false}]);
                 return;
             }

@@ -7,6 +7,9 @@
           <el-button type="primary" :disabled="checkArry.length==0" @click="scamperBtn(0,0)">{{ $t('sys_q111') }}</el-button>
         </el-form-item>
         <el-form-item>
+          <el-input v-model="model1.user_account" clearable placeholder="请输入用户账号"  style="width:180px;" />
+        </el-form-item>
+        <el-form-item>
           <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
         </el-form-item>
          <el-form-item>
@@ -170,6 +173,7 @@ export default {
         limit: 100,
         account: "",
         ipCtime: "",
+        user_account: "",
         invite_link: "",
         ad_account: "",
         task_type:""
@@ -218,6 +222,7 @@ export default {
       this.model1.invite_link = "";
       this.model1.task_type = "";
       this.model1.ad_account = "";
+      this.model1.user_account = "";
       this.getTaskList(1);
       // this.$refs.serveTable.clearSelection();
     },
@@ -230,6 +235,7 @@ export default {
         status: this.model1.status||-1,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,
+        app_account: this.model1.user_account,
         task_type:this.model1.task_type||-1,
         start_time: start_time,
         end_time: end_time
@@ -250,6 +256,7 @@ export default {
         status: this.model1.status||-1,
         account: this.model1.account,
         invite_link: this.model1.invite_link,
+        app_account: this.model1.user_account,
         ad_account: this.model1.ad_account,
         task_type:this.model1.task_type||-1,
         start_time: start_time,

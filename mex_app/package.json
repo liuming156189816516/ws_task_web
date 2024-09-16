@@ -8,7 +8,7 @@
     "serve:prod": "vue-cli-service serve --mode prod",
     "build": "vue-cli-service build",
     "build:test": "vue-cli-service build --mode test",
-    "build:prod": "vue-cli-service build --mode prod",
+    "build:mex_prod": "vue-cli-service build --mode mex_prod",
     "build:mex_test": "vue-cli-service build --mode mex_test",
     "lint": "vue-cli-service lint"
   },

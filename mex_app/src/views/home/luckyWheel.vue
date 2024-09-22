@@ -211,7 +211,7 @@ export default {
         return this.$toast(this.$t('other_076'))
       }
       if(!this.isLucky&&this.task_type==2){
-        return this.$toast(this.$t('other_089'))
+        return this.$toast(this.$t('other_091'))
       }
       this.isLucky = false;
       this.$refs.myLucky.play();

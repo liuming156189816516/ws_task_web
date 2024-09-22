@@ -335,7 +335,7 @@ export default {
     other_073:"Ganador",
     other_074:"recibir",
     other_075:"Congratulations, Lieutenant General{value}oro",
-    other_076:"The lucky wheel has been used up. Try again tomorrow！",
+    other_076:"Los tiempos de hoy se han agotado, inténtalo de nuevo mañana.！",
     other_077:"Congratulations on winning the lucky prize,",
     other_078:"reglas de la rueda",
     other_079:"tareas diarias",
@@ -350,6 +350,7 @@ export default {
     other_088:"ver por qué",
     other_089:"Debes completar la tarea antes de continuar.",
     other_090:"Récord ganador",
+    other_091:"Saldo de cuenta insuficiente",
 
     table_001:"Inicio",
     table_002:"Equipo",

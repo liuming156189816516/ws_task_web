@@ -1,6 +1,6 @@
 <template>
     <div class="title">
-        <page-header :title="$route.meta.title" :show-icon="true" :bgColor="true" />
+        <page-header :title="$t('home_138')" :show-icon="true" :bgColor="true" />
         <div class="detail">
             <div class="d_header">
                 <div class="tit">{{ n_detail.name }}</div>

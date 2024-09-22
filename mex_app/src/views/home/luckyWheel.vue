@@ -93,7 +93,7 @@
             </div>
         </template>
         <div class="title_top footer_tips w_f flex-item font_24">
-            {{$t('spre_014')}}
+            {{$t('other_092')}}
         </div>
     </div>
     </div>

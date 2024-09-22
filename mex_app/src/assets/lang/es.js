@@ -351,6 +351,7 @@ export default {
     other_089:"Debes completar la tarea antes de continuar.",
     other_090:"Récord ganador",
     other_091:"Saldo de cuenta insuficiente",
+    other_092:"Actualmente, el sistema solo conserva registros del día actual",
 
     table_001:"Inicio",
     table_002:"Equipo",

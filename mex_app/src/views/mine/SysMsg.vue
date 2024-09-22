@@ -1,6 +1,6 @@
 <template>
     <div class="detailDetail">
-        <page-header :title="$route.meta.title" :show-icon="true" :bgColor="true"></page-header>
+        <page-header :title="$t('home_138')" :show-icon="true" :bgColor="true"></page-header>
         <!-- <div class="tab_bar">
             <van-tabs :active="curIndex" @change="changeTab">
                 <van-tab :title="item.title" v-for="(item,index) in noticArry" :key="index"></van-tab>

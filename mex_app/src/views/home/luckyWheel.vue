@@ -378,12 +378,12 @@ export default {
           box-sizing: border-box;
           background: $home-title-10;
           span{
-              flex: 1;
+            flex: 1;
           }
       }
       .task_title_head {
-          border-top-left-radius: 20px;
-          border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
       }
       // .title_top:nth-child(1){
       //     border-top-left-radius: 20px;
@@ -395,7 +395,7 @@ export default {
       }
       span:nth-child(3){
         flex-grow: 0.8;
-        justify-content: right;
+        justify-content: flex-end !important;
       }
       .record_item{
           height: 108px;

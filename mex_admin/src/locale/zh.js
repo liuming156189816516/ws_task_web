@@ -246,6 +246,7 @@ export default {
     'sys_c138': '已发布',
     'sys_c139': '幸运奖',
     'sys_c140': '幸运奖ID',
+    'sys_c141': '奖金',
 
     'sys_g001': '用户UID',
     'sys_g002': '用户名',

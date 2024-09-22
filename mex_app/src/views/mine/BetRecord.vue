@@ -26,6 +26,7 @@
                                 <p class="task_type font_24" v-if="item.task_type!=0">{{ taskOption[item.task_type] }}</p>
                             </div>
                             <div class="task_money font_30" v-if="item.type==9" style="color:#F52C2C;">{{ item.amount }}</div>
+                            <div class="task_money font_30" v-else-if="item.type==4&&!checkReduce(item.amount)">{{ item.amount }}</div>
                             <div class="task_money font_30" v-else-if="item.type==8&&checkReduce(item.amount)">+{{ item.amount }}</div>
                             <div class="task_money font_30" v-else-if="item.type==8&&!checkReduce(item.amount)" style="color:#F52C2C;">{{ item.amount }}</div>
                             <div class="task_money font_30" v-else>+{{ item.amount }}</div>

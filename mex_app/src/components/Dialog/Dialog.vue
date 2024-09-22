@@ -16,7 +16,7 @@
                     <van-button type="primary" @click="$router.push('/home')">确定</van-button>
                 </div> -->
             </div>
-            <template v-if="type==3||type==4||type==5|type==7||type==8">
+            <template v-if="type==3||type==4||type==5|type==7||type==8||type==9">
                 <div class="rule_model w_f flex-item flex-align flex-dir-c">
                     <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
                     <div class="top_header w_f flex-item flex-center flex-align font_26">{{title}}</div>
@@ -48,8 +48,8 @@
                     <div class="rule_desc rule_desc_5 font_28" v-if="type==5">
                         <p>{{restLanuage('other_081')}}</p>
                         <p class="mg_24">{{restLanuage('other_082')}}</p>
-                        <p>{{restLanuage('other_083')}}</p>
-                        <p class="mg_24">{{restLanuage('home_142')}}</p>
+                        <!-- <p>{{restLanuage('other_083')}}</p> -->
+                        <!-- <p class="mg_24">{{restLanuage('home_142')}}</p> -->
                         <!-- <p class="mg_24">{{restLanuage('other_081')}}</p>
                         <p class="mb_24">{{restLanuage('other_082')}}</p>
                         <p>{{restLanuage('other_083')}}</p> -->
@@ -63,6 +63,11 @@
                     <div class="rule_desc font_28" v-if="type==8">
                         <p class="mb_24">{{restLanuage('home_031')}}：{{number}}</p>
                         <p class="mb_24" style="line-height: 20px;" >{{content}}</p>
+                    </div>
+                    <div class="rule_desc flex-item flex-align flex-center flex-dir-c font_28" v-if="type==9">
+                        <p class="mb_24">{{restLanuage('home_143')}}：{{number}}</p>
+                        <p class="mb_24" style="line-height: 20px;" >{{content}}</p>
+                        <span class="copay_code flex-item flex-align flex-center" v-clipboard:copy="number" v-clipboard:success="copySuccess">{{restLanuage('other_006')}}</span>
                     </div>
                 </div>
             </template>
@@ -260,6 +265,9 @@ export default {
                 }
             }
         //   this.$refs.myVideo[k].play();
+        },
+        copySuccess() {
+            this.$toast(`${i18n.t("other_044")}`);
         }
     }
     // beforeDestroy(){
@@ -583,5 +591,15 @@ export default {
 .mian_padding{
     padding: 0 20px;
     box-sizing: border-box;
+}
+.copay_code {
+    width: max-content;
+    flex-shrink: 0;
+    padding: 0 20px;
+    margin-top: 10px;
+    margin: 10px;
+    line-height: initial;
+    color: $font-color-white;
+    background: $color-theme;
 }
 </style>

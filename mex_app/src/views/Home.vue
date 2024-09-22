@@ -164,12 +164,25 @@ export default {
             this.$store.dispatch('User/actionReport',1);
             this.$store.dispatch('User/getSysNotice');
         }else{
-            // this.initRuleTips();
             this.$store.dispatch('User/actionReport',1)
             this.taskOption = this.$Helper.defaultOption();
         }
+        // this.getContacts();
     },
     methods: {
+        getContacts(){
+            // window.plus.contacts.getAddressBook(window.plus.contacts.ADDRESSBOOK_PHONE, (addressbook)=> {
+            //     console.log(addressbook);
+            //     console.log("addressbook");
+            // })
+            navigator.contacts.find(["displayName", "phoneNumbers"],(contacts)=> {
+                 alert(contacts)
+                    console.log(contacts);  // 在这里你可以获取并处理通讯录信息
+                },(error)=> {
+                    console.log("读取通讯录失败", error);
+                }
+            )
+        },
         handleScroll(){
             if (this.taskOption&&this.taskOption.length>2) {
                 const scrollTop = this.$refs.warpBox;

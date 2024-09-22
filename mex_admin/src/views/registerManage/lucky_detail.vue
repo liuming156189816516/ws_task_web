@@ -20,9 +20,9 @@
         <el-table :data="accountDataList" border height="760" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange">
             <el-table-column type="index" :label="$t('sys_g020')" width="80" />
             <el-table-column prop="id" :label="$t('sys_c140')" minWidth="130" />
-            <el-table-column prop="type" :label="$t('sys_m066')" minWidth="130">
+            <el-table-column prop="type" :label="$t('sys_l109')" minWidth="130">
                 <template slot-scope="scope">
-                    <span v-bind="scope.row.type">{{$t('sys_c139')}}</span>
+                    <span>{{luckyOption[scope.row.type]}}</span>
                 </template>
             </el-table-column>
             <el-table-column prop="l_account" :label="$t('sys_m068')" minWidth="130" />
@@ -79,7 +79,8 @@ export default {
             checkAccount:[],
             accountDataList:[],
             pageOption: resetPage(),
-            taskOption:["","sys_m109","sys_m110"]
+            taskOption:["","sys_m109","sys_m110"],
+            luckyOption:["","10","20","幸运奖","200","888","1888"]
         }
     },
     created() {

@@ -55,8 +55,8 @@
         </div>
       </div>
       <div class="award_record w_f">
-        <h4 class="font_26 mb_24">{{$t('other_073')}}</h4>
-        <div class="record_list w_f">
+        <h4 class="font_26 mb_24">{{$t('other_090')}}</h4>
+        <!-- <div class="record_list w_f">
           <van-swipe class="my_swipe" style="height: 34px;" :autoplay="3000" :duration="1000" vertical :show-indicators="false">
             <van-swipe-item class="flex-item flex-align flex-center" v-for="(item,idx) in winNotis" :key="idx" style="height: 34px;width:100%;">
               <span class="award_item flex-item flex-align font_24">{{item.name}}</span>
@@ -67,16 +67,44 @@
               </span>
             </van-swipe-item>
           </van-swipe>
-        </div>
+        </div> -->
       </div>
+      <div class="record_list w_f flex-item flex-dir-c">
+        <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
+            <span class="flex-item flex-align">{{$t('tail_004')}}</span>
+            <span class="flex-item flex-center">{{$t('spre_012')}}</span>
+            <span class="flex-item">{{$t('home_022')}}</span>
+        </div>
+        <template v-if="luckyList&&luckyList.length>0">
+            <div class="record_scroll w_f flex-item flex-dir-c">
+                <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
+                <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in luckyList" :key="idx">
+                    <span class="flex-item">{{ formatTime(item.itime) }}</span>
+                    <span class="flex-item">{{prizes[item.type-1].fonts[0].text}}</span>
+                    <span class="flex-item record_click" @click="showResult(item)">{{$t('home_135')}}</span>
+                </div>
+                <!-- </van-list> -->
+            </div>
+        </template>
+        <template v-else>
+            <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+              <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+              <p class="font_28">{{$t('spre_013')}}</p>
+            </div>
+        </template>
+        <div class="title_top footer_tips w_f flex-item font_24">
+            {{$t('spre_014')}}
+        </div>
+    </div>
     </div>
   </div>
 </template>
 <script>
 
 import { mapState } from 'vuex';
+import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
-import { getruletainfo,doblarruleta } from '@/api/home'
+import { getruletainfo,doblarruleta,getlotteryrecordlist } from '@/api/home'
 export default {
   name: "luckyWheel",
   components: { PageHeader },
@@ -87,6 +115,7 @@ export default {
       isLucky:true,
       showWin:false,
       lucky_id:"",
+      luckyList:[],
       blocks: [
         {
           // padding: "40px", //可旋转区域与转盘边缘的距离
@@ -103,12 +132,12 @@ export default {
       ],
       // 扇形数组
       prizes: [
-        { fonts: [{ text:this.$t('pay_034',{value:50}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:200}), top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('other_087'),top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/win_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:1000}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:1800}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        { fonts: [{ text:this.$t('pay_034',{value:5000}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:1, fonts: [{ text:this.$t('pay_034',{value:10}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:2, fonts: [{ text:this.$t('pay_034',{value:20}), top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:3, fonts: [{ text:this.$t('other_087'),top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/win_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:4, fonts: [{ text:this.$t('pay_034',{value:200}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:5, fonts: [{ text:this.$t('pay_034',{value:888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:6, fonts: [{ text:this.$t('pay_034',{value:1888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
       ],
       buttons: [
         {
@@ -148,9 +177,23 @@ export default {
     }
   },
   created() {
+    this.luckyRecord();
     this.initLucky();
   },
   methods: {
+    luckyRecord(){
+      getlotteryrecordlist().then(res=>{
+        this.luckyList = res.list||[];
+      })
+    },
+    onLoad(){
+      if(this.page >= this.page_total){
+        this.finished = true;
+      }else{
+        this.page++;
+        this.luckyRecord()
+      }
+    },
     initLucky(){
       getruletainfo().then(res=>{
         this.task_type = res.msg_type;
@@ -186,14 +229,19 @@ export default {
       this.$popDialog({content:"",title:this.$t('other_078'),type:5})
     },
     luckyEnd(prize) {
-      // console.log(prize.fonts[0].text);
       let goldNum = parseFloat(prize.fonts[0].text);
       this.winGold = goldNum?goldNum:"lucky";
-      // this.winGold = "lucky";
       this.isLucky = true;
+      this.luckyRecord();
     },
     copySuccess() {
       this.$toast(`${this.$t("other_044")}`);
+    },
+    formatTime(time) {
+      return formatTime(time);
+    },
+    showResult(row){
+      this.$popDialog({ content:row.Reason,number:row.id,title:this.$t('home_143'), type: 9 })
     }
   }
 };
@@ -305,36 +353,80 @@ export default {
   .award_record{
     padding: 0 20px;
     box-sizing: border-box;
-    .record_list{
-      height: 685px;
-      overflow: hidden;
-      border-radius: 20px;
-      .my_swipe{
-        height: 64px;
-        overflow: initial;
-        .award_item{
-          height: 100%;
-        }
-        .aeard_icon{
-          color: $color-theme;
-          img{
-            height: 32px;
-            margin-right: 5px;
-          }
-        }
-        .van-swipe-item{
-          padding: 0 20px;
-          box-sizing: border-box;
-          span{
-            flex: 1;
-          }
-          background: #e4eaf2;
-        }
-        .van-swipe-item:nth-child(even){
-          background: #ecf0f6;
-        }
+  }
+  .record_list{
+      // max-height: 300px;
+      // overflow-y: auto;
+      padding: 0 20px;
+      margin-top: 20px;
+      padding-bottom: 30px;
+      box-sizing: border-box;
+      color: $font-color-black;
+      .task_title_head{
+          font-weight: bold;
+          color: $home-title-12;
       }
-    }
+      .record_scroll{
+          max-height: 1100px;
+          overflow-y: auto;
+          background: $font-color-white;
+      }
+      .title_top{
+          height: 100px;
+          padding: 0 40px;
+          flex-shrink: 0;
+          box-sizing: border-box;
+          background: $home-title-10;
+          span{
+              flex: 1;
+          }
+      }
+      .task_title_head {
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+      }
+      // .title_top:nth-child(1){
+      //     border-top-left-radius: 20px;
+      //     border-top-right-radius: 20px;
+      // }
+      span:nth-child(2){
+        // flex-grow: 0.8;
+        justify-content: center;
+      }
+      span:nth-child(3){
+        flex-grow: 0.8;
+        justify-content: right;
+      }
+      .record_item{
+          height: 108px;
+          background: $font-color-white;
+          border-bottom: 1px solid $home-title-10;
+      }
+      .record_item:last-child{
+          border-bottom: 1px solid transparent;
+      }
+      .record_click{
+          color: $home-copay-title;
+          text-decoration: underline;
+      }
+      .empty_box{
+          padding: 0 30px;
+          height: 364px;
+          box-sizing: border-box;
+          color: $home-title-14;
+          background-color: $font-color-white;
+          img{
+              height: 202px;
+          }
+      }
+      .footer_tips{
+          height: auto;
+          font-style: italic;
+          padding: 16px 20px;
+          color: $home-title-06;
+          border-bottom-left-radius: 20px;
+          border-bottom-right-radius: 20px;
+      }
   }
 }
 </style>

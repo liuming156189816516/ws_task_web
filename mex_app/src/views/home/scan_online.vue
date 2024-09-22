@@ -213,15 +213,15 @@ export default {
     //     this.timestamp = Math.floor(new Date().getTime() / 1000);
     //     this.task_id = this.$route.query.id||"";
     },
-    mounted(){
-        this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_04'));
-            if(!isTips){
-                this.$popDialog({steps:true, type: 12 })
-            }
-        })
-        this.$store.dispatch('User/actionReport',16);
-    },
+    // mounted(){
+    //     this.$nextTick(()=>{
+    //         const isTips = JSON.parse(localStorage.getItem('step_04'));
+    //         if(!isTips){
+    //             this.$popDialog({steps:true, type: 12 })
+    //         }
+    //     })
+    //     this.$store.dispatch('User/actionReport',16);
+    // },
 	methods: {
         getIncomeList(){
             getbillrecordlist({page: 1,limit: 100,task_type:1}).then(res => {

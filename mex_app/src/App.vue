@@ -36,7 +36,7 @@ export default {
 			currentTIme:null,
 			transitionName:"",
 			timeout: 1000,   
-      		setInter: 5000,
+      		setInter: 6000,
 			keepAliveNames: ['home']
 		}
 	},
@@ -119,6 +119,10 @@ export default {
 				localStorage.removeItem('token');
 			})
 		}
+	},
+	beforeDestroy(){
+		clearInterval(this.waitTimer);
+		clearInterval(this.heartTimer);
 	},
 	watch: {
 		'$route'(to, from) {

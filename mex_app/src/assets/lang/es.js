@@ -126,6 +126,7 @@ export default {
     home_140:"número de serie：",
     home_141:"un usuario x",
     home_142:"4. Alcanza VIP 5 para obtener misiones gratis y gira la ruleta para obtener monedas de oro.",
+    home_143:"numero ganador",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -339,8 +340,8 @@ export default {
     other_078:"reglas de la rueda",
     other_079:"tareas diarias",
     other_080:"Completa tareas y gana monedas.",
-    other_081: "1. Después de completar la tarea, podrás tener una oportunidad de jugar a la ruleta todos los días",
-    other_082: "2. Después de ganar el premio en monedas de oro, las ganancias se distribuirán inmediatamente a su cuenta",
+    other_081: "1. You can spin the roulette wheel 30 times a day, each time consuming 20 points",
+    other_082: "2. After winning the lucky prize, you can contact customer service through the lucky ID to get the reward",
     other_083: "3. Después de ganar el premio de la suerte, haga clic para copiar el número y comuníquese con el servicio de atención al cliente para obtener su recompensa.",
     other_084: "1. Después de completar la tarea, podrá obtener una oportunidad de iniciar sesión todos los días.",
     other_085: "2. Sólo iniciando sesión continuamente podrás obtener las monedas de oro correspondientes",
@@ -348,6 +349,7 @@ export default {
     other_087:"Afortunado",
     other_088:"ver por qué",
     other_089:"Debes completar la tarea antes de continuar.",
+    other_090:"Récord ganador",
 
     table_001:"Inicio",
     table_002:"Equipo",

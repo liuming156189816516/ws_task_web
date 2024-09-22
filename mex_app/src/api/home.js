@@ -77,6 +77,9 @@ export const dousermessagel = (params)=> {
 export const getmessagelbyid = (params)=> {
     return request({url:'/account/getmessagelbyid',method:'post',data:params})
 }
+export const getlotteryrecordlist = (params)=> {
+    return request({url:'/account/getlotteryrecordlist',method:'post',data:params})
+}
 
 
 

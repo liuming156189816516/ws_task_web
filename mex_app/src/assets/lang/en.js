@@ -84,7 +84,7 @@ export default {
 
     home_042:"<span style='color:#ff013d;'>In order to complete the task smoothly, it is recommended to use the Chrome browser</span>。",
     home_043:"Download Chrome",
-    home_044:"Group Tasks",
+    home_044:"Group Mission",
     home_056:"Invite Now",
     home_064:"1. You can only withdraw {value} times a day",
     home_065:"2. You can only apply for withdrawal when your gold coins reach {value} or above",
@@ -120,7 +120,7 @@ export default {
     home_131:"Sign in now",
     home_132:"Sign in completed",
     home_133:"Sign in...",
-    home_134:"Upload group links",
+    home_134:"Upload Group Links",
     home_135:"View",
     home_136:"The more members in the group the more point you can collect",
     home_137:"You can sign in after completing the task",

@@ -43,7 +43,7 @@ export default {
     home_002:"Today's task income",
     home_003:"Today's promotion income",
     home_004:"Please select the task type",
-    home_005:"Start task",
+    home_005:"Start mission",
     home_006:"In progress",
     home_007:"Settlement in progress",
     home_008:"Complete",

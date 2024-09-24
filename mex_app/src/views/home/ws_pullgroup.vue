@@ -51,7 +51,7 @@
                         </div>
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_037')}}</div>
-                            <div class="task_desc font_20">{{$t('home_110')}}</div>
+                            <!-- <div class="task_desc font_20">{{$t('home_110')}}</div> -->
                         </div>
                         <div class="w_f flex-item flex-between flex-align font_24">
                             <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>

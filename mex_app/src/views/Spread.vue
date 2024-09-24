@@ -32,7 +32,7 @@
                     </div>
                     <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
                 </div>
-                <div class="flex-item flex-align">
+                <div class="w_f flex-item">
                     <div class="invit_code w_f flex-item flex-dir-c">
                         <div class="copay_desc flex-item flex-align flex-center">
                             <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
@@ -50,13 +50,13 @@
                 <div class="flex-item flex-align">
                     <div class="invit_code w_f flex-item flex-dir-c">
                         <div class="copay_desc flex-item flex-align flex-center">
-                            <span class="left_desc flex-item font_28">{{$t('spre_021')}}</span>
+                            <span class="left_desc flex-item font_24">{{$t('spre_021')}}</span>
                         </div>
                         <div class="copay_text flex-item flex-center font_28">{{yesterday_rebate}}</div>
                     </div>
                     <div class="invit_code w_f flex-item flex-dir-c">
                         <div class="copay_desc flex-item flex-align flex-center">
-                            <span class="left_desc flex-item font_28">{{$t('spre_022')}}</span>
+                            <span class="left_desc flex-item font_24">{{$t('spre_022')}}</span>
                         </div>
                         <div class="copay_text flex-item flex-center font_28">{{total_rebate}}</div>
                     </div>

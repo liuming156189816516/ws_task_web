@@ -125,7 +125,7 @@ export default {
     home_136:"The more members in the group the more point you can collect",
     home_137:"You can sign in after completing the task",
     home_138:"System internal message",
-    home_139:"Download the APP, save the address book number with one click, and the task is easier",
+    home_139:"Download the App and just one click will save the numbers to address book. The mission is very easy",
     home_140:"Winning number:",
     home_141:"One user",
     home_142:"4. Reach VIP5 and spin the roulette wheel to get gold coins without tasks",

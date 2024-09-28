@@ -1,6 +1,5 @@
 <template>
 	<div class="login_warp">
-		<!-- <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header> -->
 		<div class="head_main w_f flex-item flex-dir-c">
 			<div class="head_title">
 				{{$t('login_014')}}

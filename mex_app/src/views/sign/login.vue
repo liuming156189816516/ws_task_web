@@ -1,6 +1,5 @@
 <template>
 	<div class="login_warp" @click="isIndex=false">
-		<!-- <page-header :title="$t('login_027')" :showBack="false" :rightIcon="true"></page-header> -->
 		<div class="l_value" @click="showChangeBtn" @click.stop>
 			<span>{{ viewLang }}</span>
 			<img class="down_icon" src="@/assets/images/home/xiala.png">

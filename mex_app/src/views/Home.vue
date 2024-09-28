@@ -445,7 +445,7 @@ export default {
             }
             .down_list{
                 width: 180px;
-                max-height: 230px;
+                min-height: 230px;
                 position: absolute;
                 right: 0px;
                 top: 50px;

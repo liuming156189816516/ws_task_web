@@ -351,8 +351,8 @@ export default {
     other_091:"Saldo de conta insuficiente",
     other_092: "O sistema atualmente retém apenas os registros do dia atual",
 
-    tabela_001:"Início",
-    tabela_002:"Equipe",
+    table_001:"Início",
+    table_002:"Equipe",
     table_003:"Cliente",
-    tabela_004:"Conta"
+    table_004:"Conta"
 }

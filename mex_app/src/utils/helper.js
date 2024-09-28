@@ -348,7 +348,7 @@ const Helper = {
 	},
 	langOptions(){
 		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];
-		return [{ lang: "en", name: "en-US" }, { lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];
+		return [{ lang: "en", name: "en-US" },{ lang: "es", name: "España" },{ lang: "br", name: "Português" },{ lang: "zh", name: "zh_CN" }];
 	},
 	globalSupport(){
 		// if (this.checkBrowser()) {

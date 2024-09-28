@@ -4,6 +4,7 @@ import { Locale } from 'vant'
 import zhCN from './zh.js'
 import enCN from './en.js'
 import esCN from './es.js'
+import brCN from './br.js'
 Vue.use(VueI18n)
 
 const messages = {
@@ -16,9 +17,12 @@ const messages = {
 	zh: {
 		...zhCN
 	},
+	br: {
+		...brCN
+	}
 }
 const i18n = new VueI18n({
-	locale: Cookies.get('language') || "es", // 设置默认语言
+	locale: Cookies.get('language') || "br", // 设置默认语言
 	silentTranslationWarn: true,
 	messages: messages // 设置资源文件对象
 })

@@ -345,10 +345,10 @@ export default {
 		margin-left: 20px;
 	}
 	.down_list{
-		width: 160px;
-		max-height: 230px;
+		width: 180px;
+		min-height: 230px;
 		position: absolute;
-		left: 0;
+		left: -10px;
 		top: 60px;
 		z-index: 2;
 		font-size: 28px;

@@ -561,7 +561,7 @@ export default {
                     margin-bottom: 14px;
                     .task_live_1, .task_live_2{
                         color: $home-task-01;
-                        width: 260px;
+                        width: 280px;
                         span{
                             margin-right: 6px;
                         }

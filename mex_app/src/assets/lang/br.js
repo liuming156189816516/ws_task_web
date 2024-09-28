@@ -25,7 +25,7 @@ export default {
     login_022:"Modificação bem-sucedida, faça login",
     login_023:"Senha de pelo menos seis dígitos",
     login_024:"e-mail",
-    login_025: "O formato do e-mail está incorreto",
+    login_025:"O formato do e-mail está incorreto",
     login_026:"conta",
     login_027:"Tarefas de reunião de grupo",
     login_028:"Você é novato?",

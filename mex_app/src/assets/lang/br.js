@@ -127,7 +127,7 @@ export default {
     home_142: "4. Se você atingir o VIP 5, poderá girar a roleta e ganhar moedas de ouro sem nenhuma tarefa",
     home_143:"Número vencedor",
 
-    spre_001:"Entrar no grupo",
+    spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",
     spre_003:"Tutoriais e regras",
     spre_004:"Obtenha bônus generosos",
@@ -158,7 +158,7 @@ export default {
     serv_002:"Como posso ajudá-lo?",
     serv_003:"Atendimento ao Cliente On-line",
     serv_004:"Atendimento ao cliente 24 horas por dia, 7 dias por semana",
-    serv_005:"Entre em contato com o atendimento ao cliente",
+    serv_005:"cliente",
     serv_006:"Perguntas frequentes",
     serv_007:"Após concluir a tarefa, os rendimentos serão creditados imediatamente?",
     serv_008:"Depois de enviar uma solicitação de saque, quanto tempo leva para ela chegar?",
@@ -203,7 +203,7 @@ export default {
     mine_018:"Notas",
     mine_019:"Senha antiga",
     mine_020:"Mensagem do sistema",
-    mine_021:"<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span> ainda é curto<span style='color:#FFF000;font-weight : negrito;'> {ouro} </span>moedas de ouro",
+    mine_021:"Você ainda precisa de <span style='color:#FFF000;font-weight: bold;'> {gold} </span> moedas para se tornar <span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
     mine_022:"Pontos acumulados: <span style='color:#31acf2;font-weight: negrito;'>{value}</span>",
 
     pay_001:"Sacar dinheiro",

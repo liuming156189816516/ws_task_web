@@ -27,7 +27,7 @@ export default {
     login_024:"e-mail",
     login_025: "O formato do e-mail está incorreto",
     login_026:"conta",
-    login_027:"Tarefa de grupo",
+    login_027:"Tarefas de reunião de grupo",
     login_028:"Você é novato?",
     login_029:"Crie uma conta",
     login_030:"senha",

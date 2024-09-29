@@ -1,7 +1,7 @@
 <template>
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
-            <page-header :title="$t('home_089')" :show-icon="true" :bgcolor="false" />
+            <page-header :title="$t('home_145')" :show-icon="true" :bgcolor="false" />
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
                 <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/2.mp4" />
             </div>
@@ -208,11 +208,11 @@ export default {
 		...mapState({
 			userInfo: state => state.User.userInfo,
 		}),
-        statusOption(){
-            return ["",this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
-        },
         taskOption(){
             return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
+        },
+        statusOption(){
+            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
         }
 	},
     created(){
@@ -274,9 +274,9 @@ export default {
            this.target_url = groupData.target_url;
            this.task_id = groupData.task_info_id; 
            this.old_account = groupData.account;
-           this.ws_account = groupData.account?groupData.account:this.ws_account;
-           this.account_type = groupData.account_type?String(groupData.account_type):this.account_type;
+           this.ws_account = groupData.account;
            this.current_code =  groupData.area_code||"355";  
+           this.account_type = groupData.account_type?String(groupData.account_type):this.account_type;
            this.isShow = groupData.status==1||groupData.status==2?false:true;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
         //    console.log(this.taskTime);
@@ -306,6 +306,7 @@ export default {
                     clearInterval(this.timer);
                     this.countTime = 60;
                     this.very_code="";
+                    this.getGroupMess();
                     this.codeOption = ["","","","","—","","","",""]
                     // this.errState = false;
                 }
@@ -551,15 +552,20 @@ export default {
                                 text-shadow: 0px 4px 3px rgba(0,0,0,0.2);
                             }
                         }
-                        .title_top{
-                            height: 88px;
-                            padding: 0 20px;
-                            font-weight: bold;
-                            box-sizing: border-box;
-                            border-top-left-radius: 20px;
-                            border-top-right-radius: 20px;
-                            background: $home-title-10;
-                        }
+                        // .title_top{
+                        //     height: 88px;
+                        //     padding: 0 20px;
+                        //     font-weight: bold;
+                        //     box-sizing: border-box;
+                        //     border-top-left-radius: 20px;
+                        //     border-top-right-radius: 20px;
+                        //     background: $home-title-10;
+                        //     span:nth-child(3){
+                        //         flex-grow: 0.8;
+                        //         justify-content: center;
+                        //         background: darkgreen;
+                        //     }
+                        // }
                         .title_head_top{
                             font-weight: bold;
                         }
@@ -742,6 +748,9 @@ export default {
                 background: $home-title-10;
                 span{
                     flex: 1;
+                }
+                span:nth-child(3){
+                    flex-grow: 0.6;
                 }
             }
             .task_title_head {

@@ -334,16 +334,14 @@ const Helper = {
 			}
 		}
 	},
-	
 	// // 示例数据
 	// const elements = ['apple', 'banana', 'cherry'];
 	// const probabilities = [0.5, 0.3, 0.2]; // 确保这些概率加起来是1
 	
 	// const randomElement = getRandomElementWithProbability(elements, probabilities);
 	// console.log(randomElement);
-	
 	defaultOption() {
-		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2}];
+		return [{status:1,task_info_id:"",type:5},{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2}];
 		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
 	},
 	langOptions(){

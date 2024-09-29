@@ -129,6 +129,7 @@ export default {
     home_143:"numero ganador",
     home_144:"vinculativo WhatsApp",
     home_144:"vinculante WhatsApp",
+    home_145:"Extraer grupos automáticamente",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

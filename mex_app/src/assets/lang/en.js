@@ -131,6 +131,7 @@ export default {
     home_142:"4. Reach VIP5 and spin the roulette wheel to get gold coins without tasks",
     home_143:"Winning number",
     home_144:"Binding WhatsApp",
+    home_145:"Automatic grouping",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

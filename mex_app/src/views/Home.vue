@@ -70,7 +70,7 @@
                         <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
                         <div class="task_btn">
-                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==3" :class="[item.status==2?'progress_award':'']">
+                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==3||item.type==5" :class="[item.status==2?'progress_award':'']">
                                 {{taskStatusOption[item.status]}}
                             </div>
                              <div class="circle_box flex-item flex-align flex-center font_24" v-else>
@@ -142,11 +142,12 @@ export default {
                 {name:this.$t('home_045'),live1:2,live2:3,type:2,g_num:10,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:10,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
-                {name:this.$t('home_134'),live1:2,live2:1,type:5,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
+                // {name:this.$t('home_134'),live1:2,live2:1,type:5,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
+                {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:10,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
             ]
         },
         taskStatusOption() {
-            return ["", this.$t('home_005'), this.$t('home_006'), this.$t('home_007'), this.$t('home_008')]
+            return ["",this.$t('home_005'), this.$t('home_006'), this.$t('home_007'), this.$t('home_008')]
         },
         langOptions(){
             return this.$Helper.langOptions();

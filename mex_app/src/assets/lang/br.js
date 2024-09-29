@@ -127,6 +127,7 @@ export default {
     home_142: "4. Se você atingir o VIP 5, poderá girar a roleta e ganhar moedas de ouro sem nenhuma tarefa",
     home_143:"Número vencedor",
     home_144:"vinculativo WhatsApp",
+    home_145:"Extraer grupos automáticamente",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

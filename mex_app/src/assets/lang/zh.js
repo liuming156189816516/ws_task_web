@@ -129,6 +129,7 @@ export default {
     home_142:"4. 达到VIP5免任务转轮盘拿金币",
     home_143:"中奖编号",
     home_144:"绑定WhatsApp",
+    home_145:"自动拉群",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",

@@ -234,7 +234,9 @@ export default {
 	methods: {
         handleType(){
             this.ws_account="";
+            this.old_account="";
             this.very_code="";
+            this.getGroupMess();
         },
         handleUnbind(){
             this.isUnbind = true;

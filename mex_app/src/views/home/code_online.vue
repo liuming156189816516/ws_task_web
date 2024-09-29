@@ -32,17 +32,24 @@
         </div>
         <div class="task_warp w_f flex-item">
             <div class="task_main w_f flex-item flex-dir-c">
+                <div class="task_item task_item1 w_f flex-item flex-dir-c font_34">
+                    <!-- <div class="task_name w_f flex-item">
+                        <img src="@/assets/images/home/num1_icon.png">
+                    </div> -->
+                    <div class="task_book w_f font_34">
+                        <div class="task_title">{{$t('home_037')}}</div>
+                    </div>
+                   <div class="w_f flex-item flex-between flex-align font_24">
+                        <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
+                        <van-button type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
+                    </div>
+                </div>
                 <div class="task_item w_f flex-item flex-dir-c font_34">
                     <div class="ws_head w_f flex-item flex-dir-c">
                         <div class="task_award w_f">
                             <div class="task_book flex-item flex-between flex-dir-c font_34">
                                 <div class="task_title"> {{$t('home_144')}} </div>
-                                <div class="w_f flex-item flex-between flex-align font_24">
-                                    <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
-                                    <van-button type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
-                                </div>
                             </div>
-                            <!-- <div><span>importar</span></div> -->
                         </div>
                     </div>
                     <div class="ws_list w_f flex-item flex-dir-c" >
@@ -393,7 +400,7 @@ export default {
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
-        background: $home-title-18;
+        background: rgba($color: $home-title-18, $alpha: 5);
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
         input {
@@ -496,8 +503,18 @@ export default {
                 padding: 0 20px;
                 gap: 30px;
                 box-sizing: border-box;
-                .task_item{
-                    height: 205px;
+                .task_book{
+                    margin-top: 10px;
+                    .task_title{
+                        font-weight: bold;
+                        color: $color-theme;
+                        margin-bottom: 10px;
+                        text-shadow: 0px 4px 3px rgba(0,0,0,0.2);
+                    }
+                }
+                .task_item1{
+                    height: 180px;
+                    margin-top: 30px;
                     padding: 16px 0 0 28px;
                     box-sizing: border-box;
                     background: url('../../assets/images/home/task_icon.png') no-repeat;
@@ -508,49 +525,23 @@ export default {
                             height: 40px;
                         }
                     }
-                    .van-button{
-                        width: max-content;
-                        height: 30px;
-                        line-height: 30px;
-                        margin-right: 10px;
-                        border-radius: 200px;
-                        color: $font-color-white;
-                        border-color: $color-theme;
-                        background-color: $color-theme;
+                    .task_book{
+                        margin-bottom: 10px;
+                    }
+                    .show_account{
+                        color: $home-title-02;
+                        text-decoration: underline;
                     }
                 }
-                .task_item{
-                    width: 100%;
-                    height: initial;
-                    padding-left: 0;
-                    padding-right: 0;
-                    overflow: hidden;
-                    padding-bottom: 20px;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    background: none;
+                .task_item:nth-child(2){
                     .ws_head{
-                        padding: 5px 20px;
+                        padding: 10px 20px;
                         box-sizing: border-box;
                         background: url('../../assets/images/home/ws_head.png') no-repeat;
                         background-size: 100% 100%;
                         .task_award{
                             margin-top: 24px;
                             margin-bottom: 14px;
-                        }
-                        .show_account{
-                            color: $home-title-02;
-                            text-decoration: underline;
-                        }
-                        .task_book{
-                            margin: 10px 0 0 10px;
-                            .task_title{
-                                font-weight: bold;
-                                color: $color-theme;
-                                margin-bottom: 10px;
-                                text-shadow: 0px 4px 3px rgba(0,0,0,0.2);
-                            }
                         }
                         // .title_top{
                         //     height: 88px;
@@ -595,7 +586,7 @@ export default {
                             gap: 40px;
                             color: $home-title-03;
                             .ws_tips{
-                                margin-top: 30px;
+                                margin-top: 10px;
                             }
                             ::v-deep .van-radio__icon .van-icon{
                                 border-radius: 0 !important;
@@ -701,6 +692,16 @@ export default {
                             }
                         }
                     }
+                }
+                .van-button{
+                    width: max-content;
+                    height: 30px;
+                    line-height: 30px;
+                    margin-right: 10px;
+                    border-radius: 200px;
+                    color: $font-color-white;
+                    border-color: $color-theme;
+                    background-color: $color-theme;
                 }
             }
         }

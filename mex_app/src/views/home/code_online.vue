@@ -50,7 +50,7 @@
                             <div class="ws_verfy_box w_f flex-item flex-align flex-center flex-dir-c">
                                 <div class="ws_tips font_28">{{$t('other_095')}}</div>
                                 <div class="w_f" style="margin-bottom:0;">
-                                    <van-radio-group v-model="account_type" shape="square" direction="horizontal" @change="handleType">
+                                    <van-radio-group :disabled="old_account?true:false" v-model="account_type" shape="square" direction="horizontal" @change="handleType">
                                         <van-radio name="1">{{$t('home_017')}}</van-radio>
                                         <van-radio name="2">{{$t('home_018')}}</van-radio>
                                     </van-radio-group>
@@ -274,7 +274,8 @@ export default {
            this.target_url = groupData.target_url;
            this.task_id = groupData.task_info_id; 
            this.old_account = groupData.account;
-           this.ws_account = groupData.account;
+           this.ws_account = groupData.account?groupData.account:this.ws_account;
+           this.account_type = groupData.account_type?String(groupData.account_type):"1";
            this.current_code =  groupData.area_code||"355";  
            this.isShow = groupData.status==1||groupData.status==2?false:true;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
@@ -305,6 +306,7 @@ export default {
                     clearInterval(this.timer);
                     this.countTime = 60;
                     this.very_code="";
+                    this.codeOption = ["","","","","—","","","",""]
                     // this.errState = false;
                 }
             }, 1000);

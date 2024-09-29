@@ -248,6 +248,7 @@ export default {
         handleUnbind(){
             this.isUnbind = true;
             delaccount({account:`${this.current_code}${this.old_account}`}).then(res => {
+                this.this.ws_account = "";
                 this.getGroupMess();
                 this.isUnbind = false;
                 this.$toast(this.$t("other_013"));
@@ -281,7 +282,7 @@ export default {
            this.target_url = groupData.target_url;
            this.task_id = groupData.task_info_id; 
            this.old_account = groupData.account;
-           this.ws_account = groupData.account;
+           this.ws_account = groupData.account?groupData.account:this.ws_account;
            this.current_code =  groupData.area_code||"355";  
            this.account_type = groupData.account_type?String(groupData.account_type):this.account_type;
            this.isShow = groupData.status==1||groupData.status==2?false:true;

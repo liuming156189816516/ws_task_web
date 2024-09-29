@@ -598,6 +598,10 @@ export default {
                                 font-size: 14px;
                                 color: $home-title-03;
                             }
+                            ::v-deep .van-radio__icon--checked .van-icon{
+                                border-color: $color-theme;
+                                background: $color-theme;
+                            }
                             .ws_value{
                                 width: 100%;
                                 height: 66px;

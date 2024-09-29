@@ -248,7 +248,7 @@ export default {
             this.isLoading = true;
             getqrcode({area_code:String(this.current_code),account:String(this.ws_account),account_type:Number(this.account_type)}).then(res => {
                 this.isLoading = false;
-                if(res.code&&res.qr_code.length==8){
+                if(!res.code&&res.qr_code.length==8){
                     this.very_code = res.qr_code;
                     let result = res.qr_code.slice(0,4)+"—"+res.qr_code.slice(4,9)
                     for (let k = 0; k < this.codeOption.length; k++) {

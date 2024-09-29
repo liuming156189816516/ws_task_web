@@ -130,6 +130,7 @@ export default {
     home_141:"One user",
     home_142:"4. Reach VIP5 and spin the roulette wheel to get gold coins without tasks",
     home_143:"Winning number",
+    home_144:"Binding WhatsApp",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",
@@ -354,6 +355,9 @@ export default {
     other_090:"Winning record",
     other_091:"Insufficient account balance",
     other_092:"The system currently only retains the record of the day",
+    other_093:"Retrieve after {value} seconds",
+    other_094:"desagregar",
+    other_095:"Enter the verification code into the linked WhatsApp account",
 
     table_001:"Home",
     table_002:"Team",

@@ -26,7 +26,7 @@
                 </div>
                 <div class="l_value" @click="showChangeBtn" @click.stop>
                     <span class="font_28">{{ viewLang }}</span>
-                    <img class="down_icon" src="../assets/images/home/down_arrow_white.png">
+                    <img class="down_icon" src="@/assets/images/home/down_arrow_white.png">
                     <van-transition name="fade-up">
                         <div class="down_list" :class="isIndex?'active_open':'active_close'">
                             <p :class="[langIdx==item.lang?'select_active':'']" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">{{item.name}}</p>
@@ -111,7 +111,7 @@ export default {
             help_url: "",
             taskOption: [],
             langIdx:Cookies.get("language"),
-            taskType: ['', 'scanOnline', 'spread', 'pullgroupTask','pulledTask'],
+            taskType: ['', 'codeOnline', 'spread', 'pullgroupTask','pulledTask','codeOnline'],
             bannerList:[],
             imagesList:[
                 {
@@ -141,7 +141,8 @@ export default {
                 {name:this.$t('home_089'),live1:1,live2:3,type:1,g_num:10, status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
                 {name:this.$t('home_045'),live1:2,live2:3,type:2,g_num:10,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:10,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
-                {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
+                {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
+                {name:this.$t('home_134'),live1:2,live2:1,type:5,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
             ]
         },
         taskStatusOption() {
@@ -229,34 +230,10 @@ export default {
         async onChangeType(row) {
             this.langIdx = row.lang;
             this.$Helper.initLanguage(row.lang);
-            // await setappuserlanguage({ language: row.lang });
-            // await this.$store.dispatch('User/plantCarousel');
         },
         handleTask(row) {
+            // this.$router.push("/codeOnline");
             const path = this.taskType[row.type];
-            // if(path=="pullgroupTask"){
-            //     this.$store.dispatch('User/actionReport',5) 
-            // }
-            // if(path=="spread"){
-            //     this.$store.dispatch('User/actionReport',6) 
-            // }
-            // if(path=="scanOnline"){
-            //     this.$store.dispatch('User/actionReport',7) 
-            // }
-            // if(!getToken()){
-               
-            // }
-            // if(getToken()){
-            //     if(path=="pullgroupTask"){
-            //         this.$store.dispatch('User/actionReport',8) 
-            //     }
-            //     if(path=="spread"){
-            //         this.$store.dispatch('User/actionReport',10) 
-            //     }
-            //     if(path=="scanOnline"){
-            //         this.$store.dispatch('User/actionReport',12) 
-            //     }
-            // }
             if (!getToken()) return this.$router.push("/login");
             if (row.type == 2) {
                 this.$router.push(path);

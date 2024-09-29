@@ -93,6 +93,7 @@
   <div id="app"></div>
   <!-- built files will be auto injected -->
   <script>
+    document.onselectstart = new Function("event.returnValue=false");
     document.addEventListener('plusready', function () {
       var webview = plus.webview.currentWebview();
       sessionStorage.setItem('plus_ready', '1')

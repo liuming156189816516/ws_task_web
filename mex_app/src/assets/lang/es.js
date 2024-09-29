@@ -127,6 +127,8 @@ export default {
     home_141:"un usuario x",
     home_142:"4. Alcanza VIP 5 para obtener misiones gratis y gira la ruleta para obtener monedas de oro.",
     home_143:"numero ganador",
+    home_144:"vinculativo WhatsApp",
+    home_144:"vinculante WhatsApp",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -352,6 +354,9 @@ export default {
     other_090:"Récord ganador",
     other_091:"Saldo de cuenta insuficiente",
     other_092:"Actualmente, el sistema solo conserva registros del día actual",
+    other_093:"Recuperar después de {value} segundos",
+    other_094:"Unbinding",
+    other_095:"Ingrese el código de verificación en la cuenta de WhatsApp vinculada",
 
     table_001:"Inicio",
     table_002:"Equipo",

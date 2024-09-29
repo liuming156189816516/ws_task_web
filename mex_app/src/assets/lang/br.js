@@ -126,6 +126,7 @@ export default {
     home_141:"um usuário",
     home_142: "4. Se você atingir o VIP 5, poderá girar a roleta e ganhar moedas de ouro sem nenhuma tarefa",
     home_143:"Número vencedor",
+    home_144:"vinculativo WhatsApp",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",
@@ -268,7 +269,7 @@ export default {
     other_008:"Lembrete caloroso",
     other_009: "Depois de sair, você não poderá visualizar os ganhos em tempo real. Tem certeza de que deseja sair?",
     other_010:"Sair",
-    other_011:"OK",
+    other_011:"Claro",
     other_012:"Enviando...",
     other_013:"Operação concluída",
     other_014:"Por favor selecione {value}",
@@ -350,6 +351,9 @@ export default {
     other_090:"Recorde de ganhos na loteria",
     other_091:"Saldo de conta insuficiente",
     other_092: "O sistema atualmente retém apenas os registros do dia atual",
+    other_093:"Recuperar após {value} segundos",
+    other_094:"desagrupar",
+    other_095:"Insira o código de verificação na conta vinculada do WhatsApp",
 
     table_001:"Início",
     table_002:"Equipe",

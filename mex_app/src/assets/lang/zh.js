@@ -27,7 +27,7 @@ export default {
     login_024:"邮箱",
     login_025:"邮箱格式不正确",
     login_026:"账户",
-    login_027:"拉群任务",
+    login_027:"",
     login_028:"您是一个新手？",
     login_029:"创建一个账户",
     login_030:"密码",
@@ -128,6 +128,7 @@ export default {
     home_141:"一个用户",
     home_142:"4. 达到VIP5免任务转轮盘拿金币",
     home_143:"中奖编号",
+    home_144:"绑定WhatsApp",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",
@@ -353,6 +354,9 @@ export default {
     other_090:"中奖记录",
     other_091:"账户余额不足",
     other_092:"系统目前只保留当天记录",
+    other_093:"{value}秒后重新获取",
+    other_094:"解绑",
+    other_095:"将验证码输入关联的 WhatsApp 帐户",
 
     table_001:"首页",
     table_002:"团队",

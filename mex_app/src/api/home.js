@@ -80,6 +80,13 @@ export const getmessagelbyid = (params)=> {
 export const getlotteryrecordlist = (params)=> {
     return request({url:'/account/getlotteryrecordlist',method:'post',data:params})
 }
+export const getautogroupinfo = (params)=> {
+    return request({url:'/account/getautogroupinfo$',method:'post',data:params})
+}
+export const submitautogrouptask = (params)=> {
+    return request({url:'/account/submitautogrouptask$',method:'post',data:params})
+}
+
 
 
 

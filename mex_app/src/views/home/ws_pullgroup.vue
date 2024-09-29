@@ -21,7 +21,7 @@
                     <div class="w_f flex-item flex-between">
                         <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
                         <div class="right_refresh flex-item font_24" @click="refreshBtn">
-                            <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="../../assets/images/home/shuaxin.png"> 
+                            <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
                             {{$t('other_035')}}
                         </div>
                     </div>
@@ -196,6 +196,7 @@ export default {
            let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
            this.teamStemp = groupData;
+        //    console.log(groupData);
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
            this.chrome_url = groupData.chrome_url;
@@ -203,6 +204,7 @@ export default {
            this.group_link = groupData.invite_link;
            this.isShow = groupData.status==1||groupData.status==2?false:true;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
+        //    console.log(this.taskTime);
         //    localStorage.setItem('task_id',this.task_id);
         },
         refreshBtn(){
@@ -230,7 +232,6 @@ export default {
             this.$toast(`${this.$t("other_044")}`);
         },
         viewTaskNum(){
-            // console.log(this.taskList);
             this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
         },
         submitTask(){

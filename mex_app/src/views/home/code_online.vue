@@ -248,7 +248,7 @@ export default {
         handleUnbind(){
             this.isUnbind = true;
             delaccount({account:`${this.current_code}${this.old_account}`}).then(res => {
-                this.this.ws_account = "";
+                this.ws_account = "";
                 this.getGroupMess();
                 this.isUnbind = false;
                 this.$toast(this.$t("other_013"));

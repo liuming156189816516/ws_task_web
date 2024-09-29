@@ -275,7 +275,7 @@ export default {
            this.task_id = groupData.task_info_id; 
            this.old_account = groupData.account;
            this.ws_account = groupData.account?groupData.account:this.ws_account;
-           this.account_type = groupData.account_type?String(groupData.account_type):"1";
+           this.account_type = groupData.account_type?String(groupData.account_type):this.account_type;
            this.current_code =  groupData.area_code||"355";  
            this.isShow = groupData.status==1||groupData.status==2?false:true;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;

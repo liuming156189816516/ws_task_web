@@ -184,7 +184,7 @@ export default {
     serv_027:"Como posso me tornar um agente?",
     serv_028:"Entre em contato conosco através do atendimento ao cliente on-line e discutiremos com você os detalhes para se tornar um agente",
 
-    mine_001:"Saldo",
+    mine_001:"equilíbrio",
     mine_002:"Retirada de conta",
     mine_003:"Detalhes da renda",
     mine_004:"Ordem de Retirada",

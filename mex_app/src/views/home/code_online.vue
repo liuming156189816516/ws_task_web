@@ -443,7 +443,7 @@ export default {
             background-size: 100% 100%;
             background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
             .task_box{
-                padding: 0 30px;
+                padding: 0 20px;
                 margin-top: 30px;
                 box-sizing: border-box;
                 .task_Progress{

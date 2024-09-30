@@ -83,7 +83,7 @@
                                         <p v-for="(item,idx) in accountList" :key="idx">44444444444444444</p>
                                     </div> -->
                                 </div>
-                                <template v-if="!old_account">
+                                <template v-if="ws_status==0">
                                     <van-button class="tabs_item flex-item font_28" :loading="isLoading" :disabled="!ws_account||isLoading||countTime!=60" @click="getVerifBtn" :loading-text="$t('other_029')">
                                         {{countTime!=60? $t('other_093',{value:countTime}):$t('login_017')}}
                                     </van-button>

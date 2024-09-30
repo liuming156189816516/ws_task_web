@@ -362,6 +362,7 @@ export default {
     other_095:"将验证码输入关联的 WhatsApp 帐号",
     other_096:"请打开WhatsApp查看联系人是否已成功保存，否则无法正常结算",
     other_097:"点击刷新，WhatsApp 帐号显示在线之后再提交",
+    other_098:"获取奖励",
 
     table_001:"首页",
     table_002:"团队",

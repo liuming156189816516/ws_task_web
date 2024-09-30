@@ -359,6 +359,7 @@ export default {
     other_095:"Insira o código de verificação na conta vinculada do WhatsApp",
     other_096:"Abra o WhatsApp para verificar se o contato foi salvo com sucesso, caso contrário a liquidação não poderá ser feita normalmente",
     other_097:"Clique em Atualizar. A conta do WhatsApp aparecerá online antes de enviar.",
+    other_098:"Receba recompensas",
 
     table_001:"Início",
     table_002:"Equipe",

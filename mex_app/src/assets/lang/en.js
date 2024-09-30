@@ -361,6 +361,7 @@ export default {
     other_095:"Enter the verification code into the linked WhatsApp account",
     other_096:"Please open WhatsApp to check whether the contact has been saved successfully, otherwise the settlement will not be possible.",
     other_097:"Click refresh, and submit after the WhatsApp account shows online",
+    other_098:"Get rewards",
 
     table_001:"Home",
     table_002:"Team",

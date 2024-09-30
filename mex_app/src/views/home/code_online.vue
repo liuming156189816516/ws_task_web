@@ -97,13 +97,12 @@
                                             <img src="@/assets/images/home/copau_icon.png">
                                         </span>
                                     </div>
-                                    <div class="mg_20 font_28">{{$t('other_095')}}</div>
                                 </template>
-                                <template v-if="!isShow">
-                                    <van-button class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account" :loading-text="$t('other_029')" @click="submitBtn">
-                                        {{$t('other_011')}}
-                                    </van-button>
-                                </template>
+                                <div class="mg_20 font_28">{{$t('other_095')}}</div>
+                                <van-button class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account" :loading-text="$t('other_029')" @click="submitBtn">
+                                    {{$t('other_098')}}
+                                </van-button>
+                                
                                 <!-- <div class="pre_tips w_f flex-item flex-dir-c font_28">
                                     <h3>{{$t('mine_018')}}</h3>
                                     <p>1.{{$t('other_095')}}</p>
@@ -385,7 +384,7 @@ export default {
         },
         showResult(row){
             if(row.status == 4||row.status == 5){
-                this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 2 })
+                this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
             }
             // this.$store.dispatch('User/actionReport',9);
         },
@@ -396,8 +395,8 @@ export default {
             setTimeout(()=>{this.sLoading=false;},500)
             let result = this.$Helper.aesDecrptHost(backRes);
             if(result.code) return;
-            this.refreshBtn();
-            this.$toast(this.$t("home_039"));
+            // this.refreshBtn();
+            // this.$toast(this.$t("home_039"));
             let scrollTop = this.$refs.warpBox;
             scrollTop.scrollTo({top: 0,behavior: "instant" });
             this.$popDialog({content:this.$t("other_096"),title:this.$t("other_008"),type:10}) 
@@ -690,7 +689,7 @@ export default {
                                 }
                             }
                             .submit_text{
-                                margin: 30px 0;
+                                margin-top: 30px;
                             }
                             .pre_tips{
                                 gap: 10px !important;

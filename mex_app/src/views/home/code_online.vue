@@ -57,7 +57,7 @@
                             <div class="ws_verfy_box w_f flex-item flex-align flex-center flex-dir-c">
                                 <!-- <div class="ws_tips font_28">{{$t('other_095')}}</div> -->
                                 <div class="table_type flex-item w_f">
-                                    <van-radio-group :disabled="old_account?true:false" v-model="account_type" shape="square" direction="horizontal" @change="handleType">
+                                    <van-radio-group :disabled="ws_status!=0?true:false" v-model="account_type" shape="square" direction="horizontal" @change="handleType">
                                         <van-radio name="1">{{$t('home_017')}}</van-radio>
                                         <van-radio name="2">{{$t('home_018')}}</van-radio>
                                     </van-radio-group>

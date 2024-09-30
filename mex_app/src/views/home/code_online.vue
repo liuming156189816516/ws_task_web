@@ -67,8 +67,8 @@
                                         <span class="status_tips">{{$t('home_021')}}：</span>
                                         <span :class="[ws_status==1?'notoce_active':'']" :style="'color:'+(ws_status==1?'#F52C2C':ws_status==2?'#008751':'#595959')">{{ wsStatus[ws_status]}}</span>
                                     </div>
-                                    <div class="flex-item flex-align" @click="refreshBtn">
-                                        <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
+                                    <div class="flex-item flex-align" @click="getWsStatus">
+                                        <img class="refres_icon" :class="{'refres_animat':isStatus}"  src="@/assets/images/home/shuaxin.png"> 
                                         {{$t('other_035')}}
                                     </div>
                                 </div>
@@ -97,9 +97,9 @@
                                             <img src="@/assets/images/home/copau_icon.png">
                                         </span>
                                     </div>
+                                    <div class="mt_20 font_28">{{$t('other_095')}}</div>
                                 </template>
-                                <div class="mg_20 font_28">{{$t('other_095')}}</div>
-                                <van-button class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account" :loading-text="$t('other_029')" @click="submitBtn">
+                                <van-button class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account||isShow" :loading-text="$t('other_029')" @click="submitBtn">
                                     {{$t('other_098')}}
                                 </van-button>
                                 
@@ -177,7 +177,7 @@ import { formatTime } from "@/utils/tool";
 import uniFun from "@/utils/uni-webview-js"
 import PageHeader from "@/components/Header";
 import { getinvitefriendtasklist } from '@/api/task';
-import { getautogroupinfo,getqrcode,delaccount,submitautogrouptask } from '@/api/home'
+import { getautogroupinfo,getqrcode,delaccount,submitautogrouptask,getautogroupaccountstatus } from '@/api/home'
 export default {
 	name: 'scan_online',
 	components: {PageHeader},
@@ -195,6 +195,7 @@ export default {
             task_id:"",
             old_account:"",
             isShow:false,
+            isStatus:false,
             wechaList:[],
             taskList:[],
             tipsText:"",
@@ -210,12 +211,12 @@ export default {
             target_url:'',
             taskTime: null,
             isScroll:false,
-            ws_status: null,
+            ws_status: 0,
             ref_loading:false,
             account_type:"1",
-            current_code:""||"355",
             pullGroupList:[],
             countryList:[],
+            current_code:""||"355",
             accountList:[1,1,1,1,1,1],
             whatsOption:["","WhatsApp","WhatsApp Business"],
             codeOption:["","","","","—","","","",""]
@@ -260,11 +261,21 @@ export default {
         handleUnbind(){
             this.isUnbind = true;
             delaccount({account:`${this.current_code}${this.old_account}`}).then(res => {
-                this.ws_account = "";
-                this.getGroupMess();
                 this.isUnbind = false;
+                this.ws_status = 0;
+                this.ws_account = "";
+                this.old_account = "";
+                this.current_code = "355";
+                // this.getWsStatus();
+                // this.getGroupMess();
                 this.$toast(this.$t("other_013"));
             })
+        },
+        async getWsStatus(){
+            this.isStatus = true;
+            let { account_status } = await getautogroupaccountstatus({account:`${this.current_code}${this.ws_account}`});
+            setTimeout(()=>{this.isStatus = false;},300)
+            this.ws_status = account_status;
         },
         getVerifBtn(){
             this.isLoading = true;
@@ -276,7 +287,6 @@ export default {
                     for (let k = 0; k < this.codeOption.length; k++) {
                         this.codeOption[k] = result[k]
                     }
-                    this.getGroupMess();
                     this.startSettime()
                 }
             })
@@ -294,12 +304,12 @@ export default {
            this.target_url = groupData.target_url;
            this.task_id = groupData.task_info_id; 
            this.old_account = groupData.account;
-           this.ws_status = groupData.account_status;
-           this.ws_account = groupData.account?groupData.account:this.ws_account;
-           this.current_code =  groupData.area_code||"355";  
+           this.ws_account = groupData.account||this.ws_account;
+           this.current_code = groupData.area_code||this.current_code;  
            this.account_type = groupData.account_type?String(groupData.account_type):this.account_type;
            this.isShow = groupData.status==1||groupData.status==2?false:true;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
+           await this.getWsStatus();
         //    console.log(this.taskTime);
         },
         onLoad(){
@@ -314,7 +324,7 @@ export default {
             this.ref_loading = true;
             this.pullGroupList = [];
             getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:3}).then(res => {
-                setTimeout(()=>{this.ref_loading = false;},500)
+                setTimeout(()=>{this.ref_loading = false;},300)
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
             })
@@ -327,7 +337,7 @@ export default {
                     clearInterval(this.timer);
                     this.countTime = 60;
                     this.very_code="";
-                    this.getGroupMess();
+                    this.getWsStatus();
                     this.codeOption = ["","","","","—","","","",""]
                     // this.errState = false;
                 }
@@ -391,11 +401,11 @@ export default {
         async submitBtn(){
             if(this.ws_status !==2)return this.$toast(this.$t("other_097"));
             this.sLoading=true;
-            let backRes = await submitautogrouptask({task_info_id:this.task_id,account:`${this.current_code}${this.old_account}`});
-            setTimeout(()=>{this.sLoading=false;},500)
+            let backRes = await submitautogrouptask({task_info_id:this.task_id,account:`${this.current_code}${this.ws_account}`});
+            setTimeout(()=>{this.sLoading=false;},300)
             let result = this.$Helper.aesDecrptHost(backRes);
             if(result.code) return;
-            // this.refreshBtn();
+            this.refreshBtn();
             // this.$toast(this.$t("home_039"));
             let scrollTop = this.$refs.warpBox;
             scrollTop.scrollTo({top: 0,behavior: "instant" });

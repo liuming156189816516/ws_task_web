@@ -86,6 +86,9 @@ export const getautogroupinfo = (params)=> {
 export const submitautogrouptask = (params)=> {
     return request({url:'/account/submitautogrouptask$',method:'post',data:params})
 }
+export const getautogroupaccountstatus = (params)=> {
+    return request({url:'/account/getautogroupaccountstatus',method:'post',data:params})
+}
 
 
 

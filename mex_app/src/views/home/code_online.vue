@@ -75,7 +75,7 @@
                                 <div class="ws_value w_f flex-item flex-align flex-center">
                                     <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
                                     <input v-model="ws_account" :disabled="ws_status!=0" :placeholder="$t('login_027')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
-                                    <span class="select_icon flex-item flex-align flex-cente" v-if="old_account">
+                                    <span class="select_icon flex-item flex-align flex-cente" v-if="ws_status!=0">
                                         <van-button class="flex-item font_28" :loading="isUnbind" :disabled="isUnbind" @click="handleUnbind" :loading-text="$t('other_029')">{{$t('other_094')}}</van-button>
                                         <!-- <img :class="['down_icon',isDown?'active_select':'']" src="@/assets/images/home/me_icon_jiantou02.png"> -->
                                     </span>

@@ -123,6 +123,10 @@
 .font_72 {
   font-size: 72px;
 }
+.mg_20 {
+  margin: 20px 0;
+  line-height: 1.2;
+}
 .mg_24 {
   margin: 24px 0;
 }

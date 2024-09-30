@@ -62,7 +62,7 @@
                                         <van-radio name="2">{{$t('home_018')}}</van-radio>
                                     </van-radio-group>
                                 </div>
-                                <div class="ws_status w_f flex-item flex-between font_30" v-if="old_account">
+                                <div class="ws_status w_f flex-item flex-between font_30">
                                     <div>
                                         <span class="status_tips">{{$t('home_021')}}：</span>
                                         <span :class="[ws_status==1?'notoce_active':'']" :style="'color:'+(ws_status==1?'#F52C2C':ws_status==2?'#008751':'#595959')">{{ wsStatus[ws_status]}}</span>
@@ -97,19 +97,18 @@
                                             <img src="@/assets/images/home/copau_icon.png">
                                         </span>
                                     </div>
+                                    <div class="mg_20 font_28">{{$t('other_095')}}</div>
                                 </template>
                                 <template v-if="!isShow">
                                     <van-button class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account" :loading-text="$t('other_029')" @click="submitBtn">
                                         {{$t('other_011')}}
                                     </van-button>
                                 </template>
-                                <div class="pre_tips w_f flex-item flex-dir-c font_28">
+                                <!-- <div class="pre_tips w_f flex-item flex-dir-c font_28">
                                     <h3>{{$t('mine_018')}}</h3>
                                     <p>1.{{$t('other_095')}}</p>
                                     <p>2.{{$t('other_096')}}</p>
-                                    <!-- <p>2.点击'已关联的设备',然后点击'关联新设备'</p>
-                                    <p>3.点击'改用电话号码关联',然后在您的手机上输入此验证码</p> -->
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -258,7 +257,6 @@ export default {
             this.ws_account="";
             this.old_account="";
             this.very_code="";
-            this.getGroupMess();
         },
         handleUnbind(){
             this.isUnbind = true;
@@ -387,23 +385,22 @@ export default {
         },
         showResult(row){
             if(row.status == 4||row.status == 5){
-                this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
+                this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 2 })
             }
             // this.$store.dispatch('User/actionReport',9);
         },
         async submitBtn(){
             if(this.ws_status !==2)return this.$toast(this.$t("other_097"));
             this.sLoading=true;
-            let backRes = await  submitautogrouptask({task_info_id:this.task_id,account:`${this.current_code}${this.old_account}`});
+            let backRes = await submitautogrouptask({task_info_id:this.task_id,account:`${this.current_code}${this.old_account}`});
             setTimeout(()=>{this.sLoading=false;},500)
             let result = this.$Helper.aesDecrptHost(backRes);
             if(result.code) return;
             this.refreshBtn();
             this.$toast(this.$t("home_039"));
-            // this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
             let scrollTop = this.$refs.warpBox;
             scrollTop.scrollTo({top: 0,behavior: "instant" });
-            // this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
+            this.$popDialog({content:this.$t("other_096"),title:this.$t("other_008"),type:10}) 
         },
         copySuccess() {
             this.$toast(`${this.$t("other_044")}`);

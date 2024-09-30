@@ -1,7 +1,7 @@
 <template>
     <van-overlay :show="visible" :class="{'mian_padding':!steps}">
         <div class="overlay_mian" @click.stop v-if="!steps">
-            <template v-if="type==1||type==2">
+            <template v-if="type==1||type==2||type==10">
                 <div class="header_title">
                     {{ title }}
                     <van-icon class="close_btn" name="cross" @click="closeBtn" />
@@ -15,6 +15,9 @@
                 <!-- <div class="bank_btn">
                     <van-button type="primary" @click="$router.push('/home')">确定</van-button>
                 </div> -->
+            </div>
+            <div class="contnet_mian" v-if="type==10">
+                <div v-html="content" class="font_28"></div>
             </div>
             <template v-if="type==3||type==4||type==5|type==7||type==8||type==9">
                 <div class="rule_model w_f flex-item flex-align flex-dir-c">

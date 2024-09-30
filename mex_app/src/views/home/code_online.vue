@@ -401,7 +401,8 @@ export default {
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
-        background: rgba($color: $home-title-18, $alpha: 5);
+         background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+        // background: rgba($color: $home-title-18, $alpha: 5);
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
         input {
@@ -440,9 +441,9 @@ export default {
             opacity: 0;
         }
         .task_mian{
+            // height: 1048px;
             position: relative;
-            background-size: 100% 100%;
-            background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+            // background-size: 100% 100%;
             .task_box{
                 padding: 0 20px;
                 margin-top: 30px;

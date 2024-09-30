@@ -308,6 +308,7 @@ export default {
         overflow-y: auto;
         position: relative;
         // background-color: #f2f2f2;
+        background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
         .top_icon{
@@ -341,7 +342,6 @@ export default {
             // background: #E6F2EF;
             // background: url('../../assets/images/home/task_001.png') no-repeat;
             // background-size: 100% 100%;
-            background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
             .task_box{
                 padding: 0 30px;
                 margin-top: 30px;
@@ -397,7 +397,7 @@ export default {
             }
         }
         .task_box_main{
-            margin-top: -376px;
+            margin-top: -365px;
             // background: #E6F2EF;
             // background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
         }

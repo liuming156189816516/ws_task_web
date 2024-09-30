@@ -132,6 +132,9 @@ export default {
     home_144:"绑定WhatsApp",
     home_145:"自动拉群",
     home_146:"待验证",
+    home_147:"请先解除绑定",
+    home_148:"选择一个国家",
+    home_149:"搜索国家",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",

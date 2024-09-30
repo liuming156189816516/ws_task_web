@@ -132,6 +132,9 @@ export default {
     home_144:"Binding WhatsApp",
     home_145:"Automatic grouping",
     home_146:"To be verified",
+    home_147:"Please unbind first",
+    home_148:"Select a country",
+    home_149:"Search Country",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

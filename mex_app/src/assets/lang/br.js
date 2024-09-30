@@ -130,6 +130,9 @@ export default {
     home_144:"vinculativo WhatsApp",
     home_145:"Extraer grupos automáticamente",
     home_146:"Para ser verificado",
+    home_147:"Por favor, desvincule primeiro",
+    home_148:"Escolha um país",
+    home_149:"Pesquisar país",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

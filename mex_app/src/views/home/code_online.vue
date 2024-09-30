@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="ws_value w_f flex-item flex-align flex-center">
                                     <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
-                                    <input v-model="ws_account" :placeholder="$t('login_027')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
+                                    <input v-model="ws_account" :disabled="ws_status!=0" :placeholder="$t('login_027')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
                                     <span class="select_icon flex-item flex-align flex-cente" v-if="old_account">
                                         <van-button class="flex-item font_28" :loading="isUnbind" :disabled="isUnbind" @click="handleUnbind" :loading-text="$t('other_029')">{{$t('other_094')}}</van-button>
                                         <!-- <img :class="['down_icon',isDown?'active_select':'']" src="@/assets/images/home/me_icon_jiantou02.png"> -->
@@ -154,11 +154,11 @@
 			<div class="country_warp w_f">
                 <div class="country_head flex-item flex-align font_36">
                     <img @click="code_model=false" src="@/assets/images/bank_icon.png" alt="" srcset="">
-                    <span>Escolha um país</span>
+                    <span>{{$t('home_148')}}</span>
                 </div>
                 <div class="code_query w_f">
                     <div class="ws_value w_f flex-item flex-align flex-center font_24 flex-between">
-                        <input v-model="ws_code" @keyup="filterCity" :placeholder="$t('login_026')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+                        <input v-model="ws_code" @keyup="filterCity" :placeholder="$t('home_149')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                     </div>
                 </div>
                 <div class="country_list w_f" ref="tips_scroll">
@@ -216,7 +216,7 @@ export default {
             account_type:"1",
             pullGroupList:[],
             countryList:[],
-            current_code:""||"355",
+            current_code:""||"52",
             accountList:[1,1,1,1,1,1],
             whatsOption:["","WhatsApp","WhatsApp Business"],
             codeOption:["","","","","—","","","",""]
@@ -360,6 +360,7 @@ export default {
             scrollTop.scrollTo({top: 0,behavior:"smooth"});
         },
         showOverlay(){
+            if(this.ws_status!=0) return this.$toast(`${this.$t("home_147")}`);
             this.ws_code = "";
             this.countryList = this.$Helper.countryList();
             this.code_model=true;

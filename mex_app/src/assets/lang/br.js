@@ -27,7 +27,7 @@ export default {
     login_024:"e-mail",
     login_025:"O formato do e-mail está incorreto",
     login_026:"conta",
-    login_027:"",
+    login_027:"WhatsApp",
     login_028:"Você é novato?",
     login_029:"Crie uma conta",
     login_030:"senha",
@@ -38,6 +38,7 @@ export default {
     login_035:"Registre sua conta",
     login_036:"Login",
     login_037:"Registrar",
+    login_038:"conta",
 
     home_001:"Saldo do usuário",
     home_002:"Receita da tarefa de hoje",

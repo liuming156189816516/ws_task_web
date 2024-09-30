@@ -27,7 +27,7 @@ export default {
     login_024:"Email",
     login_025:"Email format is incorrect",
     login_026:"Account",
-    login_027:"Group task",
+    login_027:"WhatsApp",
     login_028:"Are you a novice?",
     login_029:"Create an account",
     login_030:"Password",
@@ -38,6 +38,7 @@ export default {
     login_035:"Register your account",
     login_036:"Log in",
     login_037:"Register",
+    login_038:"account",
 
     home_001:"User balance",
     home_002:"Today's task income",

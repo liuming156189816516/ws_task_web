@@ -27,7 +27,7 @@ export default {
     login_024:"邮箱",
     login_025:"邮箱格式不正确",
     login_026:"账户",
-    login_027:"",
+    login_027:"WhatsApp",
     login_028:"您是一个新手？",
     login_029:"创建一个账户",
     login_030:"密码",
@@ -38,6 +38,7 @@ export default {
     login_035:"注册您的账户",
     login_036:"登录",
     login_037:"注册",
+    login_038:"账号",
 
     home_001:"用户余额",
     home_002:"今日任务收益",
@@ -357,7 +358,7 @@ export default {
     other_092:"系统目前只保留当天记录",
     other_093:"{value}秒后重新获取",
     other_094:"解绑",
-    other_095:"将验证码输入关联的 WhatsApp 帐户",
+    other_095:"将验证码输入关联的 WhatsApp 帐号",
 
     table_001:"首页",
     table_002:"团队",

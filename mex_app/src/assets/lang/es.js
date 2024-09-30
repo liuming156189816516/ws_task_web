@@ -131,6 +131,7 @@ export default {
     home_144:"vinculativo WhatsApp",
     home_144:"vinculante WhatsApp",
     home_145:"Extraer grupos automáticamente",
+    home_146:"Por verificar",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -271,7 +272,7 @@ export default {
     other_005:"Código de recomendación",
     other_006:"Copiar",
     other_007:"Cancelar",
-    other_008:"Recordatorio cálido",
+    other_008:"Consejos amables",
     other_009:"Después de cerrar sesión, no podrás ver tus ganancias en tiempo real. ¿Estás seguro de que deseas cerrar sesión?",
     other_010:"Cerrar sesión",
     other_011:"OK",
@@ -359,6 +360,8 @@ export default {
     other_093:"Recuperar después de {value} segundos",
     other_094:"Unbinding",
     other_095:"Ingrese el código de verificación en la cuenta de WhatsApp vinculada",
+    other_096:"Abra WhatsApp para verificar si el contacto se ha guardado correctamente; de ​​lo contrario, no se podrá realizar la liquidación normalmente.",
+    other_097:"Haga clic en Actualizar. La cuenta de WhatsApp se mostrará en línea antes de enviarla.",
 
     table_001:"Inicio",
     table_002:"Equipo",

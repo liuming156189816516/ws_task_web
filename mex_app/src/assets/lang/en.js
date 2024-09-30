@@ -65,7 +65,6 @@ export default {
     home_023: "Offline",
     home_024: "Online",
     home_025: "Logging in",
-
     home_026:"Login failed",
     home_027:"Offline",
     home_028:"Number of people invited to the group",
@@ -82,7 +81,6 @@ export default {
     home_039:"Task submitted, pay attention to commission income in time!",
     home_040:"Deleting the online WhatsApp number will result in no income, are you sure you want to delete it?",
     home_041:"Are you sure you want to delete this WhatsApp number?",
-
     home_042:"<span style='color:#ff013d;'>In order to complete the task smoothly, it is recommended to use the Chrome browser</span>。",
     home_043:"Download Chrome",
     home_044:"Group Mission",
@@ -133,6 +131,7 @@ export default {
     home_143:"Winning number",
     home_144:"Binding WhatsApp",
     home_145:"Automatic grouping",
+    home_146:"To be verified",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",
@@ -208,7 +207,7 @@ export default {
     mine_015:"You only have {value} coins left to withdraw. Keep working hard, complete the task, and the generous bonus is in your hands",
     mine_016:"Today's Income",
     mine_017:"Yesterday's Income",
-    mine_018:"Notes",
+    mine_018:"Kind tips",
     mine_019:"Old Password",
     mine_020: "System Message",
     mine_021:"You still need <span style='color:#FFF000;font-weight: bold;'> {gold} </span> coins to become <span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
@@ -360,6 +359,8 @@ export default {
     other_093:"Retrieve after {value} seconds",
     other_094:"desagregar",
     other_095:"Enter the verification code into the linked WhatsApp account",
+    other_096:"Please open WhatsApp to check whether the contact has been saved successfully, otherwise the settlement will not be possible.",
+    other_097:"Click refresh, and submit after the WhatsApp account shows online",
 
     table_001:"Home",
     table_002:"Team",

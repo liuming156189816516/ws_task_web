@@ -55,12 +55,22 @@
                     <div class="ws_list w_f flex-item flex-dir-c" >
                         <div class="ws_account" style="background:transparent;">
                             <div class="ws_verfy_box w_f flex-item flex-align flex-center flex-dir-c">
-                                <div class="ws_tips font_28">{{$t('other_095')}}</div>
-                                <div class="w_f" style="margin-bottom:0;">
+                                <!-- <div class="ws_tips font_28">{{$t('other_095')}}</div> -->
+                                <div class="table_type flex-item w_f">
                                     <van-radio-group :disabled="old_account?true:false" v-model="account_type" shape="square" direction="horizontal" @change="handleType">
                                         <van-radio name="1">{{$t('home_017')}}</van-radio>
                                         <van-radio name="2">{{$t('home_018')}}</van-radio>
                                     </van-radio-group>
+                                </div>
+                                <div class="ws_status w_f flex-item flex-between font_30" v-if="old_account">
+                                    <div>
+                                        <span class="status_tips">{{$t('home_021')}}：</span>
+                                        <span :class="[ws_status==1?'notoce_active':'']" :style="'color:'+(ws_status==1?'#F52C2C':ws_status==2?'#008751':'#595959')">{{ wsStatus[ws_status]}}</span>
+                                    </div>
+                                    <div class="flex-item flex-align" @click="refreshBtn">
+                                        <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
+                                        {{$t('other_035')}}
+                                    </div>
                                 </div>
                                 <div class="ws_value w_f flex-item flex-align flex-center">
                                     <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
@@ -89,16 +99,17 @@
                                     </div>
                                 </template>
                                 <template v-if="!isShow">
-                                    <van-button class="tabs_item flex-item font_28" :loading="sLoading" :disabled="!old_account" :loading-text="$t('other_029')" @click="submitBtn">
+                                    <van-button class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account" :loading-text="$t('other_029')" @click="submitBtn">
                                         {{$t('other_011')}}
                                     </van-button>
                                 </template>
-                                <!-- <div class="pre_tips w_f flex-item flex-dir-c font_28">
-                                    <h3>在WhatsApp中的操作步骤:</h3>
-                                    <p>1.点击'菜单'(在Android手机上)或'设置'(在iPhone上)</p>
-                                    <p>2.点击'已关联的设备',然后点击'关联新设备'</p>
-                                    <p>3.点击'改用电话号码关联',然后在您的手机上输入此验证码</p>
-                                </div> -->
+                                <div class="pre_tips w_f flex-item flex-dir-c font_28">
+                                    <h3>{{$t('mine_018')}}</h3>
+                                    <p>1.{{$t('other_095')}}</p>
+                                    <p>2.{{$t('other_096')}}</p>
+                                    <!-- <p>2.点击'已关联的设备',然后点击'关联新设备'</p>
+                                    <p>3.点击'改用电话号码关联',然后在您的手机上输入此验证码</p> -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -201,6 +212,7 @@ export default {
             target_url:'',
             taskTime: null,
             isScroll:false,
+            ws_status: null,
             ref_loading:false,
             account_type:"1",
             current_code:""||"355",
@@ -220,6 +232,9 @@ export default {
         },
         statusOption(){
             return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
+        },
+        wsStatus(){
+            return [this.$t('home_146'),this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
         }
 	},
     created(){
@@ -282,6 +297,7 @@ export default {
            this.target_url = groupData.target_url;
            this.task_id = groupData.task_info_id; 
            this.old_account = groupData.account;
+           this.ws_status = groupData.account_status;
            this.ws_account = groupData.account?groupData.account:this.ws_account;
            this.current_code =  groupData.area_code||"355";  
            this.account_type = groupData.account_type?String(groupData.account_type):this.account_type;
@@ -376,6 +392,7 @@ export default {
             // this.$store.dispatch('User/actionReport',9);
         },
         async submitBtn(){
+            if(this.ws_status !==2)return this.$toast(this.$t("other_097"));
             this.sLoading=true;
             let backRes = await  submitautogrouptask({task_info_id:this.task_id,account:`${this.current_code}${this.old_account}`});
             setTimeout(()=>{this.sLoading=false;},500)
@@ -463,17 +480,6 @@ export default {
                             height: 32px;
                             margin-right: 10px;
                         }
-                        .refres_animat{
-                            animation: rotate 2s linear infinite;
-                        }
-                        @keyframes rotate {
-                            from {
-                                transform: rotate(0deg);
-                            }
-                            to {
-                                transform: rotate(720deg);
-                            }
-                        }
                     }
                 }
                 .task_text{
@@ -545,27 +551,12 @@ export default {
                             margin-top: 24px;
                             margin-bottom: 14px;
                         }
-                        // .title_top{
-                        //     height: 88px;
-                        //     padding: 0 20px;
-                        //     font-weight: bold;
-                        //     box-sizing: border-box;
-                        //     border-top-left-radius: 20px;
-                        //     border-top-right-radius: 20px;
-                        //     background: $home-title-10;
-                        //     span:nth-child(3){
-                        //         flex-grow: 0.8;
-                        //         justify-content: center;
-                        //         background: darkgreen;
-                        //     }
-                        // }
                         .title_head_top{
                             font-weight: bold;
                         }
                     }
                     .ws_list{
-                        padding: 0 20px;
-                        padding-bottom: 20px;
+                        padding: 0 20px 40px 20px;
                         box-sizing: border-box;
                         border-bottom-left-radius: 20px;
                         border-bottom-right-radius: 20px;
@@ -585,10 +576,23 @@ export default {
                             padding: 20px 0;
                         }
                         .ws_verfy_box{
-                            gap: 40px;
+                            // gap: 40px;
                             color: $home-title-03;
+                            .table_type{
+                                margin: 10px 0 20px 0;
+                            }
                             .ws_tips{
                                 margin-top: 10px;
+                            }
+                            .ws_status{
+                                margin-bottom: 10px;
+                                .status_tips{
+                                    color: $home-title-02;
+                                }
+                                img{
+                                    height: 32px;
+                                    margin-right: 10px;
+                                }
                             }
                             ::v-deep .van-radio__icon .van-icon{
                                 border-radius: 0 !important;
@@ -670,8 +674,10 @@ export default {
                                 }
 
                             }
+                            .tabs_item{
+                                margin: 30px 0;
+                            }
                             .verfy_list{
-                                gap: 12px !important;
                                 .modle_line{
                                     width: 60px;
                                     height: 60px;
@@ -685,6 +691,9 @@ export default {
                                 .copay_text{
                                     height: 100%;
                                 }
+                            }
+                            .submit_text{
+                                margin: 30px 0;
                             }
                             .pre_tips{
                                 gap: 10px !important;
@@ -800,6 +809,17 @@ export default {
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
             }
+        }
+    }
+    .refres_animat{
+        animation: rotate 2s linear infinite;
+    }
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(720deg);
         }
     }
      .van-overlay{

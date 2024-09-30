@@ -129,6 +129,7 @@ export default {
     home_143:"Número vencedor",
     home_144:"vinculativo WhatsApp",
     home_145:"Extraer grupos automáticamente",
+    home_146:"Para ser verificado",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",
@@ -203,7 +204,7 @@ export default {
     mine_015: "Você só tem {value} moedas de ouro restantes antes de sacar dinheiro. Continue trabalhando duro e complete a tarefa, e o bônus generoso estará em suas mãos.",
     mine_016:"Ganhos de hoje",
     mine_017:"Ganhos de ontem",
-    mine_018:"Notas",
+    mine_018:"Dicas gentis",
     mine_019:"Senha antiga",
     mine_020:"Mensagem do sistema",
     mine_021:"Você ainda precisa de <span style='color:#FFF000;font-weight: bold;'> {gold} </span> moedas para se tornar <span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
@@ -356,6 +357,8 @@ export default {
     other_093:"Recuperar após {value} segundos",
     other_094:"desagrupar",
     other_095:"Insira o código de verificação na conta vinculada do WhatsApp",
+    other_096:"Abra o WhatsApp para verificar se o contato foi salvo com sucesso, caso contrário a liquidação não poderá ser feita normalmente",
+    other_097:"Clique em Atualizar. A conta do WhatsApp aparecerá online antes de enviar.",
 
     table_001:"Início",
     table_002:"Equipe",

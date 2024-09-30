@@ -57,18 +57,16 @@ export default {
 		const VERSION_TIME = Date.parse(new Date());
 		// console.log(VERSION_TIME);
 	},
-	 mounted(){
+	mounted(){
 		this.customHeader("#31acf2");
-		this.handleVersion().then(res=>{
-			this.currentTIme = res||"";
-		})
-		this.waitTimer = setInterval(() => {
-			this.heartTimer = setTimeout(() => {
-				// console.log("heart");
-				// console.log(new Date());
-				this.initCheckVersion();
-			}, this.timeout)
-		}, this.setInter)
+		// this.handleVersion().then(res=>{
+		// 	this.currentTIme = res||"";
+		// })
+		// this.waitTimer = setInterval(() => {
+		// 	this.heartTimer = setTimeout(() => {
+		// 		this.initCheckVersion();
+		// 	}, this.timeout)
+		// }, this.setInter)
 	},
 	methods: {
 		initCheckVersion (){

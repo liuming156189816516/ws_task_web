@@ -265,7 +265,7 @@ export default {
                 this.ws_status = 0;
                 this.ws_account = "";
                 this.old_account = "";
-                this.current_code = "355";
+                this.current_code = "52";
                 // this.getWsStatus();
                 // this.getGroupMess();
                 this.$toast(this.$t("other_013"));

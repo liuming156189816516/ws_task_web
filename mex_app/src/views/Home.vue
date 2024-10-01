@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="task_main w_f flex-item flex-dir-c">
-                <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx" @click="handleTask(item)">
+                <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx">
                     <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
                     <div class="task_live flex-item flex-align font_22">
                         <div class="task_live_1 flex-item flex-align">
@@ -72,7 +72,7 @@
                     <div class="task_award flex-item font_24">
                         <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
-                        <div class="task_btn">
+                        <div class="task_btn" @click="handleTask(item)">
                             <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==3||item.type==5" :class="[item.status==2?'progress_award':'']">
                                 {{taskStatusOption[item.status]}}
                             </div>

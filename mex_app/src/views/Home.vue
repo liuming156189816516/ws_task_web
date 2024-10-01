@@ -112,6 +112,8 @@ export default {
             user_money: 0,
             teamStemp: "",
             help_url: "",
+            timeout: 1000,   
+      		setInter: 6000,
             viewLang:"en-GB",
             taskOption: [],
             langIdx:Cookies.get("language"),
@@ -166,6 +168,15 @@ export default {
             this.$store.dispatch('User/getUserIncome');
             this.$store.dispatch('User/actionReport',1);
             this.$store.dispatch('User/getSysNotice');
+            this.waitTimer = setInterval(() => {
+                this.heartTimer = setTimeout(() => {
+                    for (let k = 0; k < this.taskOption.length; k++) {
+                        if((this.taskOption[k].invalid_time - this.currentTime()) <= 0){
+                            this.taskOption[k].status = 1;
+                        }
+                    }
+                }, this.timeout)
+            }, this.setInter)
         }else{
             this.$store.dispatch('User/actionReport',1)
             this.taskOption = this.$Helper.defaultOption();

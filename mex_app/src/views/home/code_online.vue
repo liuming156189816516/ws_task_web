@@ -516,7 +516,7 @@ export default {
             z-index: 9;
              .task_main{
                 padding: 0 20px;
-                gap: 30px;
+                // gap: 30px;
                 box-sizing: border-box;
                 .task_book{
                     margin-top: 10px;
@@ -547,6 +547,9 @@ export default {
                         color: $home-title-02;
                         text-decoration: underline;
                     }
+                }
+                .task_item:nth-child(1){
+                    margin-bottom: 30px;
                 }
                 .task_item:nth-child(2){
                     .ws_head{

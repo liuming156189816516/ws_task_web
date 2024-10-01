@@ -487,6 +487,9 @@ export default {
                     }
                 }
             }
+            .task_item:nth-child(1){
+                margin-bottom: 30px;
+            }
         }
         .record_legend{
             padding: 0 30px;

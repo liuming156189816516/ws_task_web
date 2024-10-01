@@ -5,7 +5,10 @@
 			<img class="down_icon" src="@/assets/images/home/xiala.png">
 			<van-transition name="fade-up">
 				<div class="down_list" :class="isIndex?'active_open':'active_close'">
-					<p v-for="item in langOptions" :key="item.lang" :style="langIdx==item.lang?'color:#07c160;':''" @click="onChangeType(item)">{{item.name}}</p>
+					<p class="flex-item flex-align flex-center" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">
+						<img :src="require(`@/assets/images/lang/${item.icon}.png`)">
+						<span :class="[langIdx==item.lang?'select_active':'']">{{item.name}}</span>
+					</p>
 				</div>
 			</van-transition>
 		</div>
@@ -344,10 +347,10 @@ export default {
 		margin-left: 20px;
 	}
 	.down_list{
-		width: 180px;
+		width: 190px;
 		min-height: 230px;
 		position: absolute;
-		left: -10px;
+		left: -30px;
 		top: 60px;
 		z-index: 2;
 		font-size: 28px;
@@ -356,13 +359,23 @@ export default {
 		box-sizing: border-box;
 		color: $font-color-black;
 		background:$font-color-white;
-		// background-color: $color-Nobtnbg;
 		p{
 			padding: 10px 0;
 			border-bottom: 1px solid #ebedf0;
+			span{
+				color: $font-color-black;
+			}
+			.select_active{
+				color: $color-theme;
+			}
 		}
 		p:last-child{
 			border: none;
+		}
+		img{
+			width: 40px;
+			height: 27px;
+			margin-right: 10px;
 		}
 	}
 	.down_list:before {

@@ -46,9 +46,9 @@
             <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
                     <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <div class="task_name w_f flex-item">
+                        <!-- <div class="task_name w_f flex-item">
                             <img src="@/assets/images/home/num1_icon.png">
-                        </div>
+                        </div> -->
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_037')}}</div>
                         </div>
@@ -73,9 +73,9 @@
                     </div> -->
 
                     <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <div class="task_name w_f flex-item">
+                        <!-- <div class="task_name w_f flex-item">
                             <img src="@/assets/images/home/num2_icon.png">
-                        </div>
+                        </div> -->
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>

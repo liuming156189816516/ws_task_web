@@ -36,7 +36,7 @@
                     <!-- <div class="task_name w_f flex-item">
                         <img src="@/assets/images/home/num1_icon.png">
                     </div> -->
-                    <div class="task_book w_f font_34">
+                    <div class="task_book w_f font_28">
                         <div class="task_title">{{$t('home_037')}}</div>
                     </div>
                    <div class="w_f flex-item flex-between flex-align font_24">
@@ -47,7 +47,7 @@
                 <div class="task_item w_f flex-item flex-dir-c font_34">
                     <div class="ws_head w_f flex-item flex-dir-c">
                         <div class="task_award w_f">
-                            <div class="task_book flex-item flex-between flex-dir-c font_34">
+                            <div class="task_book flex-item flex-between flex-dir-c font_28">
                                 <div class="task_title"> {{$t('home_144')}} </div>
                             </div>
                         </div>
@@ -524,7 +524,7 @@ export default {
                         font-weight: bold;
                         color: $color-theme;
                         margin-bottom: 10px;
-                        text-shadow: 0px 4px 3px rgba(0,0,0,0.2);
+                        // text-shadow: 0px 4px 3px rgba(0,0,0,0.2);
                     }
                 }
                 .task_item1{
@@ -555,7 +555,7 @@ export default {
                         background: url('../../assets/images/home/ws_head.png') no-repeat;
                         background-size: 100% 100%;
                         .task_award{
-                            margin-top: 24px;
+                            margin-top: 10px;
                             margin-bottom: 14px;
                         }
                         .title_head_top{

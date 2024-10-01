@@ -29,7 +29,10 @@
                     <img class="down_icon" src="@/assets/images/home/down_arrow_white.png">
                     <van-transition name="fade-up">
                         <div class="down_list" :class="isIndex?'active_open':'active_close'">
-                            <p :class="[langIdx==item.lang?'select_active':'']" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">{{item.name}}</p>
+                            <p class="flex-item flex-align flex-center" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">
+                                <img :src="require(`@/assets/images/lang/${item.icon}.png`)">
+                                <span :class="[langIdx==item.lang?'select_active':'']">{{item.name}}</span>
+                            </p>
                         </div>
                     </van-transition>
                 </div>
@@ -426,9 +429,8 @@ export default {
                 min-height: 230px;
                 position: absolute;
                 right: 0px;
-                top: 50px;
+                top: 55px;
                 z-index: 1;
-                color: $font-color-black;
                 font-size: 28px;
                 padding: 16px 20px;
                 border-radius: 8px;
@@ -437,12 +439,20 @@ export default {
                 p{
                     padding: 10px 0;
                     border-bottom: 1px solid #ebedf0;
+                    span{
+                        color: $font-color-black;
+                    }
+                    .select_active{
+                        color: $color-theme;
+                    }
                 }
                 p:last-child{
                     border: none;
                 }
-                .select_active{
-                    color: $color-theme;
+                img{
+                    width: 40px;
+                    height: 27px;
+                    margin-right: 10px;
                 }
             }
             .down_list:before {
@@ -453,7 +463,7 @@ export default {
                 height: 0;
                 border: 16px solid transparent;
                 border-bottom-color: #fff;
-                left: 40px;
+                left: 50px;
                 top: -30px;
             }
             .active_open{

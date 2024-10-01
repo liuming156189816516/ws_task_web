@@ -112,6 +112,7 @@ export default {
             user_money: 0,
             teamStemp: "",
             help_url: "",
+            viewLang:"en-GB",
             taskOption: [],
             langIdx:Cookies.get("language"),
             taskType: ['', 'codeOnline', 'spread', 'pullgroupTask','pulledTask','codeOnline'],
@@ -154,13 +155,10 @@ export default {
         },
         langOptions(){
             return this.$Helper.langOptions();
-        },
-        viewLang() {
-            let lang = this.$Helper.langOptions().find(item => item.lang == this.langIdx);
-            return lang.name;
         }
     },
     activated() {
+        this.getLangConfig();
         this.filexTop = false;
         this.$store.dispatch('User/plantCarousel');
         if(getToken()){
@@ -231,9 +229,15 @@ export default {
         showChangeBtn(){
 			this.isIndex=!this.isIndex;
 		},
-        async onChangeType(row) {
+        getLangConfig(){
+            this.langIdx = Cookies.get("language");
+            let langText = this.$Helper.langOptions().find(item => item.lang == this.langIdx);
+            this.viewLang = langText.name;
+        },
+        onChangeType(row) {
             this.langIdx = row.lang;
             this.$Helper.initLanguage(row.lang);
+            this.getLangConfig();
         },
         handleTask(row) {
             // this.$router.push("/codeOnline");
@@ -425,7 +429,7 @@ export default {
                 margin-left: 20px;
             }
             .down_list{
-                width: 180px;
+                width: 190px;
                 min-height: 230px;
                 position: absolute;
                 right: 0px;

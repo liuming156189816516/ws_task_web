@@ -347,12 +347,13 @@ export default {
 		margin-left: 20px;
 	}
 	.down_list{
-		width: 190px;
+		width: 200px;
 		min-height: 230px;
 		position: absolute;
-		left: -30px;
-		top: 60px;
+		left: -40px;
+		top: 50px;
 		z-index: 2;
+		flex-shrink: 0;
 		font-size: 28px;
 		padding: 16px 20px;
 		border-radius: 8px;

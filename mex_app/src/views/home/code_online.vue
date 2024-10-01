@@ -609,6 +609,7 @@ export default {
                             }
                             ::v-deep .van-radio__label{
                                 font-size: 14px;
+                                font-weight: bold;
                                 color: $home-title-03;
                             }
                             ::v-deep .van-radio__icon--checked .van-icon{

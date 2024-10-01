@@ -173,6 +173,7 @@ export default {
                     for (let k = 0; k < this.taskOption.length; k++) {
                         if((this.taskOption[k].invalid_time - this.currentTime()) <= 0){
                             this.taskOption[k].status = 1;
+                            this.taskOption[k].invalid_time = 0;
                             this.taskOption[k].task_info_id = "";
                         }
                     }

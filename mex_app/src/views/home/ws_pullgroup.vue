@@ -52,7 +52,7 @@
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_037')}}</div>
                         </div>
-                        <div class="w_f flex-item flex-between flex-align font_24">
+                        <div class="task_btn w_f flex-item flex-between flex-align font_24">
                             <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
                             <van-button type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
@@ -413,7 +413,7 @@ export default {
                 // background-size: cover;
                 // background-position: 0 40px;
                 .task_item{
-                    height: 240px;
+                    height: 210px;
                     padding: 16px 0 0 20px;
                     box-sizing: border-box;
                     background: url('../../assets/images/home/task_icon.png') no-repeat;
@@ -481,7 +481,10 @@ export default {
                     }
                 }
                 .task_item:nth-child(1){
-                    height: 260px;
+                    height: 190px;
+                    .task_btn{
+                        margin-top: 20px;
+                    }
                 }
             }
         }

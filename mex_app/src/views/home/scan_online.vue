@@ -509,7 +509,6 @@ export default {
             margin-top: -50px;
              .task_main{
                 padding: 0 24px 0 36px;
-                gap: 30px;
                 box-sizing: border-box;
                 // background: url('../../assets/images/home/jinbi.png') no-repeat;
                 // background-size: cover;
@@ -576,6 +575,9 @@ export default {
                         border-color: $color-theme;
                         background-color: $color-theme;
                     }
+                }
+                .task_item:nth-child(1){
+                    margin-bottom: 30px;
                 }
                 .task_item:nth-child(2){
                     width: 100%;

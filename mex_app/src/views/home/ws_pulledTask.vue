@@ -378,7 +378,7 @@ export default {
             margin-top: -60px;
              .task_main{
                 padding: 0 30px;
-                gap: 30px;
+                // gap: 30px;
                 box-sizing: border-box;
                 // background: url('../../assets/images/home/jinbi.png') no-repeat;
                 // background-size: cover;
@@ -474,8 +474,11 @@ export default {
                     }
                 }
                 .task_item:nth-child(1){
-                    height: 260px;
+                    height: 210px;
                 }
+            }
+            .task_item:nth-child(1){
+                margin-bottom: 30px;
             }
         }
         .record_legend{

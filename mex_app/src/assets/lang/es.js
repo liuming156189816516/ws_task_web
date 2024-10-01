@@ -130,7 +130,7 @@ export default {
     home_143:"numero ganador",
     home_144:"vinculativo WhatsApp",
     home_144:"vinculante WhatsApp",
-    home_145:"Tareas automatizadas",
+    home_145:"Tareas autom",
     home_146:"Por verificar",
     home_147:"Por favor, desvincúlate primero",
     home_148:"Elige un país",

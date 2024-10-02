@@ -349,10 +349,11 @@ export default {
         position: fixed;
         top: 0;
         z-index: 1000;
-        animation: slide-up .3s ease-in-out forwards;
+        // animation: slide-up .3s ease-in-out forwards;
     }
     .apk_fixed{
         top: 80px;
+        transition: ease-in-out 5s;
     }
      @keyframes slide-up {
         from {

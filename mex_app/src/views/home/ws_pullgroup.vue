@@ -33,7 +33,9 @@
                         <div class="task_sure_time">
                             <p class="task_text font_24">{{$t('home_108')}}</p>
                             <p class="task_num flex-item font_28">
-                                {{taskOption[teamStemp.status]}}
+                                <span :style="{color:teamStemp.status==2?'#31acf2':teamStemp.status==4?'#008751':''}">
+                                    {{taskOption[teamStemp.status]}}
+                                </span>
                                 <van-count-down :time="taskTime" />
                             </p>
                         </div>
@@ -102,7 +104,7 @@
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                                 <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                                <span class="flex-item flex-center" :style="{color:item.status==2?'#ff9600':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                                <span class="flex-item flex-center" :style="{color:item.status==2?'#31acf2':item.status==4?'#008751':''}">{{statusOption[item.status]}}</span>
                                 <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
                                 <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
                             </div>

@@ -73,7 +73,8 @@
                         <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
                         <div class="task_btn" @click="handleTask(item)">
-                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==3||item.type==5" :class="[item.status==2?'progress_award':'']">
+                             <!-- :class="[item.status==2?'progress_award':'']" -->
+                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==3||item.type==5">
                                 {{taskStatusOption[item.status]}}
                             </div>
                              <div class="circle_box flex-item flex-align flex-center font_24" v-else>

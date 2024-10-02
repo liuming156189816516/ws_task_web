@@ -218,7 +218,7 @@ export default {
             account_type:"1",
             pullGroupList:[],
             countryList:[],
-            current_code:""||"52",
+            current_code:""||"55",
             accountList:[1,1,1,1,1,1],
             whatsOption:["","WhatsApp","WhatsApp Business"],
             codeOption:["","","","","—","","","",""]
@@ -267,7 +267,7 @@ export default {
                 this.ws_status = 0;
                 this.ws_account = "";
                 this.old_account = "";
-                this.current_code = "52";
+                this.current_code = "55";
                 // this.getWsStatus();
                 // this.getGroupMess();
                 this.$toast(this.$t("other_013"));

@@ -245,7 +245,6 @@ export default {
 		},
         getLangConfig(){
             this.langIdx = Cookies.get("language");
-            console.log(this.langIdx);
             let langText = this.$Helper.langOptions().find(item => item.lang == this.langIdx);
             this.viewLang = langText.name;
         },

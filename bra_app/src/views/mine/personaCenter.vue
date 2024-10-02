@@ -25,7 +25,7 @@
                     <span class="lable_text">{{ $t('pay_022') }}</span>
                     <van-field v-model="collectName" :placeholder="$t('pay_022')" :border="false" />
                 </div>
-                <div class="user_info">
+                <div class="user_info" v-if="this.accountType=='CPF'||this.accountType=='CNPJ'">
                     <span class="lable_text">{{ $t('pay_037') }}</span>
                     <van-field v-model="numberId" :placeholder="$t('pay_037')" :border="false" />
                 </div>
@@ -159,7 +159,7 @@ export default {
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
             }else if(this.curIndex==1&&!this.collectName){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_022')}))
-            }else if(this.curIndex==1&&!this.numberId){
+            }else if(this.accountType=='CPF'||this.accountType=='CNPJ'&&!this.numberId){
                 return this.$toast(this.$t('other_014',{value:this.$t('pay_037')}))
             }
             this.isLoading = true;

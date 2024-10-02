@@ -10,7 +10,7 @@
                 <div class="user_info bank_account" @click="showBank(0)">
                     <span class="lable_text">{{ $t('pay_033') }}</span>
                     <div class="flex-between">
-                        <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
+                        <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_033')})" :border="false" />
                         <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${accountModel == true ? 90 : 0}deg)`}" />
                     </div>
                 </div>

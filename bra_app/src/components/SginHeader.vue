@@ -1,6 +1,9 @@
 <template>
     <div class="login_head w_f flex-item flex-align flex-between">
-        <img class="le_logn" src="@/assets/images/logo-h.png" />
+        <div class="flex-item flex-align">
+            <img class="le_logn" src="@/assets/images/logo.png" />
+            <span class="font_30" style="color:#fff;margin-left:5px;font-weight: bold;">Bbzvip.COM</span>
+        </div>
         <!-- <img class="le_logn" src="@/assets/images/logo.png" /> -->
         <div class="login_area flex-item flex-align font_24">
             <div class="flex-item flex-align" v-if="!userInfo.token">

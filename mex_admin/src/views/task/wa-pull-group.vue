@@ -201,7 +201,7 @@ export default {
       return ["","开始任务","进行中","结算中","成功","失败"]
     },
     taskOption(){
-      return ["","拉群","拉粉","挂机"]
+      return ["","手动拉群","拉粉","自动挂机"]
     },
     taskRules() {
       return {

@@ -250,6 +250,7 @@ export default {
     pay_034:"{value}moedas de ouro",
     pay_035: "Adicione uma conta de pagamento com base nas informações de pagamento reais. Se ocorrer um erro, a conta não será creditada!",
     pay_036:"{value} conta bancária",
+    pay_037:"Número identificação",
 
     tail_001:"Detalhes da renda",
     tail_002:"tipo",

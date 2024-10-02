@@ -84,6 +84,7 @@ export default {
 			curIndex:"0",
 			WithdMoney:0,
 			bank_code:"",
+			identify_Num:"",
 			income_naira:0,
 			userInfo:"",
 			account_type:"",
@@ -134,12 +135,11 @@ export default {
         },
 
 		async getBankInfo(){
-			let { card_no,bank_name,payee_name,code,account_type } = await getwithdrawcard({type:Number(this.curIndex)+1});
-			this.bank_code = code||"";
+			let { card_no,payee_name,identify_Num,type } = await getwithdrawcard({type:Number(this.curIndex)+1});
 			this.card_no = card_no||"";
-			this.bank_name = bank_name||"";
+			this.account_type = type||"";
 			this.payee_name = payee_name||"";
-			this.account_type = account_type||"";
+			this.identify_Num = identify_Num||"";
 		},
 		onChange(idx){
 			this.curIndex=idx;
@@ -177,12 +177,10 @@ export default {
 				return this.$toast(this.$t('pay_028',{value:this.withdraw_cash}));
 			}
 			let params = {
-				type:Number(this.curIndex)+1,
-				code:this.bank_code,
 				card_no:this.card_no,
-				bank_name:this.bank_name,
 				payee_name:this.payee_name,
-				account_type:this.account_type,
+				type:this.account_type,
+				identify_Num:this.identify_Num,
 				amount:Number(this.withdraw_num)
 			}
 			this.isLoading = true;

@@ -10,20 +10,24 @@
                 <div class="user_info bank_account" @click="showBank(0)">
                     <span class="lable_text">{{ $t('pay_033') }}</span>
                     <div class="flex-between">
-                        <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
+                        <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_033')})" :border="false" />
                         <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${accountModel == true ? 90 : 0}deg)`}" />
                     </div>
                 </div>
-                <div class="user_info bank_account" @click="showBank(1)">
+                <!-- <div class="user_info bank_account" @click="showBank(1)">
                     <span class="lable_text">{{ $t('pay_021') }}</span>
                     <div class="flex-between">
                         <van-field v-model="bankName" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
                         <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${selectBank == true ? 90 : 0}deg)`}" />
                     </div>
-                </div>
+                </div> -->
                 <div class="user_info">
                     <span class="lable_text">{{ $t('pay_022') }}</span>
-                    <van-field v-model="collectName" :placeholder="$t('other_001',{value:$t('pay_022')})" :border="false" />
+                    <van-field v-model="collectName" :placeholder="$t('pay_022')" :border="false" />
+                </div>
+                <div class="user_info">
+                    <span class="lable_text">{{ $t('pay_037') }}</span>
+                    <van-field v-model="numberId" :placeholder="$t('pay_037')" :border="false" />
                 </div>
                 <!-- <div class="user_info">
                     <span class="lable_text">收款姓名</span>
@@ -76,6 +80,7 @@ export default {
             bank_id:"",
             bankName:"",
             bankCode:"",
+            numberId:"",
             accountType:"",
             collectCard:"",
             collectName:"",
@@ -88,7 +93,7 @@ export default {
             selectBank:false,
             accountModel:false,
             malayBank: [],
-            bankOption: [{name:"CLABE"},{name:"BANK"}]
+            bankOption: [{name:"CPF"},{name:"CNPJ"},{name:"EMAIL"},{name:"PHONE"}]
         }
     },
     computed: {
@@ -98,30 +103,16 @@ export default {
     },
     created() {
         this.curIndex = this.$route.query.type;
-        this.syncInitApi();
+        this.getBankInfo();
     },
     methods: {
-        syncInitApi(){
-            let fun1 = new Promise((resolve,reject)=>{
-                getlistbanks().then(res =>{
-                    resolve(res)
-                })
-            });
-            let fun2 = new Promise((resolve,reject)=>{
-                getwithdrawcard({type:1}).then(res =>{
-                    resolve(res)
-                })
-            });
-            Promise.all([fun1,fun2]).then( res => {
-                const [bankList,{id,bank_name,card_no,payee_name,code,account_type}] = res;
-                this.malayBank = bankList.banks||[];
-                this.bank_id = id||"";
-                this.bankCode = code||"";
-                this.bankName = bank_name||"";
-                this.collectCard = card_no||"";
-                this.collectName = payee_name||"";
-                this.accountType = account_type||"";
-            })
+        async getBankInfo(){
+            const {id,card_no,payee_name,type,identify_Num} = await getwithdrawcard({type:1});
+            this.bank_id = id||"";
+            this.accountType = type||"";
+            this.collectCard = card_no||"";
+            this.collectName = payee_name||"";
+            this.numberId = identify_Num||"";
         },
         showBank(idx){
             idx==1?this.selectBank=true:this.accountModel=true;
@@ -140,12 +131,10 @@ export default {
             if(this.curIndex == 1){
                 params ={
                     ptype:this.bank_id?2:1,
-                    code:this.bankCode,
-                    type:Number(this.curIndex),
+                    type:this.accountType,
                     card_no:this.collectCard,
-                    bank_name:this.bankName,
+                    identify_Num:this.numberId,
                     payee_name:this.collectName,
-                    account_type:this.accountType
                 }
             }else{
                 params ={
@@ -157,18 +146,21 @@ export default {
             this.bank_id?params.id=this.bank_id:"";
             if(this.curIndex==1&&!this.collectCard){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_006')}))
-            }else if(this.accountType=="BANK"&&this.collectCard.length!=16){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_036',{value:16})}))
-            }else if(this.accountType=="CLABE"&&this.collectCard.length!=18){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_036',{value:18})}))
             }else if(this.curIndex==1&&!this.accountType){
                 return this.$toast(this.$t('other_014',{value:this.$t('pay_033')}))
-            }else if(this.curIndex==2&&!this.collectCard){
+            }
+            // else if(this.accountType=="CLABE"&&this.collectCard.length!=18){
+            //     return this.$toast(this.$t('other_001',{value:this.$t('pay_036',{value:18})}))
+            // }
+            // else if(this.curIndex==1&&!this.accountType){
+            //     return this.$toast(this.$t('other_014',{value:this.$t('pay_033')}))
+            // }
+            else if(this.curIndex==2&&!this.collectCard){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
-            }else if(this.curIndex==1&&!this.bankName){
-                return this.$toast(this.$t('other_014',{value:this.$t('pay_021')}))
             }else if(this.curIndex==1&&!this.collectName){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_020')}))
+                return this.$toast(this.$t('other_001',{value:this.$t('pay_022')}))
+            }else if(this.curIndex==1&&!this.numberId){
+                return this.$toast(this.$t('other_014',{value:this.$t('pay_037')}))
             }
             this.isLoading = true;
             const res = await dowithdrawcard(params);

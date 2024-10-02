@@ -16,14 +16,14 @@
                 <el-form-item>
 					<el-button size="small" icon="el-icon-search" type="primary" @click="getPayOrderList(1)">{{ $t('sys_c002') }}</el-button>
                     <el-button size="small" icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
-                    <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="regectBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_rai124')}) }}</el-button>
+                    <!-- <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="regectBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_rai124')}) }}</el-button> -->
                 </el-form-item>
 			</el-form>
 		</div>
 		<div class="switch_bar">
 			<div class="consun_list handel_area">
 				<el-table :data="bannerList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading" element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }" @selection-change="selectAllChange" @row-click="rowSelectChange">
-					<el-table-column type="selection" width="55" :selectable="checkSelectable"> </el-table-column>
+					<!-- <el-table-column type="selection" width="55" :selectable="checkSelectable"> </el-table-column> -->
 					<!-- <el-table-column prop="wx_id" label="序号" width="60" align="center">
                         <template slot-scope="scope">
 							<span>{{(factorModel.offset-1)*factorModel.limit+scope.$index+1}}</span>
@@ -31,16 +31,11 @@
                     </el-table-column> -->
                     <el-table-column prop="account" :label="$t('sys_c009')" minWidth="120" align="center" />
                     <el-table-column prop="card_no" :label="$t('sys_p004')" minWidth="100" align="center" />
-                    <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center">
-                        <template slot-scope="scope">
+                    <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center" />
+                        <!-- <template slot-scope="scope">
                             {{ drawOption[scope.row.type]}}
 						</template>
-                    </el-table-column>
-					<el-table-column prop="bank_name" :label="$t('sys_p003')" minWidth="100" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.bank_name||"-" }}
-						</template>
-                    </el-table-column>
+                    </el-table-column> -->
                     <el-table-column prop="payee_name" :label="$t('sys_p005')" minWidth="100" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.payee_name||"-" }}
@@ -69,7 +64,7 @@
                             <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':'warning'"> {{ payOptions[scope.row.status] }}</el-tag>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="status" :label="$t('sys_rai129')" minWidth="100">
+                    <!-- <el-table-column prop="status" :label="$t('sys_rai129')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleApply(command)">
                             <span style="color:#909399" :class="[factorModel.apy_status?'dropdown_title':'']"> {{ $t('sys_rai129') }}
@@ -83,7 +78,7 @@
                         <template slot-scope="scope">
                             <el-tag size="small" :type="scope.row.approval_status==2?'success':scope.row.approval_status==3?'danger':'info'"> {{ applyOption[scope.row.approval_status] }}</el-tag>
                         </template>
-                    </el-table-column>
+                    </el-table-column> -->
                     <el-table-column prop="remark" :label="$t('sys_p017')+$t('sys_c071')" minWidth="140">
                         <template slot-scope="scope">
                         <el-tooltip class="item" effect="dark" :content="scope.row.remark" placement="top">

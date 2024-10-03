@@ -3,7 +3,7 @@
         <div class="task_mian w_f">
             <page-header :title="$t('home_145')" :show-icon="true" :bgcolor="false" />
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/2.mp4" />
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://wstask.s3.ap-southeast-1.amazonaws.com/5.mp4" />
             </div>
             <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">
@@ -218,9 +218,8 @@ export default {
             account_type:"1",
             pullGroupList:[],
             countryList:[],
-            current_code:""||"55",
+            current_code:""||"52",
             accountList:[1,1,1,1,1,1],
-            whatsOption:["","WhatsApp","WhatsApp Business"],
             codeOption:["","","","","—","","","",""]
 		}
 	},
@@ -267,7 +266,7 @@ export default {
                 this.ws_status = 0;
                 this.ws_account = "";
                 this.old_account = "";
-                this.current_code = "55";
+                this.current_code = "52";
                 // this.getWsStatus();
                 // this.getGroupMess();
                 this.$toast(this.$t("other_013"));
@@ -275,13 +274,16 @@ export default {
         },
         async getWsStatus(){
             this.isStatus = true;
-            let { account_status } = await getautogroupaccountstatus({account:`${this.current_code}${this.ws_account}`});
+            let { account_status,account,area_code } = await getautogroupaccountstatus({task_info_id:this.task_id});
             setTimeout(()=>{this.isStatus = false;},300)
+            this.old_account = account;
             this.ws_status = account_status;
+            this.ws_account = account||this.ws_account;
+            this.current_code = area_code||this.current_code;  
         },
         getVerifBtn(){
             this.isLoading = true;
-            getqrcode({area_code:String(this.current_code),account:String(this.ws_account),account_type:Number(this.account_type)}).then(res => {
+            getqrcode({task_info_id:this.task_id,area_code:String(this.current_code),account:String(this.ws_account),account_type:Number(this.account_type)}).then(res => {
                 this.isLoading = false;
                 if(!res.code&&res.qr_code.length==8){
                     this.very_code = res.qr_code;
@@ -300,14 +302,11 @@ export default {
         async getGroupMess(){
            let group_task =  await getautogroupinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
-           console.log(groupData);
+        //    console.log(groupData);
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
            this.task_id = groupData.task_info_id; 
-           this.old_account = groupData.account;
-           this.ws_account = groupData.account||this.ws_account;
-           this.current_code = groupData.area_code||this.current_code;  
            this.account_type = groupData.account_type?String(groupData.account_type):this.account_type;
            this.isShow = groupData.status==1||groupData.status==2?false:true;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;

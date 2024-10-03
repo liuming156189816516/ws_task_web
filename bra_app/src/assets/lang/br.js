@@ -113,7 +113,7 @@ export default {
     home_127:"Por favor insira o link do grupo",
     home_128:"Check-in diário",
     home_129:"{value} dia",
-    home_130:"{mês} mês {número} {semana}",
+    home_130:"{month} mês {number} {week}",
     home_131:"Faça login agora",
     home_132:"Login concluído",
     home_133:"Fazendo login...",

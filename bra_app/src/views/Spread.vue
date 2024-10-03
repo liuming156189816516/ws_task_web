@@ -128,7 +128,6 @@ export default {
             iframeSrc:'',
             allIncome:"",
             team_size:"",
-            invit_link:"https://www.beoyyo.com",
             today_rebate:0,
             total_rebate:0,
             yesterday_rebate:0,
@@ -136,7 +135,8 @@ export default {
             loading:false,
             finished :false,
             page_total:0,
-            millionList:[]
+            millionList:[],
+            invit_link:"https://www.bbzvip.com",
         }
     },
     computed: {

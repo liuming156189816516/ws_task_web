@@ -381,7 +381,7 @@ const Helper = {
 		if(storeLang&&!lang){
 			i18n.locale = storeLang;
 		}else{
-			let setLang = lang||"br";
+			let setLang = lang||"es";
 			i18n.locale = setLang;
 			Cookies.set("language",setLang)
 		}

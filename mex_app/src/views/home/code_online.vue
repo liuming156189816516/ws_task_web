@@ -275,12 +275,13 @@ export default {
         },
         async getWsStatus(){
             this.isStatus = true;
-            let { account_status,account,area_code } = await getautogroupaccountstatus({task_info_id:this.task_id});
+            let { account_status,account,area_code,account_type } = await getautogroupaccountstatus({task_info_id:this.task_id});
             setTimeout(()=>{this.isStatus = false;},300)
             this.old_account = account;
             this.ws_status = account_status;
             this.ws_account = account||this.ws_account;
             this.current_code = area_code||this.current_code;  
+            this.account_type = account_type?String(account_type):this.account_type;
         },
         getVerifBtn(){
             this.isLoading = true;
@@ -308,7 +309,6 @@ export default {
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
            this.task_id = groupData.task_info_id; 
-           this.account_type = groupData.account_type?String(groupData.account_type):this.account_type;
            this.isShow = groupData.status==1||groupData.status==2?false:true;
            this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
            await this.getWsStatus();

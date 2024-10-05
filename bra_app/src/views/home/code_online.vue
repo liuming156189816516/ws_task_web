@@ -303,7 +303,7 @@ export default {
         async getGroupMess(){
            let group_task =  await getautogroupinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
-        //    console.log(groupData);
+           console.log(groupData);
            this.teamStemp = groupData;
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
@@ -383,7 +383,6 @@ export default {
             this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
         },
         downAddress(){
-            this.$store.dispatch('User/actionReport',10);
             if(this.$Helper.checkBrowser()){
                 const link = document.createElement('a');
                 link.href = this.target_url;
@@ -391,8 +390,9 @@ export default {
                 link.target = "_blank";
                 link.click();
             }else{
-                if(this.taskList.length == 0) return;
-                let newArr = this.taskList.map(item => {return {...item,target:`+${item.target}`}});
+                let mobileList = this.taskList;
+                if(mobileList.length == 0) return;
+                let newArr = mobileList.map(item => {return {...item,target:`+${item.target}`}});
                 uniFun.postMessage({data:newArr});
             }
         },

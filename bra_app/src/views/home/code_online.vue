@@ -266,6 +266,7 @@ export default {
                 this.ws_status = 0;
                 this.ws_account = "";
                 this.old_account = "";
+                this.account_type = "1";
                 this.current_code = "52";
                 this.$toast(this.$t("other_013"));
             })

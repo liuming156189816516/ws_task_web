@@ -59,9 +59,9 @@
                             <div class="ws_verfy_box w_f flex-item flex-align flex-center flex-dir-c">
                                 <!-- <div class="ws_tips font_28">{{$t('other_095')}}</div> -->
                                 <div class="table_type flex-item w_f">
-                                    <van-radio-group :disabled="ws_status!=0?true:false" v-model="account_type" shape="square" direction="horizontal" @change="handleType">
-                                        <van-radio name="1">{{$t('home_017')}}</van-radio>
-                                        <van-radio name="2">{{$t('home_018')}}</van-radio>
+                                    <van-radio-group :disabled="ws_status!=0?true:false" v-model="account_type" shape="square" direction="horizontal">
+                                        <van-radio name="1" @click="changeType">{{$t('home_017')}}</van-radio>
+                                        <van-radio name="2" @click="changeType">{{$t('home_018')}}</van-radio>
                                     </van-radio-group>
                                 </div>
                                 <div class="ws_status w_f flex-item flex-between font_30">
@@ -254,7 +254,7 @@ export default {
         })
     },
 	methods: {
-        handleType(){
+        changeType(){
             this.ws_account="";
             this.old_account="";
             this.very_code="";
@@ -267,20 +267,19 @@ export default {
                 this.ws_account = "";
                 this.old_account = "";
                 this.current_code = "52";
-                // this.getWsStatus();
-                // this.getGroupMess();
                 this.$toast(this.$t("other_013"));
             })
         },
         async getWsStatus(){
             this.isStatus = true;
-            let { account_status,account,area_code,account_type } = await getautogroupaccountstatus({task_info_id:this.task_id});
-            setTimeout(()=>{this.isStatus = false;},300)
+            let { account,account_status,area_code,account_type } = await getautogroupaccountstatus({task_info_id:this.task_id});
+            setTimeout(()=>{this.isStatus = false;},300);
             this.old_account = account;
             this.ws_status = account_status;
             this.ws_account = account||this.ws_account;
             this.current_code = area_code||this.current_code;  
             this.account_type = account_type?String(account_type):this.account_type;
+            
         },
         getVerifBtn(){
             this.isLoading = true;

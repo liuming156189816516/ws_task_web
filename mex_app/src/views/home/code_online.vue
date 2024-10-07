@@ -338,11 +338,11 @@ export default {
         this.$nextTick(()=>{
             let list = this.$refs.tips_scroll;
             const isTips = JSON.parse(localStorage.getItem('step_02'));
-            if(!isTips){
+            // if(!isTips){
                 let scrollTop = this.$refs.warpBox;
                 scrollTop.scrollTo({top: 120,behavior:"instant"});
                 this.showStep=true;
-            }
+            // }
             if (list) {
                 list.addEventListener("touchmove",e => e.stopPropagation(),false)
             }

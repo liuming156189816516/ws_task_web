@@ -147,7 +147,7 @@ export default {
     home_161:"Próximo passo",
     home_162:"pular",
     home_162:"Eu entendo",
-    home_163:"Copie o link do grupo no WhatsApp e cole/insira o link do grupo aqui",
+    home_163:"No WhatsApp, crie um grupo a partir dos contatos importados, copie a conexão do grupo e cole aqui",
     home_164:"Clique para enviar o link do grupo",
 
     spre_001:"grupo",

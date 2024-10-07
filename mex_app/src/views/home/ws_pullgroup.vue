@@ -264,10 +264,10 @@ export default {
     mounted(){
         this.getIncomeList();
         this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_01'));
-            if(!isTips){
+            // const isTips = JSON.parse(localStorage.getItem('step_01'));
+            // if(!isTips){
                 this.showStep=true;
-            }
+            // }
         })
         this.$store.dispatch('User/actionReport',8) 
     },

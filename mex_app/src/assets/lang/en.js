@@ -149,7 +149,7 @@ export default {
     home_161:"Next step",
     home_162:"Skip",
     home_162:"I understand",
-    home_163:"Copy the group link in WhatsApp, paste/enter the group link here",
+    home_163:"In WhatsApp, create a group from the imported contacts, copy the group link and paste it here",
     home_164:"Click to submit the group link",
 
     spre_001:"Groups",

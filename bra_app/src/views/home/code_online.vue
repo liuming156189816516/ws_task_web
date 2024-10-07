@@ -1,5 +1,4 @@
 <template>
-<!-- <vue-intro-step v-model="showStep" :config="config" ref="myIntroStep"> -->
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
             <page-header :title="$t('home_145')" :show-icon="true" :bgcolor="false" />
@@ -173,7 +172,6 @@
 			</div>
         </van-overlay>
     </div>
-<!-- </vue-intro-step> -->
 </template>
 <script>
 import { mapState } from 'vuex';
@@ -189,7 +187,6 @@ export default {
 		return {
             page:1,
             limit:100,
-            showStep:true,
             page_total:0,
             timer:null,
             ws_account:"",
@@ -221,72 +218,9 @@ export default {
             account_type:"1",
             pullGroupList:[],
             countryList:[],
-            current_code:""||"52",
+            current_code:""||"55",
             accountList:[1,1,1,1,1,1],
-            codeOption:["","","","","—","","","",""],
-            config: {
-                backgroundOpacity: 0.2,
-                titleStyle: {
-                textAlign: 'center',
-                fontSize: '19px',
-                },
-                contentStyle: {
-                textAlign: 'center',
-                fontSize: '15px',
-                },
-                tips: [
-                {
-                    el: '#intro_title',
-                    tipPosition: 'bottom',
-                    title: '欢迎使用问答管理系统',
-                    content: '点击左侧菜单进行操作',
-                    onNext: () => {
-                    return new Promise((resolve, reject) => {
-                        // 延迟2秒 再执行下一步
-                        setTimeout(() => {
-                        resolve(true);
-                        }, 2000);
-                    });
-                    }
-                },
-                {
-                    el: '#intro_mine',
-                    tipPosition: 'left',
-                    // title: '点击进入个人中心',
-                    content: '查看个人信息，修改密码查看个人信息，修改密码查看个人信息，修改密码查看个人信息，修改密码查看个人信息，修改密码查看个人信息，修改密码查看个人信息，修改密码查看个人信息，修改密码',
-                    // 点击上一步时，触发的事件
-                    onPrev: () => {
-                    return new Promise((resolve) => {
-                        resolve(true);
-                    });
-                    },
-                    onNext: () => {
-                    return new Promise((resolve) => {
-                        // 当页面很长，下一步的内容不在此可视区域内时，可进行下面操作
-                        document.body.style.overflow = 'auto';
-                        // 让body滚动到顶部
-                        window.scrollTo(0,0)
-                        resolve(true);
-                    });
-                    }
-                },
-                {
-                    el: '#intro_user',
-                    tipPosition: 'right',
-                    title: '点击进入用户管理',
-                    content: '查看用户信息，添加用户',
-                    onNext: () => {
-                    return Promise.resolve(true)
-                    }
-                },
-                {
-                    el: '#intro_save',
-                    tipPosition: 'top',
-                    title: '点击进入用户管理',
-                    content: '查看用户信息，添加用户'
-                }
-                ]
-            }
+            codeOption:["","","","","—","","","",""]
 		}
 	},
 	computed: {
@@ -333,7 +267,7 @@ export default {
                 this.ws_account = "";
                 this.old_account = "";
                 this.account_type = "1";
-                this.current_code = "52";
+                this.current_code = "55";
                 this.$toast(this.$t("other_013"));
             })
         },

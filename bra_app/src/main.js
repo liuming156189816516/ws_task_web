@@ -26,8 +26,8 @@ import 'amfe-flexible/index.js';
 import "./utils/pcRem"
 import "./utils/setInterval"
 
-// import VueIntroStep from 'vue-intro-step'
-// Vue.component('vue-intro-step', VueIntroStep);
+import VueIntroStep from 'vue-intro-step'
+Vue.component('vue-intro-step', VueIntroStep);
 
 Vue.use(VueLuckyCanvas);
 Vue.component("popDialog", popDialog)

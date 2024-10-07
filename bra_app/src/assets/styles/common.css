@@ -619,13 +619,28 @@
     opacity: 1;
   }
 }
-.step_prev, .next_step{
+.step_prev, .next_step, .skip_step{
+  width: max-content !important;
   color: #000;
   padding: 10px 18px;
   border-radius: 10px;
-  margin: 0 5px;
+  margin: 0 10px;
+  outline: none;
+  border: none;
 }
 .next_step{
-
+  color: #fff;
+  background: #31acf2;
+}
+.tip-box{
+  width: 100vw !important;
+  max-width: initial !important;
+  padding: 0 30px;
+  box-sizing: border-box;
+  /* background: darkcyan; */
+  left: 0 !important;
+}
+.skip_step{
+  display: none;
 }
 

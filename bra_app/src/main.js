@@ -25,10 +25,10 @@ import 'amfe-flexible/index.js';
 import "./utils/pcRem"
 import "./utils/setInterval"
 
-import Vue from 'vue'
-import VueIntroStep from 'vue-intro-step'
+// import Vue from 'vue'
+// import VueIntroStep from 'vue-intro-step'
 
-Vue.component('vue-intro-step', VueIntroStep);
+// Vue.component('vue-intro-step', VueIntroStep);
 Vue.use(VueLuckyCanvas);
 Vue.component("popDialog", popDialog)
 Vue.prototype.$popDialog = situantpop.install

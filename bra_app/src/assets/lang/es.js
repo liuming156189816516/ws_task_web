@@ -149,7 +149,7 @@ export default {
     home_161:"Siguiente paso",
     home_162:"saltar",
     home_162:"Entiendo",
-    home_163:"Copia el enlace del grupo en WhatsApp y pega/ingresa el enlace del grupo aquí",
+    home_163:"En WhatsApp, crea un grupo a partir de contactos importados, copia la conexión del grupo y pégala aquí",
     home_164:"Haga clic para enviar el enlace del grupo",
 
     spre_001:"participar",

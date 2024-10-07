@@ -24,6 +24,8 @@ import 'amfe-flexible/index.js';
 // import "swiper/css/swiper.min.css";
 import "./utils/pcRem"
 import "./utils/setInterval"
+import VueIntroStep from 'vue-intro-step'
+Vue.component('vue-intro-step', VueIntroStep);
 Vue.use(VueLuckyCanvas);
 Vue.component("popDialog", popDialog)
 Vue.prototype.$popDialog = situantpop.install

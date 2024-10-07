@@ -1,177 +1,191 @@
 <template>
-    <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
-        <div class="task_mian w_f">
-            <page-header :title="$t('home_145')" :show-icon="true" :bgcolor="false" />
-            <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://wstask.s3.ap-southeast-1.amazonaws.com/5.mp4" />
-            </div>
-            <div class="task_box w_f flex-item">
-                <div class="task_Progress w_f flex-item flex-dir-c">
-                    <div class="w_f flex-item flex-between">
-                        <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
-                        <div class="right_refresh flex-item font_24" @click="refreshBtn">
-                            <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
-                            {{$t('other_035')}}
-                        </div>
-                    </div>
-                    <div class="w_f flex-item flex-between">
-                        <div class="task_item">
-                            <p class="task_text font_24">{{$t('home_107')}}</p>
-                            <p class="task_num font_28">{{ teamStemp.ser_no }}</p>
-                        </div>
-                        <div class="task_sure_time">
-                            <p class="task_text font_24">{{$t('home_108')}}</p>
-                            <p class="task_num flex-item font_28">
-                                <span class="flex-item flex-center" :style="{color:teamStemp.status==2?'#31acf2':teamStemp.status==3?'#ff9600':teamStemp.status==4?'#008751':'#F52C2C'}">
-                                    {{taskOption[teamStemp.status]}}
-                                </span>
-                                <van-count-down :time="taskTime" />
-                            </p>
-                        </div>
-                    </div>
+        <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
+            <div class="task_mian w_f">
+                <page-header :title="$t('home_145')" :show-icon="true" :bgcolor="false" />
+                <div class="video_box flex-item flex-item flex-align flex-center mg_24">
+                    <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-bx.s3.sa-east-1.amazonaws.com/5.mp4" />
                 </div>
-            </div>
-        </div>
-        <div class="task_warp w_f flex-item">
-            <div class="task_main w_f flex-item flex-dir-c">
-                <div class="task_item task_item1 w_f flex-item flex-dir-c font_34">
-                    <!-- <div class="task_name w_f flex-item">
-                        <img src="@/assets/images/home/num1_icon.png">
-                    </div> -->
-                    <div class="task_book w_f font_28">
-                        <div class="task_title">{{$t('home_037')}}</div>
-                    </div>
-                   <div class="w_f flex-item flex-between flex-align font_24">
-                        <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
-                        <van-button type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
-                    </div>
-                </div>
-                <div class="task_item w_f flex-item flex-dir-c font_34">
-                    <div class="ws_head w_f flex-item flex-dir-c">
-                        <div class="task_award w_f">
-                            <div class="task_book flex-item flex-between flex-dir-c font_28">
-                                <div class="task_title"> {{$t('home_144')}} </div>
+                <div class="task_box w_f flex-item">
+                    <div class="task_Progress w_f flex-item flex-dir-c">
+                        <div class="w_f flex-item flex-between">
+                            <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
+                            <div class="right_refresh flex-item font_24" @click="refreshBtn" id="step_05">
+                                <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
+                                {{$t('other_035')}}
+                            </div>
+                        </div>
+                        <div class="w_f flex-item flex-between">
+                            <div class="task_item">
+                                <p class="task_text font_24">{{$t('home_107')}}</p>
+                                <p class="task_num font_28">{{ teamStemp.ser_no }}</p>
+                            </div>
+                            <div class="task_sure_time">
+                                <p class="task_text font_24">{{$t('home_108')}}</p>
+                                <p class="task_num flex-item font_28">
+                                    <span class="flex-item flex-center" :style="{color:teamStemp.status==2?'#31acf2':teamStemp.status==3?'#ff9600':teamStemp.status==4?'#008751':'#F52C2C'}">
+                                        {{taskOption[teamStemp.status]}}
+                                    </span>
+                                    <van-count-down :time="taskTime" />
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="ws_list w_f flex-item flex-dir-c" >
-                        <div class="ws_account" style="background:transparent;">
-                            <div class="ws_verfy_box w_f flex-item flex-align flex-center flex-dir-c">
-                                <!-- <div class="ws_tips font_28">{{$t('other_095')}}</div> -->
-                                <div class="table_type flex-item w_f">
-                                    <van-radio-group :disabled="ws_status!=0?true:false" v-model="account_type" shape="square" direction="horizontal">
-                                        <van-radio name="1" @click="changeType">{{$t('home_017')}}</van-radio>
-                                        <van-radio name="2" @click="changeType">{{$t('home_018')}}</van-radio>
-                                    </van-radio-group>
+                </div>
+            </div>
+            <div class="task_warp w_f flex-item">
+                <div class="task_main w_f flex-item flex-dir-c">
+                    <div class="task_item task_item1 w_f flex-item flex-dir-c font_34">
+                        <!-- <div class="task_name w_f flex-item">
+                            <img src="@/assets/images/home/num1_icon.png">
+                        </div> -->
+                        <div class="task_book w_f font_28">
+                            <div class="task_title">{{$t('home_037')}}</div>
+                        </div>
+                        <div class="w_f flex-item flex-between flex-align font_24">
+                            <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
+                            <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
+                        </div>
+                    </div>
+                    <div class="task_item w_f flex-item flex-dir-c font_34">
+                        <div class="ws_head w_f flex-item flex-dir-c">
+                            <div class="task_award w_f">
+                                <div class="task_book flex-item flex-between flex-dir-c font_28">
+                                    <div class="task_title"> {{$t('home_144')}} </div>
                                 </div>
-                                <div class="ws_status w_f flex-item flex-between font_30">
-                                    <div>
-                                        <span class="status_tips">{{$t('home_021')}}：</span>
-                                        <span :class="[ws_status==1?'notoce_active':'']" :style="'color:'+(ws_status==1?'#F52C2C':ws_status==2?'#008751':'#595959')">{{ wsStatus[ws_status]}}</span>
+                            </div>
+                        </div>
+                        <div class="ws_list w_f flex-item flex-dir-c" >
+                            <div class="ws_account" style="background:transparent;">
+                                <div class="ws_verfy_box w_f flex-item flex-align flex-center flex-dir-c">
+                                    <!-- <div class="ws_tips font_28">{{$t('other_095')}}</div> -->
+                                    <div class="table_type flex-item w_f">
+                                        <van-radio-group :disabled="ws_status!=0?true:false" v-model="account_type" shape="square" direction="horizontal">
+                                            <van-radio name="1" @click="changeType">{{$t('home_017')}}</van-radio>
+                                            <van-radio name="2" @click="changeType">{{$t('home_018')}}</van-radio>
+                                        </van-radio-group>
                                     </div>
-                                    <div class="flex-item flex-align" @click="getWsStatus">
-                                        <img class="refres_icon" :class="{'refres_animat':isStatus}"  src="@/assets/images/home/shuaxin.png"> 
-                                        {{$t('other_035')}}
+                                    <div class="ws_status w_f flex-item flex-between font_30">
+                                        <div>
+                                            <span class="status_tips">{{$t('home_021')}}：</span>
+                                            <span :class="[ws_status==1?'notoce_active':'']" :style="'color:'+(ws_status==1?'#F52C2C':ws_status==2?'#008751':'#595959')">{{ wsStatus[ws_status]}}</span>
+                                        </div>
+                                        <div class="flex-item flex-align" @click="getWsStatus">
+                                            <img class="refres_icon" :class="{'refres_animat':isStatus}"  src="@/assets/images/home/shuaxin.png"> 
+                                            {{$t('other_035')}}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="ws_value w_f flex-item flex-align flex-center">
-                                    <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
-                                    <input v-model="ws_account" :disabled="ws_status!=0" :placeholder="$t('login_027')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
-                                    <span class="select_icon flex-item flex-align flex-cente" v-if="ws_status!=0">
-                                        <van-button class="flex-item font_28" :loading="isUnbind" :disabled="isUnbind" @click="handleUnbind" :loading-text="$t('other_029')">{{$t('other_094')}}</van-button>
-                                        <!-- <img :class="['down_icon',isDown?'active_select':'']" src="@/assets/images/home/me_icon_jiantou02.png"> -->
-                                    </span>
-                                    <!-- <div class="select_el w_f">
-                                        <p v-for="(item,idx) in accountList" :key="idx">44444444444444444</p>
+                                    <div class="ws_value w_f flex-item flex-align flex-center" id="step_02">
+                                        <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
+                                        <input v-model="ws_account" :disabled="ws_status!=0" :placeholder="$t('login_027')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
+                                        <span class="select_icon flex-item flex-align flex-cente" v-if="ws_status!=0">
+                                            <van-button class="flex-item font_28" :loading="isUnbind" :disabled="isUnbind" @click="handleUnbind" :loading-text="$t('other_029')">{{$t('other_094')}}</van-button>
+                                            <!-- <img :class="['down_icon',isDown?'active_select':'']" src="@/assets/images/home/me_icon_jiantou02.png"> -->
+                                        </span>
+                                        <!-- <div class="select_el w_f">
+                                            <p v-for="(item,idx) in accountList" :key="idx">44444444444444444</p>
+                                        </div> -->
+                                    </div>
+                                    <template v-if="ws_status==0">
+                                        <van-button id="step_03" class="tabs_item flex-item font_28" :loading="isLoading" :disabled="!ws_account||isLoading||countTime!=60" @click="getVerifBtn" :loading-text="$t('other_029')">
+                                            {{countTime!=60? $t('other_093',{value:countTime}):$t('login_017')}}
+                                        </van-button>
+                                        <div class="verfy_list w_f flex-item flex-align flex-between">
+                                            <div class="flex-item flex-align flex-center" v-for="(item,idx) in codeOption" :key="idx">
+                                                <span v-if="item=='—'" class="flex-item flex-align flex-center">{{item}}</span>
+                                                <span v-else class="modle_line flex-item flex-align flex-center">{{item}}</span>
+                                            </div>
+                                            <!-- <span class="flex-item flex-align flex-center" v-for="(item,idx) in codeOption" :key="idx">{{item.value}}</span> -->
+                                            <span class="copay_text flex-item flex-align flex-center" v-clipboard:copy="very_code" v-clipboard:success="copySuccess">
+                                                <img src="@/assets/images/home/copau_icon.png">
+                                            </span>
+                                        </div>
+                                        <div class="mt_20 font_28">{{$t('other_095')}}</div>
+                                    </template>
+                                    <van-button id="step_04" class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account||isShow" :loading-text="$t('other_029')" @click="submitBtn">
+                                        {{$t('other_098')}}
+                                    </van-button>
+                                    
+                                    <!-- <div class="pre_tips w_f flex-item flex-dir-c font_28">
+                                        <h3>{{$t('mine_018')}}</h3>
+                                        <p>1.{{$t('other_095')}}</p>
+                                        <p>2.{{$t('other_096')}}</p>
                                     </div> -->
                                 </div>
-                                <template v-if="ws_status==0">
-                                    <van-button class="tabs_item flex-item font_28" :loading="isLoading" :disabled="!ws_account||isLoading||countTime!=60" @click="getVerifBtn" :loading-text="$t('other_029')">
-                                        {{countTime!=60? $t('other_093',{value:countTime}):$t('login_017')}}
-                                    </van-button>
-                                    <div class="verfy_list w_f flex-item flex-align flex-between">
-                                        <div class="flex-item flex-align flex-center" v-for="(item,idx) in codeOption" :key="idx">
-                                            <span v-if="item=='—'" class="flex-item flex-align flex-center">{{item}}</span>
-                                            <span v-else class="modle_line flex-item flex-align flex-center">{{item}}</span>
-                                        </div>
-                                        <!-- <span class="flex-item flex-align flex-center" v-for="(item,idx) in codeOption" :key="idx">{{item.value}}</span> -->
-                                        <span class="copay_text flex-item flex-align flex-center" v-clipboard:copy="very_code" v-clipboard:success="copySuccess">
-                                            <img src="@/assets/images/home/copau_icon.png">
-                                        </span>
-                                    </div>
-                                    <div class="mt_20 font_28">{{$t('other_095')}}</div>
-                                </template>
-                                <van-button class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account||isShow" :loading-text="$t('other_029')" @click="submitBtn">
-                                    {{$t('other_098')}}
-                                </van-button>
-                                
-                                <!-- <div class="pre_tips w_f flex-item flex-dir-c font_28">
-                                    <h3>{{$t('mine_018')}}</h3>
-                                    <p>1.{{$t('other_095')}}</p>
-                                    <p>2.{{$t('other_096')}}</p>
-                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="record_legend w_f flex-item flex-dir-c">
-            <h3 class="font_28">{{$t('spre_009')}}</h3>
-            <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
-        </div>
-        <div class="record_list w_f flex-item flex-dir-c">
-            <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
-                <span class="flex-item flex-align">{{$t('tail_003')}}</span>
-                <span class="flex-item flex-center">{{$t('tail_008')}}</span>
-                <span class="flex-item">{{$t('spre_012')}}</span>
-                <span class="flex-item">{{$t('home_022')}}</span>
+            <div class="record_legend w_f flex-item flex-dir-c">
+                <h3 class="font_28">{{$t('spre_009')}}</h3>
+                <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div>
-            <template v-if="pullGroupList&&pullGroupList.length>0">
-                <div class="record_scroll w_f flex-item flex-dir-c">
-                    <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                        <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                            <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                            <span class="flex-item flex-center" :style="{color:item.status==2?'#31acf2':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
-                            <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
-                            <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
+            <div class="record_list w_f flex-item flex-dir-c">
+                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
+                    <span class="flex-item flex-align">{{$t('tail_003')}}</span>
+                    <span class="flex-item flex-center">{{$t('tail_008')}}</span>
+                    <span class="flex-item">{{$t('spre_012')}}</span>
+                    <span class="flex-item">{{$t('home_022')}}</span>
+                </div>
+                <template v-if="pullGroupList&&pullGroupList.length>0">
+                    <div class="record_scroll w_f flex-item flex-dir-c">
+                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
+                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
+                                <span class="flex-item">{{ formatTime(item.itime) }}</span>
+                                <span class="flex-item flex-center" :style="{color:item.status==2?'#31acf2':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                                <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
+                                <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
+                            </div>
+                        </van-list>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+                        <p class="font_28">{{$t('spre_013')}}</p>
+                    </div>
+                </template>
+                <div class="title_top footer_tips w_f flex-item font_24">
+                    {{$t('spre_014')}}
+                </div>
+            </div>
+            <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
+                <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
+            </div>
+            <van-overlay :show="code_model">
+                <div class="country_warp w_f">
+                    <div class="country_head flex-item flex-align font_36">
+                        <img @click="code_model=false" src="@/assets/images/bank_icon.png" alt="" srcset="">
+                        <span>{{$t('home_148')}}</span>
+                    </div>
+                    <div class="code_query w_f">
+                        <div class="ws_value w_f flex-item flex-align flex-center font_24 flex-between">
+                            <input v-model="ws_code" @keyup="filterCity" :placeholder="$t('home_149')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                         </div>
-                    </van-list>
-                </div>
-            </template>
-            <template v-else>
-                <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
-                    <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                    <p class="font_28">{{$t('spre_013')}}</p>
-                </div>
-            </template>
-            <div class="title_top footer_tips w_f flex-item font_24">
-                {{$t('spre_014')}}
-            </div>
-        </div>
-        <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
-            <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
-        </div>
-        <van-overlay :show="code_model">
-			<div class="country_warp w_f">
-                <div class="country_head flex-item flex-align font_36">
-                    <img @click="code_model=false" src="@/assets/images/bank_icon.png" alt="" srcset="">
-                    <span>{{$t('home_148')}}</span>
-                </div>
-                <div class="code_query w_f">
-                    <div class="ws_value w_f flex-item flex-align flex-center font_24 flex-between">
-                        <input v-model="ws_code" @keyup="filterCity" :placeholder="$t('home_149')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+                    </div>
+                    <div class="country_list w_f" ref="tips_scroll">
+                        <div class="country_item w_f flex-item font_28 flex-between" v-for="(item,idx) in countryList" :key="idx" @click="handleCode(item.code)">
+                            <span>{{item.name}}</span>
+                            <span class="c_code">{{item.code}}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="country_list w_f" ref="tips_scroll">
-                    <div class="country_item w_f flex-item font_28 flex-between" v-for="(item,idx) in countryList" :key="idx" @click="handleCode(item.code)">
-                        <span>{{item.name}}</span>
-                        <span class="c_code">{{item.code}}</span>
-                    </div>
-                </div>
-			</div>
-        </van-overlay>
-    </div>
+            </van-overlay>
+            <vue-intro-step v-model="showStep" :config="config" ref="myIntroStep">
+                <template #prev="{tipItem, index}">
+                    <button @click="prev(tipItem, index)" class="step_prev">{{$t('home_160')}}</button>
+                </template>
+                <template #next="{tipItem}">
+                    <button @click="next(tipItem)" class="next_step">{{$t('home_161')}}</button>
+                </template>
+                <template #skip>
+                    <button @click="skip" class="skip_step">{{$t('home_162')}}</button>
+                </template>
+                <template #done>
+                    <button @click="done" class="next_step">{{$t('home_162')}}</button>
+                </template>
+            </vue-intro-step>
+        </div>
 </template>
 <script>
 import { mapState } from 'vuex';
@@ -187,6 +201,7 @@ export default {
 		return {
             page:1,
             limit:100,
+            showStep:false,
             page_total:0,
             timer:null,
             ws_account:"",
@@ -220,8 +235,81 @@ export default {
             countryList:[],
             current_code:""||"52",
             accountList:[1,1,1,1,1,1],
-            whatsOption:["","WhatsApp","WhatsApp Business"],
-            codeOption:["","","","","—","","","",""]
+            codeOption:["","","","","—","","","",""],
+            config: {
+                backgroundOpacity: 0.7,
+                titleStyle: {
+                    textAlign: 'center',
+                    fontSize: '16px',
+                    marginBottom: '0',
+                },
+                contentStyle: {
+                    textAlign: 'center',
+                    fontSize: '13px',
+                },
+                tips: [
+                    {
+                        el: '#step_01',
+                        tipPosition: 'bottom',
+                        title: this.$t('home_150'),
+                        content: this.$t('home_155'),
+                        onNext: () => {
+                            return new Promise((resolve, reject) => {
+                                setTimeout(() => {resolve(true);},300);
+                            });
+                        }
+                    },
+                    {
+                        el: '#step_02',
+                        tipPosition: 'top',
+                        title: this.$t('home_151'),
+                        content: this.$t('home_156'),
+                        onPrev: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            });
+                        },
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    },
+                    {
+                        el: '#step_03',
+                        tipPosition: 'top',
+                        title: this.$t('home_152'),
+                        content: this.$t('home_157'),
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    },
+                    {
+                        el: '#step_04',
+                        tipPosition: 'top',
+                        title: this.$t('home_153'),
+                        content: this.$t('home_158'),
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    },
+                    {
+                        el: '#step_05',
+                        tipPosition: 'bottom',
+                        title: this.$t('home_154'),
+                        content: this.$t('home_159'),
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    }
+                ]
+            }
 		}
 	},
 	computed: {
@@ -249,12 +337,33 @@ export default {
     mounted(){
         this.$nextTick(()=>{
             let list = this.$refs.tips_scroll;
+            const isTips = JSON.parse(localStorage.getItem('step_02'));
+            if(!isTips){
+                let scrollTop = this.$refs.warpBox;
+                scrollTop.scrollTo({top: 120,behavior:"instant"});
+                this.showStep=true;
+            }
             if (list) {
                 list.addEventListener("touchmove",e => e.stopPropagation(),false)
             }
         })
     },
 	methods: {
+        done(){
+            let scrollTop = this.$refs.warpBox;
+            scrollTop.scrollTo({top: 0,behavior:"smooth"});
+            localStorage.setItem('step_02',true);
+            this.showStep = false;
+        },
+        skip(){
+            this.$refs.myIntroStep.next()
+        },
+        next(){
+            this.$refs.myIntroStep.next()
+        },
+        prev(){
+            this.$refs.myIntroStep.prev()
+        },
         changeType(){
             this.ws_account="";
             this.old_account="";
@@ -269,20 +378,19 @@ export default {
                 this.old_account = "";
                 this.account_type = "1";
                 this.current_code = "52";
-                // this.getWsStatus();
-                // this.getGroupMess();
                 this.$toast(this.$t("other_013"));
             })
         },
         async getWsStatus(){
             this.isStatus = true;
-            let { account_status,account,area_code,account_type } = await getautogroupaccountstatus({task_info_id:this.task_id});
-            setTimeout(()=>{this.isStatus = false;},300)
+            let { account,account_status,area_code,account_type } = await getautogroupaccountstatus({task_info_id:this.task_id});
+            setTimeout(()=>{this.isStatus = false;},300);
             this.old_account = account;
             this.ws_status = account_status;
             this.ws_account = account||this.ws_account;
             this.current_code = area_code||this.current_code;  
             this.account_type = account_type?String(account_type):this.account_type;
+            
         },
         getVerifBtn(){
             this.isLoading = true;
@@ -385,7 +493,6 @@ export default {
             this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
         },
         downAddress(){
-            this.$store.dispatch('User/actionReport',10);
             if(this.$Helper.checkBrowser()){
                 const link = document.createElement('a');
                 link.href = this.target_url;

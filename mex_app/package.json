@@ -33,6 +33,7 @@
     "svg-sprite-loader": "^6.0.11",
     "vod-js-sdk-v6": "^1.4.12",
     "vue": "^2.6.10",
+    "vue-intro-step": "^1.0.13",
     "vue-json-excel": "^0.3.0",
     "vue-marquee-text-component": "^1.1.1",
     "vue-qr": "^2.3.0",

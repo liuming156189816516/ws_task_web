@@ -20,7 +20,7 @@
                 <div class="task_Progress w_f flex-item flex-dir-c">
                     <div class="w_f flex-item flex-between">
                         <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
-                        <div class="right_refresh flex-item font_24" @click="refreshBtn">
+                        <div class="right_refresh flex-item font_24" @click="refreshBtn" id="step_04">
                             <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
                             {{$t('other_035')}}
                         </div>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="task_btn w_f flex-item flex-between flex-align font_24">
                             <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
-                            <van-button type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
+                            <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                     </div>
 
@@ -82,8 +82,8 @@
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>
                         <div class="group_link w_f flex-item flex-between flex-align font_24">
-                            <input type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
-                            <van-button :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
+                            <input id="step_02" type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
+                            <van-button id="step_03" :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
                         </div>
                     </div>
                 </div>
@@ -125,6 +125,20 @@
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
         </div>
+        <vue-intro-step v-model="showStep" :config="config" ref="myIntroStep">
+            <template #prev="{tipItem, index}">
+                <button @click="prev(tipItem, index)" class="step_prev">{{$t('home_160')}}</button>
+            </template>
+            <template #next="{tipItem}">
+                <button @click="next(tipItem)" class="next_step">{{$t('home_161')}}</button>
+            </template>
+            <template #skip>
+                <button @click="skip" class="skip_step">{{$t('home_162')}}</button>
+            </template>
+            <template #done>
+                <button @click="done" class="next_step">{{$t('home_162')}}</button>
+            </template>
+        </vue-intro-step>
     </div>
 </template>
 
@@ -157,7 +171,71 @@ export default {
             ref_loading:false,
             taskTime: null,
             taskList:[],
-            pullGroupList:[]
+            pullGroupList:[],
+            showStep:false,
+            config: {
+                backgroundOpacity: 0.7,
+                titleStyle: {
+                    textAlign: 'center',
+                    fontSize: '16px',
+                    marginBottom: '0',
+                },
+                contentStyle: {
+                    textAlign: 'center',
+                    fontSize: '13px',
+                },
+                tips: [
+                    {
+                        el: '#step_01',
+                        tipPosition: 'bottom',
+                        title: this.$t('home_150'),
+                        content: this.$t('home_155'),
+                        onNext: () => {
+                            return new Promise((resolve, reject) => {
+                                setTimeout(() => {resolve(true);},300);
+                            });
+                        }
+                    },
+                    {
+                        el: '#step_02',
+                        tipPosition: 'top',
+                        title: this.$t('home_151'),
+                        content: this.$t('home_163'),
+                        onPrev: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            });
+                        },
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    },
+                    {
+                        el: '#step_03',
+                        tipPosition: 'top',
+                        title: this.$t('home_152'),
+                        content: this.$t('home_164'),
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    },
+                    {
+                        el: '#step_04',
+                        tipPosition: 'bottom',
+                        title: this.$t('home_153'),
+                        content: this.$t('home_159'),
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    }
+                ]
+            }
 		}
 	},
 	computed: {
@@ -177,6 +255,7 @@ export default {
 	},
     created(){
         this.isScroll = false;
+        
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         // this.task_id = this.$Helper.getUrlParams("id");
         this.task_id = this.$route.query.id||"";
@@ -184,15 +263,30 @@ export default {
     },
     mounted(){
         this.getIncomeList();
-        // this.$nextTick(()=>{
-        //     const isTips = JSON.parse(localStorage.getItem('step_03'));
-        //     if(!isTips){
-        //         this.$popDialog({ steps:true, type: 11 })
-        //     }
-        // })
+        this.$nextTick(()=>{
+            const isTips = JSON.parse(localStorage.getItem('step_01'));
+            if(!isTips){
+                this.showStep=true;
+            }
+        })
         this.$store.dispatch('User/actionReport',8) 
     },
 	methods: {
+         done(){
+            // let scrollTop = this.$refs.warpBox;
+            // scrollTop.scrollTo({top: 0,behavior:"smooth"});
+            localStorage.setItem('step_01',true);
+            this.showStep = false;
+        },
+        skip(){
+            this.$refs.myIntroStep.next()
+        },
+        next(){
+            this.$refs.myIntroStep.next()
+        },
+        prev(){
+            this.$refs.myIntroStep.prev()
+        },
         async getGroupMess(){
            let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);

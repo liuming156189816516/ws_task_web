@@ -335,10 +335,10 @@ export default {
         this.getIncomeList();
     },
     mounted(){
-        this.$nextTick(()=>{
+        setTimeout(()=>{
             let list = this.$refs.tips_scroll;
             const isTips = JSON.parse(localStorage.getItem('step_02'));
-            if(!isTips){
+            if(!isTips&&this.ws_status==0){
                 let scrollTop = this.$refs.warpBox;
                 scrollTop.scrollTo({top: 120,behavior:"instant"});
                 this.showStep=true;
@@ -346,7 +346,7 @@ export default {
             if (list) {
                 list.addEventListener("touchmove",e => e.stopPropagation(),false)
             }
-        })
+        },1000)
     },
 	methods: {
         done(){

@@ -255,7 +255,7 @@ export default {
     pay_021:"banco de deposito",
     pay_022:"Nombre del pago",
     pay_023:"Vincular información de retiro",
-    pay_024:"pesos",
+    pay_024:"peso",
     pay_025:"Puedes retirar efectivo hasta {value} veces por día",
     pay_026:"1 moneda de oro = 0.005 pesos",
     pay_027:"oro",

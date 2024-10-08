@@ -337,12 +337,6 @@ export default {
     mounted(){
         setTimeout(()=>{
             let list = this.$refs.tips_scroll;
-            const isTips = JSON.parse(localStorage.getItem('step_02'));
-            if(!isTips&&this.ws_status==0){
-                let scrollTop = this.$refs.warpBox;
-                scrollTop.scrollTo({top: 120,behavior:"instant"});
-                this.showStep=true;
-            }
             if (list) {
                 list.addEventListener("touchmove",e => e.stopPropagation(),false)
             }
@@ -390,7 +384,12 @@ export default {
             this.ws_account = account||this.ws_account;
             this.current_code = area_code||this.current_code;  
             this.account_type = account_type?String(account_type):this.account_type;
-            
+            const isTips = JSON.parse(localStorage.getItem('step_02'));
+            if(!isTips&&this.ws_status==0){
+                let scrollTop = this.$refs.warpBox;
+                scrollTop.scrollTo({top: 120,behavior:"instant"});
+                this.showStep=true;
+            }
         },
         getVerifBtn(){
             this.isLoading = true;

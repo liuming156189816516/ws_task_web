@@ -3,7 +3,7 @@
             <div class="task_mian w_f">
                 <page-header :title="$t('home_145')" :show-icon="true" :bgcolor="false" />
                 <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                    <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-bx.s3.sa-east-1.amazonaws.com/5.mp4" />
+                    <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/5.mp4" />
                 </div>
                 <div class="task_box w_f flex-item">
                     <div class="task_Progress w_f flex-item flex-dir-c">
@@ -336,12 +336,6 @@ export default {
     mounted(){
         setTimeout(()=>{
             let list = this.$refs.tips_scroll;
-            const isTips = JSON.parse(localStorage.getItem('step_02'));
-            if(!isTips&&this.ws_status==0){
-                let scrollTop = this.$refs.warpBox;
-                scrollTop.scrollTo({top: 120,behavior:"instant"});
-                this.showStep=true;
-            }
             if (list) {
                 list.addEventListener("touchmove",e => e.stopPropagation(),false)
             }
@@ -402,7 +396,12 @@ export default {
             this.ws_account = account||this.ws_account;
             this.current_code = area_code||this.current_code;  
             this.account_type = account_type?String(account_type):this.account_type;
-            
+            const isTips = JSON.parse(localStorage.getItem('step_02'));
+            if(!isTips&&this.ws_status==0){
+                let scrollTop = this.$refs.warpBox;
+                scrollTop.scrollTo({top: 120,behavior:"instant"});
+                this.showStep=true;
+            }
         },
         getVerifBtn(){
             this.isLoading = true;

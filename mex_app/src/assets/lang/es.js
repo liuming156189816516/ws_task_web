@@ -257,7 +257,7 @@ export default {
     pay_023:"Vincular información de retiro",
     pay_024:"peso",
     pay_025:"Puedes retirar efectivo hasta {value} veces por día",
-    pay_026:"1 moneda de oro = 0.005 pesos",
+    pay_026:"1 moneda de oro = 0.09 pesos",
     pay_027:"oro",
     pay_028:"Retiro mínimo {value} oro",
     pay_029:"El número de retiros de hoy ha sido limitado",

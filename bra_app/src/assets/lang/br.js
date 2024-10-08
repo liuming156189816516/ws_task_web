@@ -124,7 +124,7 @@ export default {
     home_138:"Mensagem do site do sistema",
     home_139: "Baixe o APP e salve os números da agenda com um clique, facilitando a tarefa",
     home_140:"Número vencedor:",
-    home_141:"Um usuário",
+    home_141:"Um usuário x",
     home_142: "4. Se você atingir o VIP 5, poderá girar a roleta e ganhar moedas de ouro sem nenhuma tarefa",
     home_143:"Número vencedor",
     home_144:"vinculativo WhatsApp",

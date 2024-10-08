@@ -59,7 +59,7 @@
 				<van-cell-group inset :border="false" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
 					<van-field v-model="withdraw_num" type="number" clearable placeholder="0" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</van-cell-group>
-				<div class="auto_computed">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.03}}{{ $t('pay_024') }}</div>
+				<div class="auto_computed">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.09}}{{ $t('pay_024') }}</div>
 				<div class="custom_dialog__footer">
 					<van-button class="custom_dialog_cancel" @click="showModel=false">{{ $t('other_007') }}</van-button>
 					<span class="model_line"></span>

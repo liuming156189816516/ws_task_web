@@ -15,8 +15,8 @@
                 </div>
                 <div class="user_vip w_f flex-item flex-dir-c">
                     <p class="total_gold font_36" v-html="$t('mine_022',{value:baseInfo.his_balance})"></p>
-                    <div class="user_grade flex-item flex-align flex-center font_26" :class="[baseInfo.level==0?'grade_zome':'']">
-                        <span>V{{baseInfo.level}}</span>
+                    <div class="user_grade flex-item flex-align flex-center" :class="[baseInfo.level==0?'grade_zome':'']">
+                        <span class="flex-item flex-align flex-center font_28">V{{baseInfo.level}}</span>
                         <!-- <img src="@/assets/images/mine/vip_icon.png" alt="" srcset=""> -->
                         <!-- <p class="font_34">VIP{{baseInfo.level}}</p> -->
                     </div>
@@ -204,15 +204,17 @@ export default {
     overflow-y: scroll;
     padding-bottom: 240px;
     background-color: #f2f2f2;
+    // background: linear-gradient(to top,$font-color-white 0%, $color-theme 100%);
     -webkit-overflow-scrolling: touch;
     .top_model {
         .user_mess {
             // height: 280px;
             padding: 0 30px;
-            box-sizing: border-box;
-            color: $font-color-black;
             align-items: center;
-            background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+            box-sizing: border-box;
+            color: $font-color-white;
+            background: $color-minebg;
+            // background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
             .page_title{
                 margin: 40px 0;
                 font-style: italic;
@@ -242,19 +244,18 @@ export default {
             }
             .user_vip{
                 margin: 20px 0;
-                padding: 20px 10px;
+                padding: 30px 10px;
                 border-radius: 20px;
                 box-sizing: border-box;
-                padding-bottom: 20px;
                 position: relative;
                 color: $font-color-white;
-                background: $home-mine-value;
+                background: $color-cardbg;
                 .total_gold{
                     font-weight: bold;
                 }
                 .user_grade{
-                    width: 110px;
-                    height: 71px;
+                    width: 100px;
+                    height: 94px;
                     position: absolute;
                     top: -38px;
                     right: 20px;
@@ -264,14 +265,16 @@ export default {
                     background-size: 100% 100%;
                     // color:$home-gold-value;
                     span{
+                        width: 100%;
                         font-weight: bold;
                         font-style: italic;
                         letter-spacing: -1px;
                         position: relative;
-                        z-index: 3;
-                        padding-right: 6px;
-                        background: linear-gradient(307.11deg,#A38748 88.8%, #785728 14.91%);
-                        // background: linear-gradient(168.91deg, #785728 -69%, #F5E486 -25.53%, #B0803A 5.51%, #B0803A 32.42%, #F5E486 65.53%, #B0803A 102.79%, #F5E486 137.98%);
+                        z-index: 399;
+                        margin-top: -10px;
+                        // padding-right: 6px;
+                        // background: linear-gradient(307.11deg,#A38748 88.8%, #785728 14.91%);
+                        background: linear-gradient(168.91deg, #785728 -69%, #F5E486 -25.53%, #B0803A 5.51%, #B0803A 32.42%, #F5E486 65.53%, #B0803A 102.79%, #F5E486 137.98%);
                         // background: linear-gradient(307.11deg, #F1DE82 14.91%, #A38748 88.8%);
                         -webkit-text-fill-color:transparent;
                         -webkit-background-clip:text;
@@ -284,7 +287,7 @@ export default {
                     filter: grayscale(.9);
                 }
                 .grade_desc{
-                    margin: 10px 0 20px 0;
+                    margin: 10px 0 30px 0;
                     // margin: 20px 0;
                     color: $font-color-white;
                     .vip_g{

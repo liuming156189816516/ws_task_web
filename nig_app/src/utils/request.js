@@ -47,7 +47,7 @@ service.interceptors.response.use(res => {
           confirmButtonText: i18n.t('other_003'),
         }).then(() => {
           window.location.reload(true);
-          window.localStorage.clear();
+          // window.localStorage.clear();
           window.localStorage.removeItem('uid');
           window.localStorage.removeItem('token');
           window.localStorage.removeItem('account');

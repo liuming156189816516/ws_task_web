@@ -50,7 +50,8 @@ export default {
     .login_head{
         padding: 10px 20px;
         box-sizing: border-box;
-        background: rgba($color: $home-eart-long, $alpha: .5);
+        // background: $color-headbg;
+        // background: rgba($color: $home-eart-long, $alpha: .5);
         .le_logn{
             height: 60px;
         }
@@ -64,7 +65,7 @@ export default {
                 font-weight: bold;
                 border-radius: 10px;
                 box-sizing: border-box;
-                background: $home-bg-value;
+                // background: $home-bg-value;
             }
             img{
                 height: 45px;

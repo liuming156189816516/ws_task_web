@@ -8,7 +8,6 @@
                 {{$t('mine_009')}}
             </div>
         </div>
-        <!-- <div class="horse_run"></div> -->
         <div class="top_fles w_f" ref="navTop" :class="[filexTop&&$Helper.checkApkBag(2)?'apk_fixed':filexTop&&$Helper.checkApkBag()?'top_fixed':'']">
             <Sgin-header />
         </div>
@@ -87,11 +86,6 @@
                 </div>
             </div>
         </div>
-        <!-- <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
-            <div class="serve_icon" slot="icon" @click="$Helper.globalSupport()">
-                <img src="../assets/images/ms_serve.png" alt="" />
-            </div>
-        </drag-icon> -->
     </div>
 </template>
 <script>
@@ -298,9 +292,7 @@ export default {
     overflow-y: auto;
     position: relative;
     padding-bottom: 320px;
-    background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
-    // background: url('../assets/images/home/bg_img.png') no-repeat;
-    // background-size: cover;
+    background: $color-btnbg;
     -webkit-overflow-scrolling: touch;
      .down_app{
         height: 80px;
@@ -343,7 +335,7 @@ export default {
         }
     }
     .top_fles{
-        background: $color-theme;
+        background: $color-headbg;
     }
     .top_fixed, .apk_fixed{
         position: fixed;
@@ -397,11 +389,6 @@ export default {
                     color: $home-title-01;
                     padding-right: 6px;
                     text-shadow: 0px 2px 3px $home-title-01;
-                    // background: linear-gradient(307.11deg,#A38748 88.8%, #FFF000 14.91%);
-                    // background: linear-gradient(168.91deg, #785728 -69%, #F5E486 -25.53%, #B0803A 5.51%, #B0803A 32.42%, #F5E486 65.53%, #B0803A 102.79%, #F5E486 137.98%);
-                    // background: linear-gradient(307.11deg, #F1DE82 14.91%, #A38748 88.8%);
-                    // -webkit-text-fill-color:transparent;
-                    // -webkit-background-clip:text;
                 }
                 .level_zero{
                     filter: grayscale(.9);
@@ -445,7 +432,7 @@ export default {
             }
             .down_list{
                 width: 190px;
-                min-height: 230px;
+                height: max-content;
                 position: absolute;
                 right: 0px;
                 top: 55px;
@@ -456,7 +443,7 @@ export default {
                 box-sizing: border-box;
                 background-color: #fff;
                 p{
-                    padding: 10px 0;
+                    padding: 20px 0;
                     border-bottom: 1px solid #ebedf0;
                     span{
                         color: $font-color-black;
@@ -508,17 +495,17 @@ export default {
         .notice_warp {
             width: 100%;
             display: flex;
-            margin-bottom: 30px;
-            margin-top: 30px;
+            margin: 30px 0;
             position: relative;
             flex-direction: column;
             .my_swipe{
-                width: calc(100vw - 40px);
+                width: 100%;
                 height: 280px;
                 border-radius: 20px;
                 img{
                     width: 100%;
                     height: 100%;
+                    border: none;
                 }
             }
         }
@@ -793,37 +780,6 @@ export default {
         img{
             height: 80px;
         }
-    }
-}
-
-.horse_run {
-    font-size: 16px;
-    border: 3px solid transparent;
-    border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1;
-    color: #000;
-    cursor: pointer;
-    animation: rotate 1s linear infinite;
-    border-radius: 50%;
-    background: #ff013d;
-}
-@keyframes rotate {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-/* 定义跑马灯动画 */
-@keyframes marquee {
-    0% {
-        border-image-slice: 2;
-        border-image-width: 2;
-    }
-    100% {
-        border-image-slice: 2;
-        border-image-width: 2;
-        border-image-source: linear-gradient(360deg, red, orange, yellow, green, blue, indigo, violet);
     }
 }
 </style>

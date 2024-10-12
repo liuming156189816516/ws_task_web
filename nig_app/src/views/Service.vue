@@ -124,10 +124,9 @@ export default {
 </script>
 <style lang="scss" scoped>
     .server_warp {
+        height:100%;
         padding-bottom: 120px;
-        background: url('../assets/images/home/bg_img.png') no-repeat;
-        background: linear-gradient(to top,#ffff 0%, $color-theme 100%);
-        background-size: cover;
+        background: $color-btnbg;
         .serve_top{
             height: 200px;
             margin-top: 46px;

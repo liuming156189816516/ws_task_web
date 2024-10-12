@@ -341,13 +341,13 @@ const Helper = {
 	// const randomElement = getRandomElementWithProbability(elements, probabilities);
 	// console.log(randomElement);
 	defaultOption() {
-		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
-        // return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:5},{status:1,task_info_id:"",type:2}];
+		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
+        return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:5},{status:1,task_info_id:"",type:2}];
 		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:4}];
 	},
 	langOptions(){
-		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];
-		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" },{icon:"es", lang: "es", name: "es-MX" },{icon:"br", lang: "br", name: "pt-BR" }];
+		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" }];
+		// return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" },{icon:"es", lang: "es", name: "es-MX" },{icon:"br", lang: "br", name: "pt-BR" }];
 	},
 	globalSupport(){
 		// if (this.checkBrowser()) {
@@ -381,7 +381,7 @@ const Helper = {
 		if(storeLang&&!lang){
 			i18n.locale = storeLang;
 		}else{
-			let setLang = lang||"br";
+			let setLang = lang||"en";
 			i18n.locale = setLang;
 			Cookies.set("language",setLang)
 		}

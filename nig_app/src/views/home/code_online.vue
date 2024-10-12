@@ -954,7 +954,7 @@ export default {
                 height: 44px;
                 padding: 0 20px;
                 box-sizing: border-box;
-                background: #31acf2;
+                background: $color-theme;
                 img{
                     height: 12px;
                     margin-right: 10px;
@@ -983,7 +983,7 @@ export default {
                     padding: 10px 0;
                     border-bottom:1px solid rgba(0,0,0,.1);
                     .c_code{
-                        color: #31acf2;
+                        color: $color-theme;
                     }
                 }
                 .country_item:last-child{

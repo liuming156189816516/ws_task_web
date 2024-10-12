@@ -643,4 +643,7 @@
 .skip_step{
   display: none;
 }
+.serve_icon img{
+  height: 88px;
+}
 

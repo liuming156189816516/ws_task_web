@@ -2,7 +2,7 @@
 	<div class="login_warp" @click="isIndex=false">
 		<div class="l_value" @click="showChangeBtn" @click.stop>
 			<span>{{ viewLang }}</span>
-			<img class="down_icon" src="@/assets/images/home/xiala.png">
+			<img class="down_icon" src="@/assets/images/home/down_arrow_white.png">
 			<van-transition name="fade-up">
 				<div class="down_list" :class="isIndex?'active_open':'active_close'">
 					<p class="flex-item flex-align flex-center" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">
@@ -337,7 +337,7 @@ export default {
 	span{
 		width: 100%;
 		flex-grow: 1;
-		color: #000;
+		color: $font-color-white;
 		font-size: 32px;
 		border-radius: 8px;
 	}
@@ -348,7 +348,7 @@ export default {
 	}
 	.down_list{
 		width: 200px;
-		min-height: 230px;
+		height: max-content;
 		position: absolute;
 		left: -40px;
 		top: 50px;
@@ -361,7 +361,7 @@ export default {
 		color: $font-color-black;
 		background:$font-color-white;
 		p{
-			padding: 10px 0;
+			padding: 20px 0;
 			border-bottom: 1px solid #ebedf0;
 			span{
 				color: $font-color-black;

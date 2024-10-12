@@ -1,6 +1,15 @@
-$color-theme:#31acf2; //主题色
-$color-btnbg:linear-gradient(#31acf2, #526cfa);
+// $color-theme:#31acf2; //主题色
+// $color-btnbg:linear-gradient(#31acf2, #526cfa);
+
+$color-theme:#0a0f2d; //主题色
+// $color-btnbg:linear-gradient(#3C3C3C, #101010);
+// $color-theme:rgba(#120e05, $alpha: .7); //主题色
 $color-Nobtnbg:#939dda;
+$color-headbg: #0b1640;
+$color-btnbg: #0a0f2d;
+$color-minebg:linear-gradient(to top,#fff 0%, #0a0f2d 70%);
+$color-cardbg:linear-gradient(to left,#080d20 30%, #29458e 100%);
+
 
 $font-color-white: #fff; //主题字体色号
 $font-color-black: #000; //主题字体色号

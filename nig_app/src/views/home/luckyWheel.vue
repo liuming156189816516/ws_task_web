@@ -250,8 +250,8 @@ export default {
 .earn {
   width: 100%;
   padding-bottom: 40px;
+  background: $color-minebg;
   -webkit-overflow-scrolling: touch;
-  background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
   .lucky_bg{
     position: relative;
     .lucky_rule{

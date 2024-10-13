@@ -453,6 +453,7 @@ export default {
                         margin-bottom: 20px;
                     }
                     .right_refresh{
+                        // color: $home-task-02;
                         flex-shrink: 0;
                         .refres_icon{
                             height: 32px;

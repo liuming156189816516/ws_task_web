@@ -375,6 +375,7 @@ export default {
                         top: 0;
                         right: 0;
                         flex-shrink: 0;
+                        color: $home-task-02;
                         .refres_icon{
                             height: 32px;
                             margin-right: 10px;

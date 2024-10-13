@@ -537,7 +537,7 @@ export default {
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
-        background: $color-btnbg;
+        background: $color-minebg;
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
         input {

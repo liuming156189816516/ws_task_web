@@ -404,7 +404,7 @@ export default {
         overflow-y: auto;
         position: relative;
         // background-color: #f2f2f2;
-        background: $color-btnbg;
+        background: $color-minebg;
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
         .top_icon{

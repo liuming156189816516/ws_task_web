@@ -38,27 +38,10 @@
         <div class="task_box_main">
             <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
-                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num1_icon.png">
-                        </div>
-                        <div class="task_award w_f">
-                            <div class="task_book font_28">{{$t('home_037')}}</div>
-                            <div class="task_desc font_20">{{$t('home_110')}}</div>
-                        </div>
-                        <div class="w_f flex-item flex-between flex-align font_24">
-                            <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
-                            <van-button type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
-                        </div>
-                    </div> -->
-
                     <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="right_refresh flex-item font_24" @click="refreshBtn">
                             <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="../../assets/images/home/shuaxin.png"> 
                             {{$t('other_035')}}
-                        </div>
-                        <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num1_icon.png">
                         </div>
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
@@ -291,6 +274,7 @@ export default {
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
+        background: $color-btnbg;
         // background-color: #f2f2f2;
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
@@ -322,10 +306,6 @@ export default {
         .task_mian{
             height: 1048px;
             position: relative;
-            // background: #E6F2EF;
-            // background: url('../../assets/images/home/task_001.png') no-repeat;
-            // background-size: 100% 100%;
-            background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
             .task_box{
                 padding: 0 30px;
                 margin-top: 30px;
@@ -384,7 +364,6 @@ export default {
                 // background-size: cover;
                 // background-position: 0 40px;
                 .task_item{
-                    height: 240px;
                     position: relative;
                     padding: 16px 0 0 20px;
                     box-sizing: border-box;
@@ -441,7 +420,7 @@ export default {
                         text-decoration: underline;
                     }
                     .group_link{
-                        margin-top: 20px;
+                        padding: 30px 0;
                         input {
                             width: 408px;
                             height: 72px;
@@ -473,9 +452,6 @@ export default {
                         background-color: $home-title-06;
                     }
                 }
-                .task_item:nth-child(1){
-                    height: 210px;
-                }
             }
             .task_item:nth-child(1){
                 margin-bottom: 30px;
@@ -485,6 +461,7 @@ export default {
             padding: 0 30px;
             h3{
                 margin: 20px 0;
+                color: $font-color-white;
             }
             .record_derc{
                 padding: 12.2px 0 12.2px 18.82px;

@@ -7,7 +7,6 @@
                     <div class="user_head">
                         <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
                     </div>
-                    <!-- <img class="vip_icon" src="" alt=""> -->
                     <div class="user_info">
                         <div class="user_name font_32">{{ userInfo.account }}</div>
                         <div class="user_code font_24">{{$t('login_012')}}&nbsp;:&nbsp;<span style="font-weight: bold;">{{userInfo.inviteCode}}</span> <span class="copay_code" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span></div>
@@ -53,14 +52,14 @@
                         <span class="font_28">{{$t('mine_016')}}</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
-                    <div class="self_dold flex-item">{{ allIncome.today_bonus ||0 }}</div>
+                    <div class="self_dold flex-item font_48">{{ allIncome.today_bonus ||0 }}</div>
                 </div>
                 <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(1)">
                     <div class="flex-item flex-align flex-between">
                         <span class="font_28">{{$t('mine_017')}}</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
-                    <div class="self_dold flex-item">{{ allIncome.yesterday_bonus ||0 }}</div>
+                    <div class="self_dold flex-item font_48">{{ allIncome.yesterday_bonus ||0 }}</div>
                 </div>
             </div>
         </div>
@@ -203,8 +202,8 @@ export default {
     // overflow-x: hidden;
     overflow-y: scroll;
     padding-bottom: 240px;
-    background-color: #f2f2f2;
-    // background: linear-gradient(to top,$font-color-white 0%, $color-theme 100%);
+    // background-color: #f2f2f2;
+    background: $color-btnbg;
     -webkit-overflow-scrolling: touch;
     .top_model {
         .user_mess {

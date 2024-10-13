@@ -97,7 +97,7 @@ module.exports = {
 		},
 		proxy: {
 			'/api': {
-				target: 'https://www.bbzvip.com:8096/',
+				target: 'https://www.clickatm.com:8096/',
 				changeOrigin: true,
 				pathRewrite: {'^/api': ''}
 			}

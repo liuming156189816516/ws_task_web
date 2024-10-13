@@ -537,8 +537,7 @@ export default {
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
-         background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
-        // background: rgba($color: $home-title-18, $alpha: 5);
+        background: $color-btnbg;
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
         input {

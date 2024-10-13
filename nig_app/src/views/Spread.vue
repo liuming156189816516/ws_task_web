@@ -21,7 +21,7 @@
                 <div class="w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">
                         <span class="left_desc flex-item font_28">{{$t('spre_006')}}</span>
-                        <van-button class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/home'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
+                        <van-button id="step_01" class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/home'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                     </div>
                     <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/home' }}</div>
                 </div>
@@ -32,33 +32,35 @@
                     </div>
                     <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
                 </div>
-                <div class="w_f flex-item">
-                    <div class="invit_code w_f flex-item flex-dir-c">
-                        <div class="copay_desc flex-item flex-align flex-center">
-                            <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
+                <div id="step_02">
+                    <div class="w_f flex-item">
+                        <div class="invit_code w_f flex-item flex-dir-c">
+                            <div class="copay_desc flex-item flex-align flex-center">
+                                <span class="left_desc flex-item font_28">{{$t('spre_019')}}</span>
+                            </div>
+                            <div class="copay_text flex-item flex-center font_28">{{team_size}}</div>
                         </div>
-                        <div class="copay_text flex-item flex-center font_28">{{team_size}}</div>
-                    </div>
-                    <div class="invit_code w_f flex-item flex-dir-c">
-                        <div class="copay_desc flex-item flex-align flex-center flex-between">
-                            <span class="left_desc flex-item font_28">{{$t('spre_020')}}</span>
+                        <div class="invit_code w_f flex-item flex-dir-c">
+                            <div class="copay_desc flex-item flex-align flex-center flex-between">
+                                <span class="left_desc flex-item font_28">{{$t('spre_020')}}</span>
+                            </div>
+                            <div class="copay_text flex-item flex-center font_28">{{today_rebate}}</div>
                         </div>
-                        <div class="copay_text flex-item flex-center font_28">{{today_rebate}}</div>
                     </div>
-                </div>
 
-                <div class="flex-item flex-align">
-                    <div class="invit_code w_f flex-item flex-dir-c">
-                        <div class="copay_desc flex-item flex-align flex-center">
-                            <span class="left_desc flex-item font_24">{{$t('spre_021')}}</span>
+                    <div class="flex-item flex-align">
+                        <div class="invit_code w_f flex-item flex-dir-c">
+                            <div class="copay_desc flex-item flex-align flex-center">
+                                <span class="left_desc flex-item font_24">{{$t('spre_021')}}</span>
+                            </div>
+                            <div class="copay_text flex-item flex-center font_28">{{yesterday_rebate}}</div>
                         </div>
-                        <div class="copay_text flex-item flex-center font_28">{{yesterday_rebate}}</div>
-                    </div>
-                    <div class="invit_code w_f flex-item flex-dir-c">
-                        <div class="copay_desc flex-item flex-align flex-center">
-                            <span class="left_desc flex-item font_24">{{$t('spre_022')}}</span>
+                        <div class="invit_code w_f flex-item flex-dir-c">
+                            <div class="copay_desc flex-item flex-align flex-center">
+                                <span class="left_desc flex-item font_24">{{$t('spre_022')}}</span>
+                            </div>
+                            <div class="copay_text flex-item flex-center font_28">{{total_rebate}}</div>
                         </div>
-                        <div class="copay_text flex-item flex-center font_28">{{total_rebate}}</div>
                     </div>
                 </div>
             </div>
@@ -110,6 +112,20 @@
                 </div>
             </div> -->
         </div>
+         <vue-intro-step v-model="showStep" :config="config" ref="myIntroStep">
+            <template #prev="{tipItem, index}">
+                <button @click="prev(tipItem, index)" class="step_prev">{{$t('home_160')}}</button>
+            </template>
+            <template #next="{tipItem}">
+                <button @click="next(tipItem)" class="next_step">{{$t('home_161')}}</button>
+            </template>
+            <template #skip>
+                <button @click="skip" class="skip_step">{{$t('home_162')}}</button>
+            </template>
+            <template #done>
+                <button @click="done" class="next_step">{{$t('home_162')}}</button>
+            </template>
+        </vue-intro-step>
     </div>
 </template>
 <script>
@@ -134,8 +150,45 @@ export default {
             isScroll:true,
             loading:false,
             finished :false,
+            showStep:false,
             page_total:0,
             millionList:[],
+            config: {
+                backgroundOpacity: 0.7,
+                titleStyle: {
+                    textAlign: 'center',
+                    fontSize: '16px',
+                    marginBottom: '0',
+                },
+                contentStyle: {
+                    textAlign: 'center',
+                    fontSize: '13px',
+                },
+                tips: [
+                    {
+                        el: '#step_01',
+                        tipPosition: 'bottom',
+                        title: this.$t('home_150'),
+                        content: this.$t('home_166'),
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    },
+                    {
+                        el: '#step_02',
+                        tipPosition: 'bottom',
+                        title: this.$t('home_151'),
+                        content: this.$t('home_167'),
+                        onNext: () => {
+                            return new Promise((resolve) => {
+                                resolve(true);
+                            })
+                        }
+                    }
+                ]
+            },
             invit_link:"https://www.clickatm.com",
         }
     },
@@ -177,15 +230,27 @@ export default {
         this.getIncomeList();
     },
     mounted(){
-        // this.$nextTick(()=>{
-        //     const isTips = JSON.parse(localStorage.getItem('step_02'));
-        //     if(!isTips){
-        //         this.$popDialog({steps:true, type: 10 })
-        //     }
-        // })
-        this.$store.dispatch('User/actionReport',12);
+        this.$nextTick(()=>{
+            const isTips = JSON.parse(localStorage.getItem('step_04'));
+            if(!isTips){
+                this.showStep=true;
+            }
+        })
     },
     methods:{
+        done(){
+            localStorage.setItem('step_04',true);
+            this.showStep = false;
+        },
+        skip(){
+            this.$refs.myIntroStep.next()
+        },
+        next(){
+            this.$refs.myIntroStep.next()
+        },
+        prev(){
+            this.$refs.myIntroStep.prev()
+        },
         async getIncomeList(){
             let {team_size,today_rebate,yesterday_rebate,total_rebate} = await getteammatesinfo();
             this.team_size = team_size;

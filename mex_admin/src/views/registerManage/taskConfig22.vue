@@ -28,7 +28,7 @@
                         <el-form-item :label="$t('sys_q131')+'：'" prop="materialData" class="custom_say">
                             <div class="mess_01">
                                 <el-button type="primary" size="mini" v-for="(item,idx) in btnOption" :key="idx" @click="showPropModel(idx)" v-show="item!=''">{{ item }}</el-button>
-                                <el-table :data="taskForm.materialData" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" style="width: 100%">
+                                <el-table :data="taskForm.materialData" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" style="width: 100%">
                                     <el-table-column type="index" :label="$t('sys_g020')"></el-table-column>
                                     <el-table-column prop="type" :label="$t('sys_g091')" minWidth="100">
                                         <template slot-scope="scope">
@@ -111,10 +111,9 @@
         </el-dialog>
         <el-image-viewer v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="[taskForm.qavatar]" />
     </div>
-</template>
-
-<script>
- import { successTips } from '@/utils/index'
+ </template>
+  <script>
+  import { successTips } from '@/utils/index'
   import material from '../content/material.vue';
   import { getdatapacklist } from '@/api/datamanage'
   import { gettaskconfiginfo,dotaskconfiginfo,getmarketgrouplist } from '@/api/user'
@@ -123,10 +122,9 @@
     data() {
       return {
         totalNum:0,
-        activeIdx:"0",
+        activeIdx:0,
         source_type:"",
         is_index:"",
-        loading:false,
         imgModel:false,
         isUpload:false,
         showLink:false,
@@ -206,7 +204,7 @@
             }
         },
         taskOption(){
-            return ["拉群配置","拉粉配置"]
+            return ["拉群任务","拉粉任务"]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]
@@ -222,12 +220,6 @@
     },
     methods:{
         handleClick(enent){
-            this.activeIdx = enent.index;
-            this.taskForm.market_group="";
-            this.taskForm.data_pack_id="";
-            this.taskForm.materialData=[];
-            this.$refs.taskForm.resetFields();
-            this.getConfiglist();
         },
         async getPullGroup(){
             const { data:{list1} } = await getmarketgrouplist({page:1,limit:100});
@@ -238,19 +230,11 @@
             this.datapackList = list || [];
         },
         async getConfiglist() {
-            this.loading = true;
-            const { data } = await gettaskconfiginfo({ptype:Number(this.activeIdx)+1});
-            this.loading = false;
-            if(data.material_list&&data.material_list.length>0){
+            const { data } = await gettaskconfiginfo();
+            if(data.material_list.length>0){
                 this.taskForm.market_group=data.market_group_id;
                 this.taskForm.data_pack_id=data.data_pack_id;
-                let materialItem = data.material_list.map(item => {
-                    if (item.type === 7) {
-                        return {...item,content:JSON.parse(item.content)};
-                    }
-                    return item;
-                })
-                this.taskForm.materialData = materialItem;
+                this.taskForm.materialData=data.material_list;
             }
         },
         getChildren(msg){
@@ -288,17 +272,10 @@
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    let materialItem = this.taskForm.materialData.map(item => {
-                        if (item.type === 7) {
-                            return {...item,content:JSON.stringify(item.content)};
-                        }
-                        return item;
-                    });
                     let params = {
-                        ptype:Number(this.activeIdx)+1,
                         market_group_id:this.taskForm.market_group,
                         data_pack_id:this.taskForm.data_pack_id,
-                        material_list:materialItem
+                        material_list:this.taskForm.materialData,
                     }
                     this.isLoading=true;
                     dotaskconfiginfo(params).then(res => {
@@ -376,10 +353,9 @@
         }
     }
   }
-</script>
-
-<style scoped lang="scss">
-    .view_continer{
+  </script>
+  <style scoped lang="scss">
+  .view_continer{
     width: 100%;
     // max-height: 760px;
     position: relative;
@@ -464,4 +440,4 @@
         }
     }
   }
-</style>
+  </style>

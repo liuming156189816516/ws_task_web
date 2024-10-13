@@ -615,6 +615,7 @@ export default {
     'sys_mat110': '目标粉丝数',
     'sys_mat111': '成功推送粉丝',
     'sys_mat112': '接受消息总数',
+    'sys_mat113': '超链',
 
     'sys_rai001': '养号模式',
     'sys_rai002': '辅助模式',

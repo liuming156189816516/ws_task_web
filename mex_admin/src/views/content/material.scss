@@ -89,7 +89,6 @@
           justify-content: center;
           // background-color: darkgreen;
           border: 1px solid #ebeef5;
-          ;
           -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
           box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
 
@@ -219,10 +218,58 @@
           padding: 0;
           margin-bottom: 10px;
         }
+        .hyper_link{
+          width: 100%;
+          gap: 15px;
+          display: flex;
+          padding: 10px;
+          border-radius: 4px;
+          flex-direction: column;
+          border: 1px solid #e4e7ed;
+          p{
+            margin: 0;
+          }
+          span{
+            display: flex;
+            width: max-content;
+            flex-shrink: 0;
+          }
+          .link_img{
+            width: 80px;
+            height: 80px;
+            display: flex;
+            position: relative;
+            align-items: center;
+            img{
+              width: 80px;
+              height: 80px;
+            }
+            .cover_mask{
+              position: absolute;
+              right: 0 !important;
+            }
+          }
+          .link_content{
+            display: flex;
+            span{
+              display: flex;
+              width: max-content;
+              flex-shrink: 0;
+            }
+            .comtent_text{
+              display: block;
+              width: calc(100% - 40px);
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+        }
 
         .img_01:hover,
         .audio_01:hover,
-        .video_01:hover {
+        .video_01:hover,
+        .link_img:hover {
           .cover_mask {
             width: 100%;
             display: flex;
@@ -306,4 +353,22 @@
 ::v-deep .el-alert--success.is-light .el-alert__description {
   color: #67c23a;
   background-color: #f0f9eb;
+}
+.link_img{
+  width: 60px;
+  height: 60px;
+  position: relative;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+  .el-icon-delete{
+    color: red;
+    font-size: 18px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    transform: translateY(-50%);
+  }
 }

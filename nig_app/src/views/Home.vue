@@ -1,5 +1,5 @@
 <template>
-    <div class="home_warp w_f" ref="warpBox" @click="isIndex=false" @scroll="handleScroll">
+    <div class="home_warp w_f" ref="warpBox" @click="isIndex=false">
         <div class="down_app w_f flex-item flex-align flex-between" v-if="showApk&&$Helper.checkApkBag()">
             <span class="close_btn flex-item flex-align flex-center font_20" @click="showApk=false">✕</span>
             <div class="down_text font_24">{{$t('other_072',{value:200})}}</div>

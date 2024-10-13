@@ -2,7 +2,7 @@
     <div class="home_warp w_f" ref="warpBox" @click="isIndex=false" @scroll="handleScroll">
         <div class="down_app w_f flex-item flex-align flex-between" v-if="showApk&&$Helper.checkApkBag()">
             <span class="close_btn flex-item flex-align flex-center font_20" @click="showApk=false">✕</span>
-            <div class="down_text font_24">{{$t('other_072',{value:100})}}</div>
+            <div class="down_text font_24">{{$t('other_072',{value:200})}}</div>
             <div class="down_apk flex-item flex-align flex-center font_24" @click="downApk">
                 <img src="@/assets/images/home/shouji.png">
                 {{$t('mine_009')}}
@@ -499,7 +499,7 @@ export default {
             position: relative;
             flex-direction: column;
             .my_swipe{
-                width: 100%;
+                width: calc(100vw - 40px);
                 height: 280px;
                 border-radius: 20px;
                 img{

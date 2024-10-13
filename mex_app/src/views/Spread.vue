@@ -3,18 +3,7 @@
         <page-header :title="$t('home_045')" :noBg="false" :bgColor="false" :showBack="false" />
         <div class="video_box flex-item flex-item flex-align flex-center mg_24">
             <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:140px;" src="https://rw-a.s3.amazonaws.com/3.mp4" />
-            <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
-                <img src="@/assets/images/serveic/play_icon.png" alt="">
-            </div> -->
         </div>
-        <!-- <div class="share_main w_f">
-            <div class="cover_img flex-item">
-                <img class="mask_img" src="@/assets/images/mill/bg_02.png" alt="" srcset="">
-                <div class="spred_mess w_f">
-                    <div class="top_title w_f font_32 flex-item flex-align flex-center">{{$t('spre_004')}}</div>
-                </div>
-            </div>
-        </div> -->
         <div class="spred_m w_f">
             <div class="spred_l">
                 <p class="top_title flex-item flex-align flex-center font_36">{{$t('spre_004')}}</p>

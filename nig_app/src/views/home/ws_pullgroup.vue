@@ -3,7 +3,7 @@
         <div class="task_mian w_f">
             <page-header :title="$t('home_044')" :show-icon="true" :bgcolor="false" />
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/2.mp4" />
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-nrly.s3.af-south-1.amazonaws.com/1.mp4" />
             </div>
             <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">
@@ -48,8 +48,8 @@
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>
-                        <div class="group_link w_f flex-item flex-between flex-align font_24" id="step_02">
-                            <input type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
+                        <div class="group_link w_f flex-item flex-between flex-align font_24">
+                            <input id="step_02" type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
                             <van-button id="step_03" :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
                         </div>
                     </div>

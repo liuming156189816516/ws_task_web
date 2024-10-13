@@ -119,7 +119,7 @@ export default {
     home_131:"Sign in now",
     home_132:"Sign in completed",
     home_133:"Sign in...",
-    home_134:"Upload Group Links",
+    home_134:"Upload group",
     home_135:"View",
     home_136:"The more members in the group the more point you can collect",
     home_137:"You can sign in after completing the task",

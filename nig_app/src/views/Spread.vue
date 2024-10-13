@@ -136,7 +136,7 @@ export default {
             finished :false,
             page_total:0,
             millionList:[],
-            invit_link:"https://www.bbzvip.com",
+            invit_link:"https://www.clickatm.com",
         }
     },
     computed: {

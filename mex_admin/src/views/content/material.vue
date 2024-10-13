@@ -208,7 +208,7 @@
           <el-form-item :label="$t('sys_g003') + ':'" prop="remark">
             <el-input v-model="groupForm.remark" clearable type="textarea" :rows="2" :placeholder="$t('sys_mat061',{value:$t('sys_g003')})" />
           </el-form-item>
-          <el-form-item :label="$t('sys_l108') + ':'" prop="is_adv">
+          <el-form-item :label="$t('sys_l110') + ':'" prop="is_adv">
             <el-radio-group v-model="groupForm.is_adv">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="2">否</el-radio>

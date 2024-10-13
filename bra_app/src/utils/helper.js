@@ -341,8 +341,8 @@ const Helper = {
 	// const randomElement = getRandomElementWithProbability(elements, probabilities);
 	// console.log(randomElement);
 	defaultOption() {
-		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
-        // return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:5},{status:1,task_info_id:"",type:2}];
+		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
+        return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2}];
 		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:4}];
 	},
 	langOptions(){

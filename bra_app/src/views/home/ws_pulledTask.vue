@@ -57,9 +57,9 @@
                             <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="../../assets/images/home/shuaxin.png"> 
                             {{$t('other_035')}}
                         </div>
-                        <div class="task_name w_f flex-item">
+                        <!-- <div class="task_name w_f flex-item">
                             <img src="@/assets/images/home/num1_icon.png">
-                        </div>
+                        </div> -->
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>

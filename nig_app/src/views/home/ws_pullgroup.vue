@@ -351,7 +351,6 @@ export default {
             }
         },
         downAddress(){
-            this.$store.dispatch('User/actionReport',10);
             if(this.$Helper.checkBrowser()){
                 const link = document.createElement('a');
                 link.href = this.target_url;
@@ -359,7 +358,9 @@ export default {
                 link.target = "_blank";
                 link.click();
             }else{
-                uniFun.postMessage({data:this.taskList});
+                if(this.taskList.length == 0) return;
+                let newArr = this.taskList.map(item => {return {...item,target:`+${item.target}`}});
+                uniFun.postMessage({data:newArr});
             }
         },
         showVideo(){

@@ -10,7 +10,7 @@
                 <div class="user_info bank_account" @click="showBank(0)">
                     <span class="lable_text">{{ $t('pay_021') }}</span>
                     <div class="flex-between">
-                        <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
+                        <van-field v-model="bankName" :readonly = true :placeholder="$t('other_014',{value:$t('pay_021')})" :border="false" />
                         <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${accountModel == true ? 90 : 0}deg)`}" />
                     </div>
                 </div>
@@ -135,7 +135,8 @@ export default {
             this.selectBank = false;
         },
         changeAccount(val){
-            this.accountType = val.name;
+            this.bankCode=val.code;
+            this.bankName=val.name;
             this.accountModel = false;
         },
         async submitBtn(){
@@ -156,11 +157,12 @@ export default {
                     card_no:this.collectCard
                 }
             }
+            console.log(params);
             this.bank_id?params.id=this.bank_id:"";
             if(this.curIndex==1&&!this.collectCard){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_006')}))
-            }else if(this.curIndex==1&&!this.accountType){
-                return this.$toast(this.$t('other_014',{value:this.$t('pay_033')}))
+            }else if(this.curIndex==1&&!this.bankName){
+                return this.$toast(this.$t('other_014',{value:this.$t('pay_021')}))
             }else if(this.curIndex==2&&!this.collectCard){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
             }else if(this.curIndex==1&&!this.collectName){

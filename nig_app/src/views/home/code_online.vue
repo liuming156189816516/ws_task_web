@@ -233,7 +233,7 @@ export default {
             account_type:"1",
             pullGroupList:[],
             countryList:[],
-            current_code:""||"55",
+            current_code:""||"234",
             accountList:[1,1,1,1,1,1],
             codeOption:["","","","","—","","","",""],
             config: {
@@ -371,7 +371,7 @@ export default {
                 this.ws_account = "";
                 this.old_account = "";
                 this.account_type = "1";
-                this.current_code = "55";
+                this.current_code = "234";
                 this.$toast(this.$t("other_013"));
             })
         },
@@ -492,6 +492,7 @@ export default {
             this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
         },
         downAddress(){
+            return;
             if(this.$Helper.checkBrowser()){
                 const link = document.createElement('a');
                 link.href = this.target_url;
@@ -499,9 +500,8 @@ export default {
                 link.target = "_blank";
                 link.click();
             }else{
-                let mobileList = this.taskList;
-                if(mobileList.length == 0) return;
-                let newArr = mobileList.map(item => {return {...item,target:`+${item.target}`}});
+                if(this.taskList.length == 0) return;
+                let newArr = this.taskList.map(item => {return {...item,target:`+${item.target}`}});
                 uniFun.postMessage({data:newArr});
             }
         },

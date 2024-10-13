@@ -16,14 +16,14 @@
                 <el-form-item>
 					<el-button size="small" icon="el-icon-search" type="primary" @click="getPayOrderList(1)">{{ $t('sys_c002') }}</el-button>
                     <el-button size="small" icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
-                    <!-- <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="regectBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_rai124')}) }}</el-button> -->
+                    <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="regectBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_rai124')}) }}</el-button>
                 </el-form-item>
 			</el-form>
 		</div>
 		<div class="switch_bar">
 			<div class="consun_list handel_area">
 				<el-table :data="bannerList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading" element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }" @selection-change="selectAllChange" @row-click="rowSelectChange">
-					<!-- <el-table-column type="selection" width="55" :selectable="checkSelectable"> </el-table-column> -->
+					<el-table-column type="selection" width="55" :selectable="checkSelectable"> </el-table-column>
 					<!-- <el-table-column prop="wx_id" label="序号" width="60" align="center">
                         <template slot-scope="scope">
 							<span>{{(factorModel.offset-1)*factorModel.limit+scope.$index+1}}</span>
@@ -98,8 +98,8 @@
                     </el-table-column>
                     <!-- <el-table-column width="180" label="操作" align="center" fixed="right">
 						<template slot-scope="scope">
-                            <el-button type="danger" :disabled="scope.row.status==2||scope.row.status==3" size="mini" plain @click="regectBtn(scope.row)">驳回</el-button>
-							<el-button :type="scope.row.status==2?'info':'warning'" :disabled="scope.row.status==2||scope.row.status==3||pay_id.length>0" size="mini" plain @click="delCardBtn(scope.row,2)">
+                            <el-button type="danger" :disabled="scope.row.status!=1||pay_id.length==0" size="mini" plain @click="regectBtn(scope.row)">驳回</el-button>
+							<el-button :type="scope.row.status==1?'warning':'info'" :disabled="scope.row.status!=1||pay_id.length==0" size="mini" plain @click="delCardBtn(scope.row,2)">
                                 {{ scope.row.status==2?$t('sys_p008'):$t('sys_p010') }}
                             </el-button>
 							<el-button type="danger" size="mini" plain @click="delCardBtn(scope.row,2)">删除</el-button>
@@ -220,7 +220,7 @@ export default {
 			})
 		},
         checkSelectable(row){
-            if (row.status === 1&&row.approval_status==1) {
+            if (row.status === 1&& row.approval_status==1) {
                 return true
             } else {
                 return false
@@ -246,7 +246,6 @@ export default {
             refsElTable.toggleRowSelection(row,true);
         },
         handleApply(val){
-            console.log(val);
             this.factorModel.apy_status=val;
             this.getPayOrderList();
         },
@@ -305,26 +304,26 @@ export default {
         //删除
 		delCardBtn(val,type){
 			let that = this;
-			// that.$confirm(this.$t('sys_c046',{value:this.$t('sys_p011')}),this.$t('sys_l013'), {
-            //     type: 'warning',
-            //     confirmButtonText:this.$t('sys_c024'),
-            //     cancelButtonText:this.$t('sys_c023'),
-            //     beforeClose: function (action, instance,done) {
-            //         if(action === 'confirm') {
-            //             instance.confirmButtonLoading = true;
-            //             dowithdrawapproval({status:2,ids:type==1?that.pay_id:[val.id]}).then(res =>{
-            //                 instance.confirmButtonLoading = false;
-            //                 if (res.code !=0) return;
-            //                 successTips(that)
-			// 				that.getPayOrderList()
-			// 				done();
-			// 			})
-            //         }else{
-            //             done();
-            //         }
-            //     }}).catch(() => {
-            //     that.$message({type: 'info',message: '已取消'});          
-            // });
+			that.$confirm(this.$t('sys_c046',{value:this.$t('sys_p011')}),this.$t('sys_l013'), {
+                type: 'warning',
+                confirmButtonText:this.$t('sys_c024'),
+                cancelButtonText:this.$t('sys_c023'),
+                beforeClose: function (action, instance,done) {
+                    if(action === 'confirm') {
+                        instance.confirmButtonLoading = true;
+                        dowithdrawapproval({status:2,ids:type==1?that.pay_id:[val.id]}).then(res =>{
+                            instance.confirmButtonLoading = false;
+                            if (res.code !=0) return;
+                            successTips(that)
+							that.getPayOrderList()
+							done();
+						})
+                    }else{
+                        done();
+                    }
+                }}).catch(() => {
+                that.$message({type: 'info',message: '已取消'});          
+            });
         }
 	},
 	watch:{

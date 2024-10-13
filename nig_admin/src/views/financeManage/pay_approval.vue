@@ -31,8 +31,8 @@
                     </el-table-column> -->
                     <el-table-column prop="account" :label="$t('sys_c009')" minWidth="120" align="center" />
                     <el-table-column prop="card_no" :label="$t('sys_p004')" minWidth="100" align="center" />
-                    <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center" />
-                        <!-- <template slot-scope="scope">
+                    <!-- <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center">
+                        <template slot-scope="scope">
                             {{ drawOption[scope.row.type]}}
 						</template>
                     </el-table-column> -->
@@ -56,12 +56,12 @@
                                 <i class="el-icon-arrow-down el-icon--right" />
                             </span>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item :class="{'dropdown_selected':idx==factorModel.status}" v-for="(item,idx) in payOptions" :key="idx" :command="idx">{{item}}</el-dropdown-item>
+                                <el-dropdown-item :class="{'dropdown_selected':idx==factorModel.status}" v-for="(item,idx) in applyOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
                             </el-dropdown-menu>
                             </el-dropdown>
                         </template>
                         <template slot-scope="scope">
-                            <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':'warning'"> {{ payOptions[scope.row.status] }}</el-tag>
+                            <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':'warning'"> {{ applyOption[scope.row.status] }}</el-tag>
                         </template>
                     </el-table-column>
                     <!-- <el-table-column prop="status" :label="$t('sys_rai129')" minWidth="100">

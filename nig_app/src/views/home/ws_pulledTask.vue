@@ -3,7 +3,7 @@
         <div class="task_mian w_f">
             <page-header :title="$t('home_134')" :show-icon="true" :bgcolor="false" />
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/1.mp4" />
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-nrly.s3.af-south-1.amazonaws.com/2.mp4" />
             </div>
         </div>
         <div class="task_box_main">
@@ -11,7 +11,7 @@
                 <div class="task_main w_f flex-item flex-dir-c">
                     <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="right_refresh flex-item font_24" @click="refreshBtn" id="step_03">
-                            <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="../../assets/images/home/shuaxin.png"> 
+                            <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
                             {{$t('other_035')}}
                         </div>
                         <div class="task_award w_f">

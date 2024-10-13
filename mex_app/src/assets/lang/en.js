@@ -151,6 +151,9 @@ export default {
     home_162:"I understand",
     home_163:"In WhatsApp, create a group from the imported contacts, copy the group link and paste it here",
     home_164:"Click to submit the group link",
+    home_165:"Check the team size here. The more team members you have, the higher the profit.",
+    home_166:"Copy your invitation link and share it with your friends to get more benefits",
+    home_167:"Check the team size here. The more team members you have, the higher the profit.",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

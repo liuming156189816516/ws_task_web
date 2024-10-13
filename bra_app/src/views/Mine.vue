@@ -53,14 +53,14 @@
                         <span class="font_28">{{$t('mine_016')}}</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
-                    <div class="self_dold flex-item">{{ allIncome.today_bonus ||0 }}</div>
+                    <div class="self_dold flex-item font_48">{{ allIncome.today_bonus ||0 }}</div>
                 </div>
                 <div class="self_item w_f flex-item flex-dir-c" @click="showIncome(1)">
                     <div class="flex-item flex-align flex-between">
                         <span class="font_28">{{$t('mine_017')}}</span>
                         <img class="more_icon" src="@/assets/images/home/more_icon.png" alt="" srcset="">
                     </div>
-                    <div class="self_dold flex-item">{{ allIncome.yesterday_bonus ||0 }}</div>
+                    <div class="self_dold flex-item font_48">{{ allIncome.yesterday_bonus ||0 }}</div>
                 </div>
             </div>
         </div>

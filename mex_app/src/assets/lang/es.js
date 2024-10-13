@@ -151,6 +151,9 @@ export default {
     home_162:"Entiendo",
     home_163:"En WhatsApp, crea un grupo a partir de contactos importados, copia la conexión del grupo y pégala aquí",
     home_164:"Haga clic para enviar el enlace del grupo",
+    home_165:"Copia el enlace del grupo y pégalo aquí.",
+    home_166:"Copie el enlace de su invitación y compártalo con amigos para obtener más beneficios",
+    home_167:"Consulta el tamaño del equipo aquí. Cuanto más grande sea el equipo, mayores serán los beneficios.",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

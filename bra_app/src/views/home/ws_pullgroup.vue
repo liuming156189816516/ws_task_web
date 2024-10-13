@@ -81,8 +81,8 @@
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>
-                        <div class="group_link w_f flex-item flex-between flex-align font_24" id="step_02">
-                            <input type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
+                        <div class="group_link w_f flex-item flex-between flex-align font_24">
+                            <input id="step_02" type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
                             <van-button id="step_03" :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
                         </div>
                     </div>
@@ -269,12 +269,9 @@ export default {
                 this.showStep=true;
             }
         })
-        this.$store.dispatch('User/actionReport',8) 
     },
 	methods: {
-         done(){
-            // let scrollTop = this.$refs.warpBox;
-            // scrollTop.scrollTo({top: 0,behavior:"smooth"});
+        done(){
             localStorage.setItem('step_01',true);
             this.showStep = false;
         },

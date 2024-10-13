@@ -2,19 +2,8 @@
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
             <page-header :title="$t('home_044')" :show-icon="true" :bgcolor="false" />
-            <!-- <div class="share_bonus w_f flex-item flex-dir-c">
-                <p class="Win_l font_72 flex-item">{{$t('home_104')}}</p>
-                <p class="Win_r font_72 flex-item">{{$t('home_105')}}</p>
-                <div class="share_rule flex-item flex-center" @click="showRule">
-                    <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                    <span class="flex-item font_26">{{$t('spre_003')}}</span>
-                </div>
-            </div> -->
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
                 <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/2.mp4" />
-                <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
-                    <img src="@/assets/images/serveic/play_icon.png" alt="">
-                </div> -->
             </div>
             <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">
@@ -42,15 +31,11 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">Complete task to win bonus</div> -->
         </div>
         <div class="task_box_main">
             <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
                     <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <!-- <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num1_icon.png">
-                        </div> -->
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_037')}}</div>
                         </div>
@@ -59,25 +44,7 @@
                             <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                     </div>
-
-                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num2_icon.png">
-                        </div>
-                        <div class="task_award w_f">
-                            <div class="task_book font_28">{{$t('home_121')}}</div>
-                            <div class="task_desc font_20">{{$t('home_122')}}</div>
-                        </div>
-                        <div class="w_f flex-item flex-between flex-align font_24">
-                            <span class="show_account"></span>
-                            <van-button type="primary" @click="openWhatsapp">{{$t('home_123')}}</van-button>
-                        </div>
-                    </div> -->
-
                     <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <!-- <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num2_icon.png">
-                        </div> -->
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>

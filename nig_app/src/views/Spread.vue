@@ -2,19 +2,8 @@
     <div class="spread_warp" ref="warpBox" @scroll="handleScrolStop">
         <page-header :title="$t('home_045')" :noBg="false" :bgColor="false" :showBack="false" />
         <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-            <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:140px;" src="https://rw-bx.s3.sa-east-1.amazonaws.com/6.mp4" />
-            <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
-                <img src="@/assets/images/serveic/play_icon.png" alt="">
-            </div> -->
+            <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:140px;" src="https://rw-nrly.s3.af-south-1.amazonaws.com/3.mp4" />
         </div>
-        <!-- <div class="share_main w_f">
-            <div class="cover_img flex-item">
-                <img class="mask_img" src="@/assets/images/mill/bg_02.png" alt="" srcset="">
-                <div class="spred_mess w_f">
-                    <div class="top_title w_f font_32 flex-item flex-align flex-center">{{$t('spre_004')}}</div>
-                </div>
-            </div>
-        </div> -->
         <div class="spred_m w_f">
             <div class="spred_l">
                 <p class="top_title flex-item flex-align flex-center font_36">{{$t('spre_004')}}</p>
@@ -66,53 +55,12 @@
             </div>
         </div>
         <div class="share_continer w_f flex-item flex-dir-c">
-            <!-- <div class="earn_warp flex-item flex-dir-c">
-                <p class="font_32">{{$t('spre_008')}}</p>
-                <div class="w_f step_warp flex-item">
-                    <div class="step_item w_f flex-item flex-align flex-dir-c" v-for="(item,idx) in stepOptopn" :key="idx">
-                        <div class="w_f flex-item flex-center">
-                            <img class="step_number" :src="require(`@/assets/images/mill/${item.img}.png`)" alt="">
-                            <span class="w_f step_text flex-item font_26">{{item.text}}</span>
-                        </div>
-                        <div class="step_img w_f flex-item flex-center">
-                            <img :src="require(`@/assets/images/mill/${item.icon}.png`)" alt="">
-                        </div>
-                        <div class="line_model w_f"></div>
-                        <img :class="['line_triang',`triang_${idx}`]" src="@/assets/images/mill/dire_row.png" alt="" v-if="idx!=0">
-                    </div>
-                </div>
-            </div> -->
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div>
-            <!-- <div class="record_list w_f flex-item flex-dir-c">
-                <div class="title_top task_title_head top_title_1 w_f flex-item flex-align flex-between font_28">
-                    <span>{{$t('tail_003')}}</span>
-                    <span>{{$t('spre_012')}}</span>
-                </div>
-                <template v-if="millionList&&millionList.length>0">
-                    <div class="record_scroll w_f flex-item flex-dir-c">
-                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                            <div class="title_top record_item w_f flex-item flex-align flex-between font_26" v-for="(item,idx) in millionList" :key="idx">
-                                <span>{{ formatTime(item.itime) }}</span>
-                                <span class="record_cash">{{ item.amount }}</span>
-                            </div>
-                        </van-list>
-                    </div>
-                </template>
-                <template v-else>
-                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
-                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                        <p class="font_28">{{$t('spre_013')}}</p>
-                    </div>
-                </template>
-                <div class="title_top footer_tips w_f flex-item font_24">
-                    {{$t('spre_014')}}
-                </div>
-            </div> -->
         </div>
-         <vue-intro-step v-model="showStep" :config="config" ref="myIntroStep">
+        <vue-intro-step v-model="showStep" :config="config" ref="myIntroStep">
             <template #prev="{tipItem, index}">
                 <button @click="prev(tipItem, index)" class="step_prev">{{$t('home_160')}}</button>
             </template>

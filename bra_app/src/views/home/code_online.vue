@@ -335,12 +335,12 @@ export default {
         this.getIncomeList();
     },
     mounted(){
-        setTimeout(()=>{
+        this.$nextTick(()=>{
             let list = this.$refs.tips_scroll;
             if (list) {
                 list.addEventListener("touchmove",e => e.stopPropagation(),false)
             }
-        },1000)
+        })
     },
 	methods: {
         done(){

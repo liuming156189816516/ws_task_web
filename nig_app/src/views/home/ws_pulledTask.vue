@@ -2,38 +2,9 @@
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f">
             <page-header :title="$t('home_134')" :show-icon="true" :bgcolor="false" />
-            <!-- <div class="share_bonus w_f flex-item flex-dir-c">
-                <p class="Win_l font_72 flex-item">{{$t('home_104')}}</p>
-                <p class="Win_r font_72 flex-item">{{$t('home_105')}}</p>
-                <div class="share_rule flex-item flex-center" @click="showRule">
-                    <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                    <span class="flex-item font_26">{{$t('spre_003')}}</span>
-                </div>
-            </div> -->
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
                 <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/1.mp4" />
-                <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
-                    <img src="@/assets/images/serveic/play_icon.png" alt="">
-                </div> -->
             </div>
-            <!-- <div class="task_box w_f flex-item">
-                <div class="task_Progress w_f flex-item flex-dir-c">
-                    <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
-                    <div class="w_f flex-item flex-between">
-                        <div class="task_item">
-                            <p class="task_text font_24">{{$t('home_107')}}</p>
-                            <p class="task_num font_28">{{ teamStemp.ser_no }}</p>
-                        </div>
-                        <div class="task_sure_time">
-                            <p class="task_text font_24">{{$t('home_108')}}</p>
-                            <p class="task_num flex-item font_28">
-                                {{taskOption[teamStemp.status]}}
-                                <van-count-down :time="taskTime" />
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
         <div class="task_box_main">
             <div class="task_warp w_f flex-item">

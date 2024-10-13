@@ -334,25 +334,12 @@ export default {
         this.getIncomeList();
     },
     mounted(){
-        setTimeout(()=>{
+        this.$nextTick(()=>{
             let list = this.$refs.tips_scroll;
             if (list) {
                 list.addEventListener("touchmove",e => e.stopPropagation(),false)
             }
-        },1000)
-        // this.$nextTick(()=>{
-        //     let list = this.$refs.tips_scroll;
-        //     const isTips = JSON.parse(localStorage.getItem('step_02'));
-        //     console.log(this.ws_account);
-        //     if(!isTips&&!this.ws_account){
-        //         let scrollTop = this.$refs.warpBox;
-        //         scrollTop.scrollTo({top: 120,behavior:"instant"});
-        //         this.showStep=true;
-        //     }
-        //     if (list) {
-        //         list.addEventListener("touchmove",e => e.stopPropagation(),false)
-        //     }
-        // },1000)
+        })
     },
 	methods: {
         done(){

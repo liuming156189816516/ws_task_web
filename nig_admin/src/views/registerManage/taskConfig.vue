@@ -5,24 +5,26 @@
         </el-tabs>
         <div class="view_continer">
             <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="营销分组：" prop="market_group">
-                            <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
-                                <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="数据包：" prop="data_pack_id">
-                            <el-select v-model="taskForm.data_pack_id" :placeholder="$t('sys_c052')">
-                                <el-option clearable v-for="item in datapackList" :key="item.id" :label="item.name+'(入库数量：'+item.into_num+'，剩余数量：'+item.residue_num+')'"  :value="item.id" />
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
+                <template v-if="activeIdx==0">
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            <el-form-item label="营销分组：" prop="market_group">
+                                <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
+                                    <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            <el-form-item label="数据包：" prop="data_pack_id">
+                                <el-select v-model="taskForm.data_pack_id" :placeholder="$t('sys_c052')">
+                                    <el-option clearable v-for="item in datapackList" :key="item.id" :label="item.name+'(入库数量：'+item.into_num+'，剩余数量：'+item.residue_num+')'"  :value="item.id" />
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </template>
                 <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item :label="$t('sys_q131')+'：'" prop="materialData" class="custom_say">
@@ -300,6 +302,8 @@
                         data_pack_id:this.taskForm.data_pack_id,
                         material_list:materialItem
                     }
+                    this.activeIdx==1?delete params.data_pack_id:"";
+                    this.activeIdx==1?delete params.market_group_id:"";
                     this.isLoading=true;
                     dotaskconfiginfo(params).then(res => {
                         this.isLoading=false;

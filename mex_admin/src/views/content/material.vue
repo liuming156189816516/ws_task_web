@@ -19,7 +19,7 @@
           <input type="file" ref='uploadclear' :accept="fileAccept[cardAcyive]" @change="uploadBtn" id="uploadFile" title=" ">
         </el-button>
       </el-form-item>
-      <el-form-item class="el-item-right" v-if="cardAcyive == 1||cardAcyive==7">
+      <el-form-item class="el-item-right" v-if="cardAcyive == 1||cardAcyive==7&&msg_show != 1">
         <el-button size="small" type="success" plain @click="addContent(0, 1)">{{$t('sys_mat004')}}</el-button>
       </el-form-item>
     </el-form>
@@ -51,8 +51,7 @@
               <i class="el-icon-setting" />
             </div>
           </div>
-          <el-button v-if="loadingGroup" class="loading_icon" style="margin-top: 10px;" type="primary"
-            :loading="true"></el-button>
+          <el-button v-if="loadingGroup" class="loading_icon" style="margin-top: 10px;" type="primary" :loading="true" />
           <template v-else>
             <div class="group_warp">
               <template v-if="groupList.length>0">
@@ -341,9 +340,6 @@ export default {
   },
   methods: {
     submitSource() {
-      // console.log(this.msg_show);
-      // console.log(this.check_text);
-      // console.log(this.cardAcyive);
       let source_type = typeof this.cardAcyive==="string"?Number(this.cardAcyive):this.cardAcyive;
       if (this.msg_show==1&&!this.msg_check) {
         let item = this.contentList.filter(item=>{return item.id == this.radio_text})[0];

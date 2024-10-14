@@ -1,5 +1,5 @@
 <template>
-    <div class="view_warp" ref="heightEle">
+  <div class="view_warp" ref="heightEle">
       <el-button size="small" @click="$router.go(-1)">
         <i class="el-icon-back"></i>
         <span>{{$t('sys_q006')}}</span>
@@ -178,7 +178,9 @@
                                     </el-table-column>
                                     <el-table-column prop="content" :label="$t('sys_mat019')" minWidth="100">
                                         <template slot-scope="scope">
-                                            <span class="content_01" v-if="scope.row.type==1||scope.row.type==5||scope.row.type==6||scope.row.type==7">{{ scope.row.content }}</span>
+                                            <template v-if="scope.row.type==1||scope.row.type==5||scope.row.type==6">
+                                                <span class="content_01">{{ scope.row.content }}</span>
+                                            </template>
                                             <img class="content_02" v-if="scope.row.type==2" :src="scope.row.content" alt="" srcset="">
                                             <audio v-if="scope.row.type==3" controls class="audio_src">
                                                 <source :src="scope.row.content" type="audio/mpeg">
@@ -186,6 +188,10 @@
                                             <video v-if="scope.row.type==4" width="60" height="35" controls>
                                                 <source :src="scope.row.content" type="video/mp4">
                                             </video>
+                                            <div v-if="scope.row.type==7" style="display: flex;align-items: center;flex-direction:column;">
+                                                <img class="content_02" :src="scope.row.content.img">
+                                                <div style="font-size:12px;">{{$t('sys_l080')}}：{{scope.row.content.url}}</div>
+                                            </div>
                                         </template>
                                     </el-table-column>
                                     <el-table-column prop="address" :label="$t('sys_c010')" width="120">
@@ -254,10 +260,10 @@
             </el-form>
         </el-dialog>
     </div>
-  </template>
-  
-  <script>
-  import { successTips } from '@/utils/index'
+</template>
+
+<script>
+import { successTips } from '@/utils/index'
   import material from '../content/material.vue';
   import { getdatapacklist } from '@/api/datamanage'
   import { getsendmsggroup,addsendmsgtask } from '@/api/task'
@@ -351,7 +357,7 @@
             return ["",this.$t('sys_mat093'),"",this.$t('sys_mat095'),this.$t('sys_mat092')]
         },
         sourceOption() {
-            return ["",this.$t('sys_mat008'),this.$t('sys_mat009'),this.$t('sys_mat010'),this.$t('sys_mat011'),this.$t('sys_mat091'),this.$t('sys_mat092')]
+            return ["",this.$t('sys_mat008'),this.$t('sys_mat009'),this.$t('sys_mat010'),this.$t('sys_mat011'),this.$t('sys_mat091'),this.$t('sys_mat092'),this.$t('sys_mat113')]
         }
     },
     created(){
@@ -367,7 +373,13 @@
             this.taskForm.send_num = taskConfig.group1_num;
             this.taskForm.min_time = taskConfig.sleep1_num;
             this.taskForm.max_time = taskConfig.sleep2_num;
-            this.taskForm.materialData = taskConfig.material_list;
+            let materialItem = taskConfig.material_list.map(item => {
+                if (item.type === 7) {
+                    return {...item,content:JSON.parse(item.content)};
+                }
+                return item;
+            });
+            this.taskForm.materialData = materialItem;
         }
         this.getGroupList();
         this.getDatalist();
@@ -418,6 +430,12 @@
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
+                    let materialItem = this.taskForm.materialData.map(item => {
+                        if (item.type === 7) {
+                            return {...item,content:JSON.stringify(item.content)};
+                        }
+                        return item;
+                    });
                     let params = {
                         config_str:JSON.stringify({
                             data_type:this.taskForm.ws_data,
@@ -442,7 +460,7 @@
                         min_time:this.taskForm.sleep1_num,
                         max_time:this.taskForm.sleep2_num,
                         speech_skill_type:this.taskForm.group_say,
-                        material_list:this.taskForm.materialData,
+                        material_list:materialItem,
                         replenish:this.taskForm.set_add
                     }
                     this.isLoading=true;
@@ -518,9 +536,10 @@
         }
     }
   }
-  </script>
-  <style scoped lang="scss">
-  .view_continer{
+</script>
+
+<style scoped lang="scss">
+.view_continer{
     width: 100%;
     // max-height: 760px;
     position: relative;
@@ -604,4 +623,4 @@
         }
     }
   }
-  </style>
+</style>

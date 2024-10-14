@@ -1,5 +1,5 @@
 <template>
-    <div class="view_warp" ref="heightEle">
+  <div class="view_warp" ref="heightEle">
       <el-button size="small" @click="$router.go(-1)">
         <i class="el-icon-back"></i>
         <span>{{$t('sys_q006')}}</span>
@@ -260,10 +260,10 @@
             </el-form>
         </el-dialog>
     </div>
-  </template>
-  
-  <script>
-  import { successTips } from '@/utils/index'
+</template>
+
+<script>
+import { successTips } from '@/utils/index'
   import material from '../content/material.vue';
   import { getdatapacklist } from '@/api/datamanage'
   import { getsendmsggroup,addsendmsgtask } from '@/api/task'
@@ -379,7 +379,7 @@
                 }
                 return item;
             });
-             this.taskForm.materialData = materialItem;
+            this.taskForm.materialData = materialItem;
         }
         this.getGroupList();
         this.getDatalist();
@@ -536,9 +536,10 @@
         }
     }
   }
-  </script>
-  <style scoped lang="scss">
-  .view_continer{
+</script>
+
+<style scoped lang="scss">
+.view_continer{
     width: 100%;
     // max-height: 760px;
     position: relative;
@@ -622,4 +623,4 @@
         }
     }
   }
-  </style>
+</style>

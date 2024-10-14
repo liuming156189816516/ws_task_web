@@ -41,6 +41,9 @@
 					<van-button type="primary" :loading="isLoading" @click="handleLogin" :loading-text="$t('login_005')">{{$t('login_004')}}</van-button>
 					<!-- <van-button plain type="primary" @click="goRegister" >{{ $t('login_006') }}</van-button> -->
 				</div>
+				<div class="system_serve w_f flex-item" @click="contactService(1)">
+					<img src="@/assets/images/serveic/telege_icon.png" alt="">
+				</div>
 			</div>
 			<div class="register_text w_f flex-item flex-center font_32" :class="{'is_bottom':isBottom}" @click="goRegister">{{$t('login_028')}}<span class="reg_text"> {{$t('login_029')}}</span></div>
 		</div>
@@ -175,6 +178,13 @@ export default {
 		onChangeType(row){
 			this.langIdx=row.lang;
 			this.$Helper.initLanguage(row.lang);
+		},
+		contactService(){
+			if(this.$Helper.checkBrowser()){
+				window.open(process.env.VUE_APP_SERVICE,"_blank");
+			}else{
+				uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
+			}
 		}
 	}
 };
@@ -276,6 +286,14 @@ export default {
 			// 	color: #323aa2;
 			// 	background: #e9edfe;
 			// }
+		}
+		.system_serve{
+			padding: 0 48px;
+			box-sizing: border-box;
+			img{
+				width: 66px;
+				height: 66px;
+			}
 		}
 		.register_text, .is_bottom{
 			margin-top: 45%;

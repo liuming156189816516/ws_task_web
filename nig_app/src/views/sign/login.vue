@@ -181,9 +181,9 @@ export default {
 		},
 		contactService(){
 			if(this.$Helper.checkBrowser()){
-				window.open(process.env.VUE_APP_SERVICE,"_blank");
+				window.open(process.env.VUE_APP_TELEGRAM,"_blank");
 			}else{
-				uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
+				uniFun.postMessage({data:process.env.VUE_APP_TELEGRAM});
 			}
 		}
 	}

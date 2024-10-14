@@ -53,7 +53,9 @@ export default {
         // background: $color-headbg;
         // background: rgba($color: $home-eart-long, $alpha: .5);
         .le_logn{
+            width: 60px;
             height: 60px;
+            border-radius: 6px;
         }
         .login_area, .user_info{
             color: $font-color-white;

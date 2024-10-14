@@ -207,7 +207,11 @@ export function formatTime(date,type) {
 	if(type == 1){
 		return Year + '/' + Month + '/' + Dates + ' ' + Hour + ':' + Minute + ':' + Seconds;
 	}else if(type == 2){
-		return [Month,Dates];
+		if(Cookies.get("language")=="en"){
+			return [enMonth[Month],Dates];
+		}else{
+			return [Month,Dates];
+		}
 	}else{
 		return Year + '-' + Month + '-' + Dates + ' ' + Hour + ':' + Minute + ':' + Seconds;
 	}

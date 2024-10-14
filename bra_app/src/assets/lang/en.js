@@ -115,7 +115,7 @@ export default {
     home_127:"Please enter the group link",
     home_128:"Daily sign in",
     home_129:"Day {value}",
-    home_130:"{month} moon {number} Number {week}",
+    home_130:"{month} {number}, {week}",
     home_131:"Sign in now",
     home_132:"Sign in completed",
     home_133:"Sign in...",

@@ -188,6 +188,7 @@ export function formatTime(date,type) {
 	var Hour = myDate.getHours(); //获取小时
 	var Minute = myDate.getMinutes(); //获取分
 	var Seconds = myDate.getSeconds(); //获取秒
+	var enMonth = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
 	//当数值为个数时，在前面加0
 	if (Month < 10) {
 		Month = '0' + Month;

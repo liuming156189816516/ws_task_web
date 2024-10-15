@@ -23,7 +23,7 @@ import "./assets/styles/common.css";
 import "./assets/styles/icon.css";
 import 'amfe-flexible/index.js';
 import "./utils/pcRem"
-import "./utils/setInterval"
+// import "./utils/setInterval"
 
 import VueIntroStep from 'vue-intro-step'
 Vue.component('vue-intro-step', VueIntroStep);

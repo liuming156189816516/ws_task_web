@@ -2,7 +2,6 @@
   "name": "wk",
   "version": "0.1.0",
   "private": true,
-  
   "scripts": {
     "serve": "vue-cli-service serve --mode local",
     "serve:test": "vue-cli-service serve --mode test",

@@ -12,7 +12,8 @@
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_g144')})" v-model="user_ip" />
             </el-form-item>
             <el-form-item>
-                <el-button type="warning" :disabled="checkIdArry.length==0" icon="el-icon-user" @click="pullBlackBtn">{{ $t('sys_rai076',{value:$t('sys_m107')}) }}</el-button>
+                <el-button type="warning" :disabled="checkIdArry.length==0" icon="el-icon-user" @click="pullBlackBtn(2)">{{ $t('sys_rai076',{value:$t('sys_m107')}) }}</el-button>
+                <el-button type="success" :disabled="checkIdArry.length==0" icon="el-icon-user" @click="pullBlackBtn(1)">{{ $t('sys_rai076',{value:$t('sys_c025')}) }}</el-button>
                 <el-button type="primary" icon="el-icon-search" @click="initNumberList(1)">{{ $t('sys_c002') }}</el-button>
                 <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
             </el-form-item>
@@ -163,16 +164,18 @@ export default {
             this.limit = size;
             this.initNumberList();
         },
-        pullBlackBtn(){
+        pullBlackBtn(val){
+            console.log(val);
             let that = this;
-            that.$confirm(that.$t('sys_c046',{value:that.$t('sys_m107')}),that.$t('sys_l013'), {
+            let tips = that.$t('sys_c046',{value:val==2?that.$t('sys_m107'):that.$t('sys_c025')})
+            that.$confirm(tips,that.$t('sys_l013'), {
                 type: 'warning',
                 confirmButtonText: that.$t('sys_c024'),
                 cancelButtonText: that.$t('sys_c023'),
                 beforeClose: function (action, instance, done) {
                     if (action === 'confirm') {
                     instance.confirmButtonLoading = true;
-                        blacklist({ids:that.checkIdArry}).then(res=>{
+                        blacklist({ptype:val,ids:that.checkIdArry}).then(res=>{
                             instance.confirmButtonLoading = false;
                             if (res.code != 0) return;
                             that.initNumberList();

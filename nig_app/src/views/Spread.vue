@@ -79,7 +79,6 @@
 <script>
 import { mapState } from "vuex";
 import { formatTime } from "@/utils/tool";
-import { getinvitelink} from '@/api/bill';
 import PageHeader from "@/components/Header";
 import { getteammatesinfo } from '@/api/home';
 export default {

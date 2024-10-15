@@ -165,7 +165,6 @@ export default {
             this.initNumberList();
         },
         pullBlackBtn(val){
-            console.log(val);
             let that = this;
             let tips = that.$t('sys_c046',{value:val==2?that.$t('sys_m107'):that.$t('sys_c025')})
             that.$confirm(tips,that.$t('sys_l013'), {

@@ -137,7 +137,7 @@ export default {
                     },
                     {
                         el: '#step_02',
-                        tipPosition: 'bottom',
+                        tipPosition: 'top',
                         title: this.$t('home_151'),
                         content: this.$t('home_167'),
                         onNext: () => {

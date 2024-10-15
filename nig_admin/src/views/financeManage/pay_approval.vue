@@ -31,6 +31,7 @@
                     </el-table-column> -->
                     <el-table-column prop="account" :label="$t('sys_c009')" minWidth="120" align="center" />
                     <el-table-column prop="card_no" :label="$t('sys_p004')" minWidth="100" align="center" />
+                    <el-table-column prop="bank_name" :label="$t('sys_l111')" minWidth="120" align="center" />
                     <!-- <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center" /> -->
                         <!-- <template slot-scope="scope">
                             {{ drawOption[scope.row.type]}}

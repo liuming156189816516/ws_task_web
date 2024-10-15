@@ -5,7 +5,7 @@
             <template v-if="curIndex==1">
                 <div class="user_info">
                     <span class="lable_text">{{ $t('pay_006') }}</span>
-                    <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_006')})" oninput="value=value.replace(/[^\d]/g,'')" :border="false" />
+                    <van-field v-model="collectCard" :maxlength="10" :placeholder="$t('other_001',{value:$t('pay_006')})" oninput="value=value.replace(/[^\d]/g,'')" :border="false" />
                 </div>
                 <div class="user_info bank_account" @click="showBank(0)">
                     <span class="lable_text">{{ $t('pay_021') }}</span>

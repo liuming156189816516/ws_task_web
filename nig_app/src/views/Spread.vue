@@ -8,7 +8,7 @@
             <div class="spred_l">
                 <p class="top_title flex-item flex-align flex-center font_36">{{$t('spre_004')}}</p>
                 <div class="w_f flex-item flex-dir-c">
-                    <div class="copay_desc flex-item flex-align flex-between">
+                    <div class="copay_desc flex-item flex-align flex-between ">
                         <span class="left_desc flex-item font_28">{{$t('spre_006')}}</span>
                         <van-button id="step_01" class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/home'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                     </div>
@@ -174,7 +174,6 @@ export default {
     },
     created() {
         this.isScroll = false;
-        // this.syncInitApi();
         this.getIncomeList();
     },
     mounted(){
@@ -214,27 +213,11 @@ export default {
                 this.getIncomeList()
             }
         },
-        syncInitApi(){
-            let fun1 = new Promise((resolve,reject)=>{
-                getinvitelink().then(res =>{
-                    resolve(res)
-                })
-            });
-            Promise.all([fun1]).then( res => {
-                const [{invite_link}] = res;
-                // this.allIncome = income;
-                this.invit_link = invite_link;
-                // this.$refs.qrcodeImg.textContent="";
-                // this.createQrcode(this.invit_link);
-            })
-        },
         copySuccess(){
             this.$toast(`${this.$t("other_044")}`);
-            // this.$store.dispatch('User/actionReport',14);
         },
         copCodeSuccess(){
             this.$toast(`${this.$t("other_044")}`);
-            // this.$store.dispatch('User/actionReport',15);
         },
         formatTime(time) {
             return formatTime(time);

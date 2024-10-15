@@ -22,7 +22,6 @@ Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
 import "./assets/styles/common.css";
 import "./assets/styles/icon.css";
 import 'amfe-flexible/index.js';
-// import "swiper/css/swiper.min.css";
 import "./utils/pcRem"
 import "./utils/setInterval"
 

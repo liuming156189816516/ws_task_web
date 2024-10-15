@@ -18,19 +18,12 @@
 				</div>
 			</div>
         </van-overlay>
-		<!-- <drag-icon ref="dragIconCom" :gapWidthPx="20" :coefficientHeight="0.78">
-            <div class="serve_icon" slot="icon" @click="$Helper.globalSupport()">
-                <img src="./assets/images/ms_serve.png" alt="" />
-            </div>
-        </drag-icon> -->
 	</div>
 </template>
 <script>
 import { mapState } from 'vuex';
 import { logout } from '@/api/login';
-import dragIcon from "@/components/dragIcon"
 export default {
-	// components: { dragIcon },
 	data() {
 		return {
 			title:"",
@@ -65,7 +58,7 @@ export default {
 		// console.log(VERSION_TIME);
 	},
 	mounted(){
-		this.customHeader("#0a0f2d");
+		this.customHeader("#31acf2");
 		this.handleVersion().then(res=>{
 			this.currentTIme = res||"";
 		})
@@ -101,7 +94,7 @@ export default {
 				metaThemeColor.name = 'theme-color';
 				document.head.appendChild(metaThemeColor);
 			}
-			metaThemeColor.content = color||'#0a0f2d'; // 设定颜色
+			metaThemeColor.content = color||'#31acf2'; // 设定颜色
 			// }	
 		},
 		handle_close(){
@@ -132,7 +125,7 @@ export default {
 	watch: {
 		'$route'(to, from) {
 			if(to.path == "/home"||to.path == "/spread"){
-				this.customHeader("#0a0f2d");	
+				this.customHeader("#31acf2");	
 			}else{
 				this.customHeader();	
 			}

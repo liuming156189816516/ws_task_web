@@ -2,12 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  /* -webkit-overflow-scrolling: touch; */
 }
 .w_f{
   width: 100%;
@@ -172,12 +166,8 @@
   height: 100%;
   border-top-left-radius: 20px !important;
   border-bottom-left-radius: 20px !important;
-  /* border-radius: 10px !important; */
   background-color: #f2f2f2;
 }
-/* .van-popup--right.van-popup--round{
-  border-radius: 10px;
-} */
 .task_head{
   width: 100%;
   height: 77px;
@@ -484,18 +474,9 @@
   width: 100px !important;
   background-color: #f2f2f2;
 }
-.cuesome_lable .van-field__body{
-}
 .cuesome_lable .van-field__control{
   padding-left: 10px;
 }
-.cuesome_lable .van-field__button{
-  /* margin-right: -30px; */
-}
-/* 加粉任务 */
-/* .group_head .van-radio-group{
-  margin-left: 25px;
-} */
 .group_head .van-radio__icon .van-icon{
   width: 16px;
   height: 16px;
@@ -637,7 +618,6 @@
   max-width: initial !important;
   padding: 0 30px;
   box-sizing: border-box;
-  /* background: darkcyan; */
   left: 0 !important;
 }
 .skip_step{

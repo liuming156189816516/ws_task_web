@@ -16,14 +16,14 @@
                 <el-form-item>
 					<el-button size="small" icon="el-icon-search" type="primary" @click="getPayOrderList(1)">{{ $t('sys_c002') }}</el-button>
                     <el-button size="small" icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
-                    <!-- <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="regectBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_rai124')}) }}</el-button> -->
+                    <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="regectBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_rai124')}) }}</el-button>
                 </el-form-item>
 			</el-form>
 		</div>
 		<div class="switch_bar">
 			<div class="consun_list handel_area">
 				<el-table :data="bannerList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading" element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }" @selection-change="selectAllChange" @row-click="rowSelectChange">
-					<!-- <el-table-column type="selection" width="55" :selectable="checkSelectable"> </el-table-column> -->
+					<el-table-column type="selection" width="55" :selectable="checkSelectable"> </el-table-column>
 					<!-- <el-table-column prop="wx_id" label="序号" width="60" align="center">
                         <template slot-scope="scope">
 							<span>{{(factorModel.offset-1)*factorModel.limit+scope.$index+1}}</span>

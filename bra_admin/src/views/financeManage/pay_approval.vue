@@ -233,7 +233,7 @@ export default {
                 refsElTable.toggleRowSelection(row, false);
                 return;
             }
-            if (row.status === 1) {
+            if (row.approval_status === 1) {
                refsElTable.toggleRowSelection(row,true);
             }
         },

@@ -59,7 +59,7 @@ export default {
 			state.appList = value;
 		},
 		store_info: (state, data) => {
-			const {token,user_info:{uid,account,invite_code}} = data;
+			const {token,user_info:{uid,account,invite_code,tutorial_list}} = data;
 			state.uid = uid;
 			state.token = token;
 			state.account = account;
@@ -68,6 +68,21 @@ export default {
 			window.localStorage.setItem('token',token);
 			window.localStorage.setItem('account',account);
 			window.localStorage.setItem('inviteCode',invite_code);
+			if(tutorial_list&&tutorial_list.length>0){
+				for (let k = 0; k < tutorial_list.length; k++) {
+					// console.log(tutorial_list[k]);
+					if(tutorial_list[k] === 1){
+						localStorage.setItem('step_01',true);
+					}
+					if(tutorial_list[k] === 2){
+						localStorage.setItem('step_02',true);
+					}
+					if(tutorial_list[k] === 3){
+						localStorage.setItem('step_03',true);
+					}
+				}
+				
+			}
 			// this.dispatch('User/plantCarousel');
 		},
 		clearUserInfo: (state, data) => {

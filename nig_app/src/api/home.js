@@ -89,6 +89,10 @@ export const submitautogrouptask = (params)=> {
 export const getautogroupaccountstatus = (params)=> {
     return request({url:'/account/getautogroupaccountstatus',method:'post',data:params})
 }
+export const dotutorialstatus = (params)=> {
+    return request({url:'/account/dotutorialstatus',method:'post',data:params})
+}
+
 
 
 

@@ -114,7 +114,7 @@ import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
 import { getinvitefriendtasklist } from '@/api/task';
-import { getcreatetaskinfo,submitcreatetask } from '@/api/home'
+import { getcreatetaskinfo,submitcreatetask,dotutorialstatus } from '@/api/home'
 import uniFun from "@/utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
@@ -239,11 +239,10 @@ export default {
         this.$store.dispatch('User/actionReport',8) 
     },
 	methods: {
-         done(){
-            // let scrollTop = this.$refs.warpBox;
-            // scrollTop.scrollTo({top: 0,behavior:"smooth"});
+        async done(){
             localStorage.setItem('step_01',true);
             this.showStep = false;
+            await dotutorialstatus({ptype:1});
         },
         skip(){
             this.$refs.myIntroStep.next()

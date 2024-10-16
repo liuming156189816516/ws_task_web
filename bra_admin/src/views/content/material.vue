@@ -14,13 +14,12 @@
         <el-button size="small" type="warning" :disabled="check_text.length == 0 && groupIdx === 0" @click="batchHandle(1)">{{$t('sys_mat006')}}</el-button>
         <el-button size="small" type="danger" :disabled="check_text.length == 0" plain @click="batchHandle(2)">{{$t('sys_l048')}}</el-button>
       </el-form-item>
-      <el-form-item class="el-item-right" v-if="cardAcyive != 1 && msg_show != 1">
+      <el-form-item class="el-item-right" v-if="cardAcyive != 1 && cardAcyive != 7 && msg_show != 1">
         <el-button class="custom_file1">{{$t('sys_c059')}}
-          <input type="file" ref='uploadclear' :accept="fileAccept[cardAcyive]" @change="uploadBtn" id="uploadFile"
-            title=" ">
+          <input type="file" ref='uploadclear' :accept="fileAccept[cardAcyive]" @change="uploadBtn" id="uploadFile" title=" ">
         </el-button>
       </el-form-item>
-      <el-form-item class="el-item-right" v-if="cardAcyive == 1">
+      <el-form-item class="el-item-right" v-if="cardAcyive == 1&&msg_show != 1||cardAcyive==7&&msg_show != 1">
         <el-button size="small" type="success" plain @click="addContent(0, 1)">{{$t('sys_mat004')}}</el-button>
       </el-form-item>
     </el-form>
@@ -30,7 +29,7 @@
         <div v-html="$t('sys_mat007',{value:check_text.length})"></div>
       </div>
       <el-tabs v-model="cardAcyive" type="card" @tab-click="handleCard">
-        <el-tab-pane v-for="(item, idx) in cardOption" :key="idx" v-if="item != ''" :label="item" :name="idx.toString()" />
+        <el-tab-pane v-for="(item, idx) in cardOption" :key="idx" v-if="item!=''"  :label="item" :name="idx.toString()" />
       </el-tabs>
       <div class="card_tips" v-text="tipsOption[cardAcyive]" />
       <div class="group_main">
@@ -126,6 +125,28 @@
                           data-clipboard-action="copy" @click.stop="copayUrl(item)"></i>
                       </div>
                     </div>
+                    <div class="hyper_link" v-if="cardAcyive==7">
+                      <div style="display:flex;align-items: center;">
+                        <span>图片：</span>
+                        <div class="link_img">
+                          <img :src="item.content.img" alt="">
+                          <div class="cover_mask">
+                            <i class="el-icon-view" @click.stop="showImg(item.content)"></i>
+                            <i class="el-icon-document-copy" id="imgUrl" :data-clipboard-text="item.content.img"
+                              data-clipboard-action="copy" @click.stop="copayUrl(item.content)"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <el-tooltip class="item" effect="dark" :content="item.content.url" placement="top">
+                        <p class="link_content"><span>链接：</span><span class="comtent_text">{{item.content.url}}</span></p>
+                      </el-tooltip>
+                      <el-tooltip class="item" effect="dark" :content="item.content.remark" placement="top">
+                        <p class="link_content"><span>描述：</span><span class="comtent_text">{{item.content.remark}}</span></p>
+                      </el-tooltip>
+                      <el-tooltip class="item" effect="dark" :content="item.content.content" placement="top">
+                        <p class="link_content"><span>内容：</span><span class="comtent_text">{{item.content.content}}</span></p>
+                      </el-tooltip>
+                    </div>
                   </div>
                   <div class="desc_01">
                       <el-radio-group v-if="msg_show==1&&!msg_check" v-model="radio_text" @change="checkHandle(item)">
@@ -135,7 +156,7 @@
                         <el-checkbox :label="item.id">{{ item.name }}</el-checkbox>
                       </el-checkbox-group>
                     <div class="desc_r_01">
-                      <i v-if="cardAcyive==1" class="el-icon-edit" @click.stop="addContent(item, 2)" />
+                      <i v-if="cardAcyive==1||cardAcyive==7" class="el-icon-edit" @click.stop="addContent(item, 2)" />
                       <template v-else>
                         <el-popover :key="idx" v-model="item.visible" placement="top" width="230">
                           <p>
@@ -165,14 +186,37 @@
     </div>
 
     <!-- 新增-->
-    <el-dialog :title="materType == 1 ? $t('sys_mat015', { value: $t('sys_mat008') }) : $t('sys_mat016', { value: $t('sys_mat008') })"
-      append-to-body center :visible.sync="groupModel" :close-on-click-modal="false" width="450px">
-      <el-form ref="groupForm" size="small" :model="groupForm" label-width="60px" :rules="groupRules">
+    <el-dialog :title="materType == 1&&cardAcyive==1?$t('sys_mat015',{ value: $t('sys_mat008') }):materType==2&&cardAcyive==1?$t('sys_mat016', { value: $t('sys_mat008') }):materType==1&&cardAcyive==7?$t('sys_mat015', { value: $t('sys_mat113') }):$t('sys_c027', { value: $t('sys_mat113') })"
+      append-to-body center :visible.sync="groupModel" :close-on-click-modal="false" :width="cardAcyive==5?'600px':'450px'">
+      <el-form ref="groupForm" size="small" :model="groupForm" :label-width="cardAcyive==7?'90px':'60px'" :rules="groupRules">
         <el-form-item :label="$t('sys_mat017') + ':'" prop="title">
-          <el-input v-model="groupForm.title" clearable :placeholder="$t('sys_mat018')" />
+          <el-input v-model="groupForm.title" clearable :placeholder="$t('sys_mat061',{value:$t('sys_mat017')})" />
         </el-form-item>
+        <template v-if="cardAcyive==7">
+          <el-form-item :label="$t('sys_mat009') + ':'" prop="imgLink">
+            <div class="link_img" v-if="groupForm.imgLink">
+              <img :src="groupForm.imgLink" alt="" srcset="">
+              <i class="el-icon-delete" @click="groupForm.imgLink=''"></i>
+            </div>
+            <el-button class="custom_file1" v-else :loading="fLoading"> {{ fLoading?'loading...':$t('sys_c059')}}
+              <input type="file" ref='uploadclear' :accept="fileAccept[2]" @change="uploadImg" id="uploadFile" title=" ">
+            </el-button>
+          </el-form-item>
+          <el-form-item :label="$t('sys_l080') + ':'" prop="link">
+            <el-input v-model="groupForm.link" clearable :placeholder="$t('sys_mat061',{value:$t('sys_l080')})" />
+          </el-form-item>
+          <el-form-item :label="$t('sys_g003') + ':'" prop="remark">
+            <el-input v-model="groupForm.remark" clearable type="textarea" :rows="2" :placeholder="$t('sys_mat061',{value:$t('sys_g003')})" />
+          </el-form-item>
+          <el-form-item :label="$t('sys_l110') + ':'" prop="is_adv">
+            <el-radio-group v-model="groupForm.is_adv">
+              <el-radio :label="1">是</el-radio>
+              <el-radio :label="2">否</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </template>
         <el-form-item :label="$t('sys_mat019') + ':'" prop="content">
-          <el-input v-model="groupForm.content" clearable type="textarea" :rows="6":placeholder="$t('sys_mat020')" />
+          <el-input v-model="groupForm.content" clearable type="textarea" :rows="6" :placeholder="$t('sys_mat061',{value:$t('sys_mat019')})" />
         </el-form-item>
         <el-form-item label-width="0" style="text-align:center;" class="el-item-bottom">
           <el-button @click="groupModel = false">{{ $t('sys_c023') }}</el-button>
@@ -194,11 +238,10 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-    <el-image-viewer v-if="imgModel" style="z-index: 999999;" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="imgList" />
+    <el-image-viewer v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="imgList" />
   </div>
 </template>
 <script>
-import Clipboard from 'clipboard';
 import { successTips } from '@/utils/index'
 import { getmaterialgrouplist, domaterialgroup, getmateriallist, domaterial, materialFile, domovegroup, domoveoutgroup } from '@/api/article'
 export default {
@@ -217,6 +260,7 @@ export default {
       check_text: [],
       materType: '',
       checkedNum: 0,
+      fLoading: false,
       moveModel: false,
       isDelVisible: false,
       imgModel: false,
@@ -238,17 +282,21 @@ export default {
       contentList: [],
       batchArry: [],
       groupForm: {
-        id: "",
-        group_id: '',
-        title: '',
+        id:'',
+        group_id:'',
+        title:'',
         content: '',
+        link:'',
+        imgLink:'',
+        remark:'',
+        is_adv:1,
       },
       moveForm: {
         checked_group: ""
       },
       viewImg: "",
       imgList: [],
-      fileAccept: ["", "", ".png,.jpg,.jpeg", ".mp3", ".mp4"],
+      fileAccept: ["", "",".png,.jpg,.jpeg",".mp3",".mp4"],
       isPlay: false, //是否正在播放
       isauto: false, //是否自动播放
       audio: null,
@@ -257,7 +305,7 @@ export default {
   },
   computed: {
     cardOption() {
-      return ['',this.$t('sys_mat008'),this.$t('sys_mat009'),this.$t('sys_mat010'),this.$t('sys_mat011')]
+      return ['',this.$t('sys_mat008'),this.$t('sys_mat009'),this.$t('sys_mat010'),this.$t('sys_mat011'),'','',this.$t('sys_mat113')]
     },
     tipsOption() {
       return ['','',this.$t('sys_g136'),this.$t('sys_g138'),this.$t('sys_g139')]
@@ -271,6 +319,10 @@ export default {
       return {
         title: [{ required: true, message: this.$t('sys_mat018'), trigger: 'blur' }],
         content: [{ required: true, message: this.$t('sys_mat020'), trigger: 'blur' }],
+        imgLink: [{ required: true, message: this.$t('sys_c089',{value:this.$t('sys_mat009')}), trigger: 'change' }],
+        link: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_l080')}), trigger: 'blur' }],
+        remark: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_g003')}), trigger: 'blur' }],
+        is_adv: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
       }
     }
   },
@@ -350,6 +402,7 @@ export default {
       this.allChecked = false;
       this.groupForm.group_id = "";
       this.materialGroup(1);
+      // this.cardAcyive = String(tab.index);
     },
     changeGroup(row, idx) {
       this.check_text = [];
@@ -373,6 +426,7 @@ export default {
         this.contentList = res.data.list || [];
         for (let k = 0; k < this.contentList.length; k++) {
           let item = this.contentList[k];
+          item.content=this.cardAcyive==7?JSON.parse(item.content):item.content;
           item.isPlay = false;
           item.check = false;
           this.$set(this.contentList,k,item)
@@ -420,7 +474,6 @@ export default {
     //   }
     // },
     checkHandle(row) {
-      console.log(row);
       this.check_nums = 0;
       if (this.msg_show == 1 && !this.msg_check) {
         this.radio_text = row.id
@@ -526,19 +579,36 @@ export default {
       this.$nextTick(() => {
         this.$refs.groupForm.resetFields();
         if (idx == 1) return;
-        this.groupForm.title = row.name;
-        this.groupForm.content = row.content;
+        if(this.cardAcyive==7){
+          this.groupForm.title = row.content.title;
+          this.groupForm.imgLink = row.content.img;
+          this.groupForm.link = row.content.url;
+          this.groupForm.remark = row.content.remark;
+          this.groupForm.isShow = row.content.isShow?1:2;
+          this.groupForm.content = row.content.content;
+        }else{
+          this.groupForm.title = row.name;
+          this.groupForm.content = row.content;
+        }
       })
     },
     submitBtn(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const params = {
+          let content = JSON.stringify({
+            title: this.groupForm.title,
+            img:this.groupForm.imgLink,
+            url:this.groupForm.link,
+            remark:this.groupForm.remark,
+            isShow:this.groupForm.is_adv==1?true:false,
+            content: this.groupForm.content,
+          })
+          let params = {
             type: Number(this.cardAcyive),
             id: this.groupForm.id,
             ptype: this.materType,
             name: this.groupForm.title,
-            content: this.groupForm.content,
+            content:this.cardAcyive==7?content:this.groupForm.content,
             group_id: this.groupForm.group_id
           }
           this.materType == 1 ? delete params.id : '';
@@ -616,6 +686,23 @@ export default {
         successTips(this)
       })
     },
+    async uploadImg(e) {
+      let imgFormat = ["jpg", "jpeg", "png"];
+      let files = this.$refs.uploadclear.files[0];
+      let fileSize = files.size / 1024 / 1024;
+      let fileType = files.name.split(".").pop();
+      if (fileSize > 1 || imgFormat.indexOf(fileType) == -1) {
+        this.$refs.uploadclear.value = null;
+        return successTips(this, "error", this.tipsOption[this.cardAcyive]);
+      }
+      let formData = new FormData();
+      formData.append('file', files);
+      this.fLoading = true;
+      const {data:{url}} = await materialFile(formData);
+      this.fLoading = false;
+      this.$refs.groupForm.clearValidate('imgLink');
+      this.groupForm.imgLink = url;
+    },
     hideDelBtn() {
       for (let k = 0; k < this.groupList.length; k++) {
         let item = this.groupList[k];
@@ -624,16 +711,19 @@ export default {
       }
     },
     showImg(row) {
+      let img = this.cardAcyive==7?row.img:row.content
       this.imgList = [];
       this.imgModel = true;
       this.$nextTick(() => {
-        this.imgList.push(row.content)
+        this.imgList.push(img)
       })
     },
     async copayUrl(row) {
+      console.log(row);
+      let copayUrl = this.cardAcyive==7?row.img:row.content
       let clipboard = navigator.clipboard || { writeText: (account) => {
           let copyInput = document.createElement('input');
-          copyInput.value = row.content;
+          copyInput.value = copayUrl;
           document.body.appendChild(copyInput);
           copyInput.select();
           document.execCommand('copy');
@@ -641,7 +731,7 @@ export default {
         }
       }
       if (clipboard) {
-        await clipboard.writeText(row.content);
+        await clipboard.writeText(copayUrl);
         successTips(this, "",this.$t('sys_rai121'))
       }
       // const clipboard = new Clipboard('#imgUrl'); // .copy-btn为按钮元素的class名称或选择器

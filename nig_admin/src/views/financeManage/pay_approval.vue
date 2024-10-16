@@ -244,7 +244,9 @@ export default {
                 refsElTable.toggleRowSelection(row, false);
                 return;
             }
-            refsElTable.toggleRowSelection(row,true);
+            if (row.status === 1) {
+               refsElTable.toggleRowSelection(row,true);
+            }
         },
         handleApply(val){
             this.factorModel.apy_status=val;

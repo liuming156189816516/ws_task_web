@@ -236,7 +236,7 @@ export default {
                 this.showStep=true;
             }
         })
-        this.$store.dispatch('User/actionReport',8) 
+        // this.$store.dispatch('User/actionReport',8) 
     },
 	methods: {
         async done(){

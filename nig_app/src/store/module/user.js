@@ -70,7 +70,6 @@ export default {
 			window.localStorage.setItem('inviteCode',invite_code);
 			if(tutorial_list&&tutorial_list.length>0){
 				for (let k = 0; k < tutorial_list.length; k++) {
-					// console.log(tutorial_list[k]);
 					if(tutorial_list[k] === 1){
 						localStorage.setItem('step_01',true);
 					}
@@ -81,7 +80,6 @@ export default {
 						localStorage.setItem('step_03',true);
 					}
 				}
-				
 			}
 			// this.dispatch('User/plantCarousel');
 		},

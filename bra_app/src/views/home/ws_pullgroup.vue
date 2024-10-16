@@ -147,7 +147,7 @@ import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
 import { getinvitefriendtasklist } from '@/api/task';
-import { getcreatetaskinfo,submitcreatetask } from '@/api/home'
+import { getcreatetaskinfo,submitcreatetask,dotutorialstatus } from '@/api/home'
 import uniFun from "@/utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
@@ -271,9 +271,10 @@ export default {
         })
     },
 	methods: {
-        done(){
+        async done(){
             localStorage.setItem('step_01',true);
             this.showStep = false;
+            await dotutorialstatus({ptype:3});
         },
         skip(){
             this.$refs.myIntroStep.next()

@@ -81,8 +81,8 @@
 <script>
 import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
-import { getcreatetaskinfo } from '@/api/home'
 import PageHeader from "@/components/Header";
+import { getcreatetaskinfo,dotutorialstatus } from '@/api/home'
 import { getinvitefriendtasklist,submitgrouplinktask } from '@/api/task';
 import uniFun from "@/utils/uni-webview-js"
 export default {
@@ -187,16 +187,17 @@ export default {
     },
     mounted(){
         this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_03'));
+            const isTips = JSON.parse(localStorage.getItem('step_02'));
             if(!isTips){
                 this.showStep=true;
             }
         })
     },
 	methods: {
-        done(){
-            localStorage.setItem('step_03',true);
+        async done(){
+            localStorage.setItem('step_02',true);
             this.showStep = false;
+            await dotutorialstatus({ptype:2});
         },
         skip(){
             this.$refs.myIntroStep.next()

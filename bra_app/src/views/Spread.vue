@@ -92,7 +92,7 @@ import { mapState } from "vuex";
 import { formatTime } from "@/utils/tool";
 import { getinvitelink} from '@/api/bill';
 import PageHeader from "@/components/Header";
-import { getteammatesinfo } from '@/api/home';
+import { getteammatesinfo,dotutorialstatus } from '@/api/home';
 export default {
     components: { PageHeader },
     data() {
@@ -190,16 +190,17 @@ export default {
     },
     mounted(){
         this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_04'));
+            const isTips = JSON.parse(localStorage.getItem('step_03'));
             if(!isTips){
                 this.showStep=true;
             }
         })
     },
     methods:{
-        done(){
-            localStorage.setItem('step_04',true);
+        async done(){
+            localStorage.setItem('step_03',true);
             this.showStep = false;
+            await dotutorialstatus({ptype:3});
         },
         skip(){
             this.$refs.myIntroStep.next()

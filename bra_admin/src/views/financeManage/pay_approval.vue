@@ -50,21 +50,11 @@
                         </template>
                     </el-table-column>
                     <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
-                        <template slot="header">
-                            <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
-                            <span style="color:#909399" :class="[factorModel.status?'dropdown_title':'']"> {{ $t('sys_c005') }}
-                                <i class="el-icon-arrow-down el-icon--right" />
-                            </span>
-                            <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item :class="{'dropdown_selected':idx==factorModel.status}" v-for="(item,idx) in payOptions" :key="idx" :command="idx">{{item}}</el-dropdown-item>
-                            </el-dropdown-menu>
-                            </el-dropdown>
-                        </template>
                         <template slot-scope="scope">
                             <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':'warning'"> {{ payOptions[scope.row.status] }}</el-tag>
                         </template>
                     </el-table-column>
-                    <!-- <el-table-column prop="status" :label="$t('sys_rai129')" minWidth="100">
+                    <el-table-column prop="status" :label="$t('sys_rai129')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleApply(command)">
                             <span style="color:#909399" :class="[factorModel.apy_status?'dropdown_title':'']"> {{ $t('sys_rai129') }}
@@ -78,7 +68,7 @@
                         <template slot-scope="scope">
                             <el-tag size="small" :type="scope.row.approval_status==2?'success':scope.row.approval_status==3?'danger':'info'"> {{ applyOption[scope.row.approval_status] }}</el-tag>
                         </template>
-                    </el-table-column> -->
+                    </el-table-column>
                     <el-table-column prop="remark" :label="$t('sys_p017')+$t('sys_c071')" minWidth="140">
                         <template slot-scope="scope">
                         <el-tooltip class="item" effect="dark" :content="scope.row.remark" placement="top">

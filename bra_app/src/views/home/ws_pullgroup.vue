@@ -274,7 +274,7 @@ export default {
         async done(){
             localStorage.setItem('step_01',true);
             this.showStep = false;
-            await dotutorialstatus({ptype:3});
+            await dotutorialstatus({ptype:1});
         },
         skip(){
             this.$refs.myIntroStep.next()

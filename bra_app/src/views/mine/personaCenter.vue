@@ -5,12 +5,12 @@
             <template v-if="curIndex==1">
                 <div class="user_info">
                     <span class="lable_text">{{ $t('pay_006') }}</span>
-                    <van-field v-model="collectCard" :maxlength="19" :placeholder="$t('other_001',{value:$t('pay_006')})" :border="false" />
+                    <van-field v-model="collectCard" :maxlength="50" :placeholder="$t('other_001',{value:$t('pay_006')})" :border="false" />
                 </div>
                 <div class="user_info bank_account" @click="showBank(0)">
                     <span class="lable_text">{{ $t('pay_033') }}</span>
                     <div class="flex-between">
-                        <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_033')})" :border="false" />
+                        <van-field v-model="accountType" :readonly = true :placeholder="$t('other_014',{value:$t('pay_033')})" :border="false" oninput="value=value.replace(/[\u4E00-\u9FA5]/g,'')" />
                         <van-icon name="arrow" style="transition: all .3s linear" :style="{transform: `rotate(${accountModel == true ? 90 : 0}deg)`}" />
                     </div>
                 </div>
@@ -124,6 +124,7 @@ export default {
         },
         changeAccount(val){
             this.accountType = val.name;
+            // this.getBankInfo();
             this.accountModel = false;
         },
         async submitBtn(){
@@ -159,7 +160,7 @@ export default {
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
             }else if(this.curIndex==1&&!this.collectName){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_022')}))
-            }else if(this.accountType=='CPF'||this.accountType=='CNPJ'&&!this.numberId){
+            }else if(this.accountType=='CPF'&&!this.numberId||this.accountType=='CNPJ'&&!this.numberId){
                 return this.$toast(this.$t('other_014',{value:this.$t('pay_037')}))
             }
             this.isLoading = true;

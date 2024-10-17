@@ -586,11 +586,11 @@
   background-color: #000;
 }
 .notoce_tips{
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   position: absolute;
-  top: 8px;
-  right: -15px;
+  top: 10px;
+  left: -15px;
   background-color: #F52C2C;
   border-radius: 50%;
   box-sizing: border-box;

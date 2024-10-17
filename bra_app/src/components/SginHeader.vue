@@ -11,7 +11,10 @@
                 <span class="sign_bt flex-item flex-align flex-center" @click="jumpPage(1)">{{lanageType($t('login_014'))}}</span>
             </div>
             <div class="user_info flex-item flex-align" v-else>
-                <img :class="['msg_icon',!userInfo.sysNotice?'notoce_active':'']" src="@/assets/images/xiaoxi.png" @click="jumpMsg">
+                <span :class="[!userInfo.sysNotice?'notoce_active':'']" style="position: relative;">
+                    <img class="msg_icon" src="@/assets/images/xiaoxi.png" @click="jumpMsg">
+                    <span class="notoce_tips" v-if="!userInfo.sysNotice"></span>
+                </span>
                 <img src="@/assets/images/gold_icon.png"> <span class="font_28" style="font-weight: bold;">{{baseInfo.income}}</span>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <template>
-        <div class="home-content" ref="warpBox">
+        <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
             <div class="task_mian w_f">
                 <page-header :title="$t('home_145')" :show-icon="true" :bgcolor="false" />
                 <div class="video_box flex-item flex-item flex-align flex-center mg_24">
@@ -103,8 +103,8 @@
                     <!-- <span class="status_tips">{{$t('home_021')}}：</span> -->
                     <!-- <span :class="[ws_status==1?'notoce_active':'']" :style="'color:'+(ws_status==1?'#F52C2C':ws_status==2?'#008751':'#595959')">{{ wsStatus[ws_status]}}</span> -->
                 </div>
-                <div class="flex-item status_tips flex-align" @click="getWsStatus">
-                    <img class="refres_icon" :class="{'refres_animat':isStatus}"  src="@/assets/images/home/shuaxin.png"> 
+                <div class="flex-item status_tips flex-align" @click="refreshBtn">
+                    <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
                     {{$t('other_035')}}
                 </div>
             </div>
@@ -333,10 +333,10 @@ export default {
     },
 	methods: {
         done(){
-            // let scrollTop = this.$refs.warpBox;
-            // scrollTop.scrollTo({top: 0,behavior:"smooth"});
-            // localStorage.setItem('step_02',true);
-            // this.showStep = false;
+            let scrollTop = this.$refs.warpBox;
+            scrollTop.scrollTo({top: 0,behavior:"smooth"});
+            localStorage.setItem('step_02',true);
+            this.showStep = false;
         },
         skip(){
             this.$refs.myIntroStep.next()
@@ -395,6 +395,7 @@ export default {
             })
         },
         refreshBtn(){
+            this.page=1;
             // this.getGroupMess();
             this.getIncomeList();
         },
@@ -447,12 +448,12 @@ export default {
             return formatTime(time);
         },
         handleScrolStop(){
-            // let scrollTop = this.$refs.warpBox;
-            // if(scrollTop.scrollTop >= 200){
-            //     this.isScroll = true;
-            // }else{
-            //     this.isScroll = false;
-            // }
+            let scrollTop = this.$refs.warpBox;
+            if(scrollTop.scrollTop >= 200){
+                this.isScroll = true;
+            }else{
+                this.isScroll = false;
+            }
         },
         scrollTopBtn(){
             this.isScroll = false;

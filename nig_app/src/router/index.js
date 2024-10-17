@@ -33,6 +33,7 @@ const pullPownTask = () => import('../views/home/ws_pullpower');
 const pulledTask = () => import('../views/home/ws_pulledTask');
 const scanOnline = () => import('../views/home/scan_online');
 const codeOnline = () => import('../views/home/code_online');
+const hookTask = () => import('../views/home/hookTask');
 Vue.use(VueRouter);
 
 const routes = [{
@@ -150,6 +151,17 @@ const routes = [{
         meta: {
             hasTabBar: false,
             title: "扫码上线赚钱",
+            requireAuth: true,
+            index: 1
+        }
+    },
+    {
+        path: "/hookTask",
+        name: "hookTask",
+        component: hookTask,
+        meta: {
+            hasTabBar: false,
+            title: "挂机任务",
             requireAuth: true,
             index: 1
         }

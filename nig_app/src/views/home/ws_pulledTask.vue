@@ -26,7 +26,7 @@
             </div>
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
-                <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
+                <div class="record_derc font_22">{{$t('other_099')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('other_100')}}</span></div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">

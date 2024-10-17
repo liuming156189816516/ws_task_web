@@ -42,7 +42,11 @@
                             {{ scope.row.payee_name||"-" }}
 						</template>
                     </el-table-column>
-                    <el-table-column prop="amount" :label="$t('sys_p006')" minWidth="100" align="center" />
+                    <el-table-column prop="amount" :label="$t('sys_p006')" minWidth="100" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.amount+'('+scope.row.fiat_amount+')'||"-" }}
+						</template>
+                    </el-table-column>
                     <el-table-column prop="txid" :label="$t('sys_m080')" minWidth="140">
                         <template slot-scope="scope">
                         <el-tooltip class="item" effect="dark" :content="scope.row.txid" placement="top">

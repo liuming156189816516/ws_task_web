@@ -81,6 +81,13 @@
             </template>
           </el-table-column>
           <el-table-column prop="members" label="群成员" minWidth="120" show-overflow-tooltip />
+          <el-table-column prop="targets" label="数据包" minWidth="140">
+            <template slot-scope="scope">
+              <el-tooltip class="item" effect="dark" :content="scope.row.targets" placement="top">
+                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.targets||"-" }}</div>
+              </el-tooltip>
+            </template>
+          </el-table-column>
             <!-- <template slot-scope="scope">
               <el-tooltip class="item" effect="dark" :content="scope.row.members" placement="top">
                 <div style="width: max-content;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.members||"-" }}</div>

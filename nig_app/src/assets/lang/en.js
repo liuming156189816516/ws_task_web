@@ -385,6 +385,8 @@ export default {
     other_096:"Please open WhatsApp to check whether the contact has been saved successfully, otherwise the settlement will not be possible.",
     other_097:"Click refresh, and submit after the WhatsApp account shows online",
     other_098:"Get rewards",
+    other_099:"Group links can be uploaded only once. They must allow free communication without admin approval. If you face issues despite following these rules",
+    other_100:"contact support",
 
     table_001:"Home",
     table_002:"Team",

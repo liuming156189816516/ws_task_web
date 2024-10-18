@@ -451,7 +451,6 @@ export default {
                     clearInterval(this.timer);
                     this.countTime = 60;
                     this.very_code="";
-                    this.getWsStatus();
                     this.codeOption = ["","","","","—","","","",""]
                     // this.errState = false;
                 }

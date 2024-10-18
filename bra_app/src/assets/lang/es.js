@@ -156,6 +156,8 @@ export default {
     home_167:"Consulta el tamaño del equipo aquí. Cuanto más grande sea el equipo, mayores serán los beneficios.",
     home_168:"Tarefas gancho",
     home_169:"Lista de cuentas colgadas",
+    home_170:"Expandir",
+    home_171:"cerca",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

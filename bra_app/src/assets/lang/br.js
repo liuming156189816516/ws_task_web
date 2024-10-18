@@ -154,6 +154,8 @@ export default {
     home_167:"Verifique o tamanho da equipe aqui. Quanto maior a equipe, maiores serão os benefícios.",
     home_168:"Tarefas gancho",
     home_169:"Lista de contas no gancho",
+    home_170:"Expandir",
+    home_171:"fechar",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

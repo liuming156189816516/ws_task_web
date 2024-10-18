@@ -156,6 +156,8 @@ export default {
     home_167:"Check the team size here. The more team members you have, the higher the profit.",
     home_168:"Idle Tasks",
     home_169:"Idle Account List",
+    home_170:"Expand",
+    home_171:"Close",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

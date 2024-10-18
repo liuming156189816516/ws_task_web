@@ -39,7 +39,7 @@
                             <div class="task_award w_f">
                                 <div class="w_f task_book flex-item flex-between font_28">
                                     <div class="task_title"> {{$t('home_144')}} </div>
-                                    <van-button class="flex-item font_28" @click="show_code=!show_code">{{show_code?$t('home_170'):$t('home_171')}}</van-button>
+                                    <van-button class="flex-item font_28" @click="show_code=!show_code">{{show_code?$t('home_171'):$t('home_170')}}</van-button>
                                 </div>
                             </div>
                         </div>

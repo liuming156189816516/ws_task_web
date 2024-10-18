@@ -8,8 +8,11 @@
              <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q134')})" v-model="fuser_name" />
             </el-form-item>
-             <el-form-item>
+            <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_g144')})" v-model="user_ip" />
+            </el-form-item>
+             <el-form-item>
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q133')})" v-model="invite_code" />
             </el-form-item>
             <el-form-item>
                 <el-button type="warning" :disabled="checkIdArry.length==0" icon="el-icon-user" @click="pullBlackBtn(2)">{{ $t('sys_rai076',{value:$t('sys_m107')}) }}</el-button>
@@ -98,6 +101,7 @@ export default {
             status:"",
             account: "",
             user_ip: "",
+            invite_code: "",
             fuser_name: "",
             loading:false,
             checkIdArry:[],
@@ -127,6 +131,7 @@ export default {
             this.account="";
             this.user_ip="";
             this.fuser_name="";
+            this.invite_code="";
             this.initNumberList(1)
             this.$refs.serveTable.clearSelection();
         },
@@ -138,7 +143,8 @@ export default {
                 limit: this.limit,
                 ip:this.user_ip,
                 account:this.account,
-                fuser_name:this.fuser_name
+                fuser_name:this.fuser_name,
+                invite_code:this.invite_code
             }
             getappuserlist(params).then(res => {
                 this.loading = false;

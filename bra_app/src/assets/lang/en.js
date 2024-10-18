@@ -158,6 +158,8 @@ export default {
     home_169:"Idle Account List",
     home_170:"Expand",
     home_171:"Close",
+    home_172:"Duration",
+    home_173:"Benefits",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",
@@ -389,6 +391,7 @@ export default {
     other_096:"Please open WhatsApp to check whether the contact has been saved successfully, otherwise the settlement will not be possible.",
     other_097:"Click refresh, and submit after the WhatsApp account shows online",
     other_098:"Get rewards",
+    other_099:"One hour x",
 
     table_001:"Home",
     table_002:"Team",

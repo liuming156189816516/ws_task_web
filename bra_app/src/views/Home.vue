@@ -64,10 +64,15 @@
                             <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
                         </div>
+                        <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
+                            <span class="flex-item">{{$t('other_099')}}{{taskNameOption[item.type].g_num}}</span>
+                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                        </div>
                         <div class="task_live_2 flex-item flex-align" v-else>
                             <span class="flex-item">{{$t('home_094')}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
                         </div>
+
                     </div>
                     <div class="task_award flex-item font_24">
                         <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
@@ -145,7 +150,7 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_168'),live1:1,live2:3,type:1,g_num:10, status:null,task_info_id:null,award:this.$t('home_009'),btn:this.$t('home_005'),desc:this.$t('home_051')},
+                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:5, status:null,task_info_id:null,award:this.$t('home_009'),btn:this.$t('home_005'),desc:this.$t('home_051')},
                 {name:this.$t('home_045'),live1:2,live2:3,type:2,g_num:10,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
@@ -297,7 +302,7 @@ export default {
     height: 100%;
     overflow-y: auto;
     position: relative;
-    padding-bottom: 320px;
+    padding-bottom: 120px;
     background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
     // background: url('../assets/images/home/bg_img.png') no-repeat;
     // background-size: cover;

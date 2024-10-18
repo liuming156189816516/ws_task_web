@@ -156,6 +156,8 @@ export default {
     home_169:"Lista de contas no gancho",
     home_170:"Expandir",
     home_171:"fechar",
+    home_172:"duração",
+    home_173:"renda",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",
@@ -387,6 +389,7 @@ export default {
     other_096:"Abra o WhatsApp para verificar se o contato foi salvo com sucesso, caso contrário a liquidação não poderá ser feita normalmente",
     other_097:"Clique em Atualizar. A conta do WhatsApp aparecerá online antes de enviar.",
     other_098:"Receba recompensas",
+    other_099:"uma hora x",
 
     table_001:"Início",
     table_002:"Equipe",

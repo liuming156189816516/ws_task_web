@@ -78,15 +78,6 @@
                                         </div>
                                         <div class="mt_20 font_28">{{$t('other_095')}}</div>
                                     </template>
-                                    <!-- <van-button id="step_04" class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account||isShow" :loading-text="$t('other_029')" @click="submitBtn">
-                                        {{$t('other_098')}}
-                                    </van-button> -->
-                                    
-                                    <!-- <div class="pre_tips w_f flex-item flex-dir-c font_28">
-                                        <h3>{{$t('mine_018')}}</h3>
-                                        <p>1.{{$t('other_095')}}</p>
-                                        <p>2.{{$t('other_096')}}</p>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -94,45 +85,64 @@
                 </div>
             </div>
             <div class="ws_hook_list w_f flex-item flex-between font_30">
-                <div class="flex-item">
+                <h3 class="ws_title flex-item font_24">
                     {{$t('home_169')}}：
-                </div>
+                </h3>
                 <div class="flex-item status_tips flex-align" @click="refreshBtn">
                     <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
                     {{$t('other_035')}}
                 </div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
-                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
+                <!-- <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('login_038')}}</span>
                     <span class="flex-item flex-center">{{$t('tail_008')}}</span>
-                    <!-- <span class="flex-item">{{$t('spre_012')}}</span> -->
                     <span class="flex-item">{{$t('home_022')}}</span>
-                </div>
-                <template v-if="pullGroupList&&pullGroupList.length>0">
+                </div> -->
+                <!-- <template v-if="pullGroupList&&pullGroupList.length>0"> -->
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
+                            <!-- <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                                 <span class="flex-item">{{ item.account }}</span>
                                 <span class="flex-item flex-center"  :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
                                 <span class="log_out flex-item flex-align flex-center font_26">
                                     <em class="flex-item flex-align flex-center" @click="showDelBtn(item)"> {{$t('other_010')}}</em>
                                 </span>
-                                <!-- <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span> -->
-                                <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
-                            </div>
+                            </div> -->
+                            <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')">
+                                <el-table-column fixed prop="account" :label="$t('login_038')" width="106" />
+                                <el-table-column prop="total_time" :label="$t('home_172')" width="80">
+                                    <template slot-scope="scope">
+                                        {{scope.row.total_time||0}}
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="bonus" :label="$t('home_173')" width="80" />
+                                <el-table-column prop="status" :label="$t('tail_008')" width="80">
+                                    <template slot-scope="scope">
+                                        <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column fixed="right" :label="$t('home_022')" width="85" align="center">
+                                    <template slot-scope="scope">
+                                        <!-- <span class="log_out flex-item flex-align flex-center font_26">
+                                            <em class="flex-item flex-align flex-center" @click="showDelBtn(scope.row)"> {{$t('other_010')}}</em>
+                                        </span> -->
+                                        <el-button @click="showDelBtn(scope.row)" type="text" size="small">{{$t('other_010')}}</el-button>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
                         </van-list>
                     </div>
-                </template>
-                <template v-else>
+                <!-- </template> -->
+                <!-- <template v-else>
                     <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
                         <img src="@/assets/images/empty_icon.png" alt="" srcset="">
                         <p class="font_28">{{$t('spre_013')}}</p>
                     </div>
-                </template>
-                <div class="title_top footer_tips w_f flex-item font_24">
+                </template> -->
+                <!-- <div class="title_top footer_tips w_f flex-item font_24">
                     {{$t('spre_014')}}
-                </div>
+                </div> -->
             </div>
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
@@ -437,7 +447,6 @@ export default {
             this.ref_loading = true;
             this.pullGroupList = [];
             getaccountlist({page:this.page,limit:this.limit}).then(res => {
-                console.log(res);
                 setTimeout(()=>{this.ref_loading = false;},300)
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
@@ -797,9 +806,9 @@ export default {
         }
         .ws_hook_list{
             padding: 0 30px;
-            margin-top: 20px;
+            margin: 30px 0 20px 0;
             box-sizing: border-box;
-            color: $font-color-white;
+            // color: $font-color-white;
             .status_tips{
                 color: $home-eart-long;
             }
@@ -832,7 +841,7 @@ export default {
             // max-height: 300px;
             // overflow-y: auto;
             padding: 0 30px;
-            margin-top: 20px;
+            border-radius: 20px;;
             padding-bottom: 30px;
             box-sizing: border-box;
             color: $font-color-black;
@@ -843,7 +852,10 @@ export default {
             .record_scroll{
                 max-height: 1100px;
                 overflow-y: auto;
+                border-radius: 20px;
                 background: $font-color-white;
+                // border-bottom-left-radius: 20px;
+                // border-bottom-right-radius: 20px;
             }
             .title_top{
                 height: 100px;
@@ -891,6 +903,8 @@ export default {
                 height: 364px;
                 color: $home-title-14;
                 background-color: $font-color-white;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
                 img{
                     height: 202px;
                 }

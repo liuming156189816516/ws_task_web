@@ -158,6 +158,8 @@ export default {
     home_169:"挂机账号列表",
     home_170:"展开",
     home_171:"收起",
+    home_172:"时长",
+    home_173:"收益",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",
@@ -390,6 +392,7 @@ export default {
     other_096:"请打开WhatsApp查看联系人是否已成功保存，否则无法正常结算",
     other_097:"点击刷新，WhatsApp 账号显示在线之后再提交",
     other_098:"获取奖励",
+    other_099:"一个小时 x",
 
     table_001:"首页",
     table_002:"团队",

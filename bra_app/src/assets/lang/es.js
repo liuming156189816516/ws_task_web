@@ -158,6 +158,8 @@ export default {
     home_169:"Lista de cuentas colgadas",
     home_170:"Expandir",
     home_171:"cerca",
+    home_172:"duración",
+    home_173:"ingreso",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -390,6 +392,7 @@ export default {
     other_096:"Abra WhatsApp para verificar si el contacto se ha guardado correctamente; de ​​lo contrario, no se podrá realizar la liquidación normalmente.",
     other_097:"Haga clic en Actualizar. La cuenta de WhatsApp se mostrará en línea antes de enviarla.",
     other_098:"Obtener recompensas",
+    other_099:"una hora x",
 
     table_001:"Inicio",
     table_002:"Equipo",

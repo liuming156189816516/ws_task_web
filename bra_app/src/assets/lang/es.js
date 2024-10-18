@@ -154,6 +154,8 @@ export default {
     home_165:"Copia el enlace del grupo y pégalo aquí.",
     home_166:"Copie el enlace de su invitación y compártalo con amigos para obtener más beneficios",
     home_167:"Consulta el tamaño del equipo aquí. Cuanto más grande sea el equipo, mayores serán los beneficios.",
+    home_168:"Tarefas gancho",
+    home_169:"Lista de cuentas colgadas",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

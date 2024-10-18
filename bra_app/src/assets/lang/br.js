@@ -152,6 +152,8 @@ export default {
     home_165:"Copie o link do grupo e cole aqui",
     home_166:"Copie o link do seu convite e compartilhe-o com amigos para obter mais benefícios",
     home_167:"Verifique o tamanho da equipe aqui. Quanto maior a equipe, maiores serão os benefícios.",
+    home_168:"Tarefas gancho",
+    home_169:"Lista de contas no gancho",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

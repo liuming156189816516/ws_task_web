@@ -60,7 +60,7 @@
                             <span class="flex-item">{{$t('home_093')}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
                         </div>
-                        <div class="task_live_2 flex-item flex-align" v-if="item.type==4||item.type==3||item.type==5">
+                        <div class="task_live_2 flex-item flex-align" v-if="item.type==3||item.type==4||item.type==5">
                             <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
                         </div>
@@ -118,7 +118,7 @@ export default {
             viewLang:"en-GB",
             taskOption: [],
             langIdx:Cookies.get("language"),
-            taskType: ['', 'codeOnline', 'spread', 'pullgroupTask','pulledTask','codeOnline'],
+            taskType: ['', 'hookTask', 'spread', 'pullgroupTask','pulledTask','codeOnline'],
             bannerList:[],
             imagesList:[
                 {
@@ -145,7 +145,7 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_089'),live1:1,live2:3,type:1,g_num:10, status:null,task_info_id:null,award:this.$t('home_048',{value:1999}),btn:this.$t('home_058'),desc:this.$t('home_051')},
+                {name:this.$t('home_168'),live1:1,live2:3,type:1,g_num:10, status:null,task_info_id:null,award:this.$t('home_009'),btn:this.$t('home_005'),desc:this.$t('home_051')},
                 {name:this.$t('home_045'),live1:2,live2:3,type:2,g_num:10,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},

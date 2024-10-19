@@ -111,17 +111,17 @@
                             </div> -->
                             <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')">
                                 <el-table-column fixed prop="account" :label="$t('login_038')" width="106" />
+                                <el-table-column prop="status" :label="$t('tail_008')" width="80">
+                                    <template slot-scope="scope">
+                                        <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
+                                    </template>
+                                </el-table-column>
                                 <el-table-column prop="total_time" :label="$t('home_172')" width="80">
                                     <template slot-scope="scope">
                                         {{scope.row.total_time||0}}
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="bonus" :label="$t('home_173')" width="80" />
-                                <el-table-column prop="status" :label="$t('tail_008')" width="80">
-                                    <template slot-scope="scope">
-                                        <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
-                                    </template>
-                                </el-table-column>
                                 <el-table-column fixed="right" :label="$t('home_022')" width="85" align="center">
                                     <template slot-scope="scope">
                                         <!-- <span class="log_out flex-item flex-align flex-center font_26">

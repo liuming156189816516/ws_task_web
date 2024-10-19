@@ -246,7 +246,7 @@ export default {
             account_type:"1",
             pullGroupList:[],
             countryList:[],
-            current_code:""||"234",
+            current_code:""||"55",
             accountList:[1,1,1,1,1,1],
             codeOption:["","","","","—","","","",""],
             config: {
@@ -383,7 +383,7 @@ export default {
                 this.ws_account = "";
                 this.old_account = "";
                 this.account_type = "1";
-                this.current_code = "234";
+                this.current_code = "55";
                 this.$toast(this.$t("other_013"));
             })
         },

@@ -71,12 +71,12 @@
                     </u-table-column>
                     <u-table-column sortable="lq_num" prop="lq_num" :label="$t('sys_m111')" minWidth="100">
                         <template slot-scope="scope">
-                            {{ scope.row.lq_num?scope.row.lq_num:"-" }}
+                            {{ scope.row.lq_num||0 }}
                         </template>
                     </u-table-column>
                      <u-table-column sortable="lf_num" prop="lf_num" :label="$t('sys_m112')" minWidth="100">
                         <template slot-scope="scope">
-                            {{ scope.row.lf_num?scope.row.lf_num:"-" }}
+                            {{ scope.row.lf_num||0 }}
                         </template>
                     </u-table-column>
                     <!-- sortable="sucess_num"  -->

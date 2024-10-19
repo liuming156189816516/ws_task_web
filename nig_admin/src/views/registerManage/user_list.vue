@@ -24,7 +24,7 @@
         <!-- 分组管理 -->
         <div class="continer_main">
             <div class="group_continer">
-                <u-table :data="accountDataList" row-key="uid" use-virtual border height="860" v-loading="loading"
+                <u-table @sort-change="sorthandle" :data="accountDataList" row-key="uid" use-virtual border height="860" v-loading="loading"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
@@ -69,6 +69,17 @@
                             {{ scope.row.level?scope.row.level:"-" }}
                         </template>
                     </u-table-column>
+                    <u-table-column sortable="lq_num" prop="lq_num" :label="$t('sys_m111')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.level?scope.row.level:"-" }}
+                        </template>
+                    </u-table-column>
+                     <u-table-column sortable="lf_num" prop="lf_num" :label="$t('sys_m112')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.level?scope.row.level:"-" }}
+                        </template>
+                    </u-table-column>
+                    <!-- sortable="sucess_num"  -->
                     <u-table-column prop="balance" :label="$t('sys_m099')" minWidth="100">
                         <template slot-scope="scope">
                             {{ scope.row.balance||0 }}
@@ -101,6 +112,8 @@ export default {
             status:"",
             account: "",
             user_ip: "",
+            lq_num_sort: "",
+            lf_num_sort: "",
             invite_code: "",
             fuser_name: "",
             loading:false,
@@ -116,6 +129,24 @@ export default {
         this.initNumberList();
     },
     methods: {
+        sorthandle({column, prop, order}){
+            if(column.property == "lq_num"&&order=="descending"){
+                this.lq_num_sort = "lq_num"
+            }else if(column.property == "lq_num"&&order=="ascending"){
+                this.lq_num_sort = "-lq_num"
+            }else{
+                this.lq_num_sort = ""
+            }
+
+            if(column.property == "lf_num"&&order=="descending"){
+                this.lf_num_sort = "lf_num"
+            }else if(column.property == "lf_num"&&order=="ascending"){
+                this.lf_num_sort = "-lf_num"
+            }else{
+                this.lf_num_sort = ""
+            }
+            this.initNumberList(1);
+        },
         handleSelectionChange(row) {
             this.checkIdArry = row.map(item => { return item.uid })
         },
@@ -132,6 +163,8 @@ export default {
             this.user_ip="";
             this.fuser_name="";
             this.invite_code="";
+            this.lq_num_sort="";
+            this.lf_num_sort="";
             this.initNumberList(1)
             this.$refs.serveTable.clearSelection();
         },
@@ -143,6 +176,8 @@ export default {
                 limit: this.limit,
                 ip:this.user_ip,
                 account:this.account,
+                lq_num_sort:this.lq_num_sort,
+                lf_num_sort:this.lf_num_sort,
                 fuser_name:this.fuser_name,
                 invite_code:this.invite_code
             }

@@ -155,7 +155,7 @@ export default {
     home_166:"Copie el enlace de su invitación y compártalo con amigos para obtener más beneficios",
     home_167:"Consulta el tamaño del equipo aquí. Cuanto más grande sea el equipo, mayores serán los beneficios.",
     home_168:"Tarefas gancho",
-    home_169:"Lista de cuentas colgadas",
+    home_169:"lista whatsapp",
     home_170:"Expandir",
     home_171:"cerca",
     home_172:"duración",

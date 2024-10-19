@@ -150,7 +150,7 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:5, status:null,task_info_id:null,award:this.$t('home_009'),btn:this.$t('home_005'),desc:this.$t('home_051')},
+                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:4, status:null,task_info_id:null,award:this.$t('home_009'),btn:this.$t('home_005'),desc:this.$t('home_051')},
                 {name:this.$t('home_045'),live1:2,live2:3,type:2,g_num:10,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},

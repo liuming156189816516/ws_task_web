@@ -133,7 +133,7 @@ export default {
         },
         handleSizeFun(limit){
             this.limit = limit;
-            this.initNumberList(1);
+            this.initLuckyList(1);
         },
         handlePageFun(page){
             this.page = page;

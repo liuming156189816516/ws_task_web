@@ -248,6 +248,7 @@ export default {
     'sys_c139': '幸运奖',
     'sys_c140': '幸运奖ID',
     'sys_c141': '奖金',
+    'sys_c142': '新增挂机',
 
     'sys_g001': '用户UID',
     'sys_g002': '用户名',
@@ -890,6 +891,7 @@ export default {
     'sys_q140': '',
     'sys_q141': '云控',
     'sys_q142': 'App',
+    'sys_q143': '时长',
 
     'sys_p001': '财务管理',
     'sys_p002': '提现审批',

@@ -12,6 +12,11 @@
                 <el-button type="primary" icon="el-icon-search" @click="initBillList(1)">{{ $t('sys_c002') }}</el-button>
                 <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
             </el-form-item>
+
+            <el-form-item class="fr">
+                <span>{{$t("sys_m071")}}: <em style="font-size: 16px;font-weight: bold;">{{$baseFun.moneyCut(bounty_amount)}}</em></span>
+                <span style="margin-left:10px;">{{$t("sys_m072")}}: <em style="font-size: 16px;font-weight: bold;">{{$baseFun.moneyCut(com_amount)}}</em></span>
+            </el-form-item>
         </el-form>
         <!-- 分组管理 -->
         <div class="continer_main">
@@ -64,6 +69,8 @@ export default {
             account: "",
             task_time: "",
             l_account: "",
+            com_amount:0,
+            bounty_amount:0,
             loading:false,
             checkIdArry:[],
             checkAccount:[],
@@ -119,6 +126,8 @@ export default {
             getbillrecordlist(params).then(res => {
                 this.loading = false;
                 this.total = res.data.total;
+                this.bounty_amount=res.data.bounty_amount;
+                this.com_amount=res.data.commission_amount;
                 this.accountDataList = res.data.list || [];
             })
         },

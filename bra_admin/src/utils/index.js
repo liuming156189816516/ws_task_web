@@ -8,7 +8,30 @@ import i18n from '@/locale'
 import { Number } from 'core-js'
 export function resetPage(page) {
   return [10, 20, 50, 100, 200, 500, 1000]
-}       
+}     
+function moneyCut1(s, n) {
+  n = n > 0 && n <= 20 ? n : 2;
+  s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+  var l = s.split(".")[0].split("").reverse(), r = s.split(".")[1];
+  var t = "";
+  for (let i = 0; i < l.length; i++) {
+      t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+  }
+  return t.split("").reverse().join("") ;
+}
+function moneyCut(amount, limit = 2) {
+  let a, b;
+  if (typeof amount == 'number') {
+    [a, b] = amount.toFixed(limit).split(".")
+  } else {
+    [a, b] = amount.split(".")
+    b = b || ''
+    while (b.length < limit) {
+      b += "0"
+    }
+  }
+  return `${a.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.${b}`
+}
 export function parseTime(time, cFormat) {
   if (arguments.length === 0 || !time) {
     return null
@@ -1356,6 +1379,7 @@ export default {
   resetTime,
   emoji_icon,
   newsTime,
-  mexicoTime
+  mexicoTime,
+  moneyCut
 }
 

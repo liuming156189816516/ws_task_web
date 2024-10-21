@@ -6,7 +6,7 @@
             <template v-else>
             <div class="card_item" v-for="(item,idx) in cardOption" :key="idx" :style="{background:`${item.b_g}`}" @click="getStatistics">
                 <span>{{ item.label }}</span>
-                <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num+'/'+item.num1" v-if="idx==3||idx==4||idx==5||idx==6"></span>
+                <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num+'/'+item.num1" v-if="idx==4||idx==5||idx==6"></span>
                 <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num" v-else></span>
             </div>
             </template>
@@ -39,22 +39,27 @@
                     <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
                     <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
                     <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
-                    <el-table-column prop="pull_total_num" :label="$t('sys_rai122')" minWidth="100">
+                    <el-table-column prop="view_account_num" :label="$t('sys_c142')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.view_account_num||0 }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="pull_total_num" :label="$t('sys_rai122')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.today_create_group_task_num +"/"+scope.row.pull_fan_task_num }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="100">
+                    <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="100">
+                    <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="100">
+                    <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
                         </template>
@@ -97,7 +102,7 @@ export default {
             checkAccount:[],
             accountDataList:[],
             pageOption: resetPage(),
-            showNum: [1,2,3,4,5,6,7,8,9,10]
+            showNum: [1,2,3,4,5,6,7,8,9,10,11]
         }
     },
     computed: {
@@ -123,6 +128,12 @@ export default {
                     num:0,
                     b_g:"#dbfff1",
                     t_c:"#02c97a"
+                },
+                {
+                    label:this.$t('sys_c142'),
+                    num:0,
+                    b_g:"#f9edff",
+                    t_c:"#b357ff"
                 },
                 {
                     label:this.$t('sys_rai122'),
@@ -189,25 +200,28 @@ export default {
                        item.num = vita.today_active_user_num||0;
                     //    item.num ="活跃用户";
                     }else if(k == 3){
+                       item.num = vita.view_account_num||0;
+                    //    item.num ="活跃用户";
+                    }else if(k == 4){
                         item.num1 = vita.pull_fan_task_num||0;
                         item.num = vita.today_create_group_task_num||0;
                         // item.num = "拉群任务数"
-                    }else if(k == 4){
+                    }else if(k == 5){
                         item.num = vita.data_num||0;
                         item.num1 = vita.pull_fan_data_num||0;
                         // item.num = "推广资源";
-                    }else if(k == 5){
+                    }else if(k == 6){
                         item.num = vita.bounty_amount||0;
                         item.num1 = vita.pull_fan_bounty_amount||0;
                     //    item.num = "任务收益";
-                    }else if(k == 6){
+                    }else if(k == 7){
                         item.num = vita.commission_amount||0;
                         item.num1 = vita.pull_fan_commission_amount||0;
                         // item.num = "返佣收益";
-                    }else if(k == 7){
+                    }else if(k == 8){
                         item.num = vita.withdraw_user_num||0;
                         // item.num = "提现人数";
-                    }else if(k == 8){
+                    }else if(k == 9){
                          item.num = vita.withdraw_amount||0;
                         // item.num = "提现扣款";
                     }

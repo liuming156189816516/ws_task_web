@@ -122,14 +122,11 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="bonus" :label="$t('home_173')" width="80" />
-                                <el-table-column fixed="right" :label="$t('home_022')" width="85" align="center">
+                                <!-- <el-table-column fixed="right" :label="$t('home_022')" width="85" align="center">
                                     <template slot-scope="scope">
-                                        <!-- <span class="log_out flex-item flex-align flex-center font_26">
-                                            <em class="flex-item flex-align flex-center" @click="showDelBtn(scope.row)"> {{$t('other_010')}}</em>
-                                        </span> -->
                                         <el-button @click="showDelBtn(scope.row)" type="text" size="small">{{$t('other_010')}}</el-button>
                                     </template>
-                                </el-table-column>
+                                </el-table-column> -->
                             </el-table>
                         </van-list>
                     </div>

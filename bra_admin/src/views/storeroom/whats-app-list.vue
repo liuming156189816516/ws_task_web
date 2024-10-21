@@ -6,7 +6,7 @@
                 <el-input clearable :placeholder="$t('sys_g006')" v-model="model1.account" />
             </el-form-item>
             <el-form-item>
-                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="model1.account" />
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="model1.fuser_name" />
             </el-form-item>
             <el-form-item class="select_body">
                 <el-select class="select_ele" v-model="model1.select_sort" :placeholder="$t('sys_c052')" @change="initNumberList(1)">

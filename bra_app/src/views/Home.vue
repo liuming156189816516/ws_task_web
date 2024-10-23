@@ -804,7 +804,7 @@ export default {
     }
     .serve_icon{
         img{
-            height: 80px;
+            height: 100px;
         }
     }
 }

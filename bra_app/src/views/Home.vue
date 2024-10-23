@@ -92,22 +92,23 @@
                 </div>
             </div>
         </div>
-        <!-- <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.68">
-            <div class="serve_icon" slot="icon" @click="$Helper.globalSupport()">
-                <img src="../assets/images/ms_serve.png" alt="" />
+        <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.56">
+            <div class="serve_icon" slot="icon" @click="contactService">
+                <img src="@/assets/images/serveic/telege_icon.png" alt="" />
             </div>
-        </drag-icon> -->
+        </drag-icon>
     </div>
 </template>
 <script>
 import { mapState } from 'vuex';
 import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
+import dragIcon from "@/components/dragIcon"
 import SginHeader from "@/components/SginHeader";
 import { gettaskliststatus,gethelp } from '@/api/home'
 export default {
     name: 'home',
-    components: { SginHeader },
+    components: { SginHeader,dragIcon },
     data() {
         return {
             showApk:true,
@@ -293,7 +294,14 @@ export default {
             link.href = process.env.VUE_APP_APK;
             link.setAttribute('download', 'Chrome');
             link.click();
-        }
+        },
+        contactService(){
+			if(this.$Helper.checkBrowser()){
+				window.open(process.env.VUE_APP_TELEGRAM,"_blank");
+			}else{
+				uniFun.postMessage({data:process.env.VUE_APP_TELEGRAM});
+			}
+		}
     }
 }
 </script>

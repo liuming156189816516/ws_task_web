@@ -563,12 +563,12 @@ export default {
             }
         }
         .task_main{
-            // gap: 30px;
             box-sizing: border-box;
             background: url('../assets/images/home/jinbi.png') no-repeat;
             background-size: cover;
             background-position: 0 -30px;
             .task_item{
+                min-height: 238px;
                 padding: 30px 0 30px 20px;
                 background: url('../assets/images/home/task_bg_1.png') no-repeat;
                 background-size: 100% 100%;
@@ -591,9 +591,6 @@ export default {
                             height: 30px; 
                         }
                     }
-                    // .task_live_2{
-                    //     font-weight: bold;
-                    // }
                 }
                 .task_award{
                     position: relative;
@@ -651,35 +648,12 @@ export default {
                     }
                 }
                 .task_desc{
-                    // height: 160px;
-                    // margin-top: 6px;
-                    // line-height: 32px;
                     padding-right: 15px;
                     color: $home-title-03;
                     box-sizing: border-box;
                     .task_desc_item{
-                        // height: 140px;
                         margin-right: -10px;
                     }
-                    // .task_btn{
-                    //     flex-grow: 2;
-                    //     flex-shrink: 0;
-                    //     align-items: center;
-                    // }
-                    // display: -webkit-box;
-                    // -webkit-line-clamp: 2;
-                    // -webkit-box-orient: vertical;
-                    // overflow: hidden;
-                    // text-overflow: ellipsis;
-                    // .task_desc_item{
-                    //     flex-grow: 2;
-                    //     flex-shrink: 0;
-                    //     flex-wrap: wrap;
-                    // }
-                    // .task_btn{
-                    //     flex-wrap: 1;
-                    //     flex-shrink: 0;
-                    // }
                 }
             }
             .task_item:nth-child(2){
@@ -696,7 +670,6 @@ export default {
                     background-color: $home-task-02;
                 }
                 .task_live_1, .task_live_2{
-                    // font-weight: bold;
                     color: $home-task-02;
                 }
             }
@@ -721,25 +694,6 @@ export default {
             .task_item:last-child{
                 margin-bottom: 0;
             }
-            // .task_item:nth-child(1){
-            //     .task_desc{
-            //         height: 130px;
-            //         margin-bottom: 20px;
-            //         // background: darkblue;
-            //     }
-            //     .task_btn{
-            //         height: 130px;
-            //     }
-            // }
-            // .task_item:nth-child(2), .task_item:nth-child(3){
-            //     .task_desc{
-            //         height: 100px;
-            //         margin-bottom: 20px;
-            //     }
-            //     .task_btn{
-            //         height: 100px;
-            //     }
-            // }
         }
         .record_warp{
             padding: 0 30px;

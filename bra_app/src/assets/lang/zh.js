@@ -160,6 +160,9 @@ export default {
     home_171:"收起",
     home_172:"时长",
     home_173:"收益",
+    home_174:"敬请期待",
+    home_175:"未开放",
+    home_176:"Telegram 和 Instagram 即将推出",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",

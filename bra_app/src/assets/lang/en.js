@@ -160,6 +160,9 @@ export default {
     home_171:"Close",
     home_172:"Duration",
     home_173:"Benefits",
+    home_174:"Stay tuned",
+    home_175:"Not open",
+    home_176:"Telegram and Instagram coming soon",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

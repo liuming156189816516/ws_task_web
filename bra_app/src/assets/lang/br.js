@@ -158,6 +158,9 @@ export default {
     home_171:"fechar",
     home_172:"duração",
     home_173:"renda",
+    home_174:"Fique atento",
+    home_175:"Não aberto",
+    home_176:"Telegram e Instagram em breve",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

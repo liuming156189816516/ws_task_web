@@ -160,6 +160,9 @@ export default {
     home_171:"cerca",
     home_172:"duración",
     home_173:"ingreso",
+    home_174:"Manténganse tanto",
+    home_175:"No abierto",
+    home_176:"Telegram e Instagram próximamente",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

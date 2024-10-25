@@ -157,6 +157,7 @@ export default {
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
                 // {name:this.$t('home_134'),live1:2,live2:1,type:5,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
                 {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                {name:this.$t('home_174'),live1:1,live2:4,type:6,g_num:20,status:null,task_info_id:null,award:this.$t('home_176'),btn:this.$t('home_175'),desc:this.$t('home_049')},
             ]
         },
         taskStatusOption() {

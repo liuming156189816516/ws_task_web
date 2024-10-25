@@ -261,16 +261,14 @@ export default {
             this.getLangConfig();
         },
         handleTask(row) {
-            if(row.type == 6){
-                return this.$toast(this.$t('home_174'));
-            }
             // this.$router.push("/codeOnline");
             const path = this.taskType[row.type];
             if (!getToken()) return this.$router.push("/login");
             if (row.type == 2) {
                 this.$router.push(path);
+            }else if(row.type == 6) {
+                return this.$toast(this.$t('home_174'));
             }else{
-                // this.$router.push(path);
                 this.$router.push(`${path}?id=${row.task_info_id}`);
             }
         },

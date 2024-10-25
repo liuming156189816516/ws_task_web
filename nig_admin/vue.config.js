@@ -1,5 +1,6 @@
 const path = require('path')
 const timeStamp = new Date().getTime();
+var webpack = require('webpack');
 const defaultSettings = require('./src/settings.js')
 
 function resolve(dir) {
@@ -52,6 +53,12 @@ module.exports = {
       filename: `static/js/[name].${timeStamp}js`, // 输出的bundle文件名
       chunkFilename: `static/js/[name].${timeStamp}.js` // 输出的chunk文件名
     },
+    plugins: [
+      new webpack.ProvidePlugin({
+        'window.Quill': 'quill/dist/quill.js',
+        'Quill': 'quill/dist/quill.js'
+      }),
+    ],
     performance: {
       hints: 'warning',
       //入口起点的最大体积

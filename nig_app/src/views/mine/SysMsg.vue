@@ -22,7 +22,7 @@
                                 <h4 class="adver_title">{{item.name}}</h4>
                                 <span class="adver_time">{{ formatTime(item.itime) }}</span>
                             </div>
-                            <div class="adver_descr">{{item.content}}</div>
+                            <div class="adver_descr" v-html="item.content"></div>
                         </div>
                     </div>
                 </div>
@@ -174,13 +174,15 @@ export default {
                 }
                 .adver_descr{
                     width: 100%;
-                    float: left;
+                    height: 80px;
                     margin-top: 6px;
                     color: #8c8c8c;
-                    font-size: 0.28rem;
+                    font-size: 28px;
                     overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
+                    // filter: blur(10px);
+                    /* 应用线性渐变的遮罩 */
+                    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+                    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
                 }
                 .adver_img{
                     width: 42px;

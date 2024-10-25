@@ -6,7 +6,7 @@
                 <div class="tit">{{ n_detail.name }}</div>
                 <div class="date">{{ formatTime(n_detail.itime) }}</div>
             </div>
-            <div class="cnt">{{n_detail.content}}</div>
+            <div class="cnt" v-html="n_detail.content"></div>
             <!-- <div class="cnt" v-if="cnt.type == 1">
                 <div v-if="cnt.url == ''" v-html="cnt.text" class="innerTxt"></div>
                 <img v-else :src="cnt.url" alt="">

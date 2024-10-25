@@ -424,7 +424,6 @@ export default {
             this.ref_loading = true;
             this.pullGroupList = [];
             getaccountlist({page:this.page,limit:this.limit,task_type:3}).then(res => {
-                console.log(res);
                 setTimeout(()=>{this.ref_loading = false;},300)
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];

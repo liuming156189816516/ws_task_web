@@ -21,7 +21,7 @@
 		</div>
 		<div class="switch_bar">
 			<div class="consun_list handel_area">
-				<el-table :data="noticeList" border style="width: 100%" v-loading="loading" ref="serveTable" element-loading-spinner="el-icon-loading" :header-cell-style="{background:'#eef1f6',color:'#606266'}" @selection-change="selectAllChange">
+				<el-table :data="noticeList" border style="width: 100%" v-loading="loading" ref="serveTable" element-loading-spinner="el-icon-loading" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
 					<!-- <el-table-column type="selection" width="55"> </el-table-column> -->
 					<el-table-column prop="wx_id" label="序号" width="60">
                         <template slot-scope="scope">
@@ -29,7 +29,11 @@
 						</template>
                     </el-table-column>
 					<el-table-column prop="name" label="标题" minWidth="100" />
-					<el-table-column prop="content" label="内容" minWidth="260" />
+					<el-table-column prop="content" label="内容" minWidth="260">
+						<template slot-scope="scope">
+                            <div v-html="scope.row.content"></div>
+						</template>
+					</el-table-column>
 					<el-table-column prop="status" label="状态" minWidth="80">
 						<template slot-scope="scope">
                             <el-tag size="small" :type="scope.row.status==2?'success':'info'"> {{ lopOption[scope.row.status] }}</el-tag>
@@ -51,7 +55,7 @@
 			</div>
 		</div>
         <!-- 新增轮播 -->
-        <el-dialog :title="type==1?'新增通知':'编辑通知'" :visible.sync="createModel" :close-on-click-modal="false" width="550px">
+        <el-dialog :title="type==1?'新增通知':'编辑通知'" :visible.sync="createModel" :close-on-click-modal="false" width="1020px">
 			<el-form size="small" :model="sendForm" label-width="140px" :rules="sendRules" ref="sendForm">
                 <el-form-item label="通知标题：" prop="task_name">
                     <el-input placeholder="请输入通知标题" v-model="sendForm.task_name" style="width:100%;"></el-input>
@@ -61,8 +65,9 @@
                         <el-radio :label="idx" v-for="(item,idx) in lopOption" :key="idx" v-show="idx!=0">{{ item }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item label="内容：" prop="content">
-                    <el-input type="textarea" rows="6" placeholder="请输入内容" v-model="sendForm.content"></el-input>
+                <el-form-item label="内容：" prop="mesContent">
+                    <!-- <el-input type="textarea" rows="6" placeholder="请输入内容" v-model="sendForm.content"></el-input> -->
+                    <vue-editor ref="editorEle" v-model="sendForm.mesContent" useCustomImageHandler :editorOptions="editorOption" @image-added="handleImageAdded" />
                 </el-form-item>
                 <el-form-item style="text-align:center;margin-left: -110px;">
                     <el-button @click="createModel=false">取消</el-button>
@@ -78,8 +83,13 @@
 import { successTips } from '@/utils/index'
 import { materialFile } from '@/api/article'
 import { getmessagelist,domessage } from '@/api/banner'
+import { VueEditor,Quill } from "vue2-editor";
+import ImageResize from 'quill-image-resize-module'
+import { ImageDrop } from 'quill-image-drop-module';
+Quill.register('modules/imageDrop', ImageDrop)
+Quill.register('modules/imageResize', ImageResize)
 export default {
-    components: {'el-image-viewer': () => import('element-ui/packages/image/src/image-viewer') },
+    components: {VueEditor,'el-image-viewer': () => import('element-ui/packages/image/src/image-viewer') },
 	data() {
 		return {
 			statusList:["待启动","初始化","进行中","失败","完成","关闭"],
@@ -103,7 +113,8 @@ export default {
                 file_url:"",
                 link:"",
                 content:"",
-                status:1
+                status:1,
+                mesContent:""
             },
             sendRules:{
                 task_name: [
@@ -112,7 +123,40 @@ export default {
 				content: [
                     { required: true, message:this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }
                 ]
-            }
+            },
+            editorOption: {
+                //  富文本编辑器配置
+                modules: {
+                    //工具栏定义的
+                    imageDrop: false,
+                    imageResize: {},
+                    toolbar: [
+                        ["bold", "italic", "underline", "strike"], // 加粗 斜体 下划线 删除线 -----['bold', 'italic', 'underline', 'strike']
+                        ["blockquote", "code-block"], // 引用  代码块-----['blockquote', 'code-block']
+                        [{ header: 1 }, { header: 2 }], // 1、2 级标题-----[{ header: 1 }, { header: 2 }]
+                        [{ list: "ordered" }, { list: "bullet" }], // 有序、无序列表-----[{ list: 'ordered' }, { list: 'bullet' }]
+                        [{ script: "sub" }, { script: "super" }], // 上标/下标-----[{ script: 'sub' }, { script: 'super' }]
+                        [{ indent: "-1" }, { indent: "+1" }], // 缩进-----[{ indent: '-1' }, { indent: '+1' }]
+                        [{ direction: "rtl" }], // 文本方向-----[{'direction': 'rtl'}]
+                        [{ size: ["small", false, "large", "huge"] }], // 字体大小-----[{ size: ['small', false, 'large', 'huge'] }]
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }], // 标题-----[{ header: [1, 2, 3, 4, 5, 6, false] }]
+                        [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色-----[{ color: [] }, { background: [] }]
+                        [{ font: [] }], // 字体种类-----[{ font: [] }]
+                        [{ align: [] }], // 对齐方式-----[{ align: [] }]
+                        ["clean"], // 清除文本格式-----['clean']
+                        ["image"] // 链接、图片、视频-----['link', 'image', 'video']
+                    ]
+                },
+                //主题
+                theme: "snow",
+                placeholder: "请输入正文"
+            },
+            // editorOption: {
+            //     modules: {
+            //         imageDrop: false,
+            //         imageResize: {}
+            //     }
+            // }
 		}
 	},
     computed: {
@@ -125,6 +169,20 @@ export default {
 	},
 	//方法集合
 	methods: {
+        handleImageAdded(file, Editor, cursorLocation,resetUploader) {
+            let extension = file.name.split(".")[1];
+            let extensionList = ["png", "jpg"];
+            if (extensionList.indexOf(extension) < 0) {
+                this.$Message.error('请上传'+extensionList+'格式图片');
+                return false;
+            }
+            let params = new FormData();params.append("file",file);
+            materialFile(params).then(res => {
+                console.log(res);
+                Editor.insertEmbed(cursorLocation,'image',res.data.url);
+                resetUploader();
+            })
+        },
 		//初始化消息列表
 		getNoticeList(){
             this.loading =true;
@@ -154,7 +212,7 @@ export default {
 			if(idx == 2){
 				this.sendForm.id=val.id;
 				this.sendForm.task_name=val.name;
-                this.sendForm.content=val.content;
+                this.sendForm.mesContent=val.content;
 			}
             this.createModel = true;
         },
@@ -166,7 +224,7 @@ export default {
 						ptype:this.type,
                         status:this.sendForm.status,
                         name:this.sendForm.task_name,
-                        content:this.sendForm.content
+                        content:this.sendForm.mesContent
 					}
 					this.type==2?data.id=this.sendForm.id:'',
                     this.isLoading = true;
@@ -227,13 +285,15 @@ export default {
 	watch:{
 		createModel(val){
 			if(val == false){
-				this.$refs.sendForm.resetFields();
                 this.sendForm.id="";
 				this.sendForm.task_name="";
                 this.sendForm.file_url="";
                 this.sendForm.link="";
                 this.sendForm.content="";
+                this.sendForm.mesContent="";
                 this.sendForm.status=1;
+                this.$refs.editorEle.quill.setText("");
+                this.$refs.sendForm.resetFields();
 			}
 		}
 	},

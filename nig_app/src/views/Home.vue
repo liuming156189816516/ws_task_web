@@ -291,7 +291,7 @@ export default {
     height: 100%;
     overflow-y: auto;
     position: relative;
-    padding-bottom: 320px;
+    padding-bottom: 120px;
     background: $color-btnbg;
     -webkit-overflow-scrolling: touch;
      .down_app{

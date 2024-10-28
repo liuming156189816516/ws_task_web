@@ -8,6 +8,9 @@
             <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="model1.fuser_name" />
             </el-form-item>
+            <el-form-item>
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q134')})" v-model="model1.fuser_account" />
+            </el-form-item>
             <el-form-item class="select_body">
                 <el-select class="select_ele" v-model="model1.select_sort" :placeholder="$t('sys_c052')" @change="initNumberList(1)">
                     <el-option v-for="item in selecSort" :key="item.value" :label="item.label" :value="item.value" />
@@ -587,6 +590,7 @@ export default {
                 staff_no: "",
                 group_id: "",
                 fuser_name: "",
+                fuser_account: "",
                 platform_type:"",
                 work_status: "",
                 custom_popover:'960px',
@@ -984,6 +988,7 @@ export default {
             this.model1.staff_no="";
             this.model1.group_id="";
             this.model1.fuser_name="";
+            this.model1.fuser_account="";
             this.checkIdArry = [];
             this.checkAccount = [];
             this.screenSelect = [];
@@ -1002,6 +1007,7 @@ export default {
                 fuser_name:this.model1.fuser_name,
                 group_id:this.model1.group_id, //分组
                 staff_no:this.model1.staff_no, //席位
+                laccount:this.model1.fuser_account,
                 sort:sort, //排序
                 nick_name:"",
                 reason:"",

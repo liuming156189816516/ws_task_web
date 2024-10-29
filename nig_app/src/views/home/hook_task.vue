@@ -58,6 +58,35 @@
                 </div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
+                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
+                    <span class="flex-item flex-align">{{$t('login_038')}}</span>
+                    <!-- <span class="flex-item flex-center">{{$t('home_031')}}</span> -->
+                    <span class="flex-item flex-center">{{$t('tail_008')}}</span>
+                    <!-- <span class="flex-item">{{$t('spre_012')}}</span> -->
+                    <span class="flex-item">{{$t('home_022')}}</span>
+                </div>
+                <template v-if="pullGroupList&&pullGroupList.length>0">
+                    <div class="record_scroll w_f flex-item flex-dir-c">
+                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
+                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
+                                <span class="flex-item">{{ item.account }}</span>
+                                <span class="flex-item" :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
+                                <span :class="['flex-item',item.status==2?'record_click':'']" @click="showDelBtn(item)">{{$t('other_010')}}</span>
+                            </div>
+                        </van-list>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+                        <p class="font_28">{{$t('tail_010')}}</p>
+                    </div>
+                </template>
+                <!-- <div class="title_top footer_tips w_f flex-item font_24">
+                    {{$t('spre_014')}}
+                </div> -->
+            </div>
+            <!-- <div class="record_list w_f flex-item flex-dir-c">
                 <div class="record_scroll w_f flex-item flex-dir-c">
                     <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                         <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')" :header-cell-style="{textAlign:'center'}">
@@ -67,16 +96,11 @@
                                     <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
                                 </template>
                             </el-table-column>
-                            <!-- <el-table-column prop="total_time" :label="$t('home_172')" width="80">
-                                <template slot-scope="scope">
-                                    {{scope.row.total_time||0}}
-                                </template>
-                            </el-table-column> -->
                             <el-table-column prop="bonus" :label="$t('home_173')" minWidth="80" />
                         </el-table>
                     </van-list>
                 </div>
-            </div>
+            </div> -->
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
@@ -394,6 +418,7 @@ export default {
                     this.countTime = 60;
                     this.very_code="";
                     this.codeOption = ["","","","","—","","","",""]
+                    this.initWechatList();
                     // this.errState = false;
                 }
             }, 1000);
@@ -785,10 +810,10 @@ export default {
             .record_scroll{
                 max-height: 1100px;
                 overflow-y: auto;
-                border-radius: 20px;
+                // border-radius: 20px;
                 background: $font-color-white;
-                // border-bottom-left-radius: 20px;
-                // border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
             }
             .title_top{
                 height: 100px;
@@ -799,9 +824,13 @@ export default {
                 span{
                     flex: 1;
                 }
-                // span:nth-child(1){
-                //     flex-grow: 1.2;
-                // }
+                span:nth-child(2){
+                    justify-content: center;
+                }
+                span:nth-child(3){
+                    flex-grow: 0.8;
+                    justify-content: right;
+                }
                 .log_out{
                     em{
                         flex-shrink: 0;

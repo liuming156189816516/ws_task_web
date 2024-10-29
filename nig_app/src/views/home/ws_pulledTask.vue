@@ -561,19 +561,7 @@ export default {
                 border-top-left-radius: 20px;
                 border-top-right-radius: 20px;
             }
-            // .title_top:nth-child(1){
-            //     border-top-left-radius: 20px;
-            //     border-top-right-radius: 20px;
-            // }
-            // span:nth-child(1){
-            //     flex-grow: 1.8;
-            //     flex-shrink: 0;
-            // }
-            // span:nth-child(2){
-            //     flex-grow: 1.6;
-            // }
             span:nth-child(3){
-                // flex-grow: 0.8;
                 justify-content: center;
             }
             span:nth-child(4){

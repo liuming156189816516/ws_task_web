@@ -33,7 +33,7 @@ const pullPownTask = () => import('../views/home/ws_pullpower');
 const pulledTask = () => import('../views/home/ws_pulledTask');
 const scanOnline = () => import('../views/home/scan_online');
 const codeOnline = () => import('../views/home/code_online');
-const hookTask = () => import('../views/home/hookTask');
+const hookTask = () => import('../views/home/hook_task');
 Vue.use(VueRouter);
 
 const routes = [{

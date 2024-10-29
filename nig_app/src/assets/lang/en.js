@@ -155,6 +155,14 @@ export default {
     home_166:"Copy your invitation link and share it with your friends to get more benefits",
     home_167:"Check the team size here. The more team members you have, the higher the profit",
     home_168:"Idle Tasks",
+    home_169:"WhatsApp List",
+    home_170:"Expand",
+    home_171:"Close",
+    home_172:"Duration",
+    home_173:"Benefits",
+    home_174:"Stay tuned",
+    home_175:"Not open",
+    home_176:"Telegram and Instagram coming soon",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",
@@ -388,6 +396,7 @@ export default {
     other_098:"Get rewards",
     other_099:"Group links can be uploaded only once. They must allow free communication without admin approval. If you face issues despite following these rules",
     other_100:"contact support",
+    other_101:"One hour x",
 
     table_001:"Home",
     table_002:"Team",

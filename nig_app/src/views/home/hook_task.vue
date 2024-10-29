@@ -1,36 +1,10 @@
 <template>
         <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
             <div class="task_mian w_f">
-                <page-header :title="$t('home_145')" :show-icon="true" :bgcolor="false" />
+                <page-header :title="$t('home_168')" :show-icon="true" :bgcolor="false" />
                 <div class="video_box flex-item flex-item flex-align flex-center mg_24">
                     <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-bx.s3.sa-east-1.amazonaws.com/5.mp4" />
                 </div>
-                <!-- <div class="task_box w_f flex-item">
-                    <div class="task_Progress w_f flex-item flex-dir-c">
-                        <div class="w_f flex-item flex-between">
-                            <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
-                            <div class="right_refresh flex-item font_24" @click="refreshBtn" id="step_05">
-                                <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
-                                {{$t('other_035')}}
-                            </div>
-                        </div>
-                        <div class="w_f flex-item flex-between">
-                            <div class="task_item">
-                                <p class="task_text font_24">{{$t('home_107')}}</p>
-                                <p class="task_num font_28">{{ teamStemp.ser_no }}</p>
-                            </div>
-                            <div class="task_sure_time">
-                                <p class="task_text font_24">{{$t('home_108')}}</p>
-                                <p class="task_num flex-item font_28">
-                                    <span class="flex-item flex-center" :style="{color:teamStemp.status==2?'#31acf2':teamStemp.status==3?'#ff9600':teamStemp.status==4?'#008751':'#F52C2C'}">
-                                        {{taskOption[teamStemp.status]}}
-                                    </span>
-                                    <van-count-down :time="taskTime" />
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
@@ -39,23 +13,13 @@
                             <div class="task_award w_f">
                                 <div class="w_f task_book flex-item flex-between font_28">
                                     <div class="task_title"> {{$t('home_144')}} </div>
-                                    <van-button class="flex-item font_28" @click="show_code=!show_code">Click to</van-button>
+                                    <van-button class="flex-item font_28" @click="show_code=!show_code">{{show_code?$t('home_171'):$t('home_170')}}</van-button>
                                 </div>
                             </div>
                         </div>
                         <div class="ws_list w_f flex-item flex-dir-c" v-if="show_code">
                             <div class="ws_account" style="background:transparent;">
                                 <div class="ws_verfy_box w_f flex-item flex-align flex-center flex-dir-c">
-                                    <!-- <div class="ws_status w_f flex-item flex-between font_30">
-                                        <div>
-                                            <span class="status_tips">{{$t('home_021')}}：</span>
-                                            <span :class="[ws_status==1?'notoce_active':'']" :style="'color:'+(ws_status==1?'#F52C2C':ws_status==2?'#008751':'#595959')">{{ wsStatus[ws_status]}}</span>
-                                        </div>
-                                        <div class="flex-item flex-align" @click="getWsStatus">
-                                            <img class="refres_icon" :class="{'refres_animat':isStatus}"  src="@/assets/images/home/shuaxin.png"> 
-                                            {{$t('other_035')}}
-                                        </div>
-                                    </div> -->
                                     <div class="ws_value w_f flex-item flex-align flex-center" id="step_02">
                                         <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
                                         <input v-model="ws_account" :disabled="ws_status!=0" :placeholder="$t('login_027')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
@@ -78,64 +42,44 @@
                                         </div>
                                         <div class="mt_20 font_28">{{$t('other_095')}}</div>
                                     </template>
-                                    <!-- <van-button id="step_04" class="submit_text flex-item font_28" :loading="sLoading" :disabled="!ws_account||isShow" :loading-text="$t('other_029')" @click="submitBtn">
-                                        {{$t('other_098')}}
-                                    </van-button> -->
-                                    
-                                    <!-- <div class="pre_tips w_f flex-item flex-dir-c font_28">
-                                        <h3>{{$t('mine_018')}}</h3>
-                                        <p>1.{{$t('other_095')}}</p>
-                                        <p>2.{{$t('other_096')}}</p>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="record_legend w_f flex-item flex-dir-c">
-                <h3 class="font_28">{{$t('spre_009')}}</h3>
-                <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
-            </div>
             <div class="ws_hook_list w_f flex-item flex-between font_30">
-                <div class="flex-item">
-                    挂机任务记录：
-                    <!-- <span class="status_tips">{{$t('home_021')}}：</span> -->
-                    <!-- <span :class="[ws_status==1?'notoce_active':'']" :style="'color:'+(ws_status==1?'#F52C2C':ws_status==2?'#008751':'#595959')">{{ wsStatus[ws_status]}}</span> -->
-                </div>
+                <h3 class="ws_title flex-item font_24">
+                    {{$t('home_169')}}：
+                </h3>
                 <div class="flex-item status_tips flex-align" @click="refreshBtn">
                     <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
                     {{$t('other_035')}}
                 </div>
             </div>
             <div class="record_list w_f flex-item flex-dir-c">
-                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
-                    <span class="flex-item flex-align">{{$t('tail_003')}}</span>
-                    <span class="flex-item flex-center">{{$t('tail_008')}}</span>
-                    <span class="flex-item">{{$t('spre_012')}}</span>
-                    <span class="flex-item">{{$t('home_022')}}</span>
+                <div class="record_scroll w_f flex-item flex-dir-c">
+                    <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
+                        <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')">
+                            <el-table-column fixed prop="account" :label="$t('login_038')" width="106" />
+                            <el-table-column prop="status" :label="$t('tail_008')" width="80">
+                                <template slot-scope="scope">
+                                    <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="total_time" :label="$t('home_172')" width="80">
+                                <template slot-scope="scope">
+                                    {{scope.row.total_time||0}}
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="bonus" :label="$t('home_173')" width="80" />
+                        </el-table>
+                    </van-list>
                 </div>
-                <template v-if="pullGroupList&&pullGroupList.length>0">
-                    <div class="record_scroll w_f flex-item flex-dir-c">
-                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                                <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                                <span class="flex-item flex-center" :style="{color:item.status==2?'#31acf2':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
-                                <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
-                                <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
-                            </div>
-                        </van-list>
-                    </div>
-                </template>
-                <template v-else>
-                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
-                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                        <p class="font_28">{{$t('spre_013')}}</p>
-                    </div>
-                </template>
-                <div class="title_top footer_tips w_f flex-item font_24">
-                    {{$t('spre_014')}}
-                </div>
+            </div>
+            <div class="record_legend w_f flex-item flex-dir-c">
+                <h3 class="font_28">{{$t('spre_009')}}</h3>
+                <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div>
             <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
                 <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
@@ -155,6 +99,18 @@
                         <div class="country_item w_f flex-item font_28 flex-between" v-for="(item,idx) in countryList" :key="idx" @click="handleCode(item.code)">
                             <span>{{item.name}}</span>
                             <span class="c_code">{{item.code}}</span>
+                        </div>
+                    </div>
+                </div>
+            </van-overlay>
+
+            <van-overlay :show="del_model">
+                <div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
+                    <div class="log_main">
+                        {{ tipsText }}
+                        <div class="footer_bnt w_f flex-item flex-center">
+                            <van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">{{$t('other_003')}}</van-button>
+                            <van-button class="footer_cancel" type="primary" @click="del_model=false">{{$t('other_007')}}</van-button>
                         </div>
                     </div>
                 </div>
@@ -197,6 +153,7 @@ export default {
             very_code:"",
             ws_code:"",
             code_model:false,
+            del_model:false,
             task_id:"",
             old_account:"",
             isShow:false,
@@ -309,7 +266,7 @@ export default {
             return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
         },
         statusOption(){
-            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
+            return ["",this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
         },
         wsStatus(){
             return [this.$t('home_146'),this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
@@ -320,8 +277,7 @@ export default {
         this.task_id = this.$route.query.id||"";
         this.countryList = this.$Helper.countryList();
         this.timestamp = Math.floor(new Date().getTime() / 1000);
-        // this.getGroupMess();
-        this.getIncomeList();
+        this.initWechatList();
     },
     mounted(){
         setTimeout(()=>{
@@ -397,7 +353,7 @@ export default {
         refreshBtn(){
             this.page=1;
             // this.getGroupMess();
-            this.getIncomeList();
+            this.initWechatList();
         },
         async getGroupMess(){
            let group_task =  await getautogroupinfo({task_info_id:this.task_id});
@@ -417,13 +373,13 @@ export default {
                 this.finished = true;
             }else{
                 this.page++;
-                this.getIncomeList()
+                this.initWechatList()
             }
         },
-        getIncomeList(){
+        initWechatList(){
             this.ref_loading = true;
             this.pullGroupList = [];
-            getaccountlist({page:this.page,limit:this.limit,task_type:3}).then(res => {
+            getaccountlist({page:this.page,limit:this.limit}).then(res => {
                 setTimeout(()=>{this.ref_loading = false;},300)
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
@@ -437,7 +393,6 @@ export default {
                     clearInterval(this.timer);
                     this.countTime = 60;
                     this.very_code="";
-                    this.getWsStatus();
                     this.codeOption = ["","","","","—","","","",""]
                     // this.errState = false;
                 }
@@ -499,7 +454,20 @@ export default {
             if(row.status == 4||row.status == 5){
                 this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
             }
-            // this.$store.dispatch('User/actionReport',9);
+        },
+        showDelBtn(row){
+            this.account = row.account;
+            this.del_model = true;
+            this.tipsText = row.status==2?this.$t('home_040'):this.$t('home_041');
+        },
+        handle_confirm(){
+            this.isLoading=true;
+            delaccount({account:this.account}).then(res => {
+                this.isLoading = false;
+                this.del_model = false;
+                this.$toast(this.$t("other_013"));
+                this.initWechatList();
+            })
         },
         async submitBtn(){
             if(this.ws_status !==2)return this.$toast(this.$t("other_097"));
@@ -685,14 +653,6 @@ export default {
                         background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
                         .ws_account{
                             background: $font-color-white;
-                            .log_out{
-                                width: 140px;
-                                padding: 10px 0;
-                                box-sizing: border-box;
-                                background: $home-title-18;
-                                border-radius: 200px;
-                                color: $color-theme;
-                            }
                         }
                         .title_top{
                             padding: 20px 0;
@@ -779,9 +739,9 @@ export default {
         }
         .ws_hook_list{
             padding: 0 30px;
-            margin-top: 20px;
+            margin: 30px 0 20px 0;
             box-sizing: border-box;
-            color: $font-color-white;
+            // color: $font-color-white;
             .status_tips{
                 color: $home-eart-long;
             }
@@ -792,9 +752,9 @@ export default {
         }
         .record_legend{
             padding: 0 30px;
+            margin-bottom: 30px;
             h3{
                 margin: 20px 0;
-                color: $font-color-white;
             }
             .record_derc{
                 font-style: italic;
@@ -814,7 +774,7 @@ export default {
             // max-height: 300px;
             // overflow-y: auto;
             padding: 0 30px;
-            margin-top: 20px;
+            border-radius: 20px;;
             padding-bottom: 30px;
             box-sizing: border-box;
             color: $font-color-black;
@@ -825,7 +785,10 @@ export default {
             .record_scroll{
                 max-height: 1100px;
                 overflow-y: auto;
+                border-radius: 20px;
                 background: $font-color-white;
+                // border-bottom-left-radius: 20px;
+                // border-bottom-right-radius: 20px;
             }
             .title_top{
                 height: 100px;
@@ -836,25 +799,26 @@ export default {
                 span{
                     flex: 1;
                 }
-                span:nth-child(3){
-                    flex-grow: 0.6;
+                // span:nth-child(1){
+                //     flex-grow: 1.2;
+                // }
+                .log_out{
+                    em{
+                        flex-shrink: 0;
+                        padding: 10px 20px;
+                        box-sizing: border-box;
+                        background: $home-title-18;
+                        border-radius: 200px;
+                        color: $color-theme;
+                    }
                 }
             }
             .task_title_head {
                 border-top-left-radius: 20px;
                 border-top-right-radius: 20px;
             }
-            // .title_top:nth-child(1){
-            //     border-top-left-radius: 20px;
-            //     border-top-right-radius: 20px;
-            // }
             span:nth-child(3){
-                // flex-grow: 0.8;
-                justify-content: center;
-            }
-            span:nth-child(4){
-                flex-grow: 0.8;
-                justify-content: right;
+                justify-content: center !important;
             }
             .record_item{
                 height: 108px;
@@ -872,6 +836,8 @@ export default {
                 height: 364px;
                 color: $home-title-14;
                 background-color: $font-color-white;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
                 img{
                     height: 202px;
                 }

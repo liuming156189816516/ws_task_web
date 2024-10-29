@@ -313,7 +313,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/create-was-task'),
         name: 'create-was-task',
         meta: {
-          title:i18n.t('sys_m034'),
+          title:i18n.t('sys_g123'),
         }
       },
       {

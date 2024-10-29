@@ -10,7 +10,7 @@
                 <el-divider></el-divider>
                 <el-row :gutter="20">
                     <el-col :span="18">
-                        <el-form-item label="活动名称：" prop="task_name">
+                        <el-form-item label="任务名称：" prop="task_name">
                             <el-input v-model="taskForm.task_name" maxlength="20" show-word-limit></el-input>
                         </el-form-item>
                     </el-col>
@@ -62,7 +62,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row :gutter="20">
+                <!-- <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item label="任务开始时间：">
                             <el-date-picker v-model="taskForm.start_time" :picker-options="pickersOptions" value-format="yyyy-MM-dd HH:mm:ss" type="datetime" :placeholder="$t('sys_c052')" />
@@ -75,7 +75,7 @@
                             <el-date-picker v-model="taskForm.end_time" value-format="yyyy-MM-dd HH:mm:ss" :picker-options="pickerOptions" type="datetime" :placeholder="$t('sys_c052')" />
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <h3 class="mess_title">规则设置</h3>
                 <el-divider></el-divider>
                 <el-row :gutter="20">
@@ -146,27 +146,16 @@
                 <el-divider></el-divider>
                 <el-row :gutter="20">
                     <el-col :span="18">
-                        <el-form-item label="群发话术：" prop="group_say">
+                        <el-form-item label="群发类型：" prop="group_say">
                             <el-radio-group v-model="taskForm.group_say">
                                 <el-radio :label="1">自主添加</el-radio>
-                                <!-- <el-radio label="群发未回复粉丝数据"></el-radio> -->
                             </el-radio-group>
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <!-- <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="主推话术语言：" prop="source_num">
-                            <el-select v-model="taskForm.source_num" :placeholder="$t('sys_c052')">
-                                <el-option label="区域一" value="shanghai"></el-option>
-                                <el-option label="区域二" value="beijing"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row> -->
                 <el-row :gutter="20">
                     <el-col :span="18">
-                        <el-form-item :label="$t('sys_q109')+'：'" prop="materialData" class="custom_say">
+                        <el-form-item label="群发话术" prop="materialData" class="custom_say">
                             <div class="mess_01">
                                 <el-button type="primary" size="mini" v-for="(item,idx) in btnOption" :key="idx" @click="showPropModel(idx)" v-show="item!=''">{{ item }}</el-button>
                                 <el-table :data="taskForm.materialData" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" style="width: 100%">
@@ -354,7 +343,7 @@ import { successTips } from '@/utils/index'
             }
         },
         btnOption(){
-            return ["",this.$t('sys_mat093'),"",this.$t('sys_mat095'),this.$t('sys_mat092')]
+            return ["",this.$t('sys_mat093'),"",this.$t('sys_mat095')]
         },
         sourceOption() {
             return ["",this.$t('sys_mat008'),this.$t('sys_mat009'),this.$t('sys_mat010'),this.$t('sys_mat011'),this.$t('sys_mat091'),this.$t('sys_mat092'),this.$t('sys_mat113')]
@@ -364,11 +353,8 @@ import { successTips } from '@/utils/index'
         let taskConfig = this.$route.query.config;
         if (taskConfig instanceof Object) {
             this.taskForm.task_name ="复制_"+taskConfig.name;
-            // this.taskForm.group_id = taskConfig.group_ids;
             this.taskForm.data_type = taskConfig.ws_data;
             this.taskForm.data_pack_id = taskConfig.data_pack_id;
-            // this.taskForm.start_time = taskConfig.start_time;
-            // this.taskForm.end_time = taskConfig.end_time;
             this.taskForm.send_type = taskConfig.group_type;
             this.taskForm.send_num = taskConfig.group1_num;
             this.taskForm.min_time = taskConfig.sleep1_num;
@@ -451,8 +437,8 @@ import { successTips } from '@/utils/index'
                         group_ids:this.taskForm.group_id,
                         data_type:this.taskForm.ws_data,
                         data_pack_id:this.taskForm.data_pack_id,
-                        start_time:this.taskForm.start_time?this.$baseFun.resetTime(this.taskForm.start_time,3):-1,
-                        end_time:this.$baseFun.resetTime(this.taskForm.end_time,3),
+                        // start_time:this.taskForm.start_time?this.$baseFun.resetTime(this.taskForm.start_time,3):-1,
+                        // end_time:this.$baseFun.resetTime(this.taskForm.end_time,3),
                         send_type:this.taskForm.group_type,
                         send_num:this.taskForm.group1_num,
                         // interval_send_num:this.taskForm.group2_num,

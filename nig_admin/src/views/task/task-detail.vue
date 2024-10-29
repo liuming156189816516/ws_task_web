@@ -36,6 +36,7 @@
       <u-table @sort-change="sorthandle" :data="detailDataList" row-key="id" use-virtual border height="660" v-loading="loading"
         element-loading-spinner="el-icon-loading" style="width: 100%;" ref="opn_table" showBodyOverflow="title" :total="total" 
         :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true" @handlePageSize="pageHandle">
+        <u-table-column type="selection" width="55" />
         <u-table-column type="index" :label="$t('sys_g020')" width="60" />
         <u-table-column prop="account" :label="$t('sys_g027')" minWidth="140" />
         <u-table-column prop="status" :label="$t('sys_c022')" minWidth="100">

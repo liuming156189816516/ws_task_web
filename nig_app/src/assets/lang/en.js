@@ -154,7 +154,7 @@ export default {
     home_165:"Copy the group link and paste it here",
     home_166:"Copy your invitation link and share it with your friends to get more benefits",
     home_167:"Check the team size here. The more team members you have, the higher the profit",
-    home_168:"Idle Tasks",
+    home_168:"Bind whatsApp",
     home_169:"WhatsApp List",
     home_170:"Expand",
     home_171:"Close",

@@ -60,19 +60,19 @@
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="record_scroll w_f flex-item flex-dir-c">
                     <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                        <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')">
-                            <el-table-column fixed prop="account" :label="$t('login_038')" width="106" />
-                            <el-table-column prop="status" :label="$t('tail_008')" width="80">
+                        <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')" :header-cell-style="{textAlign:'center'}">
+                            <el-table-column fixed prop="account" :label="$t('login_038')" minWidth="106" />
+                            <el-table-column prop="status" :label="$t('tail_008')" minWidth="80">
                                 <template slot-scope="scope">
                                     <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="total_time" :label="$t('home_172')" width="80">
+                            <!-- <el-table-column prop="total_time" :label="$t('home_172')" width="80">
                                 <template slot-scope="scope">
                                     {{scope.row.total_time||0}}
                                 </template>
-                            </el-table-column>
-                            <el-table-column prop="bonus" :label="$t('home_173')" width="80" />
+                            </el-table-column> -->
+                            <el-table-column prop="bonus" :label="$t('home_173')" minWidth="80" />
                         </el-table>
                     </van-list>
                 </div>
@@ -867,12 +867,13 @@ export default {
         height: 100% !important;
         .country_warp{
             height: auto;
-            background: #fff;
+            background: $font-color-white;
             .country_head{
                 height: 44px;
                 padding: 0 20px;
                 box-sizing: border-box;
                 background: $color-theme;
+                color: $font-color-white;
                 img{
                     height: 12px;
                     margin-right: 10px;

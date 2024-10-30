@@ -92,6 +92,9 @@ export const getautogroupaccountstatus = (params)=> {
 export const dotutorialstatus = (params)=> {
     return request({url:'/account/dotutorialstatus',method:'post',data:params})
 }
+export const getwsincomelist = (params)=> {
+    return request({url:'/account/getwsincomelist',method:'post',data:params})
+}
 
 
 

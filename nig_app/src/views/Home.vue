@@ -192,7 +192,6 @@ export default {
             //     console.log("addressbook");
             // })
             navigator.contacts.find(["displayName", "phoneNumbers"],(contacts)=> {
-                 alert(contacts)
                     console.log(contacts);  // 在这里你可以获取并处理通讯录信息
                 },(error)=> {
                     console.log("读取通讯录失败", error);
@@ -254,8 +253,6 @@ export default {
         },
         handleTask(row) {
             const path = this.taskType[row.type];
-            console.log(path);
-            
             if (!getToken()) return this.$router.push("/login");
             if (row.type == 2) {
                 this.$router.push(path);

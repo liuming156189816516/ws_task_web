@@ -67,11 +67,38 @@
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
+                        <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
+                            <span class="flex-item">{{ item.account }}</span>
+                            <span class="flex-item" :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
+                            <span :class="['flex-item',item.status==2?'record_click':'']" @click="showDelBtn(item)">{{$t('other_010')}}</span>
+                        </div>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+                        <p class="font_28">{{$t('tail_010')}}</p>
+                    </div>
+                </template>
+            </div>
+            <div class="born_record w_f flex-item flex-dir-c">
+                <h3 class="font_28">{{$t('mine_010')}}</h3>
+            </div>
+            <div class="record_list w_f flex-item flex-dir-c">
+                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
+                    <span class="flex-item flex-align">{{$t('tail_003')}}</span>
+                    <!-- <span class="flex-item flex-center">{{$t('home_031')}}</span> -->
+                    <span class="flex-item flex-center">{{$t('home_020')}}</span>
+                    <!-- <span class="flex-item">{{$t('spre_012')}}</span> -->
+                    <span class="flex-item">{{$t('spre_012')}}</span>
+                </div>
+                <template v-if="hookRecordList&&hookRecordList.length>0">
+                    <div class="record_scroll w_f flex-item flex-dir-c">
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                                <span class="flex-item">{{ item.account }}</span>
-                                <span class="flex-item" :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
-                                <span :class="['flex-item',item.status==2?'record_click':'']" @click="showDelBtn(item)">{{$t('other_010')}}</span>
+                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in hookRecordList" :key="idx">
+                                <span class="flex-item">{{ item.itime }}</span>
+                                <span class="flex-item">{{item.account}}</span>
+                                <span class="flex-item">{{item.amount}}</span>
                             </div>
                         </van-list>
                     </div>
@@ -82,25 +109,7 @@
                         <p class="font_28">{{$t('tail_010')}}</p>
                     </div>
                 </template>
-                <!-- <div class="title_top footer_tips w_f flex-item font_24">
-                    {{$t('spre_014')}}
-                </div> -->
             </div>
-            <!-- <div class="record_list w_f flex-item flex-dir-c">
-                <div class="record_scroll w_f flex-item flex-dir-c">
-                    <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                        <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')" :header-cell-style="{textAlign:'center'}">
-                            <el-table-column fixed prop="account" :label="$t('login_038')" minWidth="106" />
-                            <el-table-column prop="status" :label="$t('tail_008')" minWidth="80">
-                                <template slot-scope="scope">
-                                    <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="bonus" :label="$t('home_173')" minWidth="80" />
-                        </el-table>
-                    </van-list>
-                </div>
-            </div> -->
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
@@ -160,8 +169,7 @@ import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import uniFun from "@/utils/uni-webview-js"
 import PageHeader from "@/components/Header";
-import { getinvitefriendtasklist } from '@/api/task';
-import { getautogroupinfo,getqrcode,delaccount,submitautogrouptask,getautogroupaccountstatus,getaccountlist } from '@/api/home'
+import { getautogroupinfo,getqrcode,delaccount,submitautogrouptask,getautogroupaccountstatus,getaccountlist,getwsincomelist } from '@/api/home'
 export default {
 	name: 'scan_online',
 	components: {PageHeader},
@@ -203,6 +211,7 @@ export default {
             account_type:"1",
             pullGroupList:[],
             countryList:[],
+            hookRecordList:[],
             current_code:""||"234",
             accountList:[1,1,1,1,1,1],
             codeOption:["","","","","—","","","",""],
@@ -302,6 +311,7 @@ export default {
         this.countryList = this.$Helper.countryList();
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         this.initWechatList();
+        this.initHookList();
     },
     mounted(){
         setTimeout(()=>{
@@ -378,6 +388,7 @@ export default {
             this.page=1;
             // this.getGroupMess();
             this.initWechatList();
+            this.initHookList();
         },
         async getGroupMess(){
            let group_task =  await getautogroupinfo({task_info_id:this.task_id});
@@ -397,16 +408,25 @@ export default {
                 this.finished = true;
             }else{
                 this.page++;
-                this.initWechatList()
+                this.hookRecordList()
             }
         },
         initWechatList(){
             this.ref_loading = true;
             this.pullGroupList = [];
-            getaccountlist({page:this.page,limit:this.limit}).then(res => {
+            getaccountlist({page:1,limit:20}).then(res => {
                 setTimeout(()=>{this.ref_loading = false;},300)
-                this.page_total = Math.ceil(res.total / this.limit);
+                // this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];
+            })
+        },
+        initHookList(){
+            this.h_loading = true;
+            this.pullGroupList = [];
+            getwsincomelist({page:this.page,limit:this.limit}).then(res => {
+                setTimeout(()=>{this.h_loading = false;},300)
+                this.page_total = Math.ceil(res.total / this.limit);
+                this.hookRecordList = [...this.hookRecordList,...res.list] || [];
             })
         },
         startSettime() {
@@ -462,7 +482,6 @@ export default {
             this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
         },
         downAddress(){
-            return;
             if(this.$Helper.checkBrowser()){
                 const link = document.createElement('a');
                 link.href = this.target_url;
@@ -778,6 +797,7 @@ export default {
         .record_legend{
             padding: 0 30px;
             margin-bottom: 30px;
+            box-sizing: border-box;
             h3{
                 margin: 20px 0;
             }
@@ -794,6 +814,10 @@ export default {
                     text-decoration: underline;
                 }
             }
+        }
+        .born_record{
+            padding: 0 30px 20px 30px;
+            box-sizing: border-box;
         }
         .record_list{
             // max-height: 300px;

@@ -161,10 +161,10 @@
             </el-form>
         </el-dialog>
     </div>
-  </template>
-  
-  <script>
-  import { successTips } from '@/utils/index'
+</template>
+
+<script>
+import { successTips } from '@/utils/index'
   import material from '../content/material.vue';
   import { getdatapacklist } from '@/api/datamanage'
   import { getaccountgrouplist } from '@/api/storeroom'
@@ -408,9 +408,10 @@
         }
     }
   }
-  </script>
-  <style scoped lang="scss">
-  .view_continer{
+</script>
+
+<style scoped lang="scss">
+    .view_continer{
     width: 100%;
     // max-height: 760px;
     position: relative;
@@ -494,4 +495,4 @@
         }
     }
   }
-  </style>
+</style>

@@ -170,7 +170,11 @@
                                             <template v-if="scope.row.type==1||scope.row.type==5||scope.row.type==6">
                                                 <span class="content_01">{{ scope.row.content }}</span>
                                             </template>
-                                            <img class="content_02" v-if="scope.row.type==2" :src="scope.row.content" alt="" srcset="">
+                                            <!-- <img class="content_02" v-if="scope.row.type==2" :src="scope.row.content" alt="" srcset=""> -->
+                                            <div v-if="scope.row.type==2">
+                                                <img class="content_02" :src="scope.row.content">
+                                                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="scope.row.remark" />
+                                            </div>
                                             <audio v-if="scope.row.type==3" controls class="audio_src">
                                                 <source :src="scope.row.content" type="audio/mpeg">
                                             </audio>
@@ -437,12 +441,8 @@ import { successTips } from '@/utils/index'
                         group_ids:this.taskForm.group_id,
                         data_type:this.taskForm.ws_data,
                         data_pack_id:this.taskForm.data_pack_id,
-                        // start_time:this.taskForm.start_time?this.$baseFun.resetTime(this.taskForm.start_time,3):-1,
-                        // end_time:this.$baseFun.resetTime(this.taskForm.end_time,3),
                         send_type:this.taskForm.group_type,
                         send_num:this.taskForm.group1_num,
-                        // interval_send_num:this.taskForm.group2_num,
-                        // interval_send_time:this.taskForm.sleep_num,
                         min_time:this.taskForm.sleep1_num,
                         max_time:this.taskForm.sleep2_num,
                         speech_skill_type:this.taskForm.group_say,

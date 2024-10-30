@@ -45,6 +45,11 @@
                   {{ scope.row.sucess_num }}/{{ scope.row.send_num }}
                 </template>
             </el-table-column>
+            <el-table-column prop="arrived_num" :label="$t('sys_mat115')" minWidth="120">
+              <template slot-scope="scope">
+                {{ scope.row.arrived_num }}
+              </template>
+            </el-table-column>
             <el-table-column prop="complete_message" :label="$t('sys_g072')" minWidth="120" />
             <el-table-column prop="status" :label="$t('sys_l059')" minWidth="160">
               <template slot="header">

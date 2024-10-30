@@ -115,64 +115,53 @@ export default {
         cardOption(){
             return [
                 {
-                    label:this.$t('sys_m086'),
+                    label:this.$t('sys_mat058'),
                     num:0,
                     b_g:"#fef4e9",
                     t_c:"#ff8400"
                 },
                 {
-                    label:this.$t('sys_m101'),
+                    label:this.$t('sys_mat109'),
                     num:0,
-                    b_g:"#dbfeff",
-                    t_c:"#1dcfdb"
+                    b_g:"#eef6fe",
+                    t_c:"#369aff"
                 },
                 {
-                    label:this.$t('sys_m088'),
+                    label:this.$t('sys_mat110'),
                     num:0,
                     b_g:"#dbfff1",
                     t_c:"#02c97a"
                 },
                 {
-                    label:this.$t('sys_rai122'),
+                    label:this.$t('sys_mat111'),
                     num:0,
-                    num1:0,
-                    b_g:"#ffebeb",
-                    t_c:"#ff0f0"
-                },
-                {
-                    label:this.$t('sys_m090'),
-                    num:0,
-                    num1:0,
-                    b_g:"#fffee6",
-                    t_c:"#f2bb16"
-                },
-                {
-                    label:this.$t('sys_m102'),
-                    num:0,
-                    num1:0,
-                    b_g:"#ffebeb",
-                    t_c:"#ff0f0"
-                },
-                {
-                    label:this.$t('sys_m103'),
-                    num:0,
-                    num1:0,
                     b_g:"#f9edff",
                     t_c:"#b357ff"
                 },
                 {
-                    label:this.$t('sys_m091'),
+                    label:this.$t('sys_g081'),
+                    num:0,
+                    b_g:"#ffebeb",
+                    t_c:"#ff0f0"
+                },
+                {
+                    label:this.$t('sys_g082'),
                     num:0,
                     b_g:"#fffee6",
                     t_c:"#f2bb16"
                 },
-                 {
-                    label: this.$t('sys_m092'),
+                {
+                    label: this.$t('sys_mat112'),
                     num:0,
                     b_g:"#dbfeff",
                     t_c:"#1dcfdb"
                 },
-                
+                {
+                    label: this.$t('sys_mat114'),
+                    num:0,
+                    b_g:"#ffebeb",
+                    t_c:"#ff0f0"
+                }
             ]
         }
     },
@@ -188,36 +177,21 @@ export default {
                 for (let k = 0; k < this.cardOption.length; k++) {
                     let item = this.cardOption[k];
                     if (k == 0) {
-                        item.num = vita.register_num||0;
-                        // item.num = "新增注册";
+                        item.num = vita.account_num||0;
                     }else if(k == 1){
-                        item.num = vita.today_new_active_user_num||0;
-                        // item.num = "新增活跃用户";
+                    item.num = vita.account_sucess_num||0;
                     }else if(k == 2){
-                       item.num = vita.today_active_user_num||0;
-                    //    item.num ="活跃用户";
+                    item.num = vita.target_num||0;
                     }else if(k == 3){
-                       item.num1 = vita.pull_fan_task_num||0;
-                        item.num = vita.today_create_group_task_num||0;
-                        // item.num = "拉群任务数"
+                    item.num = vita.push_num||0;
                     }else if(k == 4){
-                        item.num = vita.data_num||0;
-                        item.num1 = vita.pull_fan_data_num||0;
-                        // item.num = "推广资源";
+                    item.num = vita.read_rate||0;
                     }else if(k == 5){
-                        item.num = vita.bounty_amount||0;
-                        item.num1 = vita.pull_fan_bounty_amount||0;
-                    //    item.num = "任务收益";
+                    item.num = vita.reply_rate||0;
                     }else if(k == 6){
-                        item.num = vita.commission_amount||0;
-                        item.num1 = vita.pull_fan_commission_amount||0;
-                        // item.num = "返佣收益";
+                    item.num = vita.receive_msg_num||0;
                     }else if(k == 7){
-                        item.num = vita.withdraw_user_num||0;
-                        // item.num = "提现人数";
-                    }else if(k == 8){
-                         item.num = vita.withdraw_amount||0;
-                        // item.num = "提现扣款";
+                    item.num = vita.arrived_num||0;
                     }
                 }
                 this.isLoading=false;

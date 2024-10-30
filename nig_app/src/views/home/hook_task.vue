@@ -96,7 +96,7 @@
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
                             <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in hookRecordList" :key="idx">
-                                <span class="flex-item">{{ item.itime }}</span>
+                                <span class="flex-item">{{ formatTime(item.itime) }}</span>
                                 <span class="flex-item">{{item.account}}</span>
                                 <span class="flex-item">{{item.amount}}</span>
                             </div>

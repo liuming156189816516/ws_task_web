@@ -177,7 +177,7 @@ export default {
         status: 0,
         total: 0,
         offset: 1,
-        limit: 100,
+        limit: 10,
         account: "",
         ipCtime: "",
         user_account: "",

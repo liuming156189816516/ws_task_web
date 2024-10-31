@@ -414,7 +414,7 @@ export default {
     getGroupContent() {
       let params = {
         page: 1,
-        limit: 100,
+        limit: 10,
         name: this.materialName,
         type: Number(this.cardAcyive),
         group_id: this.groupForm.group_id,

@@ -21,15 +21,6 @@
         <el-form-item>
           <el-date-picker v-model="model1.ipCtime" value-format="yyyy-MM-dd HH:mm:ss" type="datetimerange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
         </el-form-item>
-        <!-- <el-form-item>
-          <el-button type="warning" :disabled="checkIdArry.length==0" @click="handleGroupBtn(1)">{{ $t('sys_rai081') }}</el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="warning" :disabled="checkIdArry.length==0" @click="handleGroupBtn(3)">{{ $t('sys_rai097') }}</el-button>
-        </el-form-item> -->
-        <!-- <el-form-item>
-          <el-button type="danger" :disabled="checkIdArry.length==0" @click="handleGroupBtn(2)">{{ $t('sys_rai082') }}</el-button>
-        </el-form-item> -->
         <el-form-item>
           <el-button icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002')}}</el-button>
           <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
@@ -42,7 +33,7 @@
     </div>
     <div class="switch_bar">
       <div class="consun_list handel_area">
-        <el-table :data="groupTaskList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading"
+        <el-table @sort-change="sorthandle" :data="groupTaskList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading"
           element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }"
           @selection-change="selectAllChange" @row-click="rowSelectChange">
           <el-table-column type="selection" width="55" />
@@ -81,20 +72,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="members" label="群成员" minWidth="120" show-overflow-tooltip />
-            <!-- <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" :content="scope.row.members" placement="top">
-                <div style="width: max-content;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.members||"-" }}</div>
-              </el-tooltip>
-            </template> -->
-          <!-- </el-table-column> -->
-          <!-- <el-table-column prop="members" label="群成员" minWidth="120">
-            <template slot-scope="scope">
-              <el-popover width="250" placement="top-start" trigger="hover" :content="scope.row.members">
-                <el-input v-model="scope.row.members"></el-input>
-              </el-popover>
-            </template>
-          </el-table-column> -->
-          <el-table-column prop="member_num" label="群成员数量" minWidth="120" />
+          <el-table-column prop="member_num" sortable label="群成员数量" minWidth="120" />
           <el-table-column prop="zq_num" label="炸群次数" minWidth="120" />
           <el-table-column prop="qid" label="群id" minWidth="140">
             <template slot-scope="scope">
@@ -122,11 +100,6 @@
               <div>{{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}</div>
             </template>
           </el-table-column>
-          <!-- <el-table-column width="100" label="操作" align="center" fixed="right">
-            <template slot-scope="scope">
-              <el-button type="danger" :disabled="checkArry.length>0" size="mini" plain @click="scamperBtn(scope.row,1)">炸群</el-button>
-            </template>
-          </el-table-column> -->
         </el-table>
         <div class="layui_page">
           <el-pagination background @size-change="limitChange" @current-change="offestChange" :page-sizes="pageOption"
@@ -170,13 +143,14 @@ export default {
         status: 0,
         total: 0,
         offset: 1,
-        limit: 100,
+        limit: 10,
         account: "",
         ipCtime: "",
         user_account: "",
         invite_link: "",
         ad_account: "",
-        task_type:""
+        task_type:"",
+        sort:""
       },
       taskForm:{
         relpy_type:"",
@@ -219,12 +193,21 @@ export default {
       this.model1.status = "";
       this.model1.account = "";
       this.model1.ipCtime = "";
+      this.model1.sort = "";
       this.model1.invite_link = "";
       this.model1.task_type = "";
       this.model1.ad_account = "";
       this.model1.user_account = "";
       this.getTaskList(1);
       // this.$refs.serveTable.clearSelection();
+    },
+    sorthandle({column, prop, order}){
+      if(order == "descending"){
+        this.model1.sort="member_num"
+      }else{
+        this.model1.sort="-member_num"
+      }
+      this.getTaskList(1);
     },
     async exportBtn(){
       const sTime = this.model1.ipCtime;
@@ -238,7 +221,8 @@ export default {
         app_account: this.model1.user_account,
         task_type:this.model1.task_type||-1,
         start_time: start_time,
-        end_time: end_time
+        end_time: end_time,
+        sort:this.model1.sort
       }
       let { data:{url} } = await dooutexcel(params);
       window.location.href = url;
@@ -260,6 +244,7 @@ export default {
         ad_account: this.model1.ad_account,
         task_type:this.model1.task_type||-1,
         start_time: start_time,
+        sort:this.model1.sort,
         end_time: end_time
       }
       getcreategroupinfolist(params).then(res => {

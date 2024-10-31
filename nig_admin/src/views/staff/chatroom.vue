@@ -1071,7 +1071,7 @@ export default {
   data() {
     return {
       f_page: 0,
-      f_limit: 100,
+     f_limit: 10,
       cardIdx: 1,
       tableIdx: 1,
       quickIdx: 1,

@@ -85,7 +85,7 @@ export default {
     data() {
         return {
             page: 1,
-            limit: 100,
+            limit: 10,
             total: 0,
             account: "",
             task_id: "",

@@ -18,7 +18,7 @@
                 <i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item :disabled="checkIdArry.length==0" v-for="(item, idx) in moreOption" :key="idx" :command="{item,idx}">
+                <el-dropdown-item :disabled="checkIdArry.length==0" v-for="(item, idx) in moreOption" :key="idx" :command="{item,idx}" v-show="idx!=0">
                   <i :class="'el-icon-' + item.icon"></i>
                   {{ item.label }}
                 </el-dropdown-item>
@@ -35,15 +35,20 @@
         <el-table @sort-change="sorthandle" :data="taskDataList" border height="660" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange">
             <el-table-column type="selection" width="55" />
             <el-table-column prop="name" :label="$t('sys_g070')" width="120" />
-            <el-table-column prop="online" :label="$t('sys_g033')+'/'+$t('sys_mat058')" minWidth="120">
+            <el-table-column prop="online" :label="$t('sys_mat058')" minWidth="120">
                 <template slot-scope="scope">
-                  {{ scope.row.online_num }}/{{ scope.row.account_num }}
+                  {{ scope.row.account_num }}
                 </template>
             </el-table-column>
             <el-table-column prop="pwd_str" :label="$t('sys_mat047')+'/'+$t('sys_g071')" minWidth="130">
                 <template slot-scope="scope">
                   {{ scope.row.sucess_num }}/{{ scope.row.send_num }}
                 </template>
+            </el-table-column>
+            <el-table-column prop="arrived_num" :label="$t('sys_mat115')" minWidth="120">
+              <template slot-scope="scope">
+                {{ scope.row.arrived_num }}
+              </template>
             </el-table-column>
             <el-table-column prop="complete_message" :label="$t('sys_g072')" minWidth="120" />
             <el-table-column prop="status" :label="$t('sys_l059')" minWidth="160">
@@ -61,18 +66,28 @@
                 <el-tag size="small" :type="scope.row.status==1?'primary':scope.row.status==2?'warning':scope.row.status==5?'success':'danger'"> {{ statusOptions[scope.row.status]||"-" }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="residue_num" :label="$t('sys_g077')" minWidth="160" />
+            <el-table-column prop="data_pack_name" :label="$t('sys_rai090')" minWidth="120">
+              <template slot-scope="scope">
+                {{ scope.row.data_pack_name||"-" }}
+              </template>
+            </el-table-column>
+            <!-- <el-table-column prop="residue_num" :label="$t('sys_g077')" minWidth="160" />
             <el-table-column prop="card_num" :label="$t('sys_g076')" minWidth="160" />
             <el-table-column prop="itime" :label="$t('sys_g078')+'/'+$t('sys_g079')" minWidth="170">
                 <template slot-scope="scope">
                   <div>{{scope.row.start_time>0?$baseFun.resetTime(scope.row.start_time*1000):"-" }}</div>
                   <div>{{scope.row.end_time>0?$baseFun.resetTime(scope.row.end_time*1000):"-" }} </div>
                 </template>
-            </el-table-column>
+            </el-table-column> -->
             <el-table-column prop="reason" :label="$t('sys_c071')" minWidth="120">
-                <template slot-scope="scope">
-                  {{ scope.row.reason||"-" }}
-                </template>
+              <template slot-scope="scope">
+                {{ scope.row.reason||"-" }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="itime" :label="$t('sys_c008')" minWidth="170">
+              <template slot-scope="scope">
+                <div>{{scope.row.itime>0?$baseFun.resetTime(scope.row.itime*1000):"-" }}</div>
+              </template>
             </el-table-column>
             <el-table-column fixed="right" :label="$t('sys_c010')" width="330">
                 <template slot-scope="scope">

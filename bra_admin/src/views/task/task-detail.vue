@@ -36,6 +36,7 @@
       <u-table @sort-change="sorthandle" :data="detailDataList" row-key="id" use-virtual border height="660" v-loading="loading"
         element-loading-spinner="el-icon-loading" style="width: 100%;" ref="opn_table" showBodyOverflow="title" :total="total" 
         :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true" @handlePageSize="pageHandle">
+        <u-table-column type="selection" width="55" />
         <u-table-column type="index" :label="$t('sys_g020')" width="60" />
         <u-table-column prop="account" :label="$t('sys_g027')" minWidth="140" />
         <u-table-column prop="status" :label="$t('sys_c022')" minWidth="100">
@@ -58,6 +59,11 @@
             {{ scope.row.sucess_num }}/{{ scope.row.send_num }}
           </template>
         </u-table-column> 
+        <el-table-column prop="arrived_num" :label="$t('sys_mat115')" minWidth="120">
+          <template slot-scope="scope">
+            {{ scope.row.arrived_num }}
+          </template>
+        </el-table-column>
         <u-table-column prop="read_rate" sortable="read_rate" :label="$t('sys_g081')" minWidth="100">
           <template slot-scope="scope">
             {{ (scope.row.read_rate*100).toFixed(2) || 0 }}%
@@ -126,10 +132,10 @@
           </el-form>
         </el-dialog>
     </div>
-  </template>
-  
-  <script>
-  import Clipboard from 'clipboard';
+</template>
+
+<script>
+import Clipboard from 'clipboard';
   import { successTips,resetPage } from '@/utils/index'
   import { getsendmsginfolist,getdatasum,doouttaskrecordexcel } from '@/api/task'
   export default {
@@ -207,6 +213,12 @@
             num:0,
             b_g:"#dbfeff",
             t_c:"#1dcfdb"
+          },
+          {
+            label: this.$t('sys_mat114'),
+            num:0,
+            b_g:"#ffebeb",
+            t_c:"#ff0f0"
           }
         ]
       }
@@ -251,6 +263,8 @@
               item.num = vita.reply_rate||0;
             }else if(k == 6){
               item.num = vita.receive_msg_num||0;
+            }else if(k == 7){
+              item.num = vita.arrived_num||0;
             }
           }
           this.isLoading=false;
@@ -338,10 +352,10 @@
       }
     }
   }
-  </script>
-  
-  <style lang="scss" scoped>
-  .title_01{
+</script>
+
+<style lang="scss" scoped>
+    .title_01{
     display: flex;
     font-size: 14px;
     margin: 0 0 10px 10px;

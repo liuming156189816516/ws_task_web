@@ -87,7 +87,7 @@ export default {
                 task_name:"",
                 total:0,
                 offset:1,
-                limit:100
+                limit: 10
             },
             type:0,
             viewImg:"",
@@ -128,7 +128,7 @@ export default {
 		//初始化消息列表
 		getNoticeList(){
             this.loading =true;
-			getmessagelist({page:1,limit:100,name:this.factorModel.task_name}).then(res =>{
+			getmessagelist({page:1,limit: 10,name:this.factorModel.task_name}).then(res =>{
                 this.loading = false;
 				this.noticeList = res.data.list || [];
 			})

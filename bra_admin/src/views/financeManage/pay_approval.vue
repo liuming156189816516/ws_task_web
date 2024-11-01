@@ -141,7 +141,7 @@ export default {
                 apy_status:"",
                 total:0,
                 offset:1,
-                limit:100
+                limit: 10
             },
             type:0,
             pay_id:[],

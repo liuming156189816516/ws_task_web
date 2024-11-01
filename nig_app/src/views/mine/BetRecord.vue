@@ -126,7 +126,6 @@ export default {
     },
     methods: {
         billDetail() {
-            this.list = [];
             let isLoading = Toast.loading({message:this.$t('other_029'),forbidClick: true});
             getbillrecordlist({
                 page: this.page,
@@ -139,8 +138,7 @@ export default {
                 this.loading = false;
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.list = [...this.list,...res.list];
-                this.total_point = res.total_point;
-            });
+            })
         },
         onLoad(){
             if(this.page >= this.page_total){

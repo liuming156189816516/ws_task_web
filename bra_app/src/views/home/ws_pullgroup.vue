@@ -155,7 +155,7 @@ export default {
 	data() {
 		return {
             page:1,
-            limit:10,
+            limit: 20,
             task_id:"",
             page_total:0,
             isScroll:true,

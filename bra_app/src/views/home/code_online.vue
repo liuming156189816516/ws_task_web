@@ -200,7 +200,7 @@ export default {
 	data() {
 		return {
             page:1,
-            limit:10,
+            limit: 20,
             showStep:false,
             page_total:0,
             timer:null,

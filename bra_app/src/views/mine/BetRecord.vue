@@ -90,7 +90,7 @@ export default {
             eTime:"",
             currentDate: "", //初始化当前时间
             page: 1,
-            limit:10,
+            limit:20,
             total: 0,
             state:0,
             list: []

@@ -444,7 +444,7 @@ export default {
             }, 1000);
 		},
         formatTime(time) {
-            return formatTime(time);
+            return formatTime(time*1000);
         },
         handleScrolStop(){
             let scrollTop = this.$refs.warpBox;

@@ -25,7 +25,7 @@ export default {
 			first_point: 0,
 			first_type: 1,
 			list: [],
-			mini_point: 100,
+			mini_point: 10,
 			put_fee: 0,
 			return_point: 0
 		},

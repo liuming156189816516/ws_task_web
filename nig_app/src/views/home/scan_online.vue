@@ -224,7 +224,7 @@ export default {
     // },
 	methods: {
         getIncomeList(){
-            getbillrecordlist({page: 1,limit: 100,task_type:1}).then(res => {
+            getbillrecordlist({page: 1,limit:10,task_type:1}).then(res => {
                 this.wsTaskList = res.list || [];
             })
         },

@@ -96,7 +96,7 @@ export default {
             eTime:"",
             list: [],
             page: 1,
-            limit: 100,
+            limit:10,
             ptype: -1,
             total: 0
         };

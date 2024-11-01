@@ -183,7 +183,7 @@ export function timetamp(time) {
 export function formatTime(date,type) {
 	// var myDate = date ? new Date(date * 1000): new Date();
 	let Afr_time = new Date().toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' });
-	const newYork = date? new Date(type == 4 ? date * 1000 : date).toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }):Afr_time;
+	const newYork = date? new Date(type == 4 ? date * 1000 : date*1000).toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }):Afr_time;
 	let myDate = new Date(newYork);
 	var Year = myDate.getFullYear(); //获取年
 	var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一

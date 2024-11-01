@@ -236,8 +236,9 @@ export default {
         },
         getIncomeList(){
             this.ref_loading = true;
-            this.pullGroupList = [];
+            // this.pullGroupList = [];
             getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:2}).then(res => {
+                this.loading = false;
                 setTimeout(()=>{this.ref_loading = false;},500);
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];

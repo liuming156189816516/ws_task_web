@@ -422,8 +422,8 @@ export default {
         },
         initHookList(){
             this.h_loading = true;
-            this.pullGroupList = [];
             getwsincomelist({page:this.page,limit:this.limit}).then(res => {
+                this.loading = false;
                 setTimeout(()=>{this.h_loading = false;},300)
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.hookRecordList = [...this.hookRecordList,...res.list] || [];

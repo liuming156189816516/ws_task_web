@@ -442,8 +442,8 @@ export default {
         },
         initWechatList(){
             this.ref_loading = true;
-            this.pullGroupList = [];
             getaccountlist({page:this.page,limit:this.limit}).then(res => {
+                this.loading = false;
                 setTimeout(()=>{this.ref_loading = false;},300)
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.pullGroupList = [...this.pullGroupList,...res.list] || [];

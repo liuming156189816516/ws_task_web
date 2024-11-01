@@ -97,7 +97,7 @@ export default {
                 task_name:"",
                 total:0,
                 offset:1,
-                limit: 10,
+                limit: 100,
             },
             type:0,
             viewImg:"",

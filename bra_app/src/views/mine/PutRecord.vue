@@ -96,10 +96,10 @@ export default {
             eTime:"",
             list: [],
             page: 1,
-            limit:10,
+            limit:20,
             ptype: -1,
             total: 0
-        };
+        }
     },
     computed:{
         profitTime(){

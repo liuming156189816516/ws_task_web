@@ -5,6 +5,9 @@
             <el-form-item>
                 <el-input clearable :placeholder="$t('sys_g006')" v-model="model1.account" />
             </el-form-item>
+            <el-form-item>
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="model1.fuser_name" />
+            </el-form-item>
             <el-form-item class="select_body">
                 <el-select class="select_ele" v-model="model1.select_sort" :placeholder="$t('sys_c052')" @change="initNumberList(1)">
                     <el-option v-for="item in selecSort" :key="item.value" :label="item.label" :value="item.value" />
@@ -274,9 +277,9 @@
                         </template>
                         <template slot-scope="scope"> {{ accountType[scope.row.account_type] }}</template>
                     </u-table-column>
-                    <u-table-column prop="fuser_name" :label="$t('sys_q134')" minWidth="100">
+                    <u-table-column prop="fuser_name" :label="$t('sys_m068')" minWidth="100">
                         <template slot-scope="scope">
-                            <span>{{ scope.row.fuser_name?scope.row.fuser_name:"-" }}</span>
+                            <span>{{ scope.row.fuser_name||"-" }}</span>
                         </template>
                     </u-table-column>
                     <u-table-column prop="first_login_time" :label="$t('sys_g014')+'/'+$t('sys_g015')" width="180">
@@ -578,6 +581,7 @@ export default {
                 account: "",
                 staff_no: "",
                 group_id: "",
+                fuser_name: "",
                 platform_type:"",
                 work_status: "",
                 custom_popover:'960px',
@@ -978,6 +982,7 @@ export default {
             this.checkIdArry = [];
             this.checkAccount = [];
             this.screenSelect = [];
+            this.model1.fuser_account="";
             this.model1.select_sort="account";
             this.initNumberList(1)
             this.$refs.serveTable.clearSelection();
@@ -1006,6 +1011,7 @@ export default {
                 offline_start_time:-1,
                 offline_end_time:-1,
                 status:this.model1.status||-1,
+                laccount:this.model1.fuser_account,
                 use_status:this.model1.use_status||-1,
                 staff_status:this.model1.staff_status||-1,
                 work_status:this.model1.work_status||-1,

@@ -6,7 +6,8 @@
             <template v-else>
             <div class="card_item" v-for="(item,idx) in cardOption" :key="idx" :style="{background:`${item.b_g}`}" @click="getStatistics">
                 <span>{{ item.label }}</span>
-                <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num+'/'+item.num1" v-if="idx==3||idx==4||idx==5||idx==6"></span>
+                <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num+'/'+item.num1" v-if="idx==3"></span>
+                  <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num2+'/'+item.num+'/'+item.num1" v-else-if="idx==4||idx==5||idx==6"></span>
                 <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num" v-else></span>
             </div>
             </template>
@@ -44,19 +45,19 @@
                             {{ scope.row.today_create_group_task_num +"/"+scope.row.pull_fan_task_num }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="100">
+                    <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="120">
                         <template slot-scope="scope">
-                            {{ scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
+                            {{ scope.row.gj_data_num +"/"+scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="100">
+                    <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="120">
                         <template slot-scope="scope">
-                            {{ scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
+                            {{ scope.row.gj_bounty_amount +"/"+scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="100">
+                    <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="120">
                         <template slot-scope="scope">
-                            {{ scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
+                            {{ scope.row.gj_commission_amount +"/"+scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
                         </template>
                     </el-table-column>
                     <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
@@ -127,7 +128,6 @@ export default {
                 {
                     label:this.$t('sys_rai122'),
                     num:0,
-                    num1:0,
                     b_g:"#ffebeb",
                     t_c:"#ff0f0"
                 },
@@ -135,6 +135,7 @@ export default {
                     label:this.$t('sys_m090'),
                     num:0,
                     num1:0,
+                    num2:0,
                     b_g:"#fffee6",
                     t_c:"#f2bb16"
                 },
@@ -142,6 +143,7 @@ export default {
                     label:this.$t('sys_m102'),
                     num:0,
                     num1:0,
+                    num2:0,
                     b_g:"#ffebeb",
                     t_c:"#ff0f0"
                 },
@@ -149,6 +151,7 @@ export default {
                     label:this.$t('sys_m103'),
                     num:0,
                     num1:0,
+                    num2:0,
                     b_g:"#f9edff",
                     t_c:"#b357ff"
                 },
@@ -163,8 +166,7 @@ export default {
                     num:0,
                     b_g:"#dbfeff",
                     t_c:"#1dcfdb"
-                },
-                
+                }
             ]
         }
     },
@@ -194,19 +196,25 @@ export default {
                         // item.num = "拉群任务数"
                     }else if(k == 4){
                         item.num = vita.data_num||0;
+                        item.num2 = vita.gj_data_num||0;
                         item.num1 = vita.pull_fan_data_num||0;
                         // item.num = "推广资源";
                     }else if(k == 5){
+                        item.num = vita.data_num||0;
+                        item.num2 = vita.gj_bounty_amount||0;
+                        item.num1 = vita.pull_fan_data_num||0;
+                        // item.num = "推广资源";
+                    }else if(k == 6){
                         item.num = vita.bounty_amount||0;
+                        item.num2 = vita.gj_commission_amount||0;
+                        console.log(vita.gj_commission_amount);
+                        
                         item.num1 = vita.pull_fan_bounty_amount||0;
                     //    item.num = "任务收益";
-                    }else if(k == 6){
+                    }else if(k == 7){
                         item.num = vita.commission_amount||0;
                         item.num1 = vita.pull_fan_commission_amount||0;
                         // item.num = "返佣收益";
-                    }else if(k == 7){
-                        item.num = vita.withdraw_user_num||0;
-                        // item.num = "提现人数";
                     }else if(k == 8){
                          item.num = vita.withdraw_amount||0;
                         // item.num = "提现扣款";

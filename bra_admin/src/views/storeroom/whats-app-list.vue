@@ -280,9 +280,9 @@
                         </template>
                         <template slot-scope="scope"> {{ accountType[scope.row.account_type] }}</template>
                     </u-table-column>
-                    <u-table-column prop="total_time" :label="$t('sys_m068')" minWidth="100">
+                    <u-table-column prop="fuser_name" :label="$t('sys_m068')" minWidth="100">
                         <template slot-scope="scope">
-                             <span>{{ scope.row.fuser_name||"-" }}</span>
+                            <span>{{ scope.row.fuser_name||"-" }}</span>
                         </template>
                     </u-table-column>
                     <u-table-column prop="total_time" :label="$t('sys_q143')" minWidth="100">

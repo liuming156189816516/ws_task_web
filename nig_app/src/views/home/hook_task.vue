@@ -68,7 +68,7 @@
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                             <span class="flex-item">{{ item.account }}</span>
                             <span class="flex-item" :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
-                            <span :class="['flex-item',item.status==2?'record_click':'']" @click="showDelBtn(item)">{{$t('other_010')}}</span>
+                            <span class="flex-item record_click" @click="showDelBtn(item)">{{$t('other_010')}}</span>
                         </div>
                         <PrevNext style="width:100%;float:left;" :len="pullGroupList.length" :total="page_total1" :limit="5" :page="l_page" @to-prev="onPrev" @to-next="onNext"></PrevNext>
                     </div>
@@ -174,7 +174,7 @@ export default {
 	data() {
 		return {
             page:1,
-            limit:100,
+            limit:20,
             l_page:1,
             showStep:false,
             page_total:0,

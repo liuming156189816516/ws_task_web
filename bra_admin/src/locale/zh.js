@@ -898,6 +898,7 @@ export default {
     'sys_q140': '',
     'sys_q141': '云控',
     'sys_q142': 'App',
+    'sys_q143': '挂机时长',
 
     'sys_p001': '财务管理',
     'sys_p002': '提现审批',

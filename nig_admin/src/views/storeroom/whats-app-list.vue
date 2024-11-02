@@ -982,6 +982,7 @@ export default {
             this.checkIdArry = [];
             this.checkAccount = [];
             this.screenSelect = [];
+            this.model1.fuser_name="";
             this.model1.fuser_account="";
             this.model1.select_sort="account";
             this.initNumberList(1)
@@ -1011,6 +1012,7 @@ export default {
                 offline_start_time:-1,
                 offline_end_time:-1,
                 status:this.model1.status||-1,
+                fuser_name:this.model1.fuser_name,
                 laccount:this.model1.fuser_account,
                 use_status:this.model1.use_status||-1,
                 staff_status:this.model1.staff_status||-1,

@@ -101,34 +101,33 @@
                 </div> -->
                 <!-- <template v-if="pullGroupList&&pullGroupList.length>0"> -->
                     <div class="record_scroll w_f flex-item flex-dir-c">
-                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                            <!-- <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                                <span class="flex-item">{{ item.account }}</span>
-                                <span class="flex-item flex-center"  :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
-                                <span class="log_out flex-item flex-align flex-center font_26">
-                                    <em class="flex-item flex-align flex-center" @click="showDelBtn(item)"> {{$t('other_010')}}</em>
-                                </span>
-                            </div> -->
-                            <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')">
-                                <el-table-column fixed prop="account" :label="$t('login_038')" width="106" />
-                                <el-table-column prop="status" :label="$t('tail_008')" width="80">
-                                    <template slot-scope="scope">
-                                        <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column prop="total_time" :label="$t('home_172')" width="80">
-                                    <template slot-scope="scope">
-                                        {{scope.row.total_time||0}}
-                                    </template>
-                                </el-table-column>
-                                <el-table-column prop="bonus" :label="$t('home_173')" width="80" />
-                                <!-- <el-table-column fixed="right" :label="$t('home_022')" width="85" align="center">
-                                    <template slot-scope="scope">
-                                        <el-button @click="showDelBtn(scope.row)" type="text" size="small">{{$t('other_010')}}</el-button>
-                                    </template>
-                                </el-table-column> -->
-                            </el-table>
-                        </van-list>
+                        <!-- <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
+                            <span class="flex-item">{{ item.account }}</span>
+                            <span class="flex-item flex-center"  :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
+                            <span class="log_out flex-item flex-align flex-center font_26">
+                                <em class="flex-item flex-align flex-center" @click="showDelBtn(item)"> {{$t('other_010')}}</em>
+                            </span>
+                        </div> -->
+                        <el-table :data="pullGroupList" size="mini" style="width: 100%" :empty-text="$t('tail_010')">
+                            <el-table-column fixed prop="account" :label="$t('login_038')" width="106" />
+                            <el-table-column prop="status" :label="$t('tail_008')" width="80">
+                                <template slot-scope="scope">
+                                    <span class="flex-item" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="total_time" :label="$t('home_172')" width="80">
+                                <template slot-scope="scope">
+                                    {{scope.row.total_time||0}}
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="bonus" :label="$t('home_173')" width="80" />
+                            <!-- <el-table-column fixed="right" :label="$t('home_022')" width="85" align="center">
+                                <template slot-scope="scope">
+                                    <el-button @click="showDelBtn(scope.row)" type="text" size="small">{{$t('other_010')}}</el-button>
+                                </template>
+                            </el-table-column> -->
+                        </el-table>
+                        <PrevNext :len="pullGroupList.length" :total="page_total" :limit="5" :page="page" @to-prev="onPrev" @to-next="onNext" />
                     </div>
                 <!-- </template> -->
                 <!-- <template v-else>
@@ -200,15 +199,15 @@ import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import uniFun from "@/utils/uni-webview-js"
 import PageHeader from "@/components/Header";
-import { getinvitefriendtasklist } from '@/api/task';
+import PrevNext from "@/components/PrevNext";
 import { getautogroupinfo,getqrcode,delaccount,submitautogrouptask,getautogroupaccountstatus,getaccountlist } from '@/api/home'
 export default {
 	name: 'scan_online',
-	components: {PageHeader},
+	components: {PageHeader,PrevNext},
 	data() {
 		return {
             page:1,
-            limit: 20,
+            limit: 5,
             showStep:false,
             page_total:0,
             timer:null,
@@ -416,7 +415,7 @@ export default {
         },
         refreshBtn(){
             this.page=1;
-            // this.getGroupMess();
+            this.ref_loading = true;
             this.initWechatList();
         },
         async getGroupMess(){
@@ -440,13 +439,20 @@ export default {
                 this.initWechatList()
             }
         },
+        onPrev() {
+            this.page--;
+            this.initWechatList();
+        },
+        onNext() {
+            this.page++;
+            this.initWechatList();
+        },
         initWechatList(){
-            this.ref_loading = true;
             getaccountlist({page:this.page,limit:this.limit}).then(res => {
                 this.loading = false;
-                setTimeout(()=>{this.ref_loading = false;},300)
-                this.page_total = Math.ceil(res.total / this.limit);
-                this.pullGroupList = [...this.pullGroupList,...res.list] || [];
+                this.ref_loading = false;
+                this.page_total = res.total;
+                this.pullGroupList = res.list;
             })
         },
         startSettime() {
@@ -835,8 +841,7 @@ export default {
             }
         }
         .record_list{
-            // max-height: 300px;
-            // overflow-y: auto;
+            height: 560px;
             padding: 0 30px;
             border-radius: 20px;;
             padding-bottom: 30px;
@@ -847,7 +852,6 @@ export default {
                 color: $home-title-12;
             }
             .record_scroll{
-                max-height: 1100px;
                 overflow-y: auto;
                 border-radius: 20px;
                 background: $font-color-white;

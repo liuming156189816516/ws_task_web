@@ -130,7 +130,6 @@ export default {
                 start_time: !this.sTime ? -1: dateStamp(this.sTime),
                 end_time: !this.eTime ? -1: dateStamp(this.eTime),
             }
-            this.list = [];
             let isLoading = Toast.loading({message:this.$t('other_029'),forbidClick: true})
             getwithdrawapprovallist(params).then(res => {
                 isLoading.clear();
@@ -144,7 +143,7 @@ export default {
                 this.finished = true;
             }else{
                 this.page++;
-                this.getIncomeList()
+                this.getPointflow()
             }
         },
         getTime(times) {

@@ -1,7 +1,8 @@
 <template>
-    <div class="buy-footer">
+    <div class="buy-footer font_28">
         <span :class="isCanPrev() ? '':'footer-disabled'" @click="isCanPrev() && toPrev()">{{$t("other_019")}}</span>
-        {{ $t("other_021",{offest:page,total:totalPage}) }}
+        <!-- {{ $t("other_021",{offest:page,total:totalPage}) }} -->
+        <em class="total_page flex-item flex-center">{{ page }}/{{ totalPage }}</em>
         <span :class="isCanNext() ? '':'footer-disabled'"  @click="isCanNext() && toNext()">{{$t("other_020")}}</span>
     </div>
 </template>
@@ -76,11 +77,8 @@ export default {
         border-radius: 23px;
         background-color: $color-theme;
     }
-    & > span:nth-child(1){
-        margin-right: 16px;
-    }
-    & > span:nth-child(2){
-        margin-left: 16px;
+    .total_page{
+        min-width: 100px;
     }
 }
 .footer-disabled {

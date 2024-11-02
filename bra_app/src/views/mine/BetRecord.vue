@@ -22,7 +22,7 @@
                     <div class="w_f flex-item flex-align flex-dir-c">
                         <div class="w_f flex-item flex-align flex-between">
                             <div class="flex-item flex-dir-c">
-                                <p class="task_bonus font_30">{{ profitType.find(val=> val.value == item.type).lable||"" }}</p>
+                                <p class="task_bonus font_30">{{profitType.find(val=> val.value == item.type)?profitType.find(val=> val.value == item.type).lable:"" }}</p>
                                 <p class="task_type font_24" v-if="item.task_type>0">{{ taskOption[item.task_type] }}</p>
                             </div>
                             <div class="task_money font_30" v-if="item.type==9" style="color:#F52C2C;">{{ item.amount }}</div>
@@ -126,7 +126,6 @@ export default {
     },
     methods: {
         billDetail() {
-            // this.list = [];
             let isLoading = Toast.loading({message:this.$t('other_029'),forbidClick: true});
             getbillrecordlist({
                 page: this.page,

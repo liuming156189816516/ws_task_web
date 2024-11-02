@@ -53,16 +53,14 @@
                     {{$t('home_169')}}：
                 </h3>
                 <div class="flex-item status_tips flex-align" @click="refreshBtn">
-                    <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
+                    <img class="refres_icon" :class="{'refres_animat':h_loading}"  src="@/assets/images/home/shuaxin.png"> 
                     {{$t('other_035')}}
                 </div>
             </div>
-            <div class="record_list w_f flex-item flex-dir-c">
+            <div class="record_list login_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('login_038')}}</span>
-                    <!-- <span class="flex-item flex-center">{{$t('home_031')}}</span> -->
                     <span class="flex-item flex-center">{{$t('tail_008')}}</span>
-                    <!-- <span class="flex-item">{{$t('spre_012')}}</span> -->
                     <span class="flex-item">{{$t('home_022')}}</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
@@ -72,6 +70,7 @@
                             <span class="flex-item" :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
                             <span :class="['flex-item',item.status==2?'record_click':'']" @click="showDelBtn(item)">{{$t('other_010')}}</span>
                         </div>
+                        <PrevNext style="width:100%;float:left;" :len="pullGroupList.length" :total="page_total1" :limit="5" :page="l_page" @to-prev="onPrev" @to-next="onNext"></PrevNext>
                     </div>
                 </template>
                 <template v-else>
@@ -87,9 +86,7 @@
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('tail_003')}}</span>
-                    <!-- <span class="flex-item flex-center">{{$t('home_031')}}</span> -->
                     <span class="flex-item flex-center">{{$t('home_020')}}</span>
-                    <!-- <span class="flex-item">{{$t('spre_012')}}</span> -->
                     <span class="flex-item">{{$t('spre_012')}}</span>
                 </div>
                 <template v-if="hookRecordList&&hookRecordList.length>0">
@@ -169,16 +166,19 @@ import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import uniFun from "@/utils/uni-webview-js"
 import PageHeader from "@/components/Header";
+import PrevNext from "@/components/PrevNext";
 import { getautogroupinfo,getqrcode,delaccount,submitautogrouptask,getautogroupaccountstatus,getaccountlist,getwsincomelist } from '@/api/home'
 export default {
 	name: 'scan_online',
-	components: {PageHeader},
+	components: {PageHeader,PrevNext},
 	data() {
 		return {
             page:1,
-            limit: 20,
+            limit:100,
+            l_page:1,
             showStep:false,
             page_total:0,
+            page_total1:0,
             timer:null,
             ws_account:"",
             // ws_account:"8138570713",
@@ -208,6 +208,7 @@ export default {
             show_code:true,
             ws_status: 0,
             ref_loading:false,
+            h_loading:false,
             account_type:"1",
             pullGroupList:[],
             countryList:[],
@@ -386,7 +387,7 @@ export default {
         },
         refreshBtn(){
             this.page=1;
-            // this.getGroupMess();
+            this.l_page=1;
             this.initWechatList();
             this.initHookList();
         },
@@ -408,23 +409,30 @@ export default {
                 this.finished = true;
             }else{
                 this.page++;
-                this.hookRecordList()
+                this.initHookList()
             }
+        },
+        onPrev() {
+            this.l_page--;
+            this.initWechatList();
+        },
+        onNext() {
+            this.l_page++;
+            this.initWechatList();
         },
         initWechatList(){
             this.ref_loading = true;
-            this.pullGroupList = [];
-            getaccountlist({page:1,limit:20}).then(res => {
+            getaccountlist({page:this.l_page,limit:5}).then(res => {
                 setTimeout(()=>{this.ref_loading = false;},300)
-                // this.page_total = Math.ceil(res.total / this.limit);
-                this.pullGroupList = [...this.pullGroupList,...res.list] || [];
+                this.page_total1 = res.total;
+                this.pullGroupList = res.list;
             })
         },
         initHookList(){
             this.h_loading = true;
             getwsincomelist({page:this.page,limit:this.limit}).then(res => {
                 this.loading = false;
-                setTimeout(()=>{this.h_loading = false;},300)
+                this.h_loading = false;
                 this.page_total = Math.ceil(res.total / this.limit);
                 this.hookRecordList = [...this.hookRecordList,...res.list] || [];
             })
@@ -444,7 +452,7 @@ export default {
             }, 1000);
 		},
         formatTime(time) {
-            return formatTime(time*1000);
+            return formatTime(time);
         },
         handleScrolStop(){
             let scrollTop = this.$refs.warpBox;
@@ -819,7 +827,7 @@ export default {
             padding: 0 30px 20px 30px;
             box-sizing: border-box;
         }
-        .record_list{
+        .record_list, .login_list{
             // max-height: 300px;
             // overflow-y: auto;
             padding: 0 30px;
@@ -874,7 +882,7 @@ export default {
                 justify-content: center !important;
             }
             .record_item{
-                height: 108px;
+                height: 88px;
                 background: $font-color-white;
                 border-bottom: 1px solid $home-title-10;
             }
@@ -903,6 +911,9 @@ export default {
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
             }
+        }
+        .login_list{
+            height: 660px;
         }
     }
     .refres_animat{

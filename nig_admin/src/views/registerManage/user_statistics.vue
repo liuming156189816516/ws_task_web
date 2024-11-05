@@ -214,8 +214,7 @@ export default {
                     }else if(k == 6){
                         item.num = vita.bounty_amount||0;
                         item.num2 = vita.gj_commission_amount||0;
-                        console.log(vita.gj_commission_amount);
-                        
+                        // console.log(vita.gj_commission_amount);
                         item.num1 = vita.pull_fan_bounty_amount||0;
                     //    item.num = "任务收益";
                     }else if(k == 7){

@@ -11,7 +11,7 @@
         <img src="@/assets/images/sgin_bg.png">
       </div> -->
       <div class="user_vip w_f flex-item flex-dir-c">
-          <p class="total_gold font_36">{{$t('spre_019')+": "+team_size}}</p>
+          <p class="total_gold font_36">{{$t('spre_019')+": "+baseInfo.his_balance}}</p>
           <div class="user_grade flex-item flex-align flex-center font_26" :class="[baseInfo.level==0?'grade_zome':'']">
             <span>V{{baseInfo.level}}</span>
           </div>
@@ -103,16 +103,12 @@ export default {
   },
   created() {
     this.$store.dispatch('User/getUserIncome');
-    this.initSgin();
-    this.getIncomeList();
+    // this.initSgin();
+    // this.getIncomeList();
     // console.log(formatTime("",2));
     // console.log(this.winNotis);
   },
   methods: {
-    async getIncomeList(){
-      let {team_size} = await getteammatesinfo();
-      this.team_size = team_size;
-    },
     initSgin(){
       getsigninfo().then(res=>{
         // console.log(res);

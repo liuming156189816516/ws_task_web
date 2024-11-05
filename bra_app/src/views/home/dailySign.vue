@@ -37,7 +37,7 @@
             </div>
           </div>
         </div>
-        <van-button class="sgin_btn flex-item flex-align flex-center" :loading="isLoading" :loading-text="$t('home_133')" :disabled="isSgin" @click="submitSgin">
+        <van-button class="sgin_btn flex-item flex-align flex-center" :loading="isLoading" :loading-text="$t('home_133')" @click="submitSgin">
           <!-- <span class="flex-item"></span> -->
           {{isSgin?$t('home_132'):$t('home_178')}}
           <!-- <img src="@/assets/images/gold_icon.png" alt=""> -->

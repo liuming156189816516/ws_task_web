@@ -14,11 +14,11 @@
                     </div>
                 </div>
                 <div class="user_vip w_f flex-item flex-dir-c">
-                    <p class="total_gold font_36" v-html="$t('mine_022',{value:baseInfo.his_balance})"></p>
+                    <p class="total_gold font_36" v-html="$t('mine_024',{value:baseInfo.his_balance})"></p>
                     <div class="user_grade flex-item flex-align flex-center font_26" :class="[baseInfo.level==0?'grade_zome':'']">
                         <span>V{{baseInfo.level}}</span>
                     </div>
-                    <p class="grade_desc font_28" v-html="$t('mine_021',{gold:baseInfo.diferencia,vip:Number(baseInfo.level)+1})"></p>
+                    <p class="grade_desc font_28" v-html="$t('mine_023',{gold:baseInfo.diferencia,vip:Number(baseInfo.level)+1})"></p>
                     <p>
                         <van-progress :percentage="baseInfo.cronograma" :show-pivot="false" track-color="#fff" color="linear-gradient(to right, #FFFF99, #FFD700)" />
                     </p>

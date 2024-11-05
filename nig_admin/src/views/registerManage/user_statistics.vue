@@ -40,6 +40,7 @@
                     <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
                     <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
                     <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
+                    <el-table-column prop="view_account_num" :label="$t('sys_mat116')" minWidth="120" />
                     <el-table-column prop="pull_total_num" :label="$t('sys_rai122')" minWidth="100">
                         <template slot-scope="scope">
                             {{ scope.row.today_create_group_task_num +"/"+scope.row.pull_fan_task_num }}
@@ -161,11 +162,17 @@ export default {
                     b_g:"#fffee6",
                     t_c:"#f2bb16"
                 },
-                 {
+                {
                     label: this.$t('sys_m092'),
                     num:0,
                     b_g:"#dbfeff",
                     t_c:"#1dcfdb"
+                },
+                {
+                    label: this.$t('sys_m073'),
+                    num:0,
+                    b_g:"#f9edff",
+                    t_c:"#b357ff"
                 }
             ]
         }
@@ -216,8 +223,11 @@ export default {
                         item.num1 = vita.pull_fan_commission_amount||0;
                         // item.num = "返佣收益";
                     }else if(k == 8){
-                         item.num = vita.withdraw_amount||0;
+                        item.num = vita.withdraw_amount||0;
                         // item.num = "提现扣款";
+                    }else if(k == 8){
+                        item.num = vita.adjust_amount||0;
+                        // item.num = "新政挂机";
                     }
                 }
                 this.isLoading=false;

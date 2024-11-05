@@ -225,7 +225,7 @@ export default {
                     }else if(k == 8){
                         item.num = vita.withdraw_amount||0;
                         // item.num = "提现扣款";
-                    }else if(k == 8){
+                    }else if(k == 9){
                         item.num = vita.adjust_amount||0;
                         // item.num = "新政挂机";
                     }

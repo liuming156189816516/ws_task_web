@@ -246,6 +246,7 @@ export default {
     mine_021:"距离<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>还需要<span style='color:#FFF000;font-weight: bold;'> {gold} </span>个金币",
     mine_022:"累计积分：<span style='color:#31acf2;font-weight: bold;'>{value}</span>",
     mine_023:"距离<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>还需要<span style='color:#FFF000;font-weight: bold;'> {gold} </span>个人",
+    mine_024:"团队人数：<span style='color:#008751;font-weight: bold;'>{value}</span>",
 
     pay_001:"提现",
     pay_002:"提现到银行卡",

@@ -246,6 +246,8 @@ export default {
     mine_021:"Aún quedan <span style='color:#FFF000;font-weight: bold;font-style: italic;'>{gold}</span> monedas de oro antes de <span class='vip_g' style='color:#FFF000;font-weight: bold;font-style: italic;'>VIP{vip}</span>",
     mine_022:"puntos acumulados: <span style='color:#FFF000;font-weight: bold;font-style: italic;'>{value}</span> oro",
     mine_023:"distancia<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>todavía necesito<span style='color:#FFF000;font-weight: bold;'> {gold} </span>personal",
+    mine_024:"Tamaño del equipo：<span style='color:#008751;font-weight: bold;'>{value}</span>",
+
 
     pay_001:"Retirar efectivo",
     pay_002:"Retirar efectivo a tarjeta bancaria",

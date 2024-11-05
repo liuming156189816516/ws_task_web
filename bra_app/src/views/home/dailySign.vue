@@ -11,7 +11,7 @@
         <img src="@/assets/images/sgin_bg.png">
       </div> -->
       <div class="user_vip w_f flex-item flex-dir-c">
-          <p class="total_gold font_36">{{$t('spre_019')+": "+baseInfo.his_balance}}</p>
+          <p class="total_gold font_36" v-html="$t('mine_024',{value:baseInfo.his_balance})"></p>
           <div class="user_grade flex-item flex-align flex-center font_26" :class="[baseInfo.level==0?'grade_zome':'']">
             <span>V{{baseInfo.level}}</span>
           </div>

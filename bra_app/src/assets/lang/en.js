@@ -246,6 +246,7 @@ export default {
     mine_021:"You still need <span style='color:#FFF000;font-weight: bold;'> {gold} </span> coins to become <span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
     mine_022:"Accumulated points: <span style='color:#31acf2;font-weight: bold;'>{value}</span>",
     mine_023:"You still need <span style='color:#FFF000;font-weight: bold;'> {gold} </span> people become <span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
+    mine_024:"Team size：<span style='color:#008751;font-weight: bold;'>{value}</span>",
 
     pay_001:"Withdraw",
     pay_002:"Withdraw to bank card",

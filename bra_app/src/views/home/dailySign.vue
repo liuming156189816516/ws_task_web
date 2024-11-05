@@ -38,8 +38,9 @@
           </div>
         </div>
         <van-button class="sgin_btn flex-item flex-align flex-center" :loading="isLoading" :loading-text="$t('home_133')" @click="submitSgin">
+          {{$t('home_178')}} 
           <!-- <span class="flex-item"></span> -->
-          {{isSgin?$t('home_132'):$t('home_178')}}
+          <!-- {{isSgin?$t('home_132'):$t('home_178')}} -->
           <!-- <img src="@/assets/images/gold_icon.png" alt=""> -->
         </van-button>
       </div>

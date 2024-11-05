@@ -17,8 +17,6 @@
                     <p class="total_gold font_36" v-html="$t('mine_022',{value:baseInfo.his_balance})"></p>
                     <div class="user_grade flex-item flex-align flex-center font_26" :class="[baseInfo.level==0?'grade_zome':'']">
                         <span>V{{baseInfo.level}}</span>
-                        <!-- <img src="@/assets/images/mine/vip_icon.png" alt="" srcset=""> -->
-                        <!-- <p class="font_34">VIP{{baseInfo.level}}</p> -->
                     </div>
                     <p class="grade_desc font_28" v-html="$t('mine_021',{gold:baseInfo.diferencia,vip:Number(baseInfo.level)+1})"></p>
                     <p>

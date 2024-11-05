@@ -163,6 +163,8 @@ export default {
     home_174:"Manténganse tanto",
     home_175:"No abierto",
     home_176:"Telegram e Instagram próximamente",
+    home_177:"recibir salario",
+    home_178:"Consíguelo ahora",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",
@@ -189,7 +191,7 @@ export default {
     spre_023:"Regístrese gratis",
     spre_024:"Recompensa de la Ruleta",
     spre_025:"Recompensa de inicio de sesión",
-    spre_026:"Descargar recompensa",
+    spre_026:"recibir salario",
 
     serv_001:"Hola, {value}",
     serv_002:"¿Cómo puedo ayudarte?",
@@ -243,6 +245,7 @@ export default {
     mine_020:"Mensajes del sistema",
     mine_021:"Aún quedan <span style='color:#FFF000;font-weight: bold;font-style: italic;'>{gold}</span> monedas de oro antes de <span class='vip_g' style='color:#FFF000;font-weight: bold;font-style: italic;'>VIP{vip}</span>",
     mine_022:"puntos acumulados: <span style='color:#FFF000;font-weight: bold;font-style: italic;'>{value}</span> oro",
+    mine_023:"distancia<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>todavía necesito<span style='color:#FFF000;font-weight: bold;'> {gold} </span>personal",
 
     pay_001:"Retirar efectivo",
     pay_002:"Retirar efectivo a tarjeta bancaria",
@@ -396,6 +399,10 @@ export default {
     other_097:"Haga clic en Actualizar. La cuenta de WhatsApp se mostrará en línea antes de enviarla.",
     other_098:"Obtener recompensas",
     other_099:"una hora x",
+    other_100: "1.La cantidad de personas en el equipo debe cumplir con los requisitos del nivel VIP",
+    other_101: "2.El número de miembros activos en línea del equipo debe alcanzar el 80%",
+    other_102: "3.El número de subordinados en línea en el equipo que han completado la tarea vinculante de WhatsApp alcanza el 80% de los miembros del equipo, haga clic en la marca de recibir salario y cambie a la página de chat oficial del gerente de servicio al cliente para verificación",
+    other_103: "4.Asegúrese de que los usuarios de nivel inferior del equipo sean miembros reales. Si hay alguna falsedad, registre de forma privada una gran cantidad de cuentas, se deducirán todas las ganancias y se eliminarán los niveles VIP, y nunca lo harán. ser contratado.",
 
     table_001:"Inicio",
     table_002:"Equipo",

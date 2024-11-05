@@ -347,7 +347,7 @@ const Helper = {
 	},
 	langOptions(){
 		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];
-		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" },{icon:"es", lang: "es", name: "es-MX" },{icon:"br", lang: "br", name: "pt-BR" }];
+		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" },{icon:"br", lang: "br", name: "pt-BR" }];
 	},
 	globalSupport(){
 		// if (this.checkBrowser()) {

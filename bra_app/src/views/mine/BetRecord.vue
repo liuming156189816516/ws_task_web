@@ -101,7 +101,7 @@ export default {
             return [this.$t('other_016'),this.$t('other_017'),this.$t('other_018'),this.$t('other_057')];
         },
         profitType(){
-            return [{lable:this.$t('other_052'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('spre_023'),value:3},{lable:this.$t('spre_024'),value:4},{lable:this.$t('spre_025'),value:5},{lable:this.$t('spre_026'),value:6},{lable:this.$t('other_027'),value:8 },{lable:this.$t('other_028'),value:9 }];
+            return [{lable:this.$t('other_052'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('spre_023'),value:3},{lable:this.$t('spre_024'),value:4},{lable:this.$t('spre_026'),value:6},{lable:this.$t('other_027'),value:8 },{lable:this.$t('other_028'),value:9 }];
         },
         taskOption(){
             return ["",this.$t('other_058'),this.$t('other_059'),this.$t('other_060')];

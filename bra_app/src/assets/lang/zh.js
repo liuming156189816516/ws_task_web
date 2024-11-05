@@ -163,6 +163,8 @@ export default {
     home_174:"敬请期待",
     home_175:"未开放",
     home_176:"Telegram 和 Instagram 即将推出",
+    home_177:"领工资",
+    home_178:"立即领取",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",
@@ -243,6 +245,7 @@ export default {
     mine_020:"系统消息",
     mine_021:"距离<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>还差<span style='color:#FFF000;font-weight: bold;'> {gold} </span>个金币",
     mine_022:"累计积分：<span style='color:#31acf2;font-weight: bold;'>{value}</span>",
+    mine_023:"距离<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>还需要<span style='color:#FFF000;font-weight: bold;'> {gold} </span>个人",
 
     pay_001:"提现",
     pay_002:"提现到银行卡",
@@ -396,6 +399,10 @@ export default {
     other_097:"点击刷新，WhatsApp 账号显示在线之后再提交",
     other_098:"获取奖励",
     other_099:"一个小时 x",
+    other_100:"1.团队人数需要达到VIP等级要求",
+    other_101:"2.团队在线活跃人数需要达到80%",
+    other_102:"3.团队在线下级完成WhatsApp绑定任务人数达到团队人数的80%,点击领取工资标记，转换到官方客服经理聊天页面进行核实",
+    other_103:"4.一定确保团队下级用户属于真实成员,如有虚假，私自套号私自大批量账号进行注册，将进行扣除所有盈利以及消除VIP等级，永不录用",
 
     table_001:"首页",
     table_002:"团队",

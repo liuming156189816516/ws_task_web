@@ -49,7 +49,7 @@
                     {{$t('home_124')}}
                 </div>
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(1)">
-                    {{$t('home_125')}}
+                    {{$t('home_177')}}
                 </div>
             </div>
             <div class="task_main w_f flex-item flex-dir-c">

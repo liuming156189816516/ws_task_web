@@ -163,6 +163,8 @@ export default {
     home_174:"Stay tuned",
     home_175:"Not open",
     home_176:"Telegram and Instagram coming soon",
+    home_177:"Receive salary",
+    home_178:"Get it now",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",
@@ -240,9 +242,11 @@ export default {
     mine_017:"Yesterday's Income",
     mine_018:"Kind tips",
     mine_019:"Old Password",
-    mine_020: "System Message",
+    mine_020:"System Message",
     mine_021:"You still need <span style='color:#FFF000;font-weight: bold;'> {gold} </span> coins to become <span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
     mine_022:"Accumulated points: <span style='color:#31acf2;font-weight: bold;'>{value}</span>",
+    mine_023:"<span style='color:#FFF000;font-weight: bold;'> {gold} </span>more people are needed to reach<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
+
     pay_001:"Withdraw",
     pay_002:"Withdraw to bank card",
     pay_003:"Withdraw to USDT account",
@@ -395,6 +399,10 @@ export default {
     other_097:"Click refresh, and submit after the WhatsApp account shows online",
     other_098:"Get rewards",
     other_099:"One hour x",
+    other_100:"1.The team size must meet the VIP level requirements",
+    other_101:"2.The number of active online members in the team needs to reach 80%",
+    other_102:'3.When the number of people who have completed the WhatsApp binding task reaches 80% of the team members, click the "Receive Salary" mark and switch to the official customer service manager chat page for verification.',
+    other_103:"4.Make sure that the team's subordinate users are real members. If there are any fake, unauthorized accounts or large-scale registrations, all profits will be deducted and the VIP level will be eliminated, and they will never be hired.",
 
     table_001:"Home",
     table_002:"Team",

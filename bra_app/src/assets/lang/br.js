@@ -161,6 +161,8 @@ export default {
     home_174:"Fique atento",
     home_175:"Não aberto",
     home_176:"Telegram e Instagram em breve",
+    home_177:"receber salário",
+    home_178:"Obtenha agora",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",
@@ -240,6 +242,7 @@ export default {
     mine_020:"Mensagem do sistema",
     mine_021:"Você ainda precisa de <span style='color:#FFF000;font-weight: bold;'> {gold} </span> moedas para se tornar <span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
     mine_022:"Pontos acumulados: <span style='color:#31acf2;font-weight: negrito;'>{value}</span>",
+    mine_023:"Ainda precisamos de <span style='color:#FFF000;font-weight: bold;'> {gold} </span> pessoas para chegar ao<span class='vip_g' style='color:#FFF000;font-weight: bold;'> VIP{vip} </span>",
 
     pay_001:"Sacar dinheiro",
     pay_002:"Retirar dinheiro para cartão bancário",
@@ -393,6 +396,10 @@ export default {
     other_097:"Clique em Atualizar. A conta do WhatsApp aparecerá online antes de enviar.",
     other_098:"Receba recompensas",
     other_099:"uma hora x",
+    other_100:"1.O número de pessoas na equipe precisa atender aos requisitos do nível VIP",
+    other_101:"2.O número de membros ativos online da equipe precisa chegar a 80%",
+    other_102:"3.Quando o número de subordinados online da equipe que concluíram a tarefa de vinculação do WhatsApp atingir 80% dos membros da equipe, clique na marca de recebimento de salário e mude para a página oficial de bate-papo do gerente de atendimento ao cliente para verificação",
+    other_103:"4.Certifique-se de garantir que os usuários de nível inferior da equipe sejam membros reais. Se houver alguma falsidade, a criação privada de um grande número de contas para registro, todos os lucros serão deduzidos e os níveis VIP serão eliminados, e eles nunca o farão. ser contratado.",
 
     table_001:"Início",
     table_002:"Equipe",

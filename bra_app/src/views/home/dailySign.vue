@@ -135,9 +135,9 @@ export default {
     },
     async submitSgin(){
       if(this.$Helper.checkBrowser()){
-				window.open(process.env.VUE_APP_TELEGRAM,"_blank");
+				window.open(process.env.VUE_APP_TG_LINK,"_blank");
 			}else{
-				uniFun.postMessage({data:process.env.VUE_APP_TELEGRAM});
+				uniFun.postMessage({data:process.env.VUE_APP_TG_LINK});
 			}
       // if(this.isSgin||!this.isTask) return this.$toast(this.$t('home_137'));
       // this.isLoading=true;

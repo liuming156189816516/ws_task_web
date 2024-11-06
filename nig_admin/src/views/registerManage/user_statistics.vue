@@ -218,8 +218,7 @@ export default {
                         item.num1 = vita.pull_fan_bounty_amount||0;
                     //    item.num = "任务收益";
                     }else if(k == 7){
-                        item.num = vita.commission_amount||0;
-                        item.num1 = vita.pull_fan_commission_amount||0;
+                        item.num = vita.withdraw_user_num||0;
                         // item.num = "返佣收益";
                     }else if(k == 8){
                         item.num = vita.withdraw_amount||0;

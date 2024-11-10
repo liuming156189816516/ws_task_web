@@ -238,7 +238,11 @@ export default {
                 this.loading = false;
                 setTimeout(()=>{this.ref_loading = false;},500);
                 this.page_total = Math.ceil(res.total / this.limit);
-                this.pullGroupList = [...this.pullGroupList,...res.list] || [];
+                if(this.page == 1){
+                    this.pullGroupList = res.list;
+                }else{
+                    this.pullGroupList = [...this.pullGroupList,...res.list] || [];
+                }
             })
         },
         copySuccess(){

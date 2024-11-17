@@ -342,8 +342,8 @@ const Helper = {
 	// console.log(randomElement);
 	defaultOption() {
 		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
-        return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:6}];
-		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:4} ,{status:1,task_info_id:"",type:3}];
+        // return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:6}];
+		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:6}];
 	},
 	langOptions(){
 		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];

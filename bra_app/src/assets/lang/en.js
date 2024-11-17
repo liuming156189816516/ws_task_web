@@ -165,6 +165,7 @@ export default {
     home_176:"Telegram and Instagram coming soon",
     home_177:"Receive salary",
     home_178:"Get it now",
+    home_179:"Today's group task has been completed and will continue tomorrow",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

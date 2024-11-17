@@ -163,6 +163,7 @@ export default {
     home_176:"Telegram e Instagram em breve",
     home_177:"receber salário",
     home_178:"Obtenha agora",
+    home_179:"A tarefa de reunião do grupo de hoje foi concluída e continuará amanhã",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

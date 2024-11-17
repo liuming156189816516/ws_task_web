@@ -264,8 +264,11 @@ export default {
             // this.$router.push("/codeOnline");
             const path = this.taskType[row.type];
             if (!getToken()) return this.$router.push("/login");
+
             if (row.type == 2) {
                 this.$router.push(path);
+            }else if(row.type==3&&row.is_open) {
+                return this.$toast(this.$t('home_179'));
             }else if(row.type == 6) {
                 return this.$toast(this.$t('home_174'));
             }else{

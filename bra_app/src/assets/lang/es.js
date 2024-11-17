@@ -165,6 +165,7 @@ export default {
     home_176:"Telegram e Instagram próximamente",
     home_177:"recibir salario",
     home_178:"Consíguelo ahora",
+    home_179:"La tarea de reunión del grupo de hoy se ha completado y continuará mañana.",
 
     spre_001:"participar",
     spre_002:"Para más actividades, haga clic para consultar",

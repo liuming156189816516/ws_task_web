@@ -165,6 +165,7 @@ export default {
     home_176:"Telegram 和 Instagram 即将推出",
     home_177:"领工资",
     home_178:"立即领取",
+    home_179:"今日拉群任务已完成,明日继续",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",

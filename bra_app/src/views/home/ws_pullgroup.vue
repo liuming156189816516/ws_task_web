@@ -11,7 +11,7 @@
                 </div>
             </div> -->
             <div class="video_box flex-item flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-a.s3.amazonaws.com/2.mp4" />
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-bx.s3.sa-east-1.amazonaws.com/lq.mp4" />
                 <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
                     <img src="@/assets/images/serveic/play_icon.png" alt="">
                 </div> -->

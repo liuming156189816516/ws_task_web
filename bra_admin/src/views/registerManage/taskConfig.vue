@@ -5,16 +5,18 @@
         </el-tabs>
         <div class="view_continer">
             <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="营销分组：" prop="market_group">
-                            <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
-                                <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <template v-if="activeIdx==0">
+                <template v-if="activeIdx==0||activeIdx==1">
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            <el-form-item label="营销分组：" prop="market_group">
+                                <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
+                                    <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </template>
+                <template v-if="activeIdx==0||activeIdx==2">
                     <el-row :gutter="20">
                         <el-col :span="18">
                             <el-form-item label="数据包：" prop="data_pack_id">

@@ -63,12 +63,14 @@ export default {
 			password: "",
 			verfyList:[],
 			pwd: "",
+			bext_id: "",
+			pixe_id: "",
 			sur_pwd: "",
 			timestamp:"",
 			user_verify: "",
 			user_code:"",
 			countTime: 60,
-			uuid: ""
+			uuid: "",
 		}
 	},
 	created() {
@@ -140,6 +142,12 @@ export default {
 				pixel_id:this.$Helper.getUrlParams("pixel_id")||"",
 				CreativeID:this.$Helper.getUrlParams("CreativeID")||""
 			};
+			// let Toast = this.$toast.loading({
+			// 	duration: 2000,
+			// 	message: this.$t('login_013'),
+			// 	forbidClick: true,
+			// 	loadingType: 'spinner',
+			// });
 			this.isLoading =true;
 			this.$store.dispatch('User/userRegister', params).then(res => {
 				this.isLoading = false;

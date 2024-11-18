@@ -138,11 +138,9 @@ export default {
 				pwd: this.pwd,
 				uuid: this.timestamp,
 				code: this.safe_code,
-				fbclid: this.bext_id,
-				pixellid: this.pixe_id,
 				finvite_Code: this.user_code,
 				click_id:this.click_id,
-				pixe_id:this.pixe_id,
+				pixel_id:this.pixel_id,
 				CreativeID:this.CreativeID
 			};
 			this.isLoading =true;

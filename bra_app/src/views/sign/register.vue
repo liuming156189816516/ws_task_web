@@ -68,10 +68,7 @@ export default {
 			user_verify: "",
 			user_code:"",
 			countTime: 60,
-			uuid: "",
-			click_id:this.$Helper.getUrlParams("click_id")||"",
-			pixe_id:this.$Helper.getUrlParams("pixel_id")||"",
-			CreativeID:this.$Helper.getUrlParams("CreativeID")||""
+			uuid: ""
 		}
 	},
 	created() {
@@ -139,9 +136,9 @@ export default {
 				uuid: this.timestamp,
 				code: this.safe_code,
 				finvite_Code: this.user_code,
-				click_id:this.click_id,
-				pixel_id:this.pixel_id,
-				CreativeID:this.CreativeID
+				click_id:this.$Helper.getUrlParams("click_id")||"",
+				pixel_id:this.$Helper.getUrlParams("pixel_id")||"",
+				CreativeID:this.$Helper.getUrlParams("CreativeID")||""
 			};
 			this.isLoading =true;
 			this.$store.dispatch('User/userRegister', params).then(res => {

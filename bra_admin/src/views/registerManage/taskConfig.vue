@@ -208,7 +208,7 @@
             }
         },
         taskOption(){
-            return ["拉群配置","拉粉配置"]
+            return ["拉群配置","拉粉配置","挂机配置"]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]

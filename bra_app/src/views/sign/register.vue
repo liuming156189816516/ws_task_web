@@ -63,27 +63,18 @@ export default {
 			password: "",
 			verfyList:[],
 			pwd: "",
-			bext_id: "",
-			pixe_id: "",
 			sur_pwd: "",
 			timestamp:"",
 			user_verify: "",
 			user_code:"",
 			countTime: 60,
 			uuid: "",
+			click_id:this.$Helper.getUrlParams("click_id")||"",
+			pixe_id:this.$Helper.getUrlParams("pixel_id")||"",
+			CreativeID:this.$Helper.getUrlParams("CreativeID")||""
 		}
 	},
 	created() {
-		let url = window.location.search;
-		if (url.indexOf("inviteCode=") > -1) {
-			this.user_code = this.$Helper.getUrlParams("inviteCode");
-		}
-		if (url.indexOf("pixellid=") > -1) {
-			this.pixe_id = this.$Helper.getUrlParams("pixellid");
-		}
-		if (url.indexOf("fbclid=") > -1) {
-			this.bext_id = this.$Helper.getUrlParams("fbclid");
-		}
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();
 		this.$store.dispatch('User/actionReport',2)
@@ -149,14 +140,11 @@ export default {
 				code: this.safe_code,
 				fbclid: this.bext_id,
 				pixellid: this.pixe_id,
-				finvite_Code: this.user_code
+				finvite_Code: this.user_code,
+				click_id:this.click_id,
+				pixe_id:this.pixe_id,
+				CreativeID:this.CreativeID
 			};
-			// let Toast = this.$toast.loading({
-			// 	duration: 2000,
-			// 	message: this.$t('login_013'),
-			// 	forbidClick: true,
-			// 	loadingType: 'spinner',
-			// });
 			this.isLoading =true;
 			this.$store.dispatch('User/userRegister', params).then(res => {
 				this.isLoading = false;

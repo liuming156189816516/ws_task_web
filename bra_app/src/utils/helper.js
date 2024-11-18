@@ -369,12 +369,21 @@ const Helper = {
 		window.likevm.$router.replace('/login');
 	},
 	//获取地址栏参数，key:参数名称
-	getUrlParams(key) {
-		let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
-		let r = window.location.search.slice(1).match(reg);
-		if (r != null) return decodeURIComponent(r[2]);
-		return null;
-	},
+	// getUrlParams(key) {
+	// 	let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+	// 	let r = window.location.search.slice(1).match(reg);
+	// 	if (r != null) return decodeURIComponent(r[2]);
+	// 	return null;
+	// },
+
+    //获取地址栏参数，key:参数名称
+    getUrlParams(key){
+        let reg = new RegExp(/[?&]([^?&=]+)=([^?&]*)/g);
+        let r_list = window.location.href.slice(1).match(reg);
+        let value = r_list&&r_list.length>0?r_list.filter(item=> { if(item.indexOf(key) > -1) return item}).join().split("=")[1]:null;
+        return value&&value!='undefined'?value:null;
+    },
+
 	//重置语言
 	initLanguage(lang) {
 		let storeLang = Cookies.get("language");

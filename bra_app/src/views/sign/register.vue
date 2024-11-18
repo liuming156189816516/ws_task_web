@@ -142,7 +142,6 @@ export default {
 				pixel_id:this.$Helper.getUrlParams("pixel_id")||"",
 				CreativeID:this.$Helper.getUrlParams("CreativeID")||""
 			};
-			console.log(params);
 			// let Toast = this.$toast.loading({
 			// 	duration: 2000,
 			// 	message: this.$t('login_013'),

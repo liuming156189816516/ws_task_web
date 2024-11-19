@@ -366,7 +366,7 @@ export default {
 	}
 	.down_list{
 		width: 200px;
-		min-height: 230px;
+		height: min-content;
 		position: absolute;
 		left: -40px;
 		top: 50px;

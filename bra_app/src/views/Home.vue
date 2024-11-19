@@ -463,7 +463,7 @@ export default {
             }
             .down_list{
                 width: 190px;
-                min-height: 230px;
+                height: min-content;
                 position: absolute;
                 right: 0px;
                 top: 55px;

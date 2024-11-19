@@ -346,8 +346,8 @@ const Helper = {
 		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:6}];
 	},
 	langOptions(){
-		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España" }];
-		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" },{icon:"br", lang: "br", name: "pt-BR" }];
+		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España",{icon:"zh", lang: "zh", name: "zh-CN" } }];
+		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"br", lang: "br", name: "pt-BR" }];
 	},
 	globalSupport(){
 		// if (this.checkBrowser()) {

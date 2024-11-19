@@ -74,6 +74,7 @@ export default {
 		}
 	},
 	created() {
+		this.$Helper.getUrlParams("inviteCode")||"";
 		this.timestamp = String(new Date().getTime());
 		this.getVerfyBtn();
 		this.$store.dispatch('User/actionReport',2)

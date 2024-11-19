@@ -345,10 +345,6 @@ const Helper = {
         // return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:6}];
 		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:6}];
 	},
-	langOptions(){
-		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España",{icon:"zh", lang: "zh", name: "zh-CN" } }];
-		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"br", lang: "br", name: "pt-BR" }];
-	},
 	globalSupport(){
 		// if (this.checkBrowser()) {
 		// 	window.open(process.env.VUE_APP_SERVEIC, "_blank");
@@ -383,12 +379,21 @@ const Helper = {
         let value = r_list&&r_list.length>0?r_list.filter(item=> { if(item.indexOf(key) > -1) return item}).join().split("=")[1]:null;
         return value&&value!='undefined'?value:null;
     },
-
+    langOptions(){
+		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España",{icon:"zh", lang: "zh", name: "zh-CN" } }];
+		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"br", lang: "br", name: "pt-BR" }];
+	},
 	//重置语言
 	initLanguage(lang) {
 		let storeLang = Cookies.get("language");
 		if(storeLang&&!lang){
-			i18n.locale = storeLang;
+            let strLang = this.langOptions().filter(item=>{item.lang == storeLang});
+            if(strLang.length==0){
+                i18n.locale = "br";
+                Cookies.set("language","br")
+            }else{
+                i18n.locale = storeLang;
+            }
 		}else{
 			let setLang = lang||"br";
 			i18n.locale = setLang;

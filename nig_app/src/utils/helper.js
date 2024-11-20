@@ -379,7 +379,13 @@ const Helper = {
 	initLanguage(lang) {
 		let storeLang = Cookies.get("language");
 		if(storeLang&&!lang){
-			i18n.locale = storeLang;
+            let strLang = this.langOptions().filter(item=>{item.lang == storeLang});
+            if(strLang.length==0){
+                i18n.locale = "en";
+                Cookies.set("language","en")
+            }else{
+                i18n.locale = storeLang;
+            }
 		}else{
 			let setLang = lang||"en";
 			i18n.locale = setLang;

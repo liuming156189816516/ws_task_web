@@ -81,9 +81,6 @@
                 </el-form-item>
             </el-form>
         </div>
-        <el-dialog title="选择素材" center :visible.sync="showSource" :close-on-click-modal="false" width="60%">
-            <material :key="source_type==1?Math.floor(new Date().getTime()):''" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
-        </el-dialog>
         <el-dialog title="添加链接" center :visible.sync="showLink" :close-on-click-modal="false" width="560px">
             <el-form size="small" :model="linkForm" :rules="linkRules" ref="linkForm" label-width="100px" class="demo-ruleForm">
                 <template v-if="source_type==2">
@@ -113,7 +110,10 @@
                 </el-form-item>
             </el-form>
         </el-dialog>
-        <el-image-viewer v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="[taskForm.qavatar]" />
+        <el-dialog title="选择素材" center :visible.sync="showSource" :close-on-click-modal="false" width="60%">
+            <material :key="source_type==1?Math.floor(new Date().getTime()):''" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
+        </el-dialog>
+        <el-image-viewer style="z-index:9999999" v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="[taskForm.qavatar]" />
     </div>
 </template>
 

@@ -375,7 +375,7 @@ const Helper = {
     //获取地址栏参数，key:参数名称
     getUrlParams(key){
         let reg = new RegExp(/[?&#]([^?&#=]+)=([^?&#]*)/g);
-        let r_list = window.location.href.slice(1).match(reg);
+        let r_list = decodeURIComponent(window.location.href).slice(1).match(reg);
         let value = r_list&&r_list.length>0?r_list.filter(item=> { if(item.indexOf(key) > -1) return item}).join().split("=")[1]:null;
         return value&&value!='undefined'?value:null;
     },

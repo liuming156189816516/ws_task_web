@@ -8,8 +8,11 @@
              <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q134')})" v-model="fuser_name" />
             </el-form-item>
-             <el-form-item>
+            <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_g144')})" v-model="user_ip" />
+            </el-form-item>
+            <el-form-item>
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_mat116')})" v-model="user_ch" />
             </el-form-item>
             <el-form-item>
                 <el-button type="warning" :disabled="checkIdArry.length==0" icon="el-icon-user" @click="pullBlackBtn(2)">{{ $t('sys_rai076',{value:$t('sys_m107')}) }}</el-button>
@@ -40,6 +43,7 @@
                         </template>
                     </u-table-column>
                     <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" />
+                    <u-table-column prop="ch" :label="$t('sys_mat116')" minWidth="100" />
                     <u-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
                         <!-- <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">
@@ -98,6 +102,7 @@ export default {
             status:"",
             account: "",
             user_ip: "",
+            user_ch: "",
             fuser_name: "",
             loading:false,
             checkIdArry:[],
@@ -126,6 +131,7 @@ export default {
         restQueryBtn(){
             this.account="";
             this.user_ip="";
+            this.user_ch="";
             this.fuser_name="";
             this.initNumberList(1)
             this.$refs.serveTable.clearSelection();
@@ -137,6 +143,7 @@ export default {
                 page: this.page,
                 limit: this.limit,
                 ip:this.user_ip,
+                ch:this.user_ch,
                 account:this.account,
                 fuser_name:this.fuser_name
             }

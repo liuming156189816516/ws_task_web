@@ -37,17 +37,17 @@
                         </template>
                     </u-table-column>
                     <u-table-column prop="account" :label="$t('sys_m062')" minWidth="130" />
-                    <u-table-column prop="user_level" :label="$t('sys_g145')" minWidth="130">
+                    <u-table-column prop="user_level" :label="$t('sys_g145')" minWidth="100">
                         <template slot-scope="scope">
                             {{scope.row.user_level||0}}
                         </template>
                     </u-table-column>
-                    <u-table-column prop="ip" :label="$t('sys_g144')" minWidth="100">
+                    <u-table-column prop="ip" :label="$t('sys_g144')" minWidth="130">
                         <template slot-scope="scope">
                             {{ scope.row.ip||"-" }}
                         </template>
                     </u-table-column>
-                    <u-table-column prop="login_ip" :label="$t('sys_c142')" minWidth="100">
+                    <u-table-column prop="login_ip" :label="$t('sys_c142')" minWidth="130">
                         <template slot-scope="scope">
                             {{ scope.row.login_ip||"-" }}
                         </template>

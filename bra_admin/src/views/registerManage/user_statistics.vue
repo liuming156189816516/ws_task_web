@@ -52,17 +52,17 @@
                     </el-table-column>
                     <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="120">
                         <template slot-scope="scope">
-                            {{ scope.row.data_num +"/"+scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
+                            {{ scope.row.gj_data_num +"/"+scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
                         </template>
                     </el-table-column>
                     <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="120">
                         <template slot-scope="scope">
-                            {{ scope.row.data_num +"/"+scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
+                            {{ scope.row.gj_bounty_amount +"/"+scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
                         </template>
                     </el-table-column>
                     <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="120">
                         <template slot-scope="scope">
-                            {{ scope.row.data_num +"/"+scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
+                            {{ scope.row.gj_commission_amount +"/"+scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
                         </template>
                     </el-table-column>
                     <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />

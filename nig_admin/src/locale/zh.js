@@ -394,6 +394,7 @@ export default {
     'sys_g142': '数据汇总',
     'sys_g143': '渠道ID',
     'sys_g144': '用户IP',
+    'sys_g145': 'VIP等级',
 
     'sys_m001': '云控系统菜单',
     'sys_m002': '新增菜单',

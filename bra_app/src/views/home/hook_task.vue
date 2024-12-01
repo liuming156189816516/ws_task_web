@@ -841,7 +841,7 @@ export default {
             }
         }
         .record_list{
-            height: 560px;
+            // height: 560px;
             padding: 0 30px;
             border-radius: 20px;;
             padding-bottom: 30px;
@@ -855,8 +855,8 @@ export default {
                 overflow-y: auto;
                 border-radius: 20px;
                 background: $font-color-white;
-                // border-bottom-left-radius: 20px;
-                // border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
             }
             .title_top{
                 height: 100px;

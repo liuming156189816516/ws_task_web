@@ -625,6 +625,7 @@ export default {
     'sys_mat114': '成功送达粉丝',
     'sys_mat115': '已送达',
     'sys_mat116': '新增挂机',
+    'sys_mat117': '挂机时长',
 
     'sys_rai001': '养号模式',
     'sys_rai002': '辅助模式',

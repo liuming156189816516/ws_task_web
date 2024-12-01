@@ -58,32 +58,47 @@
                 </div>
             </div>
             <div class="record_list login_list w_f flex-item flex-dir-c">
-                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
+                <!-- <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('login_038')}}</span>
                     <span class="flex-item flex-center">{{$t('tail_008')}}</span>
                     <span class="flex-item">{{$t('home_022')}}</span>
+                </div> -->
+                <!-- <template v-if="pullGroupList&&pullGroupList.length>0"> -->
+                <div class="record_scroll w_f flex-item flex-dir-c">
+                     <el-table style="width:100%" :data="pullGroupList" size="mini" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
+                        <el-table-column fixed prop="account" :label="$t('login_038')" minwidth="100" />
+                        <el-table-column prop="status" :label="$t('tail_008')" minwidth="100">
+                            <template slot-scope="scope">
+                                <span class="flex-item flex-center" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="total_time" :label="$t('home_172')" width="90">
+                            <template slot-scope="scope">
+                                {{scope.row.total_time||0}}
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="bonus" :label="$t('home_173')" width="90" />
+                        <!-- <el-table-column fixed="right" :label="$t('home_022')" width="85" align="center">
+                            <template slot-scope="scope">
+                                <el-button @click="showDelBtn(scope.row)" type="text" size="small">{{$t('other_010')}}</el-button>
+                            </template>
+                        </el-table-column> -->
+                    </el-table>
+                    <!-- <PrevNext :len="pullGroupList.length" :total="page_total" :limit="5" :page="page" @to-prev="onPrev" @to-next="onNext" /> -->
+                    <PrevNext :len="pullGroupList.length" :total="page_total1" :limit="5" :page="l_page" @to-prev="onPrev" @to-next="onNext" />
                 </div>
-                <template v-if="pullGroupList&&pullGroupList.length>0">
-                    <div class="record_scroll w_f flex-item flex-dir-c">
-                        <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                            <span class="flex-item">{{ item.account }}</span>
-                            <span class="flex-item" :style="'color:'+(item.status!=2?'#D32C2C':'#28C445')">{{statusOption[item.status]}}</span>
-                            <span class="flex-item record_click" @click="showDelBtn(item)">{{$t('other_010')}}</span>
-                        </div>
-                        <PrevNext style="width:100%;float:left;" :len="pullGroupList.length" :total="page_total1" :limit="5" :page="l_page" @to-prev="onPrev" @to-next="onNext"></PrevNext>
-                    </div>
-                </template>
+                <!-- </template>
                 <template v-else>
                     <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
                         <img src="@/assets/images/empty_icon.png" alt="" srcset="">
                         <p class="font_28">{{$t('tail_010')}}</p>
                     </div>
-                </template>
+                </template> -->
             </div>
-            <div class="born_record w_f flex-item flex-dir-c">
+            <!-- <div class="born_record w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('mine_010')}}</h3>
-            </div>
-            <div class="record_list w_f flex-item flex-dir-c">
+            </div> -->
+            <!-- <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('tail_003')}}</span>
                     <span class="flex-item flex-center">{{$t('home_020')}}</span>
@@ -106,7 +121,7 @@
                         <p class="font_28">{{$t('tail_010')}}</p>
                     </div>
                 </template>
-            </div>
+            </div> -->
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
@@ -312,7 +327,7 @@ export default {
         this.countryList = this.$Helper.countryList();
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         this.initWechatList();
-        this.initHookList();
+        // this.initHookList();
     },
     mounted(){
         setTimeout(()=>{
@@ -433,7 +448,7 @@ export default {
             getwsincomelist({page:this.page,limit:this.limit}).then(res => {
                 this.loading = false;
                 this.h_loading = false;
-                this.page_total = Math.ceil(res.total / this.limit);
+                // this.page_total = Math.ceil(res.total / this.limit);
                 this.hookRecordList = [...this.hookRecordList,...res.list] || [];
             })
         },
@@ -840,15 +855,13 @@ export default {
                 color: $home-title-12;
             }
             .record_scroll{
-                max-height: 1100px;
                 overflow-y: auto;
-                // border-radius: 20px;
+                border-radius: 20px;
                 background: $font-color-white;
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
             }
             .title_top{
-                height: 100px;
                 padding: 0 40px;
                 flex-shrink: 0;
                 box-sizing: border-box;
@@ -911,9 +924,6 @@ export default {
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
             }
-        }
-        .login_list{
-            height: 660px;
         }
     }
     .refres_animat{

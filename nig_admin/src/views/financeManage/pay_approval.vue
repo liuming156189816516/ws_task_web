@@ -30,6 +30,11 @@
 						</template>
                     </el-table-column> -->
                     <el-table-column prop="account" :label="$t('sys_c009')" minWidth="120" align="center" />
+                    <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center">
+                        <template slot-scope="scope">
+                            {{ drawOption[scope.row.type]}}
+						</template>
+                    </el-table-column>
                     <el-table-column prop="card_no" :label="$t('sys_p004')" minWidth="100" align="center">
                         <template slot-scope="scope">
                             <el-tooltip class="item" effect="dark" :content="scope.row.card_no" placement="top">
@@ -37,10 +42,9 @@
                             </el-tooltip>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="bank_name" :label="$t('sys_l111')" minWidth="120" align="center" />
-                    <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center">
+                    <el-table-column prop="bank_name" :label="$t('sys_l111')" minWidth="120" align="center">
                         <template slot-scope="scope">
-                            {{ drawOption[scope.row.type]}}
+                            {{ scope.row.bank_name||"-"}}
 						</template>
                     </el-table-column>
                     <el-table-column prop="payee_name" :label="$t('sys_p005')" minWidth="100" align="center">

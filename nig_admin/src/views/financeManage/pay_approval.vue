@@ -30,13 +30,19 @@
 						</template>
                     </el-table-column> -->
                     <el-table-column prop="account" :label="$t('sys_c009')" minWidth="120" align="center" />
-                    <el-table-column prop="card_no" :label="$t('sys_p004')" minWidth="100" align="center" />
+                    <el-table-column prop="card_no" :label="$t('sys_p004')" minWidth="100" align="center">
+                        <template slot-scope="scope">
+                            <el-tooltip class="item" effect="dark" :content="scope.row.card_no" placement="top">
+                                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.card_no||"-" }}</div>
+                            </el-tooltip>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="bank_name" :label="$t('sys_l111')" minWidth="120" align="center" />
-                    <!-- <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center" /> -->
-                        <!-- <template slot-scope="scope">
+                    <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center">
+                        <template slot-scope="scope">
                             {{ drawOption[scope.row.type]}}
 						</template>
-                    </el-table-column> -->
+                    </el-table-column>
                     <el-table-column prop="payee_name" :label="$t('sys_p005')" minWidth="100" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.payee_name||"-" }}
@@ -49,9 +55,9 @@
                     </el-table-column>
                     <el-table-column prop="txid" :label="$t('sys_m080')" minWidth="140">
                         <template slot-scope="scope">
-                        <el-tooltip class="item" effect="dark" :content="scope.row.txid" placement="top">
-                            <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.txid||"-" }}</div>
-                        </el-tooltip>
+                            <el-tooltip class="item" effect="dark" :content="scope.row.txid" placement="top">
+                                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.txid||"-" }}</div>
+                            </el-tooltip>
                         </template>
                     </el-table-column>
                     <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
@@ -192,7 +198,7 @@ export default {
             return [this.$t('sys_l053'),this.$t('sys_p007'),this.$t('sys_p008'),this.$t('sys_p017')]
         },
         drawOption(){
-            return ["",this.$t('sys_p013'),this.$t('sys_p014')]
+            return ["",this.$t('sys_p013'),this.$t('sys_p021')]
         }
     },
 	mounted() {

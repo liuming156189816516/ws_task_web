@@ -115,7 +115,6 @@ export default {
     },
     methods: {
         changeType(val){
-            this.collectCard="";
             this.curIndex = val;
         },
         syncInitApi(){

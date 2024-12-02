@@ -20,12 +20,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="share_box">
-					<div class="share_link">
+				<div class="share_box w_f flex-item flex-between">
+					<div class="share_link flex-item flex-align">
 						<span class="account_name" v-text="curIndex==1?$t('login_026')+'：':$t('pay_041')+'：'"></span>
 						<span class="account_text" v-text="card_no&&curIndex==1||card_no&&curIndex==2?card_no:$t('pay_042',{value:$t('login_038')})"></span>
 					</div>
-					<div class="share_btn" @click="bindCardBtn">
+					<div class="share_btn flex-item" @click="bindCardBtn">
 						<van-button type="primary">{{curIndex==1||curIndex==2&&card_no?$t('pay_008'):curIndex==1&&card_no?$t('pay_008'):$t('pay_007')}}</van-button>
 					</div>
 				</div>
@@ -334,15 +334,11 @@ export default {
 			}
 		}
 		.share_box{
-			width: 100%;
-			display: flex;
 			padding: 38px 32px;
 			box-sizing: border-box;
 			background: #FFE9E9;
 			border-radius: 20px;
 			.share_link, .share_btn{
-				flex-grow: 1;
-				// justify-content: space-between;
 				.van-button{
 					width: 56px;
 					height: 24px;
@@ -355,27 +351,24 @@ export default {
 				}
 			}
 			.share_link{
-				display: flex;
+				width: calc(100% - 140px);
+				flex-grow: 1.2;
+				flex-shrink: 0;
 				font-size: 28px;
-				// flex-wrap: wrap;
-				align-items: center;
 				.account_name{
+					flex-shrink: 0;
 					font-weight: 400;
 					color: #666666;
 				}
 				.account_text{
-					width: max-content;
 					color:#999999;
 					overflow: hidden;
-					text-overflow:ellipsis;
-					white-space: nowra
+					white-space: nowrap;
+					text-overflow: ellipsis;
 				}
 				p:nth-child(2){
 					color: #F52C2C;
 				}
-			}
-			.share_btn{
-				flex-grow: 0;
 			}
 		}
 	}

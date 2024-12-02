@@ -139,6 +139,7 @@ export default {
 				uuid: this.timestamp,
 				code: this.safe_code,
 				finvite_Code: this.user_code,
+				device:this.$Helper.checkApkBag(1),
 				ch:this.$Helper.getUrlParams("ch")||"",
 				click_id:this.$Helper.getUrlParams("click_id")||"",
 				pixel_id:this.$Helper.getUrlParams("pixel_id")||"",

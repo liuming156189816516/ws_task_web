@@ -149,7 +149,8 @@ export default {
 				code: this.safe_code,
 				fbclid: this.bext_id,
 				pixellid: this.pixe_id,
-				finvite_Code: this.user_code
+				finvite_Code: this.user_code,
+				device:this.$Helper.checkApkBag(1)
 			};
 			// let Toast = this.$toast.loading({
 			// 	duration: 2000,

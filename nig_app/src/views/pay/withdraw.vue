@@ -7,7 +7,7 @@
             </van-tabs> -->
 			<div class="draw_main">
 				<div class="card_box">
-					<div class="card">
+					<div class="card flex-item flex-dir-c">
 						<div class="title">
 							<span>{{ $t('pay_004') }}</span>
 						</div>
@@ -15,18 +15,18 @@
 							<img src="@/assets/images/gold_icon.png">
 							{{ WithdMoney || 0 }}≈{{ income_naira || 0 }}<span>{{ $t('pay_024') }}</span>
 						</div>
-						<div class="btn_withdraw">
+						<div class="btn_withdraw flex-item flex-center">
 							<van-button type="primary" @click="submitBtn">{{ $t('pay_005') }}</van-button>
 						</div>
 					</div>
 				</div>
 				<div class="share_box">
 					<div class="share_link">
-						<span class="account_name" v-text="curIndex==0?$t('login_026')+'：':$t('pay_014')+'：'"></span>
-						<span class="account_text" v-text="curIndex==0?card_no||$t('pay_006'):card_no||$t('pay_014',{value:$t('pay_014')})"></span>
+						<span class="account_name" v-text="curIndex==1?$t('login_026')+'：':$t('pay_041')+'：'"></span>
+						<span class="account_text" v-text="card_no&&curIndex==1||card_no&&curIndex==2?card_no:$t('pay_042',{value:$t('login_038')})"></span>
 					</div>
 					<div class="share_btn" @click="bindCardBtn">
-						<van-button type="primary">{{curIndex==0&&card_no?$t('pay_008'):curIndex==1&&card_no?$t('pay_008'):$t('pay_007')}}</van-button>
+						<van-button type="primary">{{curIndex==1||curIndex==2&&card_no?$t('pay_008'):curIndex==1&&card_no?$t('pay_008'):$t('pay_007')}}</van-button>
 					</div>
 				</div>
 			</div>
@@ -59,7 +59,10 @@
 				<van-cell-group inset :border="false" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
 					<van-field v-model="withdraw_num" type="number" clearable placeholder="0" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</van-cell-group>
-				<div class="auto_computed">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.8}}{{ $t('pay_024') }}</div>
+				<div class="auto_computed">
+					<span v-if="curIndex==2">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.004}}{{ $t('pay_040') }}</span>
+					<span v-else>{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.8}}{{ $t('pay_024') }}</span>
+				</div>
 				<div class="custom_dialog__footer">
 					<van-button class="custom_dialog_cancel" @click="showModel=false">{{ $t('other_007') }}</van-button>
 					<span class="model_line"></span>
@@ -81,7 +84,7 @@ export default {
 			card_no:"",
 			bank_name:"",
 			payee_name:"",
-			curIndex:"0",
+			curIndex:"1",
 			WithdMoney:0,
 			bank_code:"",
 			identify_Num:"",
@@ -134,7 +137,8 @@ export default {
             })
         },
 		async getBankInfo(){
-			let { card_no,bank_name,payee_name,code } = await getwithdrawcard({type:Number(this.curIndex)+1});
+			let { card_no,bank_name,payee_name,code,type } = await getwithdrawcard();
+			this.curIndex = type||"1";
 			this.bank_code = code||"";
 			this.card_no = card_no||"";
 			this.bank_name = bank_name||"";
@@ -155,7 +159,7 @@ export default {
 		},
 		submitBtn() {
 			this.withdraw_num = "";
-			let payIdx = Number(this.curIndex+1);
+			let payIdx = this.curIndex;
 			if(!this.is_withdraw) return this.$toast(this.$t('pay_029'));
 			if(payIdx==1&&!this.card_no){
 				return this.$toast(this.$t('other_001',{value:this.$t('pay_013')}));
@@ -176,7 +180,7 @@ export default {
 				return this.$toast(this.$t('pay_028',{value:this.withdraw_cash}));
 			}
 			let params = {
-				type:Number(this.curIndex)+1,
+				type:Number(this.curIndex),
 				code:this.bank_code,
 				card_no:this.card_no,
 				bank_name:this.bank_name,
@@ -206,7 +210,7 @@ export default {
 		},
 		bindCardBtn(){
 			// this.$router.push("/personCenter");
-			this.$router.push({path:'/personCenter', query: { type:Number(this.curIndex)+1 } });
+			this.$router.push({path:'/personCenter', query: {type:String(this.curIndex)} });
 		}
 	},
 };
@@ -261,19 +265,14 @@ export default {
 			box-sizing: border-box;
 			.card_box {
 				width: 100%;
-				margin-bottom: 24px;
-				padding-top: 30px;
+				margin: 24px 0;
 				.card {
-					height: 447px;
+					padding: 52px 0;
 					background-color: $color-theme;
-					border-radius: 10px;
 					text-align: center;
 					border-radius: 20px;
 					.title {
-						padding-top: 64px;
 						font-size: 28px;
-						// color: rgb(102, 102, 102);
-						// 
 						span {
 							vertical-align: middle;
 							color: #fff;
@@ -316,14 +315,13 @@ export default {
 					}
 					.btn_withdraw {
 						width: 100%;
-						float: left;
 						padding: 0 50px;
-						// margin-top: 57px;
+						margin-top: 40px;
 						box-sizing: border-box;
 						.van-button {
-							width: 100%;
-							padding: 0;
+							padding: 0 30px;
 							height: 44px;
+							line-height: 44px;
 							border-radius: 44px;
 							font-size: 0.32rem;
 							font-weight: bold;

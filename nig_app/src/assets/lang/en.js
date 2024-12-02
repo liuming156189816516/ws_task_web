@@ -281,6 +281,11 @@ export default {
     pay_035:"Add a payment account based on the actual payment information. If an error occurs, the account will not be credited!",
     pay_036:"{value} bank account",
     pay_037:"Identification number",
+    pay_038:"Withdrawal Type",
+    pay_039:"bank card",
+    pay_040:"TRX",
+    pay_041:"TRX Address",
+    pay_042:"Please add {value}",
 
     tail_001:"income details",
     tail_002:"type",

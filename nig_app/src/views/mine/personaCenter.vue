@@ -2,6 +2,13 @@
     <div class="person_c">
         <page-header :title="$t('pay_023')" :show-icon="true" :bgColor="true"></page-header>
         <div class="person_content">
+            <div class="user_info w_f flex-item flex-content-l">
+                <div class="lable_text">{{$t('pay_038')}}</div>
+                <van-radio-group class="w_f flex-item flex-dir-r" v-model="curIndex" @change="changeType">
+                    <van-radio name="1" shape="square">{{$t('pay_039')}}</van-radio>
+                    <van-radio name="2" shape="square">{{$t('pay_040')}}</van-radio>
+                </van-radio-group>
+            </div>
             <template v-if="curIndex==1">
                 <div class="user_info">
                     <span class="lable_text">{{ $t('pay_006') }}</span>
@@ -38,10 +45,10 @@
                     <van-field v-model="openBranch" placeholder="请输入开户支行" :border="false" />
                 </div> -->
             </template>
-            <template v-else-if="curIndex==2">
+            <template v-else>
                 <div class="user_info alipay_info">
-                    <span class="lable_text">{{ $t('pay_014') }}</span>
-                    <van-field v-model="collectCard" :placeholder="$t('other_001',{value:$t('pay_014')})" :border="false" />
+                    <span class="lable_text">{{ $t('pay_041') }}</span>
+                    <van-field v-model="collectTRX" :placeholder="$t('other_001',{value:$t('pay_041')})" :border="false" oninput="value=value.replace(/[\u4E00-\u9FA5]/g,'')" />
                 </div>
             </template>
             <!-- <div class="user_info">
@@ -77,12 +84,14 @@ export default {
     components: { PageHeader},
     data() {
         return {
+            curIndex:"1",
             bank_id:"",
             bankName:"",
             bankCode:"",
             numberId:"",
             accountType:"",
             collectCard:"",
+            collectTRX:"",
             collectName:"",
             openBranch:"",
             usdtCard:"",
@@ -101,10 +110,14 @@ export default {
         }
     },
     created() {
-        this.curIndex = this.$route.query.type;
+        this.curIndex = this.$route.query.type||"2";
         this.syncInitApi();
     },
     methods: {
+        changeType(val){
+            this.collectCard="";
+            this.curIndex = val;
+        },
         syncInitApi(){
             let fun1 = new Promise((resolve,reject)=>{
                 getlistbanks().then(res =>{
@@ -112,18 +125,19 @@ export default {
                 })
             });
             let fun2 = new Promise((resolve,reject)=>{
-                getwithdrawcard({type:1}).then(res =>{
+                getwithdrawcard().then(res =>{
                     resolve(res)
                 })
             });
             Promise.all([fun1,fun2]).then( res => {
-                const [bankList,{id,bank_name,card_no,payee_name,code}] = res;
+                const [bankList,{id,bank_name,card_no,payee_name,code,type}] = res;
                 this.bankOption = bankList.banks||[];
                 this.bank_id = id||"";
                 this.bankCode = code||"";
                 this.bankName = bank_name||"";
-                this.collectCard = card_no||"";
                 this.collectName = payee_name||"";
+                this.collectCard = type==1?card_no:"";
+                this.collectTRX = type==2?card_no:"";
             })
         },
         showBank(idx){
@@ -154,16 +168,15 @@ export default {
                 params ={
                     ptype:this.bank_id?2:1,
                     type:Number(this.curIndex),
-                    card_no:this.collectCard
+                    card_no:this.collectTRX
                 }
             }
-            console.log(params);
             this.bank_id?params.id=this.bank_id:"";
             if(this.curIndex==1&&!this.collectCard){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_006')}))
             }else if(this.curIndex==1&&!this.bankName){
                 return this.$toast(this.$t('other_014',{value:this.$t('pay_021')}))
-            }else if(this.curIndex==2&&!this.collectCard){
+            }else if(this.curIndex==2&&!this.collectTRX){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
             }else if(this.curIndex==1&&!this.collectName){
                 return this.$toast(this.$t('other_001',{value:this.$t('pay_022')}))
@@ -184,11 +197,17 @@ export default {
             padding: 0 !important;
         }
     }
+    .van-radio__icon--checked .van-icon{
+        border-color: $color-theme !important;
+        background-color: $color-theme;
+    }
 </style>
 <style lang="scss" scoped>
 .person_c {
     width: 100%;
     float: left;
+    height: 100%;
+    overflow: hidden;
     font-size: 28px;
     background-color: #f2f2f2;
     .person_content{
@@ -213,11 +232,13 @@ export default {
                 width: 260px;
                 color: #969799;
                 line-height: 28px;
-                float: left;
+                flex-shrink: 0;
+            }
+            .van-radio-group{
+                gap: 20px;
             }
             .van-icon{
                 float: right;
-                // margin-top: 10px;
             }
             .van-cell{
                 width: 3.5rem;

@@ -287,6 +287,7 @@ export default {
     pay_040:"TRX",
     pay_041:"TRX地址",
     pay_042:"请添加 {value}",
+    pay_043:"1金币 = 0.004TRX",
 
     tail_001:"收益明细",
     tail_002:"类型",

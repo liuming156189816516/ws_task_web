@@ -11,9 +11,11 @@
 						<div class="title">
 							<span>{{ $t('pay_004') }}</span>
 						</div>
-						<div class="amount van-ellipsis">
+						<div class="amount van-ellipsis flex-item flex-align">
 							<img src="@/assets/images/gold_icon.png">
-							{{ WithdMoney || 0 }}≈{{ income_naira || 0 }}<span>{{ $t('pay_024') }}</span>
+							<div class="flex-item flex-align">
+								{{ WithdMoney || 0 }}≈{{ curIndex==2?income_trx||0:income_naira||0}}<span>{{ curIndex==2?$t('pay_040'):$t('pay_024') }}</span>
+							</div>
 						</div>
 						<div class="btn_withdraw flex-item flex-center">
 							<van-button type="primary" @click="submitBtn">{{ $t('pay_005') }}</van-button>
@@ -48,6 +50,10 @@
 				<div class="title_item">
 					<van-tag type="warning" />
 					{{ $t('pay_026') }}
+				</div>
+				<div class="title_item">
+					<van-tag type="warning" />
+					{{ $t('pay_043') }}
 				</div>
 			</div>
 		</div>
@@ -88,6 +94,7 @@ export default {
 			WithdMoney:0,
 			bank_code:"",
 			identify_Num:"",
+			income_trx:0,
 			income_naira:0,
 			userInfo:"",
 			account_type:"",
@@ -128,8 +135,9 @@ export default {
                 })
             });
             Promise.all([fun1,fun2]).then( res => {
-                const [{income,income_naira},{limit_amount,limit_count,limit_count_status}] = res;
+                const [{income,income_naira,income_trx},{limit_amount,limit_count,limit_count_status}] = res;
 				this.WithdMoney = income||0;
+				this.income_trx = income_trx||0;
 				this.income_naira = income_naira||0;
 				this.withdraw_times = limit_count||0;
 				this.withdraw_cash = limit_amount||0;
@@ -284,11 +292,10 @@ export default {
 						}
 					}
 					.amount {
-						display: flex;
 						color: #fff;
-						margin-top: 40px;
 						font-size: 75px;
 						font-weight: 500;
+						margin-top: 30px;
 						align-items: center;
 						justify-content: center;
 						font-family: 'Arial MT';

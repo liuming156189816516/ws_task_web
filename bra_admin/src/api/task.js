@@ -124,6 +124,13 @@ export const getmarketgroupgrouptwo = (params) =>{
   return request({url:'/marketgroup/getmarketgroupgrouptwo',method:'post',data:params})
 }
 
+export const getaimessagelist = (params) =>{
+  return request({url:'/aimessage/getaimessagelist',method:'post',data:params})
+}
+export const doaimessage = (params) =>{
+  return request({url:'/aimessage/doaimessage',method:'post',data:params})
+}
+
 
 
 

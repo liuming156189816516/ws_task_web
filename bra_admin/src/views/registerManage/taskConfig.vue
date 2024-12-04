@@ -27,6 +27,15 @@
                         </el-col>
                     </el-row>
                 </template>
+                <template v-if="activeIdx==2">
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            <el-form-item :label="$t('sys_l080')+'：'" prop="data_link">
+                                <el-input v-model="taskForm.data_link" :placeholder="$t('sys_mat061',{value:$t('sys_l080')})" />
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </template>
                 <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item :label="$t('sys_q131')+'：'" prop="materialData" class="custom_say">
@@ -169,6 +178,7 @@
             data_pack_id:"",
             relpy_text:"",
             ym_group_id:"",
+            data_link:"",
             is_announcement:1,
             materialData:[],
             qavatar:""
@@ -198,7 +208,8 @@
                 market_group: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
                 data_pack_id: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
                 is_announcement: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                materialData: [{required: true, required: true, message: this.$t('sys_c052'), trigger: 'change' }]
+                materialData: [{required: true, required: true, message: this.$t('sys_c052'), trigger: 'change' }],
+                data_link: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_l080')}), trigger: 'blur' }]
             }
         },
         linkRules(){
@@ -206,11 +217,11 @@
                 link_title: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }],
                 link_address: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }],
                 card_type: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                card_text: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }]
+                card_text: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }],
             }
         },
         taskOption(){
-            return ["拉群配置","拉粉配置","挂机配置"]
+            return ["拉群配置","拉粉配置","AI配置"]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]
@@ -300,6 +311,7 @@
                     });
                     let params = {
                         ptype:Number(this.activeIdx)+1,
+                        link:this.taskForm.data_link,
                         market_group_id:this.taskForm.market_group,
                         data_pack_id:this.taskForm.data_pack_id,
                         material_list:materialItem

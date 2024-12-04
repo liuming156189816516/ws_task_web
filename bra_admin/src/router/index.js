@@ -422,6 +422,15 @@ export const asyncRoutes = [
       },
       {
         hidden: true,
+        path: '/group-task',
+        component: () => import('@/views/task/ai-group-task'),
+        name: 'group-task',
+        meta: {
+          title:i18n.t('sys_m033')+i18n.t('sys_m113')
+        }
+      },
+      {
+        hidden: true,
         path: '/lucky_details',
         component: () => import('@/views/registerManage/lucky_detail'),
         name: 'lucky_details',

@@ -260,6 +260,7 @@
             if(data.material_list&&data.material_list.length>0){
                 this.taskForm.market_group=data.market_group_id;
                 this.taskForm.data_pack_id=data.data_pack_id;
+                this.taskForm.data_link=data.link;
                 let materialItem = data.material_list.map(item => {
                     if (item.type === 7) {
                         return {...item,content:JSON.parse(item.content)};

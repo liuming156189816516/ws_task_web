@@ -120,7 +120,7 @@
             </el-form>
         </el-dialog>
         <el-dialog title="选择素材" center :visible.sync="showSource" :close-on-click-modal="false" width="60%">
-            <material :key="source_type==1?Math.floor(new Date().getTime()):''" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
+            <material :key="source_type?Math.floor(new Date().getTime()):''" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
         </el-dialog>
         <el-image-viewer style="z-index:9999999" v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="[taskForm.qavatar]" />
     </div>
@@ -137,7 +137,6 @@
       return {
         totalNum:0,
         activeIdx:"0",
-        source_type:"",
         is_index:"",
         loading:false,
         imgModel:false,
@@ -145,6 +144,7 @@
         showLink:false,
         isLoading:false,
         showSource:false,
+        source_type:null,
         childMess:{
             check:false,
             is_show:1,
@@ -237,6 +237,7 @@
     },
     methods:{
         handleClick(enent){
+            this.source_type = null;
             this.activeIdx = enent.index;
             this.taskForm.market_group="";
             this.taskForm.data_pack_id="";
@@ -389,6 +390,14 @@
         cloneImgpreview(e) {
             if (e.target.getAttribute('class') === 'el-image-viewer__mask') {
                 this.imgModel = false;
+            }
+        }
+    }
+    ,
+    watch:{
+        showSource(val){
+            if(!val){
+                this.source_type = null;
             }
         }
     }

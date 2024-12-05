@@ -16,7 +16,7 @@
                     </div>
                     <div class="w_f flex-item flex-between">
                         <div class="task_item">
-                            <p class="task_text font_24">{{$t('home_002')}}</p>
+                            <p class="task_text font_24">{{$t('home_188')}}</p>
                             <p class="task_num flex-item font_28">{{ total_bonus }}</p>
                         </div>
                         <div class="task_sure_time">
@@ -72,7 +72,7 @@
                         <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                             <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
-                            <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                            <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                             <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
                             <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
                             <div class="title_04 flex-item flex-align flex-center" v-if="!item.img_url">
@@ -96,9 +96,9 @@
                         <p class="font_28">{{$t('spre_013')}}</p>
                     </div>
                 </template>
-                <div class="title_top footer_tips w_f flex-item font_24">
+                <!-- <div class="title_top footer_tips w_f flex-item font_24">
                     {{$t('spre_014')}}
-                </div>
+                </div> -->
             </div>
         </div>
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
@@ -730,6 +730,9 @@ export default {
                 height: 108px;
                 background: $font-color-white;
                 border-bottom: 1px solid $home-title-10;
+                .jump_un_link{
+                    color: $color-theme;
+                }
             }
             .record_item:last-child{
                 border-bottom: 1px solid transparent;

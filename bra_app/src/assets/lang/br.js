@@ -172,6 +172,7 @@ export default {
     home_185:"Clique na conta para abrir automaticamente o WhatsApp, clique no botão enviar e salve a captura de tela após o envio.",
     home_186:"Clique para fazer upload da imagem. A conta de envio da imagem deve corresponder individualmente à conta no lado esquerdo da tarefa.",
     home_187:"cabelo privado Tarefa",
+    home_188:"Bônus da tarefa",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

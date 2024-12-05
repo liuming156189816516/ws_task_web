@@ -199,9 +199,9 @@ export default {
     },
     checkSelectable(row){
         if (row.status === 3) {
-            return true
+          return true
         } else {
-            return false
+          return false
         }
     },
     selectAllChange(row) {
@@ -214,7 +214,7 @@ export default {
         refsElTable.toggleRowSelection(row, false);
         return;
       }
-      if (row.status === 1) {
+      if (row.status === 3) {
         refsElTable.toggleRowSelection(row, true);
       }
     },

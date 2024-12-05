@@ -4,7 +4,7 @@
     <div class="condition_warp select_warp">
       <el-form size="small" inline>
         <el-form-item>
-          <el-input v-model="model1.user_account" clearable placeholder="请输入用户账号"  style="width:180px;" />
+          <el-input v-model="model1.account" clearable placeholder="请输入用户账号"  style="width:180px;" />
         </el-form-item>
         <!-- <el-form-item>
           <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
@@ -128,7 +128,6 @@ export default {
         limit: 10,
         account: "",
         ipCtime: "",
-        user_account: "",
         invite_link: "",
         ad_account: "",
         task_type:"",

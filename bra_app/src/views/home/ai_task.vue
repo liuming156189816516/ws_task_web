@@ -307,7 +307,6 @@ export default {
             this.getIncomeList();
         },
         refreshBtn(){
-            this.getGroupMess();
             this.getIncomeList();
         },
         onLoad(){

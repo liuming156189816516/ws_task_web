@@ -59,7 +59,6 @@ export default {
 			state.appList = value;
 		},
 		store_info: (state, data) => {
-			console.log(data);
 			const {token,user_info:{uid,account,invite_code,tutorial_list}} = data;
 			state.uid = uid;
 			state.token = token;

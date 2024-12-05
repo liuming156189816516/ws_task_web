@@ -20,5 +20,13 @@ export const getinvitefriendtasklist = (params = {}) => {
 export const submitgrouplinktask = (params = {}) => {
     return request({url: '/account/submitgrouplinktask$',method: 'post',data:params})
 }
+export const getaimsginfo = (params = {}) => {
+    return request({url: '/account/getaimsginfo$',method: 'post',data:params})
+}
+export const uploadfile = (params)=> {
+    return request({url:'/account/upload',method:'post',data:params})
+}
+
+
 
 

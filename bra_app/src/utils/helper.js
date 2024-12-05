@@ -381,7 +381,7 @@ const Helper = {
     },
     langOptions(){
 		// return [{ lang: "zh", name: "zh_CN" },{ lang: "es", name: "España",{icon:"zh", lang: "zh", name: "zh-CN" } }];
-		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"br", lang: "br", name: "pt-BR" }];
+		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"br", lang: "br", name: "pt-BR" },{icon:"zh", lang: "zh", name: "zh-CN" }];
 	},
 	//重置语言
 	initLanguage(lang) {

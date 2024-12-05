@@ -31,7 +31,7 @@
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
                     <span class="flex-item flex-align">{{$t('tail_003')}}</span>
-                    <span class="flex-item flex-center">{{$t('tail_008')}}</span>
+                    <span class="flex-item flex-center">{{$t('home_021')}}</span>
                     <span class="flex-item">{{$t('spre_012')}}</span>
                     <span class="flex-item">{{$t('home_022')}}</span>
                 </div>

@@ -21,5 +21,3 @@ export const getwithdrawapprovallist = (params = {}) => {
 export const getwithdrawconfig = (params = {}) => {
     return request({url: '/account/getwithdrawconfig',method: 'post',data:params})
 }
-
-

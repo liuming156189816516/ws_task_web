@@ -59,6 +59,7 @@ export default {
 			state.appList = value;
 		},
 		store_info: (state, data) => {
+			console.log(data);
 			const {token,user_info:{uid,account,invite_code,tutorial_list}} = data;
 			state.uid = uid;
 			state.token = token;
@@ -78,6 +79,9 @@ export default {
 					}
 					if(tutorial_list[k] === 3){
 						localStorage.setItem('step_03',true);
+					}
+					if(tutorial_list[k] === 4){
+						localStorage.setItem('step_04',true);
 					}
 				}
 			}

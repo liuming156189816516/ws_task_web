@@ -1,56 +1,42 @@
 <template>
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
-        <div class="task_mian w_f">
+        <div class="task_mian w_f flex-item flex-dir-c">
             <page-header :title="$t('home_044')" :show-icon="true" :bgcolor="false" />
-            <!-- <div class="share_bonus w_f flex-item flex-dir-c">
-                <p class="Win_l font_72 flex-item">{{$t('home_104')}}</p>
-                <p class="Win_r font_72 flex-item">{{$t('home_105')}}</p>
-                <div class="share_rule flex-item flex-center" @click="showRule">
-                    <img src="@/assets/images/mill/rules_icon.png" alt="" srcset="">
-                    <span class="flex-item font_26">{{$t('spre_003')}}</span>
-                </div>
-            </div> -->
-            <div class="video_box flex-item flex-item flex-align flex-center mg_24">
+            <div class="video_box flex-item flex-align flex-center mg_24">
                 <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-bx.s3.sa-east-1.amazonaws.com/lq.mp4" />
-                <!-- <div v-if="palyIdx!=1" class="paly_btn w_f h_f flex-item flex-align flex-center" @click="palyVideo(1)">
-                    <img src="@/assets/images/serveic/play_icon.png" alt="">
-                </div> -->
             </div>
             <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">
                     <div class="w_f flex-item flex-between">
                         <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
-                        <div class="right_refresh flex-item font_24" @click="refreshBtn" id="step_04">
+                        <div class="right_refresh flex-item font_24" @click="refreshBtn" id="step_03">
                             <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
                             {{$t('other_035')}}
                         </div>
                     </div>
                     <div class="w_f flex-item flex-between">
                         <div class="task_item">
-                            <p class="task_text font_24">{{$t('home_107')}}</p>
-                            <p class="task_num font_28">{{ teamStemp.ser_no }}</p>
+                            <p class="task_text font_24">{{$t('home_002')}}</p>
+                            <p class="task_num flex-item font_28">{{ total_bonus }}</p>
                         </div>
                         <div class="task_sure_time">
-                            <p class="task_text font_24">{{$t('home_108')}}</p>
+                            <p class="task_text flex-item font_24">{{$t('home_184')}}</p>
                             <p class="task_num flex-item font_28">
-                                <span :style="{color:teamStemp.status==2?'#31acf2':teamStemp.status==3?'#ff9600':teamStemp.status==4?'#008751':'#F52C2C'}">
+                                {{finish_count}}/{{total_count}}
+                                <!-- <span :style="{color:teamStemp.status==2?'#31acf2':teamStemp.status==3?'#ff9600':teamStemp.status==4?'#008751':'#F52C2C'}">
                                     {{taskOption[teamStemp.status]}}
-                                </span>
-                                <van-count-down :time="taskTime" />
+                                </span> -->
+                                <!-- <van-count-down :time="taskTime" /> -->
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="task_win_bonus w_f flex-item flex-align flex-center font_32">Complete task to win bonus</div> -->
         </div>
         <div class="task_box_main">
-            <div class="task_warp w_f flex-item">
+            <!-- <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
                     <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <!-- <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num1_icon.png">
-                        </div> -->
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_037')}}</div>
                         </div>
@@ -59,25 +45,7 @@
                             <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                     </div>
-
-                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num2_icon.png">
-                        </div>
-                        <div class="task_award w_f">
-                            <div class="task_book font_28">{{$t('home_121')}}</div>
-                            <div class="task_desc font_20">{{$t('home_122')}}</div>
-                        </div>
-                        <div class="w_f flex-item flex-between flex-align font_24">
-                            <span class="show_account"></span>
-                            <van-button type="primary" @click="openWhatsapp">{{$t('home_123')}}</van-button>
-                        </div>
-                    </div> -->
-
                     <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <!-- <div class="task_name w_f flex-item">
-                            <img src="@/assets/images/home/num2_icon.png">
-                        </div> -->
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>
@@ -87,28 +55,41 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="record_legend w_f flex-item flex-dir-c">
+            </div> -->
+            <!-- <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
-            </div>
+            </div> -->
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
-                    <span class="flex-item flex-align">{{$t('tail_003')}}</span>
+                    <span class="flex-item flex-align">{{$t('login_038')}}</span>
                     <span class="flex-item flex-center">{{$t('home_021')}}</span>
                     <span class="flex-item">{{$t('spre_012')}}</span>
                     <span class="flex-item">{{$t('home_022')}}</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
-                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                                <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                                <span class="flex-item flex-center" :style="{color:item.status==2?'#31acf2':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
-                                <span class="flex-item" style="font-weight: bold;">{{ item.amount }}</span>
-                                <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
+                        <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
+                        <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
+                            <span class="jump_un_link flex-item" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
+                            <span class="flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                            <span class="flex-item" v-if="item.status!=1" style="font-weight: bold;">{{ item.bonus }}</span>
+                            <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
+                            <div class="flex-item flex-align" v-if="!item.img_url">
+                                <span class="upload_icon flex-item flex-align">
+                                    <template>
+                                        <van-button id="step_02" :disabled="is_upload" :loading="file_uuid==item.uuid&&is_upload" :loading-text="is_upload?$t('home_183'):''" plain :icon="require(`@/assets/images/home/up_icon.png`)">
+                                            {{$t('home_181')}}
+                                            <input v-if="!is_upload" :ref="'upload'+idx" class="file_input" accept=".png,.jpg,.jpeg" type="file" @change="checkDataIsUse(item,idx)" />
+                                        </van-button>
+                                    </template>
+                                </span>
                             </div>
-                        </van-list>
+                            <span v-else class="flex-item flex-align flex-center" @click="viewImg(item.img_url)">
+                                <img class="group_img" :src="item.img_url" alt="" srcset="">
+                            </span>
+                        </div>
+                        <!-- </van-list> -->
                     </div>
                 </template>
                 <template v-else>
@@ -139,6 +120,13 @@
                 <button @click="done" class="next_step">{{$t('home_162')}}</button>
             </template>
         </vue-intro-step>
+        <van-image-preview v-model="showImg" :images="images" :close-on-click-image="false" >
+            <template #image="{ src }">
+                <video style="width: 100%;" controls>
+                <source :src="src" />
+                </video>
+            </template>
+        </van-image-preview>
     </div>
 </template>
 
@@ -146,8 +134,8 @@
 import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
-import { getinvitefriendtasklist } from '@/api/task';
-import { getcreatetaskinfo,submitcreatetask,dotutorialstatus } from '@/api/home'
+import { getaimsginfo,uploadfile } from '@/api/task';
+import { submitcreatetask,dotutorialstatus } from '@/api/home'
 import uniFun from "@/utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
@@ -157,7 +145,9 @@ export default {
             page:1,
             limit: 20,
             task_id:"",
+            file_uuid:"",
             page_total:0,
+            showImg:false,
             isScroll:true,
             isShow:false,
             loading:false,
@@ -167,10 +157,16 @@ export default {
             group_link:'',
             target_url:'',
             chrome_url:'',
+            message:'',
+            total_bonus:0,
+            total_count:0,
+            finish_count:0,
+            is_upload:false,
             isLoading:false,
             ref_loading:false,
             taskTime: null,
             taskList:[],
+            images:[],
             pullGroupList:[],
             showStep:false,
             config: {
@@ -189,7 +185,7 @@ export default {
                         el: '#step_01',
                         tipPosition: 'bottom',
                         title: this.$t('home_150'),
-                        content: this.$t('home_155'),
+                        content: this.$t('home_185'),
                         onNext: () => {
                             return new Promise((resolve, reject) => {
                                 setTimeout(() => {resolve(true);},300);
@@ -200,7 +196,7 @@ export default {
                         el: '#step_02',
                         tipPosition: 'top',
                         title: this.$t('home_151'),
-                        content: this.$t('home_163'),
+                        content: this.$t('home_186'),
                         onPrev: () => {
                             return new Promise((resolve) => {
                                 resolve(true);
@@ -212,19 +208,19 @@ export default {
                             })
                         }
                     },
+                    // {
+                    //     el: '#step_03',
+                    //     tipPosition: 'top',
+                    //     title: this.$t('home_152'),
+                    //     content: this.$t('home_164'),
+                    //     onNext: () => {
+                    //         return new Promise((resolve) => {
+                    //             resolve(true);
+                    //         })
+                    //     }
+                    // },
                     {
                         el: '#step_03',
-                        tipPosition: 'top',
-                        title: this.$t('home_152'),
-                        content: this.$t('home_164'),
-                        onNext: () => {
-                            return new Promise((resolve) => {
-                                resolve(true);
-                            })
-                        }
-                    },
-                    {
-                        el: '#step_04',
                         tipPosition: 'bottom',
                         title: this.$t('home_153'),
                         content: this.$t('home_159'),
@@ -255,26 +251,18 @@ export default {
 	},
     created(){
         this.isScroll = false;
-        
         this.timestamp = Math.floor(new Date().getTime() / 1000);
-        // this.task_id = this.$Helper.getUrlParams("id");
         this.task_id = this.$route.query.id||"";
-        this.getGroupMess();
+        // this.getGroupMess();
     },
     mounted(){
         this.getIncomeList();
-        this.$nextTick(()=>{
-            const isTips = JSON.parse(localStorage.getItem('step_01'));
-            if(!isTips){
-                this.showStep=true;
-            }
-        })
     },
 	methods: {
         async done(){
-            localStorage.setItem('step_01',true);
+            localStorage.setItem('step_04',true);
             this.showStep = false;
-            await dotutorialstatus({ptype:1});
+            await dotutorialstatus({ptype:4});
         },
         skip(){
             this.$refs.myIntroStep.next()
@@ -285,20 +273,36 @@ export default {
         prev(){
             this.$refs.myIntroStep.prev()
         },
-        async getGroupMess(){
-           let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
-           let groupData = this.$Helper.aesDecrptHost(group_task);
-           this.teamStemp = groupData;
-        //    console.log(groupData);
-           this.taskList = groupData.targets;
-           this.target_url = groupData.target_url;
-           this.chrome_url = groupData.chrome_url;
-           this.task_id = groupData.task_info_id;
-           this.group_link = groupData.invite_link;
-           this.isShow = groupData.status==1||groupData.status==2?false:true;
-           this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
-        //    console.log(this.taskTime);
-        //    localStorage.setItem('task_id',this.task_id);
+        viewImg(url){
+            this.images = [];
+            this.images.push(url);
+            this.showImg=true;
+        },
+        async checkDataIsUse(row,idx){
+            const fileAccept = ['png','jpg','jpeg'];
+            const files = this.$refs['upload'+idx][0].files[0]; 
+            let fileType = files.type.split("/").pop(); 
+            if (fileAccept.indexOf(fileType) == -1) {
+                this.$refs['upload'+idx][0].value = null;
+                return this.$toast(this.$t("home_181",{value:String(fileAccept)}));
+            }
+            let formData = new FormData();
+            formData.append('file', files);
+            formData.append('uuid', row.uuid);
+            formData.append('phone', row.phone);
+            this.is_upload=true;
+            this.file_uuid = row.uuid;
+            let res = await uploadfile(formData);
+            this.is_upload=false;
+            if(res.code) return;
+            for (let k = 0; k < this.pullGroupList.length; k++) {
+                let item = this.pullGroupList[k];
+                if(item.uuid == row.uuid){
+                    item.img_url=res.url;
+                }
+                this.$set(this.pullGroupList,k,item)
+            }
+            this.getIncomeList();
         },
         refreshBtn(){
             this.getGroupMess();
@@ -314,14 +318,22 @@ export default {
         },
         getIncomeList(){
             this.ref_loading = true;
-            getinvitefriendtasklist({page:this.page,limit:this.limit,task_type:1}).then(res => {
+            getaimsginfo({page:this.page,limit:this.limit,task_type:1}).then(res => {
                 this.loading = false;
+                this.message = res.content;
+                this.total_bonus = res.total_bonus;
+                this.total_count = res.total_count;
+                this.finish_count = res.finish_count;
                 setTimeout(()=>{this.ref_loading = false;},500)
                 this.page_total = Math.ceil(res.total / this.limit);
                 if(this.page == 1){
                     this.pullGroupList = res.list;
                 }else{
                     this.pullGroupList = [...this.pullGroupList,...res.list] || [];
+                }
+                const isTips = JSON.parse(localStorage.getItem('step_04'));
+                if(!isTips){
+                    this.showStep=true;
                 }
             })
         },
@@ -394,6 +406,13 @@ export default {
             this.isScroll = false;
             let scrollTop = this.$refs.warpBox;
             scrollTop.scrollTo({top: 0,behavior:"smooth"});
+        },
+        jumpWsSend(row){
+            if(this.$Helper.checkBrowser()){
+                window.open(`https://wa.me/${row.phone}?text=${this.message}`,"_blank");
+            }else{
+                uniFun.postMessage({data:`https://wa.me/${row.phone}?text=${this.message}`});
+            }
         }
 	}
 };
@@ -435,7 +454,7 @@ export default {
             opacity: 0;
         }
         .task_mian{
-            height: 1048px;
+            // height: 1048px;
             position: relative;
             // background: #E6F2EF;
             // background: url('../../assets/images/home/task_001.png') no-repeat;
@@ -476,9 +495,18 @@ export default {
                     color: $home-title-06;
                     margin-bottom: 12px;
                 }
+                .task_sure_time{
+                    .task_text{
+                        justify-content: flex-end !important;
+                    }
+                    .task_num{
+                        justify-content: center;
+                    }
+                }
                 .task_num{
                     color: $home-title-12;
                     font-weight: bold;
+                    justify-content: center;
                     .van-count-down{
                         width: 60px;
                         color: $home-title-02;
@@ -495,7 +523,7 @@ export default {
             }
         }
         .task_box_main{
-            margin-top: -365px;
+            // margin-top: -365px;
             // background: #E6F2EF;
             // background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
         }
@@ -507,9 +535,6 @@ export default {
                 padding: 0 30px;
                 gap: 30px;
                 box-sizing: border-box;
-                // background: url('../../assets/images/home/jinbi.png') no-repeat;
-                // background-size: cover;
-                // background-position: 0 40px;
                 .task_item{
                     height: 210px;
                     padding: 16px 0 0 20px;
@@ -633,6 +658,36 @@ export default {
                 span{
                     flex: 1;
                 }
+                .upload_icon{
+                    position: relative;
+                    width: max-content;
+                    .van-button{
+                        height: initial;
+                        position: relative;
+                        width: 108px;
+                        border-radius: 8px;
+                        padding: 4px 10px;
+                        color: $home-title-03;
+                        z-index: 1;
+                        border-color: $color-theme;
+                        .van-button__icon{
+                            font-size: 28px;
+                        }
+                        input{
+                            opacity: 0;
+                            width: 100% !important;
+                            height: 100% !important;
+                            position: absolute;
+                            opacity: 0;
+                            top: 0;
+                            left: 0;
+                        }
+                    }
+                }
+                .group_img{
+                    width: 72px;
+                    height: 72px;
+                }
             }
             .task_title_head {
                 border-top-left-radius: 20px;
@@ -643,7 +698,7 @@ export default {
             //     border-top-right-radius: 20px;
             // }
             span:nth-child(3){
-                // flex-grow: 0.8;
+                flex-grow: 0.6;
                 justify-content: center;
             }
             span:nth-child(4){

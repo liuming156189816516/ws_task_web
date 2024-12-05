@@ -110,7 +110,7 @@
                         </div> -->
                         <el-table style="width:100%" :data="pullGroupList" size="mini" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
                             <el-table-column fixed prop="account" :label="$t('login_038')" minwidth="100" />
-                            <el-table-column prop="status" :label="$t('tail_008')" minwidth="100">
+                            <el-table-column prop="status" :label="$t('home_021')" minwidth="100">
                                 <template slot-scope="scope">
                                     <span class="flex-item flex-center" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
                                 </template>

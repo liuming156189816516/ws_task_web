@@ -173,7 +173,7 @@ export default {
     home_184:"Task Progress",
     home_185:"Click the account to automatically open WhatsApp, click the send button, and take a screenshot after sending.",
     home_186:"Click to upload a picture. The account to send the picture should correspond to the account on the left side of the task.",
-    home_187:"Private task",
+    home_187:"Promotion tasks",
     home_188:"Mission Bonus",
 
     spre_001:"Groups",

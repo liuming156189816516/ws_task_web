@@ -1,7 +1,7 @@
 <template>
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
         <div class="task_mian w_f flex-item flex-dir-c">
-            <page-header :title="$t('home_044')" :show-icon="true" :bgcolor="false" />
+            <page-header :title="$t('home_187')" :show-icon="true" :bgcolor="false" />
             <div class="video_box flex-item flex-align flex-center mg_24">
                 <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-bx.s3.sa-east-1.amazonaws.com/lq.mp4" />
             </div>

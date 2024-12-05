@@ -64,7 +64,7 @@
           </el-table-column>
           <el-table-column prop="img_url" label="图片" minWidth="120">
             <template slot-scope="scope">
-                <img style="width:32px;height:32px;" :src="scope.row.img_url">
+                <img style="width:32px;height:32px;cursor: pointer;" :src="scope.row.img_url" @click="showImg(scope.row.img_url)">
               <!-- <el-tooltip class="item" effect="dark" :content="scope.row.remark" placement="top">
                 <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.remark||"-" }}</div>
               </el-tooltip> -->
@@ -110,6 +110,7 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+    <el-image-viewer v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="imgList" />
   </div>
 </template>
 
@@ -117,6 +118,7 @@
 import { successTips, resetPage } from '@/utils/index'
 import { getaimessagelist,getsysconfig,upsysconfig,doaimessage,dooutexcel } from '@/api/task'
 export default {
+   components: { 'el-image-viewer': () => import('element-ui/packages/image/src/image-viewer') },
   data() {
     return {
       model1: {
@@ -139,8 +141,10 @@ export default {
         relpy_text:"",
       },
       type: 0,
+      imgList:[],
       checkArry:[],
       loading: false,
+      imgModel: false,
       auto_scamper:null,
       groupTaskList: [],
       isLoading: false,
@@ -317,6 +321,19 @@ export default {
       }
       let { data:{url} } = await dooutexcel(params);
       window.location.href = url;
+    },
+    showImg(img) {
+      this.imgList = [];
+      this.imgList.push(img)
+      this.imgModel = true;
+    },
+    closeViewer(){
+      this.imgModel=false;
+    },
+    cloneImgpreview(e) {
+      if (e.target.getAttribute('class') === 'el-image-viewer__mask') {
+        this.imgModel = false;
+      }
     }
   }
 }

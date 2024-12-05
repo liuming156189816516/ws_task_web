@@ -330,7 +330,7 @@ export default {
                     this.pullGroupList = [...this.pullGroupList,...res.list] || [];
                 }
                 const isTips = JSON.parse(localStorage.getItem('step_04'));
-                if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList.length[0].img_url){
+                if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList[0].img_url){
                     this.showStep=true;
                 }
             })
@@ -687,12 +687,14 @@ export default {
                     position: relative;
                     width: max-content;
                     .van-button{
-                        height: initial;
+                        display: flex;
+                        height: 34px;
                         position: relative;
                         // width: 108px;
                         width: 52px;
+                        flex-shrink: 0;
                         border-radius: 8px;
-                        padding: 4px 10px;
+                        padding: 0 10px;
                         color: $home-title-03;
                         z-index: 1;
                         border-color: $color-theme;

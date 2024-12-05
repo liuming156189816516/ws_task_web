@@ -100,6 +100,10 @@
                     {{$t('spre_014')}}
                 </div> -->
             </div>
+            <div class="record_legend w_f flex-item flex-dir-c">
+                <h3 class="font_28">{{$t('spre_009')}}</h3>
+                <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
+            </div> 
         </div>
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">

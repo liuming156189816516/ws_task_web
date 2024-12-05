@@ -39,6 +39,9 @@
 .flex-dir-r{
   flex-direction: row;
 }
+.flex-dir-r-end{
+  justify-content: flex-end !important;
+}
 .font_10 {
   font-size: 10px;
 }

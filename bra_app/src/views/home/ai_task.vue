@@ -61,31 +61,29 @@
                 <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
             </div> -->
             <div class="record_list w_f flex-item flex-dir-c">
-                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
-                    <span class="flex-item flex-align">{{$t('login_038')}}</span>
-                    <span class="flex-item flex-center">{{$t('home_021')}}</span>
-                    <span class="flex-item">{{$t('spre_012')}}</span>
-                    <span class="flex-item">{{$t('home_022')}}</span>
+                <div class="title_top task_title_head w_f flex-item flex-align font_24">
+                    <span class="title_01 flex-item flex-align">{{$t('login_038')}}</span>
+                    <span class="title_02 flex-item flex-center">{{$t('home_021')}}</span>
+                    <span class="title_03 flex-item flex-center">{{$t('spre_012')}}</span>
+                    <span class="title_04 flex-item">{{$t('home_022')}}</span>
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                            <span class="jump_un_link flex-item" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
-                            <span class="flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
-                            <span class="flex-item" v-if="item.status!=1" style="font-weight: bold;">{{ item.bonus }}</span>
+                            <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
+                            <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==3?'#ff9600':item.status==4?'#008751':'#F52C2C'}">{{statusOption[item.status]}}</span>
+                            <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
                             <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
-                            <div class="flex-item flex-align" v-if="!item.img_url">
-                                <span class="upload_icon flex-item flex-align">
-                                    <template>
-                                        <van-button id="step_02" :disabled="is_upload" :loading="file_uuid==item.uuid&&is_upload" :loading-text="is_upload?$t('home_183'):''" plain :icon="require(`@/assets/images/home/up_icon.png`)">
-                                            {{$t('home_181')}}
-                                            <input v-if="!is_upload" :ref="'upload'+idx" class="file_input" accept=".png,.jpg,.jpeg" type="file" @change="checkDataIsUse(item,idx)" />
-                                        </van-button>
-                                    </template>
+                            <div class="title_04 flex-item flex-align flex-center" v-if="!item.img_url">
+                                <span class="upload_icon flex-item">
+                                    <van-button id="step_02" :disabled="is_upload" :loading="file_uuid==item.uuid&&is_upload" plain :icon="require(`@/assets/images/home/up_icon.png`)">
+                                        <!-- {{$t('home_181')}} -->
+                                        <input v-if="!is_upload" :ref="'upload'+idx" class="file_input" accept=".png,.jpg,.jpeg" type="file" @change="checkDataIsUse(item,idx)" />
+                                    </van-button>
                                 </span>
                             </div>
-                            <span v-else class="flex-item flex-align flex-center" @click="viewImg(item.img_url)">
+                            <span v-else class="title_03 w_f flex-item flex-align flex-center" @click="viewImg(item.img_url)">
                                 <img class="group_img" :src="item.img_url" alt="" srcset="">
                             </span>
                         </div>
@@ -332,7 +330,7 @@ export default {
                     this.pullGroupList = [...this.pullGroupList,...res.list] || [];
                 }
                 const isTips = JSON.parse(localStorage.getItem('step_04'));
-                if(!isTips){
+                if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList.length[0].img_url){
                     this.showStep=true;
                 }
             })
@@ -644,34 +642,62 @@ export default {
                 font-weight: bold;
                 color: $home-title-12;
             }
-            .record_scroll{
-                max-height: 1100px;
-                overflow-y: auto;
-                background: $font-color-white;
-            }
+
             .title_top{
                 height: 100px;
-                padding: 0 40px;
-                flex-shrink: 0;
+                padding: 10px 30px;
                 box-sizing: border-box;
                 background: $home-title-10;
-                span{
+                // span{
+                //     flex-shrink: 0;
+                // }
+                .title_01, .title_01, .title_01, .title_01{
+                    flex-shrink: 0;
+                }
+                .title_01{
                     flex: 1;
                 }
+                .title_02{
+                    flex: 1.2;
+                }
+                .title_03{
+                    flex: 0.8;
+                }
+                .title_04{
+                    flex: 0.8;
+                }
+
+                // span:nth-child(1){
+                //     flex-grow: 1;
+                //     flex-shrink: 0;
+                //     background: salmon;
+                // }
+                // span:nth-child(2){
+                //     flex-grow: 2;
+                //     flex-shrink: 0;
+                // }
+                // span:nth-child(3){
+                //     flex-grow: 0.6;
+                //     justify-content: center;
+                // }
+                // span:nth-child(4){
+                //     flex-grow: 0.6;
+                // }
                 .upload_icon{
                     position: relative;
                     width: max-content;
                     .van-button{
                         height: initial;
                         position: relative;
-                        width: 108px;
+                        // width: 108px;
+                        width: 52px;
                         border-radius: 8px;
                         padding: 4px 10px;
                         color: $home-title-03;
                         z-index: 1;
                         border-color: $color-theme;
                         .van-button__icon{
-                            font-size: 28px;
+                            font-size: 26px;
                         }
                         input{
                             opacity: 0;
@@ -689,21 +715,14 @@ export default {
                     height: 72px;
                 }
             }
+            .record_scroll{
+                max-height: 1100px;
+                overflow-y: auto;
+                background: $font-color-white;
+            }
             .task_title_head {
                 border-top-left-radius: 20px;
                 border-top-right-radius: 20px;
-            }
-            // .title_top:nth-child(1){
-            //     border-top-left-radius: 20px;
-            //     border-top-right-radius: 20px;
-            // }
-            span:nth-child(3){
-                flex-grow: 0.6;
-                justify-content: center;
-            }
-            span:nth-child(4){
-                flex-grow: 0.8;
-                justify-content: right;
             }
             .record_item{
                 height: 108px;

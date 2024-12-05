@@ -166,7 +166,7 @@ export default {
     home_177:"Receive salary",
     home_178:"Get it now",
     home_179:"Today's group task has been completed and will continue tomorrow",
-    home_180:"Continue a obter lucros elevados",
+    home_180:"The more contact numbers you promote using WhatsApp, the more you will earn",
     home_181:"Upload",
     home_182:"Select format {value}",
     home_183:"Uploading",

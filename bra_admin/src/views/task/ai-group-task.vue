@@ -52,7 +52,7 @@
               </el-dropdown>
             </template>
             <template slot-scope="scope">
-              <el-tag size="small" :type="scope.row.status == 1 ? 'warning' : scope.row.status == 4 ? 'danger' :scope.row.status == 5 ? 'success': ''"> {{ statusOptions[scope.row.status] }}</el-tag>
+              <el-tag size="small" :type="scope.row.status == 1 ? 'warning' : scope.row.status == 4 ? 'success' :scope.row.status == 5 ? 'danger': ''"> {{ statusOptions[scope.row.status] }}</el-tag>
             </template>
           </el-table-column>
            <el-table-column prop="link" label="推广链接" minWidth="120">
@@ -156,7 +156,7 @@ export default {
   },
   computed: {
     statusOptions(){
-      return ["",this.$t('sys_l112'),this.$t('sys_l113'),this.$t('sys_l114'),this.$t('sys_l115'),this.$t('sys_l116')]
+      return ["",this.$t('sys_l112'),this.$t('sys_l113'),this.$t('sys_l114'),this.$t('sys_l116'),this.$t('sys_l115')]
     },
     taskOption(){
       return ["","手动拉群","拉粉","自动拉群"]

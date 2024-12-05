@@ -164,7 +164,7 @@ export default {
     home_177:"receber salário",
     home_178:"Obtenha agora",
     home_179:"A tarefa de reunião do grupo de hoje foi concluída e continuará amanhã",
-    home_180:"Muitas conexões",
+    home_180:"Quanto mais números de catálogo de endereços você promover usando o WhatsApp, maior será sua renda.",
     home_181:"carregar",
     home_182:"Selecione o formato {value}",
     home_183:"Uploading",

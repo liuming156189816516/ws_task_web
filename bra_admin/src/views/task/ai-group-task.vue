@@ -33,7 +33,7 @@
     </div>
     <div class="switch_bar">
       <div class="consun_list handel_area">
-        <el-table :data="groupTaskList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading"
+        <el-table :data="groupTaskList" border style="width: 100%" :height="cliHeight" ref="serveTable" v-loading="loading"
           element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }"
           @selection-change="selectAllChange" @row-click="rowSelectChange">
           <el-table-column type="selection" width="55" :selectable="checkSelectable" />
@@ -140,6 +140,7 @@ export default {
         relpy_text:"",
       },
       type: 0,
+      cliHeight:0,
       imgList:[],
       checkArry:[],
       loading: false,
@@ -169,6 +170,9 @@ export default {
   },
   mounted() {
     this.getTaskList();
+    this.$nextTick(()=>{
+      this.cliHeight = document.documentElement.clientHeight-230;
+    })
     // this.initGroupConfig();
   },
   methods: {

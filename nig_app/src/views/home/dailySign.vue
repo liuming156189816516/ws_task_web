@@ -178,13 +178,13 @@ export default {
       isLoading:false,
       sginDay:[1,2,3],
       sginArry:[
+        {disab:false,isSgin:false,gold:5},
+        {disab:false,isSgin:false,gold:10},
+        {disab:false,isSgin:false,gold:15},
+        {disab:false,isSgin:false,gold:20},
+        {disab:false,isSgin:false,gold:25},
         {disab:false,isSgin:false,gold:30},
-        {disab:false,isSgin:false,gold:60},
-        {disab:false,isSgin:false,gold:90},
-        {disab:false,isSgin:false,gold:120},
-        {disab:false,isSgin:false,gold:150},
-        {disab:false,isSgin:false,gold:180},
-        {disab:false,isSgin:false,gold:210}
+        {disab:false,isSgin:false,gold:35}
       ]
     }
   },

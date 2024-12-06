@@ -74,17 +74,17 @@
                             {{ scope.row.fuser_name?scope.row.fuser_name:"-" }}
                         </template>
                     </u-table-column>
-                    <u-table-column prop="level" :label="$t('sys_q136')" minWidth="100">
+                    <u-table-column sortable="user_level" prop="level" :label="$t('sys_q136')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.level?scope.row.level:"-" }}
                         </template>
                     </u-table-column>
-                    <u-table-column sortable="lq_num" prop="lq_num" :label="$t('sys_m111')" minWidth="100">
+                    <u-table-column sortable="lq_num" prop="lq_num" :label="$t('sys_m111')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.lq_num||0 }}
                         </template>
                     </u-table-column>
-                     <u-table-column sortable="lf_num" prop="lf_num" :label="$t('sys_m112')" minWidth="100">
+                     <u-table-column sortable="lf_num" prop="lf_num" :label="$t('sys_m112')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.lf_num||0 }}
                         </template>
@@ -126,6 +126,7 @@ export default {
             lf_num_sort: "",
             invite_code: "",
             fuser_name: "",
+            user_level_sort: "",
             loading:false,
             checkIdArry:[],
             accountDataList:[],
@@ -140,12 +141,21 @@ export default {
     },
     methods: {
         sorthandle({column, prop, order}){
+            console.log(column.property);
             if(column.property == "lq_num"&&order=="descending"){
                 this.lq_num_sort = "lq_num"
             }else if(column.property == "lq_num"&&order=="ascending"){
                 this.lq_num_sort = "-lq_num"
             }else{
                 this.lq_num_sort = ""
+            }
+
+            if(column.property == "level"&&order=="descending"){
+                this.user_level_sort = "user_level"
+            }else if(column.property == "level"&&order=="ascending"){
+                this.user_level_sort = "-user_level"
+            }else{
+                this.user_level_sort = ""
             }
 
             if(column.property == "lf_num"&&order=="descending"){
@@ -175,6 +185,7 @@ export default {
             this.invite_code="";
             this.lq_num_sort="";
             this.lf_num_sort="";
+            this.user_level_sort="";
             this.initNumberList(1)
             this.$refs.serveTable.clearSelection();
         },
@@ -189,7 +200,8 @@ export default {
                 lq_num_sort:this.lq_num_sort,
                 lf_num_sort:this.lf_num_sort,
                 fuser_name:this.fuser_name,
-                invite_code:this.invite_code
+                invite_code:this.invite_code,
+                user_level_sort:this.user_level_sort
             }
             getappuserlist(params).then(res => {
                 this.loading = false;

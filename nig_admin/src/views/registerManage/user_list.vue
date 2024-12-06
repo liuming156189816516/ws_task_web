@@ -37,7 +37,7 @@
                         </template>
                     </u-table-column>
                     <u-table-column prop="account" :label="$t('sys_m062')" minWidth="130" />
-                    <u-table-column prop="user_level" :label="$t('sys_g145')" minWidth="100">
+                    <u-table-column sortable="user_level" prop="user_level" :label="$t('sys_g145')" minWidth="100">
                         <template slot-scope="scope">
                             {{scope.row.user_level||0}}
                         </template>
@@ -74,7 +74,7 @@
                             {{ scope.row.fuser_name?scope.row.fuser_name:"-" }}
                         </template>
                     </u-table-column>
-                    <u-table-column sortable="user_level" prop="level" :label="$t('sys_q136')" minWidth="120">
+                    <u-table-column prop="level" :label="$t('sys_q136')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.level?scope.row.level:"-" }}
                         </template>
@@ -150,9 +150,9 @@ export default {
                 this.lq_num_sort = ""
             }
 
-            if(column.property == "level"&&order=="descending"){
+            if(column.property == "user_level"&&order=="descending"){
                 this.user_level_sort = "user_level"
-            }else if(column.property == "level"&&order=="ascending"){
+            }else if(column.property == "user_level"&&order=="ascending"){
                 this.user_level_sort = "-user_level"
             }else{
                 this.user_level_sort = ""

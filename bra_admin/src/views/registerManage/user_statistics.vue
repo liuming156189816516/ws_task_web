@@ -68,33 +68,33 @@
                 </div> -->
                 <el-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading" ref="serveTable"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" :summary-method="getSummaries" show-summary>
-                    <el-table-column prop="statis_time_str" :label="$t('sys_c134')" width="180" />
+                    <el-table-column prop="statis_time_str" :label="$t('sys_c134')" width="100" />
                     <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
-                    <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="150" />
-                    <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="120" />
+                    <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="120" />
+                    <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
                     <el-table-column prop="view_account_num" :label="$t('sys_c143')" minWidth="100">
                         <template slot-scope="scope">
                             {{ scope.row.view_account_num||0 }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="pull_total_num" :label="$t('sys_rai122')" minWidth="120">
+                    <el-table-column prop="pull_total_num" :label="$t('sys_rai122')" minWidth="140">
                         <template slot-scope="scope">
                             {{ scope.row.today_create_group_task_num +"/"+scope.row.pull_fan_task_num }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="120">
+                    <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="180">
                         <template slot-scope="scope">
-                            {{ scope.row.gj_data_num +"/"+scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
+                            {{ scope.row.ai_data_num+"/"+scope.row.gj_data_num +"/"+scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="120">
+                    <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="170">
                         <template slot-scope="scope">
-                            {{ scope.row.gj_bounty_amount +"/"+scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
+                            {{ scope.row.ai_bounty_amount+"/"+scope.row.gj_bounty_amount +"/"+scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="120">
+                    <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="170">
                         <template slot-scope="scope">
-                            {{ scope.row.gj_commission_amount +"/"+scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
+                            {{ scope.row.ai_commission_amount+"/"+scope.row.gj_commission_amount +"/"+scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
                         </template>
                     </el-table-column>
                     <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />

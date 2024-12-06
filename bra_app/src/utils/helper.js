@@ -343,7 +343,7 @@ const Helper = {
 	defaultOption() {
 		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
         // return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:6}];
-		return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:6}];
+		return [{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4}];
 	},
 	globalSupport(){
 		// if (this.checkBrowser()) {

@@ -324,10 +324,10 @@ export default {
             getaimsginfo({page:this.page,limit:this.limit,task_type:1}).then(res => {
                 this.loading = false;
                 this.link = res.link;
-                this.message = res.content;
                 this.total_bonus = res.total_bonus;
                 this.total_count = res.total_count;
                 this.finish_count = res.finish_count;
+                this.message = encodeURIComponent(res.content);
                 setTimeout(()=>{this.ref_loading = false;},500)
                 this.page_total = Math.ceil(res.total / this.limit);
                 if(this.page == 1){

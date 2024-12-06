@@ -360,7 +360,8 @@ export default {
 .detail_card{
     // width: 100%;
     width: 100%;
-    min-height: 160px;
+    margin-bottom: 20px;
+    // min-height: 160px;
     display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;

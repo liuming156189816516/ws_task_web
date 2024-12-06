@@ -707,7 +707,7 @@ export default {
     sorthandle({column, prop, order}){
       this.ipDataList = [];
       if (order) {
-        this.model1.sort=order=='ascending'?'user_num':'-user_num';
+        this.model1.sort=order=='ascending'?'-user_num':'user_num';
       }else{
         this.model1.sort="";
       }

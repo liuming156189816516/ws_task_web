@@ -141,26 +141,25 @@ export default {
     },
     methods: {
         sorthandle({column, prop, order}){
-            console.log(column.property);
-            if(column.property == "lq_num"&&order=="descending"){
+            if(column.property == "lq_num"&&order=="ascending"){
                 this.lq_num_sort = "lq_num"
-            }else if(column.property == "lq_num"&&order=="ascending"){
+            }else if(column.property == "lq_num"&&order=="descending"){
                 this.lq_num_sort = "-lq_num"
             }else{
                 this.lq_num_sort = ""
             }
 
-            if(column.property == "user_level"&&order=="descending"){
+            if(column.property == "user_level"&&order=="ascending"){
                 this.user_level_sort = "user_level"
-            }else if(column.property == "user_level"&&order=="ascending"){
+            }else if(column.property == "user_level"&&order=="descending"){
                 this.user_level_sort = "-user_level"
             }else{
                 this.user_level_sort = ""
             }
 
-            if(column.property == "lf_num"&&order=="descending"){
+            if(column.property == "lf_num"&&order=="ascending"){
                 this.lf_num_sort = "lf_num"
-            }else if(column.property == "lf_num"&&order=="ascending"){
+            }else if(column.property == "lf_num"&&order=="descending"){
                 this.lf_num_sort = "-lf_num"
             }else{
                 this.lf_num_sort = ""

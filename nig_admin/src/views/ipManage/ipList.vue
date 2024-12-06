@@ -705,10 +705,9 @@ export default {
       this.setIpName=this.$t('sys_c033');
     },
     sorthandle({column, prop, order}){
-      console.log(order);
       this.ipDataList = [];
       if (order) {
-        this.model1.sort=order=='ascending'?'user_num':'-user_num';
+        this.model1.sort=order=='ascending'?'-user_num':'user_num';
       }else{
         this.model1.sort="";
       }

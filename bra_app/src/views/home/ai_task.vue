@@ -145,6 +145,7 @@ export default {
 	data() {
 		return {
             page:1,
+            link:"",
             limit: 20,
             task_id:"",
             file_uuid:"",
@@ -291,6 +292,7 @@ export default {
             let formData = new FormData();
             formData.append('file', files);
             formData.append('uuid', row.uuid);
+            formData.append('link', this.link);
             formData.append('phone', row.phone);
             this.is_upload=true;
             this.file_uuid = row.uuid;
@@ -321,6 +323,7 @@ export default {
             this.ref_loading = true;
             getaimsginfo({page:this.page,limit:this.limit,task_type:1}).then(res => {
                 this.loading = false;
+                this.link = res.link;
                 this.message = res.content;
                 this.total_bonus = res.total_bonus;
                 this.total_count = res.total_count;

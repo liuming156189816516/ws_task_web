@@ -27,17 +27,17 @@
                 </el-table-column>
                 <el-table-column prop="statis_time_str" :label="$t('sys_m090')" minWidth="140">
                     <template slot-scope="scope">
-                        {{ scope.row.ai_data_num||0 }}/{{ scope.row.data_num||0 }}/{{scope.row.gj_data_num}}/{{scope.row.pull_fan_data_num}}
+                        {{ scope.row.ai_data_num||0 }}/{{ scope.row.gj_data_num||0 }}/{{scope.row.data_num}}/{{scope.row.pull_fan_data_num}}
                     </template>
                 </el-table-column>
                 <el-table-column prop="statis_time_str" :label="$t('sys_m102')" minWidth="140">
                     <template slot-scope="scope">
-                        {{ scope.row.ai_bounty_amount||0 }}/{{ scope.row.bounty_amount||0 }}/{{scope.row.gj_bounty_amount}}/{{scope.row.pull_fan_bounty_amount}}
+                        {{ scope.row.ai_bounty_amount||0 }}/{{ scope.row.gj_bounty_amount||0 }}/{{scope.row.bounty_amount}}/{{scope.row.pull_fan_bounty_amount}}
                     </template>
                 </el-table-column>
                 <el-table-column prop="statis_time_str" :label="$t('sys_m103')" minWidth="140">
                     <template slot-scope="scope">
-                        {{ scope.row.ai_commission_amount||0 }}/{{ scope.row.commission_amount||0 }}/{{scope.row.gj_commission_amount}}/{{scope.row.pull_fan_commission_amount}}
+                        {{ scope.row.ai_commission_amount||0 }}/{{ scope.row.gj_commission_amount||0 }}/{{scope.row.commission_amount}}/{{scope.row.pull_fan_commission_amount}}
                     </template>
                 </el-table-column>
                 <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />

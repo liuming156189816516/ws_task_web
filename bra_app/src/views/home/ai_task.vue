@@ -89,7 +89,8 @@
                                 </span>
                             </div>
                             <span v-else class="title_03 w_f flex-item flex-align flex-center" @click="viewImg(item.img_url)">
-                                <img class="group_img" :src="item.img_url" alt="" srcset="">
+                                <!-- <img class="group_img" :src="item.img_url" alt="" srcset=""> -->
+                                <img class="group_img" @load="handleImageLoad(idx+1)" :src="loadedImages[idx+1] ? item.img_url : imageLoading">
                             </span>
                         </div>
                         <!-- </van-list> -->
@@ -177,6 +178,8 @@ export default {
             images:[],
             pullGroupList:[],
             showStep:false,
+            loadedImages: [],
+            imageLoading:require("@/assets/images/loading.gif"),
             config: {
                 backgroundOpacity: 0.7,
                 titleStyle: {
@@ -285,6 +288,9 @@ export default {
             this.images = [];
             this.images.push(url);
             this.showImg=true;
+        },
+        handleImageLoad(index) {
+            this.$set(this.loadedImages, index, true);
         },
         async checkDataIsUse(row,idx){
             const fileAccept = ['png','jpg','jpeg'];

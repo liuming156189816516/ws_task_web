@@ -64,7 +64,7 @@
           </el-table-column>
           <el-table-column prop="img_url" label="图片" minWidth="120">
             <template slot-scope="scope">
-                <img style="width:32px;height:32px;cursor: pointer;" :src="scope.row.img_url" @click="showImg(scope.row.img_url)">
+                <img @load="handleImageLoad(scope.$index+1)" :src="loadedImages[scope.$index+1] ? scope.row.img_url : imageLoading" style="width:32px;height:32px;cursor: pointer;" @click="showImg(scope.row.img_url)">
               <!-- <el-tooltip class="item" effect="dark" :content="scope.row.remark" placement="top">
                 <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.remark||"-" }}</div>
               </el-tooltip> -->
@@ -151,7 +151,9 @@ export default {
       isUpload: false,
       imgModel: false,
       dialogVisible:false,
-      pageOption: resetPage()
+      loadedImages: [],
+      pageOption: resetPage(),
+      imageLoading: require("@/assets/loading.gif"),
     }
   },
   computed: {
@@ -176,6 +178,9 @@ export default {
     // this.initGroupConfig();
   },
   methods: {
+    handleImageLoad(index) {
+      this.$set(this.loadedImages, index, true);
+    },
     restQueryBtn() {
       this.model1.status = "";
       this.model1.account = "";

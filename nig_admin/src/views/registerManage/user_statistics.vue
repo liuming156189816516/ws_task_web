@@ -43,6 +43,7 @@
                 </el-table-column>
                 <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                 <el-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
+                <el-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
             </el-table>
         </div>
         <el-form size="small" :inline="true" style="margin-top: 10px;">

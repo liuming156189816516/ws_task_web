@@ -271,19 +271,33 @@ export default {
                             let num = this.accountDataList[k].today_create_group_task_num+this.accountDataList[k].pull_fan_task_num;
                             this.accountDataList[k].pull_total_num=num;
                         }
-                        if(key==='data_num'||key==='pull_fan_data_num'){
-                            let num = this.accountDataList[k].data_num+this.accountDataList[k].pull_fan_data_num;
+                        if(key==='ai_data_num'||key==='gj_data_num'||key==='data_num'||key==='pull_fan_data_num'){
+                            let num = this.accountDataList[k].ai_data_num+this.accountDataList[k].gj_data_num+this.accountDataList[k].data_num+this.accountDataList[k].pull_fan_data_num;
                             this.accountDataList[k].group_total_num=num;
                         }
-                        if(key==='bounty_amount'||key==='pull_fan_bounty_amount'){
-                            let num = this.accountDataList[k].bounty_amount+this.accountDataList[k].pull_fan_bounty_amount;
+                        if(key==='ai_bounty_amount'||key==='gj_bounty_amount'||key==='bounty_amount'||key==='pull_fan_bounty_amount'){
+                            let num = this.accountDataList[k].ai_bounty_amount+this.accountDataList[k].gj_bounty_amount+this.accountDataList[k].bounty_amount+this.accountDataList[k].pull_fan_bounty_amount;
                             this.accountDataList[k].bouns_total_num=num;
                         }
-                        if(key==='commission_amount'||key==='pull_fan_commission_amount'){
-                            let num = this.accountDataList[k].commission_amount+this.accountDataList[k].pull_fan_commission_amount;
+                        if(key==='ai_commission_amount'||key==='gj_commission_amount'||key==='commission_amount'||key==='pull_fan_commission_amount'){
+                            let num = this.accountDataList[k].ai_commission_amount+this.accountDataList[k].gj_commission_amount+this.accountDataList[k].commission_amount+this.accountDataList[k].pull_fan_commission_amount;
                             this.accountDataList[k].comm_total_num=num;
                         }
                     }
+                //     <el-table-column prop="statis_time_str" :label="$t('sys_m090')" minWidth="140">
+                //     <template slot-scope="scope">
+                //         {{ scope.row.ai_data_num||0 }}/{{ scope.row.gj_data_num||0 }}/{{scope.row.data_num}}/{{scope.row.pull_fan_data_num}}
+                //     </template>
+                // </el-table-column>
+                // <el-table-column prop="statis_time_str" :label="$t('sys_m102')" minWidth="140">
+                //     <template slot-scope="scope">
+                //         {{ scope.row.ai_bounty_amount||0 }}/{{ scope.row.gj_bounty_amount||0 }}/{{scope.row.bounty_amount}}/{{scope.row.pull_fan_bounty_amount}}
+                //     </template>
+                // </el-table-column>
+                // <el-table-column prop="statis_time_str" :label="$t('sys_m103')" minWidth="140">
+                //     <template slot-scope="scope">
+                //         {{ scope.row.ai_commission_amount||0 }}/{{ scope.row.gj_commission_amount||0 }}/{{scope.row.commission_amount}}/{{scope.row.pull_fan_commission_amount}}
+                //     </template>
                 }
                 this.$nextTick(()=>{
                     if (this.$refs.serveTable) {

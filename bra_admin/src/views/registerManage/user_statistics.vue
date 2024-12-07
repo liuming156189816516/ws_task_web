@@ -11,7 +11,7 @@
                     <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num" v-else></span>
                 </div>
             </template> -->
-             <el-table :data="statisticsList" border v-loading="loading" minHeight="max-content" element-loading-spinner="el-icon-loading" style="width: 100%;">
+            <el-table :data="statisticsList" border v-loading="loading" minHeight="max-content" element-loading-spinner="el-icon-loading" style="width: 100%;">
                 <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
                 <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="100" />
                 <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
@@ -42,7 +42,7 @@
                 </el-table-column>
                 <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                 <el-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
-             </el-table>
+            </el-table>
         </div>
         <el-form size="small" :inline="true" style="margin-top: 10px;">
             <el-form-item v-if="task_id">

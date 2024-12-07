@@ -221,10 +221,10 @@ export default {
     },
     methods: {
         getStatistics(){
-            this.isLoading=true;
+            this.loading=true;
             gettodaystatisinfo({uid:this.task_id,pixellids:this.pixe_id}).then(res=>{
                 this.statisticsList = [res.data]
-                this.isLoading=false;
+                this.loading=false;
             })
         },
         handleSelectionChange(row) {

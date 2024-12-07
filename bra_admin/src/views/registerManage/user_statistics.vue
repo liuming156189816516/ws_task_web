@@ -222,7 +222,7 @@ export default {
     methods: {
         getStatistics(){
             this.isLoading=true;
-            gettodaystatisinfo({uid:this.task_id,pixellids:this.pixe_id}).then(res=>{
+            gettodaystatisinfo().then(res=>{
                 this.statisticsList = [res.data]
                 this.isLoading=false;
             })

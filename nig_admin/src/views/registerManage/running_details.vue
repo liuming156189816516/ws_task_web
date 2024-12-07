@@ -45,10 +45,10 @@
                             {{formatType(scope.row.type)||"-" }}
                         </template>
                     </u-table-column> -->
-                    <u-table-column prop="type" :label="$t('sys_m066')" minWidth="100">
+                    <u-table-column prop="type" :label="$t('sys_m075')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">
-                            <span style="color:#909399" :class="[type?'dropdown_title':'']"> {{ $t('sys_m066') }}
+                            <span style="color:#909399" :class="[type?'dropdown_title':'']"> {{ $t('sys_m075') }}
                                 <i class="el-icon-arrow-down el-icon--right" />
                             </span>
                             <el-dropdown-menu slot="dropdown">

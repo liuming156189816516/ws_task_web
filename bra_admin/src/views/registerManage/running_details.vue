@@ -125,6 +125,7 @@ export default {
             }
             getbillrecordlist(params).then(res => {
                 this.loading = false;
+                console.log(res);
                 this.total = res.data.total;
                 this.bounty_amount=res.data.bounty_amount;
                 this.com_amount=res.data.commission_amount;

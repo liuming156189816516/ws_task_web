@@ -6,7 +6,7 @@
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="l_account" />
             </el-form-item>
             <el-form-item>
-                <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+                <el-date-picker v-model="task_time" type="daterange" :picker-options="pickerOptions" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" icon="el-icon-search" @click="initBillList(1)">{{ $t('sys_c002') }}</el-button>
@@ -25,6 +25,21 @@
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
                     <u-table-column type="index" :label="$t('sys_g020')" width="60" />
+                    <u-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
+                        <template slot="header">
+                            <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
+                            <span style="color:#909399" :class="[task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
+                                <i class="el-icon-arrow-down el-icon--right" />
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in tasksOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                            </el-dropdown-menu>
+                            </el-dropdown>
+                        </template>
+                        <template slot-scope="scope">
+                            {{ tasksOption[scope.row.task_type]||"" }}
+                        </template>
+                    </u-table-column>
                     <u-table-column prop="type" :label="$t('sys_m075')" minWidth="100">
                         <template slot-scope="scope">
                             {{formatType(scope.row.type)||"-" }}
@@ -62,13 +77,25 @@ export default {
             limit: 10,
             total: 0,
             account: "",
-            task_time: "",
+            task_type:"",
+            task_time:"",
             l_account: "",
+            choiceDate:"",
             loading:false,
             checkIdArry:[],
             checkAccount:[],
             accountDataList:[],
-            pageOption: resetPage()
+            pageOption: resetPage(),
+            pickerOptions: {
+                disabledDate(date) {
+                    const current = new Date();
+                    const currentYear = current.getFullYear();
+                    const currentMonth = current.getMonth();
+                    const startOfMonth = new Date(currentYear, currentMonth, 1);
+                    const endOfMonth = new Date(currentYear, currentMonth + 1, 0);
+                    return date < startOfMonth || date > endOfMonth;
+                }
+            }
         }
     },
     computed: {
@@ -77,13 +104,31 @@ export default {
             // return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
         },
         tasksOption(){
-            return ["","挂机","拉群","分享链接"];
+            return ["","挂机","拉群","拉粉"]
         }
     },
     created() {
         this.initBillList();
     },
     methods: {
+        handleNewwork(type){
+            this.task_type = type;
+            this.initBillList(1)
+        },
+        disabledDate(time) {  
+            // 获取当前日期  
+            const now = new Date();  
+            // 获取当前年份和月份  
+            const currentYear = now.getFullYear();  
+            const currentMonth = now.getMonth();  
+            // 获取当前月的最后一天  
+            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();  
+            // 构建本月的开始日期和结束日期  
+            const startOfMonth = new Date(currentYear, currentMonth, 1);  
+            const endOfMonth = new Date(currentYear, currentMonth, lastDayOfMonth);  
+            // 如果给定的日期不在本月的开始和结束日期之间，则禁用它  
+            return time.getTime() < startOfMonth.getTime() || time.getTime() > endOfMonth.getTime();  
+        },
         handleSelectionChange(row) {
             this.checkIdArry = row.map(item => { return item.id })
             this.checkAccount = row.map(item => { return item.account })

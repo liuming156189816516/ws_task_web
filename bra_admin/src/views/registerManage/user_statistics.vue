@@ -66,7 +66,7 @@
                     <i slot="reference" class="el-icon-info"></i>
                     <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
                 </div> -->
-                <el-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading" ref="serveTable"
+                <el-table :data="accountDataList" row-key="id" use-virtual border height="740" v-loading="loading" ref="serveTable"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" :summary-method="getSummaries" show-summary>
                     <el-table-column prop="statis_time_str" :label="$t('sys_c134')" width="100" />
                     <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />

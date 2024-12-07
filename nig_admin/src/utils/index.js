@@ -369,9 +369,9 @@ export function mexicoTime(date, type){
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
   var Dates = myDate.getDate(); //获取日
   if(type == 1){
-    Time = Year + "-" + Month + "-" + Dates + " 08:00:00";
+    Time = Year + "-" + Month + "-" + Dates + " 00:00:00";
   }else if(type == 2){
-    Time = Year + "-" + Month + "-" + (Dates+1) + " 07:59:59";
+    Time = Year + "-" + Month + "-" + Dates + " 23:59:59";
   }else if(type == 3){
     let Afr_time = date.toLocaleString('en-US', { timeZone: 'Africa/Lagos' });
     let formatMexico = (Date.parse(Afr_time)/1000) + (1 * 3600);

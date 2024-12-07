@@ -57,7 +57,7 @@
                             </el-dropdown>
                         </template>
                         <template slot-scope="scope">
-                            {{ taskOption[scope.row.type].lable||"-" }}
+                            {{ taskOption.filter(item=>item.value==scope.row.type)[0].lable||"-" }}
                         </template>
                     </u-table-column>
                     <u-table-column prop="amount" :label="$t('sys_m076')" minWidth="130" />

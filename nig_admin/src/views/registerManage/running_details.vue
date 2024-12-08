@@ -6,6 +6,7 @@
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="l_account" />
             </el-form-item>
             <el-form-item>
+                 <!-- :picker-options="pickerOptions" -->
                 <el-date-picker v-model="task_time" type="daterange" :clearable="false" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
             </el-form-item>
             <el-form-item>
@@ -100,18 +101,29 @@ export default {
             loading:false,
             checkIdArry:[],
             checkAccount:[],
+            maxRangeEnd: null, 
             accountDataList:[],
             pageOption: resetPage(),
-            pickerOptions: {
-                disabledDate(date) {
-                    const current = new Date();
-                    const currentYear = current.getFullYear();
-                    const currentMonth = current.getMonth();
-                    const startOfMonth = new Date(currentYear, currentMonth, 1);
-                    const endOfMonth = new Date(currentYear, currentMonth + 1, 0);
-                    return date < startOfMonth || date > endOfMonth;
+            pickerOptions() {
+                const now = new Date(); // 当前日期
+                const monthStart = new Date(now.getFullYear(), now.getMonth(), 1); // 当前月第一天
+                const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0); // 当前月最后一天
+                return {
+                    disabledDate: (date) => {
+                        return date < monthStart || date > monthEnd;
+                    }
                 }
-            }
+            },
+            // pickerOptions: {
+            //     disabledDate(date) {
+            //         const current = new Date();
+            //         const currentYear = current.getFullYear();
+            //         const currentMonth = current.getMonth();
+            //         const startOfMonth = new Date(currentYear, currentMonth, 1);
+            //         const endOfMonth = new Date(currentYear, currentMonth + 1, 0);
+            //         return date < startOfMonth || date > endOfMonth;
+            //     }
+            // }
         }
     },
     computed: {
@@ -127,6 +139,25 @@ export default {
         this.initBillList();
     },
     methods: {
+        // 处理日期范围变化
+        handleDateChange([startDate]) {
+            if (startDate) {
+                // 动态设置最大允许选择的结束日期为起始日期 + 1 个月
+                const start = new Date(startDate);
+                this.maxRangeEnd = new Date(start.setMonth(start.getMonth() + 1));
+            } else {
+                this.maxRangeEnd = null; // 如果清空选择，取消限制
+            }
+            },
+            // 禁用超过范围的日期
+            disabledDate(date) {
+            if (!this.task_time[0]) return false; // 如果没有选择起始日期，不禁用任何日期
+
+            const start = new Date(this.task_time[0]); // 起始日期
+            const maxEnd = this.maxRangeEnd; // 最大结束日期
+
+            return date < start || date > maxEnd; // 禁用超出范围的日期
+        },
         handleNewwork(row,idx){
             if(idx == 1){
                 this.task_type = row;

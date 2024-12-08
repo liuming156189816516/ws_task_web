@@ -15,9 +15,10 @@
         <el-form-item>
           <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
         </el-form-item>
+         -->
         <el-form-item>
-          <el-date-picker v-model="model1.ipCtime" value-format="yyyy-MM-dd HH:mm:ss" type="datetimerange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
-        </el-form-item> -->
+          <el-date-picker style="width:230px" v-model="model1.ipCtime" value-format="yyyy-MM-dd" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+        </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002')}}</el-button>
           <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
@@ -191,13 +192,15 @@ export default {
       this.loading = true;
       const sTime = this.model1.ipCtime;
       this.model1.page = num ? num : this.model1.page;
-      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0],3):-1;
-      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1],3):-1;
+      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0],1):-1;
+      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1],2):-1;
       let params = {
         page: this.model1.page,
         limit: this.model1.limit,
         status: this.model1.status||-1,
-        account: this.model1.account
+        account: this.model1.account,
+        start_time:start_time,
+        end_time:end_time,
       }
       getaimessagelist(params).then(res => {
         this.loading = false;

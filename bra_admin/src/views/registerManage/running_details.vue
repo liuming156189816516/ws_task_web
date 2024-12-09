@@ -175,7 +175,6 @@ export default {
         restQueryBtn(){
             this.type="";
             this.account="";
-            this.task_time="";
             this.l_account="";
             this.task_type="";
             this.checkAccount = [];

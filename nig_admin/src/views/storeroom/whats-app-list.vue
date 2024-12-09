@@ -172,7 +172,7 @@
                 <template v-else>
                     <div class="group_warp">
                         <template v-if="numberGroupList.length>0">
-                            <transition name="fade">
+                            <!-- <transition name="fade"> -->
                                 <div v-for="(item, idx) in numberGroupList" :key="idx" :draggable="true" :class="['group_item', model1.group_id === item.id ? 'group_active' : '']"  @click="changeGroup(item, idx)" @dragstart="dragStart(idx)" @dragover.prevent @drop="handleMoveSort(idx)">
                                     <div class="group_name">
                                         <i class="left_icon" :class="['left_icon', model1.group_id === item.id ? 'el-icon-folder-opened' : 'el-icon-folder']" />
@@ -195,7 +195,7 @@
                                         </el-popconfirm>
                                     </div>
                                 </div>
-                            </transition>
+                            <!-- </transition> -->
                         </template>
                         <div v-else class="text_empty">{{ $t('sys_mat013') }}</div>
                     </div>

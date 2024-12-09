@@ -27,8 +27,8 @@
                 </div> -->
                 <u-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
-                    :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true"
-                    @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
+                    :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true" @handlePageSize="switchPage">
+                    <u-table-column type="selection" />
                     <u-table-column type="index" :label="$t('sys_g020')" width="60" />
                     <u-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
                         <template slot="header">
@@ -182,6 +182,14 @@ export default {
             this.initBillList(1)
             this.$refs.serveTable.clearSelection();
         },
+        handleNewwork(row,idx){
+            if(idx == 1){
+                this.task_type = row;
+            }else{
+                this.type = row.value==-1?"":row.value;
+            }
+            this.initBillList(1)
+        },
         initBillList(num) {
             this.loading = true;
             this.page = num || this.page;
@@ -198,7 +206,6 @@ export default {
             }
             getbillrecordlist(params).then(res => {
                 this.loading = false;
-                console.log(res);
                 this.total = res.data.total;
                 this.bounty_amount=res.data.bounty_amount;
                 this.com_amount=res.data.commission_amount;

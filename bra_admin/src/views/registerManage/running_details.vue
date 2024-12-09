@@ -178,6 +178,7 @@ export default {
             this.l_account="";
             this.task_type="";
             this.checkAccount = [];
+            this.task_time=[new Date(),new Date()];
             this.initBillList(1)
             this.$refs.serveTable.clearSelection();
         },

@@ -6,8 +6,7 @@
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="l_account" />
             </el-form-item>
             <el-form-item>
-                 <!-- :picker-options="pickerOptions" -->
-                <el-date-picker v-model="task_time" type="daterange" :clearable="false" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+                <el-date-picker v-model="task_time" type="daterange" :picker-options="pickerOptions" :clearable="false" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" icon="el-icon-search" @click="initBillList(1)">{{ $t('sys_c002') }}</el-button>
@@ -95,7 +94,6 @@ export default {
             account: "",
             type:"",
             task_type:"",
-            task_time:[new Date(),new Date()],
             l_account: "",
             choiceDate:"",
             loading:false,
@@ -104,26 +102,41 @@ export default {
             maxRangeEnd: null, 
             accountDataList:[],
             pageOption: resetPage(),
-            pickerOptions() {
-                const now = new Date(); // 当前日期
-                const monthStart = new Date(now.getFullYear(), now.getMonth(), 1); // 当前月第一天
-                const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0); // 当前月最后一天
-                return {
-                    disabledDate: (date) => {
-                        return date < monthStart || date > monthEnd;
+            task_time:[new Date(),new Date()],
+            pickerOptions: {
+                onPick: ({ maxDate, minDate }) => {
+                    this.choiceDate = minDate.getTime()
+                    if (maxDate) {
+                        this.choiceDate = ''
+                    }
+                },
+                disabledDate: (time) => {
+                    const self = this
+                    if (self.choiceDate) {
+                        const selectDate = new Date(self.choiceDate)
+                        const nowYear = selectDate.getFullYear() // 当前年
+                        const nowMonth = selectDate.getMonth() // 当前月
+                        const nowDate = selectDate.getDate() // 当前几号
+                        const nowDay = selectDate.getDay() // 当前星期几
+                        // 本月的开始时间
+                        const monthStartDate = new Date(nowYear, nowMonth, 1).getTime()
+                        // 本月的结束时间
+                        const monthEndDate = new Date(nowYear, nowMonth + 1, 0).getTime()
+                        // 本年的开始时间
+                        const yearStartDate = new Date(nowYear, 0, 1).getTime()
+                        // 本年的结束时间
+                        const yearEndDate = new Date(nowYear, 12, 0).getTime()
+                        // 本周的开始时间，本周的结束时间
+                        const weekStartDate = new Date(nowYear, nowMonth, nowDate - nowDay + 1)
+                        const weekEndDate = new Date(nowYear, nowMonth, nowDate + (7 - nowDay))
+                        // 前后三天
+                        const tStartDate = new Date(nowYear, nowMonth, nowDate - 2)
+                        const tEndDate = new Date(nowYear, nowMonth, nowDate + 2)
+                        // 此处以不能跨月做示范
+                        return time.getTime() < monthStartDate || time.getTime() > monthEndDate
                     }
                 }
-            },
-            // pickerOptions: {
-            //     disabledDate(date) {
-            //         const current = new Date();
-            //         const currentYear = current.getFullYear();
-            //         const currentMonth = current.getMonth();
-            //         const startOfMonth = new Date(currentYear, currentMonth, 1);
-            //         const endOfMonth = new Date(currentYear, currentMonth + 1, 0);
-            //         return date < startOfMonth || date > endOfMonth;
-            //     }
-            // }
+            }
         }
     },
     computed: {

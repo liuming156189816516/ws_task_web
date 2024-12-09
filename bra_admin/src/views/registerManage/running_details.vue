@@ -6,7 +6,7 @@
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="l_account" />
             </el-form-item>
             <el-form-item>
-                <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+                <el-date-picker v-model="task_time" type="daterange" :picker-options="pickerOptions" :clearable="false" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" icon="el-icon-search" @click="initBillList(1)">{{ $t('sys_c002') }}</el-button>
@@ -67,15 +67,50 @@ export default {
             limit: 10,
             total: 0,
             account: "",
-            task_time: "",
             l_account: "",
             com_amount:0,
             bounty_amount:0,
             loading:false,
             checkIdArry:[],
             checkAccount:[],
+            choiceDate: '',
             accountDataList:[],
-            pageOption: resetPage()
+            pageOption: resetPage(),
+            task_time:[new Date(),new Date()],
+            pickerOptions: {
+                onPick: ({ maxDate, minDate }) => {
+                    this.choiceDate = minDate.getTime()
+                    if (maxDate) {
+                        this.choiceDate = ''
+                    }
+                },
+                disabledDate: (time) => {
+                    const self = this
+                    if (self.choiceDate) {
+                        const selectDate = new Date(self.choiceDate)
+                        const nowYear = selectDate.getFullYear() // 当前年
+                        const nowMonth = selectDate.getMonth() // 当前月
+                        const nowDate = selectDate.getDate() // 当前几号
+                        const nowDay = selectDate.getDay() // 当前星期几
+                        // 本月的开始时间
+                        const monthStartDate = new Date(nowYear, nowMonth, 1).getTime()
+                        // 本月的结束时间
+                        const monthEndDate = new Date(nowYear, nowMonth + 1, 0).getTime()
+                        // 本年的开始时间
+                        const yearStartDate = new Date(nowYear, 0, 1).getTime()
+                        // 本年的结束时间
+                        const yearEndDate = new Date(nowYear, 12, 0).getTime()
+                        // 本周的开始时间，本周的结束时间
+                        const weekStartDate = new Date(nowYear, nowMonth, nowDate - nowDay + 1)
+                        const weekEndDate = new Date(nowYear, nowMonth, nowDate + (7 - nowDay))
+                        // 前后三天
+                        const tStartDate = new Date(nowYear, nowMonth, nowDate - 2)
+                        const tEndDate = new Date(nowYear, nowMonth, nowDate + 2)
+                        // 此处以不能跨月做示范
+                        return time.getTime() < monthStartDate || time.getTime() > monthEndDate
+                    }
+                }
+            }
         }
     },
     computed: {
@@ -91,6 +126,18 @@ export default {
         this.initBillList();
     },
     methods: {
+        disableFutureDates(time) {
+            // 获取当前日期
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth();
+            // 获取当前月的最后一天
+            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            // 获取选择日期的天数
+            const dayOfMonth = time.getDate();
+            // 禁用超过当月的日期
+            return dayOfMonth > lastDayOfMonth || time.getTime() > currentDate.getTime();
+        },
         handleSelectionChange(row) {
             this.checkIdArry = row.map(item => { return item.id })
             this.checkAccount = row.map(item => { return item.account })

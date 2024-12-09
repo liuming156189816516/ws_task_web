@@ -40,11 +40,6 @@
                             {{ tasksOption[scope.row.task_type]||"-" }}
                         </template>
                     </u-table-column>
-                    <!-- <u-table-column prop="type" :label="$t('sys_m075')" minWidth="100">
-                        <template slot-scope="scope">
-                            {{formatType(scope.row.type)||"-" }}
-                        </template>
-                    </u-table-column> -->
                     <u-table-column prop="type" :label="$t('sys_m075')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">
@@ -201,6 +196,7 @@ export default {
             tableCell.toggleRowSelection([{row:row,selected:true}]);
         },
         restQueryBtn(){
+            this.type="";
             this.account="";
             this.task_time="";
             this.l_account="";

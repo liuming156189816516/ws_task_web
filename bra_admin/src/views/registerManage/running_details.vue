@@ -35,13 +35,38 @@
                             {{formatType(scope.row.type)||"-" }}
                         </template>
                     </u-table-column>
-                    <u-table-column prop="amount" :label="$t('sys_m076')" minWidth="130" />
-                    <u-table-column prop="l_account" :label="$t('sys_m068')" minWidth="100" />
-                    <u-table-column prop="f_account" :label="$t('sys_q134')" minWidth="100">
+                    <u-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
+                        <template slot="header">
+                            <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">
+                            <span style="color:#909399" :class="[task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
+                                <i class="el-icon-arrow-down el-icon--right" />
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in tasksOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                            </el-dropdown-menu>
+                            </el-dropdown>
+                        </template>
                         <template slot-scope="scope">
-                            {{scope.row.f_account||"-" }}
+                            {{ tasksOption[scope.row.task_type]||"-" }}
                         </template>
                     </u-table-column>
+                    <u-table-column prop="type" :label="$t('sys_m075')" minWidth="100">
+                        <template slot="header">
+                            <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">
+                            <span style="color:#909399" :class="[type?'dropdown_title':'']"> {{ $t('sys_m075') }}
+                                <i class="el-icon-arrow-down el-icon--right" />
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :class="{'dropdown_selected':item.value==type}" v-for="(item,idx) in taskOption" :key="idx" :command="item">{{item.lable }}</el-dropdown-item>
+                            </el-dropdown-menu>
+                            </el-dropdown>
+                        </template>
+                        <template slot-scope="scope">
+                            {{ taskOption.filter(item=>item.value==scope.row.type)[0].lable||"-" }}
+                        </template>
+                    </u-table-column>
+                    <u-table-column prop="amount" :label="$t('sys_m076')" minWidth="130" />
+                    <u-table-column prop="l_account" :label="$t('sys_m068')" minWidth="100" />
                     <u-table-column prop="sys_c008" :label="$t('sys_c008')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}
@@ -67,6 +92,8 @@ export default {
             limit: 10,
             total: 0,
             account: "",
+            type:"",
+            task_type:"",
             l_account: "",
             com_amount:0,
             bounty_amount:0,
@@ -119,7 +146,7 @@ export default {
             // return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
         },
         tasksOption(){
-            return ["","挂机","拉群","分享链接"];
+            return ["","挂机","拉群","拉粉"]
         }
     },
     created() {
@@ -151,9 +178,11 @@ export default {
             tableCell.toggleRowSelection([{row:row,selected:true}]);
         },
         restQueryBtn(){
+            this.type="";
             this.account="";
             this.task_time="";
             this.l_account="";
+            this.task_type="";
             this.checkAccount = [];
             this.initBillList(1)
             this.$refs.serveTable.clearSelection();
@@ -165,8 +194,10 @@ export default {
             const params = {
                 page: this.page,
                 limit: this.limit,
+                type:this.type||-1,
                 account:this.account,
                 l_account:this.l_account,
+                task_type:this.task_type||-1,
                 start_time: sTime ? this.$baseFun.mexicoTime(sTime[0], 1) : -1,
                 end_time: sTime ? this.$baseFun.mexicoTime(sTime[1], 2) : -1
             }

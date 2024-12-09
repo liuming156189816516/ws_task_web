@@ -104,7 +104,7 @@ export default {
             return [{lable:this.$t('other_052'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('spre_023'),value:3},{lable:this.$t('spre_024'),value:4},{lable:this.$t('spre_026'),value:6},{lable:this.$t('other_027'),value:8 },{lable:this.$t('other_028'),value:9 }];
         },
         taskOption(){
-            return ["",this.$t('other_058'),this.$t('other_059'),this.$t('other_060')];
+            return ["",this.$t('home_187'),this.$t('home_168'),this.$t('other_060')];
         }
     },
     created() {

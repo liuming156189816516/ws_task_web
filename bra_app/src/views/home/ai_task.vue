@@ -438,7 +438,7 @@ export default {
             scrollTop.scrollTo({top: 0,behavior:"smooth"});
         },
         jumpWsSend(row){
-            let textMsg = `https://wa.me/${row.phone}?text=${this.message}$*$${row.uuid}` 
+            let textMsg = `https://wa.me/${row.phone}?text=${this.message}:::${row.uuid}` 
             if(this.$Helper.checkBrowser()){
                 window.open(textMsg,"_blank");
             }else{

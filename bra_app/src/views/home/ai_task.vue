@@ -312,7 +312,6 @@ export default {
             formData.append('phone', row.phone);
             this.is_upload=true;
             this.file_uuid = row.uuid;
-            this.task_id = row.task_id;
             let res = await uploadfile(formData);
             this.is_upload=false;
             if(res.code) return;
@@ -341,6 +340,7 @@ export default {
             getaimsginfo({page:this.page,limit:this.limit,task_type:1}).then(res => {
                 this.loading = false;
                 this.link = res.link;
+                this.task_id = res.task_id;
                 this.total_bonus = res.total_bonus;
                 this.total_count = res.total_count;
                 this.finish_count = res.finish_count;

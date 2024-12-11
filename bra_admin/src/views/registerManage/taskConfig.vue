@@ -5,17 +5,15 @@
         </el-tabs>
         <div class="view_continer">
             <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
-                <template v-if="activeIdx==0||activeIdx==1">
-                    <el-row :gutter="20">
-                        <el-col :span="18">
-                            <el-form-item label="营销分组：" prop="market_group">
-                                <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
-                                    <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
-                                </el-select>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                </template>
+                <el-row :gutter="20">
+                    <el-col :span="18">
+                        <el-form-item :label="activeIdx==2?'监控号分组：':'营销分组：'" prop="market_group">
+                            <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
+                                <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
                 <template v-if="activeIdx==0||activeIdx==2">
                     <el-row :gutter="20">
                         <el-col :span="18">
@@ -243,10 +241,11 @@
             this.taskForm.data_pack_id="";
             this.taskForm.materialData=[];
             this.$refs.taskForm.resetFields();
+            this.getPullGroup();
             this.getConfiglist();
         },
         async getPullGroup(){
-            const { data:{list1} } = await getmarketgrouplist({page:1,limit:100});
+            const { data:{list1} } = await getmarketgrouplist({ptype:this.activeIdx==2?1:0,page:1,limit:100});
             this.marketingList = list1|| [];
         },
         async getDatalist() {

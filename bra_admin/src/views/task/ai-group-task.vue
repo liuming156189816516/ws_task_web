@@ -40,6 +40,11 @@
           <el-table-column type="selection" width="55" :selectable="checkSelectable" />
           <el-table-column prop="account" label="用户账号" minWidth="100" />
           <el-table-column prop="phone" label="手机号" width="140" />
+          <el-table-column prop="data_type" :label="$t('sys_l117')" minWidth="100">
+            <template slot-scope="scope">
+              {{ scope.row.data_type==1?'数据号':'监控号' }}
+            </template>
+          </el-table-column>
           <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
             <template slot="header">
               <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">
@@ -118,6 +123,7 @@
 <script>
 import { successTips, resetPage } from '@/utils/index'
 import { getaimessagelist,getsysconfig,upsysconfig,doaimessage,dooutexcel } from '@/api/task'
+import { date } from 'jszip/lib/defaults';
 export default {
    components: { 'el-image-viewer': () => import('element-ui/packages/image/src/image-viewer') },
   data() {

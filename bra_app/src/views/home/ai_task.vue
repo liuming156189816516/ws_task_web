@@ -106,6 +106,9 @@
                     {{$t('spre_014')}}
                 </div> -->
             </div>
+            <div class="w_f submit_btn flex-item flex-align">
+                <van-button :loading="isupoading" :loading-text="$t('other_029')" @click="submitBtn">{{$t('home_038')}}</van-button>
+            </div>
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
@@ -142,7 +145,7 @@
 import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
-import { getaimsginfo,uploadfile } from '@/api/task';
+import { getaimsginfo,uploadfile,submitaimessagetask } from '@/api/task';
 import { submitcreatetask,dotutorialstatus } from '@/api/home'
 import uniFun from "@/utils/uni-webview-js"
 export default {
@@ -172,6 +175,7 @@ export default {
             finish_count:0,
             is_upload:false,
             isLoading:false,
+            isupoading:false,
             ref_loading:false,
             taskTime: null,
             taskList:[],
@@ -263,7 +267,7 @@ export default {
     created(){
         this.isScroll = false;
         this.timestamp = Math.floor(new Date().getTime() / 1000);
-        this.task_id = this.$route.query.id||"";
+        // this.task_id = this.$route.query.id||"";
         // this.getGroupMess();
     },
     mounted(){
@@ -301,12 +305,14 @@ export default {
                 return this.$toast(this.$t("home_181",{value:String(fileAccept)}));
             }
             let formData = new FormData();
+            formData.append('id', row.id);
             formData.append('file', files);
             formData.append('uuid', row.uuid);
             formData.append('link', this.link);
             formData.append('phone', row.phone);
             this.is_upload=true;
             this.file_uuid = row.uuid;
+            this.task_id = row.task_id;
             let res = await uploadfile(formData);
             this.is_upload=false;
             if(res.code) return;
@@ -357,6 +363,15 @@ export default {
         },
         viewTaskNum(){
             this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
+        },
+        submitBtn(){
+            this.isupoading=true;
+            dotutorialstatus({task_id:this.task_id}).then(res=>{
+                this.isupoading=false;
+                if(res.code) return;
+                this.refreshBtn();
+                this.$toast(this.$t("home_039"));
+            })
         },
         submitTask(){
             // this.$store.dispatch('User/actionReport',11);
@@ -424,9 +439,9 @@ export default {
         },
         jumpWsSend(row){
             if(this.$Helper.checkBrowser()){
-                window.open(`https://wa.me/${row.phone}?text=${this.message}`,"_blank");
+                window.open(`https://wa.me/${row.phone}?text=${this.message+row.uuid}`,"_blank");
             }else{
-                uniFun.postMessage({data:`https://wa.me/${row.phone}?text=${this.message}`});
+                uniFun.postMessage({data:`https://wa.me/${row.phone}?text=${this.message+row.uuid}`});
             }
         }
 	}
@@ -645,6 +660,17 @@ export default {
                     color: $home-title-02;
                     text-decoration: underline;
                 }
+            }
+        }
+        .submit_btn{
+            padding: 0 30px;
+            box-sizing: border-box;
+            .van-button{
+                width: 100%;
+                border-radius: 20px;
+                color: $font-color-white;
+                border-color: $color-theme;
+                background-color: $color-theme;
             }
         }
         .record_list{

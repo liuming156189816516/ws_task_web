@@ -352,6 +352,7 @@ export default {
                 }else{
                     this.pullGroupList = [...this.pullGroupList,...res.list] || [];
                 }
+                // this.showStep=true;
                 const isTips = JSON.parse(localStorage.getItem('step_04'));
                 if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList[0].img_url){
                     this.showStep=true;
@@ -366,7 +367,7 @@ export default {
         },
         submitBtn(){
             this.isupoading=true;
-            dotutorialstatus({task_id:this.task_id}).then(res=>{
+            submitaimessagetask({task_id:this.task_id}).then(res=>{
                 this.isupoading=false;
                 if(res.code) return;
                 this.refreshBtn();

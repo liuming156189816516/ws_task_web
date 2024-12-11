@@ -438,10 +438,11 @@ export default {
             scrollTop.scrollTo({top: 0,behavior:"smooth"});
         },
         jumpWsSend(row){
+            let textMsg = `https://wa.me/${row.phone}?text=${this.message}$*$${row.uuid}` 
             if(this.$Helper.checkBrowser()){
-                window.open(`https://wa.me/${row.phone}?text=${this.message+row.uuid}`,"_blank");
+                window.open(textMsg,"_blank");
             }else{
-                uniFun.postMessage({data:`https://wa.me/${row.phone}?text=${this.message+row.uuid}`});
+                uniFun.postMessage({data:textMsg});
             }
         }
 	}

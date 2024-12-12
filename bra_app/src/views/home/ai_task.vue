@@ -77,7 +77,7 @@
                             <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
                             <div class="title_04 flex-item flex-align flex-center" v-if="!item.img_url">
                                 <span class="upload_icon flex-item">
-                                    <van-button id="step_02" :disabled="is_upload" :loading="file_uuid==item.uuid&&is_upload" plain :icon="require(`@/assets/images/home/up_icon.png`)">
+                                    <van-button id="step_02" :disabled="is_upload||item.status==5" :loading="file_uuid==item.uuid&&is_upload" plain :icon="require(`@/assets/images/home/up_icon.png`)">
                                         <!-- {{$t('home_181')}} -->
                                         <template v-if="$Helper.checkApkBag(1)==1">
                                             <input v-if="!is_upload" :ref="'upload'+idx" class="file_input" accept="image/*" capture="camera" type="file" @change="checkDataIsUse(item,idx)" />
@@ -107,7 +107,7 @@
                 </div> -->
             </div>
             <div class="w_f submit_btn flex-item flex-align">
-                <van-button :loading="isupoading" :loading-text="$t('other_029')" @click="submitBtn">{{$t('home_038')}}</van-button>
+                <van-button :disabled="isFinish" :loading="isupoading" :loading-text="$t('other_029')" @click="submitBtn">{{$t('home_038')}}</van-button>
             </div>
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
@@ -164,7 +164,8 @@ export default {
             isShow:false,
             loading:false,
             teamStemp:'',
-            finished :false,
+            finished:false,
+            isFinish:false,
             timestamp:0,
             group_link:'',
             target_url:'',
@@ -266,6 +267,7 @@ export default {
 	},
     created(){
         this.isScroll = false;
+        this.isFinish = false;
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         // this.task_id = this.$route.query.id||"";
         // this.getGroupMess();
@@ -374,6 +376,7 @@ export default {
             submitaimessagetask({task_id:this.task_id}).then(res=>{
                 this.isupoading=false;
                 if(res.code) return;
+                this.isFinish=true;
                 this.refreshBtn();
                 this.$toast(this.$t("home_039"));
             })

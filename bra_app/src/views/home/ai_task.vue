@@ -266,7 +266,6 @@ export default {
 	},
     created(){
         this.isScroll = false;
-        this.isFinish = false;
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         // this.task_id = this.$route.query.id||"";
         // this.getGroupMess();
@@ -313,6 +312,7 @@ export default {
             formData.append('phone', row.phone);
             this.is_upload=true;
             this.file_uuid = row.uuid;
+            this.isFinish = row.is_finish_flag;
             let res = await uploadfile(formData);
             this.is_upload=false;
             if(res.code) return;

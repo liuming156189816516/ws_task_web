@@ -312,7 +312,6 @@ export default {
             formData.append('phone', row.phone);
             this.is_upload=true;
             this.file_uuid = row.uuid;
-            this.isFinish = row.is_finish_flag;
             let res = await uploadfile(formData);
             this.is_upload=false;
             if(res.code) return;
@@ -342,6 +341,7 @@ export default {
                 this.loading = false;
                 this.link = res.link;
                 this.task_id = res.task_id;
+                this.isFinish = res.is_finish_flag;
                 this.total_bonus = res.total_bonus;
                 this.total_count = res.total_count;
                 this.finish_count = res.finish_count;

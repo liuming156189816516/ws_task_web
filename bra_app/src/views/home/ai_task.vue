@@ -416,7 +416,8 @@ export default {
                 link.target = "_blank";
                 link.click();
             }else{
-                uniFun.postMessage({data:this.taskList});
+                let newArr = this.taskList.map(item => {return {...item,target:`+${item.target}`}});
+                uniFun.postMessage({data:newArr});
             }
         },
         showVideo(){

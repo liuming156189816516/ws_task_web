@@ -78,12 +78,11 @@
                             <div class="title_04 flex-item flex-align flex-center" v-if="!item.img_url">
                                 <span class="upload_icon flex-item">
                                     <van-button id="step_02" :disabled="is_upload||item.status==5" :loading="file_uuid==item.uuid&&is_upload" plain :icon="require(`@/assets/images/home/up_icon.png`)">
-                                        <!-- {{$t('home_181')}} -->
                                         <template v-if="$Helper.checkApkBag(1)==1">
-                                            <input v-if="!is_upload" :ref="'upload'+idx" class="file_input" accept="image/*" capture="camera" type="file" @change="checkDataIsUse(item,idx)" />
+                                            <input v-if="!is_upload&&item.status==5" :ref="'upload'+idx" class="file_input" accept="image/*" capture="camera" type="file" @change="checkDataIsUse(item,idx)" />
                                         </template>
                                         <template v-else>
-                                            <input v-if="!is_upload" :ref="'upload'+idx" class="file_input" accept="image/*" type="file" @change="checkDataIsUse(item,idx)" />
+                                            <input v-if="!is_upload&&item.status==5" :ref="'upload'+idx" class="file_input" accept="image/*" type="file" @change="checkDataIsUse(item,idx)" />
                                         </template>
                                     </van-button>
                                 </span>

@@ -352,6 +352,10 @@ export default {
                 }else{
                     this.pullGroupList = [...this.pullGroupList,...res.list] || [];
                 }
+                // setTimeout(()=>{
+                //     let scrollTop = this.$refs.warpBox;
+                //     scrollTop.scrollTo({top: 300,behavior: "instant" });
+                // })
                 // this.showStep=true;
                 const isTips = JSON.parse(localStorage.getItem('step_04'));
                 if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList[0].img_url){

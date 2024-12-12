@@ -33,19 +33,19 @@
                 </div>
             </div>
         </div>
-        <div class="task_box_main">
-            <!-- <div class="task_warp w_f flex-item">
+        <div class="task_box_main w_f flex-item flex-dir-c">
+            <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
                     <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_037')}}</div>
                         </div>
                         <div class="task_btn w_f flex-item flex-between flex-align font_24">
-                            <span class="show_account" @click="viewTaskNum">{{$t('home_111')}}</span>
+                            <span class="show_account">{{$t('home_189')}}</span>
                             <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                     </div>
-                    <div class="task_item w_f flex-item flex-dir-c font_34">
+                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
                         <div class="task_award w_f">
                             <div class="task_book font_28">{{$t('home_113')}}</div>
                         </div>
@@ -53,9 +53,9 @@
                             <input id="step_02" type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
                             <van-button id="step_03" :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-            </div> -->
+            </div>
             <!-- <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
@@ -144,8 +144,8 @@
 import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
-import { getaimsginfo,uploadfile,submitaimessagetask } from '@/api/task';
 import { submitcreatetask,dotutorialstatus } from '@/api/home'
+import { getaimsginfo,uploadfile,submitaimessagetask,getaimessagetaskcontacts } from '@/api/task';
 import uniFun from "@/utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
@@ -270,8 +270,9 @@ export default {
         // this.task_id = this.$route.query.id||"";
         // this.getGroupMess();
     },
-    mounted(){
-        this.getIncomeList();
+    async mounted(){
+        await this.getIncomeList();
+        await this.getContato();
     },
 	methods: {
         async done(){
@@ -335,35 +336,40 @@ export default {
                 this.getIncomeList()
             }
         },
-        getIncomeList(){
+        async getIncomeList(){
             this.ref_loading = true;
-            getaimsginfo({page:this.page,limit:this.limit,task_type:1}).then(res => {
-                this.loading = false;
-                this.link = res.link;
-                this.task_id = res.task_id;
-                this.isFinish = res.is_finish_flag;
-                this.total_bonus = res.total_bonus;
-                this.total_count = res.total_count;
-                this.finish_count = res.finish_count;
-                this.message = encodeURIComponent(res.content);
-                setTimeout(()=>{this.ref_loading = false;},500)
-                this.page_total = Math.ceil(res.total / this.limit);
-                if(this.page == 1){
-                    this.pullGroupList = res.list;
-                }else{
-                    this.pullGroupList = [...this.pullGroupList,...res.list] || [];
-                }
-                // setTimeout(()=>{
-                //     let scrollTop = this.$refs.warpBox;
-                //     scrollTop.scrollTo({top: 300,behavior: "instant" });
-                // })
-                // this.showStep=true;
-                const isTips = JSON.parse(localStorage.getItem('step_04'));
-                if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList[0].img_url){
-                    this.showStep=true;
-                }
-            })
+            let res = await getaimsginfo({page:this.page,limit:this.limit,task_type:1});
+            this.loading = false;
+            if(res.code) return;
+            this.link = res.link;
+            this.task_id = res.task_id;
+            this.isFinish = res.is_finish_flag;
+            this.total_bonus = res.total_bonus;
+            this.total_count = res.total_count;
+            this.finish_count = res.finish_count;
+            this.message = encodeURIComponent(res.content);
+            setTimeout(()=>{this.ref_loading = false;},500)
+            this.page_total = Math.ceil(res.total / this.limit);
+            if(this.page == 1){
+                this.pullGroupList = res.list;
+            }else{
+                this.pullGroupList = [...this.pullGroupList,...res.list] || [];
+            }
+            // setTimeout(()=>{
+            //     let scrollTop = this.$refs.warpBox;
+            //     scrollTop.scrollTo({top: 300,behavior: "instant" });
+            // })
+            // this.showStep=true;
+            const isTips = JSON.parse(localStorage.getItem('step_04'));
+            if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList[0].img_url){
+                this.showStep=true;
+            }
         },
+        async getContato(){
+           const { url } = await getaimessagetaskcontacts({task_id:this.task_id});
+           this.target_url = url;
+        },
+        // 
         copySuccess(){
             this.$toast(`${this.$t("other_044")}`);
         },
@@ -402,7 +408,7 @@ export default {
             }
         },
         downAddress(){
-            this.$store.dispatch('User/actionReport',10);
+            // this.$store.dispatch('User/actionReport',10);
             if(this.$Helper.checkBrowser()){
                 const link = document.createElement('a');
                 link.href = this.target_url;
@@ -566,16 +572,14 @@ export default {
             // background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
         }
         .task_warp{
+            margin: 30px 0 10px 0;
             position: relative;
-            z-index: 9;
-            margin-top: -60px;
              .task_main{
                 padding: 0 30px;
                 gap: 30px;
                 box-sizing: border-box;
                 .task_item{
-                    height: 210px;
-                    padding: 16px 0 0 20px;
+                    padding: 16px 0 20px 30px;
                     box-sizing: border-box;
                     background: url('../../assets/images/home/task_icon.png') no-repeat;
                     background-size: 100% 100%;
@@ -605,8 +609,8 @@ export default {
                         }
                     }
                     .show_account{
+                        line-height: 1.5;
                         color: $home-title-02;
-                        text-decoration: underline;
                     }
                     .group_link{
                         margin-top: 20px;
@@ -641,15 +645,6 @@ export default {
                         background-color: $home-title-06;
                     }
                 }
-                .task_item:nth-child(1){
-                    height: 190px;
-                    .task_btn{
-                        margin-top: 20px;
-                    }
-                }
-            }
-            .task_item:nth-child(1){
-                margin-bottom: 30px;
             }
         }
         .record_legend{

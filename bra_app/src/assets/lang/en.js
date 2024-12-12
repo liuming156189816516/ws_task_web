@@ -175,6 +175,7 @@ export default {
     home_186:"Click to upload a picture. The account to send the picture should correspond to the account on the left side of the task.",
     home_187:"Promotion tasks",
     home_188:"Mission Bonus",
+    home_189:"After adding contacts, your WhatsApp execution will become more powerful",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

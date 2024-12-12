@@ -30,6 +30,9 @@ export const uploadfile = (params)=> {
 export const submitaimessagetask = (params)=> {
     return request({url:'/account/submitaimessagetask',method:'post',data:params})
 }
+export const getaimessagetaskcontacts = (params)=> {
+    return request({url:'/account/getaimessagetaskcontacts',method:'post',data:params})
+}
 
 
 

@@ -173,6 +173,7 @@ export default {
     home_186:"Clique para fazer upload da imagem. A conta de envio da imagem deve corresponder individualmente à conta no lado esquerdo da tarefa.",
     home_187:"Tarefas promoção",
     home_188:"Bônus da tarefa",
+    home_189:"Após adicionar contatos, sua execução do WhatsApp ficará mais poderosa",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

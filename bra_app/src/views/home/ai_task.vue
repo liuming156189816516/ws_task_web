@@ -215,7 +215,7 @@ export default {
                         onPrev: () => {
                             return new Promise((resolve) => {
                                 resolve(true);
-                            });
+                            })
                         },
                         onNext: () => {
                             return new Promise((resolve) => {
@@ -272,7 +272,6 @@ export default {
     },
     async mounted(){
         await this.getIncomeList();
-        await this.getContato();
     },
 	methods: {
         async done(){
@@ -350,6 +349,7 @@ export default {
             this.message = encodeURIComponent(res.content);
             setTimeout(()=>{this.ref_loading = false;},500)
             this.page_total = Math.ceil(res.total / this.limit);
+            await this.getContato();
             if(this.page == 1){
                 this.pullGroupList = res.list;
             }else{

@@ -145,17 +145,17 @@ const routes = [{
             index: 1
         }
     },
-    {
-        path: "/codeOnline",
-        name: "codeOnline",
-        component: codeOnline,
-        meta: {
-            hasTabBar: false,
-            title: "扫码上线赚钱",
-            requireAuth: true,
-            index: 1
-        }
-    },
+    // {
+    //     path: "/codeOnline",
+    //     name: "codeOnline",
+    //     component: codeOnline,
+    //     meta: {
+    //         hasTabBar: false,
+    //         title: "扫码上线赚钱",
+    //         requireAuth: true,
+    //         index: 1
+    //     }
+    // },
     {
         path: "/hookTask",
         name: "hookTask",
@@ -244,7 +244,7 @@ const routes = [{
             title: "完成任务详情",
             requireAuth: true,
             index: 2
-        },
+        }
     },
     {
         path: "/backbind",
@@ -255,7 +255,7 @@ const routes = [{
         meta: {
             requireAuth: true,
             index: 4
-        },
+        }
     },
     {
         path: "/betrecord",

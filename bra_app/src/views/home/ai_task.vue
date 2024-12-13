@@ -368,8 +368,8 @@ export default {
         },
         async getContato(){
            const { url,targets } = await getaimessagetaskcontacts({task_id:this.task_id});
-           this.taskList = targets;
            this.target_url = url;
+           this.taskList = targets;
         },
         // 
         copySuccess(){

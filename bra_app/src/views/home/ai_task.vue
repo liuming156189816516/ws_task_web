@@ -342,6 +342,7 @@ export default {
             if(res.code) return;
             this.link = res.link;
             this.task_id = res.task_id;
+            this.taskList = res.targets;
             this.isFinish = res.is_finish_flag;
             this.total_bonus = res.total_bonus;
             this.total_count = res.total_count;
@@ -372,9 +373,6 @@ export default {
         // 
         copySuccess(){
             this.$toast(`${this.$t("other_044")}`);
-        },
-        viewTaskNum(){
-            this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
         },
         submitBtn(){
             this.isupoading=true;

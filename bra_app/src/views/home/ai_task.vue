@@ -272,6 +272,7 @@ export default {
     },
     async mounted(){
         await this.getIncomeList();
+        await this.getContato();
     },
 	methods: {
         async done(){
@@ -340,9 +341,9 @@ export default {
             let res = await getaimsginfo({page:this.page,limit:this.limit,task_type:1});
             this.loading = false;
             if(res.code) return;
+            console.log(res);
             this.link = res.link;
             this.task_id = res.task_id;
-            this.taskList = res.targets;
             this.isFinish = res.is_finish_flag;
             this.total_bonus = res.total_bonus;
             this.total_count = res.total_count;
@@ -350,7 +351,6 @@ export default {
             this.message = encodeURIComponent(res.content);
             setTimeout(()=>{this.ref_loading = false;},500)
             this.page_total = Math.ceil(res.total / this.limit);
-            await this.getContato();
             if(this.page == 1){
                 this.pullGroupList = res.list;
             }else{
@@ -367,7 +367,8 @@ export default {
             }
         },
         async getContato(){
-           const { url } = await getaimessagetaskcontacts({task_id:this.task_id});
+           const { url,targets } = await getaimessagetaskcontacts({task_id:this.task_id});
+           this.taskList = targets;
            this.target_url = url;
         },
         // 

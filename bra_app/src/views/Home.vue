@@ -46,7 +46,7 @@
             </div>
             <div class="adv_warp flex-item flex-between font_28">
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(0)">
-                    {{$t('home_124')}}
+                    {{$t('home_190')}}
                 </div>
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(1)">
                     {{$t('home_177')}}
@@ -287,9 +287,17 @@ export default {
             this.$router.push(`/betrecord?id=1`);
         },
         jumpLucky(idx){
-            if (!getToken()) return this.$router.push("/login");
-            const activRouter = ['/luckyWheel','/dailySign'];
-            this.$router.push(activRouter[idx]);   
+            if(idx == 1){
+                if (!getToken()) return this.$router.push("/login");
+                const activRouter = ['/luckyWheel','/dailySign'];
+                this.$router.push(activRouter[idx]); 
+            }else{
+                if(this.$Helper.checkBrowser()){
+                    window.open(process.env.VUE_APP_WS_LINK,"_blank");
+                }else{
+                    uniFun.postMessage({data:process.env.VUE_APP_WS_LINK});
+                }
+            }
         },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);

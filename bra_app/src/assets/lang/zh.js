@@ -176,6 +176,7 @@ export default {
     home_187:"推广任务",
     home_188:"任务奖金",
     home_189:"添加通讯录以后，你的WhatsApp执行力会变得更加的强大",
+    home_190:"WhatsApp 奖金",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",

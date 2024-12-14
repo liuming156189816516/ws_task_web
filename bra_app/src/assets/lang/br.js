@@ -174,6 +174,7 @@ export default {
     home_187:"Tarefas promoção",
     home_188:"Bônus da tarefa",
     home_189:"Após adicionar contatos, sua execução do WhatsApp ficará mais poderosa",
+    home_190:"WhatsApp Bônus",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

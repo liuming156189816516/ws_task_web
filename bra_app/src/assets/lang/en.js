@@ -176,6 +176,7 @@ export default {
     home_187:"Promotion tasks",
     home_188:"Mission Bonus",
     home_189:"After adding contacts, your WhatsApp execution will become more powerful",
+    home_190:"WhatsApp Bonus",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

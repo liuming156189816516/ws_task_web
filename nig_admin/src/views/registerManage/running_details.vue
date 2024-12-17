@@ -140,7 +140,7 @@ export default {
             // return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
         },
         tasksOption(){
-            return ["","挂机","拉群","拉粉"]
+            return ["","挂机","拉群","拉粉","AI"]
         }
     },
     created() {

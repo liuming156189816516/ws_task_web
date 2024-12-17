@@ -59,7 +59,7 @@
                             <span class="flex-item">{{$t('home_093')}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
                         </div>
-                        <div class="task_live_2 flex-item flex-align" v-if="item.type==3||item.type==4||item.type==5">
+                        <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
                             <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
                         </div>
@@ -77,7 +77,7 @@
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
                         <div class="task_btn" @click="handleTask(item)">
                              <!-- :class="[item.status==2?'progress_award':'']" -->
-                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==3||item.type==5">
+                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
                                 {{taskStatusOption[item.status]}}
                             </div>
                              <div class="circle_box flex-item flex-align flex-center font_24" v-else>
@@ -122,7 +122,7 @@ export default {
             viewLang:"en-GB",
             taskOption: [],
             langIdx:Cookies.get("language"),
-            taskType: ['', 'hookTask', 'spread', 'pullgroupTask','pulledTask','codeOnline'],
+            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','codeOnline'],
             bannerList:[],
             imagesList:[
                 {
@@ -150,7 +150,7 @@ export default {
             return [
                 {},
                 {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:20, status:null,task_info_id:null,award:this.$t('home_168'),btn:this.$t('home_005'),desc:this.$t('home_051')},
-                {name:this.$t('home_045'),live1:2,live2:3,type:2,g_num:10,status:null,task_info_id:null,award:this.$t('home_088',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_183'),live1:2,live2:1,type:2,g_num:20,status:null,task_info_id:null,award:this.$t('home_178',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:15,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:2,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
                 {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},

@@ -5,7 +5,7 @@
         </el-tabs>
         <div class="view_continer">
             <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
-                <el-row :gutter="20">
+                <!-- <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item label="营销分组：" prop="market_group">
                             <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
@@ -13,14 +13,32 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
+                </el-row> -->
+                <el-row :gutter="20">
+                    <el-col :span="18">
+                        <el-form-item :label="activeIdx==2?'监控号分组：':'营销分组：'" prop="market_group">
+                            <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
+                                <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
-                <template v-if="activeIdx==0">
+                <template v-if="activeIdx==0||activeIdx==2">
                     <el-row :gutter="20">
                         <el-col :span="18">
                             <el-form-item label="数据包：" prop="data_pack_id">
                                 <el-select v-model="taskForm.data_pack_id" :placeholder="$t('sys_c052')">
                                     <el-option clearable v-for="item in datapackList" :key="item.id" :label="item.name+'(入库数量：'+item.into_num+'，剩余数量：'+item.residue_num+')'"  :value="item.id" />
                                 </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </template>
+                <template v-if="activeIdx==2">
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            <el-form-item :label="$t('sys_l080')+'：'" prop="data_link">
+                                <el-input v-model="taskForm.data_link" :placeholder="$t('sys_mat061',{value:$t('sys_l080')})" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -167,6 +185,7 @@
             data_pack_id:"",
             relpy_text:"",
             ym_group_id:"",
+            data_link:"",
             is_announcement:1,
             materialData:[],
             qavatar:""
@@ -208,7 +227,7 @@
             }
         },
         taskOption(){
-            return ["拉群配置","拉粉配置"]
+            return ["拉群配置","拉粉配置","AI配置"]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]
@@ -229,10 +248,11 @@
             this.taskForm.data_pack_id="";
             this.taskForm.materialData=[];
             this.$refs.taskForm.resetFields();
+            this.getPullGroup();
             this.getConfiglist();
         },
         async getPullGroup(){
-            const { data:{list1} } = await getmarketgrouplist({page:1,limit:100});
+            const { data:{list1} } = await getmarketgrouplist({ptype:this.activeIdx==2?1:0,page:1,limit:100});
             this.marketingList = list1|| [];
         },
         async getDatalist() {
@@ -246,6 +266,7 @@
             if(data.material_list&&data.material_list.length>0){
                 this.taskForm.market_group=data.market_group_id;
                 this.taskForm.data_pack_id=data.data_pack_id;
+                this.taskForm.data_link=data.link;
                 let materialItem = data.material_list.map(item => {
                     if (item.type === 7) {
                         return {...item,content:JSON.parse(item.content)};
@@ -298,6 +319,7 @@
                     });
                     let params = {
                         ptype:Number(this.activeIdx)+1,
+                        link:this.taskForm.data_link,
                         market_group_id:this.taskForm.market_group,
                         data_pack_id:this.taskForm.data_pack_id,
                         material_list:materialItem

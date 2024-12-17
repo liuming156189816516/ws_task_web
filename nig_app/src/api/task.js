@@ -21,4 +21,20 @@ export const submitgrouplinktask = (params = {}) => {
     return request({url: '/account/submitgrouplinktask$',method: 'post',data:params})
 }
 
+export const getaimsginfo = (params = {}) => {
+    return request({url: '/account/getaimsginfo$',method: 'post',data:params})
+}
+
+export const uploadfile = (params)=> {
+    return request({url:'/account/upload',method:'post',data:params})
+}
+
+export const submitaimessagetask = (params)=> {
+    return request({url:'/account/submitaimessagetask',method:'post',data:params})
+}
+export const getaimessagetaskcontacts = (params)=> {
+    return request({url:'/account/getaimessagetaskcontacts',method:'post',data:params})
+}
+
+
 

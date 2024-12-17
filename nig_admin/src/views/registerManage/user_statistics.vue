@@ -11,8 +11,7 @@
                     <span class="card_num" :style="{color:`${item.t_c}`}" v-text="item.num" v-else></span>
                 </div>
             </template> -->
-
-            <el-table :data="statisticsList" border v-loading="loading" minHeight="max-content" element-loading-spinner="el-icon-loading" style="width: 100%;">
+            <el-table :data="statisticsList" border v-loading="isLoading" minHeight="max-content" element-loading-spinner="el-icon-loading" style="width: 100%;">
                 <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
                 <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="100" />
                 <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
@@ -400,7 +399,6 @@ export default {
 .detail_card{
     // width: 100%;
     width: 100%;
-    min-height: 160px;
     display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;

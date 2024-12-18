@@ -11,7 +11,7 @@
                 <span class="sign_bt flex-item flex-align flex-center" @click="jumpPage(1)">{{lanageType($t('login_014'))}}</span>
             </div>
             <div class="user_info flex-item flex-align" v-else>
-                <span :class="[!userInfo.sysNotice?'notoce_active':'']" style="position: relative;">
+                <span :class="['flex-item flex-align',!userInfo.sysNotice?'notoce_active':'']" style="position: relative;">
                     <img class="msg_icon" src="@/assets/images/xiaoxi.png" @click="jumpMsg">
                     <span class="notoce_tips" v-if="!userInfo.sysNotice"></span>
                 </span>

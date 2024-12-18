@@ -172,7 +172,7 @@ export default {
     }
   },
   created() {
-    this.getTaskList();
+    // this.getTaskList();
   },
   methods: {
       resetQuery(){
@@ -228,9 +228,9 @@ export default {
       },
       jumpCreatTask(row,idx){
         if (idx == 0) {
-          this.$router.push("/create-super-task")
+          this.$router.push("/creat-mess")
         }else{
-          this.$router.push({path:"/create-super-task",query:{config:row}})
+          this.$router.push({path:"/creat-mess",query:{config:row}})
         }
       },
       handleCommand(row,command) {

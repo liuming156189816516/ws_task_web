@@ -62,6 +62,13 @@ export function filterAsyncRoutes(routers){
   return routers.filter(item =>{
     let childrenList = []
     for (let k = 0; k < asyncRoutes.length; k++) {
+      if(item.path == asyncRoutes[k].path&&asyncRoutes[k].children.length>0){
+        for (let c = 0; c < asyncRoutes[k].children.length; c++) {
+          if(asyncRoutes[k].children[c].hidden){
+            item.children.push(asyncRoutes[k].children[c])
+          }
+        }
+      }
       if(asyncRoutes[k].children&&asyncRoutes[k].children.length>0){
         for (let l = 0; l < asyncRoutes[k].children.length; l++) {
           childrenList.push(asyncRoutes[k].children[l])
@@ -117,7 +124,7 @@ const actions = {
       commit('SET_MENU', userMenu)
       let accessedRoutes = asyncRoutes || []
       commit('SET_ROUTES', accessedRoutes)
-      // console.log();
+      // resolve(accessedRoutes)
       resolve(state.routes)
     })
   }

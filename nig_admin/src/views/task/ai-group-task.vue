@@ -101,10 +101,10 @@
     <el-dialog :title="$t('sys_q111')" :visible.sync="dialogVisible" width="560px" center>
       <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="资源审核" prop="group_type">
-            <el-radio-group v-model="taskForm.group_type">
-                <el-radio label="1">通过</el-radio>
-                <el-radio label="2">驳回</el-radio>
-            </el-radio-group>
+          <el-radio-group v-model="taskForm.group_type">
+            <el-radio label="1">通过</el-radio>
+            <el-radio label="2">驳回</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item :label="$t('sys_c071')+'：'" prop="relpy_text" v-if="taskForm.group_type==2">
           <el-input type="textarea" clearable v-model="taskForm.relpy_text" :placeholder="$t('sys_mat061',{value:$t('sys_c071')})" rows="6" />

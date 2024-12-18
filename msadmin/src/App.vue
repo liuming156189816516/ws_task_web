@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="closeMenu">
+  <div id="app" @click="closeGoods">
     <!-- <keep-alive> -->
       <router-view />
     <!-- </keep-alive> -->
@@ -16,7 +16,7 @@ export default {
     }
   },
   methods:{
-    closeMenu(){
+    closeGoods(){
       this.EventBus.$emit('message',"ok");
     }
   }

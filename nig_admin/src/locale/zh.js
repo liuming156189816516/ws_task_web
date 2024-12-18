@@ -514,6 +514,7 @@ export default {
     'sys_m110': '未领取',
     'sys_m111': '拉群资源数',
     'sys_m112': '拉粉资源数',
+    'sys_m113': 'AI',
 
     'sys_mat001': '素材名称',
     'sys_mat002': '排序调整',

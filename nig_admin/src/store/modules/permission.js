@@ -59,49 +59,49 @@ const state = {
   routes: [],
   addRoutes: []
 }
-// export function filterAsyncRoutes(routers){
-//   return routers.filter(item =>{
-//     item.component = 'Layout';
-//     if (item.path) {
-//       if (item.children && item.children.length > 0) {
-//         item.children = filterAsyncRoutes(item.children,routers)
-//       }
-//       return true
-//     }
-//   })
-// }
 export function filterAsyncRoutes(routers){
   return routers.filter(item =>{
-    let childrenList = []
-    for (let k = 0; k < asyncRoutes.length; k++) {
-      if(asyncRoutes[k].children&&asyncRoutes[k].children.length>0){
-        for (let l = 0; l < asyncRoutes[k].children.length; l++) {
-          childrenList.push(asyncRoutes[k].children[l])
-        }
-      }
-
-      if(asyncRoutes[k].path === item.path){
-        item.name = asyncRoutes[k].meta.title;
-        item.component = asyncRoutes[k].component;
-      }
-      
-      if(childrenList&&childrenList.length>0){
-        for (let f = 0; f < childrenList.length; f++) {
-          if(item.path == childrenList[f].path){
-            item.name = childrenList[f].meta.title;
-            item.component = childrenList[f].component;
-          }
-        }
-      }
-    }
+    item.component = 'Layout';
     if (item.path) {
       if (item.children && item.children.length > 0) {
-        item.children = filterAsyncRoutes(item.children)
+        item.children = filterAsyncRoutes(item.children,routers)
       }
       return true
     }
   })
 }
+// export function filterAsyncRoutes(routers){
+//   return routers.filter(item =>{
+//     let childrenList = []
+//     for (let k = 0; k < asyncRoutes.length; k++) {
+//       if(asyncRoutes[k].children&&asyncRoutes[k].children.length>0){
+//         for (let l = 0; l < asyncRoutes[k].children.length; l++) {
+//           childrenList.push(asyncRoutes[k].children[l])
+//         }
+//       }
+
+//       if(asyncRoutes[k].path === item.path){
+//         item.name = asyncRoutes[k].meta.title;
+//         item.component = asyncRoutes[k].component;
+//       }
+      
+//       if(childrenList&&childrenList.length>0){
+//         for (let f = 0; f < childrenList.length; f++) {
+//           if(item.path == childrenList[f].path){
+//             item.name = childrenList[f].meta.title;
+//             item.component = childrenList[f].component;
+//           }
+//         }
+//       }
+//     }
+//     if (item.path) {
+//       if (item.children && item.children.length > 0) {
+//         item.children = filterAsyncRoutes(item.children)
+//       }
+//       return true
+//     }
+//   })
+// }
 const mutations = {
   SET_ROUTES: (state, routes) => {
     let rolesRouter = filterAsyncRoutes(state.userMenu);
@@ -132,8 +132,8 @@ const actions = {
       commit('SET_MENU', userMenu)
       let accessedRoutes = asyncRoutes || []
       commit('SET_ROUTES', accessedRoutes)
-      // resolve(accessedRoutes)
-      resolve(state.routes)
+      resolve(accessedRoutes)
+      // resolve(state.routes)
     })
   }
 }

@@ -216,7 +216,7 @@ export default {
       })
     },
     checkSelectable(row){
-        if (row.status === 3) {
+        if (row.status === 3||row.status === 5) {
           return true
         } else {
           return false
@@ -232,7 +232,7 @@ export default {
         refsElTable.toggleRowSelection(row, false);
         return;
       }
-      if (row.status === 3) {
+      if (row.status === 3||row.status === 5) {
         refsElTable.toggleRowSelection(row, true);
       }
     },

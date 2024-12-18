@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="closeMenu">
     <!-- <keep-alive> -->
       <router-view />
     <!-- </keep-alive> -->
@@ -13,6 +13,11 @@ export default {
   mounted() {
     if (getToken()) {
       this.$store.dispatch('user/getMenuInfo');
+    }
+  },
+  methods:{
+    closeMenu(){
+      this.EventBus.$emit('message',"ok");
     }
   }
 }

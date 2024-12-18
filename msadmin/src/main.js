@@ -25,6 +25,7 @@ Vue.use(UTableColumn);
 Vue.use(UTable);
 Vue.use(Element,{i18n:(key,value)=>i18n.t(key,value)})
 Vue.config.productionTip = false
+Vue.prototype.EventBus = new Vue();
 
 new Vue({
   el: '#app',

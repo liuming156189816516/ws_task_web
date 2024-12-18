@@ -471,7 +471,8 @@ export default {
         overflow-y: auto;
         position: relative;
         // background-color: #f2f2f2;
-        background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+        // background: $color-cardbg;
+        background: linear-gradient(180deg, $color-theme 1.61%, rgba(255, 255, 255, 0.5) 100%);
         -webkit-overflow-scrolling: touch; 
         padding-bottom: 20px;
         .top_icon{

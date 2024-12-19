@@ -6,6 +6,9 @@
         <el-form-item>
           <el-input v-model="model1.account" clearable placeholder="请输入用户账号"  style="width:180px;" />
         </el-form-item>
+        <el-form-item>
+          <el-input v-model="model1.remark" clearable placeholder="请输入原因"  style="width:180px;" />
+        </el-form-item>
         <!-- <el-form-item>
           <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
         </el-form-item>
@@ -136,6 +139,7 @@ export default {
         limit: 10,
         account: "",
         ipCtime: "",
+        remark: "",
         invite_link: "",
         ad_account: "",
         task_type:"",
@@ -192,6 +196,7 @@ export default {
     restQueryBtn() {
       this.model1.status = "";
       this.model1.account = "";
+      this.model1.remark = "";
       this.getTaskList(1);
     },
     //获取订单列表
@@ -206,6 +211,7 @@ export default {
         limit: this.model1.limit,
         status: this.model1.status||-1,
         account: this.model1.account,
+        remark: this.model1.remark,
         start_time:start_time,
         end_time:end_time,
       }

@@ -449,15 +449,12 @@ export default {
             scrollTop.scrollTo({top: 0,behavior:"smooth"});
         },
         jumpWsSend(row){
-            console.log(row.content);
-            let message = encodeURIComponent(row.content);
-            console.log(message);
-            // let textMsg =`https://wa.me/${row.phone}?text=${message}`;
-            // if(this.$Helper.checkBrowser()){
-            //     window.open(textMsg,"_blank");
-            // }else{
-            //     uniFun.postMessage({data:textMsg});
-            // }
+            let textMsg =`https://wa.me/${row.phone}?text=${encodeURIComponent(row.content)}`;
+            if(this.$Helper.checkBrowser()){
+                window.open(textMsg,"_blank");
+            }else{
+                uniFun.postMessage({data:textMsg});
+            }
         }
 	}
 };

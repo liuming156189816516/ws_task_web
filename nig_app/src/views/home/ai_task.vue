@@ -169,7 +169,6 @@ export default {
             group_link:'',
             target_url:'',
             chrome_url:'',
-            message:'',
             total_bonus:0,
             total_count:0,
             finish_count:0,
@@ -348,7 +347,6 @@ export default {
             this.total_bonus = res.total_bonus;
             this.total_count = res.total_count;
             this.finish_count = res.finish_count;
-            this.message = encodeURIComponent(res.content);
             setTimeout(()=>{this.ref_loading = false;},500)
             this.page_total = Math.ceil(res.total / this.limit);
             if(this.page == 1){
@@ -451,14 +449,15 @@ export default {
             scrollTop.scrollTo({top: 0,behavior:"smooth"});
         },
         jumpWsSend(row){
-            let textMsg =
-            `https://wa.me/${row.phone}?text=${this.message}
-            :::${row.uuid}`;
-            if(this.$Helper.checkBrowser()){
-                window.open(textMsg,"_blank");
-            }else{
-                uniFun.postMessage({data:textMsg});
-            }
+            console.log(row.content);
+            let message = encodeURIComponent(row.content);
+            console.log(message);
+            // let textMsg =`https://wa.me/${row.phone}?text=${message}`;
+            // if(this.$Helper.checkBrowser()){
+            //     window.open(textMsg,"_blank");
+            // }else{
+            //     uniFun.postMessage({data:textMsg});
+            // }
         }
 	}
 };

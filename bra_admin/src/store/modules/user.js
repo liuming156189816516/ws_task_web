@@ -1,5 +1,5 @@
 import { asyncRoutes, constantRoutes } from '@/router'
-import { login, loginout, adminmenu } from '@/api/login'
+import { login, loginout } from '@/api/login'
 import { setToken,getToken,setUserInfo,getUserInfo,removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 

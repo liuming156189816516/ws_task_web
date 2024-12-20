@@ -340,7 +340,6 @@ export default {
             let res = await getaimsginfo({page:this.page,limit:this.limit,task_type:1});
             this.loading = false;
             if(res.code) return;
-            console.log(res);
             this.link = res.link;
             this.task_id = res.task_id;
             this.isFinish = res.is_finish_flag;

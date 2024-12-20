@@ -7,7 +7,7 @@
           <el-input v-model="model1.account" clearable placeholder="请输入用户账号"  style="width:180px;" />
         </el-form-item>
         <el-form-item>
-          <el-input v-model="model1.account" clearable placeholder="请输入原因"  style="width:180px;" />
+          <el-input v-model="model1.remark" clearable placeholder="请输入原因"  style="width:180px;" />
         </el-form-item>
         <!-- <el-form-item>
           <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />

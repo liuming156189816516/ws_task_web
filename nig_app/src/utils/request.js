@@ -73,7 +73,7 @@ service.interceptors.response.use(res => {
       }
     }
   },error => {
-    const { config, response } = error;
+    const { config } = error;
     if(config.data.httpReqCount < 3){
       config.data.httpReqCount++;
       service(config);

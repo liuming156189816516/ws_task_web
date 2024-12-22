@@ -167,17 +167,17 @@ const routes = [{
             index: 1
         }
     },
-    {
-        path: "/highTask",
-        name: "highTask",
-        component: aiTask,
-        meta: {
-            hasTabBar: false,
-            title: "挂机任务",
-            requireAuth: true,
-            index: 1
-        }
-    },
+    // {
+    //     path: "/highTask",
+    //     name: "highTask",
+    //     component: aiTask,
+    //     meta: {
+    //         hasTabBar: false,
+    //         title: "挂机任务",
+    //         requireAuth: true,
+    //         index: 1
+    //     }
+    // },
     {
         path: "/pullgroupTask",
         name: "pullgroupTask",

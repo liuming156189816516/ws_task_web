@@ -57,14 +57,14 @@
                         <p class="mb_24">{{restLanuage('other_082')}}</p>
                         <p>{{restLanuage('other_083')}}</p> -->
                     </div>
-                    <div class="rule_desc w_f flex-item flex-between font_22" style="flex-wrap: wrap;" v-if="type==7">
+                    <div class="rule_desc w_f flex-item flex-between font_22" style="flex-wrap:wrap;" v-if="type==7">
                         <div class="task_list flex-item flex-center" v-for="(item,idx) in content" :key="idx">
                             {{ item.target }}
                             <!-- <span v-for="(item,idx) in content" :key="idx">{{ item.target }}</span> -->
                         </div>
                     </div>
                     <div class="rule_desc font_28" v-if="type==8">
-                        <p class="mb_24">{{restLanuage('home_031')}}：{{number}}</p>
+                        <!-- <p class="mb_24">{{restLanuage('home_031')}}：{{number}}</p> -->
                         <p class="mb_24" style="line-height: 20px;" >{{content}}</p>
                     </div>
                     <div class="rule_desc flex-item flex-align flex-center flex-dir-c font_28" v-if="type==9">

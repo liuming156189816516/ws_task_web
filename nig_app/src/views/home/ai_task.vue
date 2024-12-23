@@ -206,8 +206,6 @@ data() {
         old_account:"",
         isShow:false,
         isStatus:false,
-        wechaList:[],
-        taskList:[],
         tipsText:"",
         account:"",
         isDown:false,
@@ -231,7 +229,8 @@ data() {
         current_code:""||"234",
         accountList:[1,1,1,1,1,1],
         target_url:"",
-        taskPhoneList:[],
+        taskList:[],
+        wechaList:[],
         pullMobileList:[],
         codeOption:["","","","","—","","","",""],
         config: {

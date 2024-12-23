@@ -107,7 +107,7 @@
                                 <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
                                 <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                                 <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
-                                <span :class="['flex-item title_04',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
+                                <span :class="['flex-item title_04',item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==5?$t('home_135'):'...'"></span>
                             </div>
                         </div>
                     </template>
@@ -534,7 +534,7 @@ export default {
             }
         },
         showResult(row){
-            if(row.status == 4||row.status == 5){
+            if(row.status == 5){
                 this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
             }
             // this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })

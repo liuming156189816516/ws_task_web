@@ -535,7 +535,7 @@ methods: {
     },
     showResult(row){
         if(row.status == 5){
-            this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
+            this.$popDialog({ content:row.remark,number:row.ser_no,title:this.$t('other_088'), type: 8 })
         }
         // this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
     },

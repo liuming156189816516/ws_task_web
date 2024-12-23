@@ -2,9 +2,9 @@
         <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
             <div class="task_mian w_f">
                 <page-header :title="$t('home_168')" :show-icon="true" :bgcolor="false" />
-                <div class="video_box flex-item flex-item flex-align flex-center mg_24">
+                <!-- <div class="video_box flex-item flex-item flex-align flex-center mg_24">
                     <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-nrly.s3.af-south-1.amazonaws.com/5.MP4" />
-                </div>
+                </div> -->
             </div>
             <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
@@ -58,18 +58,12 @@
                 </div>
             </div>
             <div class="record_list login_list w_f flex-item flex-dir-c">
-                <!-- <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
-                    <span class="flex-item flex-align">{{$t('login_038')}}</span>
-                    <span class="flex-item flex-center">{{$t('tail_008')}}</span>
-                    <span class="flex-item">{{$t('home_022')}}</span>
-                </div> -->
-                <!-- <template v-if="pullGroupList&&pullGroupList.length>0"> -->
                 <div class="record_scroll w_f flex-item flex-dir-c">
                      <el-table style="width:100%" :data="pullGroupList" size="mini" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
                         <el-table-column fixed prop="account" :label="$t('login_038')" minwidth="100" />
                         <el-table-column prop="status" :label="$t('tail_008')" minwidth="100">
                             <template slot-scope="scope">
-                                <span class="flex-item flex-center" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{statusOption[scope.row.status]}}</span>
+                                <span class="flex-item flex-center" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{accountOption[scope.row.status]}}</span>
                             </template>
                         </el-table-column>
                         <el-table-column prop="total_time" :label="$t('home_172')" width="90">
@@ -78,53 +72,59 @@
                             </template>
                         </el-table-column>
                         <el-table-column prop="bonus" :label="$t('home_173')" width="90" />
-                        <!-- <el-table-column fixed="right" :label="$t('home_022')" width="85" align="center">
-                            <template slot-scope="scope">
-                                <el-button @click="showDelBtn(scope.row)" type="text" size="small">{{$t('other_010')}}</el-button>
-                            </template>
-                        </el-table-column> -->
                     </el-table>
-                    <!-- <PrevNext :len="pullGroupList.length" :total="page_total" :limit="5" :page="page" @to-prev="onPrev" @to-next="onNext" /> -->
                     <PrevNext :len="pullGroupList.length" :total="page_total1" :limit="5" :page="l_page" @to-prev="onPrev" @to-next="onNext" />
                 </div>
-                <!-- </template>
-                <template v-else>
-                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
-                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                        <p class="font_28">{{$t('tail_010')}}</p>
-                    </div>
-                </template> -->
             </div>
-            <!-- <div class="born_record w_f flex-item flex-dir-c">
-                <h3 class="font_28">{{$t('mine_010')}}</h3>
-            </div> -->
-            <!-- <div class="record_list w_f flex-item flex-dir-c">
-                <div class="title_top task_title_head w_f flex-item flex-align flex-between font_24">
-                    <span class="flex-item flex-align">{{$t('tail_003')}}</span>
-                    <span class="flex-item flex-center">{{$t('home_020')}}</span>
-                    <span class="flex-item">{{$t('spre_012')}}</span>
-                </div>
-                <template v-if="hookRecordList&&hookRecordList.length>0">
-                    <div class="record_scroll w_f flex-item flex-dir-c">
-                        <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad">
-                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in hookRecordList" :key="idx">
-                                <span class="flex-item">{{ formatTime(item.itime) }}</span>
-                                <span class="flex-item">{{item.account}}</span>
-                                <span class="flex-item">{{item.amount}}</span>
-                            </div>
-                        </van-list>
-                    </div>
-                </template>
-                <template v-else>
-                    <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
-                        <img src="@/assets/images/empty_icon.png" alt="" srcset="">
-                        <p class="font_28">{{$t('tail_010')}}</p>
-                    </div>
-                </template>
-            </div> -->
-            <div class="record_legend w_f flex-item flex-dir-c">
+            <!-- <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
+            </div> -->
+            <div class="task_box_main w_f flex-item flex-dir-c">
+                <div class="task_warp w_f flex-item">
+                    <div class="task_main w_f flex-item flex-dir-c">
+                        <div class="task_item w_f flex-item flex-dir-c font_34">
+                            <div class="task_award w_f">
+                                <div class="task_book font_28">{{$t('home_037')}}</div>
+                            </div>
+                            <div class="task_btn w_f flex-item flex-between flex-align font_24">
+                                <span class="show_account">{{$t('home_185')}}</span>
+                                <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="record_list w_f flex-item flex-dir-c">
+                    <div class="title_top task_title_head w_f flex-item flex-align font_24">
+                        <span class="title_01 flex-item flex-align">{{$t('login_038')}}</span>
+                        <span class="title_02 flex-item flex-center">{{$t('home_021')}}</span>
+                        <span class="title_03 flex-item flex-center">{{$t('spre_012')}}</span>
+                        <span class="title_04 flex-item">{{$t('home_022')}}</span>
+                    </div>
+                    <template v-if="pullMobileList&&pullMobileList.length>0">
+                        <div class="record_scroll w_f flex-item flex-dir-c">
+                            <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullMobileList" :key="idx">
+                                <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
+                                <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
+                                <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
+                                <span :class="['flex-item title_04',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
+                            <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+                            <p class="font_28">{{$t('spre_013')}}</p>
+                        </div>
+                    </template>
+                </div>
+                <!-- <div class="w_f submit_btn flex-item flex-align">
+                    <van-button :disabled="isFinish" :loading="isupoading" :loading-text="$t('other_029')" @click="submitBtn">{{$t('home_038')}}</van-button>
+                </div> -->
+                <div class="record_legend w_f flex-item flex-dir-c">
+                    <h3 class="font_28">{{$t('spre_009')}}</h3>
+                    <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
+                </div> 
             </div>
             <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
                 <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
@@ -182,6 +182,7 @@ import { formatTime } from "@/utils/tool";
 import uniFun from "@/utils/uni-webview-js"
 import PageHeader from "@/components/Header";
 import PrevNext from "@/components/PrevNext";
+import { getaimessagetaskcontacts,getaimsginfo } from '@/api/task';
 import { getautogroupinfo,getqrcode,delaccount,submitautogrouptask,getautogroupaccountstatus,getaccountlist,getwsincomelist } from '@/api/home'
 export default {
 	name: 'scan_online',
@@ -217,7 +218,6 @@ export default {
             finished :false,
             timestamp:0,
             group_link:'',
-            target_url:'',
             taskTime: null,
             isScroll:false,
             show_code:true,
@@ -230,6 +230,9 @@ export default {
             hookRecordList:[],
             current_code:""||"234",
             accountList:[1,1,1,1,1,1],
+            target_url:"",
+            taskPhoneList:[],
+            pullMobileList:[],
             codeOption:["","","","","—","","","",""],
             config: {
                 backgroundOpacity: 0.7,
@@ -314,8 +317,11 @@ export default {
         taskOption(){
             return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
         },
-        statusOption(){
+        accountOption(){
             return ["",this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
+        },
+        statusOption(){
+            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
         },
         wsStatus(){
             return [this.$t('home_146'),this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
@@ -327,6 +333,8 @@ export default {
         this.countryList = this.$Helper.countryList();
         this.timestamp = Math.floor(new Date().getTime() / 1000);
         this.initWechatList();
+        this.getIncomeList();
+        this.getContato();
         // this.initHookList();
     },
     mounted(){
@@ -370,6 +378,11 @@ export default {
                 this.$toast(this.$t("other_013"));
             })
         },
+        async getContato(){
+           const { url,targets } = await getaimessagetaskcontacts({task_id:this.task_id});
+           this.target_url = url;
+           this.taskPhoneList = targets;
+        },
         async getWsStatus(){
             this.isStatus = true;
             let { account,account_status,area_code,account_type } = await getautogroupaccountstatus({task_info_id:this.task_id});
@@ -404,20 +417,8 @@ export default {
             this.page=1;
             this.l_page=1;
             this.initWechatList();
+            this.getIncomeList();
             this.initHookList();
-        },
-        async getGroupMess(){
-           let group_task =  await getautogroupinfo({task_info_id:this.task_id});
-           let groupData = this.$Helper.aesDecrptHost(group_task);
-        //    console.log(groupData);
-           this.teamStemp = groupData;
-           this.taskList = groupData.targets;
-           this.target_url = groupData.target_url;
-           this.task_id = groupData.task_info_id; 
-           this.isShow = groupData.status==1||groupData.status==2?false:true;
-           this.taskTime = (groupData.invalid_time - this.timestamp)*1000 ||0;
-           await this.getWsStatus();
-        //    console.log(this.taskTime);
         },
         onLoad(){
             if(this.page >= this.page_total){
@@ -452,6 +453,20 @@ export default {
                 this.hookRecordList = [...this.hookRecordList,...res.list] || [];
             })
         },
+        async getIncomeList(){
+            this.ref_loading = true;
+            let res = await getaimsginfo({task_type:1});
+            this.loading = false;
+            if(res.code) return;
+            this.link = res.link;
+            this.task_id = res.task_id;
+            this.isFinish = res.is_finish_flag;
+            this.total_bonus = res.total_bonus;
+            this.total_count = res.total_count;
+            this.finish_count = res.finish_count;
+            setTimeout(()=>{this.ref_loading = false},500)
+            this.pullMobileList = res.list;
+        },
         startSettime() {
             this.timer = setInterval(()=> {
                 if (this.countTime > 1) {
@@ -462,6 +477,7 @@ export default {
                     this.very_code="";
                     this.codeOption = ["","","","","—","","","",""]
                     this.initWechatList();
+                    this.getIncomeList();
                     // this.errState = false;
                 }
             }, 1000);
@@ -521,6 +537,7 @@ export default {
             if(row.status == 4||row.status == 5){
                 this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
             }
+            // this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
         },
         showDelBtn(row){
             this.account = row.account;
@@ -551,6 +568,14 @@ export default {
         },
         copySuccess() {
             this.$toast(`${this.$t("other_044")}`);
+        },
+        jumpWsSend(row){
+            let textMsg =`https://wa.me/${row.phone}?text=${encodeURIComponent(row.content)}`;
+            if(this.$Helper.checkBrowser()){
+                window.open(textMsg,"_blank");
+            }else{
+                uniFun.postMessage({data:textMsg});
+            }
         }
 	}
 };
@@ -856,7 +881,6 @@ export default {
             }
             .record_scroll{
                 overflow-y: auto;
-                border-radius: 20px;
                 background: $font-color-white;
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
@@ -925,6 +949,11 @@ export default {
                 border-bottom-right-radius: 20px;
             }
         }
+        .login_list{
+            .record_scroll{
+                border-radius: 20px;
+            }
+        }
     }
     .refres_animat{
         animation: rotate 2s linear infinite;
@@ -982,6 +1011,191 @@ export default {
                 .country_item:last-child{
                     border-bottom:1px solid transparent;
                 }
+            }
+        }
+    }
+    .task_box_main{
+        .task_warp{
+            margin: 0 0 10px 0;
+            position: relative;
+             .task_main{
+                padding: 0 30px;
+                box-sizing: border-box;
+                .task_item{
+                    margin-top: 0;
+                    padding: 16px 0 20px 30px;
+                    box-sizing: border-box;
+                    background: url('../../assets/images/home/task_icon.png') no-repeat;
+                    background-size: 100% 100%;
+                    .task_name{
+                        margin-top: 8px;
+                        img{
+                            height: 40px;
+                        }
+                    }
+                    .task_award{
+                        position: relative;
+                        color: $font-color-black;
+                        margin-top: 5px;
+                        margin-bottom: 10px;
+                        .task_book{
+                            font-weight: bold;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            color: $color-theme;
+                        }
+                        .task_desc{
+                            line-height: 32px;
+                            // letter-spacing: -2px;
+                            color: $home-title-03;
+                            margin-right: -10px;
+                        }
+                    }
+                    .show_account{
+                        line-height: 1.5;
+                        color: $home-title-02;
+                    }
+                    .group_link{
+                        margin-top: 20px;
+                        input {
+                            width: 408px;
+                            height: 72px;
+                            background: $home-title-13 !important;
+                            border: $home-title-13;
+                            border-radius: 200px;
+                            outline: none;
+                            font-size: 28px;
+                            color: #626262;
+                            padding-left: 25px;
+                            flex-grow: 1;
+                        }
+                        .van-button{
+                            margin-left: 20px;
+                        }
+                    }
+                    .van-button{
+                        min-width: 80px;
+                        height: 30px;
+                        line-height: 30px;
+                        margin-right: 10px;
+                        border-radius: 200px;
+                        color: $font-color-white;
+                        border-color: $color-theme;
+                        background-color: $color-theme;
+                    }
+                    .progress_award{
+                        border-color: $home-title-06;
+                        background-color: $home-title-06;
+                    }
+                }
+            }
+        }
+        .record_list{
+            padding: 0 30px;
+            margin-top: 20px;
+            padding-bottom: 30px;
+            box-sizing: border-box;
+            color: $font-color-black;
+            .task_title_head{
+                font-weight: bold;
+                color: $home-title-12;
+            }
+
+            .title_top{
+                height: 100px;
+                padding: 10px 30px;
+                box-sizing: border-box;
+                background: $home-title-10;
+                .title_01, .title_01, .title_01, .title_01{
+                    flex-shrink: 0;
+                }
+                .title_01{
+                    flex: 1;
+                }
+                .title_02{
+                    flex: 1.2;
+                }
+                .title_03{
+                    flex: 0.8;
+                }
+                .title_04{
+                    flex: 0.8;
+                    justify-content: center;
+                }
+                .upload_icon{
+                    position: relative;
+                    width: max-content;
+                    .van-button{
+                        display: flex;
+                        height: 34px;
+                        position: relative;
+                        // width: 108px;
+                        width: 52px;
+                        flex-shrink: 0;
+                        border-radius: 8px;
+                        padding: 0 10px;
+                        color: $home-title-03;
+                        z-index: 1;
+                        border-color: $color-theme;
+                        .van-button__icon{
+                            font-size: 26px;
+                        }
+                        input{
+                            opacity: 0;
+                            width: 100% !important;
+                            height: 100% !important;
+                            position: absolute;
+                            opacity: 0;
+                            top: 0;
+                            left: 0;
+                        }
+                    }
+                }
+                .group_img{
+                    width: 72px;
+                    height: 72px;
+                }
+            }
+            .record_scroll{
+                max-height: 1100px;
+                overflow-y: auto;
+                background: $font-color-white;
+            }
+            .task_title_head {
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+            }
+            .record_item{
+                height: 108px;
+                background: $font-color-white;
+                border-bottom: 1px solid $home-title-10;
+                .jump_un_link{
+                    color: $color-theme;
+                }
+            }
+            .record_item:last-child{
+                border-bottom: 1px solid transparent;
+            }
+            .record_click{
+                color: $home-copay-title;
+                text-decoration: underline;
+            }
+            .empty_box{
+                height: 364px;
+                color: $home-title-14;
+                background-color: $font-color-white;
+                img{
+                    height: 202px;
+                }
+            }
+            .footer_tips{
+                height: auto;
+                font-style: italic;
+                padding: 16px 20px;
+                color: $home-title-06;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
             }
         }
     }

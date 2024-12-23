@@ -45,21 +45,8 @@
                             <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                     </div>
-                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <div class="task_award w_f">
-                            <div class="task_book font_28">{{$t('home_113')}}</div>
-                        </div>
-                        <div class="group_link w_f flex-item flex-between flex-align font_24">
-                            <input id="step_02" type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
-                            <van-button id="step_03" :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
-                        </div>
-                    </div> -->
                 </div>
             </div>
-            <!-- <div class="record_legend w_f flex-item flex-dir-c">
-                <h3 class="font_28">{{$t('spre_009')}}</h3>
-                <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
-            </div> -->
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align font_24">
                     <span class="title_01 flex-item flex-align">{{$t('login_038')}}</span>
@@ -69,12 +56,10 @@
                 </div>
                 <template v-if="pullGroupList&&pullGroupList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
-                        <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
                             <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
                             <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                             <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
-                            <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
                             <div class="title_04 flex-item flex-align flex-center" v-if="!item.img_url">
                                 <span class="upload_icon flex-item">
                                     <van-button id="step_02" :disabled="is_upload||item.status==5" :loading="file_uuid==item.uuid&&is_upload" plain :icon="require(`@/assets/images/home/up_icon.png`)">
@@ -88,11 +73,9 @@
                                 </span>
                             </div>
                             <span v-else class="title_03 w_f flex-item flex-align flex-center" @click="viewImg(item.img_url)">
-                                <!-- <img class="group_img" :src="item.img_url" alt="" srcset=""> -->
                                 <img class="group_img" @load="handleImageLoad(idx+1)" :src="loadedImages[idx+1] ? item.img_url : imageLoading">
                             </span>
                         </div>
-                        <!-- </van-list> -->
                     </div>
                 </template>
                 <template v-else>
@@ -101,9 +84,6 @@
                         <p class="font_28">{{$t('spre_013')}}</p>
                     </div>
                 </template>
-                <!-- <div class="title_top footer_tips w_f flex-item font_24">
-                    {{$t('spre_014')}}
-                </div> -->
             </div>
             <div class="w_f submit_btn flex-item flex-align">
                 <van-button :disabled="isFinish" :loading="isupoading" :loading-text="$t('other_029')" @click="submitBtn">{{$t('home_038')}}</van-button>
@@ -675,8 +655,6 @@ export default {
             }
         }
         .record_list{
-            // max-height: 300px;
-            // overflow-y: auto;
             padding: 0 30px;
             margin-top: 20px;
             padding-bottom: 30px;

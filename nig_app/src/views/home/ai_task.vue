@@ -66,12 +66,12 @@
                             <span class="flex-item flex-center" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{accountOption[scope.row.status]}}</span>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="total_time" :label="$t('home_172')" width="90">
+                    <!-- <el-table-column prop="total_time" :label="$t('home_172')" width="90">
                         <template slot-scope="scope">
                             {{scope.row.total_time||0}}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="bonus" :label="$t('home_173')" width="90" />
+                    <el-table-column prop="bonus" :label="$t('home_173')" width="90" /> -->
                 </el-table>
                 <PrevNext :len="pullGroupList.length" :total="page_total1" :limit="5" :page="l_page" @to-prev="onPrev" @to-next="onNext" />
             </div>

@@ -43,6 +43,8 @@
           <el-table-column type="selection" width="55" :selectable="checkSelectable" />
           <el-table-column prop="account" label="用户账号" minWidth="100" />
           <el-table-column prop="phone" label="手机号" width="140" />
+          <el-table-column prop="task_account" label="ws任务账号" width="140" />
+          <el-table-column prop="user_account" label="ws挂机账号" width="140" />
           <el-table-column prop="uuid" label="任务号" width="100" />
           <el-table-column prop="data_type" :label="$t('sys_l117')" minWidth="100">
             <template slot-scope="scope">
@@ -65,7 +67,7 @@
               <el-tag size="small" :type="scope.row.status == 1 ? 'warning' : scope.row.status == 4 ? 'success' :scope.row.status == 5 ? 'danger': ''"> {{ statusOptions[scope.row.status] }}</el-tag>
             </template>
           </el-table-column>
-           <el-table-column prop="link" label="推广链接" minWidth="120">
+          <!-- <el-table-column prop="link" label="推广链接" minWidth="120">
             <template slot-scope="scope">
               <el-tooltip class="item" effect="dark" :content="scope.row.link" placement="top">
                 <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.link||"-" }}</div>
@@ -76,18 +78,13 @@
             <template slot-scope="scope">
                 <span v-if="!scope.row.img_url">-</span>
                 <img v-else @load="handleImageLoad(scope.$index+1)" :src="loadedImages[scope.$index+1] ? scope.row.img_url : imageLoading" style="width:32px;height:32px;cursor: pointer;" @click.stop="showImg(scope.row.img_url)">
-              <!-- <el-tooltip class="item" effect="dark" :content="scope.row.remark" placement="top">
-                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.remark||"-" }}</div>
-              </el-tooltip> -->
-            </template>
-          </el-table-column>
-          <el-table-column prop="remark" label="原因" minWidth="140" />
-            <!-- <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" :content="scope.row.remark" placement="top">
-                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.remark||"-" }}</div>
-              </el-tooltip>
             </template>
           </el-table-column> -->
+          <el-table-column prop="remark" label="原因" minWidth="140">
+            <template slot-scope="scope">
+              {{ scope.row.remark||"-" }}
+            </template>
+          </el-table-column>
           <el-table-column prop="itime" :label="$t('sys_c008')" minWidth="120">
             <template slot-scope="scope">
               <div>{{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}</div>

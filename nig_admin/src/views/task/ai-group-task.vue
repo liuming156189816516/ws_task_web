@@ -9,6 +9,9 @@
         <el-form-item>
           <el-input v-model="model1.remark" clearable placeholder="请输入原因"  style="width:180px;" />
         </el-form-item>
+        <el-form-item>
+          <el-input v-model="model1.user_account" clearable placeholder="请输入ws挂机账号"  style="width:180px;" />
+        </el-form-item>
         <!-- <el-form-item>
           <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
         </el-form-item>
@@ -143,6 +146,7 @@ export default {
         account: "",
         ipCtime: "",
         remark: "",
+        user_account:"",
         invite_link: "",
         ad_account: "",
         task_type:"",
@@ -200,6 +204,7 @@ export default {
       this.model1.status = "";
       this.model1.account = "";
       this.model1.remark = "";
+      this.model1.user_account = "";
       this.getTaskList(1);
     },
     //获取订单列表
@@ -217,6 +222,7 @@ export default {
         remark: this.model1.remark,
         start_time:start_time,
         end_time:end_time,
+        user_account: this.model1.user_account
       }
       getaimessagelist(params).then(res => {
         this.loading = false;

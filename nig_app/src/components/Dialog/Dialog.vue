@@ -173,7 +173,7 @@
         <transition name="el-fade-in-linear">
             <div class="steps_main w_f h_f" v-if="steps&&type==99&&content">
                 <div class="adv_step w_f flex-item flex-align flex-center">
-                    <div class="w_f adv_cover flex-item flex-align flex-center flex-dir-c">
+                    <div class="w_f adv_cover flex-item flex-align flex-center flex-dir-c" ref="tips_scroll">
                         <!-- <h4 class="w_f font_32">产生的速度慢了点吗没事没事面对吗没什么输出吗</h4> -->
                         <h4 class="w_f font_32">{{ title }}</h4>
                         <div class="adv_content w_f flex-item flex-center flex-dir-c font_26" v-html="content"></div>

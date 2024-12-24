@@ -173,7 +173,7 @@ export default {
             this.initHandle();
             this.getNoticeList();
             this.$store.dispatch('User/getUserIncome');
-            // this.$store.dispatch('User/getSysNotice');
+            this.$store.dispatch('User/getSysNotice');
             this.waitTimer = setInterval(() => {
                 this.heartTimer = setTimeout(() => {
                     for (let k = 0; k < this.taskOption.length; k++) {

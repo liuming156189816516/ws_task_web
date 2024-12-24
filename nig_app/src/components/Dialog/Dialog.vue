@@ -170,12 +170,25 @@
                 <div :class="['font_26',idx==0?'first_color':'']" v-for="(item,idx) in content" :key="idx">{{item}}</div>
             </div>
         </div>
+        <transition name="el-fade-in-linear">
+            <div class="steps_main w_f h_f" v-if="steps&&type==99&&content">
+                <div class="adv_step w_f flex-item flex-align flex-center">
+                    <div class="w_f adv_cover flex-item flex-align flex-center flex-dir-c">
+                        <!-- <h4 class="w_f font_32">产生的速度慢了点吗没事没事面对吗没什么输出吗</h4> -->
+                        <h4 class="w_f font_32">{{ title }}</h4>
+                        <div class="adv_content w_f flex-item flex-center flex-dir-c font_26" v-html="content"></div>
+                        <van-button type="primary" @click="closeAdvBtn" plain>{{restLanuage('home_162')}}</van-button>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </van-overlay>
 </template>
 <script>
 import { i18n } from '@/assets/lang'
 import { getToken } from '@/utils/tool';
 import Global from "@/store/module/global";
+import { dousermessagel } from '@/api/home'
 export default {
     props: {
         type:{
@@ -196,6 +209,7 @@ export default {
         },
         number:null,
         content:null,
+        adv_id:null,
         steps: {
             type: Boolean,
             default: false
@@ -232,6 +246,12 @@ export default {
             this.ruleIdx = idx;
         },
         closeBtn(){
+            document.getElementById("app").removeChild(this.$el);
+            window.localStorage.setItem('is_play',true)
+            this.visible=false;
+        },
+        async closeAdvBtn(){
+            await dousermessagel({id:this.adv_id});
             document.getElementById("app").removeChild(this.$el);
             window.localStorage.setItem('is_play',true)
             this.visible=false;
@@ -279,6 +299,58 @@ export default {
     // }
 };
 </script>
+<style lang="scss">
+    .adv_step{
+        height: 100%;
+        padding: 30px 20px;
+        box-sizing: border-box;
+        .adv_cover{
+            width: 100%;
+            flex-shrink: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            min-height: 300px;
+            max-height: 1200px;
+            border-radius: 6px;
+            background: #fff;
+            padding: 20px 30px;
+            box-sizing: border-box;
+            h4{
+                display: block;
+                flex-shrink: 0;
+                padding: 10px 0;
+                text-align: center;
+                margin-bottom: 10px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                box-sizing: border-box;
+            }
+            .adv_content{
+                transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+                p{
+                    width: 100%;
+                    display: flex;
+                    margin: 0;
+                    flex-shrink: 0;
+                    flex-wrap: wrap;
+                    img{
+                        margin: 0 auto;
+                        max-width: 100%;
+                    }
+                }
+            }
+            .van-button{
+                height: 32px;
+                width: max-content;
+                flex-shrink: 0;
+                border-radius: 5px;
+                margin: 20px 0 10px 0;
+            }
+        }
+    }
+    
+</style>
 <style lang="scss" scoped>
 .van-overlay{
     width: 100%;

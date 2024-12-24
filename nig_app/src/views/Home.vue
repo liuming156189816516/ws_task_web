@@ -103,7 +103,7 @@ import { getToken } from '@/utils/tool';
 import uniFun from "@/utils/uni-webview-js"
 import dragIcon from "@/components/dragIcon"
 import SginHeader from "@/components/SginHeader";
-import { gettaskliststatus,gethelp } from '@/api/home'
+import { gettaskliststatus,gethelp,getmessagellist,getnewmessagel } from '@/api/home'
 export default {
     name: 'home',
     components: { SginHeader,dragIcon },
@@ -167,6 +167,7 @@ export default {
     },
     activated() {
         this.getLangConfig();
+        this.getNoticeList();
         this.filexTop = false;
         this.$store.dispatch('User/plantCarousel');
         if(getToken()){
@@ -299,7 +300,14 @@ export default {
 			}else{
 				uniFun.postMessage({data:process.env.VUE_APP_TG_LINK});
 			}
-		}
+		},
+        getNoticeList() {
+            getnewmessagel().then(res => {
+                if(!res)return;
+                let {id,name,content} = res;
+                this.$popDialog({adv_id:id,title:name,content:content,steps:true, type: 99 })
+            })
+        }
     }
 }
 </script>

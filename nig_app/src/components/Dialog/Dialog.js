@@ -10,6 +10,7 @@ Dialog.install = function (data) {
     instance.money = data.money
     instance.number = data.number
     instance.content = data.content
+    instance.adv_id = data.adv_id
     document.getElementById("app").appendChild(instance.$el);
     Vue.nextTick(() => {instance.visible = true})
 }

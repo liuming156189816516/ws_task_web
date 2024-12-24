@@ -167,14 +167,13 @@ export default {
     },
     activated() {
         this.getLangConfig();
-        this.getNoticeList();
         this.filexTop = false;
         this.$store.dispatch('User/plantCarousel');
         if(getToken()){
             this.initHandle();
+            this.getNoticeList();
             this.$store.dispatch('User/getUserIncome');
-            this.$store.dispatch('User/actionReport',1);
-            this.$store.dispatch('User/getSysNotice');
+            // this.$store.dispatch('User/getSysNotice');
             this.waitTimer = setInterval(() => {
                 this.heartTimer = setTimeout(() => {
                     for (let k = 0; k < this.taskOption.length; k++) {
@@ -187,7 +186,7 @@ export default {
                 }, this.timeout)
             }, this.setInter)
         }else{
-            this.$store.dispatch('User/actionReport',1)
+            // this.$store.dispatch('User/actionReport',1)
             this.taskOption = this.$Helper.defaultOption();
         }
         // this.getContacts();

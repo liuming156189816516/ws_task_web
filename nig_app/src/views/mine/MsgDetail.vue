@@ -6,7 +6,7 @@
                 <div class="tit">{{ n_detail.name }}</div>
                 <div class="date">{{ formatTime(n_detail.itime) }}</div>
             </div>
-            <div class="cnt" v-html="n_detail.content"></div>
+            <div class="cnt_mes_list" v-html="n_detail.content"></div>
             <!-- <div class="cnt" v-if="cnt.type == 1">
                 <div v-if="cnt.url == ''" v-html="cnt.text" class="innerTxt"></div>
                 <img v-else :src="cnt.url" alt="">
@@ -74,12 +74,27 @@ export default {
             text-align: right;
         }
     }
-    .cnt {
+}
+</style>
+<style lang="scss">
+    .cnt_mes_list {
+        width: 100%;
         font-weight: 400;
         font-size: 28px;
         color: #000000;
         line-height: 1.6;
         margin-top: 30px;
+        transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+        p{
+            width: 100%;
+            display: flex;
+            margin: 0;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            img{
+                margin: 0 auto;
+                max-width: 100%;
+            }
+        }
     }
-}
 </style>

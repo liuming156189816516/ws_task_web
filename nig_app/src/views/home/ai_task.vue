@@ -6,6 +6,9 @@
                 <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-nrly.s3.af-south-1.amazonaws.com/5.MP4" />
             </div> -->
         </div>
+        <div class="task_video jump_un_link w_f flex-item font_30" @click="taskVideo">
+            {{$t('home_035')}}
+        </div>
         <div class="task_warp w_f flex-item">
             <div class="task_main w_f flex-item flex-dir-c">
                 <div class="task_item w_f flex-item flex-dir-c font_34">
@@ -568,6 +571,9 @@ methods: {
     copySuccess() {
         this.$toast(`${this.$t("other_044")}`);
     },
+    taskVideo(){
+        this.$popDialog({title:this.$t("home_035"),type:1}) 
+    },
     jumpWsSend(row){
         let textMsg =`https://wa.me/${row.phone}?text=${encodeURIComponent(row.content)}`;
         if(this.$Helper.checkBrowser()){
@@ -670,6 +676,13 @@ methods: {
             bottom: 115px;
             font-weight: bold;
         }
+    }
+    .task_video{
+        padding: 0 30px;
+        font-weight: 600;
+        box-sizing: border-box;
+        color: $home-month-value;
+        justify-content: flex-end;
     }
     .task_warp{
         position: relative;
@@ -832,7 +845,9 @@ methods: {
         padding: 0 30px;
         margin: 30px 0 20px 0;
         box-sizing: border-box;
-        // color: $font-color-white;
+        .ws_title{
+            color: $font-color-white;
+        }
         .status_tips{
             color: $home-eart-long;
         }

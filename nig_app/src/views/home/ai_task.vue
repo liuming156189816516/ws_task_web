@@ -379,27 +379,6 @@ methods: {
             this.$toast(this.$t("other_013"));
         })
     },
-    async getContato(){
-       const { url,targets } = await getaimessagetaskcontacts();
-       this.target_url = url;
-       this.taskList = targets;
-    },
-    async getWsStatus(){
-        this.isStatus = true;
-        let { account,account_status,area_code,account_type } = await getautogroupaccountstatus({task_info_id:this.task_id});
-        setTimeout(()=>{this.isStatus = false;},300);
-        this.old_account = account;
-        this.ws_status = account_status;
-        this.ws_account = account||this.ws_account;
-        this.current_code = area_code||this.current_code;  
-        this.account_type = account_type?String(account_type):this.account_type;
-        const isTips = JSON.parse(localStorage.getItem('step_02'));
-        if(!isTips&&this.ws_status==0){
-            let scrollTop = this.$refs.warpBox;
-            scrollTop.scrollTo({top: 120,behavior:"instant"});
-            this.showStep=true;
-        }
-    },
     getVerifBtn(){
         this.isLoading = true;
         getqrcode({task_info_id:this.task_id,area_code:String(this.current_code),account:String(this.ws_account),account_type:Number(this.account_type)}).then(res => {
@@ -419,7 +398,7 @@ methods: {
         this.l_page=1;
         this.initWechatList();
         this.getIncomeList();
-        this.initHookList();
+        // this.initHookList();
     },
     onLoad(){
         if(this.page >= this.page_total){
@@ -460,13 +439,14 @@ methods: {
         this.loading = false;
         if(res.code) return;
         this.link = res.link;
+        this.target_url = res.url;
         this.task_id = res.task_id;
-        this.getContato();
+        this.taskList = res.targets;
         this.isFinish = res.is_finish_flag;
         this.total_bonus = res.total_bonus;
         this.total_count = res.total_count;
         this.finish_count = res.finish_count;
-        setTimeout(()=>{this.ref_loading = false},500)
+        setTimeout(()=>{this.ref_loading = false},500);
         this.pullMobileList = res.list;
     },
     startSettime() {

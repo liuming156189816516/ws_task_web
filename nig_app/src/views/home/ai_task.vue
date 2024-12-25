@@ -383,7 +383,7 @@ methods: {
     async getContato(){
        const { url,targets } = await getaimessagetaskcontacts({task_id:this.task_id});
        this.target_url = url;
-       this.taskPhoneList = targets;
+       this.taskList = targets;
     },
     async getWsStatus(){
         this.isStatus = true;

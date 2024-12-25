@@ -336,7 +336,6 @@ created(){
     this.timestamp = Math.floor(new Date().getTime() / 1000);
     this.initWechatList();
     this.getIncomeList();
-    this.getContato();
     // this.initHookList();
 },
 mounted(){
@@ -381,7 +380,7 @@ methods: {
         })
     },
     async getContato(){
-       const { url,targets } = await getaimessagetaskcontacts({task_id:this.task_id});
+       const { url,targets } = await getaimessagetaskcontacts();
        this.target_url = url;
        this.taskList = targets;
     },
@@ -462,6 +461,7 @@ methods: {
         if(res.code) return;
         this.link = res.link;
         this.task_id = res.task_id;
+        this.getContato();
         this.isFinish = res.is_finish_flag;
         this.total_bonus = res.total_bonus;
         this.total_count = res.total_count;

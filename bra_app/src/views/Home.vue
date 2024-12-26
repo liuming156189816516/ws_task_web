@@ -325,8 +325,6 @@ export default {
     position: relative;
     padding-bottom: 120px;
     background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
-    // background: url('../assets/images/home/bg_img.png') no-repeat;
-    // background-size: cover;
     -webkit-overflow-scrolling: touch;
      .down_app{
         height: 80px;

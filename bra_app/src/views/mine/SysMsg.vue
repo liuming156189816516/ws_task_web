@@ -106,86 +106,84 @@ export default {
 </script>
 <style lang="scss" scoped>
 .detailDetail {
-    padding: 0;
-    height: 100vh;
-    display: flex;
+    height: 100%;
     overflow: hidden;
+    padding-bottom: 120px;
     flex-direction: column;
     background-color: #f2f2f2;
     .msg-main {
-        flex: 1;
-        overflow-x: hidden;
+        height: 100%;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-    }
-    .item-box {
-        padding: 20px 30px;
-        box-sizing: border-box;
-        .item-wrap {
-            padding: 37px 23px;
-            border-radius: 24px;
-            background-color: #ffffff;
-            // border-radius: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            box-shadow: 0.06rem 0.06rem 0.1rem #e0e0e0;
-            .left {
-                width: 80px;
-                height: 80px;
-                border-radius: 50%;
-                position: relative;
+        .item-box {
+            padding: 20px 30px;
+            box-sizing: border-box;
+            .item-wrap {
+                padding: 37px 23px;
+                border-radius: 24px;
+                background-color: #ffffff;
+                // border-radius: 20px;
+                margin-bottom: 20px;
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                background: linear-gradient(121.09deg, #006CEB 14.23%, #78B6FF 86.54%);
-                img {
-                    width: 40px;
-                    height: 40px;
-                }
-                .redIcon {
-                    width: 20px;
-                    height: 20px;
-                    background: red;
+                justify-content: space-between;
+                box-shadow: 0.06rem 0.06rem 0.1rem #e0e0e0;
+                .left {
+                    width: 80px;
+                    height: 80px;
                     border-radius: 50%;
-                    position: absolute;
-                    top: -8px;
-                    right: -6px;
-                }
-            }
-            .right {
-                width: 85%;
-                flex-basis: 80%;
-                .adver_content {
-                    width: 100%;
+                    position: relative;
                     display: flex;
-                    font-size: 28px;
-                    font-weight: 600;
-                    justify-content: space-between;
-                    .adver_title{
-                        max-width: 230px;
+                    align-items: center;
+                    justify-content: center;
+                    background: linear-gradient(121.09deg, #006CEB 14.23%, #78B6FF 86.54%);
+                    img {
+                        width: 40px;
+                        height: 40px;
+                    }
+                    .redIcon {
+                        width: 20px;
+                        height: 20px;
+                        background: red;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: -8px;
+                        right: -6px;
+                    }
+                }
+                .right {
+                    width: 85%;
+                    flex-basis: 80%;
+                    .adver_content {
+                        width: 100%;
+                        display: flex;
+                        font-size: 28px;
+                        font-weight: 600;
+                        justify-content: space-between;
+                        .adver_title{
+                            max-width: 230px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+                        .adver_time{
+                            font-weight: normal;
+                        }
+                    }
+                    .adver_descr{
+                        width: 100%;
+                        float: left;
+                        margin-top: 6px;
+                        color: #8c8c8c;
+                        font-size: 0.28rem;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
                     }
-                    .adver_time{
-                        font-weight: normal;
+                    .adver_img{
+                        width: 42px;
+                        height: 42px;
+                        float: left;
                     }
-                }
-                .adver_descr{
-                    width: 100%;
-                    float: left;
-                    margin-top: 6px;
-                    color: #8c8c8c;
-                    font-size: 0.28rem;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-                .adver_img{
-                    width: 42px;
-                    height: 42px;
-                    float: left;
                 }
             }
         }

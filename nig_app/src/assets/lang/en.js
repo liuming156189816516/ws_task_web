@@ -279,7 +279,7 @@ export default {
     pay_024:"Naira",
     pay_025:"You can withdraw up to {value} times a day",
     pay_026:"1 gold = 0.8 Naira",
-    pay_027:"Gold coin",
+    pay_027:"Gold",
     pay_028:"Minimum withdrawal {value} gold",
     pay_029:"Today's withdrawal times have reached the upper limit",
     spre_019:"Team size",

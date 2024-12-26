@@ -3,6 +3,7 @@
         <div class="flex-item flex-align">
             <img class="le_logn" src="@/assets/images/logo.png" />
             <span class="font_30" style="color:#fff;margin-left:5px;font-weight: bold;">clickatm.com</span>
+            <!-- <span class="gold_num flex-item flex-align font_20">1000{{ $t('pay_027') }}=800{{ $t('pay_024') }}</span> -->
         </div>
         <!-- <img class="le_logn" src="@/assets/images/logo.png" /> -->
         <div class="login_area flex-item flex-align font_24">
@@ -59,6 +60,10 @@ export default {
             width: 60px;
             height: 60px;
             border-radius: 6px;
+        }
+        .gold_num{
+            font-weight: bold;
+            color: $home-bind-button;
         }
         .login_area, .user_info{
             color: $font-color-white;

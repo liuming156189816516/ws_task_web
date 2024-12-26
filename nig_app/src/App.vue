@@ -156,9 +156,9 @@ body,
 		width: 100%;
 		height: 100%;
 		// height: calc(100% - 180px);
-		overflow-y: auto;
+		// overflow-y: auto;
 		margin-top: 80px;
-		-webkit-overflow-scrolling: touch; 
+		// -webkit-overflow-scrolling: touch; 
 	}
 	.app_continer{
 		margin-top: 0px;

@@ -1,11 +1,6 @@
 <template>
-    <div class="detailDetail">
+    <div class="massage_list">
         <page-header :title="$t('home_138')" :show-icon="true" :bgColor="true"></page-header>
-        <!-- <div class="tab_bar">
-            <van-tabs :active="curIndex" @change="changeTab">
-                <van-tab :title="item.title" v-for="(item,index) in noticArry" :key="index"></van-tab>
-            </van-tabs>
-        </div> -->
         <div class="msg-main">
             <div class="empty_tips flex-item flex-align" v-if="loading">
                 <van-loading size="24px">{{ $t('other_029') }}</van-loading>
@@ -105,19 +100,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.detailDetail {
-    padding: 0;
+.massage_list {
     height: 100vh;
-    display: flex;
     overflow: hidden;
     flex-direction: column;
     background-color: #f2f2f2;
     .msg-main {
-        flex: 1;
-        height: 100%;
+        height: calc(100% - 84px);
         overflow-x: hidden;
         overflow-y: auto;
-        webkit-overflow-scrolling: touch;
+        padding-bottom: 30px;
         -webkit-overflow-scrolling: touch;
     }
     .item-box {

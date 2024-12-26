@@ -106,10 +106,11 @@ export default {
     flex-direction: column;
     background-color: #f2f2f2;
     .msg-main {
-        height: calc(100% - 84px);
+        height: 100%;
+        // height: calc(100% - 84px);
         overflow-x: hidden;
         overflow-y: auto;
-        padding-bottom: 30px;
+        padding-bottom: 80px;
         -webkit-overflow-scrolling: touch;
     }
     .item-box {

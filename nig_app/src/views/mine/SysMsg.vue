@@ -109,14 +109,14 @@ export default {
     padding: 0;
     height: 100vh;
     display: flex;
-    flex-direction: column;
     overflow: hidden;
+    flex-direction: column;
     background-color: #f2f2f2;
-    -webkit-overflow-scrolling: touch;
     .msg-main {
         flex: 1;
-        overflow: auto;
-        // margin: 20px 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
     .item-box {
         padding: 20px 30px;

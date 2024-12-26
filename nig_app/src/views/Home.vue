@@ -322,7 +322,7 @@ export default {
         height: 80px;
         overflow: hidden;
         position: relative;
-        padding: 14px 20px 14px 20px;
+        padding: 14px 20px;
         box-sizing: border-box;
         background: linear-gradient(90deg, #ff9600, #ff013d);
         .close_btn{

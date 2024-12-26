@@ -114,8 +114,10 @@ export default {
     background-color: #f2f2f2;
     .msg-main {
         flex: 1;
+        height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
+        webkit-overflow-scrolling: touch;
         -webkit-overflow-scrolling: touch;
     }
     .item-box {

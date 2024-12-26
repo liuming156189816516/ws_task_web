@@ -13,6 +13,7 @@
             </template> -->
             <el-table :data="statisticsList" border v-loading="isLoading" minHeight="max-content" element-loading-spinner="el-icon-loading" style="width: 100%;">
                 <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
+                <el-table-column prop="login_num" :label="$t('sys_s010')" minWidth="100" />
                 <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="100" />
                 <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
                 <el-table-column prop="view_account_num" :label="$t('sys_c143')" minWidth="100">
@@ -70,6 +71,7 @@
                     element-loading-spinner="el-icon-loading" style="width: 100%;" :summary-method="getSummaries" show-summary>
                     <el-table-column prop="statis_time_str" :label="$t('sys_c134')" width="100" />
                     <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
+                    <el-table-column prop="login_num" :label="$t('sys_s010')" minWidth="100" />
                     <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="120" />
                     <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
                     <el-table-column prop="view_account_num" :label="$t('sys_c143')" minWidth="100">

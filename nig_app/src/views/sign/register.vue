@@ -13,8 +13,8 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
-					<!-- <span class="font_28">+234</span> -->
-					<input v-model="username" :placeholder="$t('login_039')" maxlength="13" autocomplete="off" max oninput="value=value.replace(/^0|[^0-9]/g, '')" />
+					<span class="font_28">234</span>
+					<input v-model="username" :placeholder="$t('login_039')" maxlength="10" autocomplete="off" max oninput="value=value.replace(/^0|[^0-9]/g, '')" />
 				</div>
 				<div class="uilist_div pwd">
 					<!-- <img src="@/assets/images/sign/lock.png" /> -->
@@ -116,17 +116,18 @@ export default {
 		},
 		//注册
 		handleRegister() {
-			const zh_reg = new RegExp(/^234/);
+			// const zh_reg = new RegExp(/^234/);
 			// const zh_reg = new RegExp(/^[^\u4e00-\u9fa5]+$/);
 			const reg = new RegExp(/^1[3456789]\d{9}$/);
 			const regex = new RegExp(/^[0-9A-Za-z]{6,20}$/);
 			if (!this.username) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_039')}))
-			} else if(this.username.length <= 12){
-				return this.$toast(this.$t('other_001',{value:this.$t('login_040')}));
-			} else if(!zh_reg.test(this.username)){
+			} else if(this.username.length <= 9){
 				return this.$toast(this.$t('other_001',{value:this.$t('login_040')}));
 			}
+			// else if(!zh_reg.test(this.username)){
+			// 	return this.$toast(this.$t('other_001',{value:this.$t('login_040')}));
+			// }
 			if (!this.pwd) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_002')}));
 			}else if(!regex.test(this.pwd)){
@@ -147,7 +148,7 @@ export default {
 				}
 			}
 			let params = {
-				account: this.username,
+				account: "234"+this.username,
 				pwd: this.pwd,
 				uuid: this.timestamp,
 				code: this.safe_code,

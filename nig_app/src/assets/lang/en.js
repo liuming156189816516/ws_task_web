@@ -41,7 +41,7 @@ export default {
     login_038:"account",
     login_039:"Phone",
     login_040:"mobile number starting with 234",
-    login_040:"13-digit mobile phone",
+    login_040:"Correct phone number",
 
     home_001:"User balance",
     home_002:"Today's task income",

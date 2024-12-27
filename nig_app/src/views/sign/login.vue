@@ -25,7 +25,7 @@
 				<div class="uilist">
 					<div class="uilist_div account">
 						<!-- <img src="@/assets/images/sign/zhanghao.png" alt /> -->
-						<input v-model="username" :placeholder="$t('login_026')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<input v-model="username" :placeholder="$t('login_039')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="uilist_div pwd">
 						<!-- <img src="@/assets/images/sign/icon_suo.png" alt /> -->

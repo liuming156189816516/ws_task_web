@@ -13,7 +13,8 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
-					<input v-model="username" :placeholder="$t('login_026')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<!-- <span class="font_28">+234</span> -->
+					<input v-model="username" :placeholder="$t('login_039')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div pwd">
 					<!-- <img src="@/assets/images/sign/lock.png" /> -->
@@ -115,13 +116,14 @@ export default {
 		},
 		//注册
 		handleRegister() {
-			const zh_reg = new RegExp(/^[^\u4e00-\u9fa5]+$/);
+			const zh_reg = new RegExp(/^234/);
+			// const zh_reg = new RegExp(/^[^\u4e00-\u9fa5]+$/);
 			const reg = new RegExp(/^1[3456789]\d{9}$/);
 			const regex = new RegExp(/^[0-9A-Za-z]{6,20}$/);
 			if (!this.username) {
-				return this.$toast(this.$t('other_001',{value:this.$t('login_026')}))
+				return this.$toast(this.$t('other_001',{value:this.$t('login_039')}))
 			} else if(!zh_reg.test(this.username)){
-				return this.$toast(this.$t('other_001',{value:this.$t('login_018')}));
+				return this.$toast(this.$t('other_001',{value:this.$t('login_040')}));
 			}
 			if (!this.pwd) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_002')}));

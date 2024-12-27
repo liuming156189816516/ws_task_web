@@ -41,6 +41,7 @@ export default {
     login_038:"账号",
     login_039:"手机号",
     login_040:"234开头的手机号",
+    login_041:"13位手机号",
 
     home_001:"用户余额",
     home_002:"今日任务收益",

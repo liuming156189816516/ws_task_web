@@ -122,6 +122,8 @@ export default {
 			const regex = new RegExp(/^[0-9A-Za-z]{6,20}$/);
 			if (!this.username) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_039')}))
+			} else if(this.username.length <= 12){
+				return this.$toast(this.$t('other_001',{value:this.$t('login_040')}));
 			} else if(!zh_reg.test(this.username)){
 				return this.$toast(this.$t('other_001',{value:this.$t('login_040')}));
 			}

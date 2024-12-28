@@ -14,16 +14,16 @@
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
 					<span class="font_28">234</span>
-					<input v-model="username" :placeholder="$t('login_039')" maxlength="10" autocomplete="off" max oninput="value=value.replace(/^0|[^0-9]/g, '')" />
+					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_039')})" maxlength="10" autocomplete="off" max oninput="value=value.replace(/^0|[^0-9]/g, '')" />
 				</div>
 				<div class="uilist_div pwd">
 					<!-- <img src="@/assets/images/sign/lock.png" /> -->
-					<input v-model="pwd" :placeholder="$t('login_002')" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="pwd" :placeholder="$t('other_001',{value:$t('login_002')})" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">
 					<!-- <img src="@/assets/images/sign/lock.png" /> -->
-					<input v-model="sur_pwd" :placeholder="$t('login_009')" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="sur_pwd" :placeholder="$t('other_001',{value:$t('login_009')})" autocomplete="off" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 					<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="showEye"></i>
 				</div>
 				<div class="uilist_div pwd">

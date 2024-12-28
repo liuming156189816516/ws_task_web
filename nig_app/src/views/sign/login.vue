@@ -25,11 +25,11 @@
 				<div class="uilist">
 					<div class="uilist_div account">
 						<!-- <img src="@/assets/images/sign/zhanghao.png" alt /> -->
-						<input v-model="username" :placeholder="$t('login_039')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<input v-model="username" :placeholder="$t('other_001',{value:$t('login_038')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="uilist_div pwd">
 						<!-- <img src="@/assets/images/sign/icon_suo.png" alt /> -->
-						<input v-model="password" :placeholder="$t('login_002')" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<input v-model="password" :placeholder="$t('other_001',{value:$t('login_002')})" :type="regEye ? 'password' : 'text'" oninput="value=value.replace(/[^\w_]/g,'')" />
 						<i :class="[regEye ? 'icon_biyan' : 'icon_zhenyan']" @click="eyeBol"></i>
 					</div>
 					<!-- <div class="forget_pwd">
@@ -41,17 +41,12 @@
 					<van-button type="primary" :loading="isLoading" @click="handleLogin" :loading-text="$t('login_005')">{{$t('login_004')}}</van-button>
 					<!-- <van-button plain type="primary" @click="goRegister" >{{ $t('login_006') }}</van-button> -->
 				</div>
-				<div class="system_serve w_f flex-item" @click="contactService(1)">
+				<!-- <div class="system_serve w_f flex-item" @click="contactService(1)">
 					<img src="@/assets/images/serveic/telege_icon.png" alt="">
-				</div>
+				</div> -->
 			</div>
 			<div class="register_text w_f flex-item flex-center font_32" :class="{'is_bottom':isBottom}" @click="goRegister">{{$t('login_028')}}<span class="reg_text"> {{$t('login_029')}}</span></div>
 		</div>
-		   <!-- <drag-icon ref="dragIconCom" :gapWidthPx="24" :coefficientHeight="0.68">
-            <div class="serve_icon" slot="icon" @click="contactService">
-                <img src="../assets/images/ms_serve.png" alt="" />
-            </div>
-        </drag-icon> -->
 	</div>
 </template>
 <script>
@@ -178,13 +173,6 @@ export default {
 		onChangeType(row){
 			this.langIdx=row.lang;
 			this.$Helper.initLanguage(row.lang);
-		},
-		contactService(){
-			if(this.$Helper.checkBrowser()){
-				window.open(process.env.VUE_APP_TELEGRAM,"_blank");
-			}else{
-				uniFun.postMessage({data:process.env.VUE_APP_TELEGRAM});
-			}
 		}
 	}
 };

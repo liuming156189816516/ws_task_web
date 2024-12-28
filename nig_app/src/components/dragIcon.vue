@@ -132,7 +132,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
   bottom: 20vw;
 }
 </style>

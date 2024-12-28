@@ -39,7 +39,7 @@ export default {
     login_036:"Log in",
     login_037:"Register",
     login_038:"account",
-    login_039:"Phone",
+    login_039:"phone number",
     login_040:"mobile number starting with 234",
     login_040:"Correct phone number",
 

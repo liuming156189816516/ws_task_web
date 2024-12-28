@@ -1,11 +1,16 @@
 <template>
 	<div id="app" :class="{'set-padding-top':hasTabBar}">
 		<div v-if="!showNavBar" class="mobile_head_top"></div>
-		<div :class="!showNavBar?'app_top_continer':'app_continer'">
+		<div :class="!showNavBar?'app_top_continer':'app_continer'" ref="app_root">
 			<keep-alive :include="keepAliveNames">
 				<router-view />
 			</keep-alive>
 			<router-view name="tabBar" />
+			<drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.62">
+				<div class="serve_icon" slot="icon" @click="contactService">
+					<img src="@/assets/images/serveic/telege_icon.png" alt="" />
+				</div>
+			</drag-icon>
 		</div>
 		<van-overlay :show="global.logOut">
 			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
@@ -23,7 +28,9 @@
 <script>
 import { mapState } from 'vuex';
 import { logout } from '@/api/login';
+import dragIcon from "@/components/dragIcon"
 export default {
+	components: {dragIcon },
 	data() {
 		return {
 			title:"",
@@ -116,6 +123,13 @@ export default {
 				this.$router.replace('/home');
 				localStorage.removeItem('token');
 			})
+		},
+		contactService(){
+			if(this.$Helper.checkBrowser()){
+				window.open(process.env.VUE_APP_TELEGRAM,"_blank");
+			}else{
+				uniFun.postMessage({data:process.env.VUE_APP_TELEGRAM});
+			}
 		}
 	},
 	beforeDestroy(){
@@ -154,6 +168,7 @@ body,
 	.app_top_continer, .app_continer{
 		width: 100%;
 		height: 100%;
+		position: relative;
 		overflow-y: auto;
 		margin-top: 80px;
 	}

@@ -70,10 +70,11 @@ export default {
 		this.handleVersion().then(res=>{
 			this.currentTIme = res||"";
 		})
-		window.onload=function(){
-			setTimeout(function() {
-			window.scrollTo(0, 1)
-		},0)}
+		this.waitTimer = setInterval(() => {
+			this.heartTimer = setTimeout(() => {
+				this.initCheckVersion();
+			}, this.timeout)
+		}, this.setInter)
 	},
 	methods: {
 		initCheckVersion (){

@@ -8,7 +8,7 @@
                 </div>
             </template>
             <div class="video_tips" v-if="type==1">
-                <video ref="myVideo" poster="@/assets/images/home/cover_img.jpg" controls :src="content"></video>
+                <video ref="myVideo" poster="@/assets/images/home/cover_img.png" controls src="https://rw-bx.s3.sa-east-1.amazonaws.com/ai.mp4"></video>
             </div>
             <div class="contnet_mian" v-if="type==2">
                 <div v-html="content"></div>

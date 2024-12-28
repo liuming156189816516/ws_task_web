@@ -705,7 +705,7 @@ methods: {
             //     margin-bottom: 30px;
             // }
             .task_item{
-                margin-top: 30px;
+                // margin-top: 30px;
                 .ws_head{
                     padding: 20px 20px;
                     box-sizing: border-box;

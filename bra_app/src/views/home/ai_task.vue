@@ -1,38 +1,88 @@
 <template>
     <div class="home-content" ref="warpBox" @scroll="handleScrolStop">
-        <div class="task_mian w_f flex-item flex-dir-c">
-            <page-header :title="$t('home_187')" :show-icon="true" :bgcolor="false" />
-            <div class="video_box flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-bx.s3.sa-east-1.amazonaws.com/ai1.mp4" />
-            </div>
-            <div class="task_box w_f flex-item">
-                <div class="task_Progress w_f flex-item flex-dir-c">
-                    <div class="w_f flex-item flex-between">
-                        <p class="task_title w_f flex-item flex-center font_28">{{$t('home_106')}}</p>
-                        <div class="right_refresh flex-item font_24" @click="refreshBtn" id="step_03">
-                            <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
-                            {{$t('other_035')}}
+        <div class="task_mian w_f">
+            <page-header :title="$t('home_168')" :show-icon="true" :bgcolor="false" />
+            <!-- <div class="video_box flex-item flex-item flex-align flex-center mg_24">
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" src="https://rw-nrly.s3.af-south-1.amazonaws.com/5.MP4" />
+            </div> -->
+        </div>
+        <div class="task_video jump_un_link w_f flex-item font_30" @click="taskVideo">
+            {{$t('home_035')}}
+        </div>
+        <div class="task_warp w_f flex-item">
+            <div class="task_main w_f flex-item flex-dir-c">
+                <div class="task_item w_f flex-item flex-dir-c font_34">
+                    <div :class="['ws_head w_f flex-item flex-dir-c',!show_code?'ws_head_active':'']">
+                        <div class="task_award w_f">
+                            <div class="w_f task_book flex-item flex-between font_28">
+                                <div class="task_title"> {{$t('home_144')}} </div>
+                                <van-button class="flex-item font_28" @click="show_code=!show_code">{{show_code?$t('home_171'):$t('home_170')}}</van-button>
+                            </div>
                         </div>
                     </div>
-                    <div class="w_f flex-item flex-between">
-                        <div class="task_item">
-                            <p class="task_text font_24">{{$t('home_188')}}</p>
-                            <p class="task_num flex-item font_28">{{ total_bonus }}</p>
-                        </div>
-                        <div class="task_sure_time">
-                            <p class="task_text flex-item font_24">{{$t('home_184')}}</p>
-                            <p class="task_num flex-item font_28">
-                                {{finish_count}}/{{total_count}}
-                                <!-- <span :style="{color:teamStemp.status==2?'#31acf2':teamStemp.status==3?'#ff9600':teamStemp.status==4?'#008751':'#F52C2C'}">
-                                    {{taskOption[teamStemp.status]}}
-                                </span> -->
-                                <!-- <van-count-down :time="taskTime" /> -->
-                            </p>
+                    <div class="ws_list w_f flex-item flex-dir-c" v-if="show_code">
+                        <div class="ws_account" style="background:transparent;">
+                            <div class="ws_verfy_box w_f flex-item flex-align flex-center flex-dir-c">
+                                <div class="ws_value w_f flex-item flex-align flex-center" id="step_02">
+                                    <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
+                                    <input v-model="ws_account" :disabled="ws_status!=0" :placeholder="$t('login_027')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
+                                    <span class="select_icon flex-item flex-align flex-cente" v-if="ws_status!=0">
+                                        <van-button class="flex-item font_28" :loading="isUnbind" :disabled="isUnbind" @click="handleUnbind" :loading-text="$t('other_029')">{{$t('other_094')}}</van-button>
+                                    </span>
+                                </div>
+                                <template v-if="ws_status==0">
+                                    <van-button id="step_03" class="tabs_item flex-item font_28" :loading="isLoading" :disabled="!ws_account||isLoading||countTime!=60" @click="getVerifBtn" :loading-text="$t('other_029')">
+                                        {{countTime!=60? $t('other_093',{value:countTime}):$t('login_017')}}
+                                    </van-button>
+                                    <div class="verfy_list w_f flex-item flex-align flex-between">
+                                        <div class="flex-item flex-align flex-center" v-for="(item,idx) in codeOption" :key="idx">
+                                            <span v-if="item=='—'" class="flex-item flex-align flex-center">{{item}}</span>
+                                            <span v-else class="modle_line flex-item flex-align flex-center">{{item}}</span>
+                                        </div>
+                                        <span class="copay_text flex-item flex-align flex-center" v-clipboard:copy="very_code" v-clipboard:success="copySuccess">
+                                            <img src="@/assets/images/home/copau_icon.png">
+                                        </span>
+                                    </div>
+                                    <div class="mt_20 font_28">{{$t('other_095')}}</div>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="ws_hook_list w_f flex-item flex-between font_30">
+            <h3 class="ws_title flex-item font_24">
+                {{$t('home_169')}}：
+            </h3>
+            <div class="flex-item status_tips flex-align" @click="refreshBtn">
+                <img class="refres_icon" :class="{'refres_animat':h_loading}"  src="@/assets/images/home/shuaxin.png"> 
+                {{$t('other_035')}}
+            </div>
+        </div>
+        <div class="record_list login_list w_f flex-item flex-dir-c">
+            <div class="record_scroll w_f flex-item flex-dir-c">
+                 <el-table style="width:100%" :data="pullGroupList" size="mini" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
+                    <el-table-column fixed prop="account" :label="$t('login_038')" minwidth="100" />
+                    <el-table-column prop="status" :label="$t('tail_008')" minwidth="100">
+                        <template slot-scope="scope">
+                            <span class="flex-item flex-center" :style="'color:'+(scope.row.status!=2?'#D32C2C':'#28C445')">{{accountOption[scope.row.status]}}</span>
+                        </template>
+                    </el-table-column>
+                    <!-- <el-table-column prop="total_time" :label="$t('home_172')" width="90">
+                        <template slot-scope="scope">
+                            {{scope.row.total_time||0}}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="bonus" :label="$t('home_173')" width="90" /> -->
+                </el-table>
+                <PrevNext :len="pullGroupList.length" :total="page_total1" :limit="5" :page="l_page" @to-prev="onPrev" @to-next="onNext" />
+            </div>
+        </div>
+        <!-- <div class="record_legend w_f flex-item flex-dir-c">
+            <h3 class="font_28">{{$t('spre_009')}}</h3>
+            <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
+        </div> -->
         <div class="task_box_main w_f flex-item flex-dir-c">
             <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
@@ -41,25 +91,12 @@
                             <div class="task_book font_28">{{$t('home_037')}}</div>
                         </div>
                         <div class="task_btn w_f flex-item flex-between flex-align font_24">
-                            <span class="show_account">{{$t('home_189')}}</span>
+                            <span class="show_account">{{$t('home_185')}}</span>
                             <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                     </div>
-                    <!-- <div class="task_item w_f flex-item flex-dir-c font_34">
-                        <div class="task_award w_f">
-                            <div class="task_book font_28">{{$t('home_113')}}</div>
-                        </div>
-                        <div class="group_link w_f flex-item flex-between flex-align font_24">
-                            <input id="step_02" type="text" v-model="group_link" :disabled="isShow" :placeholder="$t('home_127')">
-                            <van-button id="step_03" :disabled="!group_link||isShow" @click="submitTask" :class="[!group_link||isShow?'progress_award':'']">{{$t('home_038')}}</van-button>
-                        </div>
-                    </div> -->
                 </div>
             </div>
-            <!-- <div class="record_legend w_f flex-item flex-dir-c">
-                <h3 class="font_28">{{$t('spre_009')}}</h3>
-                <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
-            </div> -->
             <div class="record_list w_f flex-item flex-dir-c">
                 <div class="title_top task_title_head w_f flex-item flex-align font_24">
                     <span class="title_01 flex-item flex-align">{{$t('login_038')}}</span>
@@ -67,32 +104,14 @@
                     <span class="title_03 flex-item flex-center">{{$t('spre_012')}}</span>
                     <span class="title_04 flex-item">{{$t('home_022')}}</span>
                 </div>
-                <template v-if="pullGroupList&&pullGroupList.length>0">
+                <template v-if="pullMobileList&&pullMobileList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
-                        <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
-                        <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
+                        <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullMobileList" :key="idx">
                             <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
                             <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                             <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
-                            <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
-                            <div class="title_04 flex-item flex-align flex-center" v-if="!item.img_url">
-                                <span class="upload_icon flex-item">
-                                    <van-button id="step_02" :disabled="is_upload||item.status==5" :loading="file_uuid==item.uuid&&is_upload" plain :icon="require(`@/assets/images/home/up_icon.png`)">
-                                        <template v-if="$Helper.checkApkBag(1)==1">
-                                            <input v-if="!is_upload&&item.status!=5" :ref="'upload'+idx" class="file_input" accept="image/*" capture="camera" type="file" @change="checkDataIsUse(item,idx)" />
-                                        </template>
-                                        <template v-else>
-                                            <input v-if="!is_upload&&item.status!=5" :ref="'upload'+idx" class="file_input" accept="image/*" type="file" @change="checkDataIsUse(item,idx)" />
-                                        </template>
-                                    </van-button>
-                                </span>
-                            </div>
-                            <span v-else class="title_03 w_f flex-item flex-align flex-center" @click="viewImg(item.img_url)">
-                                <!-- <img class="group_img" :src="item.img_url" alt="" srcset=""> -->
-                                <img class="group_img" @load="handleImageLoad(idx+1)" :src="loadedImages[idx+1] ? item.img_url : imageLoading">
-                            </span>
+                            <span :class="['flex-item title_04',item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==5?$t('home_135'):'...'"></span>
                         </div>
-                        <!-- </van-list> -->
                     </div>
                 </template>
                 <template v-else>
@@ -101,13 +120,10 @@
                         <p class="font_28">{{$t('spre_013')}}</p>
                     </div>
                 </template>
-                <!-- <div class="title_top footer_tips w_f flex-item font_24">
-                    {{$t('spre_014')}}
-                </div> -->
             </div>
-            <div class="w_f submit_btn flex-item flex-align">
+            <!-- <div class="w_f submit_btn flex-item flex-align">
                 <van-button :disabled="isFinish" :loading="isupoading" :loading-text="$t('other_029')" @click="submitBtn">{{$t('home_038')}}</van-button>
-            </div>
+            </div> -->
             <div class="record_legend w_f flex-item flex-dir-c">
                 <h3 class="font_28">{{$t('spre_009')}}</h3>
                 <div class="record_derc font_22">{{$t('spre_010')}}<span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
@@ -116,6 +132,37 @@
         <div :class="['top_icon',isScroll?'icon_active':'icon_hide']" @click="scrollTopBtn">
             <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
         </div>
+        <van-overlay :show="code_model">
+            <div class="country_warp w_f">
+                <div class="country_head flex-item flex-align font_36">
+                    <img @click="code_model=false" src="@/assets/images/bank_icon.png" alt="" srcset="">
+                    <span>{{$t('home_148')}}</span>
+                </div>
+                <div class="code_query w_f">
+                    <div class="ws_value w_f flex-item flex-align flex-center font_24 flex-between">
+                        <input v-model="ws_code" @keyup="filterCity" :placeholder="$t('home_149')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+                    </div>
+                </div>
+                <div class="country_list w_f" ref="tips_scroll">
+                    <div class="country_item w_f flex-item font_28 flex-between" v-for="(item,idx) in countryList" :key="idx" @click="handleCode(item.code)">
+                        <span>{{item.name}}</span>
+                        <span class="c_code">{{item.code}}</span>
+                    </div>
+                </div>
+            </div>
+        </van-overlay>
+
+        <van-overlay :show="del_model">
+            <div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
+                <div class="log_main">
+                    {{ tipsText }}
+                    <div class="footer_bnt w_f flex-item flex-center">
+                        <van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">{{$t('other_003')}}</van-button>
+                        <van-button class="footer_cancel" type="primary" @click="del_model=false">{{$t('other_007')}}</van-button>
+                    </div>
+                </div>
+            </div>
+        </van-overlay>
         <vue-intro-step v-model="showStep" :config="config" ref="myIntroStep">
             <template #prev="{tipItem, index}">
                 <button @click="prev(tipItem, index)" class="step_prev">{{$t('home_160')}}</button>
@@ -130,675 +177,1022 @@
                 <button @click="done" class="next_step">{{$t('home_162')}}</button>
             </template>
         </vue-intro-step>
-        <van-image-preview v-model="showImg" :images="images" :close-on-click-image="false" >
-            <template #image="{ src }">
-                <video style="width: 100%;" controls>
-                <source :src="src" />
-                </video>
-            </template>
-        </van-image-preview>
     </div>
 </template>
-
 <script>
 import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
-import PageHeader from "@/components/Header";
-import { submitcreatetask,dotutorialstatus } from '@/api/home'
-import { getaimsginfo,uploadfile,submitaimessagetask,getaimessagetaskcontacts } from '@/api/task';
 import uniFun from "@/utils/uni-webview-js"
+import PageHeader from "@/components/Header";
+import PrevNext from "@/components/PrevNext";
+import { getaimessagetaskcontacts,getaimsginfo } from '@/api/task';
+import { getautogroupinfo,getqrcode,delaccount,submitautogrouptask,getautogroupaccountstatus,getaccountlist,getwsincomelist } from '@/api/home'
 export default {
-	name: 'ws_pullgroup',
-	components: {PageHeader},
-	data() {
-		return {
-            page:1,
-            link:"",
-            limit: 20,
-            task_id:"",
-            file_uuid:"",
-            page_total:0,
-            showImg:false,
-            isScroll:true,
-            isShow:false,
-            loading:false,
-            teamStemp:'',
-            finished:false,
-            isFinish:false,
-            timestamp:0,
-            group_link:'',
-            target_url:'',
-            chrome_url:'',
-            message:'',
-            total_bonus:0,
-            total_count:0,
-            finish_count:0,
-            is_upload:false,
-            isLoading:false,
-            isupoading:false,
-            ref_loading:false,
-            taskTime: null,
-            taskList:[],
-            images:[],
-            pullGroupList:[],
-            showStep:false,
-            loadedImages: [],
-            imageLoading:require("@/assets/images/loading.gif"),
-            config: {
-                backgroundOpacity: 0.7,
-                titleStyle: {
-                    textAlign: 'center',
-                    fontSize: '16px',
-                    marginBottom: '0',
-                },
-                contentStyle: {
-                    textAlign: 'center',
-                    fontSize: '13px',
-                },
-                tips: [
-                    {
-                        el: '#step_01',
-                        tipPosition: 'bottom',
-                        title: this.$t('home_150'),
-                        content: this.$t('home_185'),
-                        onNext: () => {
-                            return new Promise((resolve, reject) => {
-                                setTimeout(() => {resolve(true);},300);
-                            });
-                        }
-                    },
-                    {
-                        el: '#step_02',
-                        tipPosition: 'top',
-                        title: this.$t('home_151'),
-                        content: this.$t('home_186'),
-                        onPrev: () => {
-                            return new Promise((resolve) => {
-                                resolve(true);
-                            })
-                        },
-                        onNext: () => {
-                            return new Promise((resolve) => {
-                                resolve(true);
-                            })
-                        }
-                    },
-                    // {
-                    //     el: '#step_03',
-                    //     tipPosition: 'top',
-                    //     title: this.$t('home_152'),
-                    //     content: this.$t('home_164'),
-                    //     onNext: () => {
-                    //         return new Promise((resolve) => {
-                    //             resolve(true);
-                    //         })
-                    //     }
-                    // },
-                    {
-                        el: '#step_03',
-                        tipPosition: 'bottom',
-                        title: this.$t('home_153'),
-                        content: this.$t('home_159'),
-                        onNext: () => {
-                            return new Promise((resolve) => {
-                                resolve(true);
-                            })
-                        }
+name: 'scan_online',
+components: {PageHeader,PrevNext},
+data() {
+    return {
+        page:1,
+        limit:20,
+        l_page:1,
+        showStep:false,
+        page_total:0,
+        page_total1:0,
+        timer:null,
+        ws_account:"",
+        // ws_account:"8138570713",
+        very_code:"",
+        ws_code:"",
+        code_model:false,
+        del_model:false,
+        task_id:"",
+        old_account:"",
+        isShow:false,
+        isStatus:false,
+        tipsText:"",
+        account:"",
+        isDown:false,
+        countTime:60,
+        isLoading:false,
+        isUnbind:false,
+        teamStemp:'',
+        finished :false,
+        timestamp:0,
+        group_link:'',
+        taskTime: null,
+        isScroll:false,
+        show_code:true,
+        ws_status: 0,
+        ref_loading:false,
+        h_loading:false,
+        account_type:"1",
+        pullGroupList:[],
+        countryList:[],
+        hookRecordList:[],
+        current_code:"55",
+        accountList:[1,1,1,1,1,1],
+        target_url:"",
+        taskList:[],
+        wechaList:[],
+        pullMobileList:[],
+        codeOption:["","","","","—","","","",""],
+        config: {
+            backgroundOpacity: 0.7,
+            titleStyle: {
+                textAlign: 'center',
+                fontSize: '16px',
+                marginBottom: '0',
+            },
+            contentStyle: {
+                textAlign: 'center',
+                fontSize: '13px',
+            },
+            tips: [
+                {
+                    el: '#step_01',
+                    tipPosition: 'bottom',
+                    title: this.$t('home_150'),
+                    content: this.$t('home_155'),
+                    onNext: () => {
+                        return new Promise((resolve, reject) => {
+                            setTimeout(() => {resolve(true);},300);
+                        });
                     }
-                ]
-            }
-		}
-	},
-	computed: {
-		...mapState({
-			userInfo: state => state.User,
-            bannerList: state => state.User.bannerList
-		}),
-        taskOption(){
-            return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
-        },
-        statusOption(){
-            return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
-        },
-        winNotis(){
-            return this.$Helper.randomStrings(100)
-        }
-	},
-    created(){
-        this.isScroll = false;
-        this.timestamp = Math.floor(new Date().getTime() / 1000);
-        // this.task_id = this.$route.query.id||"";
-        // this.getGroupMess();
-    },
-    async mounted(){
-        await this.getIncomeList();
-        // await this.getContato();
-    },
-	methods: {
-        async done(){
-            localStorage.setItem('step_04',true);
-            this.showStep = false;
-            await dotutorialstatus({ptype:4});
-        },
-        skip(){
-            this.$refs.myIntroStep.next()
-        },
-        next(){
-            this.$refs.myIntroStep.next()
-        },
-        prev(){
-            this.$refs.myIntroStep.prev()
-        },
-        viewImg(url){
-            this.images = [];
-            this.images.push(url);
-            this.showImg=true;
-        },
-        handleImageLoad(index) {
-            this.$set(this.loadedImages, index, true);
-        },
-        async checkDataIsUse(row,idx){
-            const fileAccept = ['png','jpg','jpeg'];
-            const files = this.$refs['upload'+idx][0].files[0]; 
-            let fileType = files.type.split("/").pop(); 
-            if (fileAccept.indexOf(fileType) == -1) {
-                this.$refs['upload'+idx][0].value = null;
-                return this.$toast(this.$t("home_181",{value:String(fileAccept)}));
-            }
-            let formData = new FormData();
-            formData.append('id', row.id);
-            formData.append('file', files);
-            formData.append('uuid', row.uuid);
-            formData.append('link', this.link);
-            formData.append('phone', row.phone);
-            this.is_upload=true;
-            this.file_uuid = row.uuid;
-            let res = await uploadfile(formData);
-            this.is_upload=false;
-            if(res.code) return;
-            for (let k = 0; k < this.pullGroupList.length; k++) {
-                let item = this.pullGroupList[k];
-                if(item.uuid == row.uuid){
-                    item.img_url=res.url;
+                },
+                {
+                    el: '#step_02',
+                    tipPosition: 'top',
+                    title: this.$t('home_151'),
+                    content: this.$t('home_156'),
+                    onPrev: () => {
+                        return new Promise((resolve) => {
+                            resolve(true);
+                        });
+                    },
+                    onNext: () => {
+                        return new Promise((resolve) => {
+                            resolve(true);
+                        })
+                    }
+                },
+                {
+                    el: '#step_03',
+                    tipPosition: 'top',
+                    title: this.$t('home_152'),
+                    content: this.$t('home_157'),
+                    onNext: () => {
+                        return new Promise((resolve) => {
+                            resolve(true);
+                        })
+                    }
+                },
+                {
+                    el: '#step_04',
+                    tipPosition: 'top',
+                    title: this.$t('home_153'),
+                    content: this.$t('home_158'),
+                    onNext: () => {
+                        return new Promise((resolve) => {
+                            resolve(true);
+                        })
+                    }
+                },
+                {
+                    el: '#step_05',
+                    tipPosition: 'bottom',
+                    title: this.$t('home_154'),
+                    content: this.$t('home_159'),
+                    onNext: () => {
+                        return new Promise((resolve) => {
+                            resolve(true);
+                        })
+                    }
                 }
-                this.$set(this.pullGroupList,k,item)
-            }
-            this.getIncomeList();
-        },
-        refreshBtn(){
-            this.getIncomeList();
-        },
-        onLoad(){
-            if(this.page >= this.page_total){
-                this.finished = true;
-            }else{
-                this.page++;
-                this.getIncomeList()
-            }
-        },
-        async getIncomeList(){
-            this.ref_loading = true;
-            let res = await getaimsginfo({page:this.page,limit:this.limit,task_type:1});
-            this.loading = false;
-            if(res.code) return;
-            this.link = res.link;
-            this.target_url = res.url;
-            this.task_id = res.task_id;
-            this.taskList = res.targets;
-            this.isFinish = res.is_finish_flag;
-            this.total_bonus = res.total_bonus;
-            this.total_count = res.total_count;
-            this.finish_count = res.finish_count;
-            this.message = encodeURIComponent(res.content);
-            setTimeout(()=>{this.ref_loading = false;},500)
-            this.page_total = Math.ceil(res.total / this.limit);
-            if(this.page == 1){
-                this.pullGroupList = res.list;
-            }else{
-                this.pullGroupList = [...this.pullGroupList,...res.list] || [];
-            }
-            // setTimeout(()=>{
-            //     let scrollTop = this.$refs.warpBox;
-            //     scrollTop.scrollTo({top: 300,behavior: "instant" });
-            // })
-            // this.showStep=true;
-            const isTips = JSON.parse(localStorage.getItem('step_04'));
-            if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList[0].img_url){
-                this.showStep=true;
-            }
-        },
-        // 
-        copySuccess(){
-            this.$toast(`${this.$t("other_044")}`);
-        },
-        submitBtn(){
-            this.isupoading=true;
-            submitaimessagetask({task_id:this.task_id}).then(res=>{
-                this.isupoading=false;
-                if(res.code) return;
-                this.isFinish=true;
-                this.refreshBtn();
-                this.$toast(this.$t("home_039"));
-            })
-        },
-        submitTask(){
-            // this.$store.dispatch('User/actionReport',11);
-            if(!this.group_link) return this.$toast(this.$t('other_001',{value:this.$t('home_036')})); 
-            this.isLoading=true;
-            submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
-                this.isLoading=false;
-                if(res.code) return;
-                this.refreshBtn();
-                this.$toast(this.$t("home_039"));
-                this.$popDialog({content:this.$t("other_048"),title:this.$t("other_008"),type:2}) 
-                let scrollTop = this.$refs.warpBox;
-                scrollTop.scrollTo({top: 0,behavior: "instant" });
-            })
-        },
-        openWhatsapp(){
-            if(this.$Helper.checkBrowser()){
-                window.open(process.env.VUE_APP_SERVICE,"_blank");
-            }else{
-                uniFun.postMessage({data:process.env.VUE_APP_SERVICE});
-            }
-        },
-        downAddress(){
-            // this.$store.dispatch('User/actionReport',10);
-            if(this.$Helper.checkBrowser()){
-                const link = document.createElement('a');
-                link.href = this.target_url;
-                link.download = this.$Helper.randomString(2)+'_phone_numbers';
-                link.target = "_blank";
-                link.click();
-            }else{
-                let newArr = this.taskList.map(item => {return {...item,target:`+${item.target}`}});
-                uniFun.postMessage({data:newArr});
-            }
-        },
-        showVideo(){
-            this.$router.push("/service")
-        },
-        downChrome(){
-            const link = document.createElement('a');
-            link.href = this.chrome_url;
-            link.setAttribute('download', 'Chrome');
-            link.click();
-        },
-        showResult(row){
-            if(row.status == 4||row.status == 5){
-                this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
-            }
-            // this.$store.dispatch('User/actionReport',9);
-        },
-        formatTime(time) {
-            return formatTime(time);
-        },
-        handleScrolStop(){
-            let scrollTop = this.$refs.warpBox;
-            if(scrollTop.scrollTop >= 200){
-                this.isScroll = true;
-            }else{
-                this.isScroll = false;
-            }
-        },
-        scrollTopBtn(){
-            this.isScroll = false;
-            let scrollTop = this.$refs.warpBox;
-            scrollTop.scrollTo({top: 0,behavior:"smooth"});
-        },
-        jumpWsSend(row){
-            let textMsg = `https://wa.me/${row.phone}?text=${this.message}:::${row.uuid}` 
-            if(this.$Helper.checkBrowser()){
-                window.open(textMsg,"_blank");
-            }else{
-                uniFun.postMessage({data:textMsg});
-            }
+            ]
         }
-	}
+    }
+},
+computed: {
+    ...mapState({
+        userInfo: state => state.User.userInfo,
+    }),
+    taskOption(){
+        return ["",this.$t('home_044'),this.$t('other_061'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
+    },
+    accountOption(){
+        return ["",this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
+    },
+    statusOption(){
+        return ["",this.$t('home_005'),this.$t('home_006'),this.$t('home_007'),this.$t('pay_031'),this.$t('pay_032')]
+    },
+    wsStatus(){
+        return [this.$t('home_146'),this.$t('home_023'),this.$t('home_024'),this.$t('home_025'),this.$t('home_026'),this.$t('home_027')]
+    }
+},
+created(){
+    this.isScroll=false;
+    this.task_id = this.$route.query.id||"";
+    this.countryList = this.$Helper.countryList();
+    this.timestamp = Math.floor(new Date().getTime() / 1000);
+    this.initWechatList();
+    this.getIncomeList();
+    // this.initHookList();
+},
+mounted(){
+    setTimeout(()=>{
+        let list = this.$refs.tips_scroll;
+        if (list) {
+            list.addEventListener("touchmove",e => e.stopPropagation(),false)
+        }
+    },1000)
+},
+methods: {
+    done(){
+        let scrollTop = this.$refs.warpBox;
+        scrollTop.scrollTo({top: 0,behavior:"smooth"});
+        localStorage.setItem('step_02',true);
+        this.showStep = false;
+    },
+    skip(){
+        this.$refs.myIntroStep.next()
+    },
+    next(){
+        this.$refs.myIntroStep.next()
+    },
+    prev(){
+        this.$refs.myIntroStep.prev()
+    },
+    changeType(){
+        this.ws_account="";
+        this.old_account="";
+        this.very_code="";
+    },
+    handleUnbind(){
+        this.isUnbind = true;
+        delaccount({account:`${this.current_code}${this.old_account}`}).then(res => {
+            this.isUnbind = false;
+            this.ws_status = 0;
+            this.ws_account = "";
+            this.old_account = "";
+            this.account_type = "1";
+            this.current_code = "55";
+            this.$toast(this.$t("other_013"));
+        })
+    },
+    getVerifBtn(){
+        this.isLoading = true;
+        getqrcode({task_info_id:this.task_id,area_code:String(this.current_code),account:String(this.ws_account),account_type:Number(this.account_type)}).then(res => {
+            this.isLoading = false;
+            if(!res.code&&res.qr_code.length==8){
+                this.very_code = res.qr_code;
+                let result = res.qr_code.slice(0,4)+"—"+res.qr_code.slice(4,9)
+                for (let k = 0; k < this.codeOption.length; k++) {
+                    this.codeOption[k] = result[k]
+                }
+                this.startSettime()
+            }
+        })
+    },
+    refreshBtn(){
+        this.page=1;
+        this.l_page=1;
+        this.initWechatList();
+        this.getIncomeList();
+        // this.initHookList();
+    },
+    onLoad(){
+        if(this.page >= this.page_total){
+            this.finished = true;
+        }else{
+            this.page++;
+            this.initHookList()
+        }
+    },
+    onPrev() {
+        this.l_page--;
+        this.initWechatList();
+    },
+    onNext() {
+        this.l_page++;
+        this.initWechatList();
+    },
+    initWechatList(){
+        this.ref_loading = true;
+        getaccountlist({page:this.l_page,limit:5}).then(res => {
+            setTimeout(()=>{this.ref_loading = false;},300)
+            this.page_total1 = res.total;
+            this.pullGroupList = res.list;
+        })
+    },
+    initHookList(){
+        this.h_loading = true;
+        getwsincomelist({page:this.page,limit:this.limit}).then(res => {
+            this.loading = false;
+            this.h_loading = false;
+            // this.page_total = Math.ceil(res.total / this.limit);
+            this.hookRecordList = [...this.hookRecordList,...res.list] || [];
+        })
+    },
+    async getIncomeList(){
+        this.ref_loading = true;
+        let res = await getaimsginfo({task_type:1});
+        this.loading = false;
+        if(res.code) return;
+        this.link = res.link;
+        this.target_url = res.url;
+        this.task_id = res.task_id;
+        this.taskList = res.targets;
+        this.isFinish = res.is_finish_flag;
+        this.total_bonus = res.total_bonus;
+        this.total_count = res.total_count;
+        this.finish_count = res.finish_count;
+        setTimeout(()=>{this.ref_loading = false},500);
+        this.pullMobileList = res.list;
+    },
+    startSettime() {
+        this.timer = setInterval(()=> {
+            if (this.countTime > 1) {
+                this.countTime--;
+            } else {
+                clearInterval(this.timer);
+                this.countTime = 60;
+                this.very_code="";
+                this.codeOption = ["","","","","—","","","",""]
+                this.initWechatList();
+                this.getIncomeList();
+                // this.errState = false;
+            }
+        }, 1000);
+    },
+    formatTime(time) {
+        return formatTime(time);
+    },
+    handleScrolStop(){
+        let scrollTop = this.$refs.warpBox;
+        if(scrollTop.scrollTop >= 200){
+            this.isScroll = true;
+        }else{
+            this.isScroll = false;
+        }
+    },
+    scrollTopBtn(){
+        this.isScroll = false;
+        let scrollTop = this.$refs.warpBox;
+        scrollTop.scrollTo({top: 0,behavior:"smooth"});
+    },
+    showOverlay(){
+        if(this.ws_status!=0) return this.$toast(`${this.$t("home_147")}`);
+        this.ws_code = "";
+        this.countryList = this.$Helper.countryList();
+        this.code_model=true;
+        this.$nextTick(()=>{
+            this.$refs.tips_scroll.scrollTo({top: 0,behavior:'instant'})
+        })
+    },
+    handleCode(code){
+        this.current_code = parseInt(code);
+        this.code_model = false;
+    },
+    filterCity(){
+        this.countryList =  this.$Helper.countryList() 
+        if(this.ws_code){
+            this.countryList = this.countryList.filter(item => item.code.toLowerCase().includes(`+${this.ws_code}`));
+        }
+    },
+    viewTaskNum(){
+        this.$popDialog({ content: this.taskList, title:this.$t('home_126'), type: 7 })
+    },
+    downAddress(){
+        if(this.$Helper.checkBrowser()){
+            const link = document.createElement('a');
+            link.href = this.target_url;
+            link.download = this.$Helper.randomString(2)+'_phone_numbers';
+            link.target = "_blank";
+            link.click();
+        }else{
+            if(this.taskList.length == 0) return;
+            let newArr = this.taskList.map(item => {return {...item,target:`+${item.target}`}});
+            uniFun.postMessage({data:newArr});
+        }
+    },
+    showResult(row){
+        if(row.status == 5){
+            this.$popDialog({ content:row.remark,number:row.ser_no,title:this.$t('other_088'), type: 8 })
+        }
+        // this.$popDialog({ content:row.Reason,number:row.ser_no,title:this.$t('other_088'), type: 8 })
+    },
+    showDelBtn(row){
+        this.account = row.account;
+        this.del_model = true;
+        this.tipsText = row.status==2?this.$t('home_040'):this.$t('home_041');
+    },
+    handle_confirm(){
+        this.isLoading=true;
+        delaccount({account:this.account}).then(res => {
+            this.isLoading = false;
+            this.del_model = false;
+            this.$toast(this.$t("other_013"));
+            this.initWechatList();
+        })
+    },
+    async submitBtn(){
+        if(this.ws_status !==2)return this.$toast(this.$t("other_097"));
+        this.sLoading=true;
+        let backRes = await submitautogrouptask({task_info_id:this.task_id,account:`${this.current_code}${this.ws_account}`});
+        setTimeout(()=>{this.sLoading=false;},300)
+        let result = this.$Helper.aesDecrptHost(backRes);
+        if(result.code) return;
+        this.refreshBtn();
+        // this.$toast(this.$t("home_039"));
+        let scrollTop = this.$refs.warpBox;
+        scrollTop.scrollTo({top: 0,behavior: "instant" });
+        this.$popDialog({content:this.$t("other_096"),title:this.$t("other_008"),type:10}) 
+    },
+    copySuccess() {
+        this.$toast(`${this.$t("other_044")}`);
+    },
+    taskVideo(){
+        this.$popDialog({title:this.$t("home_035"),type:1}) 
+    },
+    jumpWsSend(row){
+        let textMsg =`https://wa.me/${row.phone}?text=${encodeURIComponent(row.content)}`;
+        if(this.$Helper.checkBrowser()){
+            window.open(textMsg,"_blank");
+        }else{
+            uniFun.postMessage({data:textMsg});
+        }
+    }
+}
 };
 </script>
 <style lang="scss" scoped>
-    .home-content {
+.home-content {
+    height: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    // background: $color-minebg;
+    background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+    -webkit-overflow-scrolling: touch; 
+    padding-bottom: 20px;
+    input {
         height: 100%;
-        height: 100vh;
-        overflow-x: hidden;
-        overflow-y: auto;
+        background: transparent !important;
+        border: transparent;
+        outline: none;
+        font-size: 28px;
+        color: #626262;
+        padding-left: 10px;
+        flex-grow: 1;
+    }
+    .top_icon{
+        width: 70px;
+        height: 70px;
+        position: fixed;
+        right:5px;
+        bottom: 50px;
+        display: flex;
+        z-index: 99999;
+        flex-shrink: 0;
+        opacity: 0;
+        align-items: center;
+        border-radius: 50%;
+        transition: all .5s;
+        justify-content: center;
+        // background: $color-theme;
+        img{
+            height: 42px;
+        }
+    }
+    .icon_active{
+        opacity: 1;
+    }
+    .icon_hide{
+        opacity: 0;
+    }
+    .task_mian{
+        // height: 1048px;
         position: relative;
-        // background-color: #f2f2f2;
-        background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
-        -webkit-overflow-scrolling: touch; 
-        padding-bottom: 20px;
-        .top_icon{
-            width: 70px;
-            height: 70px;
-            position: fixed;
-            right:5px;
-            bottom: 50px;
-            display: flex;
-            z-index: 99999;
-            flex-shrink: 0;
-            opacity: 0;
-            align-items: center;
-            border-radius: 50%;
-            transition: all .5s;
-            justify-content: center;
-            // background: $color-theme;
-            img{
-                height: 42px;
-            }
-        }
-        .icon_active{
-            opacity: 1;
-        }
-        .icon_hide{
-            opacity: 0;
-        }
-        .task_mian{
-            // height: 1048px;
-            position: relative;
-            // background: #E6F2EF;
-            // background: url('../../assets/images/home/task_001.png') no-repeat;
-            // background-size: 100% 100%;
-            .task_box{
-                padding: 0 30px;
-                margin-top: 30px;
+        // background-size: 100% 100%;
+        .task_box{
+            padding: 0 20px;
+            margin-top: 30px;
+            box-sizing: border-box;
+            .task_Progress{
+                border-radius: 24px;
+                padding: 14px 20px 24px 24px;
                 box-sizing: border-box;
-                .task_Progress{
-                    border-radius: 24px;
-                    padding: 14px 20px 24px 24px;
-                    box-sizing: border-box;
-                    background: $font-color-white;
-                    .task_title{
-                        font-weight: bold;
-                        margin-bottom: 20px;
-                    }
-                    .right_refresh{
-                        flex-shrink: 0;
-                        .refres_icon{
-                            height: 32px;
-                            margin-right: 10px;
-                        }
-                        .refres_animat{
-                            animation: rotate 2s linear infinite;
-                        }
-                        @keyframes rotate {
-                            from {
-                                transform: rotate(0deg);
-                            }
-                            to {
-                                transform: rotate(720deg);
-                            }
-                        }
-                    }
-                }
-                .task_text{
-                    color: $home-title-06;
-                    margin-bottom: 12px;
-                }
-                .task_sure_time{
-                    .task_text{
-                        justify-content: flex-end !important;
-                    }
-                    .task_num{
-                        justify-content: center;
-                    }
-                }
-                .task_num{
-                    color: $home-title-12;
-                    font-weight: bold;
-                    justify-content: center;
-                    .van-count-down{
-                        width: 60px;
-                        color: $home-title-02;
-                        margin-left: 10px;
-                    }
-                }
-            }
-            .task_win_bonus{
-                height: 102px;
-                position: absolute;
-                left: 0;
-                bottom: 115px;
-                font-weight: bold;
-            }
-        }
-        .task_box_main{
-            // margin-top: -365px;
-            // background: #E6F2EF;
-            // background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
-        }
-        .task_warp{
-            margin: 30px 0 10px 0;
-            position: relative;
-             .task_main{
-                padding: 0 30px;
-                gap: 30px;
-                box-sizing: border-box;
-                .task_item{
-                    padding: 16px 0 20px 30px;
-                    box-sizing: border-box;
-                    background: url('../../assets/images/home/task_icon.png') no-repeat;
-                    background-size: 100% 100%;
-                    .task_name{
-                        margin-top: 8px;
-                        img{
-                            height: 40px;
-                        }
-                    }
-                    .task_award{
-                        position: relative;
-                        color: $font-color-black;
-                        margin-top: 5px;
-                        margin-bottom: 10px;
-                        .task_book{
-                            font-weight: bold;
-                            overflow: hidden;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
-                            color: $color-theme;
-                        }
-                        .task_desc{
-                            line-height: 32px;
-                            // letter-spacing: -2px;
-                            color: $home-title-03;
-                            margin-right: -10px;
-                        }
-                    }
-                    .show_account{
-                        line-height: 1.5;
-                        color: $home-title-02;
-                    }
-                    .group_link{
-                        margin-top: 20px;
-                        input {
-                            width: 408px;
-                            height: 72px;
-                            background: $home-title-13 !important;
-                            border: $home-title-13;
-                            border-radius: 200px;
-                            outline: none;
-                            font-size: 28px;
-                            color: #626262;
-                            padding-left: 25px;
-                            flex-grow: 1;
-                        }
-                        .van-button{
-                            margin-left: 20px;
-                        }
-                    }
-                    .van-button{
-                        min-width: 80px;
-                        height: 30px;
-                        line-height: 30px;
-                        margin-right: 10px;
-                        border-radius: 200px;
-                        color: $font-color-white;
-                        border-color: $color-theme;
-                        background-color: $color-theme;
-                    }
-                    .progress_award{
-                        border-color: $home-title-06;
-                        background-color: $home-title-06;
-                    }
-                }
-            }
-        }
-        .record_legend{
-            padding: 0 30px;
-            h3{
-                margin: 20px 0;
-            }
-            .record_derc{
-                padding: 12.2px 0 12.2px 18.82px;
-                border-radius: 20px;
-                box-sizing: border-box;
-                font-style: italic;
-                color: $home-title-19;
                 background: $font-color-white;
-                .focus_tips{
+                .task_title{
+                    font-weight: bold;
+                    margin-bottom: 20px;
+                }
+                .right_refresh{
+                    flex-shrink: 0;
+                    .refres_icon{
+                        height: 32px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+            .task_text{
+                color: $home-title-06;
+                margin-bottom: 12px;
+            }
+            .task_num{
+                color: $home-title-12;
+                font-weight: bold;
+                .van-count-down{
+                    width: 60px;
+                    color: $home-title-02;
+                    margin-left: 10px;
+                }
+            }
+        }
+        .task_win_bonus{
+            height: 102px;
+            position: absolute;
+            left: 0;
+            bottom: 115px;
+            font-weight: bold;
+        }
+    }
+    .task_video{
+        padding: 0 30px;
+        font-weight: 600;
+        box-sizing: border-box;
+        color: $home-eart-long;
+        justify-content: flex-end;
+    }
+    .task_warp{
+        position: relative;
+        z-index: 9;
+         .task_main{
+            padding: 0 20px;
+            // gap: 30px;
+            box-sizing: border-box;
+            .task_book{
+                margin-top: 10px;
+                .task_title{
+                    font-weight: bold;
+                    color: $color-theme;
+                    margin-bottom: 10px;
+                    // text-shadow: 0px 4px 3px rgba(0,0,0,0.2);
+                }
+            }
+            .task_item1{
+                height: 180px;
+                margin-top: 30px;
+                padding: 16px 0 0 28px;
+                box-sizing: border-box;
+                background: url('../../assets/images/home/task_icon.png') no-repeat;
+                background-size: 100% 100%;
+                .task_name{
+                    margin-top: 8px;
+                    img{
+                        height: 40px;
+                    }
+                }
+                .task_book{
+                    margin-bottom: 10px;
+                }
+                .show_account{
                     color: $home-title-02;
                     text-decoration: underline;
                 }
             }
-        }
-        .submit_btn{
-            padding: 0 30px;
-            box-sizing: border-box;
+            // .task_item:nth-child(1){
+            //     margin-bottom: 30px;
+            // }
+            .task_item{
+                // margin-top: 30px;
+                .ws_head{
+                    padding: 20px 20px;
+                    box-sizing: border-box;
+                    background: url('../../assets/images/home/ws_head.png') no-repeat;
+                    background-size: 100% 100%;
+                    .task_award{
+                        position: relative;
+                        margin-top: 10px;
+                        margin-bottom: 14px;
+                        .van-button{
+                            position: absolute;
+                            top: 10px;
+                            right: -10px;
+                        }
+                    }
+                    .title_head_top{
+                        font-weight: bold;
+                    }
+                }
+                .ws_head_active{
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                }
+                .ws_list{
+                    margin-top: -4px;
+                    padding: 0 20px 40px 20px;
+                    box-sizing: border-box;
+                    border-bottom-left-radius: 20px;
+                    border-bottom-right-radius: 20px;
+                    background: linear-gradient(90deg, #FEFCEF 0%, #FCFEFD 100%);
+                    .ws_account{
+                        background: $font-color-white;
+                    }
+                    .title_top{
+                        padding: 20px 0;
+                    }
+                    .ws_verfy_box{
+                        // gap: 40px;
+                        color: $home-title-03;
+                        .table_type{
+                            margin: 10px 0 20px 0;
+                        }
+                        .ws_tips{
+                            margin-top: 10px;
+                        }
+                        ::v-deep .van-radio__icon .van-icon{
+                            border-radius: 0 !important;
+                        }
+                        ::v-deep .van-radio__label{
+                            font-size: 14px;
+                            font-weight: bold;
+                            color: $home-title-03;
+                        }
+                        ::v-deep .van-radio__icon--checked .van-icon{
+                            border-color: $color-theme;
+                            background: $color-theme;
+                        }
+                        .ws_value{
+                            width: 100%;
+                            height: 66px;
+                            position: relative;
+                            border-radius: 10px;
+                            margin-top: 20px;
+                            border: 1px solid #008751;
+                            .area_code{
+                                margin-left: 10px;
+                                color: $home-notice-tip;
+                                padding-right: 10px;
+                                border-right:1px solid rgba(0,0,0,.1);
+                                span{
+                                    color: $font-color-black;
+                                }
+                            }
+                        }
+                        .tabs_item{
+                            margin: 30px 0;
+                        }
+                        .verfy_list{
+                            .modle_line{
+                                width: 60px;
+                                height: 60px;
+                                flex-shrink: 0;
+                                border-radius: 6px;
+                                border: 1px solid $home-title-08;
+                            }
+                            img{
+                                height: 45px;
+                            }
+                            .copay_text{
+                                height: 100%;
+                            }
+                        }
+                        .submit_text{
+                            margin-top: 30px;
+                        }
+                        .pre_tips{
+                            gap: 10px !important;
+                            h3{
+                                color: $font-color-black;
+                            }
+                        }
+                    }
+                }
+            }
             .van-button{
-                width: 100%;
-                border-radius: 20px;
+                width: max-content;
+                height: 30px;
+                line-height: 30px;
+                margin-right: 10px;
+                border-radius: 200px;
                 color: $font-color-white;
                 border-color: $color-theme;
                 background-color: $color-theme;
             }
         }
-        .record_list{
-            // max-height: 300px;
-            // overflow-y: auto;
-            padding: 0 30px;
-            margin-top: 20px;
-            padding-bottom: 30px;
+    }
+    .ws_hook_list{
+        padding: 0 30px;
+        margin: 30px 0 20px 0;
+        box-sizing: border-box;
+        .ws_title{
+            color: $font-color-white;
+        }
+        .status_tips{
+            color: $home-eart-long;
+        }
+        img{
+            height: 32px;
+            margin-right: 10px;
+        }
+    }
+    .record_legend{
+        padding: 0 30px;
+        margin-bottom: 30px;
+        box-sizing: border-box;
+        h3{
+            margin: 20px 0;
+        }
+        .record_derc{
+            font-style: italic;
+            padding: 12.2px 0 12.2px 18.82px;
+            border-radius: 20px;
             box-sizing: border-box;
-            color: $font-color-black;
-            .task_title_head{
-                font-weight: bold;
-                color: $home-title-12;
-            }
-
-            .title_top{
-                height: 100px;
-                padding: 10px 30px;
-                box-sizing: border-box;
-                background: $home-title-10;
-                // span{
-                //     flex-shrink: 0;
-                // }
-                .title_01, .title_01, .title_01, .title_01{
-                    flex-shrink: 0;
-                }
-                .title_01{
-                    flex: 1;
-                }
-                .title_02{
-                    flex: 1.2;
-                }
-                .title_03{
-                    flex: 0.8;
-                }
-                .title_04{
-                    flex: 0.8;
-                }
-
-                // span:nth-child(1){
-                //     flex-grow: 1;
-                //     flex-shrink: 0;
-                //     background: salmon;
-                // }
-                // span:nth-child(2){
-                //     flex-grow: 2;
-                //     flex-shrink: 0;
-                // }
-                // span:nth-child(3){
-                //     flex-grow: 0.6;
-                //     justify-content: center;
-                // }
-                // span:nth-child(4){
-                //     flex-grow: 0.6;
-                // }
-                .upload_icon{
-                    position: relative;
-                    width: max-content;
-                    .van-button{
-                        display: flex;
-                        height: 34px;
-                        position: relative;
-                        // width: 108px;
-                        width: 52px;
-                        flex-shrink: 0;
-                        border-radius: 8px;
-                        padding: 0 10px;
-                        color: $home-title-03;
-                        z-index: 1;
-                        border-color: $color-theme;
-                        .van-button__icon{
-                            font-size: 26px;
-                        }
-                        input{
-                            opacity: 0;
-                            width: 100% !important;
-                            height: 100% !important;
-                            position: absolute;
-                            opacity: 0;
-                            top: 0;
-                            left: 0;
-                        }
-                    }
-                }
-                .group_img{
-                    width: 72px;
-                    height: 72px;
-                }
-            }
-            .record_scroll{
-                max-height: 1100px;
-                overflow-y: auto;
-                background: $font-color-white;
-            }
-            .task_title_head {
-                border-top-left-radius: 20px;
-                border-top-right-radius: 20px;
-            }
-            .record_item{
-                height: 108px;
-                background: $font-color-white;
-                border-bottom: 1px solid $home-title-10;
-                .jump_un_link{
-                    color: $color-theme;
-                }
-            }
-            .record_item:last-child{
-                border-bottom: 1px solid transparent;
-            }
-            .record_click{
-                color: $home-copay-title;
+            line-height: 34px;
+            color:$home-title-03;
+            background: $font-color-white;
+            .focus_tips{
+                color: $home-title-02;
                 text-decoration: underline;
-            }
-            .empty_box{
-                height: 364px;
-                color: $home-title-14;
-                background-color: $font-color-white;
-                img{
-                    height: 202px;
-                }
-            }
-            .footer_tips{
-                height: auto;
-                font-style: italic;
-                padding: 16px 20px;
-                color: $home-title-06;
-                border-bottom-left-radius: 20px;
-                border-bottom-right-radius: 20px;
             }
         }
     }
+    .born_record{
+        padding: 0 30px 20px 30px;
+        box-sizing: border-box;
+    }
+    .record_list, .login_list{
+        // max-height: 300px;
+        // overflow-y: auto;
+        padding: 0 30px;
+        border-radius: 20px;;
+        padding-bottom: 30px;
+        box-sizing: border-box;
+        color: $font-color-black;
+        .task_title_head{
+            font-weight: bold;
+            color: $home-title-12;
+        }
+        .record_scroll{
+            overflow-y: auto;
+            background: $font-color-white;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .title_top{
+            padding: 0 40px;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            background: $home-title-10;
+            span{
+                flex: 1;
+            }
+            span:nth-child(2){
+                justify-content: center;
+            }
+            span:nth-child(3){
+                flex-grow: 0.8;
+                justify-content: right;
+            }
+            .log_out{
+                em{
+                    flex-shrink: 0;
+                    padding: 10px 20px;
+                    box-sizing: border-box;
+                    background: $home-title-18;
+                    border-radius: 200px;
+                    color: $color-theme;
+                }
+            }
+        }
+        .task_title_head {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        span:nth-child(3){
+            justify-content: center !important;
+        }
+        .record_item{
+            height: 88px;
+            background: $font-color-white;
+            border-bottom: 1px solid $home-title-10;
+        }
+        .record_item:last-child{
+            border-bottom: 1px solid transparent;
+        }
+        .record_click{
+            color: $home-copay-title;
+            text-decoration: underline;
+        }
+        .empty_box{
+            height: 364px;
+            color: $home-title-14;
+            background-color: $font-color-white;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            img{
+                height: 202px;
+            }
+        }
+        .footer_tips{
+            height: auto;
+            font-style: italic;
+            padding: 16px 20px;
+            color: $home-title-06;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+    }
+    .login_list{
+        .record_scroll{
+            border-radius: 20px;
+        }
+    }
+}
+.refres_animat{
+    animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(720deg);
+    }
+}
+ .van-overlay{
+    height: 100% !important;
+    .country_warp{
+        height: auto;
+        background: $font-color-white;
+        .country_head{
+            height: 44px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            background: $color-theme;
+            color: $font-color-white;
+            img{
+                height: 12px;
+                margin-right: 10px;
+            }
+        }
+        .code_query{
+            padding: 0 20px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            .ws_value{
+                height: 33px;
+                padding-left: 10px;
+                border-radius: 10px;
+                background: rgba($color: #8E8E8E, $alpha: .3);
+                .area_code{
+                    margin-left: 10px;
+                }
+            }
+        }
+        .country_list{
+            height: calc(100vh - 88px);
+            overflow-y: auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            .country_item{
+                padding: 10px 0;
+                border-bottom:1px solid rgba(0,0,0,.1);
+                .c_code{
+                    color: $color-theme;
+                }
+            }
+            .country_item:last-child{
+                border-bottom:1px solid transparent;
+            }
+        }
+    }
+}
+.task_box_main{
+    .task_warp{
+        margin: 0 0 10px 0;
+        position: relative;
+         .task_main{
+            padding: 0 30px;
+            box-sizing: border-box;
+            .task_item{
+                margin-top: 0;
+                padding: 16px 0 20px 30px;
+                box-sizing: border-box;
+                background: url('../../assets/images/home/task_icon.png') no-repeat;
+                background-size: 100% 100%;
+                .task_name{
+                    margin-top: 8px;
+                    img{
+                        height: 40px;
+                    }
+                }
+                .task_award{
+                    position: relative;
+                    color: $font-color-black;
+                    margin-top: 5px;
+                    margin-bottom: 10px;
+                    .task_book{
+                        font-weight: bold;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        color: $color-theme;
+                    }
+                    .task_desc{
+                        line-height: 32px;
+                        // letter-spacing: -2px;
+                        color: $home-title-03;
+                        margin-right: -10px;
+                    }
+                }
+                .show_account{
+                    line-height: 1.5;
+                    color: $home-title-02;
+                }
+                .group_link{
+                    margin-top: 20px;
+                    input {
+                        width: 408px;
+                        height: 72px;
+                        background: $home-title-13 !important;
+                        border: $home-title-13;
+                        border-radius: 200px;
+                        outline: none;
+                        font-size: 28px;
+                        color: #626262;
+                        padding-left: 25px;
+                        flex-grow: 1;
+                    }
+                    .van-button{
+                        margin-left: 20px;
+                    }
+                }
+                .van-button{
+                    min-width: 80px;
+                    height: 30px;
+                    line-height: 30px;
+                    margin-right: 10px;
+                    border-radius: 200px;
+                    color: $font-color-white;
+                    border-color: $color-theme;
+                    background-color: $color-theme;
+                }
+                .progress_award{
+                    border-color: $home-title-06;
+                    background-color: $home-title-06;
+                }
+            }
+        }
+    }
+    .record_list{
+        padding: 0 30px;
+        margin-top: 20px;
+        padding-bottom: 30px;
+        box-sizing: border-box;
+        color: $font-color-black;
+        .task_title_head{
+            font-weight: bold;
+            color: $home-title-12;
+        }
+
+        .title_top{
+            height: 100px;
+            padding: 10px 30px;
+            box-sizing: border-box;
+            background: $home-title-10;
+            .title_01, .title_01, .title_01, .title_01{
+                flex-shrink: 0;
+            }
+            .title_01{
+                flex: 1;
+            }
+            .title_02{
+                flex: 1.2;
+            }
+            .title_03{
+                flex: 0.8;
+            }
+            .title_04{
+                flex: 0.8;
+                justify-content: center;
+            }
+            .upload_icon{
+                position: relative;
+                width: max-content;
+                .van-button{
+                    display: flex;
+                    height: 34px;
+                    position: relative;
+                    // width: 108px;
+                    width: 52px;
+                    flex-shrink: 0;
+                    border-radius: 8px;
+                    padding: 0 10px;
+                    color: $home-title-03;
+                    z-index: 1;
+                    border-color: $color-theme;
+                    .van-button__icon{
+                        font-size: 26px;
+                    }
+                    input{
+                        opacity: 0;
+                        width: 100% !important;
+                        height: 100% !important;
+                        position: absolute;
+                        opacity: 0;
+                        top: 0;
+                        left: 0;
+                    }
+                }
+            }
+            .group_img{
+                width: 72px;
+                height: 72px;
+            }
+        }
+        .record_scroll{
+            max-height: 1100px;
+            overflow-y: auto;
+            background: $font-color-white;
+        }
+        .task_title_head {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .record_item{
+            height: 108px;
+            background: $font-color-white;
+            border-bottom: 1px solid $home-title-10;
+            .jump_un_link{
+                color: $color-theme;
+            }
+        }
+        .record_item:last-child{
+            border-bottom: 1px solid transparent;
+        }
+        .record_click{
+            color: $home-copay-title;
+            text-decoration: underline;
+        }
+        .empty_box{
+            height: 364px;
+            color: $home-title-14;
+            background-color: $font-color-white;
+            img{
+                height: 202px;
+            }
+        }
+        .footer_tips{
+            height: auto;
+            font-style: italic;
+            padding: 16px 20px;
+            color: $home-title-06;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+    }
+}
 </style>

@@ -68,7 +68,7 @@
                         <p class="mb_24" style="line-height: 20px;" >{{content}}</p>
                     </div>
                     <div class="rule_desc flex-item flex-align flex-center flex-dir-c font_28" v-if="type==9">
-                        <p class="mb_24">{{restLanuage('home_143')}}：{{number}}</p>
+                        <!-- <p class="mb_24">{{restLanuage('home_143')}}：{{number}}</p> -->
                         <p class="mb_24" style="line-height: 20px;" >{{content}}</p>
                         <span class="copay_code flex-item flex-align flex-center" v-clipboard:copy="number" v-clipboard:success="copySuccess">{{restLanuage('other_006')}}</span>
                     </div>

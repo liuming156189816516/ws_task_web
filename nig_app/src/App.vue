@@ -1,7 +1,7 @@
 <template>
 	<div id="app" :class="{'set-padding-top':hasTabBar}">
 		<div v-if="!showNavBar" class="mobile_head_top"></div>
-		<div :class="!showNavBar?'app_top_continer':'app_continer'" ref="app_root">
+		<div :class="!showNavBar?'app_top_continer':'app_continer'">
 			<keep-alive :include="keepAliveNames">
 				<router-view />
 			</keep-alive>
@@ -70,11 +70,10 @@ export default {
 		this.handleVersion().then(res=>{
 			this.currentTIme = res||"";
 		})
-		this.waitTimer = setInterval(() => {
-			this.heartTimer = setTimeout(() => {
-				this.initCheckVersion();
-			}, this.timeout)
-		}, this.setInter)
+		window.onload=function(){
+			setTimeout(function() {
+			window.scrollTo(0, 1)
+		},0)}
 	},
 	methods: {
 		initCheckVersion (){

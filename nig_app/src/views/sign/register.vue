@@ -1,5 +1,5 @@
 <template>
-	<div class="login_warp">
+	<div class="login_warp" @click="show_code=false">
 		<div class="head_main w_f flex-item flex-dir-c">
 			<div class="head_title">
 				{{$t('login_014')}}
@@ -13,7 +13,18 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
-					<span class="font_28">234</span>
+					<div class="code_item flex-item flex-align font_28">
+						<span @click.stop="show_code=!show_code">{{ area_code }}</span>
+						<transition name="el-zoom-in-top">
+							<div class="down_list flex-item flex-dir-c" v-if="show_code">
+								<p class="flex-item flex-align flex-between" v-for="(item,idx) in codeOption" :key="idx" @click="changeCode(item)">
+									{{ item }}
+									<img v-if="area_code==item" src="@/assets/images/sign/chack.png">
+								</p>
+							</div>
+						</transition>
+						<img class="down_icon flex-item" src="@/assets/images/sign/xiala.png">
+					</div>
 					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_039')})" maxlength="10" autocomplete="off" max oninput="value=value.replace(/^0|[^0-9]/g, '')" />
 				</div>
 				<div class="uilist_div pwd">
@@ -57,6 +68,7 @@ export default {
 	data() {
 		return {
 			regEye:true,
+			show_code:false,
 			isLoading:false,
 			is_login: 1,
 			safe_code: "",
@@ -72,10 +84,13 @@ export default {
 			user_code:"",
 			countTime: 60,
 			uuid: "",
+			area_code:"234",
+			codeOption:['234','91']
 		}
 	},
 	created() {
 		let url = window.location.search;
+		this.area_code = localStorage.getItem("code")||'234';
 		if (url.indexOf("inviteCode=") > -1) {
 			this.user_code = this.$Helper.getUrlParams("inviteCode");
 		}
@@ -100,6 +115,11 @@ export default {
 		bankIcon(){
 			// this.$store.dispatch('Global/isShowType',1);
 			this.$router.go("-1")
+		},
+		changeCode(val){
+			this.username="";
+			this.area_code = val;
+			localStorage.setItem("code",val);
 		},
 		// handleBlur(){
 		// 	if (!this.username) return;
@@ -148,7 +168,7 @@ export default {
 				}
 			}
 			let params = {
-				account: "234"+this.username,
+				account:`${this.area_code}${this.username}`,
 				pwd: this.pwd,
 				uuid: this.timestamp,
 				code: this.safe_code,
@@ -267,7 +287,50 @@ export default {
 				box-sizing: border-box;
 				background-color: #F6F6F6;
 				margin-bottom: 32px;
-
+				.code_item{
+					height: 100%;
+					position: relative;
+					.down_icon{
+						width: 26px;
+						height: 26px;
+						flex-shrink: 0;
+						margin-left:4px;
+					}
+					.down_list{
+						width: 200px;
+						padding: 20px 20px;
+						border-radius: 8px;
+						position: absolute;
+						top: 96px;
+						left: -20px;
+						z-index: 2;
+						background: $home-notice-tip;
+						box-sizing: border-box;
+						box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+						// background: rgba($color: #000000, $alpha: .3);
+						p{
+							height: 64px;
+							border-bottom: 1px solid rgba($color: $font-color-pale, $alpha: .2);
+							img{
+								height: 32px;
+							}
+						}
+						p:last-child{
+							border: none;
+						}
+					}
+					.down_list:before {
+						content: "";
+						display: block;
+						position: absolute;
+						width:0;
+						height: 0;
+						border: 16px solid transparent;
+						border-bottom-color: $home-notice-tip;
+						left: 30px;
+						top: -28px;
+					}
+				}
 				>img {
 					width: 23px;
 					height: auto;

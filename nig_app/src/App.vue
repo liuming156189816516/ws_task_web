@@ -28,6 +28,7 @@
 <script>
 import { mapState } from 'vuex';
 import { logout } from '@/api/login';
+import uniFun from "@/utils/uni-webview-js"
 import dragIcon from "@/components/dragIcon"
 export default {
 	components: {dragIcon },

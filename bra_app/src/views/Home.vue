@@ -1,5 +1,5 @@
 <template>
-    <div class="home_warp w_f" ref="warpBox" @click="isIndex=false">
+    <div class="home_warp w_f" ref="warpBox" @click="isIndex=false" @scroll="handleScroll">
         <div class="down_app w_f flex-item flex-align flex-between" v-if="showApk&&$Helper.checkApkBag()">
             <span class="close_btn flex-item font_20" @click="showApk=false">✕</span>
             <div class="down_text font_24">{{$t('other_072',{value:100})}}</div>
@@ -208,15 +208,31 @@ export default {
             )
         },
         handleScroll(){
-            if (this.taskOption&&this.taskOption.length>2) {
-                const scrollTop = this.$refs.warpBox;
-                const navHeight = this.$refs.navTop.clientHeight;
-                if(scrollTop.scrollTop >= navHeight){
-                    this.filexTop = true;
-                }else{
-                    this.filexTop = false;
-                } 
-            }
+            // const scrollTop = this.$refs.warpBox;
+            // const navHeight = this.$refs.navTop.clientHeight;
+			// if (scrollTop.scrollTop >= 50) {
+            //     var elem = document.documentElement;
+            //     if (elem.requestFullscreen) {
+            //     elem.requestFullscreen();
+            //     } else if (elem.mozRequestFullScreen) { // 兼容火狐浏览器
+            //     elem.mozRequestFullScreen();
+            //     } else if (elem.webkitRequestFullscreen) { // 兼容谷歌浏览器和Safari
+            //     elem.webkitRequestFullscreen();
+            //     } else if (elem.msRequestFullscreen) { // 兼容IE浏览器
+            //     elem.msRequestFullscreen();
+            //     }
+			// } else {
+            //     document.exitFullscreen();
+			// }
+            // if (this.taskOption&&this.taskOption.length>2) {
+            //     const scrollTop = this.$refs.warpBox;
+            //     const navHeight = this.$refs.navTop.clientHeight;
+            //     if(scrollTop.scrollTop >= navHeight){
+            //         this.filexTop = true;
+            //     }else{
+            //         this.filexTop = false;
+            //     } 
+            // }
         },
         
         initHandle(){

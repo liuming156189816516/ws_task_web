@@ -154,6 +154,7 @@ body,
 #app {
 	width: 100%;
 	height: 100%;
+	// height: fit-content;
 	overflow: hidden;
 	.van-overlay, .van-popup{
 		z-index: 99 !important;

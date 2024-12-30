@@ -25,7 +25,7 @@
 						</transition>
 						<img class="down_icon flex-item" src="@/assets/images/sign/xiala.png">
 					</div>
-					<input v-model="username" :placeholder="$t('other_001',{value:$t('login_039')})" maxlength="10" autocomplete="off" max oninput="value=value.replace(/^0|[^0-9]/g, '')" />
+					<input v-model="username" type="number" :placeholder="$t('other_001',{value:$t('login_039')})" maxlength="10" autocomplete="off" max oninput="value=value.replace(/^0|[^0-9]/g, '')" />
 				</div>
 				<div class="uilist_div pwd">
 					<!-- <img src="@/assets/images/sign/lock.png" /> -->

@@ -44,7 +44,7 @@
 				<div class="uilist_div verfy_code">
 					<div class="input_code">
 						<!-- <img src="@/assets/images/sign/secret.png" /> -->
-						<input style="flex-grow:1;" v-model="safe_code" autocomplete="off" :placeholder="$t('login_008')" oninput="value=value.replace(/[^\w_]/g,'')" />
+						<input style="flex-grow:1;" type="number" v-model="safe_code" autocomplete="off" :placeholder="$t('login_008')" oninput="value=value.replace(/[^\w_]/g,'')" />
 					</div>
 					<div class="code_img" @click="getVerfyBtn">
 						<img :src="require(`@/assets/images/code/${item}.png`)" v-for="(item,idx) in verfyList" :key="idx">

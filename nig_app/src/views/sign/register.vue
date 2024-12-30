@@ -13,8 +13,8 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
-					<div class="code_item flex-item flex-align font_28">
-						<span @click.stop="show_code=!show_code">{{ area_code }}</span>
+					<div class="code_item flex-item flex-align font_28" @click.stop="show_code=!show_code">
+						<span>{{ area_code }}</span>
 						<transition name="el-zoom-in-top">
 							<div class="down_list flex-item flex-dir-c" v-if="show_code">
 								<p class="flex-item flex-align flex-between" v-for="(item,idx) in codeOption" :key="idx" @click="changeCode(item)">

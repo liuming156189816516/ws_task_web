@@ -388,20 +388,32 @@ function convertTimeToZone(date, targetTimeZone) {
 export function mexicoTime(date, type){
   let Time;
   let myDate = new Date(date);
-  var Year = myDate.getFullYear(); //获取年
-  var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
-  var Dates = myDate.getDate(); //获取日
-  if(type == 1){
-    Time = Year + "-" + Month + "-" + Dates + " 00:00:00";
-  }else if(type == 2){
-    Time = Year + "-" + Month + "-" + Dates + " 23:59:59";
-  }else if(type == 3){
-    let Afr_time = date.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' });
-    let formatMexico = (Date.parse(Afr_time)/1000) + (5 * 3600);
-    return formatMexico;
+  var Year = myDate.getFullYear();
+  var Month = myDate.getMonth() + 1;
+  var Dates = myDate.getDate();
+  var Hour = myDate.getHours(); //获取小时
+  var Minute = myDate.getMinutes(); //获取分
+  var Seconds = myDate.getSeconds(); //获取秒
+  if (Hour < 10) {
+    Hour = '0' + Hour
   }
-  let Afr_time = Time.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' });
-  return Date.parse(Afr_time)/1000
+  if (Minute < 10) {
+    Minute = '0' + Minute
+  }
+  if (Seconds < 10) {
+    Seconds = '0' + Seconds
+  }
+  if(type == 1){
+    let date1 = new Date(`${Year}-${Month}-${Dates}T00:00:00-03:00`);
+    Time = date1.getTime()/1000;
+  }else if(type == 2){
+    let date2 = new Date(`${Year}-${Month}-${Dates}T23:59:59-03:00`);
+    Time = date2.getTime()/1000;
+  }else if(type == 3){
+    let date3 = new Date(`${Year}-${Month}-${Dates}T${Hour}:${Minute}:${Seconds}-03:00`);
+    return date3.getTime()/1000;
+  }
+  return Time;
 }
 
 //将时间戳转成年月日时分秒

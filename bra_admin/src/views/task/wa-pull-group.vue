@@ -19,7 +19,7 @@
           <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
         </el-form-item>
         <el-form-item>
-          <el-date-picker v-model="model1.ipCtime" value-format="yyyy-MM-dd HH:mm:ss" type="datetimerange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+          <el-date-picker v-model="model1.ipCtime" type="datetimerange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
         </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002')}}</el-button>

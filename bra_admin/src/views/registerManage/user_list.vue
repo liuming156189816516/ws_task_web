@@ -60,7 +60,7 @@
                         </template>
                     </u-table-column>
                     <u-table-column prop="invite_code" :label="$t('sys_q133')" minWidth="130" />
-                    <u-table-column prop="fuser_name" :label="$t('sys_q134')" minWidth="100">
+                    <u-table-column prop="fuser_name" show-overflow-tooltip :label="$t('sys_q134')" minWidth="130">
                         <template slot-scope="scope">
                             {{ scope.row.fuser_name?scope.row.fuser_name:"-" }}
                         </template>

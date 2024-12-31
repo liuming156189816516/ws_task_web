@@ -41,5 +41,8 @@ export const buriedpoint = (param) => {
 export const buriedpointlogout = (param) => {
     return request({url: '/account/buriedpointlogout',method: 'post',data:param})
 }
+export const getcountrycode = (params)=> {
+    return request({url:'/adminmember/getcountrycode',method:'post',data:params})
+}
 
 

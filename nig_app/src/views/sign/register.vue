@@ -61,7 +61,7 @@
 	</div>
 </template>
 <script>
-import { getcode } from '@/api/login';
+import { getcode,getcountrycode } from '@/api/login';
 import PageHeader from "@/components/Header";
 export default {
 	// components: { PageHeader },
@@ -101,6 +101,7 @@ export default {
 			this.bext_id = this.$Helper.getUrlParams("fbclid");
 		}
 		this.timestamp = String(new Date().getTime());
+		this.getAreaCode();
 		this.getVerfyBtn();
 		this.$store.dispatch('User/actionReport',2)
 	},
@@ -108,6 +109,14 @@ export default {
 		goLogin() {
 			this.$router.push("/login")
 			// this.$store.dispatch('Global/isShowType',1);
+		},
+		async getAreaCode(){
+			const { code } = await getcountrycode();
+			if(code){
+				this.area_code=code;
+			}else{
+				this.area_code="234";
+			}
 		},
 		showEye(){
 			this.regEye = !this.regEye;

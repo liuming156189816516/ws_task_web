@@ -969,13 +969,14 @@ methods: {
         height: auto;
         background: $font-color-white;
         .country_head{
-            height: 44px;
-            padding: 0 20px;
+            height: 42.23px;
+            padding: 0 14px;
             box-sizing: border-box;
             background: $color-theme;
             color: $font-color-white;
             img{
-                height: 12px;
+                width: 16.94px;
+                height: 12.95px;
                 margin-right: 10px;
             }
         }

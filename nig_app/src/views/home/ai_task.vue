@@ -1010,7 +1010,7 @@ methods: {
         }
     }
     .app_top_head{
-        margin-top: 80px;
+        margin-top: 40px;
     }
 }
 .task_box_main{

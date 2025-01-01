@@ -323,7 +323,7 @@ export default {
 					height: 100%;
 					position: relative;
 					span{
-						min-width: 46px;
+						min-width: 48px;
 					}
 					.down_icon{
 						width: 26px;

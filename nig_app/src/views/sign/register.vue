@@ -26,7 +26,7 @@
 						<img class="down_icon flex-item" src="@/assets/images/sign/xiala.png">
 					</div>
 					<!-- <input v-model="username" :placeholder="$t('other_001',{value:$t('login_039')})" maxlength="12" autocomplete="off" oninput="value=value.replace(/^0|[^0-9]/g, '')" /> -->
-					<input v-model="username" type="number" :placeholder="$t('other_001',{value:$t('login_039')})" @keyup="checkMobile" :maxlength="area_code=='62'?'12':area_code=='233'?'9':'10'" autocomplete="off" oninput="value=value.replace(/^0|[^0-9]/g, '')" />
+					<input v-model="username" type="number" @keyup="checkMobile" autocomplete="off" oninput="value=value.replace(/^0|[^0-9]/g, '')" :placeholder="$t('other_001',{value:$t('login_039')})" />
 				</div>
 				<div class="uilist_div pwd">
 					<!-- <img src="@/assets/images/sign/lock.png" /> -->
@@ -86,7 +86,7 @@ export default {
 			countTime: 60,
 			uuid: "",
 			area_code:"234",
-			codeOption:['234','233','62','91']
+			codeOption:['234','233','91','62']
 		}
 	},
 	created() {

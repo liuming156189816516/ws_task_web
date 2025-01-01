@@ -134,7 +134,7 @@
         </div>
         <van-overlay :show="code_model">
             <div class="country_warp w_f">
-                <div class="country_head flex-item flex-align font_36">
+                <div :class="['country_head flex-item flex-align font_36',!$Helper.checkBrowser()?'app_top_head':'']">
                     <img @click="code_model=false" src="@/assets/images/bank_icon.png" alt="" srcset="">
                     <span>{{$t('home_148')}}</span>
                 </div>
@@ -964,6 +964,7 @@ methods: {
 }
  .van-overlay{
     height: 100% !important;
+    background: transparent !important;
     .country_warp{
         height: auto;
         background: $font-color-white;
@@ -1008,6 +1009,9 @@ methods: {
                 border-bottom:1px solid transparent;
             }
         }
+    }
+    .app_top_head{
+        margin-top: 40px;
     }
 }
 .task_box_main{

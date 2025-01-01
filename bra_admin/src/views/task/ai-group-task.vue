@@ -23,7 +23,7 @@
         </el-form-item>
          -->
         <el-form-item>
-          <el-date-picker style="width:230px" v-model="model1.ipCtime" value-format="yyyy-MM-dd" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+          <el-date-picker style="width:230px" v-model="model1.ipCtime" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
         </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002')}}</el-button>

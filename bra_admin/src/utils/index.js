@@ -394,6 +394,12 @@ export function mexicoTime(date, type){
   var Hour = myDate.getHours(); //获取小时
   var Minute = myDate.getMinutes(); //获取分
   var Seconds = myDate.getSeconds(); //获取秒
+  if (Month < 10) {
+    Month = '0' + Month
+  }
+  if (Dates < 10) {
+    Dates = '0' + Dates
+  }
   if (Hour < 10) {
     Hour = '0' + Hour
   }

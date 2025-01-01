@@ -85,7 +85,7 @@ export default {
 			countTime: 60,
 			uuid: "",
 			area_code:"234",
-			codeOption:['234','91']
+			codeOption:['234','223','91']
 		}
 	},
 	created() {

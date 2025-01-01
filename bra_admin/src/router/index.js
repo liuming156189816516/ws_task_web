@@ -158,6 +158,14 @@ export const asyncRoutes = [
         meta: {
           title: '修改WS资料日志',
         }
+      },
+      {
+        path: '/tg-app-list',
+        component: () => import('@/views/storeroom/tg-app-list'),
+        name: 'tg-app-list',
+        meta: {
+          title:i18n.t('sys_t001'),
+        }
       }
     ]
   },

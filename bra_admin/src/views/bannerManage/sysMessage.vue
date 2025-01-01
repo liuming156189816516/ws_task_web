@@ -7,7 +7,7 @@
                     <el-input size="small" v-model="factorModel.task_name" clearable placeholder="请输入标题" style="width:180px;"></el-input>
 				</el-form-item>
 				<!-- <el-form-item class="change_new_time">
-					<el-date-picker size="small" v-model="factorModel.dateArry" type="daterange" value-format="yyyy-MM-dd" range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期" style='width:240px'>
+					<el-date-picker size="small" v-model="factorModel.dateArry" type="daterange" range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期" style='width:240px'>
 					</el-date-picker>
                 </el-form-item> -->
                 <el-form-item>

@@ -34,7 +34,7 @@
             <el-row :gutter="20">
                 <el-col :span="18">
                     <el-form-item :label="$t('sys_g079')" prop="end_time" class="hide_text">
-                        <el-date-picker v-model="quickForm.end_time" value-format="yyyy-MM-dd HH:mm:ss" type="datetime" :placeholder="$t('sys_c052')" />
+                        <el-date-picker v-model="quickForm.end_time" type="datetime" :placeholder="$t('sys_c052')" />
                     </el-form-item>
                 </el-col>
             </el-row>

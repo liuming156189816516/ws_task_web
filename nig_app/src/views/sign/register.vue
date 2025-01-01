@@ -14,7 +14,7 @@
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
 					<div class="code_item flex-item flex-align font_28" @click.stop="show_code=!show_code">
-						<span>{{ area_code }}</span>
+						<span class="flex-item">{{ area_code }}</span>
 						<transition name="el-zoom-in-top">
 							<div class="down_list flex-item flex-dir-c" v-if="show_code">
 								<p class="flex-item flex-align flex-between" v-for="(item,idx) in codeOption" :key="idx" @click="changeCode(item)">
@@ -25,7 +25,8 @@
 						</transition>
 						<img class="down_icon flex-item" src="@/assets/images/sign/xiala.png">
 					</div>
-					<input v-model="username" type="number" :placeholder="$t('other_001',{value:$t('login_039')})" maxlength="10" autocomplete="off" max oninput="value=value.replace(/^0|[^0-9]/g, '')" />
+					<!-- <input v-model="username" :placeholder="$t('other_001',{value:$t('login_039')})" maxlength="12" autocomplete="off" oninput="value=value.replace(/^0|[^0-9]/g, '')" /> -->
+					<input v-model="username" type="number" :placeholder="$t('other_001',{value:$t('login_039')})" @keyup="checkMobile" :maxlength="area_code=='62'?'12':area_code=='233'?'9':'10'" autocomplete="off" oninput="value=value.replace(/^0|[^0-9]/g, '')" />
 				</div>
 				<div class="uilist_div pwd">
 					<!-- <img src="@/assets/images/sign/lock.png" /> -->
@@ -85,12 +86,12 @@ export default {
 			countTime: 60,
 			uuid: "",
 			area_code:"234",
-			codeOption:['234','223','91']
+			codeOption:['234','233','62','91']
 		}
 	},
 	created() {
 		let url = window.location.search;
-		this.area_code = localStorage.getItem("code")||'234';
+		// this.area_code = localStorage.getItem("code")||'234';
 		if (url.indexOf("inviteCode=") > -1) {
 			this.user_code = this.$Helper.getUrlParams("inviteCode");
 		}
@@ -110,6 +111,16 @@ export default {
 			this.$router.push("/login")
 			// this.$store.dispatch('Global/isShowType',1);
 		},
+		checkMobile(){
+			const len = this.username.length;
+			if(this.area_code == '62' && len > 12){
+				this.username = this.username.slice(0,12)
+			}else if(this.area_code == '233' && len > 9){
+				this.username = this.username.slice(0,9)
+			}else if(this.area_code == '91'||this.area_code == '234'){
+				this.username = this.username.slice(0,10)
+			}
+		},
 		async getAreaCode(){
 			const { code } = await getcountrycode();
 			if(code){
@@ -128,7 +139,7 @@ export default {
 		changeCode(val){
 			this.username="";
 			this.area_code = val;
-			localStorage.setItem("code",val);
+			// localStorage.setItem("code",val);
 		},
 		// handleBlur(){
 		// 	if (!this.username) return;
@@ -147,13 +158,25 @@ export default {
 		handleRegister() {
 			// const zh_reg = new RegExp(/^234/);
 			// const zh_reg = new RegExp(/^[^\u4e00-\u9fa5]+$/);
+			const len = this.username.length;
 			const reg = new RegExp(/^1[3456789]\d{9}$/);
 			const regex = new RegExp(/^[0-9A-Za-z]{6,20}$/);
 			if (!this.username) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_039')}))
-			} else if(this.username.length <= 9){
-				return this.$toast(this.$t('other_001',{value:this.$t('login_040')}));
+			} else if(this.area_code=='234' && len <= 9 || this.area_code=='91' && len <= 9){
+				return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
+			} else if(this.area_code=='233' && len <= 8){
+				return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
+			} else if(this.area_code=='62' && len < 8){
+				return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
 			}
+
+			// else if(this.area_code=='62'&&len <= 7){
+			// 	console.log("002");
+			// 	return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
+			// }
+
+			// area_code=='62'?'14':area_code=='233'?'9'
 			// else if(!zh_reg.test(this.username)){
 			// 	return this.$toast(this.$t('other_001',{value:this.$t('login_040')}));
 			// }
@@ -299,6 +322,9 @@ export default {
 				.code_item{
 					height: 100%;
 					position: relative;
+					span{
+						min-width: 46px;
+					}
 					.down_icon{
 						width: 26px;
 						height: 26px;

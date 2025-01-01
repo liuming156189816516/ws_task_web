@@ -40,8 +40,9 @@ export default {
     login_037:"Register",
     login_038:"account",
     login_039:"phone number",
-    login_040:"mobile number starting with 234",
-    login_040:"Correct phone number",
+    login_040:"mobile number starting with {value}",
+    login_041:"Correct phone number",
+    login_042:"Please log in using your country's mobile phone number: 234../91../233../62../",
 
     home_001:"User balance",
     home_002:"Today's task income",

@@ -133,7 +133,8 @@
             <img class="ws_icon" src="@/assets/images/home/dingbu.png" alt="">
         </div>
         <van-overlay :show="code_model">
-            <div class="country_warp w_f">
+            <div :class="['country_warp w_f',!$Helper.checkBrowser()?'app_continer':'']">
+                <!-- <page-header :title="$t('home_168')" :show-icon="true" :bgcolor="false" /> -->
                 <div class="country_head flex-item flex-align font_36">
                     <img @click="code_model=false" src="@/assets/images/bank_icon.png" alt="" srcset="">
                     <span>{{$t('home_148')}}</span>
@@ -730,6 +731,7 @@ methods: {
                     border-bottom-right-radius: 10px;
                 }
                 .ws_list{
+                    margin-top: -3px;
                     padding: 0 20px 40px 20px;
                     box-sizing: border-box;
                     border-bottom-left-radius: 20px;
@@ -1006,6 +1008,9 @@ methods: {
                 border-bottom:1px solid transparent;
             }
         }
+    }
+    .app_continer{
+        margin-top: 80px;
     }
 }
 .task_box_main{

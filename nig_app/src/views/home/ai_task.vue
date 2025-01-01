@@ -964,6 +964,7 @@ methods: {
 }
  .van-overlay{
     height: 100% !important;
+    background: transparent !important;
     .country_warp{
         height: auto;
         background: $font-color-white;

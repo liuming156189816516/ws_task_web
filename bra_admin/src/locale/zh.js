@@ -516,6 +516,11 @@ export default {
     'sys_m111': '拉群资源数',
     'sys_m112': '拉粉资源数',
     'sys_m113': '(AI)',
+    'sys_m114': 'WS-挂机',
+    'sys_m115': 'WS-拉群',
+    'sys_m116': 'WS-拉粉',
+    'sys_m117': 'WS-私发',
+    'sys_m118': 'TG-私发',
 
     'sys_mat001': '素材名称',
     'sys_mat002': '排序调整',
@@ -633,6 +638,7 @@ export default {
     'sys_mat114': '成功送达粉丝',
     'sys_mat115': '已送达',
     'sys_mat116': '投放渠道',
+    'sys_mat117': 'WS私发',
 
     'sys_rai001': '养号模式',
     'sys_rai002': '辅助模式',
@@ -763,6 +769,7 @@ export default {
     'sys_rai127': '已通过',
     'sys_rai128': '已驳回',
     'sys_rai129': '审批状态',
+    'sys_rai130': '营销话术',
 
     'sys_q001': '话术名称',
     'sys_q002': '话术库',

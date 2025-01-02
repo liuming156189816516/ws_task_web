@@ -75,7 +75,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return ["","挂机","拉群","拉粉","AI"]
+            return ["",this.$t("sys_m114"),this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117")]
         }
     },
     created() {

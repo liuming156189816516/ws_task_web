@@ -285,11 +285,11 @@
                             <span>{{ scope.row.fuser_name||"-" }}</span>
                         </template>
                     </u-table-column>
-                    <u-table-column prop="total_time" :label="$t('sys_q143')" minWidth="100">
+                    <!-- <u-table-column prop="total_time" :label="$t('sys_q143')" minWidth="100">
                         <template slot-scope="scope">
                             <span>{{ scope.row.total_time||0 }}</span>
                         </template>
-                    </u-table-column>
+                    </u-table-column> -->
                     <u-table-column prop="first_login_time" :label="$t('sys_g014')+'/'+$t('sys_g015')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.first_login_time > 0 ? $baseFun.resetTime(scope.row.first_login_time * 1000) : "-" }}/</br>

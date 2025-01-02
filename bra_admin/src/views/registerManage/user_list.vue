@@ -43,7 +43,11 @@
                         </template>
                     </u-table-column>
                     <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" />
-                    <u-table-column prop="ch" :label="$t('sys_mat116')" minWidth="100" />
+                    <u-table-column prop="ch" :label="$t('sys_mat116')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{ scope.row.ch||"-" }}
+                        </template>
+                    </u-table-column>
                     <u-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
                         <!-- <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">

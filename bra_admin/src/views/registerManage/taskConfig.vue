@@ -6,7 +6,7 @@
         <div class="view_continer">
             <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
                 <el-row :gutter="20">
-                    <el-col :span="18">
+                    <el-col :span="18" v-if="activeIdx!=3">
                         <el-form-item :label="activeIdx==2?'监控号分组：':'营销分组：'" prop="market_group">
                             <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
                                 <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
@@ -14,7 +14,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <template v-if="activeIdx==0||activeIdx==2">
+                <template v-if="activeIdx!=1">
                     <el-row :gutter="20">
                         <el-col :span="18">
                             <el-form-item label="数据包：" prop="data_pack_id">
@@ -25,7 +25,7 @@
                         </el-col>
                     </el-row>
                 </template>
-                <template v-if="activeIdx==2">
+                <template v-if="activeIdx==2||activeIdx==3">
                     <el-row :gutter="20">
                         <el-col :span="18">
                             <el-form-item :label="$t('sys_l080')+'：'" prop="data_link">
@@ -36,7 +36,7 @@
                 </template>
                 <el-row :gutter="20">
                     <el-col :span="18">
-                        <el-form-item :label="$t('sys_q131')+'：'" prop="materialData" class="custom_say">
+                        <el-form-item :label="$t('sys_rai130')+'：'" prop="materialData" class="custom_say">
                             <div class="mess_01">
                                 <el-button type="primary" size="mini" v-for="(item,idx) in btnOption" :key="idx" @click="showPropModel(idx)" v-show="item!=''">{{ item }}</el-button>
                                 <el-table :data="taskForm.materialData" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" style="width: 100%">
@@ -219,7 +219,7 @@
             }
         },
         taskOption(){
-            return ["拉群配置","拉粉配置","AI配置"]
+            return [this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),this.$t("sys_m118")]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]

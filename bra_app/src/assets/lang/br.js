@@ -185,7 +185,8 @@ export default {
     home_198:"Etapa 7",
     home_199:"Etapa 8",
     home_200:"Etapa 9",
-    home_201: "Verifique o status da conta online, envie e conclua a tarefa de acordo com a conta do catálogo de endereços, clique aqui para atualizar e visualizar o rendimento",
+    home_201:"Verifique o status da conta online, envie e conclua a tarefa de acordo com a conta do catálogo de endereços, clique aqui para atualizar e visualizar o rendimento",
+    home_202:"Quanto mais números de catálogo de endereços você usar o Telegram para promover, maior será sua renda",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

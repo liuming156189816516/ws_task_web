@@ -179,6 +179,7 @@ export default {
     home_189:"添加通讯录以后，你的WhatsApp执行力会变得更加的强大",
     home_190:"WhatsApp 奖金",
     home_191:"绑定Telegram",
+    home_192:"点击复制发送内容",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",

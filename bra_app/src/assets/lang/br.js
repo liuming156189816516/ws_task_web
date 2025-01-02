@@ -176,6 +176,7 @@ export default {
     home_189:"Após adicionar contatos, sua execução do WhatsApp ficará mais poderosa",
     home_190:"WhatsApp Bônus",
     home_191:"vinculativo Telegram",
+    home_192:"Copie e envie conteúdo",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

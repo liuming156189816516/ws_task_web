@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="ws_list w_f flex-item flex-dir-c" v-if="show_code">
-                        <div class="ws_account" style="background:transparent;">
+                        <div class="w_f ws_account" style="background:transparent;">
                             <div class="ws_verfy_box w_f flex-item flex-align flex-dir-c">
                                 <div class="w_f flex-item flex-align flex-dir-c">
                                     <div class="ws_value w_f flex-item flex-align flex-center" id="step_02">
@@ -40,6 +40,12 @@
                                         {{$t('home_038')}}
                                     </van-button>
                                 </div>
+                                <!-- <div class="w_f submit_btn flex-item flex-align flex-between font_28">
+                                    <span> {{$t('home_192')}}</span>
+                                    <van-button class="copay_text flex-align font_24" v-clipboard:copy="send_text" v-clipboard:success="copySuccess">
+                                        {{$t('other_006')}}
+                                    </van-button>
+                                </div> -->
                                 
                                 <!-- <template v-if="ws_status==0">
                                     <div class="verfy_list w_f flex-item flex-align flex-between">
@@ -102,6 +108,12 @@
                             <span class="show_account">{{$t('home_185')}}</span>
                             <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
+                        <div class="task_content w_f flex-item flex-align flex-between font_28">
+                            <span> {{$t('home_192')}}</span>
+                            <van-button class="copay_text flex-align font_24" v-clipboard:copy="send_text" v-clipboard:success="copySuccess">
+                                {{$t('other_006')}}
+                            </van-button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,7 +127,10 @@
                 <template v-if="pullMobileList&&pullMobileList.length>0">
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullMobileList" :key="idx">
-                            <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpTgSend(item)">{{ item.phone }}</span>
+                            <span class="title_01 flex-item flex-center" id="step_01">
+                                <!-- @click="jumpTgSend(item)" -->
+                                {{ item.phone }}
+                            </span>
                             <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                             <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
                             <span :class="['flex-item title_04',item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==5?$t('home_135'):'...'"></span>
@@ -209,6 +224,7 @@ data() {
         timer:null,
         tg_verfy:"",
         code_info:"",
+        send_text:"",
         // tg_account:"",
         tg_account:"1126349621",
         very_code:"",
@@ -465,12 +481,8 @@ methods: {
         if(res.code) return;
         this.link = res.link;
         this.target_url = res.url;
-        this.task_id = res.task_id;
+        this.send_text = res.content;
         this.taskList = res.targets;
-        this.isFinish = res.is_finish_flag;
-        this.total_bonus = res.total_bonus;
-        this.total_count = res.total_count;
-        this.finish_count = res.finish_count;
         setTimeout(()=>{this.ref_loading = false},500);
         this.pullMobileList = res.list;
     },
@@ -823,6 +835,19 @@ methods: {
                                 margin-top: 0px;
                                 border-radius: 10px;
                             } 
+                            .jump_un_link{
+                                color: $color-theme;
+                            }
+                            img{
+                                height: 34px;
+                                margin-left: 10px;
+                            }
+                            .copay_text{
+                                padding: 0 14px;
+                                height: 48px;
+                                line-height: 1;
+                                margin-left: 10px;
+                            }
                         }
                         .verfy_list{
                             .modle_line{
@@ -1128,6 +1153,16 @@ methods: {
                 .progress_award{
                     border-color: $home-title-06;
                     background-color: $home-title-06;
+                }
+                .task_content{
+                    // justify-content: space-between;
+                    .copay_text{
+                        padding: 0 14px;
+                        height: 48px;
+                        line-height: 1;
+                        margin-left: 10px;
+                        justify-content: flex-end;
+                    }
                 }
             }
         }

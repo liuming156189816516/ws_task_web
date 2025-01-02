@@ -12,16 +12,6 @@
           <el-form-item>
             <el-input v-model="model1.user_account" clearable placeholder="请输入ws挂机账号"  style="width:180px;" />
           </el-form-item>
-          <!-- <el-form-item>
-            <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
-          </el-form-item>
-           <el-form-item>
-            <el-input v-model="model1.invite_link" clearable placeholder="请输入邀请链接"  style="width:180px;" />
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
-          </el-form-item>
-           -->
           <el-form-item>
             <el-date-picker style="width:230px" v-model="model1.ipCtime" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
           </el-form-item>

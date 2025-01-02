@@ -208,8 +208,8 @@ import { formatTime } from "@/utils/tool";
 import uniFun from "@/utils/uni-webview-js"
 import PageHeader from "@/components/Header";
 import PrevNext from "@/components/PrevNext";
-import { getaimessagetaskcontacts,gettgaimsginfo } from '@/api/task';
-import { getautogroupinfo,getqrcodetg,delaccount,submitautogrouptask,getautogroupaccountstatus,gettgaccountlist,getwsincomelist,submittgcode } from '@/api/home'
+import { gettgaimsginfo } from '@/api/task';
+import { getqrcodetg,delaccount,submitautogrouptask,getautogroupaccountstatus,gettgaccountlist,getwsincomelist,submittgcode,dotutorialstatus } from '@/api/home'
 export default {
 name: 'scan_online',
 components: {PageHeader,PrevNext},
@@ -402,11 +402,10 @@ mounted(){
     })
 },
 methods: {
-    done(){
-        let scrollTop = this.$refs.warpBox;
-        scrollTop.scrollTo({top: 0,behavior:"smooth"});
-        localStorage.setItem('step_05',true);
+    async done(){
         this.showStep = false;
+        localStorage.setItem('step_05',true);
+        await dotutorialstatus({ptype:5});
     },
     skip(){
         this.$refs.myIntroStep.next()

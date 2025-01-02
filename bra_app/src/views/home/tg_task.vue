@@ -105,7 +105,7 @@
                             <div class="task_book font_28">{{$t('home_037')}}</div>
                         </div>
                         <div class="task_btn w_f flex-item flex-between flex-align font_24">
-                            <span class="show_account">{{$t('home_185')}}</span>
+                            <span class="show_account">{{$t('home_203')}}</span>
                             <van-button id="step_05" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                         <div class="task_content w_f flex-item flex-align flex-between font_28">
@@ -1146,7 +1146,7 @@ methods: {
                     }
                 }
                 .show_account{
-                    line-height: 1.5;
+                    line-height: 1.2;
                     color: $home-title-02;
                 }
                 .group_link{
@@ -1182,6 +1182,7 @@ methods: {
                     background-color: $home-title-06;
                 }
                 .task_content{
+                    margin-top: 10px;
                     // justify-content: space-between;
                     .copay_text{
                         padding: 0 14px;

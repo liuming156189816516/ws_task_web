@@ -10,7 +10,7 @@
             <el-input v-model="model1.remark" clearable placeholder="请输入原因"  style="width:180px;" />
           </el-form-item>
           <el-form-item>
-            <el-input v-model="model1.user_account" clearable placeholder="请输入ws挂机账号"  style="width:180px;" />
+            <el-input v-model="model1.user_account" clearable placeholder="请输入tg挂机账号"  style="width:180px;" />
           </el-form-item>
           <el-form-item>
             <el-date-picker style="width:230px" v-model="model1.ipCtime" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
@@ -36,8 +36,8 @@
             <el-table-column type="selection" width="55" :selectable="checkSelectable" />
             <el-table-column prop="account" label="用户账号" minWidth="100" />
             <el-table-column prop="phone" label="手机号" minWidth="120" />
-            <el-table-column prop="task_account" label="ws任务账号" minWidth="120" />
-            <el-table-column prop="user_account" label="ws挂机账号" minWidth="120" />
+            <el-table-column prop="task_account" label="tg任务账号" minWidth="120" />
+            <el-table-column prop="user_account" label="tg挂机账号" minWidth="120" />
             <el-table-column prop="uuid" label="任务号" minWidth="120" />
             <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
               <template slot="header">

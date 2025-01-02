@@ -288,7 +288,7 @@ data() {
                 },
                 {
                     el: '#step_02',
-                    tipPosition: 'top',
+                    tipPosition: 'bottom',
                     title: this.$t('home_151'),
                     content: this.$t('home_194'),
                     onPrev: () => {
@@ -304,7 +304,7 @@ data() {
                 },
                 {
                     el: '#step_03',
-                    tipPosition: 'top',
+                    tipPosition: 'bottom',
                     title: this.$t('home_152'),
                     content: this.$t('home_195'),
                     onNext: () => {
@@ -315,7 +315,7 @@ data() {
                 },
                 {
                     el: '#step_04',
-                    tipPosition: 'top',
+                    tipPosition: 'bottom',
                     title: this.$t('home_153'),
                     content: this.$t('home_196'),
                     onNext: () => {

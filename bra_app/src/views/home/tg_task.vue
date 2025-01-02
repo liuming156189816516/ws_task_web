@@ -129,7 +129,7 @@
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullMobileList" :key="idx">
                             <span class="title_01 flex-item flex-center" id="step_01">
                                 <!-- @click="jumpTgSend(item)" -->
-                                {{ item.phone }}
+                                {{ item.uuid }}
                             </span>
                             <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                             <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
@@ -1187,16 +1187,17 @@ methods: {
                 flex-shrink: 0;
             }
             .title_01{
-                flex: 1;
+                flex: 0.8;
+                justify-content: flex-start;
             }
             .title_02{
                 flex: 1.2;
             }
             .title_03{
-                flex: 0.8;
+                flex: 1;
             }
             .title_04{
-                flex: 0.8;
+                flex: 1;
                 justify-content: center;
             }
             .upload_icon{

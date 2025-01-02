@@ -26,7 +26,7 @@
                                 <div class="w_f flex-item flex-align flex-dir-c">
                                     <div class="ws_value w_f flex-item flex-align flex-center" id="step_01">
                                         <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
-                                        <input v-model="tg_account" :disabled="ws_status!=0" :placeholder="$t('login_039')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
+                                        <input v-model="tg_account" type="number" :disabled="ws_status!=0" :placeholder="$t('login_039')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
                                     </div>
                                     <van-button id="step_02" class="tabs_item flex-item flex-center font_28" :loading="isLoading" :disabled="!tg_account||isLoading||countTime!=60" @click="getVerifBtn" :loading-text="$t('other_029')">
                                         {{countTime!=60? $t('other_093',{value:countTime}):$t('login_017')}}
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="w_f submit_btn flex-item flex-align flex-between">
                                     <div id="step_03" class="ws_value w_f flex-item flex-align flex-center">
-                                        <input v-model="tg_verfy" maxlength="6" :disabled="ws_status!=0" :placeholder="$t('login_008')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
+                                        <input v-model="tg_verfy" type="number" maxlength="6" :disabled="ws_status!=0" :placeholder="$t('login_008')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
                                     </div>
                                     <van-button id="step_04" class="tabs_item flex-item flex-center font_28" :loading="verLoading" :disabled="!tg_verfy||verLoading" @click="submitVerif" :loading-text="$t('other_029')">
                                         {{$t('home_038')}}
@@ -163,7 +163,7 @@
                 </div>
                 <div class="code_query w_f">
                     <div class="ws_value w_f flex-item flex-align flex-center font_24 flex-between">
-                        <input v-model="ws_code" @keyup="filterCity" :placeholder="$t('home_149')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+                        <input v-model="ws_code" type="number" @keyup="filterCity" :placeholder="$t('home_149')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
                     </div>
                 </div>
                 <div class="country_list w_f" ref="tips_scroll">

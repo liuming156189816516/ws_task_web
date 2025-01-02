@@ -225,8 +225,8 @@ data() {
         tg_verfy:"",
         code_info:"",
         send_text:"",
-        tg_account:"",
-        // tg_account:"1126349621",
+        // tg_account:"",
+        tg_account:"1126349621",
         very_code:"",
         ws_code:"",
         verLoading:false,
@@ -1187,17 +1187,17 @@ methods: {
                 flex-shrink: 0;
             }
             .title_01{
-                flex: 0.8;
+                flex: 1;
                 justify-content: flex-start;
             }
             .title_02{
                 flex: 1.2;
             }
             .title_03{
-                flex: 1;
+                flex: 0.8;
             }
             .title_04{
-                flex: 1;
+                flex: 0.8;
                 justify-content: center;
             }
             .upload_icon{

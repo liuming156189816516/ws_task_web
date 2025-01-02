@@ -395,18 +395,17 @@ mounted(){
         }
     },1000)
     this.$nextTick(()=>{
-        // const isTips = JSON.parse(localStorage.getItem('step_02'));
-        // if(!isTips){
-        //     this.showStep=true;
-        // }
-        this.showStep=true;
+        const isTips = JSON.parse(localStorage.getItem('step_05'));
+        if(!isTips){
+            this.showStep=true;
+        }
     })
 },
 methods: {
     done(){
         let scrollTop = this.$refs.warpBox;
         scrollTop.scrollTo({top: 0,behavior:"smooth"});
-        localStorage.setItem('step_02',true);
+        localStorage.setItem('step_05',true);
         this.showStep = false;
     },
     skip(){

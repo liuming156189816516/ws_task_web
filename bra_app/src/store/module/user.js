@@ -82,6 +82,9 @@ export default {
 					if(tutorial_list[k] === 4){
 						localStorage.setItem('step_04',true);
 					}
+					if(tutorial_list[k] === 5){
+						localStorage.setItem('step_05',true);
+					}
 				}
 			}
 			// this.dispatch('User/plantCarousel');
@@ -131,6 +134,7 @@ export default {
 			localStorage.removeItem('step_02');
 			localStorage.removeItem('step_03');
 			localStorage.removeItem('step_04');
+			localStorage.removeItem('step_05');
 		}
 	},
 	actions: {

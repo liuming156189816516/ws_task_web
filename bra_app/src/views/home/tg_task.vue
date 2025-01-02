@@ -339,7 +339,7 @@ data() {
                     el: '#step_06',
                     tipPosition: 'top',
                     title: this.$t('home_197'),
-                    content: this.$t('home_109'),
+                    content: this.$t('home_192'),
                     onNext: () => {
                         return new Promise((resolve) => {
                             resolve(true);

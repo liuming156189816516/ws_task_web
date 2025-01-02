@@ -35,6 +35,7 @@ const scanOnline = () => import('../views/home/scan_online');
 const codeOnline = () => import('../views/home/code_online');
 const hookTask = () => import('../views/home/hook_task');
 const aiTask = () => import('../views/home/ai_task')
+const tgTask = () => import('../views/home/tg_task')
 Vue.use(VueRouter);
 
 const routes = [{
@@ -171,6 +172,17 @@ const routes = [{
         path: "/highTask",
         name: "highTask",
         component: aiTask,
+        meta: {
+            hasTabBar: false,
+            title: "挂机任务",
+            requireAuth: true,
+            index: 1
+        }
+    },
+    {
+        path: "/telegTask",
+        name: "telegTask",
+        component: tgTask,
         meta: {
             hasTabBar: false,
             title: "挂机任务",

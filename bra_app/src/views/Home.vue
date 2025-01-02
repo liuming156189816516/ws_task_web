@@ -124,7 +124,7 @@ export default {
             viewLang:"en-GB",
             taskOption: [],
             langIdx:Cookies.get("language"),
-            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','codeOnline'],
+            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','telegTask'],
             bannerList:[],
             imagesList:[
                 {
@@ -156,8 +156,9 @@ export default {
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
                 // {name:this.$t('home_134'),live1:2,live2:1,type:5,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
-                {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
-                {name:this.$t('home_174'),live1:1,live2:4,type:6,g_num:20,status:null,task_info_id:null,award:this.$t('home_176'),btn:this.$t('home_175'),desc:this.$t('home_049')},
+                // {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                // {name:this.$t('home_174'),live1:1,live2:4,type:6,g_num:20,status:null,task_info_id:null,award:this.$t('home_176'),btn:this.$t('home_175'),desc:this.$t('home_049')},
+                {name:this.$t('home_187'),live1:1,live2:1,type:5,g_num:25,status:null,task_info_id:null,award:this.$t('home_180',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_180')},
             ]
         },
         taskStatusOption() {
@@ -195,10 +196,6 @@ export default {
     },
     methods: {
         getContacts(){
-            // window.plus.contacts.getAddressBook(window.plus.contacts.ADDRESSBOOK_PHONE, (addressbook)=> {
-            //     console.log(addressbook);
-            //     console.log("addressbook");
-            // })
             navigator.contacts.find(["displayName", "phoneNumbers"],(contacts)=> {
                  alert(contacts)
                     console.log(contacts);  // 在这里你可以获取并处理通讯录信息
@@ -207,33 +204,7 @@ export default {
                 }
             )
         },
-        handleScroll(){
-            // const scrollTop = this.$refs.warpBox;
-            // const navHeight = this.$refs.navTop.clientHeight;
-			// if (scrollTop.scrollTop >= 50) {
-            //     var elem = document.documentElement;
-            //     if (elem.requestFullscreen) {
-            //     elem.requestFullscreen();
-            //     } else if (elem.mozRequestFullScreen) { // 兼容火狐浏览器
-            //     elem.mozRequestFullScreen();
-            //     } else if (elem.webkitRequestFullscreen) { // 兼容谷歌浏览器和Safari
-            //     elem.webkitRequestFullscreen();
-            //     } else if (elem.msRequestFullscreen) { // 兼容IE浏览器
-            //     elem.msRequestFullscreen();
-            //     }
-			// } else {
-            //     document.exitFullscreen();
-			// }
-            // if (this.taskOption&&this.taskOption.length>2) {
-            //     const scrollTop = this.$refs.warpBox;
-            //     const navHeight = this.$refs.navTop.clientHeight;
-            //     if(scrollTop.scrollTop >= navHeight){
-            //         this.filexTop = true;
-            //     }else{
-            //         this.filexTop = false;
-            //     } 
-            // }
-        },
+        handleScroll(){},
         
         initHandle(){
             this.getTaskList();
@@ -244,7 +215,6 @@ export default {
                 const isTips = JSON.parse(localStorage.getItem('step_01'));
                 if (!isTips) {
                     this.$popDialog({steps:true, type: 9 })
-                    // this.$popDialog({ content: this.help_url, title: this.$t("other_051"), type: 3 })
                 }
             }, 600);
         },

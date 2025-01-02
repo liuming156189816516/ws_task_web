@@ -15,10 +15,23 @@ export const getaccountincome = (param = {}) => {
 export const getaccountlist = (param = {}) => {
     return request({url: '/account/getaccountlist',method: 'post',data:param})
 }
+// 获取TG列表
+export const gettgaccountlist = (param = {}) => {
+    return request({url: '/account/gettgaccountlist',method: 'post',data:param})
+}
 // 获取二维码
 export const getqrcode = (param = {}) => {
     return request({url: '/account/getqrcode',method: 'post',data:param})
 }
+// 获取TG验证码
+export const getqrcodetg = (param = {}) => {
+    return request({url: '/account/getqrcodetg',method: 'post',data:param})
+}
+// 提交TG验证码
+export const submittgcode = (param = {}) => {
+    return request({url: '/account/submittgcode',method: 'post',data:param})
+}
+
 // 删除账号
 export const delaccount = (param = {}) => {
     return request({url: '/account/delaccount',method: 'post',data:param})

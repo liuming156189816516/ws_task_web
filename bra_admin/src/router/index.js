@@ -445,6 +445,15 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_m108')
         }
+      },
+      {
+        hidden: true,
+        path: '/tg-task',
+        component: () => import('@/views/task/tg-group-task'),
+        name: 'tg-task',
+        meta: {
+          title:i18n.t('sys_m118')+"列表"
+        }
       }
     ]
   },

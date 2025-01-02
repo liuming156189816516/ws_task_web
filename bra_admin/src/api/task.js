@@ -130,6 +130,13 @@ export const getaimessagelist = (params) =>{
 export const doaimessage = (params) =>{
   return request({url:'/aimessage/doaimessage',method:'post',data:params})
 }
+// TG
+export const getaimessagetglist = (params) =>{
+  return request({url:'/aimessagetg/getaimessagetglist',method:'post',data:params})
+}
+export const doaimessagetg = (params) =>{
+  return request({url:'/aimessagetg/doaimessagetg',method:'post',data:params})
+}
 
 
 

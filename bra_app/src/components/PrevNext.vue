@@ -73,8 +73,8 @@ export default {
         font-size: 20px;
         color: #fff;
         height: 46px;
+        padding: 0 20px;
         line-height: 46px;
-        width: 160px;
         text-align: center;
         border-radius: 23px;
         background-color: $color-theme;

@@ -24,19 +24,19 @@
                         <div class="w_f ws_account" style="background:transparent;">
                             <div class="ws_verfy_box w_f flex-item flex-align flex-dir-c">
                                 <div class="w_f flex-item flex-align flex-dir-c">
-                                    <div class="ws_value w_f flex-item flex-align flex-center" id="step_02">
+                                    <div class="ws_value w_f flex-item flex-align flex-center" id="step_01">
                                         <div class="area_code flex-item font_28" @click="showOverlay">+ <span>{{current_code}}</span></div>
                                         <input v-model="tg_account" :disabled="ws_status!=0" :placeholder="$t('login_039')+' '+$t('login_038')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
                                     </div>
-                                    <van-button class="tabs_item flex-item flex-center font_28" :loading="isLoading" :disabled="!tg_account||isLoading||countTime!=60" @click="getVerifBtn" :loading-text="$t('other_029')">
+                                    <van-button id="step_02" class="tabs_item flex-item flex-center font_28" :loading="isLoading" :disabled="!tg_account||isLoading||countTime!=60" @click="getVerifBtn" :loading-text="$t('other_029')">
                                         {{countTime!=60? $t('other_093',{value:countTime}):$t('login_017')}}
                                     </van-button>
                                 </div>
                                 <div class="w_f submit_btn flex-item flex-align flex-between">
-                                    <div class="ws_value w_f flex-item flex-align flex-center" id="step_02">
+                                    <div id="step_03" class="ws_value w_f flex-item flex-align flex-center">
                                         <input v-model="tg_verfy" maxlength="6" :disabled="ws_status!=0" :placeholder="$t('login_008')" autocomplete="off" oninput="value=value.replace(/\D/g,'')" />
                                     </div>
-                                    <van-button id="step_03" class="tabs_item flex-item flex-center font_28" :loading="verLoading" :disabled="!tg_verfy||verLoading" @click="submitVerif" :loading-text="$t('other_029')">
+                                    <van-button id="step_04" class="tabs_item flex-item flex-center font_28" :loading="verLoading" :disabled="!tg_verfy||verLoading" @click="submitVerif" :loading-text="$t('other_029')">
                                         {{$t('home_038')}}
                                     </van-button>
                                 </div>
@@ -69,7 +69,7 @@
             <h3 class="ws_title flex-item font_24">
                 {{$t('home_169')}}：
             </h3>
-            <div class="flex-item status_tips flex-align" @click="refreshBtn">
+            <div class="flex-item status_tips flex-align" id="step_07" @click="refreshBtn">
                 <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 
                 {{$t('other_035')}}
             </div>
@@ -106,11 +106,11 @@
                         </div>
                         <div class="task_btn w_f flex-item flex-between flex-align font_24">
                             <span class="show_account">{{$t('home_185')}}</span>
-                            <van-button id="step_01" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
+                            <van-button id="step_05" type="primary" :disabled="isShow" @click="downAddress">{{$t('home_112')}}</van-button>
                         </div>
                         <div class="task_content w_f flex-item flex-align flex-between font_28">
                             <span> {{$t('home_192')}}</span>
-                            <van-button class="copay_text flex-align font_24" v-clipboard:copy="send_text" v-clipboard:success="copySuccess">
+                            <van-button id="step_06" class="copay_text flex-align font_24" v-clipboard:copy="send_text" v-clipboard:success="copySuccess">
                                 {{$t('other_006')}}
                             </van-button>
                         </div>
@@ -279,7 +279,7 @@ data() {
                     el: '#step_01',
                     tipPosition: 'bottom',
                     title: this.$t('home_150'),
-                    content: this.$t('home_155'),
+                    content: this.$t('home_193'),
                     onNext: () => {
                         return new Promise((resolve, reject) => {
                             setTimeout(() => {resolve(true);},300);
@@ -290,7 +290,7 @@ data() {
                     el: '#step_02',
                     tipPosition: 'top',
                     title: this.$t('home_151'),
-                    content: this.$t('home_156'),
+                    content: this.$t('home_194'),
                     onPrev: () => {
                         return new Promise((resolve) => {
                             resolve(true);
@@ -306,7 +306,7 @@ data() {
                     el: '#step_03',
                     tipPosition: 'top',
                     title: this.$t('home_152'),
-                    content: this.$t('home_157'),
+                    content: this.$t('home_195'),
                     onNext: () => {
                         return new Promise((resolve) => {
                             resolve(true);
@@ -317,7 +317,7 @@ data() {
                     el: '#step_04',
                     tipPosition: 'top',
                     title: this.$t('home_153'),
-                    content: this.$t('home_158'),
+                    content: this.$t('home_196'),
                     onNext: () => {
                         return new Promise((resolve) => {
                             resolve(true);
@@ -326,9 +326,31 @@ data() {
                 },
                 {
                     el: '#step_05',
-                    tipPosition: 'bottom',
+                    tipPosition: 'top',
                     title: this.$t('home_154'),
-                    content: this.$t('home_159'),
+                    content: this.$t('home_155'),
+                    onNext: () => {
+                        return new Promise((resolve) => {
+                            resolve(true);
+                        })
+                    }
+                },
+                {
+                    el: '#step_06',
+                    tipPosition: 'top',
+                    title: this.$t('home_197'),
+                    content: this.$t('home_109'),
+                    onNext: () => {
+                        return new Promise((resolve) => {
+                            resolve(true);
+                        })
+                    }
+                },
+                {
+                    el: '#step_07',
+                    tipPosition: 'bottom',
+                    title: this.$t('home_198'),
+                    content: this.$t('home_201'),
                     onNext: () => {
                         return new Promise((resolve) => {
                             resolve(true);
@@ -372,6 +394,13 @@ mounted(){
             list.addEventListener("touchmove",e => e.stopPropagation(),false)
         }
     },1000)
+    this.$nextTick(()=>{
+        // const isTips = JSON.parse(localStorage.getItem('step_02'));
+        // if(!isTips){
+        //     this.showStep=true;
+        // }
+        this.showStep=true;
+    })
 },
 methods: {
     done(){
@@ -430,15 +459,14 @@ methods: {
             this.verLoading = false;
             if(res.code) return;
             this.tg_verfy="";
-            this.initWechatList();
-                // this.getIncomeList();
+            this.refreshBtn();
         })
     },
     refreshBtn(){
         this.page=1;
         this.l_page=1;
         this.initWechatList();
-        // this.getIncomeList();
+        this.getIncomeList();
         // this.initHookList();
     },
     onLoad(){
@@ -495,8 +523,7 @@ methods: {
                 this.countTime = 60;
                 this.very_code="";
                 this.tg_verfy="";
-                this.initWechatList();
-                // this.getIncomeList();
+                this.refreshBtn();
                 // this.errState = false;
             }
         }, 1000);

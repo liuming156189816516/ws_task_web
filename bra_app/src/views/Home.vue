@@ -52,8 +52,12 @@
                     {{$t('home_177')}}
                 </div>
             </div>
+            <div class="task_title flex-item flex-align">
+                <img src="../assets/images/home/ws_icon.png">
+                <h4 class="font_32">{{ $t("home_204") }}</h4>
+            </div>
             <div class="task_main w_f flex-item flex-dir-c">
-                <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx">
+                <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in wsList" :key="idx">
                     <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
                     <div class="task_live flex-item flex-align font_22">
                         <div class="task_live_1 flex-item flex-align">
@@ -72,25 +76,63 @@
                             <span class="flex-item">{{$t('home_094')}}</span>
                             <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
                         </div>
-
                     </div>
                     <div class="task_award flex-item font_24">
                         <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                         <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
                         <div class="task_btn" @click="handleTask(item)">
-                             <!-- :class="[item.status==2?'progress_award':'']" -->
                             <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
                                 {{taskStatusOption[item.status]}}
                             </div>
-                             <div class="circle_box flex-item flex-align flex-center font_24" v-else>
+                            <div class="circle_box flex-item flex-align flex-center font_24" v-else>
                                 {{taskNameOption[item.type].btn}}
-                                <!-- <van-button class="" v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
-                                <van-button class="" v-else type="primary">{{taskNameOption[item.type].btn}}</van-button> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <template>
+                <div class="task_title tg_task_title flex-item flex-align">
+                    <img src="@/assets/images/serveic/telege_icon.png">
+                    <h4 class="font_32">{{ $t("home_205") }}</h4>
+                </div>
+                <div class="task_main w_f flex-item flex-dir-c">
+                    <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in tgList" :key="idx">
+                        <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
+                        <div class="task_live flex-item flex-align font_22">
+                            <div class="task_live_1 flex-item flex-align">
+                                <span class="flex-item">{{$t('home_093')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
+                                <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
+                                <span class="flex-item">{{$t('other_099')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else>
+                                <span class="flex-item">{{$t('home_094')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
+                            </div>
+                        </div>
+                        <div class="task_award flex-item font_24">
+                            <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
+                            <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
+                            <div class="task_btn" @click="handleTask(item)">
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
+                                    {{taskStatusOption[item.status]}}
+                                </div>
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-else>
+                                    {{taskNameOption[item.type].btn}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            
         </div>
         <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.56">
             <div class="serve_icon" slot="icon" @click="contactService">
@@ -122,7 +164,8 @@ export default {
             timeout: 1000,   
       		setInter: 6000,
             viewLang:"en-GB",
-            taskOption: [],
+            wsList: [],
+            tgList: [],
             langIdx:Cookies.get("language"),
             taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','telegTask'],
             bannerList:[],
@@ -189,26 +232,14 @@ export default {
                 }, this.timeout)
             }, this.setInter)
         }else{
-            this.$store.dispatch('User/actionReport',1)
-            this.taskOption = this.$Helper.defaultOption();
+            this.wsList=this.$Helper.wsOption();
+            this.tgList=this.$Helper.tgOption();
         }
-        // this.getContacts();
     },
     methods: {
-        getContacts(){
-            navigator.contacts.find(["displayName", "phoneNumbers"],(contacts)=> {
-                 alert(contacts)
-                    console.log(contacts);  // 在这里你可以获取并处理通讯录信息
-                },(error)=> {
-                    console.log("读取通讯录失败", error);
-                }
-            )
-        },
         handleScroll(){},
-        
         initHandle(){
             this.getTaskList();
-            // this.initRuleTips();
         },
         initRuleTips(){
             setTimeout(() => {
@@ -216,11 +247,13 @@ export default {
                 if (!isTips) {
                     this.$popDialog({steps:true, type: 9 })
                 }
-            }, 600);
+            }, 600)
         },
         getTaskList() {
             gettaskliststatus().then(res => {
-                this.taskOption = res.list||[];
+                console.log(res);
+                this.wsList = res.ws_list||[];
+                this.tgList = res.tg_list||[];
             })
         },
         showRule(){
@@ -554,6 +587,23 @@ export default {
                 background: url("../assets/images/sign_icon.png");
                 background-size: 100% 100%;
             }
+        }
+        .task_title{
+            font-weight: 600;
+            margin-bottom: 10px;
+            img{
+                height: 48px;
+                margin-right: 10px;
+            }
+            h4{
+                background: linear-gradient(to right, $home-task-03, $home-history-value);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+        }
+        .tg_task_title{
+            margin-top: 20px;
         }
         .task_main{
             box-sizing: border-box;

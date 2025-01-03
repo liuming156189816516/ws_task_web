@@ -188,7 +188,8 @@ export default {
     home_201:"Verifique o status da conta online, envie e conclua a tarefa de acordo com a conta do catálogo de endereços, clique aqui para atualizar e visualizar o rendimento",
     home_202:"Quanto mais números de catálogo de endereços você usar o Telegram para promover, maior será sua renda",
     home_203:"Clique em Salvar no catálogo de endereços e envie de acordo com a conta do catálogo de endereços. Após enviar, clique em Atualizar para visualizar a receita.",
-    home_200:"Etapa 9",
+    home_204:"WhatsApp Tarefa",
+    home_205:"Telegram Tarefa",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

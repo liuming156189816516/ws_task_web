@@ -193,6 +193,7 @@ export default {
     home_203:"点击保存到通讯录,根据通讯录账号进行发送,发送完之后点击刷新查看收益",
     home_204:"WhatsApp 任务",
     home_205:"Telegram 任务",
+    home_206:"Telegram 列表",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",

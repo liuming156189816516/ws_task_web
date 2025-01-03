@@ -37,7 +37,7 @@
                                 <i class="el-icon-arrow-down el-icon--right" />
                             </span>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in tasksOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                                <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in tasksOption" :key="idx" :command="idx">{{ !item&&idx==0?$t('sys_l053'):item }}</el-dropdown-item>
                             </el-dropdown-menu>
                             </el-dropdown>
                         </template>
@@ -141,7 +141,7 @@ export default {
             // return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
         },
         tasksOption(){
-            return ["",this.$t("sys_m114"),this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117")]
+            return ["",this.$t("sys_m114"),this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),"","","",this.$t("sys_m118")]
         }
     },
     created() {

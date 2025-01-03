@@ -67,7 +67,7 @@
         </div>
         <div class="ws_hook_list w_f flex-item flex-between font_30">
             <h3 class="ws_title flex-item font_24">
-                {{$t('home_169')}}：
+                {{$t('home_206')}}：
             </h3>
             <div class="flex-item status_tips flex-align" id="step_07" @click="refreshBtn">
                 <img class="refres_icon" :class="{'refres_animat':ref_loading}"  src="@/assets/images/home/shuaxin.png"> 

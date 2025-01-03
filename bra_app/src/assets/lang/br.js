@@ -190,6 +190,7 @@ export default {
     home_203:"Clique em Salvar no catálogo de endereços e envie de acordo com a conta do catálogo de endereços. Após enviar, clique em Atualizar para visualizar a receita.",
     home_204:"WhatsApp Tarefa",
     home_205:"Telegram Tarefa",
+    home_206:"Lista de telegram",
 
     spre_001:"grupo",
     spre_002: "Clique para consultar mais atividades",

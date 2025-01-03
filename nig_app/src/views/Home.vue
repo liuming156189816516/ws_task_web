@@ -312,13 +312,15 @@ export default {
     padding-bottom: 120px;
     background: $color-btnbg;
     -webkit-overflow-scrolling: touch;
-     .down_app{
+    .down_app{
         height: 80px;
         overflow: hidden;
         position: relative;
         padding: 14px 20px;
         box-sizing: border-box;
-        background: linear-gradient(90deg, #ff9600, #ff013d);
+        background: -moz-linear-gradient(left,#ff9600 0,#ff013d 100%);
+        background: -o-linear-gradient(left,#ff9600 0,#ff013d 100%);
+        background: linear-gradient(90deg,#ff9600,#ff013d);
         .close_btn{
             width: 42px;
             height: 42px;

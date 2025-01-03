@@ -602,6 +602,9 @@
   animation: blink 1.5s infinite;
   transition: opacity 0.5s ease-in-out;
 }
+.notoce_active .msg_icon{
+  filter: sepia(100%) saturate(200%) hue-rotate(90deg);
+}
 
 @keyframes blink {
   0% {

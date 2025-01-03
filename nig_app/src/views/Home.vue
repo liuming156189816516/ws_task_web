@@ -333,7 +333,7 @@ export default {
         }
         .down_text{
             font-weight: bold;
-            padding-left: 30px;
+            padding-left: 20px;
             color: $font-color-white;
         }
         .down_apk{
@@ -511,7 +511,7 @@ export default {
         .notice_warp {
             width: 100%;
             display: flex;
-            margin: 30px 0;
+            margin: 20px 0;
             position: relative;
             flex-direction: column;
             .my_swipe{
@@ -551,7 +551,6 @@ export default {
             }
         }
         .task_main{
-            // gap: 30px;
             box-sizing: border-box;
             background: url('../assets/images/home/jinbi.png') no-repeat;
             background-size: cover;
@@ -560,7 +559,7 @@ export default {
                 padding: 30px 0 30px 20px;
                 background: url('../assets/images/home/task_bg_1.png') no-repeat;
                 background-size: 100% 100%;
-                margin-bottom: 30px;
+                margin-bottom: 20px;
                 .task_name{
                     color: $home-task-01;
                     font-weight: 900;
@@ -674,7 +673,6 @@ export default {
                 padding: 30px 0 30px 20px;
                 background: url('../assets/images/home/task_bg_2.png') no-repeat;
                 background-size: 100% 100%;
-                margin-bottom: 30px;
                 .task_name{
                     color: $home-task-02;
                     text-shadow: 0px 2px 3px $font-color-white;
@@ -692,7 +690,6 @@ export default {
                 padding: 30px 0 30px 20px;
                 background: url('../assets/images/home/task_bg_3.png') no-repeat;
                 background-size: 100% 100%;
-                margin-bottom: 30px;
                 .task_name{
                     color: $home-task-03;
                     text-shadow: 0px 2px 3px $font-color-white;

@@ -369,7 +369,7 @@ export default {
         }
         .down_text{
             font-weight: bold;
-            padding-left: 30px;
+            padding-left: 20px;
             color: $font-color-white;
         }
         .down_apk{
@@ -552,8 +552,7 @@ export default {
         .notice_warp {
             width: 100%;
             display: flex;
-            margin-bottom: 30px;
-            margin-top: 30px;
+            margin: 20px 0;
             position: relative;
             flex-direction: column;
             .my_swipe{
@@ -567,7 +566,6 @@ export default {
             }
         }
         .adv_warp{
-            // gap: 20px;
             margin-bottom: 30px;
             .adv_item{
                 flex: 1;
@@ -603,6 +601,20 @@ export default {
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
+                // animation: flicker 2s infinite; 
+                // -webkit-animation: flicker 2s infinite; 
+            }
+            @-webkit-keyframes flicker{
+                0%{
+                    opacity: 1;
+                }
+                50%{
+                    opacity: 0.7;
+                }
+                100%{
+                    opacity: 1;
+                }
+
             }
         }
         .tg_task_title{
@@ -618,7 +630,7 @@ export default {
                 padding: 30px 0 30px 20px;
                 background: url('../assets/images/home/task_bg_1.png') no-repeat;
                 background-size: 100% 100%;
-                margin-bottom: 30px;
+                margin-bottom: 20px;
                 .task_name{
                     color: $home-task-01;
                     font-weight: 900;

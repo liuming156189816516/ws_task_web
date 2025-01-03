@@ -117,9 +117,8 @@ export default {
 				storage["is_play"] = false;
 				this.$store.dispatch('Global/isCloseTips',false);
 				this.$store.dispatch('User/logoutClear');
-				sessionStorage.clear();
-				localStorage.setItem('is_play',true);
 				this.$router.replace('/home');
+				sessionStorage.clear();
 			}).catch(err => {
 				this.$router.replace('/home');
 				localStorage.removeItem('token');

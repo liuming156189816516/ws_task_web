@@ -80,7 +80,7 @@
                     <el-table-column fixed prop="account" :label="$t('login_038')" minwidth="100" />
                     <el-table-column prop="status" :label="$t('tail_008')" minwidth="100">
                         <template slot-scope="scope">
-                            <span class="flex-item flex-center" :style="'color:'+(scope.row.status==2?'#07c160':scope.row.status==3?'#ff976a':'#28C445')">{{accountOption[scope.row.status]}}</span>
+                            <span class="flex-item flex-center" :style="'color:'+(scope.row.status==2?'#07c160':scope.row.status==3?'#ff976a':'#ee0a24')">{{accountOption[scope.row.status]}}</span>
                         </template>
                     </el-table-column>
                     <!-- <el-table-column prop="total_time" :label="$t('home_172')" width="90">

@@ -298,7 +298,9 @@ export default {
             getnewmessagel().then(res => {
                 if(!res)return;
                 let {id,name,content} = res;
-                this.$popDialog({adv_id:id,title:name,content:content,steps:true, type: 99 })
+                if(!localStorage.setItem('is_play')){
+                    this.$popDialog({adv_id:id,title:name,content:content,steps:true, type: 99 })
+                }
             })
         }
     }

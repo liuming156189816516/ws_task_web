@@ -120,14 +120,16 @@ export default {
 		clear_token(state){
 			state.uid = "";
 			state.token = null;
+			// window.localStorage.clear();
 			localStorage.removeItem('uid');
 			localStorage.removeItem('token');
 			localStorage.removeItem('account');
-			localStorage.removeItem('inviteCode');
+			localStorage.removeItem('is_play');
 			localStorage.removeItem('step_01');
 			localStorage.removeItem('step_02');
 			localStorage.removeItem('step_03');
 			localStorage.removeItem('step_04');
+			localStorage.removeItem('inviteCode');
 		}
 	},
 	actions: {

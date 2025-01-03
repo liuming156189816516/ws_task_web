@@ -177,7 +177,9 @@
                         <!-- <h4 class="w_f font_32">产生的速度慢了点吗没事没事面对吗没什么输出吗</h4> -->
                         <h4 class="w_f font_32">{{ title }}</h4>
                         <div class="adv_content w_f flex-item flex-center flex-dir-c font_26" v-html="content"></div>
-                        <van-button type="primary" @click="closeAdvBtn" plain>{{restLanuage('home_162')}}</van-button>
+                        <van-button type="primary" :disabled="countTime>0" @click="closeAdvBtn" plain>
+                            {{restLanuage('home_162')}} {{ countTime>0?countTime+"s":"" }}
+                        </van-button>
                     </div>
                 </div>
             </div>
@@ -217,10 +219,12 @@ export default {
     },
     data() {
         return {
+            timer:null,
             ruleIdx:0,
             palyIdx:null,
             visible:false,
             is_play:false,
+            countTime:60,
             labelOption:[i18n.t('home_116'),i18n.t('home_117')]
         };
     },
@@ -240,6 +244,16 @@ export default {
                 list.addEventListener("touchmove",e => e.stopPropagation(),false)
             }
         })
+        if(localStorage.getItem('is_timer')&&!localStorage.getItem('is_play')){
+            this.countTime = localStorage.getItem('is_timer');
+            this.startSettime();
+        }
+        this.$nextTick(()=>{
+            if(this.steps&&this.type==99&&!localStorage.getItem('is_timer')){
+                this.countTime = 5;
+                this.startSettime();
+            }
+        })
     },
     methods: {
         changeLabel(idx){
@@ -255,6 +269,18 @@ export default {
             document.getElementById("app").removeChild(this.$el);
             window.localStorage.setItem('is_play',true)
             this.visible=false;
+        },
+        startSettime() {
+            console.log("999");
+            this.timer = setInterval(()=> {
+                if (this.countTime > 0) {
+                    this.countTime--;
+                    localStorage.setItem('is_timer',this.countTime);
+                } else {
+                    clearInterval(this.timer);
+                    localStorage.removeItem('is_timer');
+                }
+            }, 1000);
         },
         palySource(){
             this.$refs.myVideo.play();

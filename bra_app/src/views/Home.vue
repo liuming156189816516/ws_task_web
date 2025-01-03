@@ -52,46 +52,48 @@
                     {{$t('home_177')}}
                 </div>
             </div>
-            <div class="task_title flex-item flex-align">
-                <img src="../assets/images/home/ws_icon.png">
-                <h4 class="font_32">{{ $t("home_204") }}</h4>
-            </div>
-            <div class="task_main w_f flex-item flex-dir-c">
-                <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in wsList" :key="idx">
-                    <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
-                    <div class="task_live flex-item flex-align font_22">
-                        <div class="task_live_1 flex-item flex-align">
-                            <span class="flex-item">{{$t('home_093')}}</span>
-                            <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
-                        </div>
-                        <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
-                            <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
-                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
-                        </div>
-                        <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
-                            <span class="flex-item">{{$t('other_099')}}{{taskNameOption[item.type].g_num}}</span>
-                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
-                        </div>
-                        <div class="task_live_2 flex-item flex-align" v-else>
-                            <span class="flex-item">{{$t('home_094')}}</span>
-                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
-                        </div>
-                    </div>
-                    <div class="task_award flex-item font_24">
-                        <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
-                        <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
-                        <div class="task_btn" @click="handleTask(item)">
-                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
-                                {{taskStatusOption[item.status]}}
+            <template v-if="wsList&&wsList.length>0">
+                <div class="task_title flex-item flex-align">
+                    <img src="../assets/images/home/ws_icon.png">
+                    <h4 class="font_32">{{ $t("home_204") }}</h4>
+                </div>
+                <div class="task_main w_f flex-item flex-dir-c">
+                    <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in wsList" :key="idx">
+                        <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
+                        <div class="task_live flex-item flex-align font_22">
+                            <div class="task_live_1 flex-item flex-align">
+                                <span class="flex-item">{{$t('home_093')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
                             </div>
-                            <div class="circle_box flex-item flex-align flex-center font_24" v-else>
-                                {{taskNameOption[item.type].btn}}
+                            <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
+                                <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
+                                <span class="flex-item">{{$t('other_099')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else>
+                                <span class="flex-item">{{$t('home_094')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
+                            </div>
+                        </div>
+                        <div class="task_award flex-item font_24">
+                            <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
+                            <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
+                            <div class="task_btn" @click="handleTask(item)">
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
+                                    {{taskStatusOption[item.status]}}
+                                </div>
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-else>
+                                    {{taskNameOption[item.type].btn}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <template>
+            </template>
+            <template v-if="tgList&&tgList.length>0">
                 <div class="task_title tg_task_title flex-item flex-align">
                     <img src="@/assets/images/serveic/telege_icon.png">
                     <h4 class="font_32">{{ $t("home_205") }}</h4>
@@ -216,17 +218,26 @@ export default {
         this.filexTop = false;
         this.$store.dispatch('User/plantCarousel');
         if(getToken()){
-            this.initHandle();
+            this.getTaskList();
             this.$store.dispatch('User/getUserIncome');
             this.$store.dispatch('User/actionReport',1);
             this.$store.dispatch('User/getSysNotice');
             this.waitTimer = setInterval(() => {
                 this.heartTimer = setTimeout(() => {
-                    for (let k = 0; k < this.taskOption.length; k++) {
-                        if((this.taskOption[k].invalid_time - this.currentTime()) <= 0){
-                            this.taskOption[k].status = 1;
-                            this.taskOption[k].invalid_time = 0;
-                            this.taskOption[k].task_info_id = "";
+                    for (let k = 0; k < this.wsList.length; k++) {
+                        if(this.wsList[k]&&this.wsList[k].invalid_time){
+                            if((this.wsList[k].invalid_time - this.currentTime()) <= 0){
+                                this.wsList[k].status = 1;
+                                this.wsList[k].invalid_time = 0;
+                                this.wsList[k].task_info_id = "";
+                            }
+                        }
+                        if(this.tgList[k]&&this.tgList[k].invalid_tim){
+                            if((this.tgList[k].invalid_time - this.currentTime()) <= 0){
+                                this.tgList[k].status = 1;
+                                this.tgList[k].invalid_time = 0;
+                                this.tgList[k].task_info_id = "";
+                            }
                         }
                     }
                 }, this.timeout)
@@ -238,9 +249,6 @@ export default {
     },
     methods: {
         handleScroll(){},
-        initHandle(){
-            this.getTaskList();
-        },
         initRuleTips(){
             setTimeout(() => {
                 const isTips = JSON.parse(localStorage.getItem('step_01'));
@@ -251,7 +259,6 @@ export default {
         },
         getTaskList() {
             gettaskliststatus().then(res => {
-                console.log(res);
                 this.wsList = res.ws_list||[];
                 this.tgList = res.tg_list||[];
             })
@@ -280,7 +287,6 @@ export default {
             this.getLangConfig();
         },
         handleTask(row) {
-            // this.$router.push("/codeOnline");
             const path = this.taskType[row.type];
             if (!getToken()) return this.$router.push("/login");
 
@@ -301,9 +307,6 @@ export default {
             } else {
                 uniFun.postMessage({ data: path });
             }
-        },
-        showTask(idx){
-            this.$router.push(`/betrecord?id=1`);
         },
         jumpLucky(idx){
             if(idx == 1){

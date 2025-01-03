@@ -11,17 +11,17 @@
                         {{ scope.row.today_create_group_task_num||0 }}/{{scope.row.pull_fan_task_num}}
                     </template>
                 </el-table-column>
-                <el-table-column prop="statis_time_str" :label="$t('sys_m090')" minWidth="140">
+                <el-table-column prop="statis_time_str" :label="$t('sys_m090')" minWidth="170">
                     <template slot-scope="scope">
                         {{ scope.row.ai_data_num||0 }}/{{scope.row.data_num}}/{{scope.row.pull_fan_data_num}}
                     </template>
                 </el-table-column>
-                <el-table-column prop="statis_time_str" :label="$t('sys_m102')" minWidth="140">
+                <el-table-column prop="statis_time_str" :label="$t('sys_m102')" minWidth="160">
                     <template slot-scope="scope">
                         {{ scope.row.ai_bounty_amount||0 }}/{{scope.row.bounty_amount}}/{{scope.row.pull_fan_bounty_amount}}
                     </template>
                 </el-table-column>
-                <el-table-column prop="statis_time_str" :label="$t('sys_m103')" minWidth="140">
+                <el-table-column prop="statis_time_str" :label="$t('sys_m103')" minWidth="160">
                     <template slot-scope="scope">
                         {{ scope.row.ai_commission_amount||0 }}/{{scope.row.commission_amount}}/{{scope.row.pull_fan_commission_amount}}
                     </template>

@@ -251,7 +251,7 @@ export default {
             this.visible=false;
         },
         async closeAdvBtn(){
-            await dousermessagel({id:this.adv_id});
+            // await dousermessagel({id:this.adv_id});
             document.getElementById("app").removeChild(this.$el);
             window.localStorage.setItem('is_play',true)
             this.visible=false;

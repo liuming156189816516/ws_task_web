@@ -6,14 +6,9 @@
                 <el-table-column prop="login_num" :label="$t('sys_s010')" minWidth="100" />
                 <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="110" />
                 <el-table-column prop="today_active_user_num" :label="$t('sys_m088')"  width="80" />
-                <el-table-column prop="view_account_num" :label="$t('sys_c143')" minWidth="100">
-                    <template slot-scope="scope">
-                        {{ scope.row.view_account_num||0 }}
-                    </template>
-                </el-table-column>
                 <el-table-column prop="statis_time_str" :label="$t('sys_rai122')" minWidth="130" >
                     <template slot-scope="scope">
-                        {{ scope.row.today_create_group_task_num||0 }}/{{scope.row. pull_fan_task_num}}
+                        {{ scope.row.today_create_group_task_num||0 }}/{{scope.row.pull_fan_task_num}}
                     </template>
                 </el-table-column>
                 <el-table-column prop="statis_time_str" :label="$t('sys_m090')" minWidth="140">
@@ -80,11 +75,6 @@
                     <el-table-column prop="login_num" :label="$t('sys_s010')" minWidth="100" />
                     <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="120" />
                     <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
-                    <el-table-column prop="view_account_num" :label="$t('sys_c143')" minWidth="100">
-                        <template slot-scope="scope">
-                            {{ scope.row.view_account_num||0 }}
-                        </template>
-                    </el-table-column>
                     <el-table-column prop="pull_total_num" :label="$t('sys_rai122')" minWidth="140">
                         <template slot-scope="scope">
                             {{ scope.row.today_create_group_task_num +"/"+scope.row.pull_fan_task_num }}

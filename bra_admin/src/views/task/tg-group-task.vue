@@ -36,7 +36,7 @@
             <el-table-column type="selection" width="55" :selectable="checkSelectable" />
             <el-table-column prop="account" label="用户账号" minWidth="100" />
             <el-table-column prop="phone" label="手机号" minWidth="120" />
-            <el-table-column prop="task_account" label="tg任务账号" minWidth="120" />
+            <!-- <el-table-column prop="user_id" label="tg任务账号" minWidth="120" /> -->
             <el-table-column prop="user_account" label="tg挂机账号" minWidth="120" />
             <el-table-column prop="uuid" label="任务号" minWidth="120" />
             <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">

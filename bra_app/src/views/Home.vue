@@ -38,9 +38,9 @@
                 </div>
             </div>
             <div class="notice_warp">
-                <van-swipe class="my_swipe" :autoplay="3500" indicator-color="white">
+                <van-swipe class="my_swipe" :autoplay="350000" indicator-color="white">
                     <van-swipe-item v-for="(item,idx) in userInfo.baseBanner||imagesList" :key="idx" @click="jumpLink(item.link)">
-                        <img :src="item.file_url">
+                        <img :src="item.file_url" alt=" " v-if="item.file_url">
                     </van-swipe-item>
                 </van-swipe>
             </div>

@@ -245,7 +245,7 @@ export default {
     mine_006:"Change Avatar",
     mine_007:"Today's Bonus",
     mine_008:"Yesterday's Bonus",
-    mine_009:"Download APP",
+    mine_009:"Download",
     mine_010:"Income Record",
     mine_011:"Withdrawal Record",
     mine_012:"Change Password",

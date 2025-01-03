@@ -255,7 +255,7 @@ export default {
     mine_006:"Modificar avatar",
     mine_007:"Bônus de hoje",
     mine_008:"Bônus de ontem",
-    mine_009:"download",
+    mine_009:"Download",
     mine_010:"Registro de Renda",
     mine_011:"Registro de retirada",
     mine_012:"Alterar senha",

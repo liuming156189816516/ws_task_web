@@ -3,9 +3,9 @@
         <div class="down_app w_f flex-item flex-align flex-between" v-if="showApk&&$Helper.checkApkBag()">
             <span class="close_btn flex-item font_20" @click="showApk=false">✕</span>
             <div class="down_text font_24">{{$t('other_072',{value:100})}}</div>
-            <div class="down_apk flex-item flex-align flex-center font_24" @click="downApk">
+            <div class="down_apk flex-item flex-align font_24" @click="downApk">
                 <img src="@/assets/images/home/shouji.png">
-                {{$t('mine_009')}}
+                <span>{{$t('mine_009')}}</span>
             </div>
         </div>
         <!-- <div class="horse_run"></div> -->

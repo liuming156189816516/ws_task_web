@@ -121,15 +121,7 @@ export default {
             imagesList:[
                 {
                   link:"",
-                  file_url:require("../assets/images/banner/banner1.png"),
-                },
-                {
-                  link:"",
-                  file_url:require("../assets/images/banner/banner2.png"),
-                },
-                {
-                  link:"",
-                  file_url:require("../assets/images/banner/banner3.png"),
+                  file_url:require("../assets/images/banner/banner4.jpg"),
                 }
             ]
         }

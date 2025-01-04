@@ -66,7 +66,7 @@
 					<van-field v-model="withdraw_num" type="number" clearable placeholder="0" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</van-cell-group>
 				<div class="auto_computed">
-					<span v-if="curIndex==2">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.004}}{{ $t('pay_040') }}</span>
+					<span v-if="curIndex==2">{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.002}}{{ $t('pay_040') }}</span>
 					<span v-else>{{withdraw_num||0}}{{ $t('pay_027') }}≈{{withdraw_num*0.8}}{{ $t('pay_024') }}</span>
 				</div>
 				<div class="custom_dialog__footer">

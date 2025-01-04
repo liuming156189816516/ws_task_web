@@ -300,7 +300,7 @@ export default {
     pay_040:"TRX",
     pay_041:"TRX Address",
     pay_042:"Please add {value}",
-    pay_043:"1 gold = 0.004 TRX",
+    pay_043:"1 gold = 0.002 TRX",
 
     tail_001:"income details",
     tail_002:"type",

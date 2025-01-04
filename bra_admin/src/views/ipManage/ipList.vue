@@ -1015,13 +1015,11 @@ export default {
       if (this.checkIdArry.length == 0) {
         return successTips(this,"error",this.$t('sys_c126'));
       }
-      for (let k = 0; k < this.betchOption.length; k++) {
-        if (this.betchOption[k].label == command.label) {
-          this.setIpType = k;
-          this.setIpName = this.betchOption[k].label;
-        }
-      }
-      console.log(this.setIpType);
+      let res = null; 
+      this.betchOption.forEach((item,index) => {if(item.label == command.label){res={index,label:item.label}}});
+      if(!res) return;
+      this.setIpType = res.index;
+      this.setIpName = res.label;
       if (this.setIpType==0||this.setIpType==1||this.setIpType==2||this.setIpType==10) {
         this.setIpModel=true;
         if (this.setIpType==10) {

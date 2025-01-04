@@ -279,7 +279,6 @@ export default {
             this.visible=false;
         },
         startSettime() {
-            console.log("999");
             this.timer = setInterval(()=> {
                 if (this.countTime > 0) {
                     this.countTime--;

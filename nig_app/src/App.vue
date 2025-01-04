@@ -101,6 +101,7 @@ export default {
 				metaThemeColor.name = 'theme-color';
 				document.head.appendChild(metaThemeColor);
 			}
+			// metaThemeColor.content = color||'#fff'; // 设定颜色
 			metaThemeColor.content = color||'#0a0f2d'; // 设定颜色
 		},
 		handle_close(){
@@ -158,7 +159,7 @@ body,
 	}
 	.mobile_head_top{
 		width: 100%;
-		height: 80px;
+		height: 60px;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -169,7 +170,7 @@ body,
 		height: 100%;
 		position: relative;
 		overflow-y: auto;
-		margin-top: 80px;
+		margin-top: 60px;
 	}
 	.app_continer{
 		margin-top: 0px;

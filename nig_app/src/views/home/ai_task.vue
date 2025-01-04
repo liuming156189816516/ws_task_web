@@ -970,7 +970,7 @@ methods: {
         background: $font-color-white;
         .country_head{
             height: 42.23px;
-            padding: 0 14px;
+            padding: 0 15px;
             box-sizing: border-box;
             background: $color-theme;
             color: $font-color-white;

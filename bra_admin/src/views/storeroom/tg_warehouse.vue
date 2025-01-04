@@ -155,7 +155,7 @@
                   <el-col :span="24" >
                       <el-form-item>
                           <div class="label_radius_title">{{ $t('sys_c058') }}</div>
-                          <div>{{ $t('sys_c114') }}</div>
+                          <div>{{ accountForm.data_way==1?$t('sys_c144'):$t('sys_c114') }}</div>
                           <div class="submit_btn">
                               <el-button class="custom_file1" v-if="accountForm.group_id" style="margin-top: 0;">{{ $t('sys_c059') }}
                                   <input type="file" ref='uploadclear' @change="checkDataIsUse" id="uploadFile" title=" " />
@@ -256,7 +256,7 @@
   </template>
   <script>
   import { successTips,resetPage } from '@/utils/index'
-  import { getaccountgrouptglist } from '@/api/tgaccount'
+  import { doaccountgrouptg,getaccountgrouptglist } from '@/api/tgaccount'
   import { getaccountfilelisttg,dobathdelaccountfiletg,checkaccountfiletg,getaccountscheduletg,dooutputaccountlogtg,addaccounttg,getaccountloglisttg} from '@/api/storeroomtg'
   export default {
     data() {
@@ -395,7 +395,7 @@
       },
       async addGroup() {
         this.groupLoading=true;
-        const result = await getaccountgrouptglist({ ptype: 1,name: this.accountForm.group_name});
+        const result = await doaccountgrouptg({ ptype: 1,name: this.accountForm.group_name});
         this.groupLoading=false;
         if (result.code !== 0) return;
         this.visible = false;

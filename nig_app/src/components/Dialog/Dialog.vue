@@ -164,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <div class="steps_main w_f h_f" v-if="type==13">
+        <div class="steps_main w_f h_f" v-if="steps&&type==13">
             <div class="task_rule w_f font_26"> 
                 <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
                 <div :class="['font_26',idx==0?'first_color':'']" v-for="(item,idx) in content" :key="idx">{{item}}</div>

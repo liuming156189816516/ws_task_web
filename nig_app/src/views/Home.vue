@@ -297,9 +297,9 @@ export default {
         getNoticeList() {
             getnewmessagel().then(res => {
                 if(!res)return;
-                let {id,name,content} = res;
                 if(!localStorage.getItem('is_play')){
-                    this.$popDialog({adv_id:id,title:name,content:content,steps:true, type: 99 })
+                    let {id,name,content} = res;
+                    this.$popDialog({adv_id:id,title:name,content:content,steps:true,type:99})
                 }
             })
             // if(!localStorage.getItem('is_play')){

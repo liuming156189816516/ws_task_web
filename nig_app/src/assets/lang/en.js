@@ -42,7 +42,7 @@ export default {
     login_039:"phone number",
     login_040:"mobile number starting with {value}",
     login_041:"Correct phone number",
-    login_042:"Please log in using your country's mobile phone number: 234../91../233../62../",
+    login_042:"The format remains unchanged for old users. New users should log in with their country's mobile phone number: 234../91../233../62../",
 
     home_001:"User balance",
     home_002:"Today's task income",

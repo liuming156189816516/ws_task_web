@@ -567,8 +567,8 @@ export default {
     'sys_mat036': '导出剩余数据',
     'sys_mat037': '剩余数据粉丝明细',
     'sys_mat038': '合计{value}条',
-    'sys_mat039': '',
-    'sys_mat040': '',
+    'sys_mat039': 'ZIP',
+    'sys_mat040': 'TXT',
     'sys_mat041': '',
     'sys_mat042': '无效数据',
     'sys_mat043': '选择导入类型',
@@ -955,4 +955,5 @@ export default {
     'sys_s010': '登录人数',
 
     'sys_t001': 'TG-账号列表',
+    'sys_t002': 'TG-账号入库',
 }

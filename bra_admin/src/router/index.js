@@ -166,6 +166,14 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_t001'),
         }
+      },
+      {
+        path: '/tg_warehouse',
+        component: () => import('@/views/storeroom/tg_warehouse'),
+        name: 'tg_warehouse',
+        meta: {
+          title:i18n.t('sys_t002'),
+        }
       }
     ]
   },

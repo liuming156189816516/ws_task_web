@@ -438,6 +438,7 @@
 </template>
 <script>
 import Clipboard from 'clipboard';
+import { doresetip } from '@/api/storeroom'
 import { successTips,resetPage } from '@/utils/index'
 import { getiplist,getgrouplist, doipgroup,checkfile,getcountrylist,addip,getipv4allot,getipv6allot,getipdynamicallot,doexpiretime,doallotnum,domoveipgroup,docheckstatus,dostartdistribution,dodisableallocation,dobatchdel,doupcountry,dooutputip,doipremark,getuselist } from '@/api/ipmanage'
 export default {
@@ -653,6 +654,10 @@ export default {
         {
           icon:"edit-outline",
           label:this.$t('sys_l050')
+        },
+        {
+          icon:"aim",
+          label:this.$t('sys_g055')
         }
       ]
     },

@@ -145,7 +145,7 @@ body,
 	}
 	.mobile_head_top{
 		width: 100%;
-		height: 80px;
+		height: 54px;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -155,7 +155,7 @@ body,
 		width: 100%;
 		height: 100%;
 		overflow-y: auto;
-		margin-top: 80px;
+		margin-top: 54px;
 		-webkit-overflow-scrolling: touch; 
 	}
 	.app_continer{

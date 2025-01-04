@@ -52,10 +52,13 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="initiplist(1)">{{ $t('sys_c002') }}</el-button>
       </el-form-item>
+      <el-form-item>
+      </el-form-item>
       <el-form-item class="el-item-right">
         <!-- <el-button type="primary">套餐IP</el-button> -->
         <!-- <el-button type="success" @click="showSetIp(0)">设置登录IP</el-button> -->
-        <el-dropdown @command="handleCommand" trigger="click">
+        <el-button type="primary" @click="checkCorrent">{{ $t("sys_g055") }}</el-button>
+        <el-dropdown @command="handleCommand" trigger="click" style="margin: 0 10px;">
           <el-button type="warning"> {{$t('sys_g018')}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
@@ -66,8 +69,7 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <!-- <el-button type="info" @click="showSetIp(0)">IP冻结规则</el-button> -->
-        <el-button type="primary" @click="changeIpBtn(0,0)" style="margin-left: 10px;">{{$t('sys_mat045')}}</el-button>
+        <el-button type="primary" @click="changeIpBtn(0,0)">{{$t('sys_mat045')}}</el-button>
       </el-form-item>
     </el-form>
     <div style="height:100%;">
@@ -654,10 +656,6 @@ export default {
         {
           icon:"edit-outline",
           label:this.$t('sys_l050')
-        },
-        {
-          icon:"aim",
-          label:this.$t('sys_g055')
         }
       ]
     },
@@ -1011,6 +1009,31 @@ export default {
       this.model1.limit = size;
       this.initiplist();
     },
+    checkCorrent(){
+      let that = this;
+        that.$confirm(`确认${that.$t("sys_l118")}吗？`, that.$t('sys_l013'), {
+          type: 'warning',
+          confirmButtonText: that.$t('sys_c024'),
+          cancelButtonText: that.$t('sys_c023'),
+          beforeClose: function (action, instance, done) {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true;
+              doresetip().then(res => {
+                instance.confirmButtonLoading = false;
+                if (res.code != 0) return;
+                that.initiplist();
+                successTips(that)
+                done();
+              })
+            } else {
+              done();
+              instance.confirmButtonLoading = false;
+            }
+          }
+        }).catch(() => {
+          that.$message({ type: 'info', message: that.$t('sys_c048') });
+        })
+    },
     handleCommand(command){
       if (this.checkIdArry.length == 0) {
         return successTips(this,"error",this.$t('sys_c126'));
@@ -1036,7 +1059,7 @@ export default {
           cancelButtonText: that.$t('sys_c023'),
           beforeClose: function (action, instance, done) {
             if (action === 'confirm') {
-              const allPost = [doexpiretime,doallotnum,domoveipgroup,docheckstatus,"","",dostartdistribution,dodisableallocation,dobatchdel,dooutputip,doupcountry,doresetip]
+              const allPost = [doexpiretime,doallotnum,domoveipgroup,docheckstatus,"","",dostartdistribution,dodisableallocation,dobatchdel,dooutputip,doupcountry]
               instance.confirmButtonLoading = true;
               allPost[that.setIpType]({ids:that.checkIdArry}).then(res => {
                 instance.confirmButtonLoading = false;

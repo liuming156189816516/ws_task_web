@@ -53,7 +53,7 @@
                 </div>
             </div>
             <template v-if="tgList&&tgList.length>0">
-                <div class="task_title tg_task_title flex-item flex-align">
+                <div class="task_title flex-item flex-align">
                     <img src="@/assets/images/serveic/telege_icon.png">
                     <h4 class="font_32">{{ $t("home_205") }}</h4>
                 </div>
@@ -94,7 +94,7 @@
                 </div>
             </template>
             <template v-if="wsList&&wsList.length>0">
-                <div class="task_title flex-item flex-align">
+                <div class="task_title tg_task_title flex-item flex-align">
                     <img src="../assets/images/home/ws_icon.png">
                     <h4 class="font_32">{{ $t("home_204") }}</h4>
                 </div>

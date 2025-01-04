@@ -164,7 +164,7 @@ body,
 		position: fixed;
 		top: 0;
 		left: 0;
-		background: $color-theme;
+		background: $color-apptop;
 	}
 	.app_top_continer, .app_continer{
 		width: 100%;

@@ -94,7 +94,7 @@ export default {
 				metaThemeColor.name = 'theme-color';
 				document.head.appendChild(metaThemeColor);
 			}
-			metaThemeColor.content = color||'#31acf2'; // 设定颜色
+			// metaThemeColor.content = color||'#31acf2'; // 设定颜色
 			// }	
 		},
 		handle_close(){

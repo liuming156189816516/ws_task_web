@@ -94,7 +94,6 @@ export default {
 			})
 		},
 		customHeader(color){
-			// if (navigator.userAgent.match(/Android/i)) {
 			// 动态设置 meta theme-color
 			let metaThemeColor = document.querySelector('meta[name=theme-color]');
 			if (!metaThemeColor) {
@@ -102,7 +101,7 @@ export default {
 				metaThemeColor.name = 'theme-color';
 				document.head.appendChild(metaThemeColor);
 			}
-			metaThemeColor.content = color||'#29458e'; // 设定颜色
+			// metaThemeColor.content = color||'#29458e'; // 设定颜色
 			// }	
 		},
 		handle_close(){
@@ -164,7 +163,7 @@ body,
 		position: fixed;
 		top: 0;
 		left: 0;
-		background: rgba($color:$color-theme, $alpha: .9);
+		background: $color-theme;
 	}
 	.app_top_continer, .app_continer{
 		width: 100%;
@@ -185,7 +184,7 @@ body,
 	font-family: 'Microsoft YaHei';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: #2c3e50;
+	// color: #2c3e50;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;

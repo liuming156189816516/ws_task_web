@@ -1021,6 +1021,7 @@ export default {
           this.setIpName = this.betchOption[k].label;
         }
       }
+      console.log(this.setIpType);
       if (this.setIpType==0||this.setIpType==1||this.setIpType==2||this.setIpType==10) {
         this.setIpModel=true;
         if (this.setIpType==10) {
@@ -1037,7 +1038,7 @@ export default {
           cancelButtonText: that.$t('sys_c023'),
           beforeClose: function (action, instance, done) {
             if (action === 'confirm') {
-              const allPost = [doexpiretime,doallotnum,domoveipgroup,docheckstatus,"","",dostartdistribution,dodisableallocation,dobatchdel,dooutputip,doupcountry]
+              const allPost = [doexpiretime,doallotnum,domoveipgroup,docheckstatus,"","",dostartdistribution,dodisableallocation,dobatchdel,dooutputip,doupcountry,doresetip]
               instance.confirmButtonLoading = true;
               allPost[that.setIpType]({ids:that.checkIdArry}).then(res => {
                 instance.confirmButtonLoading = false;

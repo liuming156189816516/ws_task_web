@@ -52,47 +52,6 @@
                     {{$t('home_177')}}
                 </div>
             </div>
-            <template v-if="wsList&&wsList.length>0">
-                <div class="task_title flex-item flex-align">
-                    <img src="../assets/images/home/ws_icon.png">
-                    <h4 class="font_32">{{ $t("home_204") }}</h4>
-                </div>
-                <div class="task_main w_f flex-item flex-dir-c">
-                    <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in wsList" :key="idx">
-                        <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
-                        <div class="task_live flex-item flex-align font_22">
-                            <div class="task_live_1 flex-item flex-align">
-                                <span class="flex-item">{{$t('home_093')}}</span>
-                                <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
-                            </div>
-                            <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
-                                <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
-                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
-                            </div>
-                            <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
-                                <span class="flex-item">{{$t('other_099')}}{{taskNameOption[item.type].g_num}}</span>
-                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
-                            </div>
-                            <div class="task_live_2 flex-item flex-align" v-else>
-                                <span class="flex-item">{{$t('home_094')}}</span>
-                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
-                            </div>
-                        </div>
-                        <div class="task_award flex-item font_24">
-                            <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
-                            <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
-                            <div class="task_btn" @click="handleTask(item)">
-                                <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
-                                    {{taskStatusOption[item.status]}}
-                                </div>
-                                <div class="circle_box flex-item flex-align flex-center font_24" v-else>
-                                    {{taskNameOption[item.type].btn}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </template>
             <template v-if="tgList&&tgList.length>0">
                 <div class="task_title tg_task_title flex-item flex-align">
                     <img src="@/assets/images/serveic/telege_icon.png">
@@ -134,7 +93,47 @@
                     </div>
                 </div>
             </template>
-            
+            <template v-if="wsList&&wsList.length>0">
+                <div class="task_title flex-item flex-align">
+                    <img src="../assets/images/home/ws_icon.png">
+                    <h4 class="font_32">{{ $t("home_204") }}</h4>
+                </div>
+                <div class="task_main w_f flex-item flex-dir-c">
+                    <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in wsList" :key="idx">
+                        <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
+                        <div class="task_live flex-item flex-align font_22">
+                            <div class="task_live_1 flex-item flex-align">
+                                <span class="flex-item">{{$t('home_093')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
+                                <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
+                                <span class="flex-item">{{$t('other_099')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else>
+                                <span class="flex-item">{{$t('home_094')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
+                            </div>
+                        </div>
+                        <div class="task_award flex-item font_24">
+                            <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
+                            <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
+                            <div class="task_btn" @click="handleTask(item)">
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
+                                    {{taskStatusOption[item.status]}}
+                                </div>
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-else>
+                                    {{taskNameOption[item.type].btn}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
         <drag-icon ref="dragIconCom" :gapWidthPx="30" :coefficientHeight="0.56">
             <div class="serve_icon" slot="icon" @click="contactService">
@@ -174,16 +173,16 @@ export default {
             imagesList:[
                 {
                   link:"",
-                  file_url:require("../assets/images/banner/banner1.png"),
-                },
-                {
-                  link:"",
-                  file_url:require("../assets/images/banner/banner2.png"),
-                },
-                {
-                  link:"",
-                  file_url:require("../assets/images/banner/banner3.png"),
+                  file_url:require("../assets/images/banner/banner4.jpg"),
                 }
+                // {
+                //   link:"",
+                //   file_url:require("../assets/images/banner/banner2.png"),
+                // },
+                // {
+                //   link:"",
+                //   file_url:require("../assets/images/banner/banner3.png"),
+                // }
             ]
         }
     },

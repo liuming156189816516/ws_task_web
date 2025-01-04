@@ -164,6 +164,7 @@ body,
 		position: fixed;
 		top: 0;
 		left: 0;
+		z-index: -1;
 		color: $font-color-white;
 		background: rgba($color:$color-theme, $alpha: .9);
 	}

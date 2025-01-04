@@ -173,13 +173,21 @@
         <transition name="el-fade-in-linear">
             <div class="steps_main w_f h_f" v-if="steps&&type==99&&content">
                 <div class="adv_step w_f flex-item flex-align flex-center">
-                    <div class="w_f adv_cover flex-item flex-align flex-center flex-dir-c" ref="tips_scroll">
+                    <div class="w_f adv_cover flex-item flex-align flex-dir-c" ref="tips_scroll">
+                        <div class="close_icon flex-item flex-align flex-center">
+                            <template v-if="countTime==0">
+                                <transition name="el-fade-in">
+                                    <van-icon name="cross" @click="closeAdvBtn" />
+                                </transition>
+                            </template>
+                            <span class="font_26" v-else>{{ countTime+"s" }}</span>
+                        </div>
                         <!-- <h4 class="w_f font_32">产生的速度慢了点吗没事没事面对吗没什么输出吗</h4> -->
                         <h4 class="w_f font_32">{{ title }}</h4>
                         <div class="adv_content w_f flex-item flex-center flex-dir-c font_26" v-html="content"></div>
-                        <van-button type="primary" :disabled="countTime>0" @click="closeAdvBtn" plain>
+                        <!-- <van-button type="primary" :disabled="countTime>0" @click="closeAdvBtn" plain>
                             {{restLanuage('home_162')}} {{ countTime>0?countTime+"s":"" }}
-                        </van-button>
+                        </van-button> -->
                     </div>
                 </div>
             </div>
@@ -340,7 +348,22 @@ export default {
             border-radius: 6px;
             background: #fff;
             padding: 20px 30px;
+            position: relative;
             box-sizing: border-box;
+            .close_icon{
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                .van-icon-cross{
+                    padding: 3px;
+                    font-size: 20px;
+                    border-radius: 50%;
+                    color: $color-theme;
+                    // border: 1px solid $color-theme;
+                }
+            }
             h4{
                 display: block;
                 flex-shrink: 0;

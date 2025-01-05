@@ -11,7 +11,7 @@
                 <video ref="myVideo" poster="@/assets/images/home/cover_img.png" controls src="https://rw-bx.s3.sa-east-1.amazonaws.com/ai.mp4"></video>
             </div>
             <div class="video_tips" v-if="type==2">
-                <video ref="myVideo" controls src="https://rw-bx.s3.sa-east-1.amazonaws.com/tg_ai.mp4"></video>
+                <video ref="myVideo" poster="@/assets/images/home/cover_img2.png" controls src="https://rw-bx.s3.sa-east-1.amazonaws.com/tg_ai.mp4"></video>
             </div>
             <!-- <div class="contnet_mian" v-if="type==2">
                 <div v-html="content"></div>

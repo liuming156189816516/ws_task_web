@@ -10,12 +10,12 @@
             <div class="video_tips" v-if="type==1">
                 <video ref="myVideo" poster="@/assets/images/home/cover_img.png" controls src="https://rw-bx.s3.sa-east-1.amazonaws.com/ai.mp4"></video>
             </div>
-            <div class="contnet_mian" v-if="type==2">
-                <div v-html="content"></div>
-                <!-- <div class="bank_btn">
-                    <van-button type="primary" @click="$router.push('/home')">确定</van-button>
-                </div> -->
+            <div class="video_tips" v-if="type==2">
+                <video ref="myVideo" controls src="https://rw-bx.s3.sa-east-1.amazonaws.com/tg_ai.mp4"></video>
             </div>
+            <!-- <div class="contnet_mian" v-if="type==2">
+                <div v-html="content"></div>
+            </div> -->
             <div class="contnet_mian" v-if="type==10">
                 <div v-html="content" class="font_28"></div>
             </div>

@@ -258,7 +258,7 @@ export default {
         }
         this.$nextTick(()=>{
             if(this.steps&&this.type==99&&!localStorage.getItem('is_timer')){
-                this.countTime = 10;
+                this.countTime = 5;
                 this.startSettime();
             }
         })

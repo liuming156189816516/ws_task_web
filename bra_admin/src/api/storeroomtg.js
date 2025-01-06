@@ -15,3 +15,9 @@ export const getaccountloglisttg = (params) =>{
 export const addaccounttg = (params) =>{
     return request({url:'/accounttg/addaccounttg',method:'post',data:params})
 }
+export const getaccountscheduletg = (params) =>{
+    return request({url:'/accounttg/getaccountscheduletg',method:'post',data:params})
+}
+export const dooutputaccountlogtg = (params) =>{
+    return request({url:'/accounttg/dooutputaccountlogtg',method:'post',data:params})
+}

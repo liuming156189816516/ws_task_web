@@ -68,7 +68,9 @@ export const constantRoutes = [
         path: '/change-password',
         component: () => import('@/views/user/change-password'),
         name: 'change-password',
-        meta: { title:i18n.t('sys_m021'), icon: 'dashboard' }
+        meta: {
+          title:i18n.t('sys_m021'),
+        }
       }
     ]
   }
@@ -390,7 +392,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/ws-add-group'),
         name: 'ws-add-group',
         meta: {
-          title:i18n.t('sys_m038')
+          title:""
         }
       },
       {
@@ -399,7 +401,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/ws-group-detail'),
         name: 'ws-group-detail',
         meta: {
-          title:i18n.t('sys_m035')
+          title:""
         }
       },
       {
@@ -416,7 +418,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/ws-add-b-group'),
         name: 'ws-creat-group',
         meta: {
-          title:i18n.t('sys_m035')
+          title:""
         }
       },
       {
@@ -433,7 +435,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/create-super-task'),
         name: 'create-super-task',
         meta: {
-          title:i18n.t('sys_m035')
+          title:""
         }
       },
       {
@@ -451,7 +453,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/ai-group-task'),
         name: 'group-task',
         meta: {
-          title:i18n.t('sys_m033')+i18n.t('sys_m113')
+          title:""
         }
       },
       {
@@ -460,7 +462,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/tg-group-task'),
         name: 'tg-task',
         meta: {
-          title:i18n.t('sys_m118')+"列表"
+          title:""
         }
       }
     ]
@@ -476,7 +478,7 @@ export const asyncRoutes = [
         component: () => import('@/views/data/wa-list'),
         name: 'wa-list',
         meta: {
-          title:i18n.t('sys_m042'),
+          title:""
         }
       }
     ]
@@ -517,7 +519,7 @@ export const asyncRoutes = [
         component: () => import('@/views/content/material'),
         name: 'material',
         meta: {
-          title: i18n.t('sys_m045'),
+          title:""
         }
       },
       // {
@@ -574,7 +576,7 @@ export const asyncRoutes = [
         component: () => import('@/views/bannerManage/bannerList'),
         name: 'bannerList',
         meta: {
-          title:i18n.t('sys_q138'),
+          title:i18n.t('sys_q139'),
         }
       },
       {
@@ -582,7 +584,7 @@ export const asyncRoutes = [
         component: () => import('@/views/bannerManage/sysMessage'),
         name: 'sysMessage',
         meta: {
-          title:i18n.t('sys_q138'),
+          title:i18n.t('sys_q046'),
         }
       }
     ]

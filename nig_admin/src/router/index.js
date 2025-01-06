@@ -158,6 +158,22 @@ export const asyncRoutes = [
         meta: {
           title: '修改WS资料日志',
         }
+      },
+      {
+        path: '/tg-app-list',
+        component: () => import('@/views/storeroom/tg-app-list'),
+        name: 'tg-app-list',
+        meta: {
+          title:i18n.t('sys_t001'),
+        }
+      },
+      {
+        path: '/tg_warehouse',
+        component: () => import('@/views/storeroom/tg_warehouse'),
+        name: 'tg_warehouse',
+        meta: {
+          title:i18n.t('sys_t002'),
+        }
       }
     ]
   },
@@ -436,6 +452,15 @@ export const asyncRoutes = [
         name: 'group-task',
         meta: {
           title:i18n.t('sys_m033')+i18n.t('sys_m113')
+        }
+      },
+      {
+        hidden: true,
+        path: '/tg-task',
+        component: () => import('@/views/task/tg-group-task'),
+        name: 'tg-task',
+        meta: {
+          title:i18n.t('sys_m118')+"列表"
         }
       }
     ]

@@ -51,44 +51,88 @@
                     {{$t('home_125')}}
                 </div>
             </div>
-            <div class="task_main w_f flex-item flex-dir-c">
-                <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in taskOption" :key="idx">
-                    <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
-                    <div class="task_live flex-item flex-align font_22">
-                        <div class="task_live_1 flex-item flex-align">
-                            <span class="flex-item">{{$t('home_093')}}</span>
-                            <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
-                        </div>
-                        <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
-                            <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
-                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
-                        </div>
-                        <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
-                            <span class="flex-item">{{$t('other_101')}}{{taskNameOption[item.type].g_num}}</span>
-                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
-                        </div>
-                        <div class="task_live_2 flex-item flex-align" v-else>
-                            <span class="flex-item">{{$t('home_094')}}</span>
-                            <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
-                        </div>
-                    </div>
-                    <div class="task_award flex-item font_24">
-                        <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
-                        <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
-                        <div class="task_btn" @click="handleTask(item)">
-                             <!-- :class="[item.status==2?'progress_award':'']" -->
-                            <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
-                                {{taskStatusOption[item.status]}}
+            <template v-if="tgList&&tgList.length>0">
+                <div class="task_title flex-item flex-align">
+                    <img src="@/assets/images/serveic/telege_icon.png">
+                    <h4 class="font_32">{{ $t("home_205") }}</h4>
+                </div>
+                <div class="task_main w_f flex-item flex-dir-c">
+                    <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in tgList" :key="idx">
+                        <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
+                        <div class="task_live flex-item flex-align font_22">
+                            <div class="task_live_1 flex-item flex-align">
+                                <span class="flex-item">{{$t('home_093')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
                             </div>
-                             <div class="circle_box flex-item flex-align flex-center font_24" v-else>
-                                {{taskNameOption[item.type].btn}}
-                                <!-- <van-button class="" v-if="item.type==3" :class="[item.status==2?'progress_award':'']" type="primary">{{taskStatusOption[item.status]}}</van-button>
-                                <van-button class="" v-else type="primary">{{taskNameOption[item.type].btn}}</van-button> -->
+                            <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
+                                <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
+                                <span class="flex-item">{{$t('other_099')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else>
+                                <span class="flex-item">{{$t('home_094')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
+                            </div>
+                        </div>
+                        <div class="task_award flex-item font_24">
+                            <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
+                            <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
+                            <div class="task_btn" @click="handleTask(item)">
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
+                                    {{taskStatusOption[item.status]}}
+                                </div>
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-else>
+                                    {{taskNameOption[item.type].btn}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </template>
+            <template v-if="wsList&&wsList.length>0">
+                <div class="task_title tg_task_title flex-item flex-align">
+                    <img src="../assets/images/home/ws_icon.png">
+                    <h4 class="font_32">{{ $t("home_204") }}</h4>
+                </div>
+                <div class="task_main w_f flex-item flex-dir-c">
+                    <div class="task_item w_f flex-item flex-dir-c" v-for="(item,idx) in wsList" :key="idx">
+                        <div class="task_name font_34">{{taskNameOption[item.type].name}}</div>
+                        <div class="task_live flex-item flex-align font_22">
+                            <div class="task_live_1 flex-item flex-align">
+                                <span class="flex-item">{{$t('home_093')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
+                                <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else-if="item.type==1">
+                                <span class="flex-item">{{$t('other_099')}}{{taskNameOption[item.type].g_num}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
+                            </div>
+                            <div class="task_live_2 flex-item flex-align" v-else>
+                                <span class="flex-item">{{$t('home_094')}}</span>
+                                <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
+                            </div>
+                        </div>
+                        <div class="task_award flex-item font_24">
+                            <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
+                            <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
+                            <div class="task_btn" @click="handleTask(item)">
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
+                                    {{taskStatusOption[item.status]}}
+                                </div>
+                                <div class="circle_box flex-item flex-align flex-center font_24" v-else>
+                                    {{taskNameOption[item.type].btn}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
     </div>
 </template>
@@ -114,9 +158,10 @@ export default {
             timeout: 1000,   
       		setInter: 6000,
             viewLang:"en-GB",
-            taskOption: [],
+            wsList: [],
+            tgList: [],
             langIdx:Cookies.get("language"),
-            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','codeOnline'],
+            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','telegTask'],
             bannerList:[],
             imagesList:[
                 {
@@ -136,12 +181,13 @@ export default {
             return [
                 {},
                 {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:20, status:null,task_info_id:null,award:this.$t('home_168'),btn:this.$t('home_005'),desc:this.$t('home_051')},
-                {name:this.$t('home_183'),live1:2,live2:1,type:2,g_num:30,status:null,task_info_id:null,award:this.$t('home_178',{value:'20%'}),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_183'),live1:2,live2:1,type:2,g_num:30,status:null,task_info_id:null,award:this.$t('home_178'),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:15,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:2,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
-                {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                // {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 // {name:this.$t('home_134'),live1:2,live2:1,type:5,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
-                {name:this.$t('home_145'),live1:2,live2:1,type:6,g_num:10,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                // {name:this.$t('home_145'),live1:2,live2:1,type:6,g_num:10,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                {name:this.$t('home_183'),live1:2,live2:1,type:5,g_num:25,status:null,task_info_id:null,award:this.$t('home_178'),btn:this.$t('home_057'),desc:this.$t('home_050')},
             ]
         },
         taskStatusOption() {
@@ -162,11 +208,20 @@ export default {
             this.$store.dispatch('User/getSysNotice');
             this.waitTimer = setInterval(() => {
                 this.heartTimer = setTimeout(() => {
-                    for (let k = 0; k < this.taskOption.length; k++) {
-                        if((this.taskOption[k].invalid_time - this.currentTime()) <= 0){
-                            this.taskOption[k].status = 1;
-                            this.taskOption[k].invalid_time = 0;
-                            this.taskOption[k].task_info_id = "";
+                    for (let k = 0; k < this.wsList.length; k++) {
+                        if(this.wsList[k]&&this.wsList[k].invalid_time){
+                            if((this.wsList[k].invalid_time - this.currentTime()) <= 0){
+                                this.wsList[k].status = 1;
+                                this.wsList[k].invalid_time = 0;
+                                this.wsList[k].task_info_id = "";
+                            }
+                        }
+                        if(this.tgList[k]&&this.tgList[k].invalid_tim){
+                            if((this.tgList[k].invalid_time - this.currentTime()) <= 0){
+                                this.tgList[k].status = 1;
+                                this.tgList[k].invalid_time = 0;
+                                this.tgList[k].task_info_id = "";
+                            }
                         }
                     }
                 }, this.timeout)
@@ -217,7 +272,8 @@ export default {
         },
         getTaskList() {
             gettaskliststatus().then(res => {
-                this.taskOption = res.list||[];
+                this.wsList = res.ws_list||[];
+                this.tgList = res.tg_list||[];
             })
         },
         showRule(){
@@ -548,6 +604,37 @@ export default {
                 background: url("../assets/images/sign_icon.png");
                 background-size: 100% 100%;
             }
+        }
+        .task_title{
+            font-weight: 600;
+            margin-bottom: 10px;
+            img{
+                height: 48px;
+                margin-right: 10px;
+            }
+            h4{
+                background: linear-gradient(to right, $home-task-03, $home-history-value);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                // animation: flicker 2s infinite; 
+                // -webkit-animation: flicker 2s infinite; 
+            }
+            @-webkit-keyframes flicker{
+                0%{
+                    opacity: 1;
+                }
+                50%{
+                    opacity: 0.7;
+                }
+                100%{
+                    opacity: 1;
+                }
+
+            }
+        }
+        .tg_task_title{
+            margin-top: 20px;
         }
         .task_main{
             box-sizing: border-box;

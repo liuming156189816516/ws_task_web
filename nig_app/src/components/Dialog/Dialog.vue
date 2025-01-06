@@ -10,12 +10,12 @@
             <div class="video_tips" v-if="type==1">
                 <video ref="myVideo" poster="@/assets/images/home/ai_task.jpg" controls src="https://rw-nrly.s3.af-south-1.amazonaws.com/ai.mp4"></video>
             </div>
-            <div class="contnet_mian" v-if="type==2">
-                <div v-html="content"></div>
-                <!-- <div class="bank_btn">
-                    <van-button type="primary" @click="$router.push('/home')">确定</van-button>
-                </div> -->
+            <div class="video_tips" v-if="type==2">
+                <video ref="myVideo" poster="@/assets/images/home/ai_task.jpg" controls src="https://rw-nrly.s3.af-south-1.amazonaws.com/ai.mp4"></video>
             </div>
+            <!-- <div class="contnet_mian" v-if="type==2">
+                <div v-html="content"></div>
+            </div> -->
             <div class="contnet_mian" v-if="type==10">
                 <div v-html="content" class="font_28"></div>
             </div>
@@ -258,7 +258,7 @@ export default {
         }
         this.$nextTick(()=>{
             if(this.steps&&this.type==99&&!localStorage.getItem('is_timer')){
-                this.countTime = 5;
+                this.countTime = 10;
                 this.startSettime();
             }
         })

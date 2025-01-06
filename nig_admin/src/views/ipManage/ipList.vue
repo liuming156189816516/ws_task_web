@@ -55,7 +55,8 @@
       <el-form-item class="el-item-right">
         <!-- <el-button type="primary">套餐IP</el-button> -->
         <!-- <el-button type="success" @click="showSetIp(0)">设置登录IP</el-button> -->
-        <el-dropdown @command="handleCommand" trigger="click">
+        <el-button type="primary" @click="checkCorrent">{{ $t("sys_g055") }}</el-button>
+        <el-dropdown @command="handleCommand" trigger="click" style="margin: 0 10px;">
           <el-button type="warning"> {{$t('sys_g018')}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
@@ -438,6 +439,7 @@
 </template>
 <script>
 import Clipboard from 'clipboard';
+import { doresetip } from '@/api/storeroom'
 import { successTips,resetPage } from '@/utils/index'
 import { getiplist,getgrouplist, doipgroup,checkfile,getcountrylist,addip,getipv4allot,getipv6allot,getipdynamicallot,doexpiretime,doallotnum,domoveipgroup,docheckstatus,dostartdistribution,dodisableallocation,dobatchdel,doupcountry,dooutputip,doipremark,getuselist } from '@/api/ipmanage'
 export default {
@@ -1005,6 +1007,31 @@ export default {
       }
       this.model1.limit = size;
       this.initiplist();
+    },
+    checkCorrent(){
+      let that = this;
+        that.$confirm(`确认${that.$t("sys_l118")}吗？`, that.$t('sys_l013'), {
+          type: 'warning',
+          confirmButtonText: that.$t('sys_c024'),
+          cancelButtonText: that.$t('sys_c023'),
+          beforeClose: function (action, instance, done) {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true;
+              doresetip().then(res => {
+                instance.confirmButtonLoading = false;
+                if (res.code != 0) return;
+                that.initiplist();
+                successTips(that)
+                done();
+              })
+            } else {
+              done();
+              instance.confirmButtonLoading = false;
+            }
+          }
+        }).catch(() => {
+          that.$message({ type: 'info', message: that.$t('sys_c048') });
+        })
     },
     handleCommand(command){
       if (this.checkIdArry.length == 0) {

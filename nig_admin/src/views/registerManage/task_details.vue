@@ -27,7 +27,7 @@
                         <i class="el-icon-arrow-down el-icon--right" />
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
+                        <el-dropdown-item :class="{'dropdown_selected':idx==task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''&&idx==0?$t('sys_l053'):item  }}</el-dropdown-item>
                     </el-dropdown-menu>
                     </el-dropdown>
                 </template>
@@ -75,7 +75,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return ["","挂机","拉群","拉粉","AI"]
+            return ["",this.$t("sys_m114"),this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),"","","",this.$t("sys_m118")]
         }
     },
     created() {

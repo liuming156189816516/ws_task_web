@@ -5,17 +5,8 @@
         </el-tabs>
         <div class="view_continer">
             <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
-                <!-- <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-form-item label="营销分组：" prop="market_group">
-                            <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
-                                <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row> -->
                 <el-row :gutter="20">
-                    <el-col :span="18">
+                    <el-col :span="18" v-if="activeIdx!=3">
                         <el-form-item :label="activeIdx==2?'监控号分组：':'营销分组：'" prop="market_group">
                             <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
                                 <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
@@ -23,7 +14,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <template v-if="activeIdx==0||activeIdx==2">
+                <template v-if="activeIdx!=1">
                     <el-row :gutter="20">
                         <el-col :span="18">
                             <el-form-item label="数据包：" prop="data_pack_id">
@@ -34,7 +25,7 @@
                         </el-col>
                     </el-row>
                 </template>
-                <template v-if="activeIdx==2">
+                <template v-if="activeIdx==2||activeIdx==3">
                     <el-row :gutter="20">
                         <el-col :span="18">
                             <el-form-item :label="$t('sys_l080')+'：'" prop="data_link">
@@ -45,7 +36,7 @@
                 </template>
                 <el-row :gutter="20">
                     <el-col :span="18">
-                        <el-form-item :label="$t('sys_q131')+'：'" prop="materialData" class="custom_say">
+                        <el-form-item :label="$t('sys_rai130')+'：'" prop="materialData" class="custom_say">
                             <div class="mess_01">
                                 <el-button type="primary" size="mini" v-for="(item,idx) in btnOption" :key="idx" @click="showPropModel(idx)" v-show="item!=''">{{ item }}</el-button>
                                 <el-table :data="taskForm.materialData" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" style="width: 100%">
@@ -97,9 +88,6 @@
                 </el-form-item>
             </el-form>
         </div>
-        <el-dialog title="选择素材" center :visible.sync="showSource" :close-on-click-modal="false" width="60%">
-            <material :key="source_type==1?Math.floor(new Date().getTime()):''" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
-        </el-dialog>
         <el-dialog title="添加链接" center :visible.sync="showLink" :close-on-click-modal="false" width="560px">
             <el-form size="small" :model="linkForm" :rules="linkRules" ref="linkForm" label-width="100px" class="demo-ruleForm">
                 <template v-if="source_type==2">
@@ -129,7 +117,10 @@
                 </el-form-item>
             </el-form>
         </el-dialog>
-        <el-image-viewer v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="[taskForm.qavatar]" />
+        <el-dialog title="选择素材" center :visible.sync="showSource" :close-on-click-modal="false" width="60%">
+            <material :key="source_type?Math.floor(new Date().getTime()):''" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
+        </el-dialog>
+        <el-image-viewer style="z-index:9999999" v-if="imgModel" :on-close="closeViewer" @click.native="cloneImgpreview" :url-list="[taskForm.qavatar]" />
     </div>
 </template>
 
@@ -144,7 +135,6 @@
       return {
         totalNum:0,
         activeIdx:"0",
-        source_type:"",
         is_index:"",
         loading:false,
         imgModel:false,
@@ -152,6 +142,7 @@
         showLink:false,
         isLoading:false,
         showSource:false,
+        source_type:null,
         childMess:{
             check:false,
             is_show:1,
@@ -215,7 +206,8 @@
                 market_group: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
                 data_pack_id: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
                 is_announcement: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                materialData: [{required: true, required: true, message: this.$t('sys_c052'), trigger: 'change' }]
+                materialData: [{required: true, required: true, message: this.$t('sys_c052'), trigger: 'change' }],
+                data_link: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_l080')}), trigger: 'blur' }]
             }
         },
         linkRules(){
@@ -223,11 +215,11 @@
                 link_title: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }],
                 link_address: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }],
                 card_type: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-                card_text: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }]
+                card_text: [{ required: true, message: this.$t('sys_mat061',{value:this.$t('sys_mat019')}), trigger: 'blur' }],
             }
         },
         taskOption(){
-            return ["拉群配置","拉粉配置","AI配置"]
+            return [this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),this.$t("sys_m118")]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]
@@ -243,6 +235,7 @@
     },
     methods:{
         handleClick(enent){
+            this.source_type = null;
             this.activeIdx = enent.index;
             this.taskForm.market_group="";
             this.taskForm.data_pack_id="";
@@ -397,6 +390,14 @@
         cloneImgpreview(e) {
             if (e.target.getAttribute('class') === 'el-image-viewer__mask') {
                 this.imgModel = false;
+            }
+        }
+    }
+    ,
+    watch:{
+        showSource(val){
+            if(!val){
+                this.source_type = null;
             }
         }
     }

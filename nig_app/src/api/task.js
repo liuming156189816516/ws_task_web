@@ -29,6 +29,10 @@ export const uploadfile = (params)=> {
     return request({url:'/account/upload',method:'post',data:params})
 }
 
+//TG任务明细
+export const gettgaimsginfo = (params = {}) => {
+    return request({url: '/account/gettgaimsginfo$',method: 'post',data:params})
+}
 export const submitaimessagetask = (params)=> {
     return request({url:'/account/submitaimessagetask',method:'post',data:params})
 }

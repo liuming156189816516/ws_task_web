@@ -352,6 +352,7 @@ methods: {
         let scrollTop = this.$refs.warpBox;
         scrollTop.scrollTo({top: 0,behavior:"smooth"});
         localStorage.setItem('step_02',true);
+        // await dotutorialstatus({ptype:5});
         this.showStep = false;
     },
     skip(){

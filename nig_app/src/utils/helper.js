@@ -345,6 +345,16 @@ const Helper = {
         return [{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:4}];
 		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:4}];
 	},
+    wsOption() {
+		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
+        // return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:6}];
+		return [{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:4}];
+	},
+    tgOption() {
+		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
+        // return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:6}];
+		return [{status:1,task_info_id:"",type:5}];
+	},
 	langOptions(){
 		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" }];
 		// return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" },{icon:"es", lang: "es", name: "es-MX" },{icon:"br", lang: "br", name: "pt-BR" }];

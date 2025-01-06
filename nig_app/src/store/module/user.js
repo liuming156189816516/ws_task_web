@@ -79,6 +79,12 @@ export default {
 					if(tutorial_list[k] === 3){
 						localStorage.setItem('step_03',true);
 					}
+					if(tutorial_list[k] === 4){
+						localStorage.setItem('step_03',true);
+					}
+					if(tutorial_list[k] === 5){
+						localStorage.setItem('step_03',true);
+					}
 				}
 			}
 			// this.dispatch('User/plantCarousel');
@@ -130,6 +136,7 @@ export default {
 			window.localStorage.removeItem('step_02');
 			window.localStorage.removeItem('step_03');
 			window.localStorage.removeItem('step_04');
+			window.localStorage.removeItem('step_05');
 			window.localStorage.removeItem('inviteCode');
 		}
 	},

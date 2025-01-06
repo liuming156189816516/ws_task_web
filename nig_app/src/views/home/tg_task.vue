@@ -405,7 +405,7 @@ methods: {
     async done(){
         this.showStep = false;
         localStorage.setItem('step_05',true);
-        // await dotutorialstatus({ptype:5});
+        await dotutorialstatus({ptype:5});
     },
     skip(){
         this.$refs.myIntroStep.next()

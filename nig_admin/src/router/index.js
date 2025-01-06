@@ -448,7 +448,6 @@ export const asyncRoutes = [
         }
       },
       {
-        hidden: true,
         path: '/group-task',
         component: () => import('@/views/task/ai-group-task'),
         name: 'group-task',
@@ -457,7 +456,6 @@ export const asyncRoutes = [
         }
       },
       {
-        hidden: true,
         path: '/tg-task',
         component: () => import('@/views/task/tg-group-task'),
         name: 'tg-task',

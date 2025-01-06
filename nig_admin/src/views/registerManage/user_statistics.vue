@@ -45,7 +45,7 @@
                 </el-table-column>
                 <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                 <el-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
-                <el-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
+                <el-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" fixed="right" />
             </el-table>
         </div>
         <el-form size="small" :inline="true" style="margin-top: 10px;">
@@ -72,7 +72,7 @@
                 </div> -->
                 <el-table :data="accountDataList" row-key="id" use-virtual border height="760" v-loading="loading" ref="serveTable"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" :summary-method="getSummaries" show-summary>
-                    <el-table-column prop="statis_time_str" :label="$t('sys_c134')" width="100" />
+                    <el-table-column prop="statis_time_str" :label="$t('sys_c134')" width="100" fixed="left" />
                     <el-table-column prop="register_num" :label="$t('sys_m086')" minWidth="100" />
                     <el-table-column prop="login_num" :label="$t('sys_s010')" minWidth="100" />
                     <el-table-column prop="today_new_active_user_num" :label="$t('sys_m101')" minWidth="120" />
@@ -115,7 +115,7 @@
                     </el-table-column>
                     <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                     <el-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
-                    <el-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
+                    <el-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" fixed="right" />
                     <el-table-column prop="sys_c008" :label="$t('sys_m098')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.statis_time > 0 ? $baseFun.resetTime(scope.row.statis_time * 1000) : "-" }}

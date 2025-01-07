@@ -484,7 +484,6 @@ export const asyncRoutes = [
   {
     path: '/ipManage',
     component: Layout,
-    redirect: '/ipManage',
     name: 'ipManage',
     meta: { title:i18n.t('sys_m043'),icon: 'el-icon-cpu' },
     children: [
@@ -493,7 +492,7 @@ export const asyncRoutes = [
         component: () => import('@/views/ipManage/ipList'),
         name: 'ipList',
         meta: {
-          title:i18n.t('sys_m044'),
+          title:"",
         }
       }
       // {

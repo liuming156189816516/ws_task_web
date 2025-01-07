@@ -430,6 +430,9 @@ aside {
 .el-tooltip__popper {
   max-width: 450px !important;
 } 
+input[aria-hidden=true] {
+	display: none !important;
+}
 // .el-button--text {
 //     display: none !important;
 // }

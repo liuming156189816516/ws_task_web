@@ -565,7 +565,7 @@
         })
       },
       downLoadTemp(){
-        var blob = new Blob(["账号,公钥,私钥,消息公钥,消息私钥,号码ID"], { type: 'text/plain' });
+        var blob = new Blob([`5597981260630----{"api_id": 4, "api_hash": "014b35b6184100b085b0d0572f9b5103", "system_version": "SDK 28", "tz_offset": -7200, "lang_code": "es", "lang_pack": "android", "app_version": "11.5.5 (55319)", "system_lang_code": "es-BR", "device_model": "HTCHTC 2PXH2", "dc": 1, "ip": "149.154.175.50", "port": 443, "auth_key": "Clpr04aXh3mgc/BO7jeNJ1JkyPRho9BQsKXORvHr1FOAE0ehCo2kWu9lZzEKXKBxFdGG6h4il1QLaho5Lk6J/mkgaRricKInv/BZJEBUo1WlWGaFxDShQL+9VMbWRiyUq/0+hghmcrfJMEYhkRP4CNAIyhJs7iuG2dgaLwVDPk/iZcyhAh6+gTM5URYGb2xvKsrXNPe/uQQtr2rzICnqpRK32CQwe3G437ZvJILiqv7+CNUINOPhImYRA0UEWCy/eZyisQeEDWtVDN4jKu9cyl+idUoS+RvQkJxLWnmCa7NWgnka1bo0OThalyQWRKPPld1LLDC6IVUALIUjuKFULg=="}`], { type: 'text/plain' });
         var a = document.createElement('a');
         a.href = window.URL.createObjectURL(blob);
         a.download = "example-wa_export-channe.txt";

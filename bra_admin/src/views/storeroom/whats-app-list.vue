@@ -789,7 +789,7 @@ export default {
                 },
                 {
                     label:this.$t('sys_g015'),
-                    value:"item"
+                    value:"itime"
                 }
             ]
             // return ["",this.$t('sys_g011'),this.$t('sys_g012'),this.$t('sys_g013'), this.$t('sys_g014'), this.$t('sys_g015')]

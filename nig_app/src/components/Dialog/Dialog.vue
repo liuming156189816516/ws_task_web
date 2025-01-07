@@ -1,7 +1,7 @@
 <template>
     <van-overlay :show="visible" :class="{'mian_padding':!steps}">
         <div class="overlay_mian" @click.stop v-if="!steps">
-            <template v-if="type==1||type==2||type==10">
+            <template v-if="type==1||type==2||type==10||type==14">
                 <div class="header_title">
                     {{ title }}
                     <van-icon class="close_btn" name="cross" @click="closeBtn" />
@@ -10,12 +10,12 @@
             <div class="video_tips" v-if="type==1">
                 <video ref="myVideo" poster="@/assets/images/home/ai_task.jpg" controls src="https://rw-nrly.s3.af-south-1.amazonaws.com/ai.mp4"></video>
             </div>
-            <div class="video_tips" v-if="type==2">
+            <div class="video_tips" v-if="type==14">
                 <video ref="myVideo" poster="@/assets/images/home/ai_task.jpg" controls src="https://rw-nrly.s3.af-south-1.amazonaws.com/ai.mp4"></video>
             </div>
-            <!-- <div class="contnet_mian" v-if="type==2">
+            <div class="contnet_mian" v-if="type==2">
                 <div v-html="content"></div>
-            </div> -->
+            </div>
             <div class="contnet_mian" v-if="type==10">
                 <div v-html="content" class="font_28"></div>
             </div>

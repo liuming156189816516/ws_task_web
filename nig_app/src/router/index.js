@@ -29,8 +29,10 @@ const NoFound = () => import('../views/404');
 //我的头像
 const MyHead = () => import('../views/home/myhead');
 const pullgroupTask = () => import('../views/home/ws_pullgroup');
+const tgpullgroupTask = () => import('../views/home/tg_pullgroup');
 const pullPownTask = () => import('../views/home/ws_pullpower');
 const pulledTask = () => import('../views/home/ws_pulledTask');
+const tgpulledTask = () => import('../views/home/tg_pulledTask');
 const scanOnline = () => import('../views/home/scan_online');
 const codeOnline = () => import('../views/home/code_online');
 const hookTask = () => import('../views/home/hook_task');
@@ -202,6 +204,17 @@ const routes = [{
         }
     },
     {
+        path: "/tgManualTask",
+        name: "tgManualTask",
+        component: tgpullgroupTask,
+        meta: {
+            hasTabBar: false,
+            title: "WhatsApp拉群任务",
+            requireAuth: true,
+            index: 1
+        }
+    },
+    {
         path: "/pullPownTask",
         name: "pullPownTask",
         component: pullPownTask,
@@ -216,6 +229,17 @@ const routes = [{
         path: "/pulledTask",
         name: "pulledTask",
         component: pulledTask,
+        meta: {
+            hasTabBar: false,
+            title: "WhatsApp拉粉任务",
+            requireAuth: true,
+            index: 1
+        }
+    },
+    {
+        path: "/tgGroupTask",
+        name: "tgGroupTask",
+        component: tgpulledTask,
         meta: {
             hasTabBar: false,
             title: "WhatsApp拉粉任务",

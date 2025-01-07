@@ -614,7 +614,7 @@ methods: {
         this.$toast(`${this.$t("other_044")}`);
     },
     taskVideo(){
-        this.$popDialog({title:this.$t("home_035"),type:2}) 
+        this.$popDialog({title:this.$t("home_035"),type:14}) 
     },
     jumpTgSend(row){
         // let textMsg =`https://t.me/${row.phone}?text=${encodeURIComponent(row.content)}`;

@@ -161,7 +161,7 @@ export default {
             wsList: [],
             tgList: [],
             langIdx:Cookies.get("language"),
-            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','telegTask'],
+            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','telegTask','tgManualTask','tgGroupTask'],
             bannerList:[],
             imagesList:[
                 {
@@ -188,6 +188,8 @@ export default {
                 // {name:this.$t('home_134'),live1:2,live2:1,type:5,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')}
                 // {name:this.$t('home_145'),live1:2,live2:1,type:6,g_num:10,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_183'),live1:2,live2:1,type:5,g_num:25,status:null,task_info_id:null,award:this.$t('home_202'),btn:this.$t('home_057'),desc:this.$t('home_050')},
+                {name:this.$t('home_044'),live1:2,live2:1,type:6,g_num:15,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
+                {name:this.$t('home_134'),live1:2,live2:1,type:7,g_num:2,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
             ]
         },
         taskStatusOption() {
@@ -305,8 +307,6 @@ export default {
             if (!getToken()) return this.$router.push("/login");
             if (row.type == 2) {
                 this.$router.push(path);
-            }else if(row.type == 6) {
-                return this.$toast(this.$t('home_174'));
             }else{
                 this.$router.push(`${path}?id=${row.task_info_id}`);
             }

@@ -353,7 +353,7 @@ const Helper = {
     tgOption() {
 		// return [{status:1,task_info_id:"",type:3},{status:1,task_info_id:"",type:2}];
         // return [{status:1,task_info_id:"",type:1},{status:1,task_info_id:"",type:4},{status:1,task_info_id:"",type:2},{status:1,task_info_id:"",type:6}];
-		return [{status:1,task_info_id:"",type:5}];
+		return [{status:1,task_info_id:"",type:5},{status:1,task_info_id:"",type:6},{status:1,task_info_id:"",type:7}];
 	},
 	langOptions(){
 		return [{icon:"en", lang: "en", name: "en-GB" },{icon:"zh", lang: "zh", name: "zh-CN" }];

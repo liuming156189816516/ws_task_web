@@ -75,7 +75,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return ["",this.$t("sys_m114"),this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),"","","",this.$t("sys_m118")]
+            return ["",this.$t("sys_m114"),this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),"","","",this.$t("sys_m118"),this.$t("sys_m122"),this.$t("sys_m123")]
         }
     },
     created() {

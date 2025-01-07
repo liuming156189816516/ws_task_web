@@ -249,7 +249,7 @@
         async getPullGroup(){
             let index = this.activeIdx;
             let params = {ptype:index==2?1:0,page:1,limit:100}
-            index==3||index==4||index==5?params.task_type=1:"";
+            index==3||index==4||index==5?params.task_type=1:0;
             const { data:{list1} } = await getmarketgrouplist(params);
             this.marketingList = list1|| [];
         },

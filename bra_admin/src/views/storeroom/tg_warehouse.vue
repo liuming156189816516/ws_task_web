@@ -41,11 +41,6 @@
             <el-table-column type="selection" width="55" />
             <el-table-column prop="name" show-overflow-tooltip :label="$t('sys_l056')" minWidth="140" />
             <el-table-column prop="acc_type" :label="$t('sys_l057')" minWidth="100" />
-            <el-table-column prop="account_type" :label="$t('sys_l058')" minWidth="100" >
-              <template slot-scope="scope">
-                {{ deviceOption[scope.row.account_type] }}
-              </template>
-            </el-table-column>
             <el-table-column prop="status" :label="$t('sys_l059')" minWidth="100">
               <template slot-scope="scope">
                 <el-tag :type="scope.row.status==1?'warning':'success'" size="small"> {{ taskOption[scope.row.status] }}</el-tag>

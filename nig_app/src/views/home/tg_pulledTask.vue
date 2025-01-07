@@ -83,7 +83,8 @@
 import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
-import { getinvitefriendtasklist,submitgrouplinktask,dotutorialstatus } from '@/api/tg_task';
+import { dotutorialstatus } from '@/api/home';
+import { getinvitefriendtasklist,submitgrouplinktask } from '@/api/tg_task';
 import uniFun from "@/utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',

@@ -114,7 +114,8 @@ import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
 import uniFun from "@/utils/uni-webview-js"
-import { getinvitefriendtasklist,getcreatetaskinfo,submitgrouplinktask,submitcreatetask,dotutorialstatus } from '@/api/tg_task';
+import { dotutorialstatus } from '@/api/home';
+import { getinvitefriendtasklist,getcreatetaskinfo,submitgrouplinktask,submitcreatetask } from '@/api/tg_task';
 export default {
 	name: 'ws_pullgroup',
 	components: {PageHeader},

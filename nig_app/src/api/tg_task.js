@@ -11,6 +11,4 @@ export const submitgrouplinktask = (params = {}) => {
 export const submitcreatetask = (param) => {
     return request({url: '/account/submitcreatetasktg$',method: 'post',data:param})
 }
-export const dotutorialstatus = (params)=> {
-    return request({url:'/account/dotutorialstatustg',method:'post',data:params})
-}
+

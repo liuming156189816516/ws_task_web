@@ -241,11 +241,15 @@
             this.taskForm.data_pack_id="";
             this.taskForm.materialData=[];
             this.$refs.taskForm.resetFields();
-            this.getPullGroup();
+            if(this.activeIdx != 3){
+                this.getPullGroup();
+            }
             this.getConfiglist();
         },
         async getPullGroup(){
-            const { data:{list1} } = await getmarketgrouplist({ptype:this.activeIdx==2?1:0,page:1,limit:100});
+            let index = this.activeIdx==4||this.activeIdx==5?1:0;
+            const { data:{list1} } = await getmarketgrouplist({ptype:index,page:1,limit:100});
+            console.log(list1);
             this.marketingList = list1|| [];
         },
         async getDatalist() {

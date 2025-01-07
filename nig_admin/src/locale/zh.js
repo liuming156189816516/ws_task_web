@@ -528,6 +528,7 @@ export default {
     'sys_m121': 'AI佣金(TG)',
     'sys_m122': 'TG-拉群',
     'sys_m123': 'TG-拉粉',
+    'sys_m124': 'TG-拉群拉粉',
 
     'sys_mat001': '素材名称',
     'sys_mat002': '排序调整',

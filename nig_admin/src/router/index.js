@@ -55,6 +55,7 @@ export const constantRoutes = [
   {
     path: '/user',
     component: Layout,
+    name: 'user',
     children: [
       {
         hidden: true,
@@ -70,6 +71,7 @@ export const constantRoutes = [
         name: 'change-password',
         meta: {
           title:i18n.t('sys_m021'),
+          icon: 'dashboard'
         }
       }
     ]
@@ -358,6 +360,14 @@ export const asyncRoutes = [
         name: 'wa-pull-group',
         meta: {
           title:i18n.t('sys_m037')+i18n.t('sys_q128')
+        }
+      },
+      {
+        path: '/tg-pull-group',
+        component: () => import('@/views/task/tg-pull-group'),
+        name: 'tg-pull-group',
+        meta: {
+          title:""
         }
       },
       {

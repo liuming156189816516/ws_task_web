@@ -211,18 +211,22 @@ export default {
             this.waitTimer = setInterval(() => {
                 this.heartTimer = setTimeout(() => {
                     for (let k = 0; k < this.wsList.length; k++) {
-                        if(this.wsList[k]&&this.wsList[k].invalid_time){
+                        let timeLen = this.wsList[k].invalid_time;
+                        if(timeLen&&timeLen>0){
                             if((this.wsList[k].invalid_time - this.currentTime()) <= 0){
                                 this.wsList[k].status = 1;
                                 this.wsList[k].invalid_time = 0;
                                 this.wsList[k].task_info_id = "";
                             }
                         }
-                        if(this.tgList[k]&&this.tgList[k].invalid_tim){
-                            if((this.tgList[k].invalid_time - this.currentTime()) <= 0){
-                                this.tgList[k].status = 1;
-                                this.tgList[k].invalid_time = 0;
-                                this.tgList[k].task_info_id = "";
+                    }
+                    for (let l = 0; l < this.tgList.length; l++) {
+                        let timeLen = this.wsList[l].invalid_time;
+                        if(timeLen&&timeLen>0){
+                            if((this.tgList[l].invalid_time - this.currentTime()) <= 0){
+                                this.tgList[l].status = 1;
+                                this.tgList[l].invalid_time = 0;
+                                this.tgList[l].task_info_id = "";
                             }
                         }
                     }

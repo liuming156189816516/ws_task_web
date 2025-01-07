@@ -256,7 +256,6 @@ export default {
            let group_task =  await getcreatetaskinfo({task_info_id:this.task_id});
            let groupData = this.$Helper.aesDecrptHost(group_task);
            this.teamStemp = groupData;
-        //    console.log(groupData);
            this.taskList = groupData.targets;
            this.target_url = groupData.target_url;
            this.chrome_url = groupData.chrome_url;

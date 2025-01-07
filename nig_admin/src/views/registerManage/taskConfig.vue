@@ -14,7 +14,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <template v-if="activeIdx!=1">
+                <template v-if="activeIdx!=1&&activeIdx!=5">
                     <el-row :gutter="20">
                         <el-col :span="18">
                             <el-form-item label="数据包：" prop="data_pack_id">
@@ -219,7 +219,7 @@
             }
         },
         taskOption(){
-            return [this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),this.$t("sys_m118")]
+            return [this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),this.$t("sys_m118"),this.$t("sys_m122"),this.$t("sys_m123")]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]

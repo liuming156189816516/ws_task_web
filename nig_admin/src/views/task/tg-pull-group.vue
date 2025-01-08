@@ -169,7 +169,7 @@
 
 <script>
 import { successTips, resetPage } from '@/utils/index'
-import { getcreategroupinfolist,getsysconfig,upsysconfig,groupsendmsg,dooutexcel } from '@/api/task'
+import { getcreategroupinfolist,getsysconfig,upsysconfig,groupsendmsg,dooutexcel } from '@/api/tg_task'
 export default {
   data() {
     return {

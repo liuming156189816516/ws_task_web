@@ -170,6 +170,8 @@ body,
 	font-family: 'Microsoft YaHei';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	touch-action: manipulation; /* 禁用默认缩放手势 */
+    -webkit-text-size-adjust: 100%; /* 禁用文本缩放 */
 	color: #2c3e50;
 	overflow: hidden;
 	display: flex;

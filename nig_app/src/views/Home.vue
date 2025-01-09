@@ -26,14 +26,14 @@
                 <div class="l_value" @click="showChangeBtn" @click.stop>
                     <span class="font_28">{{ viewLang }}</span>
                     <img class="down_icon" src="@/assets/images/home/down_arrow_white.png">
-                    <van-transition name="fade-up">
-                        <div class="down_list" :class="isIndex?'active_open':'active_close'">
+                    <transition name="el-zoom-in-top">
+                        <div class="down_list" v-if="isIndex">
                             <p class="flex-item flex-align flex-center" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">
                                 <img :src="require(`@/assets/images/lang/${item.icon}.png`)">
                                 <span :class="[langIdx==item.lang?'select_active':'']">{{item.name}}</span>
                             </p>
                         </div>
-                    </van-transition>
+                    </transition>
                 </div>
             </div>
             <div class="notice_warp">
@@ -545,7 +545,7 @@ export default {
                 height: 0;
                 border: 16px solid transparent;
                 border-bottom-color: #fff;
-                left: 50px;
+                left: 80px;
                 top: -30px;
             }
             .active_open{

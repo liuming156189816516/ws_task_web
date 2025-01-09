@@ -24,17 +24,17 @@
                         <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
                     </div>
                 </div>
-                <div class="l_value" @click="showChangeBtn" @click.stop>
+                <div class="l_value flex-item flex-align flex-center" @click="showChangeBtn" @click.stop>
                     <span class="font_28">{{ viewLang }}</span>
                     <img class="down_icon" src="@/assets/images/home/down_arrow_white.png">
-                    <van-transition name="fade-up">
-                        <div class="down_list" :class="isIndex?'active_open':'active_close'">
-                            <p class="flex-item flex-align flex-center" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">
+                    <transition name="el-zoom-in-top">
+                        <div class="down_list flex-item flex-align flex-dir-c" v-if="isIndex">
+                            <p class="flex-item" v-for="item in langOptions" :key="item.lang" @click="onChangeType(item)">
                                 <img :src="require(`@/assets/images/lang/${item.icon}.png`)">
                                 <span :class="[langIdx==item.lang?'select_active':'']">{{item.name}}</span>
                             </p>
                         </div>
-                    </van-transition>
+                    </transition>
                 </div>
             </div>
             <div class="notice_warp">
@@ -473,8 +473,6 @@ export default {
             position: absolute;
             top: 40px;
             right: 0;
-            display: flex;
-            align-items: center;
             span{
                 width: 100%;
                 flex-grow: 1;
@@ -493,6 +491,7 @@ export default {
                 right: 0px;
                 top: 55px;
                 z-index: 1;
+                flex-shrink: 0;
                 font-size: 28px;
                 padding: 16px 20px;
                 border-radius: 8px;
@@ -509,7 +508,7 @@ export default {
                     }
                 }
                 p:last-child{
-                    border: none;
+                    border: transparent;
                 }
                 img{
                     width: 40px;
@@ -525,27 +524,8 @@ export default {
                 height: 0;
                 border: 16px solid transparent;
                 border-bottom-color: #fff;
-                left: 50px;
+                left: 80px;
                 top: -30px;
-            }
-            .active_open{
-                display: block;
-                transition: all .2s;
-                // animation: slide-down .2s ease-in;
-                transition: .2s ease-in;
-                transform-origin: 50% 0;
-                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-            }
-            .active_close{
-                display: none;
-                transition: all .5s;
-                animation: select-close .5s ease-in;
-                transition: .3s ease-in;
-                transform-origin: 50% 0;
-            }
-            @keyframes slide-down{
-                0%{transform: scale(1,.5)}
-                100%{transform: scale(1,1)}
             }
         }
         .notice_warp {

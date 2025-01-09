@@ -83,6 +83,10 @@
             <h3 class="font_28">{{$t('spre_009')}}</h3>
             <div class="record_derc font_22">{{$t('spre_010')}} <span class="focus_tips" @click="$Helper.globalSupport()">{{$t('spre_011')}}</span></div>
         </div> -->
+        <div class="task_tips w_f flex-item flex-align font_28">
+            <van-icon name="warning-o" />
+            {{ $t("other_102") }}
+        </div>
         <div class="task_box_main w_f flex-item flex-dir-c">
             <div class="task_warp w_f flex-item">
                 <div class="task_main w_f flex-item flex-dir-c">
@@ -1014,6 +1018,18 @@ methods: {
     }
     .app_top_head{
         margin-top: 28px;
+    }
+}
+.task_tips{
+    padding: 0 30px;
+    line-height: 1;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    color: $home-order-title;
+    .van-icon{
+        font-size: 18px;
+        margin-right: 4px;
+        color: $home-copay-title;
     }
 }
 .task_box_main{

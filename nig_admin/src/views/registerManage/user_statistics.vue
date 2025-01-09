@@ -152,7 +152,7 @@ export default {
             statisticsList:[],
             accountDataList:[],
             pageOption: resetPage(),
-            showNum: [1,2,3,4,5,6,7,8,9,10]
+            showNum: [1,2,3,4,5,6,7,8]
         }
     },
     computed: {

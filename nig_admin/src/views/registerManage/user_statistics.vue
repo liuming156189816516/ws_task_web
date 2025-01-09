@@ -337,7 +337,7 @@ export default {
                             let num = this.accountDataList[k].ai_bounty_amount+this.accountDataList[k].bounty_amount+this.accountDataList[k].pull_fan_bounty_amount;
                             this.accountDataList[k].bouns_total_num=num;
                         }
-                        if(key==='ai_commission_amount'key==='commission_amount'||key==='pull_fan_commission_amount'){
+                        if(key==='ai_commission_amount'||key==='commission_amount'||key==='pull_fan_commission_amount'){
                             let num = this.accountDataList[k].ai_commission_amount+this.accountDataList[k].commission_amount+this.accountDataList[k].pull_fan_commission_amount;
                             this.accountDataList[k].comm_total_num=num;
                         }

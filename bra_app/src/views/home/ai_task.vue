@@ -1109,11 +1109,13 @@ methods: {
             padding: 10px 30px;
             box-sizing: border-box;
             background: $home-title-10;
-            .title_01, .title_01, .title_01, .title_01{
+            .title_01, .title_02, .title_03, .title_04{
                 flex-shrink: 0;
             }
             .title_01{
                 flex: 1;
+                flex-basis: 50px;
+                justify-content: flex-start;
             }
             .title_02{
                 flex: 1.2;

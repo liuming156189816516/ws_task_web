@@ -71,7 +71,7 @@
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                            <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{ item.phone }}</span>
+                            <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{idx==1?item.phone+"2":item.phone }}</span>
                             <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                             <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
                             <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
@@ -672,8 +672,6 @@ export default {
             }
         }
         .record_list{
-            // max-height: 300px;
-            // overflow-y: auto;
             padding: 0 30px;
             margin-top: 20px;
             padding-bottom: 30px;
@@ -683,20 +681,18 @@ export default {
                 font-weight: bold;
                 color: $home-title-12;
             }
-
             .title_top{
                 height: 100px;
                 padding: 10px 30px;
                 box-sizing: border-box;
                 background: $home-title-10;
-                // span{
-                //     flex-shrink: 0;
-                // }
-                .title_01, .title_01, .title_01, .title_01{
+                .title_01, .title_02, .title_03, .title_04{
                     flex-shrink: 0;
                 }
                 .title_01{
                     flex: 1;
+                    flex-basis: 50px;
+                    justify-content: flex-start;
                 }
                 .title_02{
                     flex: 1.2;
@@ -706,24 +702,8 @@ export default {
                 }
                 .title_04{
                     flex: 0.8;
+                    justify-content: center;
                 }
-
-                // span:nth-child(1){
-                //     flex-grow: 1;
-                //     flex-shrink: 0;
-                //     background: salmon;
-                // }
-                // span:nth-child(2){
-                //     flex-grow: 2;
-                //     flex-shrink: 0;
-                // }
-                // span:nth-child(3){
-                //     flex-grow: 0.6;
-                //     justify-content: center;
-                // }
-                // span:nth-child(4){
-                //     flex-grow: 0.6;
-                // }
                 .upload_icon{
                     position: relative;
                     width: max-content;

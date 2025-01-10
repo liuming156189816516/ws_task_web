@@ -272,7 +272,6 @@ export default {
     },
     async mounted(){
         await this.getIncomeList();
-        await this.getContato();
     },
 	methods: {
         async done(){
@@ -341,8 +340,9 @@ export default {
             let res = await getaimsginfows({page:this.page,limit:this.limit,task_type:1});
             this.loading = false;
             if(res.code) return;
-            console.log(res);
             this.link = res.link;
+            this.target_url = res.url;
+            this.taskList = res.targets;
             this.task_id = res.task_id;
             this.isFinish = res.is_finish_flag;
             this.total_bonus = res.total_bonus;
@@ -365,11 +365,6 @@ export default {
             if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList[0].img_url){
                 this.showStep=true;
             }
-        },
-        async getContato(){
-           const { url,targets } = await gettaskliststatus({task_id:this.task_id});
-           this.target_url = url;
-           this.taskList = targets;
         },
         // 
         copySuccess(){

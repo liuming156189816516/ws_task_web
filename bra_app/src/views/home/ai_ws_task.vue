@@ -3,7 +3,7 @@
         <div class="task_mian w_f flex-item flex-dir-c">
             <page-header :title="$t('home_187')" :show-icon="true" :bgcolor="false" />
             <div class="video_box flex-item flex-align flex-center mg_24">
-                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" poster="@/assets/images/home/cover_img.png" src="https://rw-bx.s3.sa-east-1.amazonaws.com/ws-ai.mp4" />
+                <video class="myVideo" ref="myVideo" controls="controls" style="width:100%;height:160px;" poster="@/assets/images/home/cover_img2.png" src="https://rw-bx.s3.sa-east-1.amazonaws.com/ws-ai.mp4" />
             </div>
             <div class="task_box w_f flex-item">
                 <div class="task_Progress w_f flex-item flex-dir-c">

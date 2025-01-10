@@ -362,8 +362,8 @@
       rowSelectChange(row, column, event) {
         let tableCell = this.$refs.serveTable;
         if (this.checkIdArry.includes(row.id)) {
-            tableCell.toggleRowSelection(row,false);
-            return;
+          tableCell.toggleRowSelection(row,false);
+          return;
         }
         tableCell.toggleRowSelection(row,true);
       },

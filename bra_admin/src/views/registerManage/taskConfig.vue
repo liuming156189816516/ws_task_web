@@ -6,8 +6,8 @@
         <div class="view_continer">
             <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
                 <el-row :gutter="20">
-                    <el-col :span="18" v-if="activeIdx!=3">
-                        <el-form-item :label="activeIdx==2?'监控号分组：':'营销分组：'" prop="market_group">
+                    <el-col :span="18">
+                        <el-form-item :label="activeIdx==2||activeIdx==3?'监控号分组：':'营销分组：'" prop="market_group">
                             <el-select v-model="taskForm.market_group" :placeholder="$t('sys_c052')">
                                 <el-option :label="item.name+'(数量：'+item.count+'，在线：'+item.online_num+')'"  :value="item.group_id" v-for="(item,idx) in marketingList" :key="idx"></el-option>
                             </el-select>
@@ -219,7 +219,7 @@
             }
         },
         taskOption(){
-            return [this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),this.$t("sys_m118")]
+            return [this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),this.$t("sys_m122")]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]
@@ -245,7 +245,7 @@
             this.getConfiglist();
         },
         async getPullGroup(){
-            const { data:{list1} } = await getmarketgrouplist({ptype:this.activeIdx==2?1:0,page:1,limit:100});
+            const { data:{list1} } = await getmarketgrouplist({ptype:this.activeIdx==2||this.activeIdx==3?1:0,page:1,limit:100});
             this.marketingList = list1|| [];
         },
         async getDatalist() {
@@ -254,7 +254,8 @@
         },
         async getConfiglist() {
             this.loading = true;
-            const { data } = await gettaskconfiginfo({ptype:Number(this.activeIdx)+1});
+            let index = Number(this.activeIdx)+1;
+            const { data } = await gettaskconfiginfo({ptype:index==4?5:index});
             this.loading = false;
             if(data.material_list&&data.material_list.length>0){
                 this.taskForm.market_group=data.market_group_id;
@@ -310,8 +311,9 @@
                         }
                         return item;
                     });
+                    let index = Number(this.activeIdx)+1;
                     let params = {
-                        ptype:Number(this.activeIdx)+1,
+                        ptype:index==4?5:index,
                         link:this.taskForm.data_link,
                         market_group_id:this.taskForm.market_group,
                         data_pack_id:this.taskForm.data_pack_id,

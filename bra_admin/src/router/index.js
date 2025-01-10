@@ -446,6 +446,14 @@ export const asyncRoutes = [
         }
       },
       {
+        path: '/ai-ws-task',
+        component: () => import('@/views/task/ai-ws-task'),
+        name: 'ai-ws-task',
+        meta: {
+          title:i18n.t('sys_m122')
+        }
+      },
+      {
         hidden: true,
         path: '/lucky_details',
         component: () => import('@/views/registerManage/lucky_detail'),

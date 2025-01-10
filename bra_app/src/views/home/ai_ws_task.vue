@@ -145,7 +145,7 @@ import { mapState } from 'vuex';
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
 import { submitcreatetask,dotutorialstatus } from '@/api/home'
-import { getaimsginfo,uploadfile,submitaimessagetask,getaimessagetaskcontacts } from '@/api/task';
+import { gettaskliststatus,uploadws,submitaimessagetaskws,getaimsginfows } from '@/api/task';
 import uniFun from "@/utils/uni-webview-js"
 export default {
 	name: 'ws_pullgroup',
@@ -313,7 +313,7 @@ export default {
             formData.append('phone', row.phone);
             this.is_upload=true;
             this.file_uuid = row.uuid;
-            let res = await uploadfile(formData);
+            let res = await uploadws(formData);
             this.is_upload=false;
             if(res.code) return;
             for (let k = 0; k < this.pullGroupList.length; k++) {
@@ -338,7 +338,7 @@ export default {
         },
         async getIncomeList(){
             this.ref_loading = true;
-            let res = await getaimsginfo({page:this.page,limit:this.limit,task_type:1});
+            let res = await getaimsginfows({page:this.page,limit:this.limit,task_type:1});
             this.loading = false;
             if(res.code) return;
             console.log(res);
@@ -367,7 +367,7 @@ export default {
             }
         },
         async getContato(){
-           const { url,targets } = await getaimessagetaskcontacts({task_id:this.task_id});
+           const { url,targets } = await gettaskliststatus({task_id:this.task_id});
            this.target_url = url;
            this.taskList = targets;
         },
@@ -377,7 +377,7 @@ export default {
         },
         submitBtn(){
             this.isupoading=true;
-            submitaimessagetask({task_id:this.task_id}).then(res=>{
+            submitaimessagetaskws({task_id:this.task_id}).then(res=>{
                 this.isupoading=false;
                 if(res.code) return;
                 this.isFinish=true;
@@ -389,7 +389,7 @@ export default {
             // this.$store.dispatch('User/actionReport',11);
             if(!this.group_link) return this.$toast(this.$t('other_001',{value:this.$t('home_036')})); 
             this.isLoading=true;
-            submitcreatetask({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
+            submitaimessagetaskws({task_info_id:this.task_id,invite_link:this.group_link}).then(res =>{
                 this.isLoading=false;
                 if(res.code) return;
                 this.refreshBtn();

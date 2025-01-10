@@ -168,7 +168,7 @@ export default {
             wsList: [],
             tgList: [],
             langIdx:Cookies.get("language"),
-            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','telegTask'],
+            taskType: ['', 'hookTask', 'highTask', 'pullgroupTask','pulledTask','telegTask','aiwsTask'],
             bannerList:[],
             imagesList:[
                 {
@@ -203,6 +203,7 @@ export default {
                 // {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 // {name:this.$t('home_174'),live1:1,live2:4,type:6,g_num:20,status:null,task_info_id:null,award:this.$t('home_176'),btn:this.$t('home_175'),desc:this.$t('home_049')},
                 {name:this.$t('home_187'),live1:1,live2:1,type:5,g_num:25,status:null,task_info_id:null,award:this.$t('home_202'),btn:this.$t('home_057'),desc:this.$t('home_180')},
+                {name:this.$t('home_187'),live1:1,live2:1,type:6,g_num:25,status:null,task_info_id:null,award:this.$t('home_202'),btn:this.$t('home_057'),desc:this.$t('home_180')},
             ]
         },
         taskStatusOption() {
@@ -293,8 +294,6 @@ export default {
                 this.$router.push(path);
             }else if(row.type==3&&!row.is_open) {
                 return this.$toast(this.$t('home_179'));
-            }else if(row.type == 6) {
-                return this.$toast(this.$t('home_174'));
             }else{
                 this.$router.push(`${path}?id=${row.task_info_id}`);
             }

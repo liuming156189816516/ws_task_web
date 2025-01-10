@@ -38,6 +38,21 @@ export const getaimessagetaskcontacts = (params)=> {
     return request({url:'/account/getaimessagetaskcontacts',method:'post',data:params})
 }
 
+export const gettaskliststatus = (params)=> {
+    return request({url:'/account/gettaskliststatus',method:'post',data:params})
+}
+export const getaimsginfows = (params)=> {
+    return request({url:'/account/getaimsginfows',method:'post',data:params})
+}
+export const submitaimessagetaskws = (params)=> {
+    return request({url:'/account/submitaimessagetaskws',method:'post',data:params})
+}
+export const uploadws = (params)=> {
+    return request({url:'/account/uploadws',method:'post',data:params})
+}
+
+
+
 
 
 

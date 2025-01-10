@@ -55,12 +55,12 @@
                             </div>
                             <div class="copay_text flex-item flex-center font_28">{{yesterday_rebate}}</div>
                         </div>
-                        <div class="invit_code w_f flex-item flex-dir-c">
+                        <!-- <div class="invit_code w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-center">
                                 <span class="left_desc flex-item font_24">{{$t('spre_022')}}</span>
                             </div>
                             <div class="copay_text flex-item flex-center font_28">{{total_rebate}}</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

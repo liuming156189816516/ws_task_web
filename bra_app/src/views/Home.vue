@@ -106,7 +106,7 @@
                                 <span class="flex-item">{{$t('home_093')}}</span>
                                 <img v-for="(v,i) in taskNameOption[item.type].live1" :key="i" src="@/assets/images/home/star_icon.png">
                             </div>
-                            <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5">
+                            <div class="task_live_2 flex-item flex-align" v-if="item.type==2||item.type==3||item.type==4||item.type==5||item.type==6">
                                 <span class="flex-item">{{$t('home_141')}}{{taskNameOption[item.type].g_num}}</span>
                                 <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/gold_icon.png">
                             </div>

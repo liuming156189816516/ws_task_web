@@ -44,12 +44,12 @@
                             </div>
                             <div class="copay_text flex-item flex-center font_28">{{yesterday_rebate}}</div>
                         </div>
-                        <div class="invit_code w_f flex-item flex-dir-c">
+                        <!-- <div class="invit_code w_f flex-item flex-dir-c">
                             <div class="copay_desc flex-item flex-align flex-center">
                                 <span class="left_desc flex-item font_24">{{$t('spre_022')}}</span>
                             </div>
                             <div class="copay_text flex-item flex-center font_28">{{total_rebate}}</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -199,10 +199,9 @@ export default {
             this.$refs.myIntroStep.prev()
         },
         async getIncomeList(){
-            let {team_size,today_rebate,yesterday_rebate,total_rebate} = await getteammatesinfo();
+            let {team_size,today_rebate,yesterday_rebate} = await getteammatesinfo();
             this.team_size = team_size;
             this.today_rebate = today_rebate;
-            this.total_rebate = total_rebate;
             this.yesterday_rebate = yesterday_rebate;
         },
         onLoad(){

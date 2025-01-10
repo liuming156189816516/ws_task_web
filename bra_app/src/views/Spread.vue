@@ -212,10 +212,9 @@ export default {
             this.$refs.myIntroStep.prev()
         },
         async getIncomeList(){
-            let {team_size,today_rebate,yesterday_rebate,total_rebate} = await getteammatesinfo();
+            let {team_size,today_rebate,yesterday_rebate} = await getteammatesinfo();
             this.team_size = team_size;
             this.today_rebate = today_rebate;
-            this.total_rebate = total_rebate;
             this.yesterday_rebate = yesterday_rebate;
         },
         onLoad(){

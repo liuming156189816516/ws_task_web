@@ -903,13 +903,13 @@ export default {
             }
             refsElTable.toggleRowSelection([{row:row,selected:true}]);
         },
-        rowSelectChange(row) {
+        rowSelectChange(row, column, event) {
             let tableCell = this.$refs.serveTable;
             if (this.checkIdArry.includes(row.id)) {
-                tableCell.toggleRowSelection([{row:row,selected:false}]);
+                tableCell.toggleRowSelection(row,false);
                 return;
             }
-            tableCell.toggleRowSelection([{row:row,selected:true}]);
+            tableCell.toggleRowSelection(row,true);
         },
         rowStaffChange(row){
             let tableCell = this.$refs.tableName;

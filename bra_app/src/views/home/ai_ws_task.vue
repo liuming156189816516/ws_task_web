@@ -741,6 +741,8 @@ export default {
             .record_scroll{
                 max-height: 1100px;
                 overflow-y: auto;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
                 background: $font-color-white;
             }
             .task_title_head {
@@ -765,6 +767,8 @@ export default {
             .empty_box{
                 height: 364px;
                 color: $home-title-14;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
                 background-color: $font-color-white;
                 img{
                     height: 202px;

@@ -48,7 +48,7 @@
             <el-table-column prop="phone" label="手机号" minWidth="120" />
             <!-- <el-table-column prop="task_account" label="ws任务账号" minWidth="120" />
             <el-table-column prop="user_account" label="ws挂机账号" minWidth="120" /> -->
-            <el-table-column prop="uuid" label="任务号" minWidth="120" />
+            <!-- <el-table-column prop="uuid" label="任务号" minWidth="120" /> -->
             <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
               <template slot="header">
                 <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">

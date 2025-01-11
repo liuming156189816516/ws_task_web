@@ -306,7 +306,7 @@
                     </el-table-column>
                 </el-table>
                 <div class="layui_page">
-                <el-pagination background @size-change="handleSizeFun" @current-change="handlePageFun" :page-size="model1.limit"
+                    <el-pagination background @size-change="handleSizeFun" @current-change="handlePageFun" :page-size="model1.limit"
                     :page-sizes="pageOption" :current-page.sync="model1.page" layout="total, sizes, prev, pager, next, jumper" :total="model1.total">
                     </el-pagination>
                     <!-- showBodyOverflow="title" :total="model1.total" 
@@ -1136,6 +1136,7 @@ export default {
             return row.id;
         },
         handleSizeFun(limit){
+            this.model1.page = 1;
             this.model1.limit = limit;
             this.initNumberList(1);
         },

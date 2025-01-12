@@ -102,7 +102,7 @@ export default {
 			this.bext_id = this.$Helper.getUrlParams("fbclid");
 		}
 		this.timestamp = String(new Date().getTime());
-		this.getAreaCode();
+		// this.getAreaCode();
 		this.getVerfyBtn();
 		this.$store.dispatch('User/actionReport',2)
 	},

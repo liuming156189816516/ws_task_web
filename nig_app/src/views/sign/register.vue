@@ -13,7 +13,7 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
-					<div class="code_item flex-item flex-align font_28" @click.stop="show_code=!show_code">
+					<!-- <div class="code_item flex-item flex-align font_28" @click.stop="show_code=!show_code">
 						<span class="flex-item">{{ area_code }}</span>
 						<transition name="el-zoom-in-top">
 							<div class="down_list flex-item flex-dir-c" v-if="show_code">
@@ -24,7 +24,7 @@
 							</div>
 						</transition>
 						<img class="down_icon flex-item" src="@/assets/images/sign/xiala.png">
-					</div>
+					</div> -->
 					<!-- <input v-model="username" :placeholder="$t('other_001',{value:$t('login_039')})" maxlength="12" autocomplete="off" oninput="value=value.replace(/^0|[^0-9]/g, '')" /> -->
 					<input v-model="username" type="number" @keyup="checkMobile" autocomplete="off" oninput="value=value.replace(/^0|[^0-9]/g, '')" :placeholder="$t('other_001',{value:$t('login_039')})" />
 				</div>
@@ -113,13 +113,16 @@ export default {
 		},
 		checkMobile(){
 			const len = this.username.length;
-			if(this.area_code == '62' && len > 12){
-				this.username = this.username.slice(0,12)
-			}else if(this.area_code == '233' && len > 9){
-				this.username = this.username.slice(0,9)
-			}else if(this.area_code == '91'||this.area_code == '234'){
-				this.username = this.username.slice(0,10)
+			if(len > 14){
+				this.username = this.username.slice(0,14)
 			}
+			// if(this.area_code == '62' && len > 12){
+			// 	this.username = this.username.slice(0,12)
+			// }else if(this.area_code == '233' && len > 9){
+			// 	this.username = this.username.slice(0,9)
+			// }else if(this.area_code == '91'||this.area_code == '234'){
+			// 	this.username = this.username.slice(0,10)
+			// }
 		},
 		async getAreaCode(){
 			const { code } = await getcountrycode();
@@ -163,13 +166,14 @@ export default {
 			const regex = new RegExp(/^[0-9A-Za-z]{6,20}$/);
 			if (!this.username) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_039')}))
-			} else if(this.area_code=='234' && len <= 9 || this.area_code=='91' && len <= 9){
-				return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
-			} else if(this.area_code=='233' && len <= 8){
-				return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
-			} else if(this.area_code=='62' && len < 8){
-				return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
 			}
+			// else if(this.area_code=='234' && len <= 9 || this.area_code=='91' && len <= 9){
+			// 	return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
+			// } else if(this.area_code=='233' && len <= 8){
+			// 	return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
+			// } else if(this.area_code=='62' && len < 8){
+			// 	return this.$toast(this.$t('other_001',{value:this.$t('login_041')}));
+			// }
 
 			// else if(this.area_code=='62'&&len <= 7){
 			// 	console.log("002");
@@ -200,7 +204,7 @@ export default {
 				}
 			}
 			let params = {
-				account:`${this.area_code}${this.username}`,
+				account:this.username,
 				pwd: this.pwd,
 				uuid: this.timestamp,
 				code: this.safe_code,

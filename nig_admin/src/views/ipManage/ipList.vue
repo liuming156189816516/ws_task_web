@@ -52,6 +52,8 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="initiplist(1)">{{ $t('sys_c002') }}</el-button>
       </el-form-item>
+      <el-form-item>
+      </el-form-item>
       <el-form-item class="el-item-right">
         <!-- <el-button type="primary">套餐IP</el-button> -->
         <!-- <el-button type="success" @click="showSetIp(0)">设置登录IP</el-button> -->
@@ -67,8 +69,7 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <!-- <el-button type="info" @click="showSetIp(0)">IP冻结规则</el-button> -->
-        <el-button type="primary" @click="changeIpBtn(0,0)" style="margin-left: 10px;">{{$t('sys_mat045')}}</el-button>
+        <el-button type="primary" @click="changeIpBtn(0,0)">{{$t('sys_mat045')}}</el-button>
       </el-form-item>
     </el-form>
     <div style="height:100%;">
@@ -1037,12 +1038,11 @@ export default {
       if (this.checkIdArry.length == 0) {
         return successTips(this,"error",this.$t('sys_c126'));
       }
-      for (let k = 0; k < this.betchOption.length; k++) {
-        if (this.betchOption[k].label == command.label) {
-          this.setIpType = k;
-          this.setIpName = this.betchOption[k].label;
-        }
-      }
+      let res = null; 
+      this.betchOption.forEach((item,index) => {if(item.label == command.label){res={index,label:item.label}}});
+      if(!res) return;
+      this.setIpType = res.index;
+      this.setIpName = res.label;
       if (this.setIpType==0||this.setIpType==1||this.setIpType==2||this.setIpType==10) {
         this.setIpModel=true;
         if (this.setIpType==10) {

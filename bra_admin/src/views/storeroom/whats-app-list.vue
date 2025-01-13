@@ -214,22 +214,25 @@
                     <i class="el-icon-info"></i>
                     <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
                 </div>
-                <el-table @sort-change="sorthandle" :data="accountDataList" row-key="id" use-virtual border height="700" v-loading="loading" element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange">
-                    <el-table-column type="index" :label="$t('sys_g020')" width="60" />
-                    <el-table-column type="selection" width="55" :reserve-selection="true" />
-                    <el-table-column prop="head" :label="$t('sys_g021')" width="80">
+                <u-table @sort-change="sorthandle" :data="accountDataList" row-key="id" use-virtual border height="700" v-loading="loading"
+                    element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="model1.total" 
+                    :page-sizes="pageOption" :page-size="model1.limit" :current-page="model1.page" :pagination-show="true"
+                    @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
+                    <u-table-column type="index" :label="$t('sys_g020')" width="60" />
+                    <u-table-column type="selection" width="55" :reserve-selection="true" />
+                    <u-table-column prop="head" :label="$t('sys_g021')" width="80">
                         <template slot-scope="scope">
                             <el-avatar v-if="scope.row.head" :src="scope.row.head" />
                             <el-avatar v-else icon="el-icon-user-solid"></el-avatar>
                         </template>
-                    </el-table-column>
-                    <el-table-column prop="account" :label="$t('sys_g027')" width="130" />
-                    <el-table-column prop="nick_name" :label="$t('sys_g022')" minWidth="100">
+                    </u-table-column>
+                    <u-table-column prop="account" :label="$t('sys_g027')" width="130" />
+                    <u-table-column prop="nick_name" :label="$t('sys_g022')" minWidth="100">
                         <template slot-scope="scope">
                             {{ scope.row.nick_name?scope.row.nick_name:"-" }}
                         </template>
-                    </el-table-column>
-                    <el-table-column prop="status" :label="$t('sys_c022')" minWidth="100">
+                    </u-table-column>
+                    <u-table-column prop="status" :label="$t('sys_c022')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">
                             <span style="color:#909399" :class="[model1.status?'dropdown_title':'']"> {{ $t('sys_c022') }}
@@ -243,8 +246,8 @@
                         <template slot-scope="scope">
                             <el-tag size="small" :type="handleTag(scope.row.status)"> {{ accountOptions[scope.row.status] }}</el-tag>
                         </template>
-                    </el-table-column>
-                    <el-table-column prop="platform_type" :label="$t('sys_mat066')" minWidth="100">
+                    </u-table-column>
+                    <u-table-column prop="platform_type" :label="$t('sys_mat066')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,6)">
                             <span style="color:#909399" :class="[model1.platform_type?'dropdown_title':'']"> {{ $t('sys_mat066') }}
@@ -258,13 +261,13 @@
                         <template slot-scope="scope">
                             {{ plantOption[scope.row.platform_type] }}
                         </template>
-                    </el-table-column>
-                    <el-table-column prop="reason" show-overflow-tooltip :label="$t('sys_g025')" minWidth="100">
+                    </u-table-column>
+                    <u-table-column prop="reason" show-overflow-tooltip :label="$t('sys_g025')" minWidth="100">
                         <template slot-scope="scope">
                             <span>{{ scope.row.reason?scope.row.reason:"-" }}</span>
                         </template>
-                    </el-table-column>
-                    <el-table-column prop="account_type" :label="$t('sys_l057')" minWidth="100">
+                    </u-table-column>
+                    <u-table-column prop="account_type" :label="$t('sys_l057')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium" @command="(command) => handleNewwork(command,3)">
                                 <span style="color:#909399" :class="[model1.account_type?'dropdown_title':'']"> {{ $t('sys_l057') }}
@@ -276,43 +279,35 @@
                             </el-dropdown>
                         </template>
                         <template slot-scope="scope"> {{ accountType[scope.row.account_type] }}</template>
-                    </el-table-column>
-                    <el-table-column prop="fuser_name" :label="$t('sys_m068')" minWidth="100">
+                    </u-table-column>
+                    <u-table-column prop="fuser_name" :label="$t('sys_m068')" minWidth="100">
                         <template slot-scope="scope">
                             <span>{{ scope.row.fuser_name||"-" }}</span>
                         </template>
-                    </el-table-column>
-                    <!-- <el-table-column prop="total_time" :label="$t('sys_q143')" minWidth="100">
+                    </u-table-column>
+                    <!-- <u-table-column prop="total_time" :label="$t('sys_mat117')" minWidth="100">
                         <template slot-scope="scope">
-                            <span>{{ scope.row.total_time||0 }}</span>
+                            <span>{{ scope.row.total_time||"-" }}</span>
                         </template>
-                    </el-table-column> -->
-                    <el-table-column prop="first_login_time" :label="$t('sys_g014')+'/'+$t('sys_g015')" width="180">
+                    </u-table-column> -->
+                    <u-table-column prop="first_login_time" :label="$t('sys_g014')+'/'+$t('sys_g015')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.first_login_time > 0 ? $baseFun.resetTime(scope.row.first_login_time * 1000) : "-" }}/</br>
                             {{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}
                         </template>
-                    </el-table-column>
-                    <el-table-column prop="offline_time" :label="$t('sys_g013')" minWidth="160">
+                    </u-table-column>
+                    <u-table-column prop="offline_time" :label="$t('sys_g013')" minWidth="160">
                         <template slot-scope="scope">
                             {{ scope.row.offline_time > 0 ? $baseFun.resetTime(scope.row.offline_time * 1000) : "-" }}
                         </template>
-                    </el-table-column>
-                    <el-table-column prop="remark" show-overflow-tooltip :label="$t('sys_l062')" width="100">
+                    </u-table-column>
+                    <u-table-column prop="remark" show-overflow-tooltip :label="$t('sys_l062')" width="100">
                     <template slot-scope="scope">
                         <div class="remark_ext">{{ scope.row.remark }}</div>
                         <div @click.stop="addRemark(scope.row,8)"><i class="el-icon-edit" style="color: rgb(103, 194, 58); cursor: pointer;"></i></div>
                     </template>
-                    </el-table-column>
-                </el-table>
-                <div class="layui_page">
-                    <el-pagination background @size-change="handleSizeFun" @current-change="handlePageFun" :page-size="model1.limit"
-                    :page-sizes="pageOption" :current-page.sync="model1.page" layout="total, sizes, prev, pager, next, jumper" :total="model1.total">
-                    </el-pagination>
-                    <!-- showBodyOverflow="title" :total="model1.total" 
-                    :page-sizes="pageOption" :page-size="model1.limit" :current-page="model1.page" :pagination-show="true"
-                     @handlePageSize="switchPage" -->
-                </div>
+                    </u-table-column>
+                </u-table>
             </div>
         </div>
         <!-- 设置IP -->

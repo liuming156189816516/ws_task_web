@@ -71,7 +71,7 @@
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                            <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{idx==1?item.phone+"2":item.phone }}</span>
+                            <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{item.phone }}</span>
                             <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                             <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
                             <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->

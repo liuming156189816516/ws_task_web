@@ -189,7 +189,7 @@ export default {
     }
   },
   created() {
-    this.getTaskList();
+    // this.getTaskList();
   },
   methods: {
       resetQuery(){

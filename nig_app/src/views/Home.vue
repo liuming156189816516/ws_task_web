@@ -202,9 +202,9 @@ export default {
     activated() {
         this.getLangConfig();
         this.filexTop = false;
+        this.initHandle();
         this.$store.dispatch('User/plantCarousel');
         if(getToken()){
-            this.initHandle();
             this.getNoticeList();
             this.$store.dispatch('User/getUserIncome');
             this.$store.dispatch('User/getSysNotice');
@@ -232,11 +232,11 @@ export default {
                     }
                 }, this.timeout)
             }, this.setInter)
-        }else{
-            this.wsList=this.$Helper.wsOption();
-            this.tgList=this.$Helper.tgOption();
-            // this.$store.dispatch('User/actionReport',1)
         }
+        // else{
+        //     this.wsList=this.$Helper.wsOption();
+        //     this.tgList=this.$Helper.tgOption();
+        // }
         // this.getContacts();
     },
     methods: {

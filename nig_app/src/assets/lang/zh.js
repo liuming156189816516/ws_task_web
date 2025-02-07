@@ -197,6 +197,9 @@ export default {
     home_204:"WhatsApp 任务",
     home_205:"Telegram 任务",
     home_206:"Telegram 列表",
+    home_207:"1. vip等级达到v5,每天可免费获得1次抽奖",
+    home_208:"2. vip等级达到v6,每天可免费获得2次抽奖",
+    home_209:"3. vip等级达到v7或以上,每天可免费获得3次抽奖",
 
     spre_001:"加入群组",
     spre_002:"更多活动点击查询",

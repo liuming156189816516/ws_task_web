@@ -197,6 +197,9 @@ export default {
     home_204:"WhatsApp task",
     home_205:"Telegram task",
     home_206:"Telegram list",
+    home_207: "1. VIP level reaches v5, you can get 1 free lottery every day",
+    home_208: "2. VIP level reaches v6, you can get 2 free lottery every day",
+    home_209: "3. VIP level reaches v7 or above, you can get 3 free lottery every day",
 
     spre_001:"Groups",
     spre_002:"Click here for more activities",

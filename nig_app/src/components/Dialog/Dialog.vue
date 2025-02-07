@@ -49,8 +49,9 @@
                         <p>{{restLanuage('home_067')}}</p>
                     </div>
                     <div class="rule_desc rule_desc_5 font_28" v-if="type==5">
-                        <p>{{restLanuage('other_081')}}</p>
-                        <p class="mg_24">{{restLanuage('other_082')}}</p>
+                        <p>{{restLanuage('home_207')}}</p>
+                        <p class="mg_24">{{restLanuage('home_208')}}</p>
+                        <p>{{restLanuage('home_209')}}</p>
                         <!-- <p>{{restLanuage('other_083')}}</p> -->
                         <!-- <p class="mg_24">{{restLanuage('home_142')}}</p> -->
                         <!-- <p class="mg_24">{{restLanuage('other_081')}}</p>

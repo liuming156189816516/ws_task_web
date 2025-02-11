@@ -350,8 +350,8 @@ export default {
     width: 100%;
     min-height: 160px;
     display: flex;
-		flex-wrap: wrap;
-		justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     .card_item{
       height: 60px;
       width: calc((100% - (5 - 1) * 30px) / 5);

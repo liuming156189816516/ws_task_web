@@ -41,6 +41,23 @@
   <script src="<%= BASE_URL %>npm/mobile-detect@1.4.4/mobile-detect.min.js"></script>
   <script type="text/javascript" src="https://cstaticdun.126.net/load.min.js?v=202004246"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1126277996176383');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1126277996176383&ev=PageView&noscript=1" />
+  </noscript>
   <title><%= VUE_APP_NAME %></title>
   <style>
     html {
@@ -71,10 +88,7 @@
     <strong>We're sorry but USDB doesn't work properly without JavaScript enabled. Please enable it to
       continue.</strong>
   </noscript>
-  <!-- <button id="TencentCaptcha" data-appid="2004381688" data-cbfn="callbackName" data-biz-state="data-biz-state"
-        type="button">验证</button> -->
   <div id="app"></div>
-  <!-- built files will be auto injected -->
   <script>
     document.onselectstart = new Function("event.returnValue=false");
     document.addEventListener('plusready', function () {

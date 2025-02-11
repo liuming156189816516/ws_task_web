@@ -213,36 +213,19 @@ export default {
 				finvite_Code: this.user_code,
 				device:this.$Helper.checkApkBag(1)
 			};
-			// let Toast = this.$toast.loading({
-			// 	duration: 2000,
-			// 	message: this.$t('login_013'),
-			// 	forbidClick: true,
-			// 	loadingType: 'spinner',
-			// });
 			this.isLoading =true;
 			this.$store.dispatch('User/userRegister', params).then(res => {
 				this.isLoading = false;
 				this.getVerfyBtn();
 				if(res.code) return;
-				// if(process.env.NODE_ENV == 'production'){
-				// 	fbq('track', 'CompleteRegistration');
-				// }
-				// localStorage.setItem('is_play',false);
-				// this.moveNews.$emit('login-env',"hello");
-				// this.$store.dispatch('Global/isShowLogin',false);
+				if(process.env.NODE_ENV == 'production'){
+					fbq('track', 'CompleteRegistration');
+				}
 				if(window.location.href.includes("?")){
 					window.location.replace(this.$Helper.restAddress())
 				}else{
 					this.$router.push('/home');
 				}
-				// try {
-				// 	if (this.$Helper.isAndroid()) {
-				// 		JSInterface.onLoginin();
-				// 	} else if (this.$Helper.isIos()) {
-				// 		let params = { method: 'onLoginin' };
-				// 		window.webkit.messageHandlers.jsCallNativeMethod.postMessage(params);
-				// 	}
-				// } catch (e) { }
 			}).catch(() => {
 				this.isLoading = false;
 			})

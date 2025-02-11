@@ -66,7 +66,7 @@ export default {
 		// console.log(VERSION_TIME);
 	},
 	mounted(){
-		this.customHeader("#0a0f2d");
+		this.customHeader("#8E8E8E");
 		this.handleVersion().then(res=>{
 			this.currentTIme = res||"";
 		})
@@ -102,7 +102,7 @@ export default {
 				document.head.appendChild(metaThemeColor);
 			}
 			// metaThemeColor.content = color||'#fff'; // 设定颜色
-			metaThemeColor.content = color||'#0a0f2d'; // 设定颜色
+			metaThemeColor.content = color||'#8E8E8E'; // 设定颜色
 		},
 		handle_close(){
 			this.$store.dispatch('Global/isCloseTips',false);
@@ -138,7 +138,7 @@ export default {
 	watch: {
 		'$route'(to, from) {
 			if(to.path == "/home"||to.path == "/spread"){
-				this.customHeader("#0a0f2d");	
+				this.customHeader("#8E8E8E");	
 			}else{
 				this.customHeader();	
 			}
@@ -163,7 +163,8 @@ body,
 		position: fixed;
 		top: 0;
 		left: 0;
-		background: $color-theme;
+		background: $home-title-03;
+		// background: $color-theme;
 	}
 	.app_top_continer, .app_continer{
 		width: 100%;

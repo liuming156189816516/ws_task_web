@@ -9,7 +9,7 @@
                 <el-table-column prop="today_active_user_num" :label="$t('sys_m088')" minWidth="100" />
                 <el-table-column prop="statis_time_str" :label="$t('sys_rai122')" minWidth="120">
                     <template slot-scope="scope">
-                        {{ scope.row.pull_fan_task_num||0 }}/{{scope.row.today_create_group_task_num}}
+                       {{scope.row.today_create_group_task_num}}/{{ scope.row.pull_fan_task_num||0 }}
                     </template>
                 </el-table-column>
                 <el-table-column prop="statis_time_str" :label="$t('sys_m090')" minWidth="170">

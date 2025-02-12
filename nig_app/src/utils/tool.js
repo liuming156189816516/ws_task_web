@@ -212,7 +212,7 @@ export function formatTime(date,type) {
 		return Year + '/' + Month + '/' + Dates + ' ' + Hour + ':' + Minute + ':' + Seconds;
 	}else if(type == 2){
 		if(Cookies.get("language")=="en"){
-			return [enMonth[Month],Dates];
+			return [enMonth[myDate.getMonth()+1],Dates];
 		}else{
 			return [Month,Dates];
 		}

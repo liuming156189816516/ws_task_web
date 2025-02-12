@@ -73,7 +73,7 @@ export default {
 <style lang="scss" scoped>
 .my_head {
     height: 100%;
-    background: $color-theme;
+    background: linear-gradient(to top,#ffff 0%, $color-theme 100%);
     .image_list {
         gap: 10px;
         flex-wrap: wrap;

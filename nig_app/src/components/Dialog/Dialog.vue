@@ -172,23 +172,18 @@
             </div>
         </div>
         <transition name="el-fade-in-linear">
-            <div class="steps_main w_f h_f" v-if="steps&&type==99&&content">
+            <div class="steps_main w_f h_f" v-show="steps&&type==99&&content">
                 <div class="adv_step w_f flex-item flex-align flex-center">
                     <div class="w_f adv_cover flex-item flex-align flex-dir-c" ref="tips_scroll">
                         <div class="close_icon flex-item flex-align flex-center">
-                            <template v-if="countTime==0">
-                                <transition name="el-fade-in">
-                                    <van-icon name="cross" @click="closeAdvBtn" />
-                                </transition>
-                            </template>
+                            <transition name="el-fade-in" v-if="countTime==0">
+                                <van-icon name="cross" @click="closeAdvBtn" />
+                            </transition>
                             <span class="font_26" v-else>{{ countTime+"s" }}</span>
                         </div>
                         <!-- <h4 class="w_f font_32">产生的速度慢了点吗没事没事面对吗没什么输出吗</h4> -->
                         <h4 class="w_f font_32">{{ title }}</h4>
-                        <div class="adv_content w_f flex-item flex-center flex-dir-c font_26" v-html="content"></div>
-                        <!-- <van-button type="primary" :disabled="countTime>0" @click="closeAdvBtn" plain>
-                            {{restLanuage('home_162')}} {{ countTime>0?countTime+"s":"" }}
-                        </van-button> -->
+                        <div class="adv_content w_f flex-item flex-center flex-dir-c font_26" ref="content" v-html="content"></div>
                     </div>
                 </div>
             </div>

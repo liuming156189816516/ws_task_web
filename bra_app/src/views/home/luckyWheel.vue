@@ -6,18 +6,18 @@
       <div class="lucky_bg w_f">
         <div class="lucky_rule flex-item flex-align flex-center font_32" @click="showRule">{{$t('home_117')}}</div>
         <div class="bg_01 w_f">
-          <img class="img_01 w_f" src="../../assets/images/lucky/bg_01.png" alt="">
+          <img class="img_01 w_f" src="@/assets/images/lucky/bg_01.png" alt="">
           <div class="lucky_bg2 w_f">
-            <img class="img_02 w_f" src="../../assets/images/lucky/bg_02.png" alt="">
+            <img class="img_02 w_f" src="@/assets/images/lucky/bg_02.png" alt="">
           </div>
           <div class="lucky_bg3 w_f">
-            <img class="img_03 w_f" src="../../assets/images/lucky/bg_03.png" alt="">
+            <img :class="['w_f',!isLucky?'img_03_animat':'']" src="@/assets/images/lucky/bg_03.png" alt="">
             <div class="lucky_main w_f">
               <LuckyWheel
                 class="custom_lucky"
                 ref="myLucky"
-                width="247px"
-                height="247px"
+                width="5.1rem"
+                height="5.1rem"
                 :prizes="prizes"
                 :buttons="buttons"
                 @start="startLucky"
@@ -31,7 +31,7 @@
         <div class="win_text w_f flex-item flex-center flex-dir-c">
           <template v-if="winGold=='lucky'">
             <div class="content_service flex-item flex-align">
-              <img src="@/assets/images/win_icon.png">
+              <img src="@//assets/images/win_icon.png">
               <div class="serve_text flex-item">
                 <span class="flex-item">{{$t('other_077')}}
                   <span class="serveic_line flex-item" @click="$Helper.globalSupport()">{{$t('serv_005')}}</span>
@@ -48,7 +48,7 @@
           </template>
           <template v-else>
             <div class="content_service flex-item flex-align">
-              <img src="@/assets/images/win_icon2.png">
+              <img src="@//assets/images/win_icon2.png">
               {{$t('other_075',{value:winGold})}}
             </div>
           </template>
@@ -62,7 +62,7 @@
               <span class="award_item flex-item flex-align font_24">{{item.name}}</span>
               <span class="flex-item flex-center font_24">{{item.desc}}</span>
               <span class="aeard_icon flex-item flex-content-r font_24">
-                <img src="@/assets/images/gold_icon.png" alt="" srcset="">
+                <img src="@//assets/images/gold_icon.png" alt="" srcset="">
                 {{item.goldNum}}
               </span>
             </van-swipe-item>
@@ -88,7 +88,7 @@
         </template>
         <template v-else>
             <div class="empty_box w_f flex-item flex-align flex-center flex-dir-c">
-              <img src="@/assets/images/empty_icon.png" alt="" srcset="">
+              <img src="@//assets/images/empty_icon.png" alt="" srcset="">
               <p class="font_28">{{$t('spre_013')}}</p>
             </div>
         </template>
@@ -102,8 +102,8 @@
 <script>
 
 import { mapState } from 'vuex';
-import { formatTime } from "@/utils/tool";
-import PageHeader from "@/components/Header";
+import { formatTime } from "@//utils/tool";
+import PageHeader from "@//components/Header";
 import { getruletainfo,doblarruleta,getlotteryrecordlist } from '@/api/home'
 export default {
   name: "luckyWheel",
@@ -132,12 +132,12 @@ export default {
       ],
       // 扇形数组
       prizes: [
-        {type:1, fonts: [{ text:this.$t('pay_034',{value:10}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        {type:2, fonts: [{ text:this.$t('pay_034',{value:30}), top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        {type:3, fonts: [{ text:this.$t('other_087'),top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("../../assets/images/win_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        {type:4, fonts: [{ text:this.$t('pay_034',{value:200}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        {type:5, fonts: [{ text:this.$t('pay_034',{value:888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        {type:6, fonts: [{ text:this.$t('pay_034',{value:1888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("../../assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:1, fonts: [{ text:this.$t('pay_034',{value:10}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#76C5F0",imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:2, fonts: [{ text:this.$t('pay_034',{value:30}), top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#E3556B",imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:3, fonts: [{ text:this.$t('other_087'),top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("@/assets/images/win_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:4, fonts: [{ text:this.$t('pay_034',{value:200}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:5, fonts: [{ text:this.$t('pay_034',{value:888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:6, fonts: [{ text:this.$t('pay_034',{value:1888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
       ],
       buttons: [
         {
@@ -158,7 +158,7 @@ export default {
           //抽奖按钮图
           imgs: [
             {
-              src: require("@/assets/images/lucky_btn.png"), //图片url
+              src: require("@//assets/images/lucky_btn.png"), //图片url
               top: "-110%", //图片距顶部距离
               width: "60px", //图片宽
               height: "80px", //图片高
@@ -213,10 +213,10 @@ export default {
       if(!this.isLucky&&this.task_type==2){
         return this.$toast(this.$t('other_091'))
       }
-      this.isLucky = false;
-      this.$refs.myLucky.play();
       const result = await doblarruleta();
       if(result.type){
+        this.isLucky = false;
+        this.$refs.myLucky.play();
         const luckyNum = result.type-1;
         this.lucky_id = result.lucky_id||"";
         this.$refs.myLucky.stop(luckyNum);
@@ -288,14 +288,16 @@ export default {
         position: absolute;
         top: 0;
         left: 0;
+        .img_03_animat{
+          animation: rotate 2s linear infinite;
+        }
         .lucky_main{
           width: 594px;
           height: 594px;
           position: absolute;
-          top: 40px;
+          top: 38px;
           left: 50%;
           transform: translateX(-50%);
-          // background: rgba($color: #000000, $alpha: .5);
           .custom_lucky{
             position: absolute;
             top: 50%;
@@ -427,6 +429,14 @@ export default {
           border-bottom-left-radius: 20px;
           border-bottom-right-radius: 20px;
       }
+  }
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(-720deg);
+    }
   }
 }
 </style>

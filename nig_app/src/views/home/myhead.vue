@@ -1,8 +1,8 @@
 <template>
     <div class="my_head">
         <page-header :title="$t('mine_006')"></page-header>
-        <div class="image_list">
-            <div class="image_box" v-for="(item,idx) in userHeadList" :key="idx" @click="updateCheckImage(idx)">
+        <div class="image_list flex-item w_f">
+            <div class="image_box flex-item" v-for="(item,idx) in userHeadList" :key="idx" @click="updateCheckImage(idx)">
                 <van-image fit="contain" :src="item" />
             </div>
         </div>
@@ -73,17 +73,17 @@ export default {
 <style lang="scss" scoped>
 .my_head {
     height: 100%;
-    background-color: #f2f2f2;
+    background: $color-minebg;
     .image_list {
-        background-color: #fff;
+        gap: 10px;
+        flex-wrap: wrap;
         padding-bottom: 20px;
         .image_box {
-            width: 25%;
-            height: auto;
-            display: inline-block;
-            padding-top: 40px;
-            padding-right: 40px;
-            padding-left: 40px;
+            width: calc((100% - 30px) / 4);
+            padding: 20px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background: rgba($color: $home-title-04, $alpha: .5);
         }
     }
     .image_dialog {
@@ -101,4 +101,13 @@ export default {
         }
     }
 }
+</style>
+<style lang="scss">
+    .image_dialog{
+        .van-dialog__confirm, .van-dialog__confirm:active{
+            color: $color-theme;
+            // border-color: $color-theme;
+            // background-color: $color-theme;
+        }
+    }
 </style>

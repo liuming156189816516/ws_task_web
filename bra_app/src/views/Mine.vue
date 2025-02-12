@@ -4,7 +4,7 @@
             <div class="user_mess w_f flex-item flex-dir-c">
                 <div class="page_title w_f flex-item font_32 flex-center"> {{$t('table_004')}} </div>
                 <div class="w_f flex-item">
-                    <div class="user_head">
+                    <div class="user_head" @click="updateHead">
                         <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
                     </div>
                     <!-- <img class="vip_icon" src="" alt=""> -->
@@ -197,12 +197,10 @@ export default {
 <style lang="scss" scoped>
 .home_warp {
     height: 100%;
-    // height: 100vh;
-    // overflow-x: hidden;
     overflow-y: scroll;
     padding-bottom: 240px;
-    background-color: #f2f2f2;
     -webkit-overflow-scrolling: touch;
+    background: linear-gradient(180deg, #31acf2 0, rgba(255, 255, 255, 0.5) 100%);
     .top_model {
         .user_mess {
             // height: 280px;
@@ -210,7 +208,8 @@ export default {
             box-sizing: border-box;
             color: $font-color-black;
             align-items: center;
-            background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
+            background: linear-gradient(to top,#ffff 0%, $color-theme 100%);
+            // background: linear-gradient(180deg, #31acf2 1.61%, rgba(255, 255, 255, 0.5) 100%);
             .page_title{
                 margin: 40px 0;
                 font-style: italic;

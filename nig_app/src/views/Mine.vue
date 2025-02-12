@@ -4,7 +4,7 @@
             <div class="user_mess w_f flex-item flex-dir-c">
                 <div class="page_title w_f flex-item font_32 flex-center"> {{$t('table_004')}} </div>
                 <div class="w_f flex-item">
-                    <div class="user_head">
+                    <div class="user_head" @click="updateHead">
                         <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)" alt="" srcset="">
                     </div>
                     <div class="user_info">

@@ -125,7 +125,7 @@ export default {
 <style lang="scss" scoped>
     .server_warp {
         padding-bottom: 120px;
-        background: url('../assets/images/home/bg_img.png') no-repeat;
+        // background: url('../assets/images/home/bg_img.png') no-repeat;
         background: linear-gradient(to top,#ffff 0%, $color-theme 100%);
         background-size: cover;
         .serve_top{

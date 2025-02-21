@@ -126,6 +126,7 @@ export default {
     },
     methods: {
         billDetail() {
+            this.page == 1?this.list=[]:"";
             let isLoading = Toast.loading({message:this.$t('other_029'),forbidClick: true});
             getbillrecordlist({
                 page: this.page,

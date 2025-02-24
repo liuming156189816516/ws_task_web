@@ -218,7 +218,7 @@
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="model1.total" 
                     :page-sizes="pageOption" :page-size="model1.limit" :current-page="model1.page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
-                    <u-table-column type="index" :label="$t('sys_g020')" width="60" />
+                    <!-- <u-table-column type="index" :label="$t('sys_g020')" width="60" /> -->
                     <u-table-column type="selection" width="55" :reserve-selection="true" />
                     <u-table-column prop="head" :label="$t('sys_g021')" width="80">
                         <template slot-scope="scope">
@@ -285,11 +285,11 @@
                             <span>{{ scope.row.fuser_name||"-" }}</span>
                         </template>
                     </u-table-column>
-                    <!-- <u-table-column prop="total_time" :label="$t('sys_mat117')" minWidth="100">
+                    <u-table-column prop="total_time" :label="$t('sys_mat117')" minWidth="100">
                         <template slot-scope="scope">
                             <span>{{ scope.row.total_time||"-" }}</span>
                         </template>
-                    </u-table-column> -->
+                    </u-table-column>
                     <u-table-column prop="first_login_time" :label="$t('sys_g014')+'/'+$t('sys_g015')" width="180">
                         <template slot-scope="scope">
                             {{ scope.row.first_login_time > 0 ? $baseFun.resetTime(scope.row.first_login_time * 1000) : "-" }}/</br>

@@ -8,20 +8,20 @@
                 <el-table-column prop="today_active_user_num" :label="$t('sys_m088')"  width="80" />
                 <el-table-column prop="statis_time_str" :label="$t('sys_rai122')" minWidth="130" >
                     <template slot-scope="scope">
-                        {{ scope.row.today_create_group_task_num||0 }}/{{scope.row.pull_fan_task_num}}
+                        {{ scope.row.gj_data_num||0 }}/{{ scope.row.today_create_group_task_num||0 }}/{{scope.row.pull_fan_task_num}}
                     </template>
                 </el-table-column>
                 <el-table-column prop="statis_time_str" :label="$t('sys_m090')" minWidth="170">
                     <template slot-scope="scope">
-                        {{ scope.row.ai_data_num||0 }}/{{scope.row.data_num}}/{{scope.row.pull_fan_data_num}}
+                        {{ scope.row.gj_bounty_amount||0 }}/{{ scope.row.ai_data_num||0 }}/{{scope.row.data_num}}/{{scope.row.pull_fan_data_num}}
                     </template>
                 </el-table-column>
                 <el-table-column prop="statis_time_str" :label="$t('sys_m102')" minWidth="160">
                     <template slot-scope="scope">
-                        {{ scope.row.ai_bounty_amount||0 }}/{{scope.row.bounty_amount}}/{{scope.row.pull_fan_bounty_amount}}
+                        {{ scope.row.gj_commission_amount||0 }}/{{ scope.row.ai_bounty_amount||0 }}/{{scope.row.bounty_amount}}/{{scope.row.pull_fan_bounty_amount}}
                     </template>
                 </el-table-column>
-                <el-table-column prop="statis_time_str" :label="$t('sys_m103')" minWidth="160">
+                <!-- <el-table-column prop="statis_time_str" :label="$t('sys_m103')" minWidth="160">
                     <template slot-scope="scope">
                         {{ scope.row.ai_commission_amount||0 }}/{{scope.row.commission_amount}}/{{scope.row.pull_fan_commission_amount}}
                     </template>
@@ -36,7 +36,7 @@
                     <template slot-scope="scope">
                         {{ scope.row.ai_bounty_amount_tg||0 }}
                     </template>
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column prop="statis_time_str" :label="$t('sys_m121')" minWidth="130">
                     <template slot-scope="scope">
                         {{ scope.row.ai_commission_amount_tg||0 }}
@@ -82,21 +82,21 @@
                     </el-table-column>
                     <el-table-column prop="group_total_num" :label="$t('sys_m090')" minWidth="180">
                         <template slot-scope="scope">
-                            {{ scope.row.ai_data_num+"/"+scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
+                            {{ scope.row.gj_data_num||0 }}/{{ scope.row.ai_data_num+"/"+scope.row.data_num +"/"+scope.row.pull_fan_data_num }}
                         </template>
                     </el-table-column>
                     <el-table-column prop="bouns_total_num" :label="$t('sys_m102')" minWidth="170">
                         <template slot-scope="scope">
-                            {{ scope.row.ai_bounty_amount+"/"+scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
+                            {{ scope.row.gj_bounty_amount||0 }}/{{ scope.row.ai_bounty_amount+"/"+scope.row.bounty_amount +"/"+scope.row.pull_fan_bounty_amount }}
                         </template>
                     </el-table-column>
                     <el-table-column prop="comm_total_num" :label="$t('sys_m103')" minWidth="170">
                         <template slot-scope="scope">
-                            {{ scope.row.ai_commission_amount+"/"+scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
+                            {{ scope.row.gj_commission_amount||0 }}/{{ scope.row.ai_commission_amount+"/"+scope.row.commission_amount +"/"+scope.row.pull_fan_commission_amount }}
                         </template>
                     </el-table-column>
 
-                    <el-table-column prop="group_total_num" :label="$t('sys_m119')" minWidth="120">
+                    <!-- <el-table-column prop="group_total_num" :label="$t('sys_m119')" minWidth="120">
                         <template slot-scope="scope">
                             {{ scope.row.ai_data_num_tg }}
                         </template>
@@ -110,7 +110,7 @@
                         <template slot-scope="scope">
                             {{ scope.row.ai_commission_amount_tg }}
                         </template>
-                    </el-table-column>
+                    </el-table-column> -->
                     <el-table-column prop="withdraw_user_num" :label="$t('sys_m091')" minWidth="100" />
                     <el-table-column prop="withdraw_amount" :label="$t('sys_m092')" minWidth="100" />
                     <el-table-column prop="adjust_amount" :label="$t('sys_m073')" minWidth="100" />
@@ -281,21 +281,22 @@ export default {
                 this.accountDataList = res.data.list || [];
                 for (let k = 0; k < this.accountDataList.length; k++) {
                     for(let key in this.accountDataList[k]){
+                        let item = this.accountDataList[k];
                         if(key==='today_create_group_task_num'||key==='pull_fan_task_num'){
-                            let num = this.accountDataList[k].today_create_group_task_num+this.accountDataList[k].pull_fan_task_num;
-                            this.accountDataList[k].pull_total_num=num;
+                            let num = item.today_create_group_task_num+item.pull_fan_task_num;
+                            item.pull_total_num=num;
                         }
                         if(key==='ai_data_num'||key==='gj_data_num'||key==='data_num'||key==='pull_fan_data_num'){
-                            let num = this.accountDataList[k].ai_data_num+this.accountDataList[k].data_num+this.accountDataList[k].pull_fan_data_num;
-                            this.accountDataList[k].group_total_num=num;
+                            let num = item.gj_data_num||0+item.ai_data_num+item.data_num+item.pull_fan_data_num;
+                            item.group_total_num=num;
                         }
                         if(key==='ai_bounty_amount'||key==='gj_bounty_amount'||key==='bounty_amount'||key==='pull_fan_bounty_amount'){
-                            let num = this.accountDataList[k].ai_bounty_amount+this.accountDataList[k].bounty_amount+this.accountDataList[k].pull_fan_bounty_amount;
-                            this.accountDataList[k].bouns_total_num=num;
+                            let num = item.gj_bounty_amount||0+item.ai_bounty_amount+item.bounty_amount+item.pull_fan_bounty_amount;
+                            item.bouns_total_num=num;
                         }
                         if(key==='ai_commission_amount'||key==='gj_commission_amount'||key==='commission_amount'||key==='pull_fan_commission_amount'){
-                            let num = this.accountDataList[k].ai_commission_amount+this.accountDataList[k].commission_amount+this.accountDataList[k].pull_fan_commission_amount;
-                            this.accountDataList[k].comm_total_num=num;
+                            let num =item.gj_commission_amount||0+item.ai_commission_amount+item.commission_amount+item.pull_fan_commission_amount;
+                            item.comm_total_num=num;
                         }
                     }
                 }

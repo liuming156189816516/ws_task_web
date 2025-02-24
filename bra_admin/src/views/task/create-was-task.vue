@@ -417,8 +417,8 @@ import { successTips } from '@/utils/index'
                 this.$refs.taskForm.clearValidate('materialData');
             }
         },
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
+        async submitForm(formName) {
+            this.$refs[formName].validate(async (valid) => {
                 if (valid) {
                     let materialItem = this.taskForm.materialData.map(item => {
                         if (item.type === 7) {
@@ -450,12 +450,11 @@ import { successTips } from '@/utils/index'
                         replenish:this.taskForm.set_add
                     }
                     this.isLoading=true;
-                    addsendmsgtask(params).then(res => {
-                        this.isLoading=false;
-                        if (res.code != 0) return;
-                        this.$router.go(-1);
-                        successTips(this)
-                    })
+                    const res = await addsendmsgtask(params);
+                    this.isLoading=false;
+                    if (res.code != 0) return;
+                    this.$router.go(-1);
+                    successTips(this)
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -520,6 +519,11 @@ import { successTips } from '@/utils/index'
                 this.$refs.taskForm.clearValidate('group_id');
             })
         }
+    },
+    beforeDestroy() {
+        this.source_type=null;
+        // 在这里取消或停止接口调用
+        console.log('组件即将销毁，停止接口调用');
     }
   }
 </script>

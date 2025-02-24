@@ -203,7 +203,7 @@ export default {
                 // {name:this.$t('home_145'),live1:2,live2:1,type:5,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 // {name:this.$t('home_174'),live1:1,live2:4,type:6,g_num:20,status:null,task_info_id:null,award:this.$t('home_176'),btn:this.$t('home_175'),desc:this.$t('home_049')},
                 {name:this.$t('home_187'),live1:1,live2:1,type:5,g_num:25,status:null,task_info_id:null,award:this.$t('home_202'),btn:this.$t('home_057'),desc:this.$t('home_180')},
-                {name:this.$t('home_187'),live1:1,live2:1,type:6,g_num:25,status:null,task_info_id:null,award:this.$t('home_202'),btn:this.$t('home_057'),desc:this.$t('home_180')},
+                {name:this.$t('home_187'),live1:1,live2:1,type:6,g_num:25,status:null,task_info_id:null,award:this.$t('home_180'),btn:this.$t('home_057'),desc:this.$t('home_180')},
             ]
         },
         taskStatusOption() {
@@ -215,10 +215,10 @@ export default {
     },
     activated() {
         this.getLangConfig();
+        this.getTaskList();
         this.filexTop = false;
         this.$store.dispatch('User/plantCarousel');
         if(getToken()){
-            this.getTaskList();
             this.$store.dispatch('User/getUserIncome');
             this.$store.dispatch('User/actionReport',1);
             this.$store.dispatch('User/getSysNotice');
@@ -242,10 +242,13 @@ export default {
                     }
                 }, this.timeout)
             }, this.setInter)
-        }else{
-            this.wsList=this.$Helper.wsOption();
-            this.tgList=this.$Helper.tgOption();
         }
+        // this.wsList=this.$Helper.wsOption();
+        // this.tgList=this.$Helper.tgOption();
+        // else{
+        //     this.wsList=this.$Helper.wsOption();
+        //     this.tgList=this.$Helper.tgOption();
+        // }
     },
     methods: {
         handleScroll(){},

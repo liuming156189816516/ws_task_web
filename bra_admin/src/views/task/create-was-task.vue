@@ -2,7 +2,7 @@
   <div class="view_warp" ref="heightEle">
       <el-button size="small" @click="$router.go(-1)">
         <i class="el-icon-back"></i>
-        <span>{{$t('sys_q006')}}</span>
+        <span>{{$t('sys_q006')}}{{ source_type }}</span>
       </el-button>
         <div class="view_continer">
             <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="25%" class="demo-ruleForm">
@@ -520,10 +520,12 @@ import { successTips } from '@/utils/index'
             })
         }
     },
-    beforeDestroy() {
-        this.source_type=null;
-        // 在这里取消或停止接口调用
-        console.log('组件即将销毁，停止接口调用');
+    watch:{
+        showSource(val){
+            if(!val){
+                this.source_type=null;
+            }
+        }
     }
   }
 </script>

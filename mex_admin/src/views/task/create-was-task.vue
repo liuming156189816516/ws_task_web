@@ -464,9 +464,9 @@ import { successTips } from '@/utils/index'
                         replenish:this.taskForm.set_add
                     }
                     this.isLoading=true;
+                    this.source_type = null;
                     addsendmsgtask(params).then(res => {
                         this.isLoading=false;
-                        this.source_type = null;
                         if (res.code != 0) return;
                         this.$router.go(-1);
                         successTips(this)

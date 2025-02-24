@@ -226,7 +226,7 @@
             </el-form>
         </div>
         <el-dialog :title="$t('sys_mat108')" center :visible.sync="showSource" :close-on-click-modal="false" width="60%">
-            <material :key="$route.name" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
+            <material v-if="source_type" :key="source_type==1?Math.floor(new Date().getTime()):''" @changeEle="getChildren" @closeDialog="showSource=false" :message="childMess" />
         </el-dialog>
         <el-dialog :title="$t('sys_mat092')" center :visible.sync="showLink" :close-on-click-modal="false" width="560px">
             <el-form size="small" :model="linkForm" :rules="linkRules" ref="linkForm" label-width="100px" class="demo-ruleForm">
@@ -466,6 +466,7 @@ import { successTips } from '@/utils/index'
                     this.isLoading=true;
                     addsendmsgtask(params).then(res => {
                         this.isLoading=false;
+                        this.source_type = null;
                         if (res.code != 0) return;
                         this.$router.go(-1);
                         successTips(this)

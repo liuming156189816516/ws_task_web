@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <el-alert :title="$t('sys_c107')" type="warning">
+  <div ref="appEle" style="height: 100%;">
+    <el-alert :title="$t('sys_c107')" type="warning" @close="handleClose">
       <template slot>
-        <div class="storage_tips">
+        <div class="storage_tips" ref="alert_tips">
           <div>{{ $t('sys_c101') }}</div>
           <div>{{ $t('sys_c102') }}</div>
           <div>{{ $t('sys_c103') }}</div>
@@ -34,7 +34,7 @@
         <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
       </div>
       <div>
-        <el-table :data="dataList" border height="640" row-key="id" v-loading="loading" element-loading-spinner="el-icon-loading"
+        <el-table :data="dataList" border :height="autoHeight" row-key="id" v-loading="loading" element-loading-spinner="el-icon-loading"
           element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" ref="serveTable"
           :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }"
           @selection-change="handleSelectionChange" @row-click="rowSelectChange">
@@ -271,6 +271,8 @@ export default {
         file_time: "",
         file_name: "",
       },
+      isTips:true,
+      autoHeight:null,
       pageOption:resetPage(),
       visible: false,
       loading: false,
@@ -345,7 +347,25 @@ export default {
     this.initGroup();
     this.initDatalist();
   },
+  mounted() {
+      this.setFullHeight();
+      window.addEventListener("resize", this.setFullHeight);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.setFullHeight);
+  },
   methods: {
+    handleClose(){
+      this.isTips = false;
+      this.setFullHeight();
+    },
+    setFullHeight(){
+      if(this.isTips){
+        this.autoHeight = this.$refs.appEle.clientHeight-360;
+      }else{
+        this.autoHeight = this.$refs.appEle.clientHeight-180;
+      }
+    },
     handleSelectionChange(row) {
       this.checkIdArry = row.map(item => { return item.id })
     },

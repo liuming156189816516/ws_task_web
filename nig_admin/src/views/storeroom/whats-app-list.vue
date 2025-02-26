@@ -1,5 +1,5 @@
 <template>
-    <div style="width:100%;height: 100%; float: left; position: relative;">
+    <div ref="appEle" style="width:100%;height: 100%; float: left; position: relative;">
         <!-- 筛选条件 -->
         <el-form size="small" :inline="true" style="margin-top: 10px;">
             <el-form-item>
@@ -137,11 +137,11 @@
         </el-form>
         <!-- 分组管理 -->
         <div class="continer_main">
-            <div :class="[!showGroup?'group_mian_hide':'']">
+            <div :class="['left_group_warp',!showGroup?'group_mian_hide':'']">
                 <div class="group_head_warp">
                     <div class="group_head" @click="changeGroup(0, 'clear')">
                         <i class="el-icon-d-arrow-left" @click.stop="showGroup=false"></i>
-                        {{ $t('sys_g049') }} ({{ numGroupTotal }})
+                        {{ $t('sys_g049') }} ({{ numGroupTotal }}) {{ autoHeight||88888 }}
                     </div>
                     <div class="group_icon">
                         <el-popover v-model="search_icon" placement="top" width="230">
@@ -211,18 +211,18 @@
                     <i class="el-icon-info"></i>
                     <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
                 </div>
-                <u-table @sort-change="sorthandle" :data="accountDataList" row-key="id" use-virtual border height="700" v-loading="loading"
+                <u-table @sort-change="sorthandle" :data="accountDataList" row-key="id" use-virtual border :height="autoHeight" v-loading="loading"
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="model1.total" 
                     :page-sizes="pageOption" :page-size="model1.limit" :current-page="model1.page" :pagination-show="true"
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
-                    <u-table-column type="index" :label="$t('sys_g020')" width="60" />
+                    <!-- <u-table-column type="index" :label="$t('sys_g020')" width="60" /> -->
                     <u-table-column type="selection" width="55" :reserve-selection="true" />
-                    <u-table-column prop="head" :label="$t('sys_g021')" width="80">
+                    <!-- <u-table-column prop="head" :label="$t('sys_g021')" width="80">
                         <template slot-scope="scope">
                             <el-avatar v-if="scope.row.head" :src="scope.row.head" />
                             <el-avatar v-else icon="el-icon-user-solid"></el-avatar>
                         </template>
-                    </u-table-column>
+                    </u-table-column> -->
                     <u-table-column prop="account" :label="$t('sys_g027')" width="130" />
                     <u-table-column prop="nick_name" :label="$t('sys_g022')" minWidth="100">
                         <template slot-scope="scope">
@@ -604,6 +604,7 @@ export default {
             seatPage:1,
             seatLimit:10,
             seatTotal:0,
+            autoHeight:0,
             blockedList:[], 
             inheritList:[],
             staffData:[],
@@ -876,7 +877,17 @@ export default {
         this.initNumberGroup();
         this.initNumberList();
     },
+    mounted() {
+        this.setFullHeight();
+        window.addEventListener("resize", this.setFullHeight);
+    },
+    beforeDestroy() {
+        window.removeEventListener("resize", this.setFullHeight);
+    },
     methods: {
+        setFullHeight(){
+            this.autoHeight = this.$refs.appEle.clientHeight-160;
+        },
         handleDisabled(row, inde){
             return row.status==2||row.status==3?false:true;
         },
@@ -1824,7 +1835,7 @@ export default {
 
 .group_warp {
     width: 220px;
-    max-height: 550px;
+    max-height: 100%;
     overflow-y: auto;
     flex-shrink: 0;
     flex-wrap: wrap;

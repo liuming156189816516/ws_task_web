@@ -1847,13 +1847,13 @@ export default {
         display: flex;
         width: 100%;
         flex-shrink: 0;
-        height: 36px;
-        margin-top: 8px;
+        height: 44px;
         cursor: pointer;
         font-size: 14px;
         align-items: center;
         justify-content: space-between;
         padding: 0 8px 0 12px;
+        border-bottom: 1px solid #F5F8FA;
         .group_name {
             width: 80%;
             display: flex;

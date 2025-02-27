@@ -227,7 +227,7 @@
                         </template>
                     </u-table-column>
                     <u-table-column prop="account" :label="$t('sys_g027')" width="130" />
-                    <u-table-column prop="nick_name" :label="$t('sys_g022')" minWidth="100">
+                    <u-table-column prop="nick_name" :label="$t('sys_g022')" show-overflow-tooltip minWidth="100">
                         <template slot-scope="scope">
                             {{ scope.row.nick_name?scope.row.nick_name:"-" }}
                         </template>
@@ -280,7 +280,7 @@
                         </template>
                         <template slot-scope="scope"> {{ accountType[scope.row.account_type] }}</template>
                     </u-table-column>
-                    <u-table-column prop="fuser_name" :label="$t('sys_m068')" minWidth="100">
+                    <u-table-column prop="fuser_name" :label="$t('sys_m068')" show-overflow-tooltip minWidth="100">
                         <template slot-scope="scope">
                             <span>{{ scope.row.fuser_name||"-" }}</span>
                         </template>

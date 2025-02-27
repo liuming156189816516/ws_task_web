@@ -217,12 +217,12 @@
                     @selection-change="handleSelectionChange" @row-click="rowSelectChange" @handlePageSize="switchPage">
                     <!-- <u-table-column type="index" :label="$t('sys_g020')" width="60" /> -->
                     <u-table-column type="selection" width="55" :reserve-selection="true" />
-                    <!-- <u-table-column prop="head" :label="$t('sys_g021')" width="80">
+                    <u-table-column prop="head" :label="$t('sys_g021')" width="80">
                         <template slot-scope="scope">
                             <el-avatar v-if="scope.row.head" :src="scope.row.head" />
                             <el-avatar v-else icon="el-icon-user-solid"></el-avatar>
                         </template>
-                    </u-table-column> -->
+                    </u-table-column>
                     <u-table-column prop="account" :label="$t('sys_g027')" width="130" />
                     <u-table-column prop="nick_name" :label="$t('sys_g022')" minWidth="100">
                         <template slot-scope="scope">

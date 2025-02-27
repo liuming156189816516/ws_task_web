@@ -992,6 +992,7 @@ export default {
         restQueryBtn(){
             this.model1.seat_id=1;
             this.model1.sort_type=1;
+            this.model1.status="";
             this.model1.account="";
             this.model1.staff_no="";
             this.model1.group_id="";

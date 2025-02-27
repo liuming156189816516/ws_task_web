@@ -173,7 +173,7 @@
                 </div>
                 <el-button v-if="loadingGroup" class="loading_icon" type="primary" :loading="true"></el-button>
                 <template v-else>
-                    <div class="group_warp">
+                    <div class="group_warp" :style="{height:(autoHeight-40)+'px'}">
                         <template v-if="numberGroupList.length>0">
                             <!-- <transition name="fade"> -->
                                 <div v-for="(item, idx) in numberGroupList" :key="idx" :draggable="true" :class="['group_item', model1.group_id === item.id ? 'group_active' : '']"  @click="changeGroup(item, idx)" @dragstart="dragStart(idx)" @dragover.prevent @drop="handleMoveSort(idx)">
@@ -1839,7 +1839,7 @@ export default {
 
 .group_warp {
     width: 220px;
-    max-height: 550px;
+    // max-height: 550px;
     overflow-y: auto;
     flex-shrink: 0;
     flex-wrap: wrap;

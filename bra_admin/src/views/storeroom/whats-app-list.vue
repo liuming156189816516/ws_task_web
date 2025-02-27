@@ -1846,14 +1846,15 @@ export default {
     .group_item {
         display: flex;
         width: 100%;
-        flex-shrink: 0;
         height: 44px;
         cursor: pointer;
         font-size: 14px;
+        flex-shrink: 0;
         align-items: center;
         justify-content: space-between;
         padding: 0 8px 0 12px;
         border-bottom: 1px solid #F5F8FA;
+        transition: ease-in-out .5s;
         .group_name {
             width: 80%;
             display: flex;

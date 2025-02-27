@@ -170,7 +170,7 @@
                 </div>
                 <el-button v-if="loadingGroup" class="loading_icon" type="primary" :loading="true"></el-button>
                 <template v-else>
-                    <div class="group_warp">
+                    <div class="group_warp" :style="{height:(autoHeight-40)+'px'}">
                         <template v-if="numberGroupList.length>0">
                             <!-- <transition name="fade"> -->
                                 <div v-for="(item, idx) in numberGroupList" :key="idx" :draggable="true" :class="['group_item', model1.group_id === item.id ? 'group_active' : '']"  @click="changeGroup(item, idx)" @dragstart="dragStart(idx)" @dragover.prevent @drop="handleMoveSort(idx)">
@@ -886,7 +886,7 @@ export default {
     },
     methods: {
         setFullHeight(){
-            this.autoHeight = this.$refs.appEle.clientHeight-160;
+            this.autoHeight = document.documentElement.clientHeight-250;
         },
         handleDisabled(row, inde){
             return row.status==2||row.status==3?false:true;
@@ -1835,21 +1835,21 @@ export default {
 
 .group_warp {
     width: 220px;
-    max-height: 100%;
     overflow-y: auto;
     flex-shrink: 0;
     flex-wrap: wrap;
     .group_item {
         display: flex;
         width: 100%;
-        flex-shrink: 0;
-        height: 36px;
-        margin-top: 8px;
+        height: 44px;
         cursor: pointer;
         font-size: 14px;
+        flex-shrink: 0;
         align-items: center;
         justify-content: space-between;
         padding: 0 8px 0 12px;
+        border-bottom: 1px solid #F5F8FA;
+        transition: ease-in-out .5s;
         .group_name {
             width: 80%;
             display: flex;

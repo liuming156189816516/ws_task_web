@@ -1000,6 +1000,7 @@ export default {
             this.checkAccount = [];
             this.screenSelect = [];
             this.model1.fuser_name="";
+            this.model1.platform_type="";
             this.model1.fuser_account="";
             this.model1.select_sort="account";
             this.initNumberList(1)

@@ -1000,6 +1000,7 @@ export default {
             this.model1.staff_no="";
             this.model1.group_id="";
             this.model1.fuser_name="";
+            this.model1.platform_type="";
             this.model1.fuser_account="";
             this.checkIdArry = [];
             this.checkAccount = [];

@@ -890,7 +890,7 @@ export default {
     },
     methods: {
         setFullHeight(){
-            this.autoHeight = this.$refs.appEle.clientHeight-160;
+            this.autoHeight = document.documentElement.clientHeight-160;
         },
         handleDisabled(row, inde){
             return row.status==2||row.status==3?false:true;

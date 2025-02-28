@@ -141,7 +141,7 @@
                 <div class="group_head_warp">
                     <div class="group_head" @click="changeGroup(0, 'clear')">
                         <i class="el-icon-d-arrow-left" @click.stop="showGroup=false"></i>
-                        {{ $t('sys_g049') }} ({{ numGroupTotal }}) {{ autoHeight||88888 }}
+                        {{ $t('sys_g049') }} ({{ numGroupTotal }})
                     </div>
                     <div class="group_icon">
                         <el-popover v-model="search_icon" placement="top" width="230">

@@ -23,7 +23,7 @@
 			<div class="sign_login">
 				<!-- <img class="login_img" src="@/assets/images/logo.png"> -->
 				<div class="uilist">
-					<p class="font_26">{{ $t('login_042') }}</p>
+					<!-- <p class="font_26">{{ $t('login_042') }}</p> -->
 					<div class="uilist_div account">
 						<!-- <img src="@/assets/images/sign/zhanghao.png" alt /> -->
 						<input v-model="username" :placeholder="$t('other_001',{value:$t('login_038')})" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />

@@ -51,6 +51,11 @@
               {{ scope.row.data_type==1?'数据号':'监控号' }}
             </template>
           </el-table-column>
+          <el-table-column prop="uuid" :label="$t('sys_m123')" minWidth="100">
+            <template slot-scope="scope">
+              {{ scope.row.uuid||'-' }}
+            </template>
+          </el-table-column>
           <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
             <template slot="header">
               <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">

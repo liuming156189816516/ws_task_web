@@ -219,7 +219,7 @@
             }
         },
         taskOption(){
-            return [this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117")]
+            return [this.$t("sys_m115"),this.$t("sys_m116"),this.$t("sys_m117"),this.$t("sys_m122")]
         },
         btnOption(){
             return ["",this.$t('sys_mat093')]

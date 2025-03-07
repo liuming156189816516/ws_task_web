@@ -9,6 +9,9 @@
           <el-form-item>
             <el-input v-model="model1.remark" clearable placeholder="请输入原因"  style="width:180px;" />
           </el-form-item>
+          <el-form-item>
+            <el-input v-model="model1.user_uuid" clearable :placeholder="$t('sys_mat061',{value:$t('sys_m123')})"  style="width:180px;" />
+          </el-form-item>
           <!-- <el-form-item>
             <el-input v-model="model1.user_account" clearable placeholder="请输入ws挂机账号"  style="width:180px;" />
           </el-form-item> -->
@@ -155,6 +158,7 @@
           invite_link: "",
           ad_account: "",
           task_type:"",
+          user_uuid:"",
           sort:""
         },
         taskForm:{
@@ -209,6 +213,7 @@
         this.model1.status = "";
         this.model1.account = "";
         this.model1.remark = "";
+        this.model1.user_uuid = "";
         this.model1.user_account = "";
         this.getTaskList(1);
       },
@@ -225,6 +230,7 @@
           status: this.model1.status||-1,
           account: this.model1.account,
           remark: this.model1.remark,
+          uuid: this.model1.user_uuid,
           start_time:start_time,
           end_time:end_time,
           user_account: this.model1.user_account

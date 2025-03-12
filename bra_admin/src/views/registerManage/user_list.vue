@@ -42,7 +42,7 @@
                             {{ scope.row.ip?scope.row.ip:"-" }}
                         </template>
                     </u-table-column>
-                    <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" />
+                    <!-- <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" /> -->
                     <u-table-column prop="ch" :label="$t('sys_mat116')" minWidth="100">
                         <template slot-scope="scope">
                             {{ scope.row.ch||"-" }}

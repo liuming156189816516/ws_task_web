@@ -13,7 +13,7 @@
         </div>
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">
-                <div class="user_head">
+                <div class="user_head" @click="shareBtn">
                     <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)">
                     <span :class="['vip_level',baseInfo.level==0?'level_zero':'']">V{{baseInfo.level}}</span>
                 </div>
@@ -314,6 +314,9 @@ export default {
             }else{
                 this.$router.push(`${path}?id=${row.task_info_id}`);
             }
+        },
+        shareBtn(){
+            uniFun.postMessage({data:"888"});
         },
         jumpLink(path) {
             if (!path) return;

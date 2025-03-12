@@ -15,11 +15,11 @@
     element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)">
       <el-table-column prop="account" :label="$t('sys_c003')" minWidth="100" />
       <!-- <el-table-column prop="pwd_str" :label="$t('sys_c016')" minWidth="80" /> -->
-      <el-table-column prop="two_pwd" :label="$t('sys_q130')" minWidth="80" >
+      <!-- <el-table-column prop="two_pwd" :label="$t('sys_q130')" minWidth="80" >
         <template slot-scope="scope">
           {{ scope.row.two_pwd || "-" }}
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column prop="role_name" :label="$t('sys_c004')" minWidth="100" />
       <el-table-column prop="invite_code" :label="$t('sys_q133')" minWidth="100" />
       <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">

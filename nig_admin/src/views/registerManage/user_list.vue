@@ -52,7 +52,7 @@
                             {{ scope.row.login_ip||"-" }}
                         </template>
                     </u-table-column>
-                    <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" />
+                    <!-- <u-table-column prop="pwd_str" :label="$t('sys_q126')" minWidth="130" /> -->
                     <u-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
                         <!-- <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">

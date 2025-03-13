@@ -218,7 +218,6 @@ export default {
         this.getTaskList();
         this.filexTop = false;
         this.$store.dispatch('User/plantCarousel');
-        console.log("55555");
         if(getToken()){
             this.$store.dispatch('User/getUserIncome');
             this.$store.dispatch('User/actionReport',1);

@@ -320,7 +320,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/whats-group-list'),
         name: 'whats-group-list',
         meta: {
-          title:i18n.t('sys_m033'),
+          title:i18n.t('sys_m114')+i18n.t('sys_m069'),
         }
       },
       {

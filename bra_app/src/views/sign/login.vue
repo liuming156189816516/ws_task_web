@@ -192,7 +192,7 @@ export default {
 <style lang="scss" scoped>
 .login_warp {
 	width: 100%;
-	height: 100vh;
+	// height: 100vh;
 	position: relative;
 	background: $font-color-white;
 	.head_main{

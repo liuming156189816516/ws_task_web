@@ -1,24 +1,27 @@
 <template>
-	<div id="app" :class="{'set-padding-top':hasTabBar}">
-		<div v-if="!showNavBar" class="mobile_head_top"></div>
-		<div :class="!showNavBar?'app_top_continer':'app_continer'">
-			<keep-alive :include="keepAliveNames">
-				<router-view />
-			</keep-alive>
-			<router-view name="tabBar" />
-		</div>
-		<van-overlay :show="global.logOut">
-			<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
-				<div class="log_main">
-					{{$t('other_009')}}
-					<div class="footer_bnt w_f flex-item flex-center">
-						<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">{{$t('other_003')}}</van-button>
-						<van-button class="footer_cancel" type="primary" @click="handle_close">{{$t('other_007')}}</van-button>
+	
+		<div id="app" :class="{'set-padding-top':hasTabBar}">
+			<div v-if="!showNavBar" class="mobile_head_top"></div>
+			<div :class="!showNavBar?'app_top_continer':'app_continer'">
+				<!-- <transition :name="transitionName"> -->
+					<keep-alive :include="keepAliveNames">
+						<router-view />
+					</keep-alive>
+					<router-view name="tabBar" />
+				<!-- </transition> -->
+			</div>
+			<van-overlay :show="global.logOut">
+				<div class="log_warp w_f flex-item flex-align flex-center flex-dir-c">
+					<div class="log_main">
+						{{$t('other_009')}}
+						<div class="footer_bnt w_f flex-item flex-center">
+							<van-button class="footer_confirm" type="primary" :loading="isLoading" loading-text="Loading..." @click="handle_confirm">{{$t('other_003')}}</van-button>
+							<van-button class="footer_cancel" type="primary" @click="handle_close">{{$t('other_007')}}</van-button>
+						</div>
 					</div>
 				</div>
-			</div>
-        </van-overlay>
-	</div>
+			</van-overlay>
+		</div>
 </template>
 <script>
 import { mapState } from 'vuex';
@@ -28,6 +31,7 @@ export default {
 		return {
 			title:"",
 			device:"",
+			allRouter:[],
 			waitTimer:null,
 			heartTimer:null,
 			isLoading: false,
@@ -123,11 +127,23 @@ export default {
 		clearInterval(this.heartTimer);
 	},
 	watch: {
-		'$route'(to, from) {
+		$route(to, from) {
 			if(to.path == "/home"||to.path == "/spread"){
 				this.customHeader("#31acf2");	
 			}else{
 				this.customHeader();	
+			}
+			// this.transitionName = "slide-right";
+			if(this.allRouter.includes(from.name)||from.name=="home"){
+				console.log(from.name);
+				if(to.meta.transition == "slide"){
+					this.transitionName = "slide-right";
+					let newRouter = this.allRouter.filter(item =>item != from.name);
+					this.allRouter = newRouter;
+				}else{
+					this.transitionName = "slide-left";
+					this.allRouter.push(to.name);
+				}
 			}
 		}
 	}
@@ -177,28 +193,26 @@ body,
 	display: flex;
 	flex-direction: column;
 }
-
-.slide-right-enter-active,
-.slide-right-leave-active,
-.slide-left-enter-active,
-.slide-left-leave-active {
-	will-change: transform;
-	transition: all 0.3s;
-	position: absolute;
-	width: 100%;
-	left: 0;
+.slide-right-enter-active,.slide-right-leave-active,.slide-left-enter-active,.slide-left-leave-active {
+  will-change: transform;
+  transition: all 10s;
+  position: absolute;
 }
 .slide-right-enter {
-	transform: translateX(-100%);
+  opacity: 0;
+  transform: translate(-100%);
 }
 .slide-right-leave-active {
-	transform: translateX(100%);
+  opacity: 0;
+  transform: translateX(100%);
 }
 .slide-left-enter {
-	transform: translateX(100%);
+  opacity: 0;
+  transform: translateX(100%);
 }
 .slide-left-leave-active {
-	transform: translateX(-100%);
+  opacity: 0;
+  transform: translateX(-100%);
 }
 .MoneyUnit {
 	font-size: 20px;
@@ -223,7 +237,7 @@ body,
 		right: 0;
 		margin-top: -0.1rem;
 		border: 0.06rem solid;
-		background-image: url('./assets/images/home/down_arrow_white.png');
+		// background-image: url('../assets/images/home/down_arrow_white.png');
 		border-color: transparent transparent #fff #fff;
 		-webkit-transform: rotate(-45deg);
 		transform: rotate(-45deg);
@@ -256,7 +270,7 @@ body,
 		right: -0.04rem;
 		margin-top: -0.1rem;
 		border: 0.06rem solid;
-		background-image: url('./assets/images/home/down_arrow_white.png');
+		// background-image: url('./assets/images/home/down_arrow_white.png');
 		border-color: transparent transparent rgba(102, 102, 102, 1) rgba(102, 102, 102, 1);
 		-webkit-transform: rotate(-45deg);
 		transform: rotate(-45deg);

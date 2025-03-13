@@ -203,11 +203,9 @@ export default {
         submitFun(type){
             if(type == 1){
                 this.timeText="";
-                this.dateState="";
-                this.sTime = "";
-                this.eTime = "";
+                this.timeValue=0;
                 this.stateValue=null;
-                this.timeValue=null;
+                this.dateState=this.$t('other_052');
             }
             this.billDetail();
             setTimeout(() =>{

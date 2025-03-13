@@ -13,7 +13,7 @@
         </div>
         <div class="warp_mian w_f flex-item flex-dir-c head_title_top">
             <div class="user_mess" v-if="userInfo.token">
-                <div class="user_head" @click="shareBtn">
+                <div class="user_head">
                     <img :src="require(`../assets/images/head/${userInfo.avatar}.png`)">
                     <span :class="['vip_level',baseInfo.level==0?'level_zero':'']">V{{baseInfo.level}}</span>
                 </div>
@@ -315,9 +315,6 @@ export default {
                 this.$router.push(`${path}?id=${row.task_info_id}`);
             }
         },
-        shareBtn(){
-            uniFun.postMessage({data:"888"});
-        },
         jumpLink(path) {
             if (!path) return;
             if (this.$Helper.checkBrowser()) {
@@ -351,13 +348,13 @@ export default {
 			}
 		},
         getNoticeList() {
-            // getnewmessagel().then(res => {
-            //     if(!res)return;
-            //     if(!localStorage.getItem('is_play')){
-            //         let {id,name,content} = res;
-            //         this.$popDialog({adv_id:id,title:name,content:content,steps:true,type:99})
-            //     }
-            // })
+            getnewmessagel().then(res => {
+                if(!res)return;
+                if(!localStorage.getItem('is_play')){
+                    let {id,name,content} = res;
+                    this.$popDialog({adv_id:id,title:name,content:content,steps:true,type:99})
+                }
+            })
             // if(!localStorage.getItem('is_play')){
             //     this.$popDialog({adv_id:"88888",title:"hello",content:"新年前夕，国家主席习近平发表二〇二五年新年贺词。“梦虽遥，追则能达；愿虽艰，持则可圆。”习近平主席温暖而坚定的话语，给我们传递了信心和力量",steps:true, type: 99 })
             // }

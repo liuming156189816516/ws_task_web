@@ -6,7 +6,7 @@
                 <div class="promote_header flex-item flex-align flex-between">
                     <div class="change_value flex-item">
                         <span class="flex-item">{{ dateState }}</span>
-                        <span class="flex-item"> {{ timeText }}</span>
+                        <span class="flex-item"> {{ profitTime[timeValue] }}</span>
                     </div>
                     <div class="fiter_icon flex-item flex-align" @click="pulldownState">
                         <span class="font_28" style="font-weight: 700;">{{$t('tail_013')}}</span>
@@ -54,7 +54,7 @@
                     </ul>
                     <p class="font_24">{{$t('tail_004')}}</p>
                     <ul>
-                        <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
+                        <li v-for="(item,index) in profitTime" v-show="item!=''" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
                     </ul>
                 </div>
                 <div class="footer_btn w_f flex-item flex-between">
@@ -98,29 +98,28 @@ export default {
     },
     computed:{
         profitTime(){
-            return [this.$t('other_016'),this.$t('other_017'),this.$t('other_018'),this.$t('other_057')];
+            return [this.$t('other_016'),this.$t('other_017'),this.$t('other_057')];
         },
         profitType(){
-            return [{lable:this.$t('other_052'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('spre_023'),value:3},{lable:this.$t('spre_024'),value:4},{lable:this.$t('spre_026'),value:6},{lable:this.$t('other_027'),value:8 },{lable:this.$t('other_028'),value:9 }];
+            return [{lable:this.$t('other_052'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('spre_023'),value:3},{lable:this.$t('spre_024'),value:4},{lable:this.$t('spre_025'),value:5},{lable:this.$t('spre_026'),value:6},{lable:this.$t('other_027'),value:8 },{lable:this.$t('other_028'),value:9 }];
         },
         taskOption(){
-            return ["",this.$t('home_168'),this.$t('other_059'),this.$t('home_134'),this.$t('home_187')];
+            return ["",this.$t('other_058'),this.$t('other_059'),this.$t('other_060')];
         }
     },
     created() {
         this.stateValue=-1;
-        this.timeValue = 3;
+        this.timeValue = 0;
         this.dateState = this.$t('other_052');
-        this.timeText = this.$t('other_057');
+        // this.timeText = this.$t('other_057');
         let params = this.$route.query;
         if (params.type) {
             this.timeValue = Number(params.type);
-            this.changeTime(this.profitTime[this.timeValue],this.timeValue)
+            // this.changeTime(this.profitTime[this.timeValue],this.timeValue)
         }
         if (params.id) {
             this.stateValue = Number(params.id);
             this.dateState = this.$t('other_054');
-            // this.changeTime(this.profitTime[this.timeValue],this.timeValue)
         }
         this.billDetail();
     },
@@ -131,9 +130,10 @@ export default {
             getbillrecordlist({
                 page: this.page,
                 limit: this.limit,
-                start_time: !this.sTime ? -1 : Date.parse(this.sTime)/1000,
-                end_time: !this.eTime? -1 : Date.parse(this.eTime)/1000,
-                type: this.stateValue||-1
+                date_type:this.timeValue+1,
+                // start_time: !this.sTime ? -1 : Date.parse(this.sTime)/1000,
+                // end_time: !this.eTime? -1 : Date.parse(this.eTime)/1000,
+                type: this.stateValue
             }).then(res => {
                 isLoading.clear();
                 this.loading = false;
@@ -168,33 +168,33 @@ export default {
             this.page = 1;
             this.timeValue = idx;
             this.timeText = row;
-            let newDate = new Date();
-            let sTime = "00"+":"+"00"+":"+"00";
-            let eTime = "23"+":"+"59"+":"+"59";
-            if(idx == 0){
-                newDate.setTime(newDate.getTime());
-                let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
-                this.datetime = today;
-                this.sTime = today +" "+ sTime;
-                this.eTime = today +" "+ eTime;
-            }else if(idx == 1){
-                newDate.setTime(newDate.getTime()-24*60*60*1000);
-                let yTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
-                this.datetime = yTady;
-                this.sTime = yTady +" "+ sTime;
-                this.eTime = yTady +" "+ eTime;
-            }else if(idx == 2){
-                newDate.setTime(newDate.getTime());
-                let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
-                newDate.setTime(newDate.getTime()-7*24*60*60*1000);
-                let sevenTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
-                this.datetime = sevenTady;
-                this.sTime = sevenTady +" "+ sTime;
-                this.eTime = today +" "+ eTime;
-            }else{
-                this.sTime = "";
-                this.eTime = "";
-            }
+            // let newDate = new Date();
+            // let sTime = "00"+":"+"00"+":"+"00";
+            // let eTime = "23"+":"+"59"+":"+"59";
+            // if(idx == 0){
+            //     newDate.setTime(newDate.getTime());
+            //     let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+            //     this.datetime = today;
+            //     this.sTime = today +" "+ sTime;
+            //     this.eTime = today +" "+ eTime;
+            // }else if(idx == 1){
+            //     newDate.setTime(newDate.getTime()-24*60*60*1000);
+            //     let yTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+            //     this.datetime = yTady;
+            //     this.sTime = yTady +" "+ sTime;
+            //     this.eTime = yTady +" "+ eTime;
+            // }else if(idx == 2){
+            //     newDate.setTime(newDate.getTime());
+            //     let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+            //     newDate.setTime(newDate.getTime()-7*24*60*60*1000);
+            //     let sevenTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+            //     this.datetime = sevenTady;
+            //     this.sTime = sevenTady +" "+ sTime;
+            //     this.eTime = today +" "+ eTime;
+            // }else{
+            //     this.sTime = "";
+            //     this.eTime = "";
+            // }
             // this.billDetail();
             // setTimeout(() =>{
             //     this.showTime = false;
@@ -203,11 +203,9 @@ export default {
         submitFun(type){
             if(type == 1){
                 this.timeText="";
-                this.dateState="";
-                this.sTime = "";
-                this.eTime = "";
+                this.timeValue=0;
                 this.stateValue=null;
-                this.timeValue=null;
+                this.dateState=this.$t('other_052');
             }
             this.billDetail();
             setTimeout(() =>{

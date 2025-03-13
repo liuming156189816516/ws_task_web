@@ -462,7 +462,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/ai-group-task'),
         name: 'group-task',
         meta: {
-          title:""
+          title:i18n.t('sys_m117')
         }
       },
       {

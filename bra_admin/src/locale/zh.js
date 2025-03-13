@@ -528,6 +528,7 @@ export default {
     'sys_m121': 'AI佣金(TG)',
     'sys_m122': 'WS-AI私发',
     'sys_m123': '任务号',
+    'sys_m125': '送达率',
     
     // 'sys_m119': 'AI/拉群/拉粉资源数(TG)',
     // 'sys_m120': 'AI/拉群/拉粉赏金(TG)',

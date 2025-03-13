@@ -324,7 +324,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/whats-group-list'),
         name: 'whats-group-list',
         meta: {
-          title:"",
+          title:i18n.t('sys_m033'),
         }
       },
       {
@@ -359,7 +359,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/wa-pull-group'),
         name: 'wa-pull-group',
         meta: {
-          title:""
+          title:i18n.t('sys_m116')+i18n.t('sys_q128')
         }
       },
       {

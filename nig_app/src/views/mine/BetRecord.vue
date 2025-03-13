@@ -109,7 +109,7 @@ export default {
     },
     created() {
         this.stateValue=-1;
-        this.timeValue = 3;
+        this.timeValue = 0;
         this.dateState = this.$t('other_052');
         this.timeText = this.$t('other_057');
         let params = this.$route.query;

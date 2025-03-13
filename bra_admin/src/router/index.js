@@ -355,7 +355,7 @@ export const asyncRoutes = [
         component: () => import('@/views/task/wa-pull-group'),
         name: 'wa-pull-group',
         meta: {
-          title:i18n.t('sys_m037')+i18n.t('sys_q128')
+          title:"WS-拉群拉粉"
         }
       },
       {

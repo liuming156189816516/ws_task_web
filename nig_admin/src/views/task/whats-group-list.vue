@@ -32,7 +32,7 @@
             <i slot="reference" class="el-icon-info"></i>
             <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
         </div>
-        <el-table @sort-change="sorthandle" :data="taskDataList" border height="660" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange"  :summary-method="getSummaries" show-summary>
+        <el-table @sort-change="sorthandle" :data="taskDataList" border :height="cliHeight" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange"  :summary-method="getSummaries" show-summary>
             <el-table-column type="selection" width="55" />
             <el-table-column prop="name" :label="$t('sys_g070')" width="120" />
             <el-table-column prop="online" :label="$t('sys_mat058')" minWidth="120">
@@ -143,6 +143,7 @@ export default {
         status:"",
         task_name: "",
       },
+      cliHeight:null,
       showNum:[3,4],
       loading:false,
       checkIdArry:[],
@@ -198,15 +199,24 @@ export default {
   created() {
     this.getTaskList();
   },
+  mounted() {
+    this.setFullHeight();
+    window.addEventListener("resize", this.setFullHeight);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.setFullHeight);
+  },
   methods: {
       resetQuery(){
         this.model1.status="";
         this.model1.task_name="";
         this.getTaskList(1);
       },
+      setFullHeight(){
+        this.cliHeight = document.documentElement.clientHeight-280;
+      },
       handleNewwork(status) {
         this.model1.status = status;
-        console.log(this.model1.status);
         this.getTaskList(1);
       },
       getTaskList(num){

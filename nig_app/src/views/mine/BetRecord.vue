@@ -115,12 +115,11 @@ export default {
         let params = this.$route.query;
         if (params.type) {
             this.timeValue = Number(params.type);
-            this.changeTime(this.profitTime[this.timeValue],this.timeValue)
+            // this.changeTime(this.profitTime[this.timeValue],this.timeValue)
         }
         if (params.id) {
             this.stateValue = Number(params.id);
             this.dateState = this.$t('other_054');
-            // this.changeTime(this.profitTime[this.timeValue],this.timeValue)
         }
         this.billDetail();
     },
@@ -169,33 +168,33 @@ export default {
             this.page = 1;
             this.timeValue = idx;
             this.timeText = row;
-            let newDate = new Date();
-            let sTime = "00"+":"+"00"+":"+"00";
-            let eTime = "23"+":"+"59"+":"+"59";
-            if(idx == 0){
-                newDate.setTime(newDate.getTime());
-                let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
-                this.datetime = today;
-                this.sTime = today +" "+ sTime;
-                this.eTime = today +" "+ eTime;
-            }else if(idx == 1){
-                newDate.setTime(newDate.getTime()-24*60*60*1000);
-                let yTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
-                this.datetime = yTady;
-                this.sTime = yTady +" "+ sTime;
-                this.eTime = yTady +" "+ eTime;
-            }else if(idx == 2){
-                newDate.setTime(newDate.getTime());
-                let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
-                newDate.setTime(newDate.getTime()-7*24*60*60*1000);
-                let sevenTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
-                this.datetime = sevenTady;
-                this.sTime = sevenTady +" "+ sTime;
-                this.eTime = today +" "+ eTime;
-            }else{
-                this.sTime = "";
-                this.eTime = "";
-            }
+            // let newDate = new Date();
+            // let sTime = "00"+":"+"00"+":"+"00";
+            // let eTime = "23"+":"+"59"+":"+"59";
+            // if(idx == 0){
+            //     newDate.setTime(newDate.getTime());
+            //     let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+            //     this.datetime = today;
+            //     this.sTime = today +" "+ sTime;
+            //     this.eTime = today +" "+ eTime;
+            // }else if(idx == 1){
+            //     newDate.setTime(newDate.getTime()-24*60*60*1000);
+            //     let yTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+            //     this.datetime = yTady;
+            //     this.sTime = yTady +" "+ sTime;
+            //     this.eTime = yTady +" "+ eTime;
+            // }else if(idx == 2){
+            //     newDate.setTime(newDate.getTime());
+            //     let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+            //     newDate.setTime(newDate.getTime()-7*24*60*60*1000);
+            //     let sevenTady = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+            //     this.datetime = sevenTady;
+            //     this.sTime = sevenTady +" "+ sTime;
+            //     this.eTime = today +" "+ eTime;
+            // }else{
+            //     this.sTime = "";
+            //     this.eTime = "";
+            // }
             // this.billDetail();
             // setTimeout(() =>{
             //     this.showTime = false;

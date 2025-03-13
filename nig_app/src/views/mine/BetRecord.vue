@@ -6,7 +6,7 @@
                 <div class="promote_header flex-item flex-align flex-between">
                     <div class="change_value flex-item">
                         <span class="flex-item">{{ dateState }}</span>
-                        <span class="flex-item"> {{ timeText }}</span>
+                        <span class="flex-item"> {{ profitTime[timeValue] }}</span>
                     </div>
                     <div class="fiter_icon flex-item flex-align" @click="pulldownState">
                         <span class="font_28" style="font-weight: 700;">{{$t('tail_013')}}</span>
@@ -111,7 +111,7 @@ export default {
         this.stateValue=-1;
         this.timeValue = 0;
         this.dateState = this.$t('other_052');
-        this.timeText = this.$t('other_057');
+        // this.timeText = this.$t('other_057');
         let params = this.$route.query;
         if (params.type) {
             this.timeValue = Number(params.type);

@@ -131,7 +131,7 @@ export default {
             getbillrecordlist({
                 page: this.page,
                 limit: this.limit,
-                data_type:this.timeValue+1,
+                date_type:this.timeValue+1,
                 // start_time: !this.sTime ? -1 : Date.parse(this.sTime)/1000,
                 // end_time: !this.eTime? -1 : Date.parse(this.eTime)/1000,
                 type: this.stateValue

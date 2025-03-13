@@ -82,7 +82,7 @@ export default {
         return {
             dialogContent:"",
             stateValue:-1,
-            timeValue:3,
+            timeValue:0,
             timeText:"",
             loading:false,
             finished :false,
@@ -123,6 +123,12 @@ export default {
     },
     methods: {
         getPointflow() {
+            if(this.timeValue===0){
+                let newDate = new Date();
+                let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
+                this.sTime = today +" "+ "00"+":"+"00"+":"+"00";
+                this.eTime = today +" "+ "23"+":"+"59"+":"+"59";
+            }
             let params = {
                 page: this.page,
                 limit: this.limit,
@@ -209,7 +215,7 @@ export default {
             let newDate = new Date();
             let sTime = "00"+":"+"00"+":"+"00";
             let eTime = "23"+":"+"59"+":"+"59";
-            if(idx == 0){
+            if(idx === 0){
                 newDate.setTime(newDate.getTime());
                 let today = newDate.getFullYear()+"-" + (newDate.getMonth()+1) + "-" + newDate.getDate();
                 this.datetime = today;

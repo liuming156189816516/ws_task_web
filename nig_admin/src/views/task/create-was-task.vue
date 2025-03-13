@@ -15,7 +15,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row :gutter="20">
+                <!-- <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item label="WS账号来源：" prop="source_num">
                             <el-select v-model="taskForm.source_num" :placeholder="$t('sys_c052')">
@@ -23,7 +23,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item label="选择WS账号：" prop="group_id" class="custom_mess">
@@ -144,7 +144,7 @@
                 </el-row>
                 <h3 class="mess_title">话术设置</h3>
                 <el-divider></el-divider>
-                <el-row :gutter="20">
+                <!-- <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item label="群发类型：" prop="group_say">
                             <el-radio-group v-model="taskForm.group_say">
@@ -152,7 +152,7 @@
                             </el-radio-group>
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item label="群发话术" prop="materialData" class="custom_say">
@@ -202,16 +202,15 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row :gutter="20">
+                <!-- <el-row :gutter="20">
                     <el-col :span="18">
                         <el-form-item label="设置补发：" prop="set_add">
                             <el-radio-group v-model="taskForm.set_add">
                                 <el-radio :label="1">不设置补发</el-radio>
-                                <!-- <el-radio label="群发未回复粉丝数据"></el-radio> -->
                             </el-radio-group>
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <el-form-item>
                     <el-button type="primary" :loading="isLoading" @click="submitForm('taskForm')">开始群发</el-button>
                     <el-button @click="$router.go(-1)">{{ $t('sys_c023') }}</el-button>
@@ -306,8 +305,8 @@ import { successTips } from '@/utils/index'
             group1_num:40,
             group2_num:15,
             sleep_num:20,
-            sleep1_num:1000,
-            sleep2_num:1200,
+            sleep1_num:30,
+            sleep2_num:50,
             group_say:1,
             set_add:1,
             materialData:[],
@@ -433,9 +432,9 @@ import { successTips } from '@/utils/index'
                             send_num:this.taskForm.group1_num,
                             min_time:this.taskForm.sleep1_num,
                             max_time:this.taskForm.sleep2_num,
-                            speech_skill_type:this.taskForm.group_say,
+                            // speech_skill_type:this.taskForm.group_say,
                             material_num:this.taskForm.materialData.length,
-                            replenish:this.taskForm.set_add
+                            // replenish:this.taskForm.set_add
                         }),
                         name:this.taskForm.task_name,
                         group_ids:this.taskForm.group_id,
@@ -445,9 +444,9 @@ import { successTips } from '@/utils/index'
                         send_num:this.taskForm.group1_num,
                         min_time:this.taskForm.sleep1_num,
                         max_time:this.taskForm.sleep2_num,
-                        speech_skill_type:this.taskForm.group_say,
+                        // speech_skill_type:this.taskForm.group_say,
                         material_list:materialItem,
-                        replenish:this.taskForm.set_add
+                        // replenish:this.taskForm.set_add
                     }
                     this.isLoading=true;
                     addsendmsgtask(params).then(res => {

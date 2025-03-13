@@ -529,6 +529,7 @@ export default {
     'sys_m122': 'TG-拉群',
     'sys_m123': 'TG-拉粉',
     'sys_m124': 'TG-拉群拉粉',
+    'sys_m125': '送达率',
 
     'sys_mat001': '素材名称',
     'sys_mat002': '排序调整',

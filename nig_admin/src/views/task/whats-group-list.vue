@@ -32,7 +32,7 @@
             <i slot="reference" class="el-icon-info"></i>
             <div v-html="$t('sys_mat007',{value:checkIdArry.length})"></div>
         </div>
-        <el-table @sort-change="sorthandle" :data="taskDataList" border height="660" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange">
+        <el-table @sort-change="sorthandle" :data="taskDataList" border height="660" v-loading="loading" element-loading-spinner="el-icon-loading" element-loading-background="rgba(255, 255, 255,1)" style="width: 100%;" :header-cell-style="{ color: '#909399', textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" ref="serveTable" @selection-change="handleSelectionChange" @row-click="rowSelectChange"  :summary-method="getSummaries" show-summary>
             <el-table-column type="selection" width="55" />
             <el-table-column prop="name" :label="$t('sys_g070')" width="120" />
             <el-table-column prop="online" :label="$t('sys_mat058')" minWidth="120">
@@ -40,9 +40,9 @@
                   {{ scope.row.account_num }}
                 </template>
             </el-table-column>
-            <el-table-column prop="pwd_str" :label="$t('sys_mat047')+'/'+$t('sys_g071')" minWidth="130">
+            <el-table-column prop="sucess_num" :label="$t('sys_mat047')" minWidth="130">
                 <template slot-scope="scope">
-                  {{ scope.row.sucess_num }}/{{ scope.row.send_num }}
+                  {{ scope.row.sucess_num }}
                 </template>
             </el-table-column>
             <el-table-column prop="arrived_num" :label="$t('sys_mat115')" minWidth="120">
@@ -50,7 +50,13 @@
                 {{ scope.row.arrived_num }}
               </template>
             </el-table-column>
-            <el-table-column prop="complete_message" :label="$t('sys_g072')" minWidth="120" />
+            <el-table-column prop="arrived_rate" :label="$t('sys_m125')" minWidth="120">
+              <template slot-scope="scope">
+                {{ parseFloat((scope.row.arrived_rate*100).toFixed(2))+"%" || 0 }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="in_pro_num" :label="$t('sys_l072')" minWidth="120" />
+            <!-- <el-table-column prop="complete_message" :label="$t('sys_g072')" minWidth="120" /> -->
             <el-table-column prop="status" :label="$t('sys_l059')" minWidth="160">
               <template slot="header">
                 <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
@@ -137,6 +143,7 @@ export default {
         status:"",
         task_name: "",
       },
+      showNum:[3,4],
       loading:false,
       checkIdArry:[],
       pageOption: resetPage(),
@@ -215,6 +222,11 @@ export default {
           this.loading=false;
           this.model1.total = res.data.total;
           this.taskDataList = res.data.list||[];
+          this.$nextTick(()=>{
+            if (this.$refs.serveTable) {
+              this.$refs.serveTable.doLayout(); 
+            }
+          })
         })
       },
       goTaskDetail(row){
@@ -281,6 +293,29 @@ export default {
             that.$message({ type: 'info', message: that.$t('sys_c048') });
         })
       },
+      getSummaries(param) {
+        const { columns, data } = param;
+        const sums = [];
+        columns.forEach((column, index) => {
+          const values = data.map(item => Number(item[column.property]));
+          if (index === 0) {
+            sums[index] = this.$t('sys_c125');
+            return;
+          }else if(this.showNum.indexOf(index) > -1){
+            sums[index] = values.reduce((prev, curr) => {
+              const value = Number(curr);
+              if (!isNaN(value)) {
+                return (prev+curr);
+              } else {
+                return prev;
+              }
+            },0);
+          }else{
+            sums[index] = '--';	
+          }
+        });
+			  return sums;
+		  },
       exportText(row){
         doouttaskexcel({id:row.id}).then(res=>{
           if (res.code != 0) return;

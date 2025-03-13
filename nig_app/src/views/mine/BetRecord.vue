@@ -54,7 +54,7 @@
                     </ul>
                     <p class="font_24">{{$t('tail_004')}}</p>
                     <ul>
-                        <li v-for="(item,index) in profitTime" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
+                        <li v-for="(item,index) in profitTime" v-show="item!=''" :class="index === timeValue  ? 'checkActive':''" :key="index" @click="changeTime(item,index)">{{item}}</li>
                     </ul>
                 </div>
                 <div class="footer_btn w_f flex-item flex-between">
@@ -98,7 +98,7 @@ export default {
     },
     computed:{
         profitTime(){
-            return [this.$t('other_016'),this.$t('other_017'),this.$t('other_018'),this.$t('other_057')];
+            return [this.$t('other_016'),this.$t('other_017'),this.$t('other_057')];
         },
         profitType(){
             return [{lable:this.$t('other_052'),value:-1},{lable:this.$t('other_025'),value:1 },{lable:this.$t('other_026'),value:2 },{lable:this.$t('spre_023'),value:3},{lable:this.$t('spre_024'),value:4},{lable:this.$t('spre_025'),value:5},{lable:this.$t('spre_026'),value:6},{lable:this.$t('other_027'),value:8 },{lable:this.$t('other_028'),value:9 }];
@@ -131,9 +131,10 @@ export default {
             getbillrecordlist({
                 page: this.page,
                 limit: this.limit,
-                start_time: !this.sTime ? -1 : Date.parse(this.sTime)/1000,
-                end_time: !this.eTime? -1 : Date.parse(this.eTime)/1000,
-                type: this.stateValue||-1
+                data_type:this.timeValue+1,
+                // start_time: !this.sTime ? -1 : Date.parse(this.sTime)/1000,
+                // end_time: !this.eTime? -1 : Date.parse(this.eTime)/1000,
+                type: this.stateValue
             }).then(res => {
                 isLoading.clear();
                 this.loading = false;

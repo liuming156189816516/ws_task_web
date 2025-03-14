@@ -4,10 +4,18 @@
 		<div class="condition_warp select_warp">
 			<el-form inline size="small">
                 <el-form-item>
-                    <el-input v-model="factorModel.account" clearable placeholder="请输入用户账号" style="width:180px;"></el-input>
+                    <el-input v-model="factorModel.account" clearable placeholder="请输入用户账号" style="width:180px;" />
 				</el-form-item>
                 <el-form-item>
-                    <el-input v-model="factorModel.card_no" clearable placeholder="请输入提现账号" style="width:180px;"></el-input>
+                    <el-input v-model="factorModel.card_no" clearable placeholder="请输入提现账号" style="width:180px;" />
+				</el-form-item>
+                <el-form-item>
+                    <el-input v-model="factorModel.card_id" clearable placeholder="请输入订单号" style="width:180px;" />
+				</el-form-item>
+                <el-form-item>
+                    <el-input v-model="factorModel.start_amount" clearable placeholder="开始金额" style="width:110px;" />
+                    -
+                    <el-input v-model="factorModel.end_amount" clearable placeholder="结束金额" style="width:110px;" />
 				</el-form-item>
 				<!-- <el-form-item class="change_new_time">
 					<el-date-picker size="small" v-model="factorModel.dateArry" type="daterange" value-format="yyyy-MM-dd" range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期" style='width:240px'>
@@ -29,6 +37,13 @@
 							<span>{{(factorModel.offset-1)*factorModel.limit+scope.$index+1}}</span>
 						</template>
                     </el-table-column> -->
+                    <el-table-column prop="txid" :label="$t('sys_m080')" minWidth="140">
+                        <template slot-scope="scope">
+                            <el-tooltip class="item" effect="dark" :content="scope.row.txid" placement="top">
+                                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.txid||"-" }}</div>
+                            </el-tooltip>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="account" :label="$t('sys_c009')" minWidth="120" align="center" />
                     <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center">
                         <template slot-scope="scope">
@@ -56,13 +71,6 @@
                         <template slot-scope="scope">
                             {{ scope.row.amount+'('+scope.row.fiat_amount+')'||"-" }}
 						</template>
-                    </el-table-column>
-                    <el-table-column prop="txid" :label="$t('sys_m080')" minWidth="140">
-                        <template slot-scope="scope">
-                            <el-tooltip class="item" effect="dark" :content="scope.row.txid" placement="top">
-                                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.txid||"-" }}</div>
-                            </el-tooltip>
-                        </template>
                     </el-table-column>
                     <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
                         <template slot="header">
@@ -167,6 +175,9 @@ export default {
                 total:0,
                 offset:1,
                 limit: 10,
+                card_id:"",
+                start_amount:"",
+                end_amount:""
             },
             type:0,
             pay_id:[],
@@ -210,9 +221,12 @@ export default {
 	},
 	methods: {
         restQueryBtn(){
+            this.factorModel.card_id="";
             this.factorModel.card_no="";
             this.factorModel.account="";
             this.factorModel.apy_status="";
+            this.factorModel.start_amount="";
+            this.factorModel.end_amount="";
             this.getPayOrderList(1)
             this.$refs.serveTable.clearSelection();
         },
@@ -221,11 +235,14 @@ export default {
             this.loading =true;
             this.factorModel.page=num?num:this.factorModel.page;
             let params = { 
+                id:this.factorModel.card_id,
                 page: this.factorModel.page,
                 limit: this.factorModel.limit,
                 status:this.factorModel.status,
                 card_no:this.factorModel.card_no,
                 account:this.factorModel.account,
+                start_amount:Number(this.factorModel.start_amount)||-1,
+                end_amount:Number(this.factorModel.end_amount)||-1,
                 approval_status:this.factorModel.apy_status||-1
             }
 			getwithdrawapprovallist(params).then(res =>{

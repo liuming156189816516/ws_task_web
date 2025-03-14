@@ -85,7 +85,7 @@
           <el-table-column prop="img_url" label="图片" minWidth="120">
             <template slot-scope="scope">
                 <span v-if="!scope.row.img_url">-</span>
-                <img v-else @load="handleImageLoad(scope.$index+1)" :src="loadedImages[scope.$index+1] ? scope.row.img_url : imageLoading" style="width:32px;height:32px;cursor: pointer;" @click="showImg(scope.row.img_url)">
+                <img v-else @load="handleImageLoad(scope.$index+1)" :src="loadedImages[scope.$index+1] ? scope.row.img_url : imageLoading" style="width:32px;height:32px;cursor: pointer;" @click.stop="showImg(scope.row.img_url)">
               <!-- <el-tooltip class="item" effect="dark" :content="scope.row.remark" placement="top">
                 <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.remark||"-" }}</div>
               </el-tooltip> -->

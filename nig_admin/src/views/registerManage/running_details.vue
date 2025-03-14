@@ -136,7 +136,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return [{lable:this.$t('sys_l053'),value:-1},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"注册赠送",value:3},{lable:"轮盘赏金",value:4},{lable:"签到赏金",value:5},{lable:"下载赏金",value:6},{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }];
+            return [{lable:this.$t('sys_l053'),value:-1},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"注册赠送",value:3},{lable:"轮盘赏金",value:4},{lable:"签到赏金",value:5},{lable:"下载赏金",value:6},{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 },{lable:"提现退款",value:10 }];
             // return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
         },
         tasksOption(){

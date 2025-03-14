@@ -442,6 +442,7 @@ export default {
     other_100:"联系客服",
     other_101:"一个小时 x",
     other_102:"保存联系人之后点击下列账号直接发送消息",
+    other_103:"提现退款",
     
     table_001:"首页",
     table_002:"团队",

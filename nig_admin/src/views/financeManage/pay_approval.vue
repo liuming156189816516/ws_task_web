@@ -65,21 +65,21 @@
                         </template>
                     </el-table-column>
                     <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
-                        <!-- <template slot="header">
+                        <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command)">
                             <span style="color:#909399" :class="[factorModel.status?'dropdown_title':'']"> {{ $t('sys_c005') }}
                                 <i class="el-icon-arrow-down el-icon--right" />
                             </span>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item :class="{'dropdown_selected':idx==factorModel.status}" v-for="(item,idx) in payOptions" :key="idx" :command="idx">{{item}}</el-dropdown-item>
+                                <el-dropdown-item :class="{'dropdown_selected':idx==factorModel.status}" v-for="(item,idx) in payOptions" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
                             </el-dropdown-menu>
                             </el-dropdown>
-                        </template> -->
+                        </template>
                         <template slot-scope="scope">
-                            <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':'warning'"> {{ payOptions[scope.row.status] }}</el-tag>
+                            <el-tag size="small" :type="scope.row.status==2?'success':scope.row.status==3?'danger':'warning'"> {{ payOptions[scope.row.status]||"-" }}</el-tag>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="status" :label="$t('sys_rai129')" minWidth="100">
+                    <el-table-column prop="apy_status" :label="$t('sys_rai129')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleApply(command)">
                             <span style="color:#909399" :class="[factorModel.apy_status?'dropdown_title':'']"> {{ $t('sys_rai129') }}
@@ -199,7 +199,7 @@ export default {
             return ["",this.$t('sys_c026'),this.$t('sys_c025')]
         },
         payOptions(){
-            return [this.$t('sys_l053'),this.$t('sys_p007'),this.$t('sys_p008'),this.$t('sys_p017')]
+            return ["",this.$t('sys_p007'),this.$t('sys_p008'),this.$t('sys_p017')]
         },
         drawOption(){
             return ["",this.$t('sys_p013'),this.$t('sys_p021')]

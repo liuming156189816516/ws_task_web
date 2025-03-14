@@ -441,7 +441,7 @@ export default {
     other_100:"contact support",
     other_101:"One hour x",
     other_102:"After saving the contact, click on the following account to send a message directly",
-    other_103:"Cash withdrawal refund",
+    other_103:"Withdrawal refund",
 
     table_001:"Home",
     table_002:"Team",

@@ -14,8 +14,8 @@
             </el-form-item>
 
             <el-form-item class="fr">
-                <span>{{$t("sys_m071")}}: <em style="font-size: 16px;font-weight: bold;">{{$baseFun.moneyCut(bounty_amount)}}</em></span>
-                <span style="margin-left:10px;">{{$t("sys_m072")}}: <em style="font-size: 16px;font-weight: bold;">{{$baseFun.moneyCut(com_amount)}}</em></span>
+                <span>{{$t("sys_m071")}}: <em style="font-size: 16px;font-weight: bold;">{{$baseFun.moneyCut(bounty_amount||0)}}</em></span>
+                <span style="margin-left:10px;">{{$t("sys_m072")}}: <em style="font-size: 16px;font-weight: bold;">{{$baseFun.moneyCut(com_amount||0)}}</em></span>
             </el-form-item>
         </el-form>
         <!-- 分组管理 -->
@@ -137,7 +137,7 @@ export default {
     },
     computed: {
         taskOption(){
-            return [{lable:"全部",value:-1},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"注册赠送",value:3},{lable:"轮盘赏金",value:4},{lable:"签到赏金",value:5},{lable:"下载赏金",value:6},{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }];
+            return [{lable:"全部",value:-1},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"注册赠送",value:3},{lable:"轮盘赏金",value:4},{lable:"签到赏金",value:5},{lable:"下载赏金",value:6},{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 },{lable:"提现退款",value:10 }];
             // return [ {},{lable:"加粉赏金",value:1 },{lable:"加粉返佣",value:2 },{lable:"人工调整",value:8 },{lable:"提现扣款",value:9 }]
         },
         tasksOption(){

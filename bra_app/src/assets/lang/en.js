@@ -433,6 +433,7 @@ export default {
     other_101:"2.The number of active online members in the team needs to reach 80%",
     other_102:'3.When the number of people who have completed the WhatsApp binding task reaches 80% of the team members, click the "Receive Salary" mark and switch to the official customer service manager chat page for verification.',
     other_103:"4.Make sure that the team's subordinate users are real members. If there are any fake, unauthorized accounts or large-scale registrations, all profits will be deducted and the VIP level will be eliminated, and they will never be hired.",
+    other_104:"Reembolso de retirada",
 
     table_001:"Home",
     table_002:"Team",

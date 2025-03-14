@@ -429,6 +429,7 @@ export default {
     other_101:"2.O número de membros ativos online da equipe precisa chegar a 80%",
     other_102:"3.Quando o número de subordinados online da equipe que concluíram a tarefa de vinculação do WhatsApp atingir 80% dos membros da equipe, clique na marca de recebimento de salário e mude para a página oficial de bate-papo do gerente de atendimento ao cliente para verificação",
     other_103:"4.Certifique-se de garantir que os usuários de nível inferior da equipe sejam membros reais. Se houver alguma falsidade, a criação privada de um grande número de contas para registro, todos os lucros serão deduzidos e os níveis VIP serão eliminados, e eles nunca o farão. ser contratado.",
+    other_104:"Reembolso de retirada",
 
     table_001:"Início",
     table_002:"Equipe",

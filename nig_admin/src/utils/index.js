@@ -114,6 +114,20 @@ export function getQueryObject(url) {
   return obj
 }
 
+function moneyCut(amount, limit = 2) {
+  let a, b;
+  if (typeof amount == 'number') {
+    [a, b] = amount.toFixed(limit).split(".")
+  } else {
+    [a, b] = amount.split(".")
+    b = b || ''
+    while (b.length < limit) {
+      b += "0"
+    }
+  }
+  return `${a.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.${b}`
+}
+
 /**
  * @param {string} input value
  * @returns {number} output value
@@ -1356,6 +1370,7 @@ export default {
   resetTime,
   emoji_icon,
   newsTime,
-  mexicoTime
+  mexicoTime,
+  moneyCut
 }
 

@@ -26,6 +26,10 @@
                     <el-button size="small" icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
                     <el-button size="small" :disabled="pay_id.length==0" type="warning" @click="regectBtn(0,1)">{{ $t('sys_rai076',{value:$t('sys_rai124')}) }}</el-button>
                 </el-form-item>
+                <el-form-item class="fr">
+                    {{ $t("sys_p006") }}
+                    <em style="font-size: 16px;font-weight: bold;">{{$baseFun.moneyCut(bounty_amount||0)}}</em>
+				</el-form-item>
 			</el-form>
 		</div>
 		<div class="switch_bar">
@@ -193,6 +197,7 @@ export default {
                 remark:"",
                 replay_type:2
             },
+            bounty_amount:0,
             pageOption: resetPage(),
             sendRules:{
                 remark: [
@@ -249,6 +254,7 @@ export default {
                 this.loading = false;
                 this.factorModel.total=res.data.total;
 				this.bannerList = res.data.list || [];
+                this.bounty_amount = res.data.total_amount||0;
 			})
 		},
         checkSelectable(row){

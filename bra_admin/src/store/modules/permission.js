@@ -18,30 +18,6 @@ function hasPermission(roles, route) {
  * @param routes asyncRoutes
  * @param roles
  */
-// export function filterAsyncRoutes(routes, roles) {
-//   const res = []
-//   routes.forEach(route => {
-//     const tmp = { ...route }
-//     if (hasPermission(roles, tmp)) {
-//       if (tmp.children) {
-//         tmp.children = filterAsyncRoutes(tmp.children, roles)
-//       }
-//       res.push(tmp)
-//     }
-//   })
-//   return res
-// }
-
-// export function filterAsyncRoutes(asyncRouter,routers){
-//   return asyncRouter.filter(item =>{
-//     if (routers.includes(item.path)||item.hidden) {
-//       if (item.children && item.children.length > 0) {
-//         item.children = filterAsyncRoutes(item.children,routers)
-//       }
-//       return true
-//     }
-//   })
-// }
 
 export function filterAllMenu(menuList,router=[]){
   menuList.forEach(item =>{
@@ -61,10 +37,38 @@ const state = {
 }
 export function filterAsyncRoutes(routers){
   return routers.filter(item =>{
-    item.component = 'Layout';
+    let childrenList = []
+    for (let k = 0; k < asyncRoutes.length; k++) {
+      if(item.path == asyncRoutes[k].path&&asyncRoutes[k].children.length>0){
+        for (let c = 0; c < asyncRoutes[k].children.length; c++) {
+          if(asyncRoutes[k].children[c].hidden){
+            item.children.push(asyncRoutes[k].children[c])
+          }
+        }
+      }
+      if(asyncRoutes[k].children&&asyncRoutes[k].children.length>0){
+        for (let l = 0; l < asyncRoutes[k].children.length; l++) {
+          childrenList.push(asyncRoutes[k].children[l])
+        }
+      }
+
+      if(asyncRoutes[k].path === item.path){
+        item.name = asyncRoutes[k].meta.title;
+        item.component = asyncRoutes[k].component;
+      }
+      
+      if(childrenList&&childrenList.length>0){
+        for (let f = 0; f < childrenList.length; f++) {
+          if(item.path == childrenList[f].path){
+            item.name = childrenList[f].meta.title;
+            item.component = childrenList[f].component;
+          }
+        }
+      }
+    }
     if (item.path) {
       if (item.children && item.children.length > 0) {
-        item.children = filterAsyncRoutes(item.children,routers)
+        item.children = filterAsyncRoutes(item.children)
       }
       return true
     }
@@ -73,8 +77,6 @@ export function filterAsyncRoutes(routers){
 const mutations = {
   SET_ROUTES: (state, routes) => {
     let rolesRouter = filterAsyncRoutes(state.userMenu);
-    // console.log(rolesRouter);
-    // console.log(asyncRoutes);
     state.addRoutes = rolesRouter;
     const adminSys = asyncRoutes.filter(item=> item.path == "/permission");
     if(state.roles == "admin"){
@@ -100,7 +102,9 @@ const actions = {
       commit('SET_MENU', userMenu)
       let accessedRoutes = asyncRoutes || []
       commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      // resolve(accessedRoutes)
+      resolve(state.routes)
+      // resolve(state.routes)
     })
   }
 }

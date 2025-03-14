@@ -437,7 +437,6 @@ export const asyncRoutes = [
         }
       },
       {
-        hidden: true,
         path: '/group-task',
         component: () => import('@/views/task/ai-group-task'),
         name: 'group-task',
@@ -490,16 +489,15 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/ipList',
+    path: '/ipManage',
     component: Layout,
-    redirect: '/ipManage/ipList',
-    name: 'ipList',
+    name: 'ipManage',
     meta: { title:i18n.t('sys_m043'),icon: 'el-icon-cpu' },
     children: [
       {
         path: '/ipList',
         component: () => import('@/views/ipManage/ipList'),
-        name: 'ipManage',
+        name: 'ipList',
         meta: {
           title:i18n.t('sys_m044'),
         }

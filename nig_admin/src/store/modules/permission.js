@@ -77,8 +77,6 @@ export function filterAsyncRoutes(routers){
 const mutations = {
   SET_ROUTES: (state, routes) => {
     let rolesRouter = filterAsyncRoutes(state.userMenu);
-    // console.log(rolesRouter);
-    // console.log(asyncRoutes);
     state.addRoutes = rolesRouter;
     const adminSys = asyncRoutes.filter(item=> item.path == "/permission");
     if(state.roles == "admin"){

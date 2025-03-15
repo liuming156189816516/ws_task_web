@@ -65,7 +65,7 @@
                 </div> -->
                 <!-- <template v-if="pullGroupList&&pullGroupList.length>0"> -->
                 <div class="record_scroll w_f flex-item flex-dir-c">
-                     <el-table style="width:100%" :data="pullGroupList" size="small" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
+                     <el-table class="font_24" style="width:100%" :data="pullGroupList" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
                         <el-table-column fixed prop="account" :label="$t('login_038')" minwidth="100" />
                         <el-table-column prop="status" :label="$t('tail_008')" minwidth="100">
                             <template slot-scope="scope">
@@ -555,6 +555,11 @@ export default {
 	}
 };
 </script>
+<style lang="scss">
+.el-table .el-table__cell{
+    padding: 20px 0;
+}
+</style>
 <style lang="scss" scoped>
     .home-content {
         height: 100%;

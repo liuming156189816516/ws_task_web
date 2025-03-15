@@ -436,9 +436,9 @@ export default {
             this.initWechatList();
         },
         initWechatList(){
-            this.ref_loading = true;
+            this.h_loading = true;
             getaccountlist({page:this.l_page,limit:5}).then(res => {
-                setTimeout(()=>{this.ref_loading = false;},300)
+                setTimeout(()=>{this.h_loading = false;},300)
                 this.page_total1 = res.total;
                 this.pullGroupList = res.list||[];
             })

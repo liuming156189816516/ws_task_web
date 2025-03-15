@@ -65,7 +65,7 @@
                 </div> -->
                 <!-- <template v-if="pullGroupList&&pullGroupList.length>0"> -->
                 <div class="record_scroll w_f flex-item flex-dir-c">
-                     <el-table style="width:100%" :data="pullGroupList" size="mini" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
+                     <el-table style="width:100%" :data="pullGroupList" size="small" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
                         <el-table-column fixed prop="account" :label="$t('login_038')" minwidth="100" />
                         <el-table-column prop="status" :label="$t('tail_008')" minwidth="100">
                             <template slot-scope="scope">
@@ -439,8 +439,8 @@ export default {
             this.ref_loading = true;
             getaccountlist({page:this.l_page,limit:5}).then(res => {
                 setTimeout(()=>{this.ref_loading = false;},300)
-                this.page_total1 = res.data.total;
-                this.pullGroupList = res.data.list||[];
+                this.page_total1 = res.total;
+                this.pullGroupList = res.list||[];
             })
         },
         initHookList(){

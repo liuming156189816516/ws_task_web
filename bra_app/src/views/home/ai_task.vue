@@ -569,6 +569,7 @@ methods: {
 <style lang="scss">
     .el-table .el-table__cell{
         padding: 20px 0;
+        line-height: 1;
     }
 </style>
 <style lang="scss" scoped>

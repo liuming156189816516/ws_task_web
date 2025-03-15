@@ -108,7 +108,7 @@
                                 <em class="flex-item flex-align flex-center" @click="showDelBtn(item)"> {{$t('other_010')}}</em>
                             </span>
                         </div> -->
-                        <el-table style="width:100%" :data="pullGroupList" size="mini" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
+                        <el-table class="font_24" style="width:100%" :data="pullGroupList" :cell-style="{ textAlign:'center'}" :header-cell-style="{ textAlign:'center'}" :empty-text="$t('tail_010')">
                             <el-table-column fixed prop="account" :label="$t('login_038')" minwidth="100" />
                             <el-table-column prop="status" :label="$t('home_021')" minwidth="100">
                                 <template slot-scope="scope">
@@ -558,6 +558,11 @@ export default {
 	}
 };
 </script>
+<style lang="scss">
+    .el-table .el-table__cell{
+        padding: 20px 0;
+    }
+</style>
 <style lang="scss" scoped>
     .home-content {
         height: 100%;

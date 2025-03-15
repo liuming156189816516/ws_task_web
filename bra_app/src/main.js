@@ -6,10 +6,12 @@ import store from "./store";
 import filters from './utils/filters';
 import Helper from './utils/helper';
 import Global from "./core/Global"
+import 'element-ui/lib/theme-chalk/index.css';
 import situantpop  from '@/components/Dialog/Dialog'
 import popDialog  from '@/components/popDialog'
 import './assets/iconfont/iconfont.css';
 import VueLuckyCanvas from '@lucky-canvas/vue';
+import { Table, TableColumn } from 'element-ui';
 window.Global = Global
 Global.setup();
 // 导入资源文件
@@ -28,7 +30,7 @@ import "./utils/setInterval"
 
 import VueIntroStep from 'vue-intro-step'
 Vue.component('vue-intro-step', VueIntroStep);
-
+Vue.use(Table).use(TableColumn);
 Vue.use(VueLuckyCanvas);
 Vue.component("popDialog", popDialog)
 Vue.prototype.$popDialog = situantpop.install

@@ -404,7 +404,7 @@ export default {
             this.page=1;
             this.l_page=1;
             this.initWechatList();
-            this.initHookList();
+            // this.initHookList();
         },
         async getGroupMess(){
            let group_task =  await getautogroupinfo({task_info_id:this.task_id});

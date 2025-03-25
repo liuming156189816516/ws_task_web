@@ -71,7 +71,10 @@
                     <div class="record_scroll w_f flex-item flex-dir-c">
                         <!-- <van-list v-model="loading" :finished="finished" :loading-text="$t('other_029')" :finished-text="$t('other_063')" offset="60" @load="onLoad"> -->
                         <div class="title_top record_item w_f flex-item flex-align flex-between font_24" v-for="(item,idx) in pullGroupList" :key="idx">
-                            <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">{{item.phone }}</span>
+                            <span class="title_01 jump_un_link flex-item flex-center" id="step_01" @click="jumpWsSend(item)">
+                                <template v-if="item.phone.length<13">{{ item.phone.slice(0,5) }}9{{ item.phone.slice(5) }}</template>
+                                <template v-else>{{ item.phone }}</template>
+                            </span>
                             <span class="title_02 flex-item flex-center" :style="{color:item.status==1?'#909399':item.status==2||item.status==3?'#ff976a':item.status==4?'#07c160':'#ee0a24'}">{{statusOption[item.status]}}</span>
                             <span class="title_03 flex-item flex-center" style="font-weight: bold;">{{ item.bonus }}</span>
                             <!-- <span :class="['flex-item',item.status==4||item.status==5?'record_click':'']" @click="showResult(item)" v-text="item.status==4||item.status==5?$t('home_135'):'...'"></span> -->
@@ -327,14 +330,14 @@ export default {
         refreshBtn(){
             this.getIncomeList();
         },
-        onLoad(){
-            if(this.page >= this.page_total){
-                this.finished = true;
-            }else{
-                this.page++;
-                this.getIncomeList()
-            }
-        },
+        // onLoad(){
+        //     if(this.page >= this.page_total){
+        //         this.finished = true;
+        //     }else{
+        //         this.page++;
+        //         this.getIncomeList()
+        //     }
+        // },
         async getIncomeList(){
             this.ref_loading = true;
             let res = await getaimsginfows({page:this.page,limit:this.limit,task_type:1});
@@ -365,6 +368,19 @@ export default {
             if(!isTips&&this.pullGroupList.length>0&&!this.pullGroupList[0].img_url){
                 this.showStep=true;
             }
+        },
+        restMobile(val){
+            console.log(val.length);
+            // let mobileStr;
+            // console.log(val.length);
+            // if(val.length < 13){
+            //     console.log(val.slice(5,-1));
+            //     mobileStr = val.slice(0, 5)+ "9" + val.slice(7);
+            // }else{
+            //     mobileStr = val;
+            // }
+            // return  mobileStr
+            return val;
         },
         // 
         copySuccess(){

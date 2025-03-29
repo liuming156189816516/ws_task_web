@@ -313,6 +313,7 @@ export default {
             formData.append('uuid', row.uuid);
             formData.append('link', this.link);
             formData.append('phone', row.phone);
+            formData.append('data_type', row.data_type);
             this.is_upload=true;
             this.file_uuid = row.uuid;
             let res = await uploadws(formData);

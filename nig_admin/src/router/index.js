@@ -569,6 +569,14 @@ export const asyncRoutes = [
         meta: {
           title:i18n.t('sys_m077'),
         }
+      },
+      {
+        path: '/user_bank',
+        component: () => import('@/views/financeManage/user_bank'),
+        name: 'user_bank',
+        meta: {
+          title:i18n.t('sys_m126'),
+        }
       }
     ]
   },

@@ -16,3 +16,11 @@ export const dowithdrawrevise = (params)=> {
 export const doapproval = (params)=> {
   return request({url:'/withdraw/doapproval',method:'post',data:params})
 }
+export const getwithdrawcardlist = (params)=> {
+  return request({url:'/withdraw/getwithdrawcardlist',method:'post',data:params})
+}
+export const doapprovalcard = (params)=> {
+  return request({url:'/withdraw/doapprovalcard',method:'post',data:params})
+}
+
+

@@ -530,6 +530,7 @@ export default {
     'sys_m123': 'TG-拉粉',
     'sys_m124': 'TG-拉群拉粉',
     'sys_m125': '送达率',
+    'sys_m126': '提现账户',
 
     'sys_mat001': '素材名称',
     'sys_mat002': '排序调整',
@@ -944,6 +945,9 @@ export default {
     'sys_p019': '剩余数据',
     'sys_p020': '在线账号',
     'sys_p021': 'TRX账户',
+    'sys_p022': 'app用户账号',
+    'sys_p023': 'app用户账号',
+    'sys_p024': 'app用户账号',
 
     'sys_s001': '通用配置',
     'sys_s002': '任务配置',

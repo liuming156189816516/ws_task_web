@@ -29,7 +29,11 @@
                 <el-form-item class="fr">
                     {{ $t("sys_p006") }}
                     <em style="font-size: 16px;font-weight: bold;">{{$baseFun.moneyCut(bounty_amount||0)}}</em>
+                    <!-- <el-button size="small" type="primary" @click="addConfigBtn(0,1)">{{ $t('sys_s006') }}</el-button> -->
 				</el-form-item>
+                <!-- <el-form-item style="float:right;">
+                    <el-button size="small" type="primary" @click="addConfigBtn(0,1)">{{ $t('sys_s006') }}</el-button>
+				</el-form-item> -->
 			</el-form>
 		</div>
 		<div class="switch_bar">

@@ -27,7 +27,7 @@
 		<div class="switch_bar">
 			<div class="consun_list handel_area">
 				<el-table :data="bannerList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading" element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }" @selection-change="selectAllChange" @row-click="rowSelectChange">
-					<el-table-column type="selection" width="55"> </el-table-column>
+					<!-- <el-table-column type="selection" width="55"> </el-table-column> -->
                     <el-table-column prop="card_no" :label="$t('sys_p004')" minWidth="120" align="center" />
                     <!-- <el-table-column prop="type" :label="$t('sys_p012')" minWidth="100" align="center">
                         <template slot-scope="scope">

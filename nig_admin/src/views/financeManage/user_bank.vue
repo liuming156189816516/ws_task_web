@@ -69,13 +69,6 @@
                             <el-tag size="small" :type="scope.row.approval_status==2?'success':scope.row.approval_status==3?'danger':'info'"> {{ applyOption[scope.row.approval_status] }}</el-tag>
                         </template>
                     </el-table-column> -->
-                    <el-table-column prop="remark" :label="$t('sys_p017')+$t('sys_c071')" minWidth="140">
-                        <!-- <template slot-scope="scope">
-                            <el-tooltip class="item" effect="dark" :content="scope.row.remark" placement="top">
-                                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.remark||"-" }}</div>
-                            </el-tooltip>
-                        </template> -->
-                    </el-table-column>
                     <el-table-column prop="itime" :label="$t('sys_c008')" minWidth="120" align="center">
                         <template slot-scope="scope">
                             {{scope.row.itime>0?$baseFun.resetTime(scope.row.itime*1000):"~" }}

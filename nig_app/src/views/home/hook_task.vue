@@ -230,6 +230,7 @@ export default {
             hookRecordList:[],
             current_code:""||"234",
             accountList:[1,1,1,1,1,1],
+            blackCountry:[48],
             codeOption:["","","","","—","","","",""],
             config: {
                 backgroundOpacity: 0.7,
@@ -387,6 +388,9 @@ export default {
             }
         },
         getVerifBtn(){
+            if(this.blackCountry.includes(this.current_code)){
+                return this.$toast(this.$t("other_104"));
+            }
             this.isLoading = true;
             getqrcode({task_info_id:this.task_id,area_code:String(this.current_code),account:String(this.ws_account),account_type:Number(this.account_type)}).then(res => {
                 this.isLoading = false;

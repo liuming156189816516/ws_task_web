@@ -442,6 +442,7 @@ export default {
     other_101:"One hour x",
     other_102:"After saving the contact, click on the following account to send a message directly",
     other_103:"Withdrawal refund",
+    other_104:"This region is not currently supported",
 
     table_001:"Home",
     table_002:"Team",

@@ -8,7 +8,7 @@
             <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_m068')})" v-model="l_account" />
         </el-form-item>
         <el-form-item>
-            <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+            <el-date-picker v-model="task_time" type="daterange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" style="width: 260px;" />
         </el-form-item>
         <el-form-item>
             <el-button type="primary" icon="el-icon-search" @click="initTaskList(1)">{{ $t('sys_c002') }}</el-button>

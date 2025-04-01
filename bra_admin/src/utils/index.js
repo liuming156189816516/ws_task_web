@@ -385,7 +385,6 @@ function convertTimeToZone(date, targetTimeZone) {
   return new Date(date.toLocaleString('en-US', { timeZone: targetTimeZone }));
 }
 
-
 export function mexicoTime(date, type){
   console.log(type);
   let Time;
@@ -406,11 +405,11 @@ export function mexicoTime(date, type){
     Time = `${Year}-${Month}-${Dates} 23:59:59`;
     console.log(Time);
   }else if(type == 3){
-    let Afr_time = date.toLocaleString("zh-CN", { timeZone:'Africa/Lagos'});
+    let Afr_time = date.toLocaleString("zh-CN", { timeZone:'America/Sao_Paulo'});
     let formatMexico = (Date.parse(Afr_time)/1000) + (5 * 3600);
     return formatMexico;
   }
-  let Afr_time = DateTime.fromFormat(Time, "yyyy-MM-dd HH:mm:ss", { zone:'Africa/Lagos'}).toMillis()/1000;
+  let Afr_time = DateTime.fromFormat(Time, "yyyy-MM-dd HH:mm:ss", { zone:'America/Sao_Paulo'}).toMillis()/1000;
   return Afr_time
 }
 

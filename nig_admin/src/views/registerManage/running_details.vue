@@ -28,7 +28,12 @@
                     element-loading-spinner="el-icon-loading" style="width: 100%;" ref="serveTable" showBodyOverflow="title" :total="total" 
                     :page-sizes="pageOption" :page-size="limit" :current-page="page" :pagination-show="true" @handlePageSize="switchPage">
                     <u-table-column type="selection" />
-                    <u-table-column type="index" :label="$t('sys_g020')" width="60" />
+                    <!-- <u-table-column type="index" :label="$t('sys_g020')" width="60" /> -->
+                    <u-table-column prop="task_record_id" :label="$t('sys_m065')" minWidth="100">
+                        <template slot-scope="scope">
+                            {{scope.row.task_record_id||"-" }}
+                        </template>
+                    </u-table-column>
                     <u-table-column prop="task_type" :label="$t('sys_m066')" minWidth="100">
                         <template slot="header">
                             <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">

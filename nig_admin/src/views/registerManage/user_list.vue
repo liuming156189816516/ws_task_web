@@ -9,7 +9,7 @@
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q134')})" v-model="fuser_name" />
             </el-form-item>
             <el-form-item>
-                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_g144')})" v-model="user_ip" />
+                <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_c142')})" v-model="user_ip" />
             </el-form-item>
              <el-form-item>
                 <el-input clearable :placeholder="$t('sys_mat061',{value:$t('sys_q133')})" v-model="invite_code" />

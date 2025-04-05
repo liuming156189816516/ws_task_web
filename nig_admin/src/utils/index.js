@@ -403,22 +403,30 @@ export function mexicoTime(date, type){
   var Year = myDate.getFullYear(); //获取年
   var Month = myDate.getMonth() + 1; //获取月，默认从0开始，所以要加一
   var Dates = myDate.getDate(); //获取日
+  var Hour = myDate.getHours(); //获取小时
+  var Minute = myDate.getMinutes(); //获取分
+  var Seconds = myDate.getSeconds(); //获取秒
   if (Month < 10) {
     Month = '0' + Month
   }
   if (Dates < 10) {
     Dates = '0' + Dates
   }
+  if (Hour < 10) {
+    Hour = '0' + Hour
+  }
+  if (Minute < 10) {
+    Minute = '0' + Minute
+  }
+  if (Seconds < 10) {
+    Seconds = '0' + Seconds
+  }
   if(type == 1){
     Time = `${Year}-${Month}-${Dates} 00:00:00`;
-    console.log(Time);
   }else if(type == 2){
     Time = `${Year}-${Month}-${Dates} 23:59:59`;
-    console.log(Time);
   }else if(type == 3){
-    let Afr_time = date.toLocaleString("zh-CN", { timeZone:'Africa/Lagos'});
-    let formatMexico = (Date.parse(Afr_time)/1000) + (5 * 3600);
-    return formatMexico;
+    Time = `${Year}-${Month}-${Dates} ${Hour}:${Minute}:${Seconds}`;
   }
   let Afr_time = DateTime.fromFormat(Time, "yyyy-MM-dd HH:mm:ss", { zone:'Africa/Lagos'}).toMillis()/1000;
   return Afr_time

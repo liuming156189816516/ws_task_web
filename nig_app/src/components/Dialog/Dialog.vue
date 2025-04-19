@@ -337,8 +337,8 @@ export default {
             width: 100%;
             flex-shrink: 0;
             overflow: hidden;
-            // overflow-y: auto;
-            // overflow-x: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
             min-height: 300px;
             max-height: 1200px;
             border-radius: 6px;
@@ -372,9 +372,9 @@ export default {
                 box-sizing: border-box;
             }
             .adv_content{
-                min-height: 300px;
-                max-height: 1200px;
-                overflow-y: auto;
+                // min-height: 300px;
+                // max-height: 1200px;
+                // overflow-y: auto;
                 transition: opacity 0.3s ease, visibility 0s linear 0.3s;
                 p{
                     width: 100%;

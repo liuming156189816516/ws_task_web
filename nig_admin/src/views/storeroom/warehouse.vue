@@ -348,8 +348,8 @@ export default {
     this.initDatalist();
   },
   mounted() {
-      this.setFullHeight();
-      window.addEventListener("resize", this.setFullHeight);
+    this.setFullHeight();
+    window.addEventListener("resize", this.setFullHeight);
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.setFullHeight);

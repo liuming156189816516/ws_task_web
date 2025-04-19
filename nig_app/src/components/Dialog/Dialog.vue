@@ -183,7 +183,7 @@
                         </div>
                         <!-- <h4 class="w_f font_32">产生的速度慢了点吗没事没事面对吗没什么输出吗</h4> -->
                         <h4 class="w_f font_32">{{ title }}</h4>
-                        <div class="adv_content w_f flex-item flex-center flex-dir-c font_26" ref="content" v-html="content"></div>
+                        <div class="adv_content w_f flex-item flex-center flex-dir-c font_26" v-html="content"></div>
                     </div>
                 </div>
             </div>
@@ -336,8 +336,9 @@ export default {
         .adv_cover{
             width: 100%;
             flex-shrink: 0;
-            overflow-y: auto;
-            overflow-x: hidden;
+            overflow: hidden;
+            // overflow-y: auto;
+            // overflow-x: hidden;
             min-height: 300px;
             max-height: 1200px;
             border-radius: 6px;
@@ -371,6 +372,9 @@ export default {
                 box-sizing: border-box;
             }
             .adv_content{
+                min-height: 300px;
+                max-height: 1200px;
+                overflow-y: auto;
                 transition: opacity 0.3s ease, visibility 0s linear 0.3s;
                 p{
                     width: 100%;

@@ -56,7 +56,7 @@
           </el-table-column> -->
           <el-table-column prop="status" :label="$t('sys_c005')" width="100">
             <template slot="header">
-              <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">
+              <el-dropdown trigger="click" size="medium" @command="(command) => handleNewwork(command,2)">
                 <span style="color:#909399" :class="[model1.status ? 'dropdown_title' : '']"> {{ $t('sys_c005') }}
                   <i class="el-icon-arrow-down el-icon--right" />
                 </span>

@@ -55,6 +55,10 @@
 					<van-tag type="warning" />
 					{{ $t('pay_043') }}
 				</div>
+        <div class="title_item">
+          <van-tag type="warning" />
+          {{ $t('pay_044') }}
+        </div>
 			</div>
 		</div>
 		<van-popup :close-on-click-overlay="false" :overlay="true" v-model="showModel">
@@ -536,9 +540,9 @@ export default {
 			margin-bottom: 20px;
 		}
 		.auto_computed{
-			width: 100%; 
+			width: 100%;
 			display: flex;
-			font-size: 16px; 
+			font-size: 16px;
 			padding: 10px 0;
 			align-items: center;
 			justify-content: center;

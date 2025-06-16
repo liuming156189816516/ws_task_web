@@ -305,7 +305,7 @@ export default {
     pay_023:"Bind withdrawal information",
     pay_024:"Naira",
     pay_025:"You can withdraw up to {value} times a day",
-    pay_026:"1 gold = 0.8 Naira",
+    pay_026:"1000 gold = 800 Naira",
     pay_027:"Gold",
     pay_028:"Minimum withdrawal {value} gold",
     pay_029:"Today's withdrawal times have reached the upper limit",
@@ -323,7 +323,8 @@ export default {
     pay_040:"TRX",
     pay_041:"TRX Address",
     pay_042:"Please add {value}",
-    pay_043:"1 gold = 0.002 TRX",
+    pay_043:"1000 gold = 60 Rupee",
+    pay_044:"1000 gold = 2 TRX",
 
     tail_001:"income details",
     tail_002:"type",

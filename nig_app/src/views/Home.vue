@@ -19,7 +19,7 @@
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
-                    <div class="user_code">{{$t('login_012')}}：{{userInfo.inviteCode}} 
+                    <div class="user_code">{{$t('login_012')}}：{{userInfo.inviteCode}}
                         <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
                     </div>
                 </div>
@@ -155,7 +155,7 @@ export default {
             user_money: 0,
             teamStemp: "",
             help_url: "",
-            timeout: 1000,   
+            timeout: 1000,
       		setInter: 6000,
             viewLang:"en-GB",
             wsList: [],
@@ -180,7 +180,7 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:10, status:null,task_info_id:null,award:this.$t('home_168'),btn:this.$t('home_005'),desc:this.$t('home_051')},
+                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:40, status:null,task_info_id:null,award:this.$t('home_168'),btn:this.$t('home_005'),desc:this.$t('home_051')},
                 {name:this.$t('home_183'),live1:2,live2:1,type:2,g_num:30,status:null,task_info_id:null,award:this.$t('home_178'),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:15,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:2,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
@@ -260,10 +260,10 @@ export default {
                     this.filexTop = true;
                 }else{
                     this.filexTop = false;
-                } 
+                }
             }
         },
-        
+
         initHandle(){
             this.getTaskList();
             // this.initRuleTips();
@@ -329,7 +329,7 @@ export default {
         jumpLucky(idx){
             if (!getToken()) return this.$router.push("/login");
             const activRouter = ['/luckyWheel','/dailySign'];
-            this.$router.push(activRouter[idx]);   
+            this.$router.push(activRouter[idx]);
         },
         currentTime(){
             return Math.floor(new Date().getTime() / 1000);
@@ -659,8 +659,8 @@ export default {
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
-                // animation: flicker 2s infinite; 
-                // -webkit-animation: flicker 2s infinite; 
+                // animation: flicker 2s infinite;
+                // -webkit-animation: flicker 2s infinite;
             }
             @-webkit-keyframes flicker{
                 0%{
@@ -703,7 +703,7 @@ export default {
                             margin-right: 6px;
                         }
                         img{
-                            height: 30px; 
+                            height: 30px;
                         }
                     }
                     // .task_live_2{

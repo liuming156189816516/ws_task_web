@@ -59,13 +59,15 @@ export default {
 			state.appList = value;
 		},
 		store_info: (state, data) => {
-			const {token,user_info:{uid,account,invite_code,tutorial_list}} = data;
+			const {token,user_info:{uid,account,invite_code,country,tutorial_list}} = data;
 			state.uid = uid;
 			state.token = token;
 			state.account = account;
+			state.country = country;
 			state.inviteCode = invite_code;
 			window.localStorage.setItem('uid',uid);
 			window.localStorage.setItem('token',token);
+			window.localStorage.setItem('country',country);
 			window.localStorage.setItem('account',account);
 			window.localStorage.setItem('inviteCode',invite_code);
 			if(tutorial_list&&tutorial_list.length>0){

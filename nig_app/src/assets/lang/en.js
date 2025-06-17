@@ -325,6 +325,15 @@ export default {
     pay_042:"Please add {value}",
     pay_043:"1000 gold = 60 Rupee",
     pay_044:"1000 gold = 2 TRX",
+    pay_045:"卢比",
+    pay_046:"国家",
+    pay_047:"Nigeria",
+    pay_048:"India",
+    pay_049:"账号类型",
+    pay_050:"BANK",
+    pay_051:"UPI",
+    pay_052:"IFSC号码",
+
 
     tail_001:"income details",
     tail_002:"type",

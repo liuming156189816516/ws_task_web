@@ -13,9 +13,13 @@
 						</div>
 						<div class="amount van-ellipsis flex-item flex-align">
 							<img src="@/assets/images/gold_icon.png">
-							<div class="flex-item flex-align">
-								{{ WithdMoney || 0 }}≈{{ curIndex==2?income_trx||0:income_naira||0}}<span>{{ curIndex==2?$t('pay_040'):$t('pay_024') }}</span>
+
+							<div class="flex-item flex-align" v-if="country ==='Nigeria'">
+								{{ WithdMoney || 0 }}≈{{ curIndex==2?income_trx||0:income_naira||0}} <span>{{ curIndex==2?$t('pay_040'):$t('pay_024') }}</span>
 							</div>
+              <div class="flex-item flex-align" v-if="country ==='India'">
+                {{ WithdMoney || 0 }}≈{{ curIndex==2?income_trx||0:income_rupia||0}}<span>{{ curIndex==2?$t('pay_040'):$t('pay_045') }}</span>
+              </div>
 						</div>
 						<div class="btn_withdraw flex-item flex-center">
 							<van-button type="primary" @click="submitBtn">{{ $t('pay_005') }}</van-button>
@@ -28,7 +32,7 @@
 						<span class="account_text" v-text="card_no&&curIndex==1||card_no&&curIndex==2?card_no:$t('pay_042',{value:$t('login_038')})"></span>
 					</div>
 					<div class="share_btn flex-item" @click="bindCardBtn">
-						<van-button type="primary">{{curIndex==1||curIndex==2&&card_no?$t('pay_008'):curIndex==1&&card_no?$t('pay_008'):$t('pay_007')}}</van-button>
+						<van-button type="primary">{{card_no?$t('pay_008'):$t('pay_007')}}</van-button>
 					</div>
 				</div>
 			</div>
@@ -100,6 +104,7 @@ export default {
 			identify_Num:"",
 			income_trx:0,
 			income_naira:0,
+      income_rupia:0,
 			userInfo:"",
 			account_type:"",
 			isLoading:false,
@@ -108,7 +113,8 @@ export default {
 			withdraw_cash:null,
 			is_withdraw: false,
 			showModel: false,
-			is_prevent: false
+			is_prevent: false,
+      country:''
 		}
 	},
 	computed: {
@@ -125,6 +131,7 @@ export default {
 		if (this.$route.params && this.$route.params.back) {
 			this.is_prevent = true;
 		}
+    this.country = localStorage.getItem('country')
 	},
 	methods: {
 		syncInitApi(){
@@ -139,22 +146,24 @@ export default {
                 })
             });
             Promise.all([fun1,fun2]).then( res => {
-                const [{income,income_naira,income_trx},{limit_amount,limit_count,limit_count_status}] = res;
+                const [{income,income_naira,income_rupia,income_trx},{limit_amount,limit_count,limit_count_status}] = res;
 				this.WithdMoney = income||0;
 				this.income_trx = income_trx||0;
-				this.income_naira = income_naira||0;
+              this.income_naira = income_naira||0;
+              this.income_rupia = income_rupia||0;
 				this.withdraw_times = limit_count||0;
 				this.withdraw_cash = limit_amount||0;
 				this.is_withdraw = limit_count_status||false;
             })
         },
 		async getBankInfo(){
-			let { card_no,bank_name,payee_name,code,type } = await getwithdrawcard();
+			let { card_no,bank_name,payee_name,code,type,account_type,country,identify_num } = await getwithdrawcard();
 			this.curIndex = type||"1";
 			this.bank_code = code||"";
 			this.card_no = card_no||"";
 			this.bank_name = bank_name||"";
 			this.payee_name = payee_name||"";
+      console.log('\tthis.card_no'	,this.card_no)
 		},
 		onChange(idx){
 			this.curIndex=idx;

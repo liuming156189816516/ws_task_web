@@ -162,8 +162,10 @@ export default {
 			this.bank_code = code||"";
 			this.card_no = card_no||"";
 			this.bank_name = bank_name||"";
-			this.payee_name = payee_name||"";
-      console.log('\tthis.card_no'	,this.card_no)
+      this.payee_name = payee_name||"";
+      this.account_type = account_type||"";
+      this.country = country||"";
+      this.identify_num =identify_num ||"";
 		},
 		onChange(idx){
 			this.curIndex=idx;
@@ -206,7 +208,10 @@ export default {
 				card_no:this.card_no,
 				bank_name:this.bank_name,
 				payee_name:this.payee_name,
-				amount:Number(this.withdraw_num)
+				amount:Number(this.withdraw_num),
+        account_type: this.account_type,
+        country: this.country,
+        identify_num: this.identify_num,
 			}
 			this.isLoading = true;
 			let res = await savewithdrawapproval(params);

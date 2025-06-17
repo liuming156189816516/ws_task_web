@@ -5,6 +5,7 @@
   "author": "lucky",
   "scripts": {
     "dev": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --mode nig_test",
     "lint": "eslint --ext .js,.vue src",
     "build:nig_prod": "vue-cli-service build --mode nig_prod",
     "build:nig_test": "vue-cli-service build --mode nig_test",

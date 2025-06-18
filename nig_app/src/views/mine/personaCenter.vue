@@ -54,6 +54,8 @@
               <div class="user_info">
                 <span class="lable_text">{{ $t('pay_006') }}</span>
                 <van-field v-model="collectCard" :maxlength="10" :placeholder="$t('other_001',{value:$t('pay_006')})" oninput="value=value.replace(/[^\d]/g,'')" :border="false" />
+
+<!--                <van-field v-model="collectCard" :placeholder="$t('other_001',{value:$t('pay_006')})" :border="false" />-->
               </div>
               <div class="user_info">
                 <span class="lable_text">{{ $t('pay_022') }}</span>

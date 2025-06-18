@@ -269,7 +269,8 @@ export default {
         account_type,
         identify_num
       }] = this.apiResData;
-      console.log('account_type',account_type)
+      console.log('val',val)
+      console.log('this.apiResData',this.apiResData)
       if (val === country) {
         this.curIndex = type ? String(type) : ''
         this.bankOption = bankList.banks || [];
@@ -280,14 +281,11 @@ export default {
         this.collectCard = type == 1 ? card_no : "";
         this.collectTRX = type == 2 ? card_no : "";
         this.accountType = account_type || ''
-        if (country === 'India') {
-          this.collectCard = card_no || '';
-          this.identifyNum = identify_num || ''
-          this.accountType = account_type || 'BANK'
-
-        }
+      }else if (val === 'India') {
+        this.collectCard = card_no || '';
+        this.identifyNum = identify_num || ''
+        this.accountType = account_type || 'BANK'
       }
-
     }
   }
 };

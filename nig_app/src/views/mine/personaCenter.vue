@@ -269,6 +269,7 @@ export default {
         account_type,
         identify_num
       }] = this.apiResData;
+      console.log('account_type',account_type)
       if (val === country) {
         this.curIndex = type ? String(type) : ''
         this.bankOption = bankList.banks || [];
@@ -282,6 +283,8 @@ export default {
         if (country === 'India') {
           this.collectCard = card_no || '';
           this.identifyNum = identify_num || ''
+          this.accountType = account_type || 'BANK'
+
         }
       }
 

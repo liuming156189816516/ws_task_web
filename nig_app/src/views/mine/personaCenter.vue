@@ -46,15 +46,14 @@
             <template v-if="countryType==='India'">
               <div class="user_info">
                 <span class="lable_text">{{ $t('pay_049') }}</span>
-                <van-radio-group v-model="accountType" class="w_f flex-item flex-dir-r"  @change="changeType">
+                <van-radio-group v-model="accountType" class="w_f flex-item flex-dir-r"  @change="changeAccountType">
                   <van-radio name="BANK" shape="square">{{$t('pay_050')}}</van-radio>
-                  <van-radio name="UPI" shape="square">{{$t('pay_051')}}</van-radio>
+<!--                  <van-radio name="UPI" shape="square">{{$t('pay_051')}}</van-radio>-->
                 </van-radio-group>
               </div>
               <div class="user_info">
                 <span class="lable_text">{{ $t('pay_006') }}</span>
                 <van-field v-model="collectCard" :maxlength="10" :placeholder="$t('other_001',{value:$t('pay_006')})" oninput="value=value.replace(/[^\d]/g,'')" :border="false" />
-
 <!--                <van-field v-model="collectCard" :placeholder="$t('other_001',{value:$t('pay_006')})" :border="false" />-->
               </div>
               <div class="user_info">
@@ -94,7 +93,7 @@
     </div>
 </template>
 <script>
-import { getwithdrawcard,dowithdrawcard,getlistbanks } from "@/api/pay";
+import {getwithdrawcard, dowithdrawcard, getlistbanks} from "@/api/pay";
 import PageHeader from "@/components/Header";
 import {cloneDeep} from "lodash/lang";
 export default {
@@ -138,6 +137,9 @@ export default {
         changeType(val){
             this.curIndex = val;
         },
+        changeAccountType(val){
+          this.accountType = val;
+        },
         syncInitApi(){
             let fun1 = new Promise((resolve,reject)=>{
                 getlistbanks().then(res =>{
@@ -160,7 +162,7 @@ export default {
                 this.collectCard = type==1?card_no:"";
                 this.collectTRX = type==2?card_no:"";
                 this.countryType = country||"";
-                this.accountType = account_type||''
+                this.accountType = account_type||'BANK'
                 if (country==='India'){
                   this.collectCard = card_no||'';
                   this.identifyNum = identify_num||''
@@ -211,199 +213,259 @@ export default {
              }
            }
 
-            this.bank_id?params.id=this.bank_id:"";
-            if(this.countryType==='Nigeria'&& this.curIndex==1&&!this.collectCard){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_006')}))
-            }else if(this.countryType==='Nigeria'&& this.curIndex==1&&!this.bankName){
-                return this.$toast(this.$t('other_014',{value:this.$t('pay_021')}))
-            }else if(this.countryType==='Nigeria'&& this.curIndex==2&&!this.collectTRX){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_014')}))
-            }else if(this.countryType==='Nigeria'&& this.curIndex==1&&!this.collectName){
-                return this.$toast(this.$t('other_001',{value:this.$t('pay_022')}))
-            }
-            this.isLoading = true;
-            const res = await dowithdrawcard(params);
-            this.isLoading = false;
-            if(res.code) return;
-            this.$toast(this.$t('other_013'));
-            setTimeout(() => {this.$router.go(-1)},500);
-        },
-        //
-        // 切换国家
-        changeCountryType(val){
-          this.countryType = val
-          this.curIndex = '1'
-          this.bankName =''
-          this.collectTRX = ''
-          this.accountType =''
-          this.collectCard =''
-          this.collectName =''
-          this.identifyNum =''
-          const [bankList,{id,bank_name,card_no,payee_name,code,type,country,account_type,identify_num}] = this.apiResData;
-          if (val===country){
-            this.curIndex = type?String(type):''
-            this.bankOption = bankList.banks||[];
-            this.bank_id = id||"";
-            this.bankCode = code||"";
-            this.bankName = bank_name||"";
-            this.collectName = payee_name||"";
-            this.collectCard = type==1?card_no:"";
-            this.collectTRX = type==2?card_no:"";
-            this.accountType = account_type||''
-            if (country==='India'){
-              this.collectCard = card_no||'';
-              this.identifyNum = identify_num||''
-            }
-          }
-
+      this.bank_id ? params.id = this.bank_id : "";
+      // 国家类型 尼日利亚
+      if (this.countryType === 'Nigeria') {
+        if (this.curIndex == 1 && !this.collectCard) {
+          return this.$toast(this.$t('other_001', {value: this.$t('pay_006')}))
+        } else if (this.curIndex == 1 && !this.bankName) {
+          return this.$toast(this.$t('other_014', {value: this.$t('pay_021')}))
+        } else if (this.curIndex == 2 && !this.collectTRX) {
+          return this.$toast(this.$t('other_001', {value: this.$t('pay_014')}))
+        } else if (this.curIndex == 1 && !this.collectName) {
+          return this.$toast(this.$t('other_001', {value: this.$t('pay_022')}))
         }
+        // 国家类型 印度
+      } else if (this.countryType === 'India') {
+        if (!this.accountType) {
+          return this.$toast(this.$t('other_014', {value: this.$t('pay_049')}))
+        } else if (!this.collectCard) {
+          return this.$toast(this.$t('other_001', {value: this.$t('pay_006')}))
+        } else if (!this.collectName) {
+          return this.$toast(this.$t('other_001', {value: this.$t('pay_022')}))
+        } else if (!this.identifyNum) {
+          return this.$toast(this.$t('other_001', {value: this.$t('pay_052')}))
+        }
+      }
+
+      this.isLoading = true;
+      const res = await dowithdrawcard(params);
+      this.isLoading = false;
+      if (res.code) return;
+      this.$toast(this.$t('other_013'));
+      setTimeout(() => {
+        this.$router.go(-1)
+      }, 500);
+    },
+    //
+    // 切换国家
+    changeCountryType(val) {
+      this.countryType = val
+      this.curIndex = '1'
+      this.bankName = ''
+      this.collectTRX = ''
+      this.accountType = ''
+      this.collectCard = ''
+      this.collectName = ''
+      this.identifyNum = ''
+      const [bankList, {
+        id,
+        bank_name,
+        card_no,
+        payee_name,
+        code,
+        type,
+        country,
+        account_type,
+        identify_num
+      }] = this.apiResData;
+      if (val === country) {
+        this.curIndex = type ? String(type) : ''
+        this.bankOption = bankList.banks || [];
+        this.bank_id = id || "";
+        this.bankCode = code || "";
+        this.bankName = bank_name || "";
+        this.collectName = payee_name || "";
+        this.collectCard = type == 1 ? card_no : "";
+        this.collectTRX = type == 2 ? card_no : "";
+        this.accountType = account_type || ''
+        if (country === 'India') {
+          this.collectCard = card_no || '';
+          this.identifyNum = identify_num || ''
+        }
+      }
+
     }
+  }
 };
 </script>
 <style lang="scss">
-    .person_content{
-        .van-collapse-item__content{
-            padding: 0 !important;
-        }
-    }
-    .van-radio__icon--checked .van-icon{
-        border-color: $color-theme !important;
-        background-color: $color-theme;
-    }
+.person_content {
+  .van-collapse-item__content {
+    padding: 0 !important;
+  }
+}
+
+.van-radio__icon--checked .van-icon {
+  border-color: $color-theme !important;
+  background-color: $color-theme;
+}
 </style>
 <style lang="scss" scoped>
 .person_c {
+  width: 100%;
+  float: left;
+  height: 100%;
+  overflow: hidden;
+  font-size: 28px;
+  background-color: #f2f2f2;
+
+  .person_content {
     width: 100%;
+    height: 100vh;
     float: left;
-    height: 100%;
-    overflow: hidden;
-    font-size: 28px;
-    background-color: #f2f2f2;
-    .person_content{
-        width: 100%;
-        height: 100vh;
-        float: left;
-        margin-top: 20px;
-        padding: 25px 30px 0 30px;
-        box-sizing: border-box;
-        background-color: #fff;
-        .user_info{
-            width: 100%;
-            height: 96px;
-            float: left;
-            border-bottom: 1px solid #EEEEEE;
-            display: flex;
-            align-items: center;
-            background-color: #fff;
-            justify-content: space-between;
-            .van-cell{flex-grow: 1;}
-            .lable_text{
-                width: 260px;
-                color: #969799;
-                line-height: 28px;
-                flex-shrink: 0;
-            }
-            .van-radio-group{
-                gap: 20px;
-            }
-            .van-icon{
-                float: right;
-            }
-            .van-cell{
-                width: 3.5rem;
-                padding: 8px 0;
-                background-color: transparent;
-            }
-        }
-        .alipay_info{
-            margin-top: 20px;
-        }
-        .van-tabs__wrap{
-            font-size: 0.32rem;
-        }
-        .bank_list{
-            width: 100%;
-            height: 400px;
-        }
-        .van-collapse-item__content{
-            padding: 0 !important;
-        }
-        .button_area{
-            width: 100%;
-            float: left;
-            padding: 0 30px;
-            margin-top: 114px;
-            .van-button{
-                height: 44px;
-                width: 100%;
-                border: none;
-                border-radius: 44px;
-                font-size: 0.32rem;
-                border-color: $color-theme;
-                background-color: $color-theme;
-            }
-        }
-        .first_title, .bank_account{
-            margin-top: 20px;
-        }
-        .bank_account{
-            .van-cell{
-                float: left;
-            }
-            .van-icon{
-                font-size: 0.36rem;
-            }
-        }
-        .van-action-sheet{
-            max-height: 40%;
-        }
-        .van-action-sheet__item{
-            // line-height: 0px;
-            padding: 20px 0;
-        }
-        .van-action-sheet__cancel{
-            padding: 12px 0;
-            border-top: 1px solid #f2f2f2;
-        }
-    }
-    .flex-between{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    margin-top: 20px;
+    padding: 25px 30px 0 30px;
+    box-sizing: border-box;
+    background-color: #fff;
+
+    .user_info {
+      width: 100%;
+      height: 96px;
+      float: left;
+      border-bottom: 1px solid #EEEEEE;
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      justify-content: space-between;
+
+      .van-cell {
         flex-grow: 1;
+      }
+
+      .lable_text {
+        width: 260px;
+        color: #969799;
+        line-height: 28px;
+        flex-shrink: 0;
+      }
+
+      .van-radio-group {
+        gap: 20px;
+      }
+
+      .van-icon {
+        float: right;
+      }
+
+      .van-cell {
+        width: 3.5rem;
+        padding: 8px 0;
+        background-color: transparent;
+      }
     }
 
-}
-.valid_title{
-    padding: 30px 32px 10px;font-size: 24px;
-}
-::v-deep {
-    .van-cell__value{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .alipay_info {
+      margin-top: 20px;
+    }
+
+    .van-tabs__wrap {
+      font-size: 0.32rem;
+    }
+
+    .bank_list {
+      width: 100%;
+      height: 400px;
+    }
+
+    .van-collapse-item__content {
+      padding: 0 !important;
+    }
+
+    .button_area {
+      width: 100%;
+      float: left;
+      padding: 0 30px;
+      margin-top: 114px;
+
+      .van-button {
+        height: 44px;
         width: 100%;
-        .van-field__body{
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .van-button--primary, .van-button--info{
-            background-color: $color-theme;
-            border-color:  $color-theme;
-        }
-        .van-button--info{
-            opacity: 0.75;pointer-events: none;
-        }
+        border: none;
+        border-radius: 44px;
+        font-size: 0.32rem;
+        border-color: $color-theme;
+        background-color: $color-theme;
+      }
     }
+
+    .first_title, .bank_account {
+      margin-top: 20px;
+    }
+
+    .bank_account {
+      .van-cell {
+        float: left;
+      }
+
+      .van-icon {
+        font-size: 0.36rem;
+      }
+    }
+
+    .van-action-sheet {
+      max-height: 40%;
+    }
+
+    .van-action-sheet__item {
+      // line-height: 0px;
+      padding: 20px 0;
+    }
+
+    .van-action-sheet__cancel {
+      padding: 12px 0;
+      border-top: 1px solid #f2f2f2;
+    }
+  }
+
+  .flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
 }
-.cash_adverice{
-    margin-top: 60px;
-    .title-tip{
-        font-weight: bold;
+
+.valid_title {
+  padding: 30px 32px 10px;
+  font-size: 24px;
+}
+
+::v-deep {
+  .van-cell__value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .van-field__body {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
     }
-    .title_item{
-        color: $home-title-15;
+
+    .van-button--primary, .van-button--info {
+      background-color: $color-theme;
+      border-color: $color-theme;
     }
+
+    .van-button--info {
+      opacity: 0.75;
+      pointer-events: none;
+    }
+  }
+}
+
+.cash_adverice {
+  margin-top: 60px;
+
+  .title-tip {
+    font-weight: bold;
+  }
+
+  .title_item {
+    color: $home-title-15;
+  }
 }
 </style>

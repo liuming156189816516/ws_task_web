@@ -48,7 +48,7 @@
         <div class="title-tip">{{ $t('pay_009') }}</div>
         <div class="title_item">
           <van-tag type="warning"/>
-          {{ $t('pay_010', {value: withdraw_cash}) }}
+          {{ $t('pay_010', {value: country==='Nigeria'?withdraw_cash:india_limit_amount}) }}
         </div>
         <div class="title_item">
           <van-tag type="warning"/>
@@ -184,9 +184,9 @@ export default {
         this.ratio_rupia = ratio_rupia ||0  //金钱对应卢比的比率
         this.ratio_trx = ratio_trx ||0  //金钱对应trx的比率
         this.withdraw_times = limit_count || 0;
-        this.withdraw_cash = limit_amount || 0; // 尼日利亚 最低体现
+        this.withdraw_cash = limit_amount || 0; // 尼日利亚 最低提现
         this.is_withdraw = limit_count_status || false;
-        this.india_limit_amount = india_limit_amount || 0; // 印度 最低体现
+        this.india_limit_amount = india_limit_amount || 0; // 印度 最低提现
 
       })
     },

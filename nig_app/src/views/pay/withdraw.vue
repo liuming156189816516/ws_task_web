@@ -260,8 +260,6 @@ export default {
         country: this.country,
         identify_num: this.identify_num,
       }
-      console.log('params',params)
-      return false
       this.isLoading = true;
       let res = await savewithdrawapproval(params);
       this.isLoading = false;

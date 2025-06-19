@@ -278,9 +278,20 @@ export default {
         account_type,
         identify_num
       }] = this.apiResData;
-      console.log('val', val)
-      console.log('this.apiResData', this.apiResData)
-      if (val === country) {
+
+      // console.log('val', val)
+      // console.log('country', country)
+      // console.log('this.apiResData', this.apiResData)
+
+      if (val=== 'India' && country ==='India'){
+        this.collectCard = card_no || '';
+        this.identifyNum = identify_num || ''
+        this.accountType = account_type || 'BANK'
+        this.collectName = payee_name || "";
+      }else {
+        this.accountType =  'BANK'
+      }
+      if (val=== 'Nigeria' && country ==='Nigeria'){
         this.curIndex = type ? String(type) : ''
         this.bankOption = bankList.banks || [];
         this.bank_id = id || "";
@@ -290,12 +301,6 @@ export default {
         this.collectCard = type == 1 ? card_no : "";
         this.collectTRX = type == 2 ? card_no : "";
         this.accountType = account_type || ''
-      }
-      if (val === 'India') {
-        this.collectCard = card_no || '';
-        this.identifyNum = identify_num || ''
-        this.accountType = account_type || 'BANK'
-        this.collectName = payee_name || "";
       }
     }
   }

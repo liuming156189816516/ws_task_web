@@ -323,7 +323,7 @@ export default {
     pay_040:"TRX",
     pay_041:"TRX Address",
     pay_042:"Please add {value}",
-    pay_043:"1000 gold = 60 Rupee",
+    pay_043:"1000 gold = 70 Rupee",
     pay_044:"1000 gold = 2 TRX",
     pay_045:"Rupee",
     pay_046:"Country",

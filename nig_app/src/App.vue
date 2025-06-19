@@ -43,7 +43,7 @@ export default {
 			showNavBar: true,
 			currentTIme:null,
 			transitionName:"",
-			timeout: 1000,   
+			timeout: 1000,
       		setInter: 6000,
 			keepAliveNames: ['home']
 		}
@@ -138,9 +138,9 @@ export default {
 	watch: {
 		'$route'(to, from) {
 			if(to.path == "/home"||to.path == "/spread"){
-				this.customHeader("#8E8E8E");	
+				this.customHeader("#8E8E8E");
 			}else{
-				this.customHeader();	
+				this.customHeader();
 			}
 		}
 	}

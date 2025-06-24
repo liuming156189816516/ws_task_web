@@ -227,6 +227,7 @@ export default {
     spre_024:"轮盘赏金",
     spre_025:"签到赏金",
     spre_026:"下载赏金",
+    spre_027:"邀请二維碼",
 
     serv_001:"您好，{value}",
     serv_002:"我可以帮您什么忙",

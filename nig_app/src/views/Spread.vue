@@ -10,9 +10,9 @@
                 <div class="w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between ">
                         <span class="left_desc flex-item font_28">{{$t('spre_006')}}</span>
-                        <van-button id="step_01" class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/register'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
+                        <van-button id="step_01" class="font_20" type="primary" v-clipboard:copy="invit_link+'?inviteCode='+userInfo.inviteCode+'#/home'" v-clipboard:success="copySuccess">{{$t('other_006')}}</van-button>
                     </div>
-                    <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/register' }}</div>
+                    <div class="copay_text flex-item font_28">{{ invit_link+'?r='+userInfo.inviteCode+'#/home' }}</div>
                 </div>
                 <div class="invit_code w_f flex-item flex-dir-c">
                     <div class="copay_desc flex-item flex-align flex-between">
@@ -20,6 +20,14 @@
                         <van-button class="font_20" type="primary" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copCodeSuccess">{{$t('other_006')}}</van-button>
                     </div>
                     <div class="copay_text flex-item font_28">{{ userInfo.inviteCode }}</div>
+                </div>
+                <div class="invit_code invit_qrCode w_f flex-item flex-dir-c">
+                  <div class="copay_desc flex-item flex-align flex-between">
+                    <span class="left_desc flex-item font_28">{{$t('spre_027')}}</span>
+                  </div>
+                  <div class="copay_text flex-item font_28">
+                    <div  ref="inviteQrCode"></div>
+                  </div>
                 </div>
                 <div id="step_02">
                     <div class="w_f flex-item">
@@ -77,6 +85,7 @@
     </div>
 </template>
 <script>
+import QRCode from 'qrcodejs2'
 import { mapState } from "vuex";
 import { formatTime } from "@/utils/tool";
 import PageHeader from "@/components/Header";
@@ -181,6 +190,16 @@ export default {
             if(!isTips){
                 this.showStep=true;
             }
+          let url = this.invit_link+'?inviteCode='+this.userInfo.inviteCode+'#/home'
+          this.$refs.inviteQrCode.textContent="";
+          let qrcode = new QRCode(this.$refs.inviteQrCode, {
+            text: url,
+            width: 150,
+            height: 150,
+            colorDark: "#333333",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.L
+          })
         })
     },
     methods:{
@@ -408,6 +427,13 @@ export default {
                 margin-top: 16px;
                 border-top: 1px solid $home-title-07;
             }
+          .invit_qrCode{
+            height: 380px;
+            .copay_text{
+              display: flex;
+              justify-content: center;
+            }
+          }
         }
         .share_continer{
             height: auto;

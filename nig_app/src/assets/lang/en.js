@@ -227,6 +227,7 @@ export default {
     spre_024:"Roulette bounty",
     spre_025:"Sign-in bounty",
     spre_026:"Download bounty",
+    spre_027:"Invitation QR code",
 
     serv_001:"Hello, {value}",
     serv_002:"How can I help you",

@@ -137,7 +137,7 @@ export default {
         {type:3, fonts: [{ text:this.$t('other_087'),top:"60%",fontSize: "12px",fontColor: "#fff"}],background: "#009241",imgs:[{src:require("@/assets/images/win_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         {type:4, fonts: [{ text:this.$t('pay_034',{value:200}), top: "60%",fontSize: "12px",fontColor: "#fff"}],background: "#DD167B",imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
         {type:5, fonts: [{ text:this.$t('pay_034',{value:888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#F8C301',imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
-        {type:6, fonts: [{ text:this.$t('pay_034',{value:1888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
+        {type:6, fonts: [{ text:this.$t('pay_034',{value:2888}), top: '60%',fontSize: "12px",fontColor: "#fff"}],background: '#E77841',imgs:[{src:require("@/assets/images/more_icon.png"),top: "10%",width:"32px",height:"32px"}]},
       ],
       buttons: [
         {
@@ -241,7 +241,7 @@ export default {
       return formatTime(time);
     },
     showResult(row){
-      this.$popDialog({ content:row.Reason,number:row.id,title:this.$t('home_143'), type: 9 })
+      this.$popDialog({ content:row.id,number:row.id,title:this.$t('home_143'), type: 9 })
     }
   }
 };

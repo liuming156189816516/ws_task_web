@@ -51,7 +51,7 @@
                     <div class="rule_desc rule_desc_5 font_28" v-if="type==5">
                         <p>{{restLanuage('other_081')}}</p>
                         <p class="mg_24">{{restLanuage('other_082')}}</p>
-                        <!-- <p>{{restLanuage('other_083')}}</p> -->
+                         <p>{{restLanuage('other_083')}}</p>
                         <!-- <p class="mg_24">{{restLanuage('home_142')}}</p> -->
                         <!-- <p class="mg_24">{{restLanuage('other_081')}}</p>
                         <p class="mb_24">{{restLanuage('other_082')}}</p>
@@ -165,7 +165,7 @@
             </div>
         </div>
         <div class="steps_main w_f h_f" v-if="type==13">
-            <div class="task_rule w_f font_26"> 
+            <div class="task_rule w_f font_26">
                 <img class="close_icon" src="@/assets/images/close_icon.png" @click="closeBtn">
                 <div :class="['font_26',idx==0?'first_color':'']" v-for="(item,idx) in content" :key="idx">{{item}}</div>
             </div>
@@ -180,7 +180,7 @@ export default {
     props: {
         type:{
             type: Number,
-            default: null 
+            default: null
         },
         title: {
             type: String,
@@ -188,7 +188,7 @@ export default {
         },
         times: {
             type: Number,
-            default: 0 
+            default: 0
         },
         money: {
             type: Number,
@@ -588,7 +588,7 @@ export default {
     .qr_steps{
        .bg_step{
             margin-top:225px;
-        } 
+        }
     }
 }
 .mian_padding{

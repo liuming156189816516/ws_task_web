@@ -20,7 +20,7 @@
                 </div>
                 <div class="user_info">
                     <div class="user_name">{{ userInfo.account }}</div>
-                    <div class="user_code">{{$t('login_012')}}：{{userInfo.inviteCode}} 
+                    <div class="user_code">{{$t('login_012')}}：{{userInfo.inviteCode}}
                         <span class="copay_text" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="copySuccess">{{$t('other_006')}}</span>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="adv_warp flex-item flex-between font_28">
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(0)">
-                    {{$t('home_190')}}
+                    {{$t('home_124')}}
                 </div>
                 <div class="adv_item flex-item flex-align flex-center" @click="jumpLucky(1)">
                     {{$t('home_177')}}
@@ -119,8 +119,13 @@
                                 <img v-for="(v,i) in taskNameOption[item.type].live2" :key="i" src="@/assets/images/home/star_icon.png">
                             </div>
                         </div>
-                        <div class="task_award flex-item font_24">
-                            <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
+                      <div class="task_award flex-item font_24">
+                        <div class="task_small_title" v-html="$t(taskNameOption[item.type].tips)" style="font-weight: bold;"></div>
+                      </div>
+
+                      <div class="task_award flex-item font_24">
+<!--                          <div class="task_small_title" v-html="$t(taskNameOption[item.type].tips)" style="font-weight: bold;"></div>-->
+                          <div class="task_small_title" v-html="$t(taskNameOption[item.type].award)" style="font-weight: bold;"></div>
                             <van-count-down v-if="item.invalid_time" :time="(item.invalid_time-currentTime())*1000" />
                             <div class="task_btn" @click="handleTask(item)">
                                 <div class="circle_box flex-item flex-align flex-center font_24" v-if="item.type==2||item.type==3||item.type==5">
@@ -162,7 +167,7 @@ export default {
             user_money: 0,
             teamStemp: "",
             help_url: "",
-            timeout: 1000,   
+            timeout: 1000,
       		setInter: 6000,
             viewLang:"en-GB",
             wsList: [],
@@ -195,7 +200,7 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:15, status:null,task_info_id:null,award:this.$t('home_009'),btn:this.$t('home_005'),desc:this.$t('home_051')},
+                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:15, status:null,task_info_id:null,tips:this.$t('home_207'),award:this.$t('home_009'),btn:this.$t('home_005'),desc:this.$t('home_051')},
                 {name:this.$t('home_187'),live1:1,live2:1,type:2,g_num:25,status:null,task_info_id:null,award:this.$t('home_180'),btn:this.$t('home_057'),desc:this.$t('home_180')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:20,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:5,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},
@@ -313,13 +318,16 @@ export default {
             if(idx == 1){
                 if (!getToken()) return this.$router.push("/login");
                 const activRouter = ['/luckyWheel','/dailySign'];
-                this.$router.push(activRouter[idx]); 
+                this.$router.push(activRouter[idx]);
             }else{
-                if(this.$Helper.checkBrowser()){
-                    window.open(process.env.VUE_APP_WS_LINK,"_blank");
-                }else{
-                    uniFun.postMessage({data:process.env.VUE_APP_WS_LINK});
-                }
+              if (!getToken()) return this.$router.push("/login");
+              const activRouter = ['/luckyWheel','/dailySign'];
+              this.$router.push(activRouter[idx]);
+                // if(this.$Helper.checkBrowser()){
+                //     window.open(process.env.VUE_APP_WS_LINK,"_blank");
+                // }else{
+                //     uniFun.postMessage({data:process.env.VUE_APP_WS_LINK});
+                // }
             }
         },
         currentTime(){
@@ -555,7 +563,7 @@ export default {
                 font-weight: bold;
                 color: $font-color-white;
                 // border-radius: 10px;
-                background: url("../assets/images/lucky_icon.png");
+                background: url("../assets/images/lucky_icon1.png");
                 background-size: 100% 100%;
                 box-sizing: border-box;
             }
@@ -582,8 +590,8 @@ export default {
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
-                // animation: flicker 2s infinite; 
-                // -webkit-animation: flicker 2s infinite; 
+                // animation: flicker 2s infinite;
+                // -webkit-animation: flicker 2s infinite;
             }
             @-webkit-keyframes flicker{
                 0%{
@@ -627,7 +635,7 @@ export default {
                             margin-right: 6px;
                         }
                         img{
-                            height: 30px; 
+                            height: 30px;
                         }
                     }
                 }

@@ -1,25 +1,33 @@
-<!--  -->this.checkArr
 <template>
-  <div class='container_coat'>
+  <div class="container_coat">
     <div class="condition_warp select_warp">
-      <el-form size="small" inline>
+      <el-form inline size="small">
         <el-form-item>
-          <el-button type="primary" :disabled="checkArry.length==0" @click="scamperBtn(0,0)">{{ $t('sys_q111') }}</el-button>
+          <el-button :disabled="checkArry.length==0" type="primary" @click="scamperBtn(0,0)">{{
+            $t('sys_q111')
+          }}
+          </el-button>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="model1.user_account" clearable placeholder="请输入用户账号"  style="width:180px;" />
+          <el-input v-model="model1.user_account" clearable placeholder="请输入用户账号" style="width:180px;" />
         </el-form-item>
         <el-form-item>
-          <el-input v-model="model1.account" clearable placeholder="请输入拉群账号"  style="width:180px;" />
-        </el-form-item>
-         <el-form-item>
-          <el-input v-model="model1.invite_link" clearable placeholder="请输入邀请链接"  style="width:180px;" />
+          <el-input v-model="model1.account" clearable placeholder="请输入拉群账号" style="width:180px;" />
         </el-form-item>
         <el-form-item>
-          <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号"  style="width:180px;" />
+          <el-input v-model="model1.invite_link" clearable placeholder="请输入邀请链接" style="width:180px;" />
         </el-form-item>
         <el-form-item>
-          <el-date-picker v-model="model1.ipCtime" type="datetimerange" :range-separator="$t('sys_c108')" :start-placeholder="$t('sys_c109')" :end-placeholder="$t('sys_c110')" />
+          <el-input v-model="model1.ad_account" clearable placeholder="请输入营销账号" style="width:180px;" />
+        </el-form-item>
+        <el-form-item>
+          <el-date-picker
+            v-model="model1.ipCtime"
+            :end-placeholder="$t('sys_c110')"
+            :range-separator="$t('sys_c108')"
+            :start-placeholder="$t('sys_c109')"
+            type="datetimerange"
+          />
         </el-form-item>
         <!-- <el-form-item>
           <el-button type="warning" :disabled="checkIdArry.length==0" @click="handleGroupBtn(1)">{{ $t('sys_rai081') }}</el-button>
@@ -31,64 +39,112 @@
           <el-button type="danger" :disabled="checkIdArry.length==0" @click="handleGroupBtn(2)">{{ $t('sys_rai082') }}</el-button>
         </el-form-item> -->
         <el-form-item>
-          <el-button icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002')}}</el-button>
+          <el-button icon="el-icon-search" type="primary" @click="getTaskList(1)">{{ $t('sys_c002') }}</el-button>
           <el-button icon="el-icon-refresh-right" @click="restQueryBtn">{{ $t('sys_c049') }}</el-button>
-          <el-button type="warning" icon="el-icon-download" @click="exportBtn">导出</el-button>
+          <el-button icon="el-icon-download" type="warning" @click="exportBtn">导出</el-button>
         </el-form-item>
         <el-form-item class="fr">
-          自动炸群: <el-switch v-model="auto_scamper" active-text="开启" inactive-text="关闭" @change="handleScamper" />
+          自动炸群:
+          <el-switch v-model="auto_scamper" active-text="开启" inactive-text="关闭" @change="handleScamper" />
         </el-form-item>
       </el-form>
     </div>
     <div class="switch_bar">
       <div class="consun_list handel_area">
-        <el-table :data="groupTaskList" border style="width: 100%" height="700" ref="serveTable" v-loading="loading"
-          element-loading-spinner="el-icon-loading" :header-cell-style="{ color: '#909399', textAlign: 'center' }"
-          @selection-change="selectAllChange" @row-click="rowSelectChange">
+        <el-table
+          ref="serveTable"
+          v-loading="loading"
+          :data="groupTaskList"
+          :header-cell-style="{ color: '#909399', textAlign: 'center' }"
+          border
+          element-loading-spinner="el-icon-loading"
+          height="700"
+          style="width: 100%"
+          @selection-change="selectAllChange"
+          @row-click="rowSelectChange"
+        >
           <el-table-column type="selection" width="55" />
-          <el-table-column prop="app_account" label="用户账号" minWidth="100" />
-          <el-table-column prop="account" label="拉群账号" width="140" />
-          <el-table-column prop="ad_account" label="营销账号" width="120" />
-          <el-table-column prop="task_type" :label="$t('sys_m066')" minWidth="130">
-              <template slot="header">
-                  <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,1)">
-                  <span style="color:#909399" :class="[model1.task_type?'dropdown_title':'']"> {{ $t('sys_m066') }}
-                      <i class="el-icon-arrow-down el-icon--right" />
-                  </span>
-                  <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item :class="{'dropdown_selected':idx==model1.task_type}" v-for="(item,idx) in taskOption" :key="idx" :command="idx">{{ item==''?$t('sys_l053'):item }}</el-dropdown-item>
-                  </el-dropdown-menu>
-                  </el-dropdown>
-              </template>
-              <template slot-scope="scope">
-                  {{ taskOption[scope.row.task_type] }}
-              </template>
-          </el-table-column>
-          <el-table-column prop="status" :label="$t('sys_c005')" minWidth="100">
+          <el-table-column label="用户账号" min-width="100" prop="app_account" />
+          <el-table-column label="国家" min-width="130" prop="country">
             <template slot="header">
-              <el-dropdown trigger="click" size="medium " @command="(command) => handleNewwork(command,2)">
-                <span style="color:#909399" :class="[model1.status ? 'dropdown_title' : '']"> {{ $t('sys_c005') }}
+              <el-dropdown size="medium" trigger="click" @command="(command) => handleNewwork(command,'country')">
+                <span :class="[model1.country?'dropdown_title':'']" style="color:#909399"> {{ $t('sys_m066') }}
                   <i class="el-icon-arrow-down el-icon--right" />
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item :class="{ 'dropdown_selected': idx == model1.status }"
-                    v-for="(item, idx) in statusOptions" :key="idx" :command="idx">{{!item?$t('sys_l053'): item }}</el-dropdown-item>
+                  <el-dropdown-item
+                    v-for="(item,idx) in countryList"
+                    :key="idx"
+                    :class="{'dropdown_selected':item.value===model1.country}"
+                    :command="item.value"
+                  >{{ item.label }}
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </template>
             <template slot-scope="scope">
-              <el-tag size="small" :type="scope.row.status == 2 ? 'success' : scope.row.status == 3 ? 'warning' :scope.row.status == 5 ? 'danger': ''"> {{ statusOptions[scope.row.status] }}</el-tag>
+              {{ scope.row[scope.column.property] ? getLabelByVal(scope.row[scope.column.property], countryList) : '-' }}
             </template>
           </el-table-column>
-          <el-table-column prop="members" label="群成员" minWidth="120" show-overflow-tooltip />
-          <el-table-column prop="targets" label="数据包" minWidth="140">
+          <el-table-column label="拉群账号" prop="account" width="140" />
+          <el-table-column label="营销账号" prop="ad_account" width="120" />
+          <el-table-column :label="$t('sys_m066')" min-width="130" prop="task_type">
+            <template slot="header">
+              <el-dropdown size="medium " trigger="click" @command="(command) => handleNewwork(command,'task_type')">
+                <span :class="[model1.task_type?'dropdown_title':'']" style="color:#909399"> {{ $t('sys_m066') }}
+                  <i class="el-icon-arrow-down el-icon--right" />
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    v-for="(item,idx) in taskOption"
+                    :key="idx"
+                    :class="{'dropdown_selected':idx==model1.task_type}"
+                    :command="idx"
+                  >{{ item == '' ? $t('sys_l053') : item }}
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </template>
             <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" :content="scope.row.targets" placement="top">
-                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.targets||"-" }}</div>
+              {{ taskOption[scope.row.task_type] }}
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('sys_c005')" min-width="100" prop="status">
+            <template slot="header">
+              <el-dropdown size="medium " trigger="click" @command="(command) => handleNewwork(command,'status')">
+                <span :class="[model1.status ? 'dropdown_title' : '']" style="color:#909399"> {{ $t('sys_c005') }}
+                  <i class="el-icon-arrow-down el-icon--right" />
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    v-for="(item, idx) in statusOptions"
+                    :key="idx"
+                    :class="{ 'dropdown_selected': idx == model1.status }"
+                    :command="idx"
+                  >{{ !item ? $t('sys_l053') : item }}
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </template>
+            <template slot-scope="scope">
+              <el-tag
+                :type="scope.row.status == 2 ? 'success' : scope.row.status == 3 ? 'warning' :scope.row.status == 5 ? 'danger': ''"
+                size="small"
+              > {{ statusOptions[scope.row.status] }}
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="群成员" min-width="120" prop="members" show-overflow-tooltip />
+          <el-table-column label="数据包" min-width="140" prop="targets">
+            <template slot-scope="scope">
+              <el-tooltip :content="scope.row.targets" class="item" effect="dark" placement="top">
+                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                  {{ scope.row.targets || '-' }}
+                </div>
               </el-tooltip>
             </template>
           </el-table-column>
-            <!-- <template slot-scope="scope">
+          <!-- <template slot-scope="scope">
               <el-tooltip class="item" effect="dark" :content="scope.row.members" placement="top">
                 <div style="width: max-content;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.members||"-" }}</div>
               </el-tooltip>
@@ -101,32 +157,38 @@
               </el-popover>
             </template>
           </el-table-column> -->
-          <el-table-column prop="member_num" label="群成员数量" minWidth="120" />
-          <el-table-column prop="zq_num" label="炸群次数" minWidth="120" />
-          <el-table-column prop="qid" label="群id" minWidth="140">
+          <el-table-column label="群成员数量" min-width="120" prop="member_num" />
+          <el-table-column label="炸群次数" min-width="120" prop="zq_num" />
+          <el-table-column label="群id" min-width="140" prop="qid">
             <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" :content="scope.row.qid" placement="top">
-                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.qid||"-" }}</div>
+              <el-tooltip :content="scope.row.qid" class="item" effect="dark" placement="top">
+                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                  {{ scope.row.qid || '-' }}
+                </div>
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column prop="invite_link" label="邀请链接" minWidth="120">
+          <el-table-column label="邀请链接" min-width="120" prop="invite_link">
             <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" :content="scope.row.invite_link" placement="top">
-                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.invite_link||"-" }}</div>
+              <el-tooltip :content="scope.row.invite_link" class="item" effect="dark" placement="top">
+                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                  {{ scope.row.invite_link || '-' }}
+                </div>
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column prop="reason" label="原因" minWidth="140">
+          <el-table-column label="原因" min-width="140" prop="reason">
             <template slot-scope="scope">
-              <el-tooltip class="item" effect="dark" :content="scope.row.reason" placement="top">
-                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{ scope.row.reason||"-" }}</div>
+              <el-tooltip :content="scope.row.reason" class="item" effect="dark" placement="top">
+                <div style="max-width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                  {{ scope.row.reason || '-' }}
+                </div>
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column prop="itime" :label="$t('sys_c008')" minWidth="120">
+          <el-table-column :label="$t('sys_c008')" min-width="120" prop="itime">
             <template slot-scope="scope">
-              <div>{{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : "-" }}</div>
+              <div>{{ scope.row.itime > 0 ? $baseFun.resetTime(scope.row.itime * 1000) : '-' }}</div>
             </template>
           </el-table-column>
           <!-- <el-table-column width="100" label="操作" align="center" fixed="right">
@@ -136,15 +198,33 @@
           </el-table-column> -->
         </el-table>
         <div class="layui_page">
-          <el-pagination background @size-change="limitChange" @current-change="offestChange" :page-sizes="pageOption"
-            :current-page.sync="model1.page" :page-size="model1.limit"
-            layout="total, sizes, prev, pager, next, jumper" :total="model1.total">
-          </el-pagination>
+          <el-pagination
+            :current-page.sync="model1.page"
+            :page-size="model1.limit"
+            :page-sizes="pageOption"
+            :total="model1.total"
+            background
+            layout="total, sizes, prev, pager, next, jumper"
+            @size-change="limitChange"
+            @current-change="offestChange"
+          />
         </div>
       </div>
     </div>
-    <el-dialog :title="$t('sys_q111')" :visible.sync="dialogVisible" :width="taskForm.group_type==1?'450px':'560px'" center>
-      <el-form :model="taskForm" size="small" :rules="taskRules" ref="taskForm" label-width="100px" class="demo-ruleForm">
+    <el-dialog
+      :title="$t('sys_q111')"
+      :visible.sync="dialogVisible"
+      :width="taskForm.group_type==1?'450px':'560px'"
+      center
+    >
+      <el-form
+        ref="taskForm"
+        :model="taskForm"
+        :rules="taskRules"
+        class="demo-ruleForm"
+        label-width="100px"
+        size="small"
+      >
         <el-form label-width="100px">
           <el-form-item :label="$t('sys_q132')+'：'" prop="group_type">
             <el-radio-group v-model="taskForm.group_type">
@@ -154,12 +234,15 @@
           </el-form-item>
         </el-form>
         <el-form-item v-if="taskForm.group_type==2" :label="$t('sys_rai104')+'：'" prop="relpy_text">
-          <el-input type="textarea" clearable v-model="taskForm.relpy_text" :placeholder="$t('sys_g129')" rows="6" />
+          <el-input v-model="taskForm.relpy_text" :placeholder="$t('sys_g129')" clearable rows="6" type="textarea" />
         </el-form-item>
         <el-form-item>
           <div class="el-item-right">
             <el-button @click="dialogVisible=false">{{ $t('sys_c023') }}</el-button>
-            <el-button type="primary" :loading="isLoading" @click="submitForm('taskForm')">{{ $t('sys_c024') }}</el-button>
+            <el-button :loading="isLoading" type="primary" @click="submitForm('taskForm')">{{
+              $t('sys_c024')
+            }}
+            </el-button>
           </div>
         </el-form-item>
       </el-form>
@@ -168,8 +251,9 @@
 </template>
 
 <script>
-import { successTips, resetPage } from '@/utils/index'
-import { getcreategroupinfolist,getsysconfig,upsysconfig,groupsendmsg,dooutexcel } from '@/api/task'
+import { successTips, resetPage, getLabelByVal } from '@/utils/index'
+import { getcreategroupinfolist, getsysconfig, upsysconfig, groupsendmsg, dooutexcel } from '@/api/task'
+
 export default {
   data() {
     return {
@@ -178,42 +262,52 @@ export default {
         total: 0,
         offset: 1,
         limit: 10,
-        account: "",
-        ipCtime: "",
-        user_account: "",
-        invite_link: "",
-        ad_account: "",
-        task_type:""
+        account: '',
+        ipCtime: '',
+        user_account: '',
+        invite_link: '',
+        ad_account: '',
+        task_type: '',
+        country: ''
       },
-      taskForm:{
-        relpy_type:"",
-        relpy_id:"",
-        group_type:1,
-        relpy_text:"",
+      taskForm: {
+        relpy_type: '',
+        relpy_id: '',
+        group_type: 1,
+        relpy_text: '',
       },
       type: 0,
-      checkArry:[],
+      checkArry: [],
       loading: false,
-      auto_scamper:null,
+      auto_scamper: null,
       groupTaskList: [],
       isLoading: false,
       isUpload: false,
       imgModel: false,
-      dialogVisible:false,
-      pageOption: resetPage()
+      dialogVisible: false,
+      pageOption: resetPage(),
+      countryList: [
+        { label: '全部', value: '' },
+        { label: '尼日利亚', value: 'Nigeria' },
+        { label: '印度', value: 'India' },
+      ]
     }
   },
   computed: {
-    statusOptions(){
-      return ["","开始任务","进行中","结算中","成功","失败"]
+    statusOptions() {
+      return ['', '开始任务', '进行中', '结算中', '成功', '失败']
     },
-    taskOption(){
-      return ["","拉群","拉粉"]
+    taskOption() {
+      return ['', '拉群', '拉粉']
     },
     taskRules() {
       return {
-        group_type:[{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
-        relpy_text: [{ required: true, message: this.$t('sys_mat021'), trigger: 'blure' },{ max: 2000, message: '最多可输入2000个字符', trigger: 'blur' }],
+        group_type: [{ required: true, message: this.$t('sys_c052'), trigger: 'change' }],
+        relpy_text: [{ required: true, message: this.$t('sys_mat021'), trigger: 'blure' }, {
+          max: 2000,
+          message: '最多可输入2000个字符',
+          trigger: 'blur'
+        }],
       }
     }
   },
@@ -223,49 +317,51 @@ export default {
   },
   methods: {
     restQueryBtn() {
-      this.model1.status = "";
-      this.model1.account = "";
-      this.model1.ipCtime = "";
-      this.model1.invite_link = "";
-      this.model1.task_type = "";
-      this.model1.ad_account = "";
-      this.model1.user_account = "";
+      this.model1.status = '';
+      this.model1.account = '';
+      this.model1.ipCtime = '';
+      this.model1.invite_link = '';
+      this.model1.task_type = '';
+      this.model1.ad_account = '';
+      this.model1.user_account = '';
+      this.model1.country = '';
       this.getTaskList(1);
       // this.$refs.serveTable.clearSelection();
     },
-    async exportBtn(){
+    async exportBtn() {
       const sTime = this.model1.ipCtime;
-      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0],3):-1;
-      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1],3):-1;
-      let params = {
+      const start_time = sTime && sTime.length ? this.$baseFun.mexicoTime(sTime[0], 3) : -1;
+      const end_time = sTime && sTime.length ? this.$baseFun.mexicoTime(sTime[1], 3) : -1;
+      const params = {
         account: this.model1.account,
-        status: this.model1.status||-1,
+        status: this.model1.status || -1,
         invite_link: this.model1.invite_link,
         ad_account: this.model1.ad_account,
         app_account: this.model1.user_account,
-        task_type:this.model1.task_type||-1,
+        task_type: this.model1.task_type || -1,
         start_time: start_time,
         end_time: end_time
       }
-      let { data:{url} } = await dooutexcel(params);
+      const { data: { url }} = await dooutexcel(params);
       window.location.href = url;
     },
-    //获取订单列表
+    // 获取订单列表
     getTaskList(num) {
       this.loading = true;
       const sTime = this.model1.ipCtime;
-      this.model1.page = num ? num : this.model1.page;
-      let start_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[0],3):-1;
-      let end_time = sTime&&sTime.length ? this.$baseFun.mexicoTime(sTime[1],3):-1;
-      let params = {
+      this.model1.page = num || this.model1.page;
+      const start_time = sTime && sTime.length ? this.$baseFun.mexicoTime(sTime[0], 3) : -1;
+      const end_time = sTime && sTime.length ? this.$baseFun.mexicoTime(sTime[1], 3) : -1;
+      const params = {
         page: this.model1.page,
         limit: this.model1.limit,
-        status: this.model1.status||-1,
+        status: this.model1.status || -1,
         account: this.model1.account,
         invite_link: this.model1.invite_link,
         app_account: this.model1.user_account,
         ad_account: this.model1.ad_account,
-        task_type:this.model1.task_type||-1,
+        task_type: this.model1.task_type || -1,
+        country: this.model1.country ,
         start_time: start_time,
         end_time: end_time
       }
@@ -275,30 +371,34 @@ export default {
         this.groupTaskList = res.data.list || [];
         for (let k = 0; k < this.groupTaskList.length; k++) {
           for (const key in this.groupTaskList[k]) {
-            if(!this.groupTaskList[k][key]){
-              this.groupTaskList[k][key]="-"
+            if (!this.groupTaskList[k][key]) {
+              this.groupTaskList[k][key] = '-'
             }
           }
         }
       })
     },
     selectAllChange(row) {
-      this.checkArry = row.map(item => { return item.id })
+      this.checkArry = row.map(item => {
+        return item.id
+      })
     },
     rowSelectChange(row, column, event) {
-      let refsElTable = this.$refs.serveTable;
-      let findRow = this.checkArry.find(item => item == row.id);
+      const refsElTable = this.$refs.serveTable;
+      const findRow = this.checkArry.find(item => item == row.id);
       if (findRow) {
         refsElTable.toggleRowSelection(row, false);
         return;
       }
       refsElTable.toggleRowSelection(row, true);
     },
-    handleNewwork(val,idx) {
-      if(idx === 1){
+    handleNewwork(val, key) {
+      if (key === 'task_type') {
         this.model1.task_type = val;
-      }else{
+      } else if (key === 'status') {
         this.model1.status = val;
+      } else if (key === 'country') {
+        this.model1.country = val;
       }
       this.getTaskList();
     },
@@ -317,53 +417,53 @@ export default {
         this.$refs.sendForm.resetFields();
       })
     },
-    //添加
-    scamperBtn(row,type){
-      this.taskForm.relpy_type=type;
-      this.taskForm.relpy_text=""; 
+    // 添加
+    scamperBtn(row, type) {
+      this.taskForm.relpy_type = type;
+      this.taskForm.relpy_text = '';
       if (type == 1) {
-        this.taskForm.relpy_id=row.id;
-        this.taskForm.relpy_text=row.ad; 
+        this.taskForm.relpy_id = row.id;
+        this.taskForm.relpy_text = row.ad;
       }
-      this.dialogVisible=true;
+      this.dialogVisible = true;
     },
-    async initGroupConfig(){
-      const {data:{auto_pull_group}} = await getsysconfig();
-      this.auto_scamper = auto_pull_group==1?true:false;
+    async initGroupConfig() {
+      const { data: { auto_pull_group }} = await getsysconfig();
+      this.auto_scamper = auto_pull_group == 1;
     },
-    async handleScamper(e){
-      const {code} = await upsysconfig({auto_big_group:-1,auto_pull_group:this.auto_scamper?1:0});
-      if (code !=0 ) return;
+    async handleScamper(e) {
+      const { code } = await upsysconfig({ auto_big_group: -1, auto_pull_group: this.auto_scamper ? 1 : 0 });
+      if (code != 0) return;
       this.auto_scamper = e;
       successTips(this)
     },
-    submitForm(formName){
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              this.isLoading=true;
-              let params = {
-                ids:this.checkArry,
-                ad:this.taskForm.relpy_text
-              }
-              !params.ad? delete params.ad:"";
-              groupsendmsg(params).then(res=>{
-                this.isLoading=false;
-                if (res.code !=0 ) return;
-                successTips(this)
-                this.getTaskList(1);
-                this.dialogVisible=false;
-              })
-            } else {
-              console.log('error submit!!');
-              return false;
-            }
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.isLoading = true;
+          const params = {
+            ids: this.checkArry,
+            ad: this.taskForm.relpy_text
+          }
+          !params.ad ? delete params.ad : '';
+          groupsendmsg(params).then(res => {
+            this.isLoading = false;
+            if (res.code != 0) return;
+            successTips(this)
+            this.getTaskList(1);
+            this.dialogVisible = false;
           })
-        },
-    //提交
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      })
+    },
+    // 提交
     submitSendBtn(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let data = {
+          const data = {
             ptype: 2,
             ids: [],
             id: this.sendForm.id,
@@ -381,14 +481,14 @@ export default {
         }
       })
     },
-    //删除
+    // 删除
     delCardBtn(val, type) {
-      let that = this;
+      const that = this;
       that.$confirm(this.$t('sys_c046', { value: this.$t('sys_p011') }), this.$t('sys_l013'), {
         type: 'warning',
         confirmButtonText: this.$t('sys_c024'),
         cancelButtonText: this.$t('sys_c023'),
-        beforeClose: function (action, instance, done) {
+        beforeClose: function(action, instance, done) {
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             dowithdrawapproval({ status: 2, ids: type == 1 ? that.checkArry : [val.id] }).then(res => {
@@ -405,7 +505,8 @@ export default {
       }).catch(() => {
         that.$message({ type: 'info', message: '已取消' });
       })
-    }
+    },
+    getLabelByVal
   }
 }
 </script>

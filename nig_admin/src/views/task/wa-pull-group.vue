@@ -68,7 +68,7 @@
           <el-table-column label="国家" min-width="130" prop="country">
             <template slot="header">
               <el-dropdown size="medium" trigger="click" @command="(command) => handleNewwork(command,'country')">
-                <span :class="[model1.country?'dropdown_title':'']" style="color:#909399"> {{ $t('sys_m066') }}
+                <span :class="[model1.country?'dropdown_title':'']" style="color:#909399"> 国家
                   <i class="el-icon-arrow-down el-icon--right" />
                 </span>
                 <el-dropdown-menu slot="dropdown">

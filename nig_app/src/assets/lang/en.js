@@ -450,7 +450,7 @@ export default {
     other_098:"Get rewards",
     other_099:"Group links can be uploaded only once. They must allow free communication without admin approval. If you face issues despite following these rules",
     other_100:"contact support",
-    other_101:"One news x",
+    other_101:"One hour x",
     other_102:"After saving the contact, click on the following account to send a message directly",
     other_103:"Withdrawal refund",
     other_104:"This region is not currently supported",

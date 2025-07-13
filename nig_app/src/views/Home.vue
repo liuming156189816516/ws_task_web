@@ -180,7 +180,7 @@ export default {
         taskNameOption() {
             return [
                 {},
-                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:40, status:null,task_info_id:null,award:this.$t('home_168'),btn:this.$t('home_005'),desc:this.$t('home_051')},
+                {name:this.$t('home_168'),live1:1,live2:1,type:1,g_num:10, status:null,task_info_id:null,award:this.$t('home_168'),btn:this.$t('home_005'),desc:this.$t('home_051')},
                 {name:this.$t('home_183'),live1:2,live2:1,type:2,g_num:30,status:null,task_info_id:null,award:this.$t('home_178'),btn:this.$t('home_057'),desc:this.$t('home_050')},
                 {name:this.$t('home_044'),live1:2,live2:1,type:3,g_num:15,status:null,task_info_id:null,award:this.$t('home_139'),btn:this.$t('home_056'),desc:this.$t('home_049')},
                 {name:this.$t('home_134'),live1:2,live2:1,type:4,g_num:2,status:null,task_info_id:null,award:this.$t('home_136'),btn:this.$t('home_005'),desc:this.$t('home_049')},

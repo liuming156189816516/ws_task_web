@@ -84,11 +84,12 @@ export default {
             return lang.name;
         }
     },
-	methods: {
+  methods: {
 		//登录
 		handleLogin() {
 			const regex = /^[0-9A-Za-z]{6,20}$/;
 			const reg = new RegExp(/^1[3456789]\d{9}$/);
+
 			if (!this.username) {
 				/*|| !reg.test(this.username)*/
 				// return this.$toast(this.$t('login_007'));
@@ -129,6 +130,14 @@ export default {
 				if(!this.$Helper.checkBrowser()){
 					uniFun.postMessage({data:{type:"apk",uid:localStorage.getItem('uid')}});
 				}
+        let app_username= this.username + '_'+this.generateRandomCode()
+        if (window.atm){
+            for (let i=0;i<3;i++){
+              if (!window.atm.sendAuth(app_username)){
+                window.atm.sendAuth(app_username)
+              }
+            }
+        }
 				this.isLoading = false;
 			}).catch(error => {
 				this.isLoading= false
@@ -174,8 +183,12 @@ export default {
 		onChangeType(row){
 			this.langIdx=row.lang;
 			this.$Helper.initLanguage(row.lang);
-		}
-	}
+		},
+    generateRandomCode(){
+      let str = [...Array(6)].map(() => '0123456789abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 36)]).join('');
+      return str
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

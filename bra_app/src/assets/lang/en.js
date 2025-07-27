@@ -40,6 +40,8 @@ export default {
     login_037:"Register",
     login_038:"account",
     login_039:"Telegram",
+    login_040:"Non-Brazil users cannot register",
+    login_041:"Please register using your mobile phone number",
 
     home_001:"User balance",
     home_002:"Today's task income",

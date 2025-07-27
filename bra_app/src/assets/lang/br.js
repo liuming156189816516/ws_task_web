@@ -39,6 +39,8 @@ export default {
     login_036:"Login",
     login_037:"Registrar",
     login_038:"conta",
+    login_040:"Usuários não brasileiros não podem se cadastrar",
+    login_041:"Por favor, registre-se usando seu número de telefone celular",
 
     home_001:"Saldo do usuário",
     home_002:"Receita da tarefa de hoje",

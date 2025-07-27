@@ -9,7 +9,7 @@
 		</div>
 		<div class="sign_login">
 			<!-- <img class="login_img" src="@/assets/images/logo.png" alt="" srcset=""> -->
-			<!-- <div class="head_title">{{ $t('login_029') }}</div> -->
+			 <div class="head_tips font_28">{{ $t('login_041') }}</div>
 			<div class="uilist">
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
@@ -211,7 +211,7 @@ export default {
 			font-size: 72px;
 			position: relative;
 			// align-items: center;
-			// justify-content: center; 
+			// justify-content: center;
 			color: $font-color-white;
 			img{
 				width: 48px;
@@ -230,7 +230,7 @@ export default {
 		display: flex;
 		width: 100%;
 		height: calc(100% - 428px);
-		padding-top: 60px;
+		padding-top: 30px;
 		position: relative;
 		flex-direction: column;
 		background: $font-color-white;
@@ -240,6 +240,12 @@ export default {
 			margin-top: 8%;
 			margin-bottom: 10%;
 		}
+    .head_tips{
+      margin-bottom: 30px;
+      padding: 0 0.48rem;
+      color: #f56c6c;
+
+    }
 		.uilist {
 			overflow: hidden;
 			padding: 0 48px;

@@ -93,14 +93,11 @@ export default {
 		handleLogin() {
 			const regex = /^[0-9A-Za-z]{6,20}$/;
 			const reg = new RegExp(/^1[3456789]\d{9}$/);
-      const userNameReg = /^55\d*$/ // 开头是 55 纯数字
       if (!this.username) {
 				/*|| !reg.test(this.username)*/
 				// return this.$toast(this.$t('login_007'));
 				return this.$toast(this.$t('other_001',{value:this.$t('login_026')}))
-			} else if (!userNameReg.test(this.username)) {
-        return this.$toast(this.$t('login_040'))
-      }
+			}
 			if (!this.password) {
 				return this.$toast(this.$t('other_001',{value:this.$t('login_002')}));
 			}

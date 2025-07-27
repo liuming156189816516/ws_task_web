@@ -13,7 +13,7 @@
 			<div class="uilist">
 				<div class="uilist_div">
 					<!-- <img src="@/assets/images/sign/zhanghao.png" /> -->
-					<input v-model="username" :placeholder="$t('login_026')" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
+					<input v-model="username" :placeholder="$t('login_026')+'123'" autocomplete="off" oninput="value=value.replace(/[^\w_]/g,'')" />
 				</div>
 				<div class="uilist_div pwd">
 					<!-- <img src="@/assets/images/sign/lock.png" /> -->
@@ -53,6 +53,13 @@ import { getcode } from '@/api/login';
 import PageHeader from "@/components/Header";
 export default {
 	// components: { PageHeader },
+  /*
+        const userNameReg = /^55\d*$/ // 开头是 55 纯数字
+else if (!userNameReg.test(this.username)) {
+        return this.$toast(this.$t('login_040'))
+      }
+
+   */
 	data() {
 		return {
 			regEye:true,

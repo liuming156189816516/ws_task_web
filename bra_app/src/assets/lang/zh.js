@@ -40,6 +40,8 @@ export default {
     login_037:"注册",
     login_038:"账号",
     login_039:"Telegram",
+    login_040:"非巴西用户无法注册",
+    login_041:"请使用手机号注册",
 
     home_001:"用户余额",
     home_002:"今日任务收益",

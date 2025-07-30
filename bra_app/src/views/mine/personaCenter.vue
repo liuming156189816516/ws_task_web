@@ -109,7 +109,7 @@ export default {
         async getBankInfo(){
             const {id,card_no,payee_name,type,identify_Num} = await getwithdrawcard({type:1});
             this.bank_id = id||"";
-            this.accountType = type||"";
+            this.accountType = type==='CPF'?'CPF':'';
             this.collectCard = card_no||"";
             this.collectName = payee_name||"";
             this.numberId = identify_Num||"";

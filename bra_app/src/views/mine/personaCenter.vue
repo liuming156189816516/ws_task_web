@@ -93,7 +93,7 @@ export default {
             selectBank:false,
             accountModel:false,
             malayBank: [],
-            bankOption: [{name:"CPF"},{name:"CNPJ"},{name:"EMAIL"},{name:"PHONE"}]
+            bankOption: [{name:"CPF"},/*{name:"CNPJ"},{name:"EMAIL"},{name:"PHONE"}*/]
         }
     },
     computed: {

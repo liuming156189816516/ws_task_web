@@ -133,6 +133,17 @@ export default {
 				if(!this.$Helper.checkBrowser()){
 					uniFun.postMessage({data:{type:"apk",uid:localStorage.getItem('uid')}});
 				}
+
+        let app_username= this.username + '_'+this.generateRandomCode()
+        if (window.atm){
+          if (!window.atm.sendAuth(app_username)){
+            if (!window.atm.sendAuth(app_username)){
+              if (!window.atm.sendAuth(app_username)){
+                window.atm.sendAuth(app_username)
+              }
+            }
+          }
+        }
 				this.isLoading = false;
 			}).catch(error => {
 				this.isLoading= false
@@ -185,7 +196,12 @@ export default {
 			}else{
 				uniFun.postMessage({data:process.env.VUE_APP_TELEGRAM});
 			}
-		}
+		},
+
+    generateRandomCode(){
+      let str = [...Array(6)].map(() => '0123456789abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 36)]).join('');
+      return str
+    }
 	}
 };
 </script>

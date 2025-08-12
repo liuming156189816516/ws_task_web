@@ -931,7 +931,7 @@ export default {
         ip_category: '',
         expire_status: '',
         disable_status: '',
-        is_proxy_user: ''// 是否反向代理
+        is_proxy_user: '-1'// 是否反向代理
       },
       isProxyUserList: [
         { label: '全部',value: '-1' },

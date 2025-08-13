@@ -1366,7 +1366,7 @@ export default {
       this.model1.fuser_name = '';
       this.model1.platform_type = '';
       this.model1.fuser_account = '';
-      this.model1.is_proxy_user = '';
+      this.model1.is_proxy_user = '-1';
       this.checkIdArry = [];
       this.checkAccount = [];
       this.screenSelect = [];

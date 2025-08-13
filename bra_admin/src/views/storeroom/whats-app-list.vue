@@ -935,7 +935,7 @@ export default {
         ip_category: '',
         expire_status: '',
         disable_status: '',
-        is_proxy_user:''
+        is_proxy_user:'-1'
       },
       isProxyUserList: [
         { label: '全部', value: '-1' },

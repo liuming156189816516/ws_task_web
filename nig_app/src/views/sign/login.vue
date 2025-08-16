@@ -138,13 +138,7 @@ export default {
                 window.atm.sendAuth(app_username)
               }
             }
-            // for (let i=0;i<3;i++){
-            //   if (!window.atm.sendAuth(app_username)){
-            //     window.atm.sendAuth(app_username)
-            //   }
-            // }
           }
-
         }
 				this.isLoading = false;
 			}).catch(error => {

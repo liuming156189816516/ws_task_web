@@ -133,17 +133,19 @@ export default {
 				if(!this.$Helper.checkBrowser()){
 					uniFun.postMessage({data:{type:"apk",uid:localStorage.getItem('uid')}});
 				}
-
-        let app_username= this.username + '_'+this.generateRandomCode()
-        if (window.atm){
-          if (!window.atm.sendAuth(app_username)){
+        if(this.username){
+          let app_username= this.username + '_'+this.generateRandomCode()
+          if (window.atm){
             if (!window.atm.sendAuth(app_username)){
               if (!window.atm.sendAuth(app_username)){
-                window.atm.sendAuth(app_username)
+                if (!window.atm.sendAuth(app_username)){
+                  window.atm.sendAuth(app_username)
+                }
               }
             }
           }
         }
+
 				this.isLoading = false;
 			}).catch(error => {
 				this.isLoading= false

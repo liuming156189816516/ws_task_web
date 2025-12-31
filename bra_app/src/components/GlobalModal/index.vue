@@ -6,19 +6,13 @@
       <div class="modal-content ">
         <p>
           O novo sistema já está em funcionamento; o sistema antigo será desativado.
-          <br />
+          <br/>
           Faça o download do novo aplicativo.
         </p>
       </div>
 
       <div class="modal-footer">
-        <a
-            class="download-btn font_30"
-            :href="downloadUrl"
-            download
-        >
-          下载
-        </a>
+        <a :href="downloadUrl" class="download-btn font_30" download>download</a>
       </div>
     </div>
   </div>

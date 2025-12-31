@@ -12,6 +12,10 @@ import popDialog  from '@/components/popDialog'
 import './assets/iconfont/iconfont.css';
 import VueLuckyCanvas from '@lucky-canvas/vue';
 import { Table, TableColumn } from 'element-ui';
+import GlobalModalPlugin from '@/plugins/globalModal' // 项目全局定时显示弹窗
+
+Vue.use(GlobalModalPlugin)
+
 window.Global = Global
 Global.setup();
 // 导入资源文件

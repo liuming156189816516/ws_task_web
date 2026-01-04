@@ -5,7 +5,7 @@
 
       <div class="modal-content ">
         <p>
-          O novo sistema já está em funcionamento; o sistema antigo será desativado.
+          O novo sistema já está em funcionamento; este sistema será desativado em 7 de janeiro de 2026.
           <br/>
           Faça o download do novo aplicativo.
         </p>
